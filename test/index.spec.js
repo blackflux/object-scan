@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const objectScan = require("./..//src/index");
+const objectScan = require("./../src/index");
 
 const haystack = {
   simple: "a",
@@ -135,7 +135,7 @@ describe("Testing Find", () => {
   });
 
   it("Testing Escaped Char Matching", () => {
-    ['*', '{', '}'].forEach((char) => {
+    [',', '.', '*', '[', ']', '{', '}'].forEach((char) => {
       const find = objectScan([`\\${char}`]);
       expect(find({ [char]: "a", b: "c" })).to.deep.equal([
         char
@@ -144,9 +144,9 @@ describe("Testing Find", () => {
   });
 
   it("Testing Escaped Star", () => {
-    const find = objectScan([`[\\*]`]);
-    expect(find({ "[*]": "a", "[x]": "b" })).to.deep.equal([
-      "[*]"
+    const find = objectScan([`a.\\[\\*\\]`]);
+    expect(find({ a: { "[*]": "b", "[x]": "c" } })).to.deep.equal([
+      "a.[*]"
     ]);
   });
 
@@ -156,6 +156,15 @@ describe("Testing Find", () => {
       "a,b",
       "c,d",
       "f\\\\,g"
+    ]);
+  });
+
+  it("Testing Escaped Dot", () => {
+    const find = objectScan([`{a\\.b,c\\.d,f\\\\\\.g}`]);
+    expect(find({ "a.b": "c", "c.d": "e", "f\\\\.g": "h" })).to.deep.equal([
+      "a.b",
+      "c.d",
+      "f\\\\.g"
     ]);
   });
 
