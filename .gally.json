@@ -1,0 +1,52 @@
+{
+  "defaultBranch": "master",
+  "contribBranch": "dev",
+  "repository": {
+    "url": "https://github.com/simlu/object-scan.git"
+  },
+  "branches": {
+    "dev": {
+      "upstream": "master",
+      "protection": "$full-strict",
+      "create": true
+    },
+    "master": {
+      "protection": "$full",
+      "create": true
+    },
+    "fix/*": {
+      "upstream": "dev"
+    },
+    "feat/*": {
+      "upstream": "dev"
+    },
+    "greenkeeper/*": {
+      "upstream": "dev"
+    }
+  },
+  "protection": {
+    "$full-strict": {
+      "@": "$full",
+      "required_status_checks": {
+        "strict": true
+      }
+    },
+    "$full": {
+      "required_status_checks": {
+        "strict": false,
+        "contexts": [
+          "continuous-integration/travis-ci/pr",
+          "continuous-integration/travis-ci/push",
+          "coverage/coveralls"
+        ]
+      },
+      "enforce_admins": false,
+      "required_pull_request_reviews": {
+        "dismiss_stale_reviews": true,
+        "require_code_owner_reviews": true,
+        "required_approving_review_count": 1
+      },
+      "restrictions": null
+    }
+  }
+}
