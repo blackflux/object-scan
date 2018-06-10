@@ -1,9 +1,9 @@
 const parser = require("./util/parser");
 
-module.exports = (needles) => {
+module.exports = (needles, valueFn = undefined) => {
   const search = needles.map(parser);
 
-  const find = (haystack, valueFn, checks, pathIn = undefined) => {
+  const find = (haystack, checks, pathIn = undefined) => {
     const result = [];
     if (checks.some(check => check.length === 0)) {
       if (valueFn === undefined || valueFn(haystack)) {
@@ -22,10 +22,10 @@ module.exports = (needles) => {
                 check[0] === `[${i}]` ||
                 (check[0] instanceof Array && check[0].indexOf(`[${i}]`) !== -1)
               ) {
-                result.push(...find(haystack[i], valueFn, [check.slice(1)], pathOut));
+                result.push(...find(haystack[i], [check.slice(1)], pathOut));
               }
               if (check[0] === "**") {
-                result.push(...find(haystack[i], valueFn, [check, check.slice(1)], pathOut));
+                result.push(...find(haystack[i], [check, check.slice(1)], pathOut));
               }
             });
         }
@@ -41,10 +41,10 @@ module.exports = (needles) => {
                 check[0] === escapedKey ||
                 (check[0] instanceof Array && check[0].indexOf(escapedKey) !== -1)
               ) {
-                result.push(...find(haystack[key], valueFn, [check.slice(1)], pathOut));
+                result.push(...find(haystack[key], [check.slice(1)], pathOut));
               }
               if (check[0] === "**") {
-                result.push(...find(haystack[key], valueFn, [check, check.slice(1)], pathOut));
+                result.push(...find(haystack[key], [check, check.slice(1)], pathOut));
               }
             });
         });
@@ -53,5 +53,5 @@ module.exports = (needles) => {
     return result;
   };
 
-  return (haystack, valueFn) => find(haystack, valueFn, search);
+  return haystack => find(haystack, search);
 };
