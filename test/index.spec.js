@@ -126,8 +126,8 @@ describe("Testing Find", () => {
   });
 
   it("Testing Value Function", () => {
-    const find = objectScan(["**"]);
-    expect(find(haystack, e => typeof e === "string" && e === "a")).to.deep.equal([
+    const find = objectScan(["**"], e => typeof e === "string" && e === "a");
+    expect(find(haystack)).to.deep.equal([
       "simple",
       "array1[0]",
       "array2.nested[0]"
@@ -177,7 +177,7 @@ describe("Testing Find", () => {
     expect(objectScan(["**"])(input)).to
       .deep.equal(["a", "a.b", "a.b.c", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]);
     expect(objectScan(["**.f"])(input)).to.deep.equal(["a.e.f"]);
-    expect(objectScan(["**"])(input, e => typeof e === "string")).to
+    expect(objectScan(["**"], e => typeof e === "string")(input)).to
       .deep.equal(["a.b.c", "a.e.f", "a.h[0]", "a.h[1]", "k"]);
     expect(objectScan(["**[*]"])(input)).to.deep.equal(["a.h[0]", "a.h[1]"]);
     expect(objectScan(["*.*[*]"])(input)).to.deep.equal(["a.h[0]", "a.h[1]"]);
