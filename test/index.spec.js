@@ -9,9 +9,9 @@ const haystack = {
   parent2: {
     child: "c"
   },
-  parent3: {
-    child: {
-      grandchild: "d"
+  grandparent1: {
+    parent: {
+      child: "d"
     }
   },
   array1: ["a", "b", "c"],
@@ -44,8 +44,34 @@ describe("Testing Find", () => {
     const find = objectScan(["*.child"]);
     expect(find(haystack)).to.deep.equal([
       "parent1.child",
+      "parent2.child"
+    ]);
+  });
+
+  it("Testing Path Multi Matching", () => {
+    const find = objectScan(["*.child", "*.parent"]);
+    expect(find(haystack)).to.deep.equal([
+      "parent1.child",
       "parent2.child",
-      "parent3.child"
+      "grandparent1.parent"
+    ]);
+  });
+
+  it("Testing Path Or Matching", () => {
+    const find = objectScan(["*.{child,parent}"]);
+    expect(find(haystack)).to.deep.equal([
+      "parent1.child",
+      "parent2.child",
+      "grandparent1.parent"
+    ]);
+  });
+
+  it("Testing Path Double Star", () => {
+    const find = objectScan(["**.child"]);
+    expect(find(haystack)).to.deep.equal([
+      "parent1.child",
+      "parent2.child",
+      "grandparent1.parent.child"
     ]);
   });
 
@@ -55,6 +81,14 @@ describe("Testing Find", () => {
       "[0]",
       "[1]",
       "[2]"
+    ]);
+  });
+
+  it("Testing Array Top Level Or", () => {
+    const find = objectScan(["[{0,1}]"]);
+    expect(find(haystack.array1)).to.deep.equal([
+      "[0]",
+      "[1]"
     ]);
   });
 
@@ -89,5 +123,55 @@ describe("Testing Find", () => {
       "array3[0].item",
       "array3[1].item"
     ]);
+  });
+
+  it("Testing Value Function", () => {
+    const find = objectScan(["**"]);
+    expect(find(haystack, e => typeof e === "string" && e === "a")).to.deep.equal([
+      "simple",
+      "array1[0]",
+      "array2.nested[0]"
+    ]);
+  });
+
+  it("Testing Escaped Char Matching", () => {
+    ['*', '{', '}'].forEach((char) => {
+      const find = objectScan([`\\${char}`]);
+      expect(find({ [char]: "a", b: "c" })).to.deep.equal([
+        char
+      ]);
+    });
+  });
+
+  it("Testing Escaped Star", () => {
+    const find = objectScan([`[\\*]`]);
+    expect(find({ "[*]": "a", "[x]": "b" })).to.deep.equal([
+      "[*]"
+    ]);
+  });
+
+  it("Testing Escaped Comma", () => {
+    const find = objectScan([`{a\\,b,c\\,d,f\\\\\\,g}`]);
+    expect(find({ "a,b": "c", "c,d": "e", "f\\\\,g": "h" })).to.deep.equal([
+      "a,b",
+      "c,d",
+      "f\\\\,g"
+    ]);
+  });
+
+  it("Testing Readme Example", () => {
+    const input = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ["i", "j"] }, k: "l" };
+    expect(objectScan(["*"])(input)).to.deep.equal(["a", "k"]);
+    expect(objectScan(["a.*.{c,f}"])(input)).to.deep.equal(["a.b.c", "a.e.f"]);
+    expect(objectScan(["a.*.f"])(input)).to.deep.equal(["a.e.f"]);
+    expect(objectScan(["*.*.*"])(input)).to.deep.equal(["a.b.c", "a.e.f"]);
+    expect(objectScan(["**"])(input)).to
+      .deep.equal(["a", "a.b", "a.b.c", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]);
+    expect(objectScan(["**.f"])(input)).to.deep.equal(["a.e.f"]);
+    expect(objectScan(["**"])(input, e => typeof e === "string")).to
+      .deep.equal(["a.b.c", "a.e.f", "a.h[0]", "a.h[1]", "k"]);
+    expect(objectScan(["**[*]"])(input)).to.deep.equal(["a.h[0]", "a.h[1]"]);
+    expect(objectScan(["*.*[*]"])(input)).to.deep.equal(["a.h[0]", "a.h[1]"]);
+    expect(objectScan(["*[*]"])(input)).to.deep.equal([]);
   });
 });

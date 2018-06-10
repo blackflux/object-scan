@@ -12,11 +12,74 @@
 
 Find Keys using Wildcard matching and optional value function.
 
-## Getting Started
+## Install
 
-Install with
+Install with [npm](https://www.npmjs.com/):
 
     $ npm install --save object-scan
 
-and use with
+## Usage
 
+<!-- eslint-disable-next-line import/no-unresolved -->
+```js
+const objectScan = require('object-scan');
+
+objectScan(["a.*.f"])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
+// => [ 'a.e.f' ]
+```
+
+## Examples
+
+More extensive examples can be found in the tests.
+
+<!-- eslint-disable-next-line import/no-unresolved -->
+```js
+const objectScan = require('object-scan');
+
+const obj = {
+  a: {
+    b: {
+      c: 'd'
+    },
+    e: {
+      f: 'g'
+    },
+    h: ["i", "j"]
+  },
+  k: "l"
+};
+
+// top level keys
+objectScan(["*"])(obj);
+// => ["a", "k"]
+
+// nested keys
+objectScan(["a.*.f"])(obj);
+// => ["a.e.f"]
+objectScan(["*.*.*"])(obj);
+// => ["a.b.c", "a.e.f"]
+
+// or filter
+objectScan(["a.*.{c,f}"])(obj);
+// => ["a.b.c", "a.e.f"]
+
+// list filter
+objectScan(["*.*[*]"])(obj);
+// => ["a.h[0]", "a.h[1]"]
+objectScan(["*[*]"])(obj);
+// => []
+
+// deep star filter
+objectScan(["**"])(obj);
+// => ["a", "a.b", "a.b.c", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]
+objectScan(["**.f"])(obj);
+// => ["a.e.f"]
+objectScan(["**"])(obj, e => typeof e === "string");
+// => ["a.b.c", "a.e.f", "a.h[0]", "a.h[1]", "k"]
+objectScan(["**[*]"])(obj);
+// => ["a.h[0]", "a.h[1]"]
+```
+
+## Special Characters
+
+The characters `{`, `}`, `,` and `*` are considered "special" and should be escaped with a backslash as necessary. 
