@@ -35,10 +35,9 @@
       "required_status_checks": {
         "strict": false,
         "contexts": [
-          "continuous-integration/circle-ci",
-          "continuous-integration/travis-ci",
-          "coverage/coveralls",
-          "greenkeeper/verify"
+          "continuous-integration/travis-ci/pr",
+          "continuous-integration/travis-ci/push",
+          "coverage/coveralls"
         ]
       },
       "enforce_admins": false,
