@@ -82,4 +82,5 @@ objectScan(["**[*]"])(obj);
 
 ## Special Characters
 
-The characters `{`, `}`, `,` and `*` are considered "special" and should be escaped with a backslash as necessary. 
+The following Characters are considered special and need to 
+be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `,`, `.` and `*`. 
