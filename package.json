@@ -1,0 +1,93 @@
+{
+  "name": "object-scan",
+  "version": "0.0.0-development",
+  "description": "Find Keys using Wildcard matching and optional value function.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run clean && npm run gardener && npm run test-simple",
+    "clean": "rm -rf lib",
+    "build": "npx babel src --out-dir lib --source-maps inline --copy-files --include-dotfiles",
+    "clean-build": "npm run clean && npm run build",
+    "build-artifact": "npm run clean-build && tar -zxvf $(npm pack) && rm *-0.0.0-development.tgz && cd package && tar -zcvf ../release.tar.gz . && cd .. && rm -rf package",
+    "test-simple": "nyc mocha \"./test/**/*.spec.js\"",
+    "coveralls": "node ./node_modules/coveralls/bin/coveralls.js < ./coverage/lcov.info",
+    "semantic-release": "npm run build-artifact && npm run clean-build && npx semantic-release",
+    "gardener": "node gardener"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simlu/object-scan.git"
+  },
+  "keywords": [
+    "object",
+    "glob",
+    "matching",
+    "regex",
+    "search",
+    "scan",
+    "find"
+  ],
+  "author": "Lukas Siemon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/simlu/object-scan/issues"
+  },
+  "homepage": "https://github.com/simlu/object-scan#readme",
+  "devDependencies": {
+    "babel-cli": "7.0.0-beta.3",
+    "babel-eslint": "8.2.3",
+    "babel-plugin-transform-flow-comments": "7.0.0-beta.3",
+    "babel-preset-flow": "7.0.0-beta.3",
+    "babel-register": "7.0.0-beta.3",
+    "chai": "4.1.2",
+    "coveralls": "3.0.1",
+    "js-gardener": "1.24.1",
+    "nyc": "12.0.2",
+    "semantic-release": "15.5.1"
+  },
+  "nyc": {
+    "tempDirectory": "./coverage/.nyc_output",
+    "report-dir": "./coverage",
+    "check-coverage": true,
+    "per-file": false,
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
+    "include": [
+      "**/*.js"
+    ],
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
+    "require": [
+      "babel-register"
+    ],
+    "extension": [],
+    "cache": true,
+    "all": true,
+    "babel": true,
+    "exclude": [
+      "gardener.js",
+      "node_modules/*",
+      "coverage/*",
+      "flow-typed/*",
+      "lib/*"
+    ]
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/simlu/object-scan/blob/master/LICENSE"
+    }
+  ],
+  "engines": {
+    "node": ">= 8.10"
+  },
+  "files": [
+    "lib"
+  ],
+  "dependencies": {},
+  "peerDependencies": {}
+}
