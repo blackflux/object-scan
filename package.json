@@ -2,7 +2,7 @@
   "name": "object-scan",
   "version": "0.0.0-development",
   "description": "Find Keys using Wildcard matching and optional value function.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "npm run clean && npm run gardener && npm run test-simple",
     "clean": "rm -rf lib",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/simlu/object-scan.git"
+    "url": "https://github.com/simlu/object-scan.git"
   },
   "keywords": [
     "object",
