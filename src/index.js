@@ -17,14 +17,14 @@ module.exports = (needles, valueFn = undefined) => {
             .filter(check => check.length !== 0)
             .forEach((check) => {
               const pathOut = `${pathIn === undefined ? "" : pathIn}[${i}]`;
-              if (
+              if (check[0] === "**") {
+                result.push(...find(haystack[i], [check, check.slice(1)], pathOut));
+              } else if (
                 check[0] === "[*]" ||
                 check[0] === `[${i}]` ||
                 (check[0] instanceof Array && check[0].indexOf(`[${i}]`) !== -1)
               ) {
                 result.push(...find(haystack[i], [check.slice(1)], pathOut));
-              } else if (check[0] === "**") {
-                result.push(...find(haystack[i], [check, check.slice(1)], pathOut));
               }
             });
         }
@@ -35,14 +35,14 @@ module.exports = (needles, valueFn = undefined) => {
             .forEach((check) => {
               const escapedKey = key.replace(/[,.*[\]{}]/g, "\\$&");
               const pathOut = pathIn === undefined ? key : `${pathIn}.${key}`;
-              if (
+              if (check[0] === "**") {
+                result.push(...find(haystack[key], [check, check.slice(1)], pathOut));
+              } else if (
                 check[0] === "*" ||
                 check[0] === escapedKey ||
                 (check[0] instanceof Array && check[0].indexOf(escapedKey) !== -1)
               ) {
                 result.push(...find(haystack[key], [check.slice(1)], pathOut));
-              } else if (check[0] === "**") {
-                result.push(...find(haystack[key], [check, check.slice(1)], pathOut));
               }
             });
         });
