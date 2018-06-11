@@ -74,10 +74,12 @@ objectScan(["**"])(obj);
 // => ["a", "a.b", "a.b.c", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]
 objectScan(["**.f"])(obj);
 // => ["a.e.f"]
-objectScan(["**"], e => typeof e === "string")(obj);
-// => ["a.b.c", "a.e.f", "a.h[0]", "a.h[1]", "k"]
 objectScan(["**[*]"])(obj);
 // => ["a.h[0]", "a.h[1]"]
+
+// value function
+objectScan(["**"], e => typeof e === "string")(obj);
+// => ["a.b.c", "a.e.f", "a.h[0]", "a.h[1]", "k"]
 ```
 
 ## Special Characters
