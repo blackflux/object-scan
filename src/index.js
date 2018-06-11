@@ -23,8 +23,7 @@ module.exports = (needles, valueFn = undefined) => {
                 (check[0] instanceof Array && check[0].indexOf(`[${i}]`) !== -1)
               ) {
                 result.push(...find(haystack[i], [check.slice(1)], pathOut));
-              }
-              if (check[0] === "**") {
+              } else if (check[0] === "**") {
                 result.push(...find(haystack[i], [check, check.slice(1)], pathOut));
               }
             });
@@ -42,8 +41,7 @@ module.exports = (needles, valueFn = undefined) => {
                 (check[0] instanceof Array && check[0].indexOf(escapedKey) !== -1)
               ) {
                 result.push(...find(haystack[key], [check.slice(1)], pathOut));
-              }
-              if (check[0] === "**") {
+              } else if (check[0] === "**") {
                 result.push(...find(haystack[key], [check, check.slice(1)], pathOut));
               }
             });
