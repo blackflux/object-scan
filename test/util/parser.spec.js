@@ -41,4 +41,28 @@ describe("Testing Parser", () => {
   it("Testing List in Path", () => {
     expect(parser("a.*.c[0]")).to.deep.equal(["a", "*", "c", "[0]"]);
   });
+
+  it("Testing Starts with Dot", () => {
+    expect(parser(".a")).to.deep.equal([".a"]);
+  });
+
+  it("Testing Ends with Dot", () => {
+    expect(parser("a.")).to.deep.equal(["a."]);
+  });
+
+  it("Testing Starts with Bracket", () => {
+    expect(parser("[a")).to.deep.equal(["[a"]);
+  });
+
+  it("Testing Ends with Bracket", () => {
+    expect(parser("a[")).to.deep.equal(["a["]);
+  });
+
+  it("Testing Group Starts with Comma", () => {
+    expect(parser("{,1,2}")).to.deep.equal([[",1", "2"]]);
+  });
+
+  it("Testing Group Ends with Comma", () => {
+    expect(parser("{1,2,}")).to.deep.equal([["1", "2,"]]);
+  });
 });
