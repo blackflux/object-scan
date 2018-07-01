@@ -138,7 +138,7 @@ describe("Testing Find", () => {
     [',', '.', '*', '[', ']', '{', '}'].forEach((char) => {
       const find = objectScan([`\\${char}`]);
       expect(find({ [char]: "a", b: "c" })).to.deep.equal([
-        char
+        `\\${char}`
       ]);
     });
   });
@@ -146,25 +146,25 @@ describe("Testing Find", () => {
   it("Testing Escaped Star", () => {
     const find = objectScan([`a.\\[\\*\\]`]);
     expect(find({ a: { "[*]": "b", "[x]": "c" } })).to.deep.equal([
-      "a.[*]"
+      "a.\\[\\*\\]"
     ]);
   });
 
   it("Testing Escaped Comma", () => {
     const find = objectScan([`{a\\,b,c\\,d,f\\\\\\,g}`]);
     expect(find({ "a,b": "c", "c,d": "e", "f\\\\,g": "h" })).to.deep.equal([
-      "a,b",
-      "c,d",
-      "f\\\\,g"
+      "a\\,b",
+      "c\\,d",
+      "f\\\\\\,g"
     ]);
   });
 
   it("Testing Escaped Dot", () => {
     const find = objectScan([`{a\\.b,c\\.d,f\\\\\\.g}`]);
     expect(find({ "a.b": "c", "c.d": "e", "f\\\\.g": "h" })).to.deep.equal([
-      "a.b",
-      "c.d",
-      "f\\\\.g"
+      "a\\.b",
+      "c\\.d",
+      "f\\\\\\.g"
     ]);
   });
 

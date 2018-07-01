@@ -34,7 +34,7 @@ module.exports = (needles, valueFn = undefined) => {
             .filter(check => check.length !== 0)
             .forEach((check) => {
               const escapedKey = key.replace(/[,.*[\]{}]/g, "\\$&");
-              const pathOut = pathIn === undefined ? key : `${pathIn}.${key}`;
+              const pathOut = pathIn === undefined ? escapedKey : `${pathIn}.${escapedKey}`;
               if (check[0] === "**") {
                 result.push(...find(haystack[key], [check, check.slice(1)], pathOut));
               } else if (
