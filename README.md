@@ -28,6 +28,16 @@ objectScan(["a.*.f"])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 // => [ 'a.e.f' ]
 ```
 
+### Value Function
+
+Constructor takes second value function parameter which gets passed in the value of the key and is expected to return true or false.
+Only results where the value function returns true are returned.
+
+### Joined
+
+When dealing with special characters it might be desired to not have the output merged. In this case 
+the constructor takes a third option which can be set to false to return each key as a list.
+
 ## Examples
 
 More extensive examples can be found in the tests.
@@ -62,6 +72,8 @@ objectScan(["*.*.*"])(obj);
 // or filter
 objectScan(["a.*.{c,f}"])(obj);
 // => ["a.b.c", "a.e.f"]
+objectScan(["a.*.{c,f}"], () => true, false)(obj);
+// => [["a", "b", "c"], ["a", "e", "f"]]
 
 // list filter
 objectScan(["*.*[*]"])(obj);
@@ -86,3 +98,5 @@ objectScan(["**"], e => typeof e === "string")(obj);
 
 The following Characters are considered special and need to 
 be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `,`, `.` and `*`. 
+
+When dealing with special characters the `joined` option might be desirable to set to `false`.
