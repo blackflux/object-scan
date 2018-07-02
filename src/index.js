@@ -1,13 +1,16 @@
 const parser = require("./util/parser");
 
-module.exports = (needles, valueFn = undefined) => {
+module.exports = (needles, valueFn = undefined, joined = true) => {
   const search = needles.map(parser);
 
-  const find = (haystack, checks, pathIn = undefined) => {
+  const find = (haystack, checks, pathIn = []) => {
     const result = [];
     if (checks.some(check => check.length === 0)) {
       if (valueFn === undefined || valueFn(haystack)) {
-        result.push(pathIn);
+        result.push(joined ? pathIn.reduce((p, c) => {
+          const isNumber = typeof c === "number";
+          return `${p}${p === "" || isNumber ? "" : "."}${isNumber ? `[${c}]` : c}`;
+        }, "") : pathIn);
       }
     }
     if (haystack instanceof Object) {
@@ -16,7 +19,7 @@ module.exports = (needles, valueFn = undefined) => {
           checks
             .filter(check => check.length !== 0)
             .forEach((check) => {
-              const pathOut = `${pathIn === undefined ? "" : pathIn}[${i}]`;
+              const pathOut = [].concat(...pathIn).concat(i);
               if (check[0] === "**") {
                 result.push(...find(haystack[i], [check, check.slice(1)], pathOut));
               } else if (
@@ -34,7 +37,7 @@ module.exports = (needles, valueFn = undefined) => {
             .filter(check => check.length !== 0)
             .forEach((check) => {
               const escapedKey = key.replace(/[,.*[\]{}]/g, "\\$&");
-              const pathOut = pathIn === undefined ? escapedKey : `${pathIn}.${escapedKey}`;
+              const pathOut = [].concat(...pathIn).concat(key);
               if (check[0] === "**") {
                 result.push(...find(haystack[key], [check, check.slice(1)], pathOut));
               } else if (

@@ -75,6 +75,15 @@ describe("Testing Find", () => {
     ]);
   });
 
+  it("Testing Path Double Star (Separated)", () => {
+    const find = objectScan(["**.child"], undefined, false);
+    expect(find(haystack)).to.deep.equal([
+      ["parent1", "child"],
+      ["parent2", "child"],
+      ["grandparent1", "parent", "child"]
+    ]);
+  });
+
   it("Testing Array Top Level", () => {
     const find = objectScan(["[*]"]);
     expect(find(haystack.array1)).to.deep.equal([
@@ -137,34 +146,32 @@ describe("Testing Find", () => {
   it("Testing Escaped Char Matching", () => {
     [',', '.', '*', '[', ']', '{', '}'].forEach((char) => {
       const find = objectScan([`\\${char}`]);
-      expect(find({ [char]: "a", b: "c" })).to.deep.equal([
-        `\\${char}`
-      ]);
+      expect(find({ [char]: "a", b: "c" })).to.deep.equal([char]);
     });
   });
 
   it("Testing Escaped Star", () => {
     const find = objectScan([`a.\\[\\*\\]`]);
     expect(find({ a: { "[*]": "b", "[x]": "c" } })).to.deep.equal([
-      "a.\\[\\*\\]"
+      "a.[*]"
     ]);
   });
 
   it("Testing Escaped Comma", () => {
     const find = objectScan([`{a\\,b,c\\,d,f\\\\\\,g}`]);
     expect(find({ "a,b": "c", "c,d": "e", "f\\\\,g": "h" })).to.deep.equal([
-      "a\\,b",
-      "c\\,d",
-      "f\\\\\\,g"
+      "a,b",
+      "c,d",
+      "f\\\\,g"
     ]);
   });
 
   it("Testing Escaped Dot", () => {
     const find = objectScan([`{a\\.b,c\\.d,f\\\\\\.g}`]);
     expect(find({ "a.b": "c", "c.d": "e", "f\\\\.g": "h" })).to.deep.equal([
-      "a\\.b",
-      "c\\.d",
-      "f\\\\\\.g"
+      "a.b",
+      "c.d",
+      "f\\\\.g"
     ]);
   });
 
@@ -172,6 +179,7 @@ describe("Testing Find", () => {
     const input = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ["i", "j"] }, k: "l" };
     expect(objectScan(["*"])(input)).to.deep.equal(["a", "k"]);
     expect(objectScan(["a.*.{c,f}"])(input)).to.deep.equal(["a.b.c", "a.e.f"]);
+    expect(objectScan(["a.*.{c,f}"], () => true, false)(input)).to.deep.equal([["a", "b", "c"], ["a", "e", "f"]]);
     expect(objectScan(["a.*.f"])(input)).to.deep.equal(["a.e.f"]);
     expect(objectScan(["*.*.*"])(input)).to.deep.equal(["a.b.c", "a.e.f"]);
     expect(objectScan(["**"])(input)).to
