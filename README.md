@@ -87,10 +87,8 @@ objectScan(["*.*.*"])(obj);
 // or filter
 objectScan(["a.*.{c,f}"])(obj);
 // => ["a.b.c", "a.e.f"]
-objectScan(["a.*.{c,f}"], { filterFn: (key, value) => typeof value === "string" })(obj);
-// => ["a.b.c", "a.e.f"]
-objectScan(["**"], { breakFn: key => key === "a.b" })(obj);
-// => ["a", "a.b", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]);
+objectScan(["a.*.{c,f}"], { joined: false })(obj);
+// => [["a", "b", "c"], ["a", "e", "f"]]
 
 // list filter
 objectScan(["*.*[*]"])(obj);
@@ -107,8 +105,10 @@ objectScan(["**[*]"])(obj);
 // => ["a.h[0]", "a.h[1]"]
 
 // value function
-objectScan(["**"], e => typeof e === "string")(obj);
+objectScan(["**"], { filterFn: (key, value) => typeof value === "string" })(obj);
 // => ["a.b.c", "a.e.f", "a.h[0]", "a.h[1]", "k"]
+objectScan(["**"], { breakFn: key => key === "a.b" })(obj);
+// => ["a", "a.b", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]);
 ```
 
 ## Special Characters
