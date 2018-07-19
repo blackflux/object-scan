@@ -20,7 +20,7 @@ Install with [npm](https://www.npmjs.com/):
 
 ## Usage
 
-<!-- eslint-disable-next-line import/no-unresolved -->
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
 const objectScan = require('object-scan');
 
@@ -42,7 +42,7 @@ the constructor takes a third option which can be set to false to return each ke
 
 More extensive examples can be found in the tests.
 
-<!-- eslint-disable-next-line import/no-unresolved -->
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
 const objectScan = require('object-scan');
 
