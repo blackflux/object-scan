@@ -76,7 +76,7 @@ describe("Testing Find", () => {
   });
 
   it("Testing Path Double Star (Separated)", () => {
-    const find = objectScan(["**.child"], undefined, false);
+    const find = objectScan(["**.child"], { joined: false });
     expect(find(haystack)).to.deep.equal([
       ["parent1", "child"],
       ["parent2", "child"],
@@ -134,8 +134,10 @@ describe("Testing Find", () => {
     ]);
   });
 
-  it("Testing Value Function", () => {
-    const find = objectScan(["**"], e => typeof e === "string" && e === "a");
+  it("Testing Filter Function", () => {
+    const find = objectScan(["**"], {
+      filterFn: (key, value) => typeof value === "string" && value === "a"
+    });
     expect(find(haystack)).to.deep.equal([
       "simple",
       "array1[0]",
@@ -179,14 +181,16 @@ describe("Testing Find", () => {
     const input = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ["i", "j"] }, k: "l" };
     expect(objectScan(["*"])(input)).to.deep.equal(["a", "k"]);
     expect(objectScan(["a.*.{c,f}"])(input)).to.deep.equal(["a.b.c", "a.e.f"]);
-    expect(objectScan(["a.*.{c,f}"], () => true, false)(input)).to.deep.equal([["a", "b", "c"], ["a", "e", "f"]]);
+    expect(objectScan(["a.*.{c,f}"], { joined: false })(input)).to.deep.equal([["a", "b", "c"], ["a", "e", "f"]]);
     expect(objectScan(["a.*.f"])(input)).to.deep.equal(["a.e.f"]);
     expect(objectScan(["*.*.*"])(input)).to.deep.equal(["a.b.c", "a.e.f"]);
     expect(objectScan(["**"])(input)).to
       .deep.equal(["a", "a.b", "a.b.c", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]);
     expect(objectScan(["**.f"])(input)).to.deep.equal(["a.e.f"]);
-    expect(objectScan(["**"], e => typeof e === "string")(input)).to
+    expect(objectScan(["**"], { filterFn: (key, value) => typeof value === "string" })(input)).to
       .deep.equal(["a.b.c", "a.e.f", "a.h[0]", "a.h[1]", "k"]);
+    expect(objectScan(["**"], { breakFn: key => key === "a.b" })(input)).to
+      .deep.equal(["a", "a.b", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]);
     expect(objectScan(["**[*]"])(input)).to.deep.equal(["a.h[0]", "a.h[1]"]);
     expect(objectScan(["*.*[*]"])(input)).to.deep.equal(["a.h[0]", "a.h[1]"]);
     expect(objectScan(["*[*]"])(input)).to.deep.equal([]);
