@@ -20,7 +20,7 @@ Install with [npm](https://www.npmjs.com/):
 
 ## Usage
 
-<!-- eslint-disable-next-line import/no-unresolved -->
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
 const objectScan = require('object-scan');
 
@@ -28,21 +28,36 @@ objectScan(["a.*.f"])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 // => [ 'a.e.f' ]
 ```
 
-### Value Function
+### Options
 
-Constructor takes second value function parameter which gets passed in the value of the key and is expected to return true or false.
-Only results where the value function returns true are returned.
+#### filterFn
 
-### Joined
+Type: `function`<br>
+Default: `undefined`
 
-When dealing with special characters it might be desired to not have the output merged. In this case 
-the constructor takes a third option which can be set to false to return each key as a list.
+Takes arguments `key` (dot joined and escaped) and `value` (value for given key) and called for every potential result.
+If function is defined and returns false, the entry is filtered from the result. 
+
+#### breakFn
+
+Type: `function`<br>
+Default: `undefined`
+
+Takes arguments `key` (dot joined and escaped) and `value` (value for given key) and called for every potential result.
+If function is defined and returns true, no nested entries are checked.
+
+#### joined
+
+Type: `boolean`<br>
+Default: `true`
+
+Can be set to false to return each key as a list. When dealing with special characters this can be useful.
 
 ## Examples
 
 More extensive examples can be found in the tests.
 
-<!-- eslint-disable-next-line import/no-unresolved -->
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
 const objectScan = require('object-scan');
 
@@ -72,7 +87,7 @@ objectScan(["*.*.*"])(obj);
 // or filter
 objectScan(["a.*.{c,f}"])(obj);
 // => ["a.b.c", "a.e.f"]
-objectScan(["a.*.{c,f}"], () => true, false)(obj);
+objectScan(["a.*.{c,f}"], { joined: false })(obj);
 // => [["a", "b", "c"], ["a", "e", "f"]]
 
 // list filter
@@ -90,8 +105,10 @@ objectScan(["**[*]"])(obj);
 // => ["a.h[0]", "a.h[1]"]
 
 // value function
-objectScan(["**"], e => typeof e === "string")(obj);
+objectScan(["**"], { filterFn: (key, value) => typeof value === "string" })(obj);
 // => ["a.b.c", "a.e.f", "a.h[0]", "a.h[1]", "k"]
+objectScan(["**"], { breakFn: key => key === "a.b" })(obj);
+// => ["a", "a.b", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]);
 ```
 
 ## Special Characters
