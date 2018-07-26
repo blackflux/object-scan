@@ -7,11 +7,11 @@
   "branches": {
     "dev": {
       "upstream": "master",
-      "protection": "$full-strict",
+      "protection": "$full-dev",
       "create": true
     },
     "master": {
-      "protection": "$full",
+      "protection": "$full-master",
       "create": true
     },
     "fix/*": {
@@ -20,27 +20,32 @@
     "feat/*": {
       "upstream": "dev"
     },
-    "greenkeeper/*": {
+    "dependabot/*": {
       "upstream": "dev"
     }
   },
   "protection": {
-    "$full-strict": {
+    "$full-dev": {
+      "@": "$full",
+      "enforce_admins": false
+    },
+    "$full-master": {
       "@": "$full",
       "required_status_checks": {
-        "strict": true
-      }
+        "strict": false
+      },
+      "enforce_admins": false
     },
     "$full": {
       "required_status_checks": {
-        "strict": false,
+        "strict": true,
         "contexts": [
           "continuous-integration/travis-ci/pr",
           "continuous-integration/travis-ci/push",
           "coverage/coveralls"
         ]
       },
-      "enforce_admins": false,
+      "enforce_admins": true,
       "required_pull_request_reviews": {
         "dismiss_stale_reviews": true,
         "require_code_owner_reviews": true,
