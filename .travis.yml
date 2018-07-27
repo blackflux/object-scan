@@ -5,7 +5,8 @@ cache:
 notifications:
   email: false
 before_install:
-  - npm install -g npm
+  - npm install -g npm gally
+  - ga promote $TRAVIS_BRANCH
 install:
   - npm install
 node_js:
