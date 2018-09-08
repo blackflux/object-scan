@@ -206,6 +206,57 @@ describe("Testing Find", () => {
     ]);
   });
 
+  it("Testing Misc Tests", () => {
+    const input = {
+      a: {
+        b: {
+          c: 'd',
+          e: 'f',
+          g: 'h',
+          i: { j: 'k' },
+          l: { g: 'k' }
+        },
+        i: 'j'
+      }
+    };
+    expect(objectScan(["a.**"])(input)).to.deep.equal([
+      'a.b',
+      'a.b.c',
+      'a.b.e',
+      'a.b.g',
+      'a.b.i',
+      'a.b.i.j',
+      'a.b.l',
+      'a.b.l.g',
+      'a.i'
+    ]);
+    expect(objectScan(["a.*"])(input)).to.deep.equal(['a.b', 'a.i']);
+    expect(objectScan(["a.b.c"])(input)).to.deep.equal(['a.b.c']);
+    expect(objectScan(["**.{b,i}"])(input)).to.deep.equal(['a.b.i', 'a.b', "a.i"]);
+    expect(objectScan(["*.{b,i}"])(input)).to.deep.equal(['a.b', "a.i"]);
+    expect(objectScan(["a.*.{c,e}"])(input)).to.deep.equal(['a.b.c', "a.b.e"]);
+    expect(objectScan(["a.*.g"])(input)).to.deep.equal(['a.b.g']);
+    expect(objectScan(["a.**.g"])(input)).to.deep.equal(['a.b.g', 'a.b.l.g']);
+    expect(objectScan(["*"])(input)).to.deep.equal(['a']);
+    expect(objectScan(["a"])(input)).to.deep.equal(['a']);
+    expect(objectScan(["c"])(input)).to.deep.equal([]);
+    expect(objectScan(["**"])(input)).to.deep.equal([
+      "a",
+      'a.b',
+      'a.b.c',
+      'a.b.e',
+      'a.b.g',
+      'a.b.i',
+      'a.b.i.j',
+      'a.b.l',
+      'a.b.l.g',
+      'a.i'
+    ]);
+    expect(objectScan([])({ a: 'a', b: 'b', c: 'c' })).to.deep.equal([]);
+    expect(objectScan(["b*"])({ foo: 'a', bar: 'b', baz: 'c' })).to.deep.equal(["bar", "baz"]);
+    expect(objectScan(["b", "c"])({ a: 'a', b: 'b', c: 'c' })).to.deep.equal(["b", "c"]);
+  });
+
   it("Testing Readme Example", () => {
     const input = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ["i", "j"] }, k: "l" };
     expect(objectScan(["*"])(input)).to.deep.equal(["a", "k"]);
