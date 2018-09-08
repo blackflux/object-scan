@@ -62,6 +62,13 @@ describe("Testing Find", () => {
     ]);
   });
 
+  it("Testing Results Unique", () => {
+    const find = objectScan(["array*.**[1*]", "array*.*[1*]"]);
+    expect(find(haystack)).to.deep.equal([
+      "array2.nested[1]"
+    ]);
+  });
+
   it("Testing Path Star", () => {
     const find = objectScan(["*.child"]);
     expect(find(haystack)).to.deep.equal([

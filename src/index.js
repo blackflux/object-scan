@@ -1,3 +1,4 @@
+const uniq = require("lodash.uniq");
 const parser = require("./util/parser");
 
 const escape = input => String(input).replace(/[,.*[\]{}]/g, "\\$&");
@@ -69,10 +70,10 @@ module.exports = (needles, {
   breakFn = undefined,
   joined = true
 } = {}) => {
-  const search = needles.map(parser);
+  const search = uniq(needles).map(parser);
   const regexCache = {};
 
-  return haystack => find(haystack, search, [], {
+  return haystack => uniq(find(haystack, search, [], {
     filterFn, breakFn, joined, regexCache
-  });
+  }));
 };
