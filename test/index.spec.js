@@ -254,6 +254,7 @@ describe("Testing Find", () => {
     ]);
     expect(objectScan([])({ a: 'a', b: 'b', c: 'c' })).to.deep.equal([]);
     expect(objectScan(["b*"])({ foo: 'a', bar: 'b', baz: 'c' })).to.deep.equal(["bar", "baz"]);
+    expect(objectScan(["b"])({ foo: 'a', bar: 'b', baz: 'c' })).to.deep.equal([]);
     expect(objectScan(["b", "c"])({ a: 'a', b: 'b', c: 'c' })).to.deep.equal(["b", "c"]);
   });
 
