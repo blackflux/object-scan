@@ -25,7 +25,8 @@
     "regex",
     "search",
     "scan",
-    "find"
+    "find",
+    "filter"
   ],
   "author": "Lukas Siemon",
   "license": "MIT",
@@ -35,15 +36,15 @@
   "homepage": "https://github.com/simlu/object-scan#readme",
   "devDependencies": {
     "babel-cli": "7.0.0-beta.3",
-    "babel-eslint": "8.2.6",
+    "babel-eslint": "9.0.0",
     "babel-plugin-transform-flow-comments": "7.0.0-beta.3",
     "babel-preset-flow": "7.0.0-beta.3",
     "babel-register": "7.0.0-beta.3",
     "chai": "4.1.2",
     "coveralls": "3.0.2",
-    "js-gardener": "1.30.2",
-    "nyc": "12.0.2",
-    "semantic-release": "15.8.1"
+    "js-gardener": "1.31.4",
+    "nyc": "13.0.1",
+    "semantic-release": "15.9.14"
   },
   "nyc": {
     "tempDirectory": "./coverage/.nyc_output",
@@ -88,6 +89,8 @@
   "files": [
     "lib"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "lodash.uniq": "4.5.0"
+  },
   "peerDependencies": {}
 }
