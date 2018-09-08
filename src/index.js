@@ -2,18 +2,30 @@ const parser = require("./util/parser");
 
 const escape = input => String(input).replace(/[,.*[\]{}]/g, "\\$&");
 
-const compare = (wildcard, input) => wildcard === input;
-
-const matches = (wildcard, input, arr) => (Array.isArray(wildcard)
-  ? wildcard.some(wc => matches(wc, input, arr))
-  : (wildcard === (arr ? "[*]" : "*") || compare(wildcard, input)));
-
 module.exports = (needles, {
   filterFn = undefined,
   breakFn = undefined,
   joined = true
 } = {}) => {
   const search = needles.map(parser);
+  const regexCache = {};
+
+  const compare = (wildcard, input, arr) => {
+    if (arr && !wildcard.match(/^\[.*]$/)) {
+      return false;
+    }
+    if (regexCache[wildcard] === undefined) {
+      regexCache[wildcard] = new RegExp(`^${wildcard
+        .split(/(?<!\\)(?:\\\\)*\*/)
+        .map(p => p.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&'))
+        .join(".*")}$`);
+    }
+    return input.match(regexCache[wildcard]);
+  };
+
+  const matches = (wildcard, input, arr) => (Array.isArray(wildcard)
+    ? wildcard.some(wc => matches(wc, input, arr))
+    : (wildcard === (arr ? "[*]" : "*") || compare(wildcard, input, arr)));
 
   const find = (haystack, checks, pathIn = []) => {
     const result = [];

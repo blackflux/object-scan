@@ -22,7 +22,8 @@ const haystack = {
     item: "e"
   }, {
     item: "f"
-  }]
+  }],
+  array4: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 };
 
 describe("Testing Find", () => {
@@ -37,6 +38,27 @@ describe("Testing Find", () => {
     const find = objectScan(["parent1.child"]);
     expect(find(haystack)).to.deep.equal([
       "parent1.child"
+    ]);
+  });
+
+  it("Testing Key Wildcard", () => {
+    const find = objectScan(["pa*nt*"]);
+    expect(find(haystack)).to.deep.equal([
+      "parent1",
+      "parent2"
+    ]);
+  });
+
+  it("Testing Array Wildcard", () => {
+    const find = objectScan(["**[1*]"]);
+    expect(find(haystack)).to.deep.equal([
+      "array1[1]",
+      "array2.nested[1]",
+      "array3[1]",
+      "array4[1]",
+      "array4[10]",
+      "array4[11]",
+      "array4[12]"
     ]);
   });
 

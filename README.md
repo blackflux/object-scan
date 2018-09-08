@@ -28,6 +28,16 @@ objectScan(["a.*.f"])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 // => [ 'a.e.f' ]
 ```
 
+### Features
+
+- Object and array matching with e.g. `key.path` and `[1]`
+- Key and index wildcard matching with `*` and `[*]`
+- Partial key and index wildcard matching, e.g. `mark*` or `[1*]`
+- Infinite nested matches with `**`
+- Simple or-clause for key and index with `{a,b}` and `[{0,1}]`
+- Full support for escaping
+- Lots of tests to ensure correctness
+
 ### Options
 
 #### filterFn
