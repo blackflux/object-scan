@@ -32,27 +32,27 @@ module.exports = (needles, {
                 } else if (
                   check[0] === "[*]"
                   || check[0] === `[${i}]`
-                  || (check[0] instanceof Array && check[0].indexOf(`[${i}]`) !== -1)
+                  || (check[0] instanceof Array && check[0].includes(`[${i}]`))
                 ) {
                   result.push(...find(haystack[i], [check.slice(1)], pathOut));
                 }
               });
           }
         } else {
-          Object.keys(haystack).forEach((key) => {
+          Object.entries(haystack).forEach(([key, value]) => {
             checks
               .filter(check => check.length !== 0)
               .forEach((check) => {
                 const escapedKey = escape(key);
                 const pathOut = [].concat(...pathIn).concat(key);
                 if (check[0] === "**") {
-                  result.push(...find(haystack[key], [check, check.slice(1)], pathOut));
+                  result.push(...find(value, [check, check.slice(1)], pathOut));
                 } else if (
                   check[0] === "*"
                   || check[0] === escapedKey
-                  || (check[0] instanceof Array && check[0].indexOf(escapedKey) !== -1)
+                  || (check[0] instanceof Array && check[0].includes(escapedKey))
                 ) {
-                  result.push(...find(haystack[key], [check.slice(1)], pathOut));
+                  result.push(...find(value, [check.slice(1)], pathOut));
                 }
               });
           });
