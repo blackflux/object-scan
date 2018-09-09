@@ -67,6 +67,11 @@ describe("Testing Find", () => {
     expect(find({ key: null })).to.deep.equal(["key"]);
   });
 
+  it("Testing undefined value", () => {
+    const find = objectScan(["**"], { filterFn: (key, value) => value === undefined });
+    expect(find({ key: undefined })).to.deep.equal(["key"]);
+  });
+
   it("Testing Escaped Wildcard", () => {
     const input = {
       parent: null,
