@@ -62,6 +62,21 @@ describe("Testing Find", () => {
     ]);
   });
 
+  it("Testing null value", () => {
+    const find = objectScan(["**"], { filterFn: (key, value) => value === null });
+    expect(find({ key: null })).to.deep.equal(["key"]);
+  });
+
+  it("Testing Escaped Wildcard", () => {
+    const input = {
+      parent: null,
+      "pa*nt*": null,
+      "pa**nt**": null
+    };
+    expect(objectScan(["pa\\*nt\\*"])(input)).to.deep.equal(["pa*nt*"]);
+    expect(objectScan(["pa*nt*"])(input)).to.deep.equal(["parent", "pa*nt*", "pa**nt**"]);
+  });
+
   it("Testing Results Unique", () => {
     const find = objectScan(["array*.**[1*]", "array*.*[1*]"]);
     expect(find(haystack)).to.deep.equal([

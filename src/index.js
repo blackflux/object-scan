@@ -31,7 +31,7 @@ const find = (haystack, checks, pathIn, ctx) => {
     }
   }
   if (ctx.breakFn === undefined || !ctx.breakFn(pathIn.map(escape).join("."), haystack)) {
-    if (typeof haystack === "object") {
+    if (haystack instanceof Object) {
       if (Array.isArray(haystack)) {
         for (let i = 0; i < haystack.length; i += 1) {
           const pathOut = pathIn.concat(i);
