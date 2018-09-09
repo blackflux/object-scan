@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const expect = require('chai').expect;
 const objectScan = require("./../src/index");
 
@@ -60,6 +62,85 @@ describe("Testing Find", () => {
       "array4[11]",
       "array4[12]"
     ]);
+  });
+
+  it("Testing Large Json Files", () => {
+    const maps = JSON.parse(fs.readFileSync(path.join(__dirname, "resources", "maps.json"), "utf8"));
+    const med = JSON.parse(fs.readFileSync(path.join(__dirname, "resources", "med.json"), "utf8"));
+    expect(objectScan(["**.lat"])(maps)).to.deep.equal([
+      "results[0].geometry.location.lat",
+      "results[0].geometry.viewport.northeast.lat",
+      "results[0].geometry.viewport.southwest.lat"
+    ]);
+    expect(objectScan(["**[{1,2}]"])(maps)).to.deep.equal([
+      "results[0].address_components[1]",
+      "results[0].address_components[2]",
+      "results[0].address_components[3].types[1]",
+      "results[0].address_components[4].types[1]",
+      "results[0].address_components[5].types[1]",
+      "results[0].address_components[6].types[1]",
+      "results[0].types[1]"
+    ]);
+    expect(objectScan(["**.*_*[{0,7}].*_name"])(maps)).to.deep.equal([
+      "results[0].address_components[0].long_name",
+      "results[0].address_components[0].short_name",
+      "results[0].address_components[7].long_name",
+      "results[0].address_components[7].short_name"
+    ]);
+    expect(objectScan(["**.name"])(med)).to.deep.equal([
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug[0].name",
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2[0].name",
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug[0].name",
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2[0].name"
+    ]);
+    expect(objectScan(["**[0]"])(med)).to.deep.equal([
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug[0]",
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2[0]",
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0]",
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug[0]",
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2[0]",
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0]",
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0]",
+      "problems[0].Diabetes[0].medications[0]",
+      "problems[0].Diabetes[0].labs[0]",
+      "problems[0].Diabetes[0]",
+      "problems[0].Asthma[0]",
+      "problems[0]"
+    ]);
+    expect(objectScan(["**.className*[*].associatedDrug*"])(med)).to.deep.equal([
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug",
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2",
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug",
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2"
+    ]);
+    expect(objectScan(["**.*at*"])(med)).to.deep.equal([
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug",
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2",
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug",
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2",
+      "problems[0].Diabetes[0].medications[0].medicationsClasses",
+      "problems[0].Diabetes[0].medications"
+    ]);
+  });
+
+  it("Testing null value", () => {
+    const find = objectScan(["**"], { filterFn: (key, value) => value === null });
+    expect(find({ key: null })).to.deep.equal(["key"]);
+  });
+
+  it("Testing undefined value", () => {
+    const find = objectScan(["**"], { filterFn: (key, value) => value === undefined });
+    expect(find({ key: undefined })).to.deep.equal(["key"]);
+  });
+
+  it("Testing Escaped Wildcard", () => {
+    const input = {
+      parent: null,
+      "pa*nt*": null,
+      "pa**nt**": null
+    };
+    expect(objectScan(["pa\\*nt\\*"])(input)).to.deep.equal(["pa*nt*"]);
+    expect(objectScan(["pa*nt*"])(input)).to.deep.equal(["parent", "pa*nt*", "pa**nt**"]);
   });
 
   it("Testing Results Unique", () => {
