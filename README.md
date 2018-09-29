@@ -45,16 +45,16 @@ objectScan(["a.*.f"])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 Type: `function`<br>
 Default: `undefined`
 
-Takes arguments `key` (dot joined and escaped) and `value` (value for given key) and called for every potential result.
-If function is defined and returns false, the entry is filtered from the result. 
+Takes arguments `key` (dot joined and escaped) and `value` (value for given key) and called for every intermittent result.
+If function is defined and returns false, the entry is filtered from the final result. 
 
 #### breakFn
 
 Type: `function`<br>
 Default: `undefined`
 
-Takes arguments `key` (dot joined and escaped) and `value` (value for given key) and called for every potential result.
-If function is defined and returns true, no nested entries are checked.
+Takes arguments `key` (dot joined and escaped) and `value` (value for given key) and called for every intermittent result.
+If function is defined and returns true, all nested entries under the current key are excluded from the result.
 
 #### joined
 
@@ -62,6 +62,13 @@ Type: `boolean`<br>
 Default: `true`
 
 Can be set to false to return each key as a list. When dealing with special characters this can be useful.
+
+#### useArraySelector
+
+Type: `boolean`<br>
+Default: `true
+
+When set to false no array selectors are used and arrays are automatically traversed.
 
 ## Examples
 
