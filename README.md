@@ -56,6 +56,13 @@ Default: `undefined`
 Takes arguments `key` (dot joined and escaped) and `value` (value for given key) and called for every intermittent result.
 If function is defined and returns true, all nested entries under the current key are excluded from the result.
 
+#### callbackFn
+
+Type: `function`<br>
+Default: `undefined`
+
+Takes arguments `key` (dot joined and escaped) and `value` (value for given key) and called for every final result.
+
 #### joined
 
 Type: `boolean`<br>

@@ -194,6 +194,16 @@ describe("Testing Find", () => {
     ]);
   });
 
+  it("Testing callbackFn", () => {
+    const result = {};
+    objectScan(["**.child"], { callbackFn: (k, v) => { result[k] = v; } })(haystack);
+    expect(result).to.deep.equal({
+      "grandparent1.parent.child": "d",
+      "parent1.child": "b",
+      "parent2.child": "c"
+    });
+  });
+
   describe("Testing useArraySelector === false", () => {
     it("Testing Items Returned Without List Selector", () => {
       const find = objectScan(["array3.item"], { useArraySelector: false });

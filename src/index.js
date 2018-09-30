@@ -23,14 +23,17 @@ const matches = (wildcard, input, arr, ctx) => (Array.isArray(wildcard)
 const find = (haystack, checks, pathIn, ctx) => {
   const result = [];
   if (checks.some(check => check.length === 0)) {
-    if (ctx.filterFn === undefined || ctx.filterFn(pathIn.map(escape).join("."), haystack)) {
+    if (ctx.filterFn === undefined || ctx.filterFn(pathIn.map(escape).join("."), haystack) !== false) {
+      if (ctx.callbackFn !== undefined) {
+        ctx.callbackFn(pathIn.map(escape).join("."), haystack);
+      }
       result.push(ctx.joined ? pathIn.reduce((p, c) => {
         const isNumber = typeof c === "number";
         return `${p}${p === "" || isNumber ? "" : "."}${isNumber ? `[${c}]` : c}`;
       }, "") : pathIn);
     }
   }
-  if (ctx.breakFn === undefined || !ctx.breakFn(pathIn.map(escape).join("."), haystack)) {
+  if (ctx.breakFn === undefined || ctx.breakFn(pathIn.map(escape).join("."), haystack) !== true) {
     if (haystack instanceof Object) {
       if (Array.isArray(haystack)) {
         for (let i = 0; i < haystack.length; i += 1) {
@@ -70,6 +73,7 @@ const find = (haystack, checks, pathIn, ctx) => {
 module.exports = (needles, {
   filterFn = undefined,
   breakFn = undefined,
+  callbackFn = undefined,
   joined = true,
   useArraySelector = true
 } = {}) => {
@@ -77,6 +81,6 @@ module.exports = (needles, {
   const regexCache = {};
 
   return haystack => uniq(find(haystack, search, [], {
-    filterFn, breakFn, joined, regexCache, useArraySelector
+    filterFn, breakFn, callbackFn, joined, regexCache, useArraySelector
   }));
 };
