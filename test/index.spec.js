@@ -123,6 +123,11 @@ describe("Testing Find", () => {
     ]);
   });
 
+  it("Testing empty search string", () => {
+    const find = objectScan([""]);
+    expect(find({ key: "test" })).to.deep.equal([]);
+  });
+
   it("Testing null value", () => {
     const find = objectScan(["**"], { filterFn: (key, value) => value === null });
     expect(find({ key: null })).to.deep.equal(["key"]);
