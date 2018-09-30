@@ -20,20 +20,23 @@ const matches = (wildcard, input, arr, ctx) => (Array.isArray(wildcard)
   ? wildcard.some(wc => matches(wc, input, arr, ctx))
   : (wildcard === (arr ? "[*]" : "*") || compare(wildcard, input, arr, ctx)));
 
+const pathToString = (input, ctx) => input.reduce((p, c) => {
+  const isNumber = typeof c === "number";
+  // eslint-disable-next-line no-nested-ternary
+  return `${p}${p === "" || isNumber ? "" : "."}${isNumber ? `[${c}]` : (ctx.escapePaths ? escape(c) : c)}`;
+}, "");
+
 const find = (haystack, checks, pathIn, ctx) => {
   const result = [];
   if (checks.some(check => check.length === 0)) {
-    if (ctx.filterFn === undefined || ctx.filterFn(pathIn.map(escape).join("."), haystack) !== false) {
+    if (ctx.filterFn === undefined || ctx.filterFn(pathToString(pathIn, ctx), haystack) !== false) {
       if (ctx.callbackFn !== undefined) {
-        ctx.callbackFn(pathIn.map(escape).join("."), haystack);
+        ctx.callbackFn(pathToString(pathIn, ctx), haystack);
       }
-      result.push(ctx.joined ? pathIn.reduce((p, c) => {
-        const isNumber = typeof c === "number";
-        return `${p}${p === "" || isNumber ? "" : "."}${isNumber ? `[${c}]` : c}`;
-      }, "") : pathIn);
+      result.push(ctx.joined ? pathToString(pathIn, ctx) : pathIn);
     }
   }
-  if (ctx.breakFn === undefined || ctx.breakFn(pathIn.map(escape).join("."), haystack) !== true) {
+  if (ctx.breakFn === undefined || ctx.breakFn(pathToString(pathIn, ctx), haystack) !== true) {
     if (haystack instanceof Object) {
       if (Array.isArray(haystack)) {
         for (let i = 0; i < haystack.length; i += 1) {
@@ -75,12 +78,13 @@ module.exports = (needles, {
   breakFn = undefined,
   callbackFn = undefined,
   joined = true,
+  escapePaths = true,
   useArraySelector = true
 } = {}) => {
   const search = uniq(needles).map(parser);
   const regexCache = {};
 
   return haystack => uniq(find(haystack, search, [], {
-    filterFn, breakFn, callbackFn, joined, regexCache, useArraySelector
+    filterFn, breakFn, callbackFn, joined, regexCache, escapePaths, useArraySelector
   }));
 };

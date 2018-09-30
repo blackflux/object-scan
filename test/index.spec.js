@@ -139,8 +139,8 @@ describe("Testing Find", () => {
       "pa*nt*": null,
       "pa**nt**": null
     };
-    expect(objectScan(["pa\\*nt\\*"])(input)).to.deep.equal(["pa*nt*"]);
-    expect(objectScan(["pa*nt*"])(input)).to.deep.equal(["parent", "pa*nt*", "pa**nt**"]);
+    expect(objectScan(["pa\\*nt\\*"])(input)).to.deep.equal(["pa\\*nt\\*"]);
+    expect(objectScan(["pa*nt*"])(input)).to.deep.equal(["parent", "pa\\*nt\\*", "pa\\*\\*nt\\*\\*"]);
   });
 
   it("Testing Results Unique", () => {
@@ -280,36 +280,45 @@ describe("Testing Find", () => {
     ]);
   });
 
-  it("Testing Escaped Char Matching", () => {
-    [',', '.', '*', '[', ']', '{', '}'].forEach((char) => {
-      const find = objectScan([`\\${char}`]);
-      expect(find({ [char]: "a", b: "c" })).to.deep.equal([char]);
+  describe("Testing Escaping", () => {
+    it("Testing Escaped Char Matching", () => {
+      [',', '.', '*', '[', ']', '{', '}'].forEach((char) => {
+        const find = objectScan([`\\${char}`]);
+        expect(find({ [char]: "a", b: "c" })).to.deep.equal([`\\${char}`]);
+      });
     });
-  });
 
-  it("Testing Escaped Star", () => {
-    const find = objectScan([`a.\\[\\*\\]`]);
-    expect(find({ a: { "[*]": "b", "[x]": "c" } })).to.deep.equal([
-      "a.[*]"
-    ]);
-  });
+    it("Testing Escaped Star", () => {
+      const find = objectScan([`a.\\[\\*\\]`]);
+      expect(find({ a: { "[*]": "b", "[x]": "c" } })).to.deep.equal([
+        "a.\\[\\*\\]"
+      ]);
+    });
 
-  it("Testing Escaped Comma", () => {
-    const find = objectScan([`{a\\,b,c\\,d,f\\\\\\,g}`]);
-    expect(find({ "a,b": "c", "c,d": "e", "f\\\\,g": "h" })).to.deep.equal([
-      "a,b",
-      "c,d",
-      "f\\\\,g"
-    ]);
-  });
+    it("Testing Escaped Comma", () => {
+      const find = objectScan([`{a\\,b,c\\,d,f\\\\\\,g}`]);
+      expect(find({ "a,b": "c", "c,d": "e", "f\\\\,g": "h" })).to.deep.equal([
+        "a\\,b",
+        "c\\,d",
+        "f\\\\\\,g"
+      ]);
+    });
 
-  it("Testing Escaped Dot", () => {
-    const find = objectScan([`{a\\.b,c\\.d,f\\\\\\.g}`]);
-    expect(find({ "a.b": "c", "c.d": "e", "f\\\\.g": "h" })).to.deep.equal([
-      "a.b",
-      "c.d",
-      "f\\\\.g"
-    ]);
+    it("Testing Escaped Dot", () => {
+      const find = objectScan([`{a\\.b,c\\.d,f\\\\\\.g}`]);
+      expect(find({ "a.b": "c", "c.d": "e", "f\\\\.g": "h" })).to.deep.equal([
+        "a\\.b",
+        "c\\.d",
+        "f\\\\\\.g"
+      ]);
+    });
+
+    it("Testing Output not Escaped", () => {
+      const find = objectScan([`*`], { escapePaths: false });
+      expect(find({ "some.key": "" })).to.deep.equal([
+        "some.key"
+      ]);
+    });
   });
 
   it("Testing Misc Tests", () => {

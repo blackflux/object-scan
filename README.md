@@ -45,7 +45,7 @@ objectScan(["a.*.f"])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 Type: `function`<br>
 Default: `undefined`
 
-Takes arguments `key` (dot joined and escaped) and `value` (value for given key) and called for every intermittent result.
+Takes arguments `key` (always joined) and `value` (value for given key) and called for every intermittent result.
 If function is defined and returns false, the entry is filtered from the final result. 
 
 #### breakFn
@@ -53,7 +53,7 @@ If function is defined and returns false, the entry is filtered from the final r
 Type: `function`<br>
 Default: `undefined`
 
-Takes arguments `key` (dot joined and escaped) and `value` (value for given key) and called for every intermittent result.
+Takes arguments `key` (always joined) and `value` (value for given key) and called for every intermittent result.
 If function is defined and returns true, all nested entries under the current key are excluded from the result.
 
 #### callbackFn
@@ -61,7 +61,7 @@ If function is defined and returns true, all nested entries under the current ke
 Type: `function`<br>
 Default: `undefined`
 
-Takes arguments `key` (dot joined and escaped) and `value` (value for given key) and called for every final result.
+Takes arguments `key` (always joined) and `value` (value for given key) and called for every final result.
 
 #### joined
 
@@ -69,6 +69,13 @@ Type: `boolean`<br>
 Default: `true`
 
 Can be set to false to return each key as a list. When dealing with special characters this can be useful.
+
+#### escapePaths
+
+Type: `boolean`<br>
+Default: `true
+
+When set to false, joined paths for functions and the final result are not escaped.
 
 #### useArraySelector
 
