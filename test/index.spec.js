@@ -194,6 +194,21 @@ describe("Testing Find", () => {
     ]);
   });
 
+  describe("Testing useArraySelector === false", () => {
+    it("Testing Items Returned Without List Selector", () => {
+      const find = objectScan(["array3.item"], { useArraySelector: false });
+      expect(find(haystack)).to.deep.equal([
+        "array3[0].item",
+        "array3[1].item"
+      ]);
+    });
+
+    it("Testing Items Not Returned With List Selector", () => {
+      const find = objectScan(["array3[*].item"], { useArraySelector: false });
+      expect(find(haystack)).to.deep.equal([]);
+    });
+  });
+
   it("Testing Array Top Level", () => {
     const find = objectScan(["[*]"]);
     expect(find(haystack.array1)).to.deep.equal([

@@ -38,7 +38,9 @@ const find = (haystack, checks, pathIn, ctx) => {
           checks
             .filter(check => check.length !== 0)
             .forEach((check) => {
-              if (check[0] === "**") {
+              if (ctx.useArraySelector === false) {
+                result.push(...find(haystack[i], [check], pathOut, ctx));
+              } else if (check[0] === "**") {
                 result.push(...find(haystack[i], [check, check.slice(1)], pathOut, ctx));
               } else if (matches(check[0], `[${i}]`, true, ctx)) {
                 result.push(...find(haystack[i], [check.slice(1)], pathOut, ctx));
@@ -68,12 +70,13 @@ const find = (haystack, checks, pathIn, ctx) => {
 module.exports = (needles, {
   filterFn = undefined,
   breakFn = undefined,
-  joined = true
+  joined = true,
+  useArraySelector = true
 } = {}) => {
   const search = uniq(needles).map(parser);
   const regexCache = {};
 
   return haystack => uniq(find(haystack, search, [], {
-    filterFn, breakFn, joined, regexCache
+    filterFn, breakFn, joined, regexCache, useArraySelector
   }));
 };

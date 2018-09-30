@@ -6,8 +6,8 @@
 [![Dependencies](https://david-dm.org/simlu/object-scan/status.svg)](https://david-dm.org/simlu/object-scan)
 [![NPM](https://img.shields.io/npm/v/object-scan.svg)](https://www.npmjs.com/package/object-scan)
 [![Downloads](https://img.shields.io/npm/dt/object-scan.svg)](https://www.npmjs.com/package/object-scan)
-[![Semantic-Release](https://github.com/simlu/js-gardener/blob/master/assets/icons/semver.svg)](https://github.com/semantic-release/semantic-release)
-[![Gardener](https://github.com/simlu/js-gardener/blob/master/assets/badge.svg)](https://github.com/simlu/js-gardener)
+[![Semantic-Release](https://github.com/blackflux/js-gardener/blob/master/assets/icons/semver.svg)](https://github.com/semantic-release/semantic-release)
+[![Gardener](https://github.com/blackflux/js-gardener/blob/master/assets/badge.svg)](https://github.com/blackflux/js-gardener)
 [![Gitter](https://github.com/simlu/js-gardener/blob/master/assets/icons/gitter.svg)](https://gitter.im/simlu/object-scan)
 
 Find Keys using Wildcard matching and optional value function.
@@ -45,16 +45,16 @@ objectScan(["a.*.f"])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 Type: `function`<br>
 Default: `undefined`
 
-Takes arguments `key` (dot joined and escaped) and `value` (value for given key) and called for every potential result.
-If function is defined and returns false, the entry is filtered from the result. 
+Takes arguments `key` (dot joined and escaped) and `value` (value for given key) and called for every intermittent result.
+If function is defined and returns false, the entry is filtered from the final result. 
 
 #### breakFn
 
 Type: `function`<br>
 Default: `undefined`
 
-Takes arguments `key` (dot joined and escaped) and `value` (value for given key) and called for every potential result.
-If function is defined and returns true, no nested entries are checked.
+Takes arguments `key` (dot joined and escaped) and `value` (value for given key) and called for every intermittent result.
+If function is defined and returns true, all nested entries under the current key are excluded from the result.
 
 #### joined
 
@@ -62,6 +62,13 @@ Type: `boolean`<br>
 Default: `true`
 
 Can be set to false to return each key as a list. When dealing with special characters this can be useful.
+
+#### useArraySelector
+
+Type: `boolean`<br>
+Default: `true
+
+When set to false no array selectors are used and arrays are automatically traversed.
 
 ## Examples
 
