@@ -202,6 +202,7 @@ describe("Testing Find", () => {
         "array3[1].item"
       ]);
     });
+
     it("Testing Items Not Returned With List Selector", () => {
       const find = objectScan(["array3[*].item"], { useArraySelector: false });
       expect(find(haystack)).to.deep.equal([]);
