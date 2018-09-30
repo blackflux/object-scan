@@ -20,23 +20,23 @@ const matches = (wildcard, input, arr, ctx) => (Array.isArray(wildcard)
   ? wildcard.some(wc => matches(wc, input, arr, ctx))
   : (wildcard === (arr ? "[*]" : "*") || compare(wildcard, input, arr, ctx)));
 
-const pathToString = (input, ctx) => input.reduce((p, c) => {
+const formatPath = (input, ctx) => (ctx.joined ? input.reduce((p, c) => {
   const isNumber = typeof c === "number";
   // eslint-disable-next-line no-nested-ternary
   return `${p}${p === "" || isNumber ? "" : "."}${isNumber ? `[${c}]` : (ctx.escapePaths ? escape(c) : c)}`;
-}, "");
+}, "") : input);
 
 const find = (haystack, checks, pathIn, ctx) => {
   const result = [];
   if (checks.some(check => check.length === 0)) {
-    if (ctx.filterFn === undefined || ctx.filterFn(pathToString(pathIn, ctx), haystack) !== false) {
+    if (ctx.filterFn === undefined || ctx.filterFn(formatPath(pathIn, ctx), haystack) !== false) {
       if (ctx.callbackFn !== undefined) {
-        ctx.callbackFn(pathToString(pathIn, ctx), haystack);
+        ctx.callbackFn(formatPath(pathIn, ctx), haystack);
       }
-      result.push(ctx.joined ? pathToString(pathIn, ctx) : pathIn);
+      result.push(formatPath(pathIn, ctx));
     }
   }
-  if (ctx.breakFn === undefined || ctx.breakFn(pathToString(pathIn, ctx), haystack) !== true) {
+  if (ctx.breakFn === undefined || ctx.breakFn(formatPath(pathIn, ctx), haystack) !== true) {
     if (haystack instanceof Object) {
       if (Array.isArray(haystack)) {
         for (let i = 0; i < haystack.length; i += 1) {
