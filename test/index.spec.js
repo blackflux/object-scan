@@ -229,6 +229,27 @@ describe("Testing Find", () => {
     });
   });
 
+  describe("Testing Fn parents", () => {
+    it("Testing parents useArraySelector == true", () => {
+      const input = { one: [{ child: "b" }] };
+      objectScan(["**.child"], {
+        callbackFn: (k, v, parents) => {
+          expect(parents).to.deep.equal([input, input.one, input.one[0]]);
+        }
+      })(input);
+    });
+
+    it("Testing parents useArraySelector == false", () => {
+      const input = { one: [{ child: "b" }] };
+      objectScan(["**.child"], {
+        callbackFn: (k, v, parents) => {
+          expect(parents).to.deep.equal([input, input.one[0]]);
+        },
+        useArraySelector: false
+      })(input);
+    });
+  });
+
   describe("Testing useArraySelector === false", () => {
     it("Testing Items Returned Without List Selector", () => {
       const find = objectScan(["array3.item"], { useArraySelector: false });

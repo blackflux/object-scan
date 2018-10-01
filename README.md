@@ -40,12 +40,18 @@ objectScan(["a.*.f"])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 
 ### Options
 
+
+**Note on Functions:**
+Signature for all functions is `Fn(key, value, parents)`, where `key` is the key that the function is called for,
+`value` is the value of that key and `parents` is an array containing all parents as `[..., grandparent, parent]`.
+The `key` argument respects the `joined` option and the `parents` only includes arrays if `useArraySelector` is true.
+
 #### filterFn
 
 Type: `function`<br>
 Default: `undefined`
 
-Takes arguments `key` and `value` (value for given key) and called for every intermittent result.
+Called for every intermittent result. 
 If function is defined and returns false, the entry is filtered from the final result. 
 
 #### breakFn
@@ -53,7 +59,7 @@ If function is defined and returns false, the entry is filtered from the final r
 Type: `function`<br>
 Default: `undefined`
 
-Takes arguments `key` and `value` (value for given key) and called for every intermittent result.
+Called for every intermittent result.
 If function is defined and returns true, all nested entries under the current key are excluded from the result.
 
 #### callbackFn
@@ -61,7 +67,7 @@ If function is defined and returns true, all nested entries under the current ke
 Type: `function`<br>
 Default: `undefined`
 
-Takes arguments `key` and `value` (value for given key) and called for every final result.
+Called for every final result.
 
 #### joined
 
