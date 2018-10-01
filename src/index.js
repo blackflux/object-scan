@@ -26,17 +26,17 @@ const formatPath = (input, ctx) => (ctx.joined ? input.reduce((p, c) => {
   return `${p}${p === "" || isNumber ? "" : "."}${isNumber ? `[${c}]` : (ctx.escapePaths ? escape(c) : c)}`;
 }, "") : input);
 
-const find = (haystack, checks, pathIn, ctx) => {
+const find = (haystack, checks, pathIn, ctx, parents) => {
   const result = [];
   if (checks.some(check => check.length === 0)) {
-    if (ctx.filterFn === undefined || ctx.filterFn(formatPath(pathIn, ctx), haystack) !== false) {
+    if (ctx.filterFn === undefined || ctx.filterFn(formatPath(pathIn, ctx), haystack, parents) !== false) {
       if (ctx.callbackFn !== undefined) {
-        ctx.callbackFn(formatPath(pathIn, ctx), haystack);
+        ctx.callbackFn(formatPath(pathIn, ctx), haystack, parents);
       }
       result.push(formatPath(pathIn, ctx));
     }
   }
-  if (ctx.breakFn === undefined || ctx.breakFn(formatPath(pathIn, ctx), haystack) !== true) {
+  if (ctx.breakFn === undefined || ctx.breakFn(formatPath(pathIn, ctx), haystack, parents) !== true) {
     if (haystack instanceof Object) {
       if (Array.isArray(haystack)) {
         for (let i = 0; i < haystack.length; i += 1) {
@@ -45,11 +45,11 @@ const find = (haystack, checks, pathIn, ctx) => {
             .filter(check => check.length !== 0)
             .forEach((check) => {
               if (ctx.useArraySelector === false) {
-                result.push(...find(haystack[i], [check], pathOut, ctx));
+                result.push(...find(haystack[i], [check], pathOut, ctx, parents));
               } else if (check[0] === "**") {
-                result.push(...find(haystack[i], [check, check.slice(1)], pathOut, ctx));
+                result.push(...find(haystack[i], [check, check.slice(1)], pathOut, ctx, parents.concat([haystack])));
               } else if (matches(check[0], `[${i}]`, true, ctx)) {
-                result.push(...find(haystack[i], [check.slice(1)], pathOut, ctx));
+                result.push(...find(haystack[i], [check.slice(1)], pathOut, ctx, parents.concat([haystack])));
               }
             });
         }
@@ -61,9 +61,9 @@ const find = (haystack, checks, pathIn, ctx) => {
             .filter(check => check.length !== 0)
             .forEach((check) => {
               if (check[0] === "**") {
-                result.push(...find(value, [check, check.slice(1)], pathOut, ctx));
+                result.push(...find(value, [check, check.slice(1)], pathOut, ctx, parents.concat([haystack])));
               } else if (matches(check[0], escapedKey, false, ctx)) {
-                result.push(...find(value, [check.slice(1)], pathOut, ctx));
+                result.push(...find(value, [check.slice(1)], pathOut, ctx, parents.concat([haystack])));
               }
             });
         });
@@ -86,5 +86,5 @@ module.exports = (needles, {
 
   return haystack => uniq(find(haystack, search, [], {
     filterFn, breakFn, callbackFn, joined, regexCache, escapePaths, useArraySelector
-  }));
+  }, []));
 };
