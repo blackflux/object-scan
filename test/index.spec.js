@@ -226,9 +226,11 @@ describe("Testing Find", () => {
   });
 
   describe("Testing Fn parents", () => {
+    const input = { one: [{ child: "b" }] };
+    const pattern = ["**.child"];
+
     it("Testing parents useArraySelector == true", () => {
-      const input = { one: [{ child: "b" }] };
-      objectScan(["**.child"], {
+      objectScan(pattern, {
         callbackFn: (k, v, parents) => {
           expect(parents).to.deep.equal([input, input.one, input.one[0]]);
         }
@@ -236,8 +238,7 @@ describe("Testing Find", () => {
     });
 
     it("Testing parents useArraySelector == false", () => {
-      const input = { one: [{ child: "b" }] };
-      objectScan(["**.child"], {
+      objectScan(pattern, {
         callbackFn: (k, v, parents) => {
           expect(parents).to.deep.equal([input, input.one[0]]);
         },
