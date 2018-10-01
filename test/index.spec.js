@@ -217,11 +217,7 @@ describe("Testing Find", () => {
 
   it("Testing callbackFn", () => {
     const result = {};
-    objectScan(["**.child"], {
-      callbackFn: (k, v) => {
-        result[k] = v;
-      }
-    })(haystack);
+    objectScan(["**.child"], { callbackFn: (k, v) => { result[k] = v; } })(haystack);
     expect(result).to.deep.equal({
       "grandparent1.parent.child": "d",
       "parent1.child": "b",
