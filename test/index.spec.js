@@ -51,6 +51,22 @@ describe("Testing Find", () => {
     ]);
   });
 
+  it("Testing Top Level Nested Array", () => {
+    const find = objectScan(["**"]);
+    expect(find([[0, 1, 2, 3], [0, 1, 2, 3]])).to.deep.equal([
+      '[0]',
+      '[0][0]',
+      '[0][1]',
+      '[0][2]',
+      '[0][3]',
+      '[1]',
+      '[1][0]',
+      '[1][1]',
+      '[1][2]',
+      '[1][3]'
+    ]);
+  });
+
   it("Testing Array Wildcard", () => {
     const find = objectScan(["**[1*]"]);
     expect(find(haystack)).to.deep.equal([
@@ -201,7 +217,11 @@ describe("Testing Find", () => {
 
   it("Testing callbackFn", () => {
     const result = {};
-    objectScan(["**.child"], { callbackFn: (k, v) => { result[k] = v; } })(haystack);
+    objectScan(["**.child"], {
+      callbackFn: (k, v) => {
+        result[k] = v;
+      }
+    })(haystack);
     expect(result).to.deep.equal({
       "grandparent1.parent.child": "d",
       "parent1.child": "b",
