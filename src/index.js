@@ -50,8 +50,8 @@ const find = (haystack, search, pathIn, parents, ctx) => {
               if (ctx.useArraySelector === false) {
                 result.push(...find(haystack[i], search, pathOut, parents, ctx));
               } else if (entry === "**") {
-                [subSearch, search].forEach(e => result
-                  .push(...find(haystack[i], e, pathOut, parents.concat([haystack]), ctx)));
+                [subSearch, search].forEach(s => result
+                  .push(...find(haystack[i], s, pathOut, parents.concat([haystack]), ctx)));
               } else if (matches(entry, `[${i}]`, true, ctx)) {
                 result.push(...find(haystack[i], subSearch, pathOut, parents.concat([haystack]), ctx));
               }
@@ -64,8 +64,8 @@ const find = (haystack, search, pathIn, parents, ctx) => {
           Object.entries(search)
             .forEach(([entry, subSearch]) => {
               if (entry === "**") {
-                [subSearch, search].forEach(e => result
-                  .push(...find(value, e, pathOut, parents.concat([haystack]), ctx)));
+                [subSearch, search].forEach(s => result
+                  .push(...find(value, s, pathOut, parents.concat([haystack]), ctx)));
               } else if (matches(entry, escapedKey, false, ctx)) {
                 result.push(...find(value, subSearch, pathOut, parents.concat([haystack]), ctx));
               }
