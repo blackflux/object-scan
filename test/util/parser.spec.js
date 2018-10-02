@@ -6,6 +6,10 @@ describe("Testing Parser", () => {
     expect(parser("a")).to.deep.equal(["a"]);
   });
 
+  it("Testing Empty", () => {
+    expect(parser("")).to.deep.equal([""]);
+  });
+
   it("Testing Path", () => {
     expect(parser("a.b")).to.deep.equal(["a", "b"]);
   });
