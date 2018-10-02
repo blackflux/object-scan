@@ -231,7 +231,7 @@ describe("Testing Find", () => {
 
     it("Testing parents useArraySelector == true", () => {
       objectScan(pattern, {
-        callbackFn: (k, v, parents) => {
+        callbackFn: (k, v, { parents }) => {
           expect(parents).to.deep.equal([input, input.one, input.one[0]]);
         }
       })(input);
@@ -239,11 +239,38 @@ describe("Testing Find", () => {
 
     it("Testing parents useArraySelector == false", () => {
       objectScan(pattern, {
-        callbackFn: (k, v, parents) => {
+        callbackFn: (k, v, { parents }) => {
           expect(parents).to.deep.equal([input, input.one[0]]);
         },
         useArraySelector: false
       })(input);
+    });
+  });
+
+  describe("Testing Fn needle", () => {
+    const input = [{ parent: { child: "value" } }];
+    const pattern = ["[*].*.child", "[*].parent"];
+
+    it("Testing needle on callbackFn", () => {
+      const result = [];
+      objectScan(pattern, { callbackFn: (k, v, { needle }) => result.push(`${needle} => ${k}`) })(input);
+      expect(result).to.deep.equal([
+        "[*].*.child => [0].parent.child",
+        "[*].parent => [0].parent"
+      ]);
+    });
+
+    it("Testing needle on breakFn", () => {
+      const result = [];
+      objectScan(pattern, { breakFn: (k, v, { needle }) => result.push(`${needle} => ${k}`) })(input);
+      expect(result).to.deep.equal([
+        "[*].*.child => ",
+        "[*].*.child => [0]",
+        "[*].*.child => [0].parent",
+        "[*].*.child => [0].parent.child",
+        "[*].parent => [0]",
+        "[*].parent => [0].parent"
+      ]);
     });
   });
 

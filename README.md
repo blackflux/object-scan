@@ -42,9 +42,11 @@ objectScan(["a.*.f"])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 
 
 **Note on Functions:**
-Signature for all functions is `Fn(key, value, parents)`, where `key` is the key that the function is called for,
-`value` is the value of that key and `parents` is an array containing all parents as `[..., grandparent, parent]`.
-The `key` argument respects the `joined` option and the `parents` only includes arrays if `useArraySelector` is true.
+Signature for all functions is `Fn(key, value, { parents, needle })`, where:
+- `key` is the key that the function is called for (respects `joined` option).
+- `value` is the value of that key.
+- `parents` is an array containing all parents as `[..., grandparent, parent]` (includes arrays iff `useArraySelector` is true).
+- `needle` is a needle that triggered the function call.
 
 #### excludeFn
 
