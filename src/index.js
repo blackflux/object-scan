@@ -46,14 +46,14 @@ const find = (haystack, search, pathIn, parents, ctx) => {
         for (let i = 0; i < haystack.length; i += 1) {
           const pathOut = pathIn.concat(i);
           Object.entries(search)
-            .forEach(([ele, path]) => {
+            .forEach(([entry, subSearch]) => {
               if (ctx.useArraySelector === false) {
                 result.push(...find(haystack[i], search, pathOut, parents, ctx));
-              } else if (ele === "**") {
-                [path, search].forEach(e => result
+              } else if (entry === "**") {
+                [subSearch, search].forEach(e => result
                   .push(...find(haystack[i], e, pathOut, parents.concat([haystack]), ctx)));
-              } else if (matches(ele, `[${i}]`, true, ctx)) {
-                result.push(...find(haystack[i], path, pathOut, parents.concat([haystack]), ctx));
+              } else if (matches(entry, `[${i}]`, true, ctx)) {
+                result.push(...find(haystack[i], subSearch, pathOut, parents.concat([haystack]), ctx));
               }
             });
         }
@@ -62,12 +62,12 @@ const find = (haystack, search, pathIn, parents, ctx) => {
           const escapedKey = escape(key);
           const pathOut = pathIn.concat(key);
           Object.entries(search)
-            .forEach(([ele, path]) => {
-              if (ele === "**") {
-                [path, search].forEach(e => result
+            .forEach(([entry, subSearch]) => {
+              if (entry === "**") {
+                [subSearch, search].forEach(e => result
                   .push(...find(value, e, pathOut, parents.concat([haystack]), ctx)));
-              } else if (matches(ele, escapedKey, false, ctx)) {
-                result.push(...find(value, path, pathOut, parents.concat([haystack]), ctx));
+              } else if (matches(entry, escapedKey, false, ctx)) {
+                result.push(...find(value, subSearch, pathOut, parents.concat([haystack]), ctx));
               }
             });
         });
