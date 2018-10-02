@@ -110,18 +110,18 @@ describe("Testing Find", () => {
       "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2[0].name"
     ]);
     expect(objectScan(["**[0]"])(med)).to.deep.equal([
+      "problems[0]",
+      "problems[0].Diabetes[0]",
+      "problems[0].Diabetes[0].medications[0]",
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0]",
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0]",
       "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug[0]",
       "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2[0]",
-      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0]",
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0]",
       "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug[0]",
       "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2[0]",
-      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0]",
-      "problems[0].Diabetes[0].medications[0].medicationsClasses[0]",
-      "problems[0].Diabetes[0].medications[0]",
       "problems[0].Diabetes[0].labs[0]",
-      "problems[0].Diabetes[0]",
-      "problems[0].Asthma[0]",
-      "problems[0]"
+      "problems[0].Asthma[0]"
     ]);
     expect(objectScan(["**.className*[*].associatedDrug*"])(med)).to.deep.equal([
       "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug",
@@ -130,12 +130,12 @@ describe("Testing Find", () => {
       "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2"
     ]);
     expect(objectScan(["**.*at*"])(med)).to.deep.equal([
+      "problems[0].Diabetes[0].medications",
+      "problems[0].Diabetes[0].medications[0].medicationsClasses",
       "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug",
       "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2",
       "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug",
-      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2",
-      "problems[0].Diabetes[0].medications[0].medicationsClasses",
-      "problems[0].Diabetes[0].medications"
+      "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2"
     ]);
   });
 
@@ -253,7 +253,7 @@ describe("Testing Find", () => {
 
     it("Testing needle on callbackFn", () => {
       const result = [];
-      objectScan(pattern, { callbackFn: (k, v, { needle }) => result.push(`${needle} => ${k}`) })(input);
+      objectScan(pattern, { callbackFn: (k, v, { needles }) => result.push(`${needles} => ${k}`) })(input);
       expect(result).to.deep.equal([
         "[*].*.child => [0].parent.child",
         "[*].parent => [0].parent"
@@ -262,13 +262,12 @@ describe("Testing Find", () => {
 
     it("Testing needle on breakFn", () => {
       const result = [];
-      objectScan(pattern, { breakFn: (k, v, { needle }) => result.push(`${needle} => ${k}`) })(input);
+      objectScan(pattern, { breakFn: (k, v, { needles }) => result.push(`${needles} => ${k}`) })(input);
       expect(result).to.deep.equal([
-        "[*].parent => ",
-        "[*].*.child => [0]",
+        "[*].*.child,[*].parent => ",
+        "[*].*.child,[*].parent => [0]",
         "[*].*.child => [0].parent",
         "[*].*.child => [0].parent.child",
-        "[*].parent => [0]",
         "[*].parent => [0].parent"
       ]);
     });
@@ -417,7 +416,7 @@ describe("Testing Find", () => {
     ]);
     expect(objectScan(["a.*"])(input)).to.deep.equal(['a.b', 'a.i']);
     expect(objectScan(["a.b.c"])(input)).to.deep.equal(['a.b.c']);
-    expect(objectScan(["**.{b,i}"])(input)).to.deep.equal(['a.b.i', 'a.b', "a.i"]);
+    expect(objectScan(["**.{b,i}"])(input)).to.deep.equal(['a.b', "a.i", 'a.b.i']);
     expect(objectScan(["*.{b,i}"])(input)).to.deep.equal(['a.b', "a.i"]);
     expect(objectScan(["a.*.{c,e}"])(input)).to.deep.equal(['a.b.c', "a.b.e"]);
     expect(objectScan(["a.*.g"])(input)).to.deep.equal(['a.b.g']);

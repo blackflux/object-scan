@@ -42,11 +42,11 @@ objectScan(["a.*.f"])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 
 
 **Note on Functions:**
-Signature for all functions is `Fn(key, value, { parents, needle })`, where:
+Signature for all functions is `Fn(key, value, { parents, needles })`, where:
 - `key` is the key that the function is called for (respects `joined` option).
 - `value` is the value of that key.
 - `parents` is an array containing all parents as `[..., grandparent, parent]` (includes arrays iff `useArraySelector` is true).
-- `needle` is a needle that triggered the function call.
+- `needles` are all needles that triggered the function call.
 
 #### excludeFn
 
@@ -149,7 +149,7 @@ objectScan(["**[*]"])(obj);
 objectScan(["**"], { excludeFn: (key, value) => typeof value !== "string" })(obj);
 // => ["a.b.c", "a.e.f", "a.h[0]", "a.h[1]", "k"]
 objectScan(["**"], { breakFn: key => key === "a.b" })(obj);
-// => ["a", "a.b", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]);
+// => ["a", "a.b", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]
 ```
 
 ## Special Characters

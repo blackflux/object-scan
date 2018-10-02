@@ -1,5 +1,5 @@
 const uniq = require("lodash.uniq");
-const parser = require("./util/parser");
+const compiler = require("./util/compiler");
 
 const escape = input => String(input).replace(/[,.*[\]{}]/g, "\\$&");
 
@@ -16,9 +16,7 @@ const compare = (wildcard, input, arr, ctx) => {
   return input.match(ctx.regexCache[wildcard]);
 };
 
-const matches = (wildcard, input, arr, ctx) => (Array.isArray(wildcard)
-  ? wildcard.some(wc => matches(wc, input, arr, ctx))
-  : (wildcard === (arr ? "[*]" : "*") || compare(wildcard, input, arr, ctx)));
+const matches = (wildcard, input, arr, ctx) => wildcard === (arr ? "[*]" : "*") || compare(wildcard, input, arr, ctx);
 
 const formatPath = (input, ctx) => (ctx.joined ? input.reduce((p, c) => {
   const isNumber = typeof c === "number";
@@ -26,40 +24,36 @@ const formatPath = (input, ctx) => (ctx.joined ? input.reduce((p, c) => {
   return `${p}${p === "" || isNumber ? "" : "."}${isNumber ? `[${c}]` : (ctx.escapePaths ? escape(c) : c)}`;
 }, "") : input);
 
-const slice = array => Object
-  .defineProperty(array.slice(1), "needle", { value: array.needle, writable: false });
-
-const find = (haystack, checks, pathIn, parents, ctx) => {
+const find = (haystack, search, pathIn, parents, ctx) => {
   const result = [];
-  const match = checks.find(check => check.length === 0);
-  if (match !== undefined) {
+  if (compiler.isFinal(search)) {
     if (
       ctx.excludeFn === undefined
-      || ctx.excludeFn(formatPath(pathIn, ctx), haystack, { parents, needle: match.needle }) !== true
+      || ctx.excludeFn(formatPath(pathIn, ctx), haystack, { parents, needles: compiler.getNeedles(search) }) !== true
     ) {
       if (ctx.callbackFn !== undefined) {
-        ctx.callbackFn(formatPath(pathIn, ctx), haystack, { parents, needle: match.needle });
+        ctx.callbackFn(formatPath(pathIn, ctx), haystack, { parents, needles: compiler.getNeedles(search) });
       }
       result.push(formatPath(pathIn, ctx));
     }
   }
   if (ctx.breakFn === undefined || ctx.breakFn(formatPath(pathIn, ctx), haystack, {
     parents,
-    needle: checks.reduce((p, c) => (p.length > c.length ? c : p), checks[0]).needle
+    needles: compiler.getNeedles(search)
   }) !== true) {
     if (haystack instanceof Object) {
       if (Array.isArray(haystack)) {
         for (let i = 0; i < haystack.length; i += 1) {
           const pathOut = pathIn.concat(i);
-          checks
-            .filter(check => check.length !== 0)
-            .forEach((check) => {
+          Object.entries(search)
+            .forEach(([ele, path]) => {
               if (ctx.useArraySelector === false) {
-                result.push(...find(haystack[i], [check], pathOut, parents, ctx));
-              } else if (check[0] === "**") {
-                result.push(...find(haystack[i], [check, slice(check)], pathOut, parents.concat([haystack]), ctx));
-              } else if (matches(check[0], `[${i}]`, true, ctx)) {
-                result.push(...find(haystack[i], [slice(check)], pathOut, parents.concat([haystack]), ctx));
+                result.push(...find(haystack[i], search, pathOut, parents, ctx));
+              } else if (ele === "**") {
+                result.push(...find(haystack[i], path, pathOut, parents.concat([haystack]), ctx));
+                result.push(...find(haystack[i], search, pathOut, parents.concat([haystack]), ctx));
+              } else if (matches(ele, `[${i}]`, true, ctx)) {
+                result.push(...find(haystack[i], path, pathOut, parents.concat([haystack]), ctx));
               }
             });
         }
@@ -67,13 +61,13 @@ const find = (haystack, checks, pathIn, parents, ctx) => {
         Object.entries(haystack).forEach(([key, value]) => {
           const escapedKey = escape(key);
           const pathOut = pathIn.concat(key);
-          checks
-            .filter(check => check.length !== 0)
-            .forEach((check) => {
-              if (check[0] === "**") {
-                result.push(...find(value, [check, slice(check)], pathOut, parents.concat([haystack]), ctx));
-              } else if (matches(check[0], escapedKey, false, ctx)) {
-                result.push(...find(value, [slice(check)], pathOut, parents.concat([haystack]), ctx));
+          Object.entries(search)
+            .forEach(([ele, path]) => {
+              if (ele === "**") {
+                result.push(...find(value, path, pathOut, parents.concat([haystack]), ctx));
+                result.push(...find(value, search, pathOut, parents.concat([haystack]), ctx));
+              } else if (matches(ele, escapedKey, false, ctx)) {
+                result.push(...find(value, path, pathOut, parents.concat([haystack]), ctx));
               }
             });
         });
@@ -91,8 +85,7 @@ module.exports = (needles, {
   escapePaths = true,
   useArraySelector = true
 } = {}) => {
-  const search = uniq(needles).map(needle => Object
-    .defineProperty(parser(needle), "needle", { value: needle, writable: false }));
+  const search = compiler.compile(uniq(needles));
   const regexCache = {};
 
   return haystack => uniq(find(haystack, search, [], [], {
