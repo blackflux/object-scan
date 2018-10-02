@@ -26,7 +26,7 @@ const formatPath = (input, ctx) => (ctx.joined ? input.reduce((p, c) => {
   return `${p}${p === "" || isNumber ? "" : "."}${isNumber ? `[${c}]` : (ctx.escapePaths ? escape(c) : c)}`;
 }, "") : input);
 
-const find = (haystack, checks, pathIn, ctx, parents) => {
+const find = (haystack, checks, pathIn, parents, ctx) => {
   const result = [];
   if (checks.some(check => check.length === 0)) {
     if (ctx.excludeFn === undefined || ctx.excludeFn(formatPath(pathIn, ctx), haystack, parents) !== true) {
@@ -45,11 +45,11 @@ const find = (haystack, checks, pathIn, ctx, parents) => {
             .filter(check => check.length !== 0)
             .forEach((check) => {
               if (ctx.useArraySelector === false) {
-                result.push(...find(haystack[i], [check], pathOut, ctx, parents));
+                result.push(...find(haystack[i], [check], pathOut, parents, ctx));
               } else if (check[0] === "**") {
-                result.push(...find(haystack[i], [check, check.slice(1)], pathOut, ctx, parents.concat([haystack])));
+                result.push(...find(haystack[i], [check, check.slice(1)], pathOut, parents.concat([haystack]), ctx));
               } else if (matches(check[0], `[${i}]`, true, ctx)) {
-                result.push(...find(haystack[i], [check.slice(1)], pathOut, ctx, parents.concat([haystack])));
+                result.push(...find(haystack[i], [check.slice(1)], pathOut, parents.concat([haystack]), ctx));
               }
             });
         }
@@ -61,9 +61,9 @@ const find = (haystack, checks, pathIn, ctx, parents) => {
             .filter(check => check.length !== 0)
             .forEach((check) => {
               if (check[0] === "**") {
-                result.push(...find(value, [check, check.slice(1)], pathOut, ctx, parents.concat([haystack])));
+                result.push(...find(value, [check, check.slice(1)], pathOut, parents.concat([haystack]), ctx));
               } else if (matches(check[0], escapedKey, false, ctx)) {
-                result.push(...find(value, [check.slice(1)], pathOut, ctx, parents.concat([haystack])));
+                result.push(...find(value, [check.slice(1)], pathOut, parents.concat([haystack]), ctx));
               }
             });
         });
@@ -84,7 +84,13 @@ module.exports = (needles, {
   const search = uniq(needles).map(parser);
   const regexCache = {};
 
-  return haystack => uniq(find(haystack, search, [], {
-    excludeFn, breakFn, callbackFn, joined, regexCache, escapePaths, useArraySelector
-  }, []));
+  return haystack => uniq(find(haystack, search, [], [], {
+    excludeFn,
+    breakFn,
+    callbackFn,
+    joined,
+    regexCache,
+    escapePaths,
+    useArraySelector
+  }));
 };
