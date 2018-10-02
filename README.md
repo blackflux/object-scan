@@ -46,13 +46,13 @@ Signature for all functions is `Fn(key, value, parents)`, where `key` is the key
 `value` is the value of that key and `parents` is an array containing all parents as `[..., grandparent, parent]`.
 The `key` argument respects the `joined` option and the `parents` only includes arrays if `useArraySelector` is true.
 
-#### filterFn
+#### excludeFn
 
 Type: `function`<br>
 Default: `undefined`
 
 Called for every intermittent result. 
-If function is defined and returns false, the entry is filtered from the final result. 
+If function is defined and returns true, the entry is excluded from the final result. 
 
 #### breakFn
 
@@ -144,7 +144,7 @@ objectScan(["**[*]"])(obj);
 // => ["a.h[0]", "a.h[1]"]
 
 // value function
-objectScan(["**"], { filterFn: (key, value) => typeof value === "string" })(obj);
+objectScan(["**"], { excludeFn: (key, value) => typeof value !== "string" })(obj);
 // => ["a.b.c", "a.e.f", "a.h[0]", "a.h[1]", "k"]
 objectScan(["**"], { breakFn: key => key === "a.b" })(obj);
 // => ["a", "a.b", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]);

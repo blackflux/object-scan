@@ -29,7 +29,7 @@ const formatPath = (input, ctx) => (ctx.joined ? input.reduce((p, c) => {
 const find = (haystack, checks, pathIn, ctx, parents) => {
   const result = [];
   if (checks.some(check => check.length === 0)) {
-    if (ctx.filterFn === undefined || ctx.filterFn(formatPath(pathIn, ctx), haystack, parents) !== false) {
+    if (ctx.excludeFn === undefined || ctx.excludeFn(formatPath(pathIn, ctx), haystack, parents) !== true) {
       if (ctx.callbackFn !== undefined) {
         ctx.callbackFn(formatPath(pathIn, ctx), haystack, parents);
       }
@@ -74,7 +74,7 @@ const find = (haystack, checks, pathIn, ctx, parents) => {
 };
 
 module.exports = (needles, {
-  filterFn = undefined,
+  excludeFn = undefined,
   breakFn = undefined,
   callbackFn = undefined,
   joined = true,
@@ -85,6 +85,6 @@ module.exports = (needles, {
   const regexCache = {};
 
   return haystack => uniq(find(haystack, search, [], {
-    filterFn, breakFn, callbackFn, joined, regexCache, escapePaths, useArraySelector
+    excludeFn, breakFn, callbackFn, joined, regexCache, escapePaths, useArraySelector
   }, []));
 };
