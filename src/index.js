@@ -26,20 +26,20 @@ const formatPath = (input, ctx) => (ctx.joined ? input.reduce((p, c) => {
 
 const find = (haystack, search, pathIn, parents, ctx) => {
   const result = [];
-  if (compiler.isFinal(search)) {
+  if (compiler.isMatch(search)) {
     if (
       ctx.excludeFn === undefined
-      || ctx.excludeFn(formatPath(pathIn, ctx), haystack, { parents, needles: compiler.getNeedles(search) }) !== true
+      || ctx.excludeFn(formatPath(pathIn, ctx), haystack, Object.assign(compiler.getMeta(search), { parents })) !== true
     ) {
       if (ctx.callbackFn !== undefined) {
-        ctx.callbackFn(formatPath(pathIn, ctx), haystack, { parents, needles: compiler.getNeedles(search) });
+        ctx.callbackFn(formatPath(pathIn, ctx), haystack, Object.assign(compiler.getMeta(search), { parents }));
       }
       result.push(formatPath(pathIn, ctx));
     }
   }
   if (
     ctx.breakFn === undefined
-    || ctx.breakFn(formatPath(pathIn, ctx), haystack, { parents, needles: compiler.getNeedles(search) }) !== true
+    || ctx.breakFn(formatPath(pathIn, ctx), haystack, Object.assign(compiler.getMeta(search), { parents })) !== true
   ) {
     if (haystack instanceof Object) {
       if (Array.isArray(haystack)) {
