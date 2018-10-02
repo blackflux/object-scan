@@ -2,11 +2,10 @@
 const parser = require("./parser");
 
 const FINAL = Symbol("final");
-const NEEDLES = Symbol("needles");
-
 const markFinal = input => Object.defineProperty(input, FINAL, { value: true, writable: false });
 module.exports.isFinal = input => input[FINAL] === true;
 
+const NEEDLES = Symbol("needles");
 const addNeedle = (input, needle) => {
   if (input[NEEDLES] === undefined) {
     Object.defineProperty(input, NEEDLES, { value: new Set(), writable: false });
