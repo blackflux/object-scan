@@ -54,5 +54,26 @@ describe("Testing compiler", () => {
     expect(compiler.getNeedle(tower.a.c.f)).to.deep.equal("a.{c,e}.f");
     expect(compiler.getNeedle(tower.a.e)).to.deep.equal(null);
     expect(compiler.getNeedle(tower.a.e.f)).to.deep.equal("a.{c,e}.f");
+
+    expect(compiler.getMeta(tower)).to.deep
+      .equal({ isMatch: false, needle: null, needles: ["a.{b,c}.d", "a.{c,e}.f", "a.b.d.g"] });
+    expect(compiler.getMeta(tower.a)).to.deep
+      .equal({ isMatch: false, needle: null, needles: ["a.{b,c}.d", "a.{c,e}.f", "a.b.d.g"] });
+    expect(compiler.getMeta(tower.a.b)).to.deep
+      .equal({ isMatch: false, needle: null, needles: ["a.{b,c}.d", "a.b.d.g"] });
+    expect(compiler.getMeta(tower.a.b.d)).to.deep
+      .equal({ isMatch: true, needle: "a.{b,c}.d", needles: ["a.{b,c}.d", "a.b.d.g"] });
+    expect(compiler.getMeta(tower.a.b.d.g)).to.deep
+      .equal({ isMatch: true, needle: "a.b.d.g", needles: ["a.b.d.g"] });
+    expect(compiler.getMeta(tower.a.c)).to.deep
+      .equal({ isMatch: false, needle: null, needles: ["a.{b,c}.d", "a.{c,e}.f"] });
+    expect(compiler.getMeta(tower.a.c.d)).to.deep
+      .equal({ isMatch: true, needle: "a.{b,c}.d", needles: ["a.{b,c}.d"] });
+    expect(compiler.getMeta(tower.a.c.f)).to.deep
+      .equal({ isMatch: true, needle: "a.{c,e}.f", needles: ["a.{c,e}.f"] });
+    expect(compiler.getMeta(tower.a.e)).to.deep
+      .equal({ isMatch: false, needle: null, needles: ["a.{c,e}.f"] });
+    expect(compiler.getMeta(tower.a.e.f)).to.deep
+      .equal({ isMatch: true, needle: "a.{c,e}.f", needles: ["a.{c,e}.f"] });
   });
 });
