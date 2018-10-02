@@ -264,7 +264,7 @@ describe("Testing Find", () => {
       const result = [];
       objectScan(pattern, { breakFn: (k, v, { needle }) => result.push(`${needle} => ${k}`) })(input);
       expect(result).to.deep.equal([
-        "[*].*.child => ",
+        "[*].parent => ",
         "[*].*.child => [0]",
         "[*].*.child => [0].parent",
         "[*].*.child => [0].parent.child",
