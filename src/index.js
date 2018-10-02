@@ -37,10 +37,10 @@ const find = (haystack, search, pathIn, parents, ctx) => {
       result.push(formatPath(pathIn, ctx));
     }
   }
-  if (ctx.breakFn === undefined || ctx.breakFn(formatPath(pathIn, ctx), haystack, {
-    parents,
-    needles: compiler.getNeedles(search)
-  }) !== true) {
+  if (
+    ctx.breakFn === undefined
+    || ctx.breakFn(formatPath(pathIn, ctx), haystack, { parents, needles: compiler.getNeedles(search) }) !== true
+  ) {
     if (haystack instanceof Object) {
       if (Array.isArray(haystack)) {
         for (let i = 0; i < haystack.length; i += 1) {
