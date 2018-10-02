@@ -247,11 +247,11 @@ describe("Testing Find", () => {
     });
   });
 
-  describe("Testing Fn needle", () => {
+  describe("Testing Fn needles", () => {
     const input = [{ parent: { child: "value" } }];
     const pattern = ["[*].*.child", "[*].parent"];
 
-    it("Testing needle on callbackFn", () => {
+    it("Testing needles on callbackFn", () => {
       const result = [];
       objectScan(pattern, { callbackFn: (k, v, { needles }) => result.push(`${needles} => ${k}`) })(input);
       expect(result).to.deep.equal([
@@ -260,13 +260,41 @@ describe("Testing Find", () => {
       ]);
     });
 
+    it("Testing needles on breakFn", () => {
+      const result = [];
+      objectScan(pattern, {
+        breakFn: (k, v, { isMatch, needles }) => result.push(`${needles} => ${k} (${isMatch})`)
+      })(input);
+      expect(result).to.deep.equal([
+        "[*].*.child,[*].parent =>  (false)",
+        "[*].*.child,[*].parent => [0] (false)",
+        "[*].*.child => [0].parent (false)",
+        "[*].*.child => [0].parent.child (true)",
+        "[*].parent => [0].parent (true)"
+      ]);
+    });
+  });
+
+  describe("Testing Fn needle", () => {
+    const input = [{ parent: { child: "value" } }];
+    const pattern = ["[*].*.child", "[*].parent"];
+
+    it("Testing needle on callbackFn", () => {
+      const result = [];
+      objectScan(pattern, { callbackFn: (k, v, { needle }) => result.push(`${needle} => ${k}`) })(input);
+      expect(result).to.deep.equal([
+        "[*].*.child => [0].parent.child",
+        "[*].parent => [0].parent"
+      ]);
+    });
+
     it("Testing needle on breakFn", () => {
       const result = [];
-      objectScan(pattern, { breakFn: (k, v, { needles }) => result.push(`${needles} => ${k}`) })(input);
+      objectScan(pattern, { breakFn: (k, v, { needle }) => result.push(`${needle} => ${k}`) })(input);
       expect(result).to.deep.equal([
-        "[*].*.child,[*].parent => ",
-        "[*].*.child,[*].parent => [0]",
-        "[*].*.child => [0].parent",
+        "null => ",
+        "null => [0]",
+        "null => [0].parent",
         "[*].*.child => [0].parent.child",
         "[*].parent => [0].parent"
       ]);

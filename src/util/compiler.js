@@ -1,9 +1,15 @@
 /* compile needles to hierarchical map object */
 const parser = require("./parser");
 
-const FINAL = Symbol("final");
-const markFinal = input => Object.defineProperty(input, FINAL, { value: true, writable: false });
-module.exports.isFinal = input => input[FINAL] === true;
+const IS_MATCH = Symbol("isMatch");
+const markMatch = input => Object.defineProperty(input, IS_MATCH, { value: true, writable: false });
+const isMatch = input => input[IS_MATCH] === true;
+module.exports.isMatch = isMatch;
+
+const NEEDLE = Symbol("needle");
+const setNeedle = (input, needle) => Object.defineProperty(input, NEEDLE, { value: needle, writable: false });
+const getNeedle = input => input[NEEDLE] || null;
+module.exports.getNeedle = getNeedle;
 
 const NEEDLES = Symbol("needles");
 const addNeedle = (input, needle) => {
@@ -12,12 +18,20 @@ const addNeedle = (input, needle) => {
   }
   input[NEEDLES].add(needle);
 };
-module.exports.getNeedles = input => [...input[NEEDLES]];
+const getNeedles = input => [...input[NEEDLES]];
+module.exports.getNeedles = getNeedles;
+
+module.exports.getMeta = input => ({
+  isMatch: isMatch(input),
+  needle: getNeedle(input),
+  needles: getNeedles(input)
+});
 
 const buildRecursive = (tower, path, needle) => {
   addNeedle(tower, needle);
   if (path.length === 0) {
-    markFinal(tower);
+    setNeedle(tower, needle);
+    markMatch(tower);
     return;
   }
   if (Array.isArray(path[0])) {
