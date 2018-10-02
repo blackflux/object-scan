@@ -59,8 +59,8 @@ If function is defined and returns true, the entry is excluded from the final re
 Type: `function`<br>
 Default: `undefined`
 
-Called for every intermittent result.
-If function is defined and returns true, all nested entries under the current key are excluded from the result.
+Called for every potential (partial) result at least once.
+If function is defined and returns true, all nested entries under the current key are excluded from search and from the final result.
 
 #### callbackFn
 
