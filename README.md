@@ -42,25 +42,27 @@ objectScan(["a.*.f"])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 
 
 **Note on Functions:**
-Signature for all functions is `Fn(key, value, parents)`, where `key` is the key that the function is called for,
-`value` is the value of that key and `parents` is an array containing all parents as `[..., grandparent, parent]`.
-The `key` argument respects the `joined` option and the `parents` only includes arrays if `useArraySelector` is true.
+Signature for all functions is `Fn(key, value, { parents, needle })`, where:
+- `key` is the key that the function is called for (respects `joined` option).
+- `value` is the value of that key.
+- `parents` is an array containing all parents as `[..., grandparent, parent]` (includes arrays iff `useArraySelector` is true).
+- `needle` is a needle that triggered the function call.
 
-#### filterFn
+#### excludeFn
 
 Type: `function`<br>
 Default: `undefined`
 
 Called for every intermittent result. 
-If function is defined and returns false, the entry is filtered from the final result. 
+If function is defined and returns true, the entry is excluded from the final result. 
 
 #### breakFn
 
 Type: `function`<br>
 Default: `undefined`
 
-Called for every intermittent result.
-If function is defined and returns true, all nested entries under the current key are excluded from the result.
+Called for every potential (partial) result at least once.
+If function is defined and returns true, all nested entries under the current key are excluded from search and from the final result.
 
 #### callbackFn
 
@@ -144,7 +146,7 @@ objectScan(["**[*]"])(obj);
 // => ["a.h[0]", "a.h[1]"]
 
 // value function
-objectScan(["**"], { filterFn: (key, value) => typeof value === "string" })(obj);
+objectScan(["**"], { excludeFn: (key, value) => typeof value !== "string" })(obj);
 // => ["a.b.c", "a.e.f", "a.h[0]", "a.h[1]", "k"]
 objectScan(["**"], { breakFn: key => key === "a.b" })(obj);
 // => ["a", "a.b", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]);

@@ -145,12 +145,12 @@ describe("Testing Find", () => {
   });
 
   it("Testing null value", () => {
-    const find = objectScan(["**"], { filterFn: (key, value) => value === null });
+    const find = objectScan(["**"], { excludeFn: (key, value) => value !== null });
     expect(find({ key: null })).to.deep.equal(["key"]);
   });
 
   it("Testing undefined value", () => {
-    const find = objectScan(["**"], { filterFn: (key, value) => value === undefined });
+    const find = objectScan(["**"], { excludeFn: (key, value) => value !== undefined });
     expect(find({ key: undefined })).to.deep.equal(["key"]);
   });
 
@@ -231,7 +231,7 @@ describe("Testing Find", () => {
 
     it("Testing parents useArraySelector == true", () => {
       objectScan(pattern, {
-        callbackFn: (k, v, parents) => {
+        callbackFn: (k, v, { parents }) => {
           expect(parents).to.deep.equal([input, input.one, input.one[0]]);
         }
       })(input);
@@ -239,11 +239,38 @@ describe("Testing Find", () => {
 
     it("Testing parents useArraySelector == false", () => {
       objectScan(pattern, {
-        callbackFn: (k, v, parents) => {
+        callbackFn: (k, v, { parents }) => {
           expect(parents).to.deep.equal([input, input.one[0]]);
         },
         useArraySelector: false
       })(input);
+    });
+  });
+
+  describe("Testing Fn needle", () => {
+    const input = [{ parent: { child: "value" } }];
+    const pattern = ["[*].*.child", "[*].parent"];
+
+    it("Testing needle on callbackFn", () => {
+      const result = [];
+      objectScan(pattern, { callbackFn: (k, v, { needle }) => result.push(`${needle} => ${k}`) })(input);
+      expect(result).to.deep.equal([
+        "[*].*.child => [0].parent.child",
+        "[*].parent => [0].parent"
+      ]);
+    });
+
+    it("Testing needle on breakFn", () => {
+      const result = [];
+      objectScan(pattern, { breakFn: (k, v, { needle }) => result.push(`${needle} => ${k}`) })(input);
+      expect(result).to.deep.equal([
+        "[*].*.child => ",
+        "[*].*.child => [0]",
+        "[*].*.child => [0].parent",
+        "[*].*.child => [0].parent.child",
+        "[*].parent => [0]",
+        "[*].parent => [0].parent"
+      ]);
     });
   });
 
@@ -314,7 +341,7 @@ describe("Testing Find", () => {
 
   it("Testing Filter Function", () => {
     const find = objectScan(["**"], {
-      filterFn: (key, value) => typeof value === "string" && value === "a"
+      excludeFn: (key, value) => typeof value !== "string" || value !== "a"
     });
     expect(find(haystack)).to.deep.equal([
       "simple",
@@ -426,7 +453,7 @@ describe("Testing Find", () => {
     expect(objectScan(["**"])(input)).to
       .deep.equal(["a", "a.b", "a.b.c", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]);
     expect(objectScan(["**.f"])(input)).to.deep.equal(["a.e.f"]);
-    expect(objectScan(["**"], { filterFn: (key, value) => typeof value === "string" })(input)).to
+    expect(objectScan(["**"], { excludeFn: (key, value) => typeof value !== "string" })(input)).to
       .deep.equal(["a.b.c", "a.e.f", "a.h[0]", "a.h[1]", "k"]);
     expect(objectScan(["**"], { breakFn: key => key === "a.b" })(input)).to
       .deep.equal(["a", "a.b", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]);
