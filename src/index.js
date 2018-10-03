@@ -1,5 +1,4 @@
 const uniq = require("lodash.uniq");
-const isPlainObject = require("lodash.isplainobject");
 const compiler = require("./util/compiler");
 
 const escape = input => String(input).replace(/[,.*[\]{}]/g, "\\$&");
@@ -49,33 +48,21 @@ const find = (haystack, search, pathIn, parents, ctx) => {
     ctx.breakFn === undefined
     || ctx.breakFn(formatPath(pathIn, ctx), haystack, Object.assign(compiler.getMeta(search), { parents })) !== true
   ) {
-    if (isPlainObject(haystack)) {
+    if (haystack instanceof Object) {
+      const isArray = Array.isArray(haystack);
       Object.entries(haystack).forEach(([key, value]) => {
-        const escapedKey = escape(key);
-        const pathOut = pathIn.concat(key);
+        const escapedKey = isArray ? `[${key}]` : escape(key);
+        const pathOut = pathIn.concat(isArray ? parseInt(key, 10) : key);
         Object.entries(search)
           .forEach(([entry, subSearch]) => {
             if (entry === "**") {
-              [subSearch, search].forEach(s => result
-                .push(...find(value, s, pathOut, parents.concat([haystack]), ctx)));
-            } else if (matches(entry, escapedKey, false, ctx)) {
+              [subSearch, search]
+                .forEach(s => result.push(...find(value, s, pathOut, parents.concat([haystack]), ctx)));
+            } else if (matches(entry, escapedKey, isArray, ctx)) {
               result.push(...find(value, subSearch, pathOut, parents.concat([haystack]), ctx));
             }
           });
       });
-    } else if (Array.isArray(haystack)) {
-      for (let i = 0; i < haystack.length; i += 1) {
-        const pathOut = pathIn.concat(i);
-        Object.entries(search)
-          .forEach(([entry, subSearch]) => {
-            if (entry === "**") {
-              [subSearch, search].forEach(s => result
-                .push(...find(haystack[i], s, pathOut, parents.concat([haystack]), ctx)));
-            } else if (matches(entry, `[${i}]`, true, ctx)) {
-              result.push(...find(haystack[i], subSearch, pathOut, parents.concat([haystack]), ctx));
-            }
-          });
-      }
     }
   }
   return result;
