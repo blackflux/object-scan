@@ -26,6 +26,13 @@ const formatPath = (input, ctx) => (ctx.joined ? input.reduce((p, c) => {
 
 const find = (haystack, search, pathIn, parents, ctx) => {
   const result = [];
+  if (ctx.useArraySelector === false && Array.isArray(haystack)) {
+    for (let i = 0; i < haystack.length; i += 1) {
+      result.push(...find(haystack[i], search, pathIn.concat(i), parents, ctx));
+    }
+    return result;
+  }
+
   if (compiler.isMatch(search)) {
     if (
       ctx.excludeFn === undefined
@@ -47,9 +54,7 @@ const find = (haystack, search, pathIn, parents, ctx) => {
           const pathOut = pathIn.concat(i);
           Object.entries(search)
             .forEach(([entry, subSearch]) => {
-              if (ctx.useArraySelector === false) {
-                result.push(...find(haystack[i], search, pathOut, parents, ctx));
-              } else if (entry === "**") {
+              if (entry === "**") {
                 [subSearch, search].forEach(s => result
                   .push(...find(haystack[i], s, pathOut, parents.concat([haystack]), ctx)));
               } else if (matches(entry, `[${i}]`, true, ctx)) {

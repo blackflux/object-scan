@@ -139,9 +139,18 @@ describe("Testing Find", () => {
     ]);
   });
 
-  it("Testing empty search string", () => {
-    const find = objectScan([""]);
-    expect(find({ key: "test" })).to.deep.equal([]);
+  describe("Testing greedy array matching", () => {
+    const needles = ["*"];
+    const input = { key: ["v1", "v2"] };
+    it("Testing arrays not matched with useArraySelector === true", () => {
+      const find = objectScan(needles, { useArraySelector: true });
+      expect(find(input)).to.deep.equal(["key"]);
+    });
+
+    it("Testing arrays matched with useArraySelector === false", () => {
+      const find = objectScan(needles, { useArraySelector: false });
+      expect(find(input)).to.deep.equal(["key[0]", "key[1]"]);
+    });
   });
 
   it("Testing null value", () => {
