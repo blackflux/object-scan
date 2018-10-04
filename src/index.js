@@ -3,8 +3,8 @@ const compiler = require("./util/compiler");
 
 const escape = input => String(input).replace(/[,.*[\]{}]/g, "\\$&");
 
-const compare = (wildcard, input, arr, ctx) => {
-  if (arr && !wildcard.match(/^\[.*]$/)) {
+const compare = (wildcard, input, isArray, ctx) => {
+  if (isArray && !wildcard.match(/^\[.*]$/)) {
     return false;
   }
   if (ctx.regexCache[wildcard] === undefined) {
@@ -16,7 +16,8 @@ const compare = (wildcard, input, arr, ctx) => {
   return input.match(ctx.regexCache[wildcard]);
 };
 
-const matches = (wildcard, input, arr, ctx) => wildcard === (arr ? "[*]" : "*") || compare(wildcard, input, arr, ctx);
+const matches = (wildcard, key, isArray, ctx) => wildcard === (isArray ? "[*]" : "*")
+  || compare(wildcard, isArray ? `[${key}]` : escape(key), isArray, ctx);
 
 const formatPath = (input, ctx) => (ctx.joined ? input.reduce((p, c) => {
   const isNumber = typeof c === "number";
@@ -51,14 +52,13 @@ const find = (haystack, search, pathIn, parents, ctx) => {
     if (haystack instanceof Object) {
       const isArray = Array.isArray(haystack);
       Object.entries(haystack).forEach(([key, value]) => {
-        const escapedKey = isArray ? `[${key}]` : escape(key);
         const pathOut = pathIn.concat(isArray ? parseInt(key, 10) : key);
         Object.entries(search)
           .forEach(([entry, subSearch]) => {
             if (entry === "**") {
               [subSearch, search]
                 .forEach(s => result.push(...find(value, s, pathOut, parents.concat([haystack]), ctx)));
-            } else if (matches(entry, escapedKey, isArray, ctx)) {
+            } else if (matches(entry, key, isArray, ctx)) {
               result.push(...find(value, subSearch, pathOut, parents.concat([haystack]), ctx));
             }
           });
