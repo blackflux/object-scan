@@ -16,7 +16,7 @@ const matches = (wildcard, key, isArray, subSearch) => {
 const formatPath = (input, ctx) => (ctx.joined ? input.reduce((p, c) => {
   const isNumber = typeof c === "number";
   // eslint-disable-next-line no-nested-ternary
-  return `${p}${p === "" || isNumber ? "" : "."}${isNumber ? `[${c}]` : (ctx.escapePaths ? escape(c) : c)}`;
+  return `${p}${isNumber || p === "" ? "" : "."}${isNumber ? `[${c}]` : (ctx.escapePaths ? escape(c) : c)}`;
 }, "") : input);
 
 const find = (haystack, search, pathIn, parents, ctx) => {
