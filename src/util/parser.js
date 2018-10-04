@@ -1,7 +1,7 @@
-const guid = require("./guid");
+const crypto = require("crypto");
 
 module.exports = (input) => {
-  const tmpSep = guid();
+  const tmpSep = crypto.randomBytes(16).toString('base64');
   return input
     // split at "." and before "[", but only if not escaped
     .replace(/(?<!\\|^)((?:\\{2})*)(?:\.|(?=\[))(?!\[?$)/g, (_, esc) => `${esc}${tmpSep}`)
