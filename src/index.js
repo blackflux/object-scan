@@ -45,15 +45,15 @@ const find = (haystack, search, pathIn, parents, ctx) => {
   ) {
     if (haystack instanceof Object) {
       const isArray = Array.isArray(haystack);
+      const parentsOut = parents.concat([haystack]);
       Object.entries(haystack).forEach(([key, value]) => {
         const pathOut = pathIn.concat(isArray ? parseInt(key, 10) : key);
         Object.entries(search)
           .forEach(([entry, subSearch]) => {
             if (entry === "**") {
-              [subSearch, search]
-                .forEach(s => result.push(...find(value, s, pathOut, parents.concat([haystack]), ctx)));
+              [subSearch, search].forEach(s => result.push(...find(value, s, pathOut, parentsOut, ctx)));
             } else if (matches(entry, key, isArray, subSearch)) {
-              result.push(...find(value, subSearch, pathOut, parents.concat([haystack]), ctx));
+              result.push(...find(value, subSearch, pathOut, parentsOut, ctx));
             }
           });
       });
