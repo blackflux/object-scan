@@ -3,15 +3,15 @@ const compiler = require("./util/compiler");
 
 const escape = input => String(input).replace(/[,.*[\]{}]/g, "\\$&");
 
-const compare = (wildcard, key, isArray, subSearch) => {
+const matches = (wildcard, key, isArray, subSearch) => {
+  if (wildcard === (isArray ? "[*]" : "*")) {
+    return true;
+  }
   if (isArray && !wildcard.match(/^\[.*]$/)) {
     return false;
   }
   return (isArray ? `[${key}]` : escape(key)).match(compiler.getWildcardRegex(subSearch));
 };
-
-const matches = (wildcard, key, isArray, subSearch) => wildcard === (isArray ? "[*]" : "*")
-  || compare(wildcard, key, isArray, subSearch);
 
 const formatPath = (input, ctx) => (ctx.joined ? input.reduce((p, c) => {
   const isNumber = typeof c === "number";
@@ -69,15 +69,11 @@ module.exports = (needles, {
   joined = true,
   escapePaths = true,
   useArraySelector = true
-} = {}) => {
-  const search = compiler.compile(uniq(needles));
-
-  return haystack => uniq(find(haystack, search, [], [], {
-    excludeFn,
-    breakFn,
-    callbackFn,
-    joined,
-    escapePaths,
-    useArraySelector
-  }));
-};
+} = {}) => haystack => uniq(find(haystack, compiler.compile(uniq(needles)), [], [], {
+  excludeFn,
+  breakFn,
+  callbackFn,
+  joined,
+  escapePaths,
+  useArraySelector
+}));
