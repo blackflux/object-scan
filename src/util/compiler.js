@@ -21,6 +21,19 @@ const addNeedle = (input, needle) => {
 const getNeedles = input => [...input[NEEDLES]];
 module.exports.getNeedles = getNeedles;
 
+const WILDCARD_REGEX = Symbol("wildcard-regex");
+const setWildcardRegex = (input, wildcard) => {
+  Object.defineProperty(input, WILDCARD_REGEX, {
+    value: new RegExp(`^${wildcard
+      .split(/(?<!\\)(?:\\\\)*\*/)
+      .map(p => p.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&'))
+      .join(".*")}$`),
+    writable: false
+  });
+};
+const getWildcardRegex = input => input[WILDCARD_REGEX];
+module.exports.getWildcardRegex = getWildcardRegex;
+
 module.exports.getMeta = input => ({
   isMatch: isMatch(input),
   needle: getNeedle(input),
@@ -40,6 +53,7 @@ const buildRecursive = (tower, path, needle) => {
   }
   if (tower[path[0]] === undefined) {
     Object.assign(tower, { [path[0]]: {} });
+    setWildcardRegex(tower[path[0]], path[0]);
   }
   buildRecursive(tower[path[0]], path.slice(1), needle);
 };

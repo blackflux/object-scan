@@ -55,6 +55,17 @@ describe("Testing compiler", () => {
     expect(compiler.getNeedle(tower.a.e)).to.deep.equal(null);
     expect(compiler.getNeedle(tower.a.e.f)).to.deep.equal("a.{c,e}.f");
 
+    expect(compiler.getWildcardRegex(tower)).to.deep.equal(undefined);
+    expect(compiler.getWildcardRegex(tower.a)).to.deep.equal(/^a$/);
+    expect(compiler.getWildcardRegex(tower.a.b)).to.deep.equal(/^b$/);
+    expect(compiler.getWildcardRegex(tower.a.b.d)).to.deep.equal(/^d$/);
+    expect(compiler.getWildcardRegex(tower.a.b.d.g)).to.deep.equal(/^g$/);
+    expect(compiler.getWildcardRegex(tower.a.c)).to.deep.equal(/^c$/);
+    expect(compiler.getWildcardRegex(tower.a.c.d)).to.deep.equal(/^d$/);
+    expect(compiler.getWildcardRegex(tower.a.c.f)).to.deep.equal(/^f$/);
+    expect(compiler.getWildcardRegex(tower.a.e)).to.deep.equal(/^e$/);
+    expect(compiler.getWildcardRegex(tower.a.e.f)).to.deep.equal(/^f$/);
+
     expect(compiler.getMeta(tower)).to.deep
       .equal({ isMatch: false, needle: null, needles: ["a.{b,c}.d", "a.{c,e}.f", "a.b.d.g"] });
     expect(compiler.getMeta(tower.a)).to.deep

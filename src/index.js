@@ -3,21 +3,15 @@ const compiler = require("./util/compiler");
 
 const escape = input => String(input).replace(/[,.*[\]{}]/g, "\\$&");
 
-const compare = (wildcard, input, isArray, ctx) => {
+const compare = (wildcard, key, isArray, subSearch) => {
   if (isArray && !wildcard.match(/^\[.*]$/)) {
     return false;
   }
-  if (ctx.regexCache[wildcard] === undefined) {
-    ctx.regexCache[wildcard] = new RegExp(`^${wildcard
-      .split(/(?<!\\)(?:\\\\)*\*/)
-      .map(p => p.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&'))
-      .join(".*")}$`);
-  }
-  return input.match(ctx.regexCache[wildcard]);
+  return (isArray ? `[${key}]` : escape(key)).match(compiler.getWildcardRegex(subSearch));
 };
 
-const matches = (wildcard, key, isArray, ctx) => wildcard === (isArray ? "[*]" : "*")
-  || compare(wildcard, isArray ? `[${key}]` : escape(key), isArray, ctx);
+const matches = (wildcard, key, isArray, subSearch) => wildcard === (isArray ? "[*]" : "*")
+  || compare(wildcard, key, isArray, subSearch);
 
 const formatPath = (input, ctx) => (ctx.joined ? input.reduce((p, c) => {
   const isNumber = typeof c === "number";
@@ -58,7 +52,7 @@ const find = (haystack, search, pathIn, parents, ctx) => {
             if (entry === "**") {
               [subSearch, search]
                 .forEach(s => result.push(...find(value, s, pathOut, parents.concat([haystack]), ctx)));
-            } else if (matches(entry, key, isArray, ctx)) {
+            } else if (matches(entry, key, isArray, subSearch)) {
               result.push(...find(value, subSearch, pathOut, parents.concat([haystack]), ctx));
             }
           });
@@ -77,14 +71,12 @@ module.exports = (needles, {
   useArraySelector = true
 } = {}) => {
   const search = compiler.compile(uniq(needles));
-  const regexCache = {};
 
   return haystack => uniq(find(haystack, search, [], [], {
     excludeFn,
     breakFn,
     callbackFn,
     joined,
-    regexCache,
     escapePaths,
     useArraySelector
   }));
