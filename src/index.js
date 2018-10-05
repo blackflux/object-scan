@@ -1,4 +1,3 @@
-const uniq = require("lodash.uniq");
 const compiler = require("./util/compiler");
 
 const escape = input => String(input).replace(/[,.*[\]{}]/g, "\\$&");
@@ -69,11 +68,14 @@ module.exports = (needles, {
   joined = true,
   escapePaths = true,
   useArraySelector = true
-} = {}) => haystack => uniq(find(haystack, compiler.compile(uniq(needles)), [], [], {
-  excludeFn,
-  breakFn,
-  callbackFn,
-  joined,
-  escapePaths,
-  useArraySelector
-}));
+} = {}) => {
+  const search = compiler.compile(new Set(needles)); // keep separate for performance
+  return haystack => [...new Set(find(haystack, search, [], [], {
+    excludeFn,
+    breakFn,
+    callbackFn,
+    joined,
+    escapePaths,
+    useArraySelector
+  }))];
+};
