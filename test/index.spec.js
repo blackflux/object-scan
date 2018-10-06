@@ -168,6 +168,11 @@ describe("Testing Find", () => {
       expect(find(arrayInput)).to.deep.equal(["[0]", "[1]"]);
     });
 
+    it("Testing array objects with useArraySelector === false (nested)", () => {
+      const find = objectScan(needles, { useArraySelector: false });
+      expect(find([arrayInput])).to.deep.equal(["[0][0]", "[0][1]"]);
+    });
+
     it("Testing object with useArraySelector === true", () => {
       const find = objectScan(needles, { useArraySelector: true });
       expect(find(objectInput)).to.deep.equal([]);
