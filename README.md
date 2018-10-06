@@ -96,6 +96,8 @@ Default: `true
 
 When set to false no array selectors are used and arrays are automatically traversed.
 
+Passing an array and setting this option to `false` will cause the empty needle (`""`) to match top level objects. 
+
 ## Examples
 
 More extensive examples can be found in the tests.

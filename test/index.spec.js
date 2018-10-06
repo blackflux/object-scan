@@ -153,6 +153,32 @@ describe("Testing Find", () => {
     });
   });
 
+  describe("Testing empty needle behaviour", () => {
+    const needles = [""];
+    const arrayInput = [{ id: 1 }, { id: 2 }];
+    const objectInput = { id: {} };
+
+    it("Testing array objects with useArraySelector === true", () => {
+      const find = objectScan(needles, { useArraySelector: true });
+      expect(find(arrayInput)).to.deep.equal([]);
+    });
+
+    it("Testing array objects with useArraySelector === false", () => {
+      const find = objectScan(needles, { useArraySelector: false });
+      expect(find(arrayInput)).to.deep.equal(["[0]", "[1]"]);
+    });
+
+    it("Testing object with useArraySelector === true", () => {
+      const find = objectScan(needles, { useArraySelector: true });
+      expect(find(objectInput)).to.deep.equal([]);
+    });
+
+    it("Testing object with useArraySelector === false", () => {
+      const find = objectScan(needles, { useArraySelector: false });
+      expect(find(objectInput)).to.deep.equal([]);
+    });
+  });
+
   it("Testing null value", () => {
     const find = objectScan(["**"], { excludeFn: (key, value) => value !== null });
     expect(find({ key: null })).to.deep.equal(["key"]);
