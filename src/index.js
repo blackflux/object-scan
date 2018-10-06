@@ -20,17 +20,14 @@ const formatPath = (input, ctx) => (ctx.joined ? input.reduce((p, c) => {
 
 const find = (haystack, search, pathIn, parents, ctx) => {
   const result = [];
-  if (ctx.useArraySelector === false) {
-    if (Array.isArray(haystack)) {
-      for (let i = 0; i < haystack.length; i += 1) {
-        result.push(...find(haystack[i], search, pathIn.concat(i), parents, ctx));
-      }
-      return result;
+  if (search[""] !== undefined) {
+    result.push(...find(haystack, search[""], pathIn, parents, ctx));
+  }
+  if (ctx.useArraySelector === false && Array.isArray(haystack)) {
+    for (let i = 0; i < haystack.length; i += 1) {
+      result.push(...find(haystack[i], search, pathIn.concat(i), parents, ctx));
     }
-    // handle empty needle edge case
-    if (pathIn.length !== 0 && search[""] !== undefined) {
-      result.push(...find(haystack, search[""], pathIn, parents, ctx));
-    }
+    return result;
   }
 
   if (compiler.isMatch(search)) {
