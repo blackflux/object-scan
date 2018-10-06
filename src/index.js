@@ -27,7 +27,7 @@ const find = (haystack, search, pathIn, parents, ctx) => {
       }
       return result;
     }
-    // handle empty string edge case
+    // handle empty needle edge case
     if (pathIn.length !== 0 && search[""] !== undefined && compiler.isMatch(search[""])) {
       result.push(formatPath(pathIn, ctx));
     }
