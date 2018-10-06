@@ -157,29 +157,34 @@ describe("Testing Find", () => {
     const needles = [""];
     const arrayInput = [{ id: 1 }, { id: 2 }];
     const objectInput = { id: {} };
+    const callbackFn = (key, value, { isMatch, needle, parents }) => {
+      expect(isMatch).to.equal(true);
+      expect(parents).to.deep.equal([]);
+      expect(needle).to.equal("");
+    };
 
     it("Testing array objects with useArraySelector === true", () => {
-      const find = objectScan(needles, { useArraySelector: true });
+      const find = objectScan(needles, { useArraySelector: true, callbackFn });
       expect(find(arrayInput)).to.deep.equal([""]);
     });
 
     it("Testing array objects with useArraySelector === false", () => {
-      const find = objectScan(needles, { useArraySelector: false });
+      const find = objectScan(needles, { useArraySelector: false, callbackFn });
       expect(find(arrayInput)).to.deep.equal(["[0]", "[1]"]);
     });
 
     it("Testing array objects with useArraySelector === false (nested)", () => {
-      const find = objectScan(needles, { useArraySelector: false });
+      const find = objectScan(needles, { useArraySelector: false, callbackFn });
       expect(find([arrayInput])).to.deep.equal(["[0][0]", "[0][1]"]);
     });
 
     it("Testing object with useArraySelector === true", () => {
-      const find = objectScan(needles, { useArraySelector: true });
+      const find = objectScan(needles, { useArraySelector: true, callbackFn });
       expect(find(objectInput)).to.deep.equal([""]);
     });
 
     it("Testing object with useArraySelector === false", () => {
-      const find = objectScan(needles, { useArraySelector: false });
+      const find = objectScan(needles, { useArraySelector: false, callbackFn });
       expect(find(objectInput)).to.deep.equal([""]);
     });
   });

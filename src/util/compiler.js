@@ -8,7 +8,7 @@ module.exports.isMatch = isMatch;
 
 const NEEDLE = Symbol("needle");
 const setNeedle = (input, needle) => Object.defineProperty(input, NEEDLE, { value: needle, writable: false });
-const getNeedle = input => input[NEEDLE] || null;
+const getNeedle = input => (input[NEEDLE] === undefined ? null : input[NEEDLE]);
 module.exports.getNeedle = getNeedle;
 
 const NEEDLES = Symbol("needles");
