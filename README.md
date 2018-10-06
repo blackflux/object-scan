@@ -155,7 +155,7 @@ objectScan(["**"], { breakFn: key => key === "a.b" })(obj);
 
 ## Edge Cases
 
-The empty needle `""` matches the top level. Note that this result does not work smoothly with [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set).
+The empty needle `""` matches top level object(s). Useful for matching objects nested in arrays by setting `useArraySelector` to `false`. Note that the empty string does not work with [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set).
 
 ## Special Characters
 
