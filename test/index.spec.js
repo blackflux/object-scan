@@ -187,6 +187,14 @@ describe("Testing Find", () => {
       const find = objectScan(needles, { useArraySelector: false, callbackFn });
       expect(find(objectInput)).to.deep.equal([""]);
     });
+
+    it("Testing empty needle only matches on top level", () => {
+      const find = objectScan(["", "**"], {
+        useArraySelector: false,
+        excludeFn: (key, value, { needle }) => needle !== ""
+      });
+      expect(find(arrayInput)).to.deep.equal(["[0]", "[1]"]);
+    });
   });
 
   it("Testing null value", () => {
@@ -262,7 +270,11 @@ describe("Testing Find", () => {
 
   it("Testing callbackFn", () => {
     const result = {};
-    objectScan(["**.child"], { callbackFn: (k, v) => { result[k] = v; } })(haystack);
+    objectScan(["**.child"], {
+      callbackFn: (k, v) => {
+        result[k] = v;
+      }
+    })(haystack);
     expect(result).to.deep.equal({
       "grandparent1.parent.child": "d",
       "parent1.child": "b",
