@@ -47,14 +47,13 @@ const find = (haystack, search, pathIn, parents, ctx) => {
       const parentsOut = parents.concat([haystack]);
       Object.entries(haystack).forEach(([key, value]) => {
         const pathOut = pathIn.concat(isArray ? parseInt(key, 10) : key);
-        Object.entries(search)
-          .forEach(([entry, subSearch]) => {
-            if (entry === "**") {
-              [subSearch, search].forEach(s => result.push(...find(value, s, pathOut, parentsOut, ctx)));
-            } else if (matches(entry, key, isArray, subSearch)) {
-              result.push(...find(value, subSearch, pathOut, parentsOut, ctx));
-            }
-          });
+        Object.entries(search).forEach(([entry, subSearch]) => {
+          if (entry === "**") {
+            [subSearch, search].forEach(s => result.push(...find(value, s, pathOut, parentsOut, ctx)));
+          } else if (matches(entry, key, isArray, subSearch)) {
+            result.push(...find(value, subSearch, pathOut, parentsOut, ctx));
+          }
+        });
       });
     }
   }
