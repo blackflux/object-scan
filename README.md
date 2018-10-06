@@ -40,7 +40,6 @@ objectScan(["a.*.f"])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 
 ### Options
 
-
 **Note on Functions:**
 Signature for all functions is `Fn(key, value, { parents, isMatch, needle, needles })`, where:
 - `key` is the key that the function is called for (respects `joined` option).
@@ -95,8 +94,6 @@ Type: `boolean`<br>
 Default: `true
 
 When set to false no array selectors are used and arrays are automatically traversed.
-
-Passing an array and setting this option to `false` will cause the empty needle (`""`) to match top level objects. 
 
 ## Examples
 
@@ -155,6 +152,10 @@ objectScan(["**"], { excludeFn: (key, value) => typeof value !== "string" })(obj
 objectScan(["**"], { breakFn: key => key === "a.b" })(obj);
 // => ["a", "a.b", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]
 ```
+
+## Edge Cases
+
+The empty needle `""` matches the top level. Note that this result does not work smoothly with [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set).
 
 ## Special Characters
 

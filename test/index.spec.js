@@ -160,7 +160,7 @@ describe("Testing Find", () => {
 
     it("Testing array objects with useArraySelector === true", () => {
       const find = objectScan(needles, { useArraySelector: true });
-      expect(find(arrayInput)).to.deep.equal([]);
+      expect(find(arrayInput)).to.deep.equal([""]);
     });
 
     it("Testing array objects with useArraySelector === false", () => {
@@ -175,12 +175,12 @@ describe("Testing Find", () => {
 
     it("Testing object with useArraySelector === true", () => {
       const find = objectScan(needles, { useArraySelector: true });
-      expect(find(objectInput)).to.deep.equal([]);
+      expect(find(objectInput)).to.deep.equal([""]);
     });
 
     it("Testing object with useArraySelector === false", () => {
       const find = objectScan(needles, { useArraySelector: false });
-      expect(find(objectInput)).to.deep.equal([]);
+      expect(find(objectInput)).to.deep.equal([""]);
     });
   });
 
