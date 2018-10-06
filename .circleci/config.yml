@@ -1,0 +1,50 @@
+workflows:
+  version: 2
+  node-multi-build:
+    jobs:
+      - gally
+      - test-node-v10
+      - test-node-v8.10
+      - release:
+          requires:
+            - gally
+            - test-node-v10
+            - test-node-v8.10
+          filters:
+            branches:
+              only: master
+version: 2
+jobs:
+  gally:
+    docker:
+      - image: 'circleci/node:10'
+    steps:
+      - checkout
+      - run: sudo npm i -g gally
+      - run: ga promote $CIRCLE_BRANCH
+  test-node-v10:
+    docker:
+      - image: 'circleci/node:10'
+    steps:
+      - checkout
+      - run: npm i
+      - run: npm t
+      - run:
+          command: |
+            if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
+              npm run coveralls
+            fi
+  test-node-v8.10:
+    docker:
+      - image: 'circleci/node:8.10'
+    steps:
+      - checkout
+      - run: npm i
+      - run: npm t
+  release:
+    docker:
+      - image: 'circleci/node:10'
+    steps:
+      - checkout
+      - run: npm i
+      - run: npm run semantic-release
