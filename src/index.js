@@ -28,7 +28,7 @@ const find = (haystack, search, pathIn, parents, ctx) => {
       return result;
     }
     // handle empty needle edge case
-    if (pathIn.length !== 0 && search[""] !== undefined && compiler.isMatch(search[""])) {
+    if (pathIn.length !== 0 && search[""] !== undefined) {
       result.push(...find(haystack, search[""], pathIn, parents, ctx));
     }
   }
