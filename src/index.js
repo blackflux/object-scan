@@ -26,7 +26,7 @@ const find = (haystack, search, pathIn, parents, ctx) => {
     }
     return result;
   }
-  if (search[""] !== undefined) {
+  if (search[""] !== undefined && parents.length === 0) {
     result.push(...find(haystack, search[""], pathIn, parents, ctx));
   }
 
