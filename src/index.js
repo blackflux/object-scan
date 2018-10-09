@@ -47,7 +47,7 @@ const find = (haystack, search, pathIn, parents, ctx) => {
   ) {
     if (haystack instanceof Object) {
       const isArray = Array.isArray(haystack);
-      const parentsOut = parents.concat([haystack]);
+      const parentsOut = [haystack].concat(parents);
       Object.entries(haystack).forEach(([key, value]) => {
         const pathOut = pathIn.concat(isArray ? parseInt(key, 10) : key);
         Object.entries(search).forEach(([entry, subSearch]) => {
