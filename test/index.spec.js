@@ -289,7 +289,7 @@ describe("Testing Find", () => {
     it("Testing parents useArraySelector == true", () => {
       objectScan(pattern, {
         callbackFn: (k, v, { parents }) => {
-          expect(parents).to.deep.equal([input, input.one, input.one[0]]);
+          expect(parents).to.deep.equal([input.one[0], input.one, input]);
         }
       })(input);
     });
@@ -297,7 +297,7 @@ describe("Testing Find", () => {
     it("Testing parents useArraySelector == false", () => {
       objectScan(pattern, {
         callbackFn: (k, v, { parents }) => {
-          expect(parents).to.deep.equal([input, input.one[0]]);
+          expect(parents).to.deep.equal([input.one[0], input]);
         },
         useArraySelector: false
       })(input);
