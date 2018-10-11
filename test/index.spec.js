@@ -283,24 +283,52 @@ describe("Testing Find", () => {
   });
 
   describe("Testing Fn parents", () => {
-    const input = { one: [{ child: "b" }] };
-    const pattern = ["**.child"];
+    describe("Testing Object Target", () => {
+      const input = { one: [{ child: "b" }] };
+      const pattern = ["**.child"];
 
-    it("Testing parents useArraySelector == true", () => {
-      objectScan(pattern, {
-        callbackFn: (k, v, { parents }) => {
-          expect(parents).to.deep.equal([input.one[0], input.one, input]);
-        }
-      })(input);
+      it("Testing object parents useArraySelector == true", () => {
+        const result = objectScan(pattern, {
+          callbackFn: (k, v, { parents }) => {
+            expect(parents).to.deep.equal([input.one[0], input.one, input]);
+          }
+        })(input);
+        expect(result).to.deep.equal(["one[0].child"]);
+      });
+
+      it("Testing object parents useArraySelector == false", () => {
+        const result = objectScan(pattern, {
+          callbackFn: (k, v, { parents }) => {
+            expect(parents).to.deep.equal([input.one[0], input]);
+          },
+          useArraySelector: false
+        })(input);
+        expect(result).to.deep.equal(["one[0].child"]);
+      });
     });
 
-    it("Testing parents useArraySelector == false", () => {
-      objectScan(pattern, {
-        callbackFn: (k, v, { parents }) => {
-          expect(parents).to.deep.equal([input.one[0], input]);
-        },
-        useArraySelector: false
-      })(input);
+    describe("Testing Array Target", () => {
+      const input = { one: { child: ["a", "b", "c"] } };
+      const pattern = ["**.child"];
+
+      it("Testing array parents useArraySelector == true", () => {
+        const result = objectScan(pattern, {
+          callbackFn: (k, v, { parents }) => {
+            expect(parents).to.deep.equal([input.one, input]);
+          }
+        })(input);
+        expect(result).to.deep.equal(["one.child"]);
+      });
+
+      it("Testing array parents useArraySelector == false", () => {
+        const result = objectScan(pattern, {
+          callbackFn: (k, v, { parents }) => {
+            expect(parents).to.deep.equal([input.one, input]);
+          },
+          useArraySelector: false
+        })(input);
+        expect(result).to.deep.equal(["one.child[0]", "one.child[1]", "one.child[2]"]);
+      });
     });
   });
 
