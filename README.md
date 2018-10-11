@@ -44,7 +44,7 @@ objectScan(["a.*.f"])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 Signature for all functions is `Fn(key, value, { parents, isMatch, needle, needles })`, where:
 - `key` is the key that the function is called for (respects `joined` option).
 - `value` is the value of that key.
-- `parents` is an array containing all parents as `[parent, grandparent, ...]`. This includes arrays iff `useArraySelector` is true, otherwise only _direct_ parents are contained.
+- `parents` is an array containing all parents as `[parent, grandparent, ...]`. Contains parents that are arrays only iff `useArraySelector` is true.
 - `isMatch` is true if this is a valid (intermittent) result.
 - `needle` is the needle that matches if `isMatch` is true, otherwise `null`.
 - `needles` are all needles that triggered the function call.
