@@ -306,6 +306,7 @@ describe("Testing Find", () => {
         expect(result).to.deep.equal(["one[0].child"]);
       });
     });
+
     describe("Testing Array Target", () => {
       const input = { one: { child: ["a", "b", "c"] } };
       const pattern = ["**.child"];
