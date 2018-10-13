@@ -43,6 +43,9 @@ module.exports.getMeta = input => ({
 const buildRecursive = (tower, path, needle) => {
   addNeedle(tower, needle);
   if (path.length === 0) {
+    if (tower[NEEDLE] !== undefined) {
+      throw new Error(`Redundant Needle Target: "${tower[NEEDLE]}" vs "${needle}"`);
+    }
     setNeedle(tower, needle);
     markMatch(tower);
     return;
