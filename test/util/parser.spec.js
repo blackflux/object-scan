@@ -30,6 +30,10 @@ describe("Testing Parser", () => {
     expect(parser("{a,b}")).to.deep.equal([["a", "b"]]);
   });
 
+  it("Testing Or Nested", () => {
+    expect(parser("{a,b.c}")).to.deep.equal(["{a,b", "c}"]);
+  });
+
   it("Testing Or Escaped", () => {
     expect(parser("{a\\,b}")).to.deep.equal([["a\\,b"]]);
   });
