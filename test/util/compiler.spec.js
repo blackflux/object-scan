@@ -2,6 +2,11 @@ const expect = require('chai').expect;
 const compiler = require("./../../src/util/compiler");
 
 describe("Testing compiler", () => {
+  it("Testing redundant needle target", () => {
+    const input = ["{a,b}", "a"];
+    expect(() => compiler.compile(input)).to.throw(`Redundant Needle Target: "{a,b}" vs "a"`);
+  });
+
   it("Testing traversing", () => {
     const input = ["a.{b,c}.d", "a.{c,e}.f", "a.b.d.g"];
     const tower = compiler.compile(input);
