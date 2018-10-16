@@ -85,9 +85,7 @@ module.exports = (input) => {
     escaped = char === "\\" ? !escaped : false;
     charPrev = char;
   }
-  if (start !== inputLength) {
-    cResult.push(input.slice(start, inputLength));
-  }
+  finalizeSegment(inputLength);
   if (getParent(cResult) !== null) {
     throwError("Non Terminated Group");
   }

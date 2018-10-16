@@ -92,8 +92,12 @@ describe("Testing Parser", () => {
       expect(() => parser("[{1,{0,1,a}}]")).to.throw("Bad List Selector: [{1,{0,1,a}}], selector a");
     });
 
+    it("Testing Only Opening Bracket", () => {
+      expect(() => parser("[")).to.throw("Non Terminated List: [");
+    });
+
     it("Testing Starts with Bracket", () => {
-      expect(() => parser("[a")).to.throw("Non Terminated List: [a");
+      expect(() => parser("[a")).to.throw("Bad List Selector: [a, selector a");
     });
 
     it("Testing Ends with Bracket", () => {
