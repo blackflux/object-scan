@@ -33,7 +33,7 @@ module.exports = (input) => {
     if (escaped === false) {
       switch (char) {
         case ".":
-          if (idx === 0 || idx === inputLength - 1) {
+          if ((start === idx && !["]", "}"].includes(charPrev)) || idx === inputLength - 1) {
             throw new Error(`Bad Path Separator: ${input}, char ${idx}`);
           }
           finalizeSegment(idx);

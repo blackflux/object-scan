@@ -57,6 +57,10 @@ describe("Testing Parser", () => {
     it("Testing Ends with Dot", () => {
       expect(() => parser("a.")).to.throw("Bad Path Separator: a., char 1");
     });
+
+    it("Testing Double Dot", () => {
+      expect(() => parser("a..b")).to.throw("Bad Path Separator: a..b, char 2");
+    });
   });
 
   describe("List Selector", () => {
