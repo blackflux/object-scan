@@ -52,7 +52,7 @@ module.exports = (input) => {
           inArray = true;
           break;
         case "]":
-          if (inArray !== true) {
+          if ((start === idx && !["}"].includes(charPrev)) || inArray !== true) {
             throw new Error(`Bad List Terminator: ${input}, char ${idx}`);
           }
           finalizeSegment(idx);

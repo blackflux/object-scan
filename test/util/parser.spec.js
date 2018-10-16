@@ -80,6 +80,10 @@ describe("Testing Parser", () => {
   });
 
   describe("List Selector", () => {
+    it("Testing Empty List", () => {
+      expect(() => parser("[]")).to.throw("Bad List Terminator: [], char 1");
+    });
+
     it("Testing Invalid List Content", () => {
       expect(() => parser("[a]")).to.throw("Bad List Selector: [a], selector a");
     });
