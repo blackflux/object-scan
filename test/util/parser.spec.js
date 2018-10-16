@@ -104,6 +104,10 @@ describe("Testing Parser", () => {
       expect(() => parser("[[")).to.throw("Bad List Start: [[, char 1");
     });
 
+    it("Testing Double Nested List In Group", () => {
+      expect(() => parser("[{1,[2]}]")).to.throw("Bad List Start: [{1,[2]}], char 4");
+    });
+
     it("Testing Or In List Escaped (Invalid Group)", () => {
       expect(() => parser("[{0\\,1}]")).to.throw("Bad List Selector: [{0\\,1}], selector 0\\,1");
     });
@@ -114,6 +118,10 @@ describe("Testing Parser", () => {
   });
 
   describe("Simple Group Selector", () => {
+    it("Testing Comma Outside Group", () => {
+      expect(() => parser("a,b")).to.throw("Bad Group Separator: a,b, char 1");
+    });
+
     it("Testing Starts with Curly Bracket", () => {
       expect(() => parser("{a")).to.throw("Non Terminated Group: {a");
     });
