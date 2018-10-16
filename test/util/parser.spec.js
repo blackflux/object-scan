@@ -20,20 +20,12 @@ describe("Testing Parser", () => {
       expect(parser("a.b")).to.deep.equal(["a", "b"]);
     });
 
-    it("Testing Path Escaped", () => {
-      expect(parser("a\\.b")).to.deep.equal(["a\\.b"]);
-    });
-
     it("Testing List", () => {
       expect(parser("a[0]")).to.deep.equal(["a", "[0]"]);
     });
 
     it("Testing Or", () => {
       expect(parser("{a,b}")).to.deep.equal([["a", "b"]]);
-    });
-
-    it("Testing Or Escaped", () => {
-      expect(parser("{a\\,b}")).to.deep.equal([["a\\,b"]]);
     });
 
     it("Testing Or In List", () => {
@@ -46,6 +38,20 @@ describe("Testing Parser", () => {
 
     it("Testing List in Path", () => {
       expect(parser("a.*.c[0]")).to.deep.equal(["a", "*", "c", "[0]"]);
+    });
+  });
+
+  describe("Testing Escaping", () => {
+    it("Testing Path Escaped", () => {
+      expect(parser("a\\.b")).to.deep.equal(["a\\.b"]);
+    });
+
+    it("Testing Or Escaped", () => {
+      expect(parser("{a\\,b}")).to.deep.equal([["a\\,b"]]);
+    });
+
+    it("Testing Escaped final Dot", () => {
+      expect(parser("a.\\.")).to.deep.equal(["a", "\\."]);
     });
   });
 
