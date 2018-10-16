@@ -2,9 +2,19 @@ const expect = require('chai').expect;
 const parser = require("./../../src/util/parser");
 
 describe("Testing Parser", () => {
+  describe("Complex Use Cases", () => {
+    it("Testing Path Groups", () => {
+      expect(parser("{a,b.c}")).to.deep.equal([["a", "b", "c"]]);
+    });
 
-  it("Testing Or Nested", () => {
-    expect(parser("{a,b.c}")).to.deep.equal([["a", "b", "c"]]);
+    it("Testing Nested Groups", () => {
+      expect(parser("{a,{b,c}}")).to.deep.equal([['a', ['b', 'c']]]);
+    });
+
+    it("Testing List Group Content", () => {
+      expect(parser("[{1,{0,1}}]")).to.deep.equal([['[1]', ['[0]', '[1]']]]);
+      expect(parser("[{{0,1},1}]")).to.deep.equal([[['[0]', '[1]'], '[1]']]);
+    });
   });
 
   describe("Testing Simple Use Cases", () => {
@@ -74,6 +84,10 @@ describe("Testing Parser", () => {
       expect(() => parser("[a]")).to.throw("Bad List Selector: [a], selector a");
     });
 
+    it("Testing Invalid List Group Content", () => {
+      expect(() => parser("[{1,{0,1,a}}]")).to.throw("Bad List Selector: [{1,{0,1,a}}], selector a");
+    });
+
     it("Testing Starts with Bracket", () => {
       expect(() => parser("[a")).to.throw("Non Terminated List Separator: [a");
     });
@@ -101,7 +115,7 @@ describe("Testing Parser", () => {
     });
 
     it("Testing Ends with Curly Bracket", () => {
-      expect(() => parser("a}")).to.throw("Bad Group Selector: a}, char 1");
+      expect(() => parser("a}")).to.throw("Bad Group Separator: a}, char 1");
     });
 
     it("Testing Group Starts with Comma", () => {
@@ -109,7 +123,7 @@ describe("Testing Parser", () => {
     });
 
     it("Testing Group Ends with Comma", () => {
-      expect(() => parser("{1,2,}")).to.throw("Bad Group Separator: {1,2,}, char 4");
+      expect(() => parser("{1,2,}")).to.throw("Bad Group Separator: {1,2,}, char 5");
     });
 
     it("Testing Group Stars After Element", () => {
