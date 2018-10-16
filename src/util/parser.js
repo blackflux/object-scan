@@ -39,7 +39,7 @@ module.exports = (input) => {
           finalizeSegment(idx);
           break;
         case ",":
-          if (start === idx || getParent(cResult) === null) {
+          if ((start === idx && !["]"].includes(charPrev)) || getParent(cResult) === null) {
             throw new Error(`Bad Group Separator: ${input}, char ${idx}`);
           }
           finalizeSegment(idx);
@@ -67,7 +67,7 @@ module.exports = (input) => {
           start = idx + 1;
           break;
         case "}":
-          if (start === idx) {
+          if (start === idx && !["]"].includes(charPrev)) {
             throw new Error(`Bad Group Separator: ${input}, char ${idx - 1}`);
           }
           finalizeSegment(idx);
