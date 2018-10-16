@@ -46,14 +46,14 @@ module.exports = (input) => {
           break;
         case "[":
           if ((start === idx && ![null, "{", ","].includes(charPrev)) || inArray !== false) {
-            throw new Error(`Bad List Selector: ${input}, char ${idx}`);
+            throw new Error(`Bad List Start: ${input}, char ${idx}`);
           }
           finalizeSegment(idx);
           inArray = true;
           break;
         case "]":
           if (inArray !== true) {
-            throw new Error(`Bad List Selector: ${input}, char ${idx}`);
+            throw new Error(`Bad List Terminator: ${input}, char ${idx}`);
           }
           finalizeSegment(idx);
           inArray = false;
@@ -68,7 +68,7 @@ module.exports = (input) => {
           break;
         case "}":
           if ((start === idx && !["]", "}"].includes(charPrev)) || getParent(cResult) === null) {
-            throw new Error(`Bad Group Separator: ${input}, char ${idx}`);
+            throw new Error(`Bad Group Terminator: ${input}, char ${idx}`);
           }
           finalizeSegment(idx);
           cResult = getParent(cResult);
@@ -84,10 +84,10 @@ module.exports = (input) => {
     cResult.push(input.slice(start, inputLength));
   }
   if (getParent(cResult) !== null) {
-    throw new Error(`Non Terminated Group Separator: ${input}`);
+    throw new Error(`Non Terminated Group: ${input}`);
   }
   if (inArray !== false) {
-    throw new Error(`Non Terminated List Separator: ${input}`);
+    throw new Error(`Non Terminated List: ${input}`);
   }
   return result;
 };

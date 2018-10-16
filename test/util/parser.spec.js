@@ -89,15 +89,15 @@ describe("Testing Parser", () => {
     });
 
     it("Testing Starts with Bracket", () => {
-      expect(() => parser("[a")).to.throw("Non Terminated List Separator: [a");
+      expect(() => parser("[a")).to.throw("Non Terminated List: [a");
     });
 
     it("Testing Ends with Bracket", () => {
-      expect(() => parser("a]")).to.throw("Bad List Selector: a], char 1");
+      expect(() => parser("a]")).to.throw("Bad List Terminator: a], char 1");
     });
 
     it("Testing Nested List Notation", () => {
-      expect(() => parser("[[")).to.throw("Bad List Selector: [[, char 1");
+      expect(() => parser("[[")).to.throw("Bad List Start: [[, char 1");
     });
 
     it("Testing Or In List Escaped (Invalid Group)", () => {
@@ -105,17 +105,17 @@ describe("Testing Parser", () => {
     });
 
     it("Testing List Escaped", () => {
-      expect(() => parser("a\\[0]")).to.throw("Bad List Selector: a\\[0], char 4");
+      expect(() => parser("a\\[0]")).to.throw("Bad List Terminator: a\\[0], char 4");
     });
   });
 
   describe("Simple Group Selector", () => {
     it("Testing Starts with Curly Bracket", () => {
-      expect(() => parser("{a")).to.throw("Non Terminated Group Separator: {a");
+      expect(() => parser("{a")).to.throw("Non Terminated Group: {a");
     });
 
     it("Testing Ends with Curly Bracket", () => {
-      expect(() => parser("a}")).to.throw("Bad Group Separator: a}, char 1");
+      expect(() => parser("a}")).to.throw("Bad Group Terminator: a}, char 1");
     });
 
     it("Testing Group Starts with Comma", () => {
@@ -123,7 +123,7 @@ describe("Testing Parser", () => {
     });
 
     it("Testing Group Ends with Comma", () => {
-      expect(() => parser("{1,2,}")).to.throw("Bad Group Separator: {1,2,}, char 5");
+      expect(() => parser("{1,2,}")).to.throw("Bad Group Terminator: {1,2,}, char 5");
     });
 
     it("Testing Group Stars After Element", () => {
