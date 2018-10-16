@@ -15,11 +15,13 @@ module.exports = (input) => {
 
   const inputLength = input.length;
   let start = 0;
+  let charPrev = null;
 
   const throwError = (msg, context = {}) => {
     throw new Error(Object.entries(context)
       .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
   };
+  const invalidTermination = (idx, allowedTerminators) => (start === idx && !allowedTerminators.includes(charPrev));
   const finalizeSegment = (idx) => {
     const segment = input.slice(start, idx);
     if (start !== idx) {
@@ -31,39 +33,38 @@ module.exports = (input) => {
     start = idx + 1;
   };
 
-  let charPrev = null;
   for (let idx = 0; idx < inputLength; idx += 1) {
     const char = input[idx];
     if (escaped === false) {
       switch (char) {
         case ".":
-          if ((start === idx && !["]", "}"].includes(charPrev)) || idx === inputLength - 1) {
+          if (invalidTermination(idx, ["]", "}"]) || idx === inputLength - 1) {
             throwError("Bad Path Separator", { char: idx });
           }
           finalizeSegment(idx);
           break;
         case ",":
-          if ((start === idx && !["]", "}"].includes(charPrev)) || getParent(cResult) === null) {
+          if (invalidTermination(idx, ["]", "}"]) || getParent(cResult) === null) {
             throwError("Bad Group Separator", { char: idx });
           }
           finalizeSegment(idx);
           break;
         case "[":
-          if ((start === idx && ![null, "{", ","].includes(charPrev)) || inArray !== false) {
+          if (invalidTermination(idx, [null, "{", ","]) || inArray !== false) {
             throwError("Bad List Start", { char: idx });
           }
           finalizeSegment(idx);
           inArray = true;
           break;
         case "]":
-          if ((start === idx && !["}"].includes(charPrev)) || inArray !== true) {
+          if (invalidTermination(idx, ["}"]) || inArray !== true) {
             throwError("Bad List Terminator", { char: idx });
           }
           finalizeSegment(idx);
           inArray = false;
           break;
         case "{":
-          if ((start === idx && ![null, ".", "[", "{", ","].includes(charPrev)) || start !== idx) {
+          if (invalidTermination(idx, [null, ".", "[", "{", ","]) || start !== idx) {
             throwError("Bad Group Start", { char: idx });
           }
           cResult.push(setParent([], cResult));
@@ -71,7 +72,7 @@ module.exports = (input) => {
           start = idx + 1;
           break;
         case "}":
-          if ((start === idx && !["]", "}"].includes(charPrev)) || getParent(cResult) === null) {
+          if (invalidTermination(idx, ["]", "}"]) || getParent(cResult) === null) {
             throwError("Bad Group Terminator", { char: idx });
           }
           finalizeSegment(idx);
