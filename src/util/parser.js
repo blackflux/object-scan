@@ -27,6 +27,7 @@ module.exports = (input) => {
     start = idx + 1;
   };
 
+  let charPrev = null;
   for (let idx = 0; idx < inputLength; idx += 1) {
     const char = input[idx];
     if (escaped === false) {
@@ -58,6 +59,9 @@ module.exports = (input) => {
           inArray = false;
           break;
         case "{":
+          if (start !== idx || ![null, ".", "["].includes(charPrev)) {
+            throw new Error(`Bad Group Start: ${input}, char ${idx}`);
+          }
           cResult.push(setParent([], cResult));
           cResult = cResult[cResult.length - 1];
           start = idx + 1;
@@ -77,6 +81,7 @@ module.exports = (input) => {
       }
     }
     escaped = char === "\\" ? !escaped : false;
+    charPrev = char;
   }
   if (start !== inputLength) {
     cResult.push(input.slice(start, inputLength));

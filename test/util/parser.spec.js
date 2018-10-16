@@ -94,5 +94,13 @@ describe("Testing Parser", () => {
     it("Testing Group Ends with Comma", () => {
       expect(() => parser("{1,2,}")).to.throw("Bad Group Separator: {1,2,}, char 4");
     });
+
+    it("Testing Group Stars After Element", () => {
+      expect(() => parser("\\.{2,3}")).to.throw("Bad Group Start: \\.{2,3}, char 2");
+    });
+
+    it("Testing Group Stars After Group", () => {
+      expect(() => parser("{1,2}{2,3}")).to.throw("Bad Group Start: {1,2}{2,3}, char 5");
+    });
   });
 });
