@@ -67,9 +67,9 @@ module.exports = (input) => {
           if (invalidTermination(idx, [null, ".", "[", "{", ","]) || start !== idx) {
             throwError("Bad Group Start", { char: idx });
           }
+          start = idx + 1;
           cResult.push(setParent([], cResult));
           cResult = cResult[cResult.length - 1];
-          start = idx + 1;
           break;
         case "}":
           if (invalidTermination(idx, ["]", "}"]) || getParent(cResult) === null) {
