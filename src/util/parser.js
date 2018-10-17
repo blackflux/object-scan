@@ -49,12 +49,12 @@ const Result = (input) => {
       }
       inArray = flag;
     },
-    finishElement: (idx, { err, finisher, finishedRequired = false }) => {
+    finishElement: (idx, { err, fins, finishedReq = false }) => {
       const isFinished = cursor === idx;
-      if (finishedRequired && !isFinished) {
+      if (finishedReq && !isFinished) {
         throwError(err, { char: idx });
       }
-      if (isFinished && !finisher.includes(input[idx - 1] || null)) {
+      if (isFinished && !fins.includes(input[idx - 1] || null)) {
         throwError(err, { char: idx });
       }
       const ele = input.slice(cursor, idx);
@@ -111,30 +111,26 @@ module.exports.parse = (input) => {
     if (escaped === false) {
       switch (char) {
         case ".":
-          result.finishElement(idx, { err: "Bad Path Separator", finisher: ["]", "}"] });
+          result.finishElement(idx, { err: "Bad Path Separator", fins: ["]", "}"] });
           break;
         case ",":
-          result.finishElement(idx, { err: "Bad Group Separator", finisher: ["]", "}"] });
+          result.finishElement(idx, { err: "Bad Group Separator", fins: ["]", "}"] });
           result.newGroupElement();
           break;
         case "[":
-          result.finishElement(idx, { err: "Bad Array Start", finisher: [null, "{", ",", "}"] });
+          result.finishElement(idx, { err: "Bad Array Start", fins: [null, "{", ",", "}"] });
           result.setInArray(true, idx);
           break;
         case "]":
-          result.finishElement(idx, { err: "Bad Array Terminator", finisher: ["}"] });
+          result.finishElement(idx, { err: "Bad Array Terminator", fins: ["}"] });
           result.setInArray(false, idx);
           break;
         case "{":
-          result.finishElement(idx, {
-            err: "Bad Group Start",
-            finisher: [null, ".", "[", "{", ","],
-            finishedRequired: true
-          });
+          result.finishElement(idx, { err: "Bad Group Start", fins: [null, ".", "[", "{", ","], finishedReq: true });
           result.startGroup();
           break;
         case "}":
-          result.finishElement(idx, { err: "Bad Group Terminator", finisher: ["]", "}"] });
+          result.finishElement(idx, { err: "Bad Group Terminator", fins: ["]", "}"] });
           result.finishGroup(idx);
           break;
         default:
@@ -143,6 +139,6 @@ module.exports.parse = (input) => {
     }
     escaped = char === "\\" ? !escaped : false;
   }
-  result.finishElement(inputLength, { err: "Bad Terminator", finisher: ["]", "}"] });
+  result.finishElement(inputLength, { err: "Bad Terminator", fins: ["]", "}"] });
   return result.finalizeResult();
 };
