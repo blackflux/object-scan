@@ -7,6 +7,76 @@ describe("Testing compiler", () => {
     expect(() => compiler.compile(input)).to.throw(`Redundant Needle Target: "{a,b}" vs "a"`);
   });
 
+  it("Testing Or Paths", () => {
+    const input = ["{a,b.c}"];
+    const tower = compiler.compile(input);
+    expect(tower).to.deep.equal({
+      a: {},
+      b: {
+        c: {}
+      }
+    });
+  });
+
+  it("Testing Top Level Or", () => {
+    const input = ["a,b"];
+    const tower = compiler.compile(input);
+    expect(tower).to.deep.equal({
+      a: {},
+      b: {}
+    });
+  });
+
+  it("Testing Nested Or", () => {
+    const input = ["{a,{b,c}}"];
+    const tower = compiler.compile(input);
+    expect(tower).to.deep.equal({
+      a: {},
+      b: {},
+      c: {}
+    });
+  });
+
+  it("Testing Nested Or in List", () => {
+    const input = ["[{1,{0,2}}]"];
+    const tower = compiler.compile(input);
+    expect(tower).to.deep.equal({
+      "[0]": {},
+      "[1]": {},
+      "[2]": {}
+    });
+  });
+
+  it("Testing Complex Path", () => {
+    const input = ["a[1].{hello.you,there[1].*,{a.b}}[{1}],a[2],a[1].*"];
+    const tower = compiler.compile(input);
+    expect(tower).to.deep.equal({
+      a: {
+        "[1]": {
+          "*": {},
+          hello: {
+            you: {
+              "[1]": {}
+            }
+          },
+          there: {
+            "[1]": {
+              "*": {
+                "[1]": {}
+              }
+            }
+          },
+          a: {
+            b: {
+              "[1]": {}
+            }
+          }
+        },
+        "[2]": {}
+      }
+    });
+  });
+
   it("Testing traversing", () => {
     const input = ["a.{b,c}.d", "a.{c,e}.f", "a.b.d.g"];
     const tower = compiler.compile(input);
