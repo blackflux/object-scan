@@ -17,26 +17,26 @@ const asString = (() => {
 describe("Testing Parser", () => {
   describe("Complex Use Cases", () => {
     it("Testing Path Groups", () => {
-      expect(asString("{a,b.c}")).to.equal('[{"a",["b","c"]}]');
+      expect(asString("{a,b.c}")).to.equal('{"a",["b","c"]}');
     });
 
     it("Testing Nested Groups", () => {
-      expect(asString("{a,{b,c}}")).to.deep.equal('[{"a",{"b","c"}}]');
+      expect(asString("{a,{b,c}}")).to.deep.equal('{"a",{"b","c"}}');
     });
 
     it("Testing List Group Content", () => {
-      expect(asString("[{1,{0,1}}]")).to.deep.equal('[{"[1]",{"[0]","[1]"}}]');
-      expect(asString("[{{0,1},1}]")).to.deep.equal('[{{"[0]","[1]"},"[1]"}]');
+      expect(asString("[{1,{0,1}}]")).to.deep.equal('{"[1]",{"[0]","[1]"}}');
+      expect(asString("[{{0,1},1}]")).to.deep.equal('{{"[0]","[1]"},"[1]"}');
     });
   });
 
   describe("Testing Simple Use Cases", () => {
     it("Testing Empty", () => {
-      expect(parse("")).to.deep.equal([""]);
+      expect(parse("")).to.deep.equal("");
     });
 
     it("Testing Simple", () => {
-      expect(parse("a")).to.deep.equal(["a"]);
+      expect(parse("a")).to.deep.equal("a");
     });
 
     it("Testing Path", () => {
@@ -48,15 +48,20 @@ describe("Testing Parser", () => {
     });
 
     it("Testing Or", () => {
-      expect(parse("{a,b}")).to.deep.equal([["a", "b"]]);
+      expect(parse("{a,b}")).to.deep.equal(["a", "b"]);
+    });
+
+    it("Testing Comma Outside Group", () => {
+      expect(parse("a,b")).to.deep.equal(["a", "b"]);
+      expect(parse("a.b,c.d")).to.deep.equal([["a", "b"], ["c", "d"]]);
     });
 
     it("Testing Or In List", () => {
-      expect(parse("[{0,1}]")).to.deep.equal([["[0]", "[1]"]]);
+      expect(parse("[{0,1}]")).to.deep.equal(["[0]", "[1]"]);
     });
 
     it("Testing List In Or", () => {
-      expect(parse("{[0],[1]}")).to.deep.equal([["[0]", "[1]"]]);
+      expect(parse("{[0],[1]}")).to.deep.equal(["[0]", "[1]"]);
     });
 
     it("Testing List in Path", () => {
@@ -70,11 +75,11 @@ describe("Testing Parser", () => {
 
   describe("Testing Escaping", () => {
     it("Testing Path Escaped", () => {
-      expect(parse("a\\.b")).to.deep.equal(["a\\.b"]);
+      expect(parse("a\\.b")).to.deep.equal("a\\.b");
     });
 
     it("Testing Or Escaped", () => {
-      expect(parse("{a\\,b}")).to.deep.equal(["a\\,b"]);
+      expect(parse("{a\\,b}")).to.deep.equal("a\\,b");
     });
 
     it("Testing Escaped final Dot", () => {
@@ -139,10 +144,6 @@ describe("Testing Parser", () => {
   });
 
   describe("Simple Group Selector", () => {
-    it("Testing Comma Outside Group", () => {
-      expect(() => parse("a,b")).to.throw("Bad Group Separator: a,b, char 1");
-    });
-
     it("Testing Starts with Curly Bracket", () => {
       expect(() => parse("{a")).to.throw("Non Terminated Group: {a");
     });

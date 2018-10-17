@@ -9,7 +9,7 @@ module.exports.isOr = isOr;
 
 module.exports.parse = (input) => {
   if (input === "") {
-    return [""];
+    return "";
   }
 
   const result = [];
@@ -53,6 +53,9 @@ module.exports.parse = (input) => {
     cResult = getParent(cResult);
   };
 
+  markOr(result);
+  newChild(false);
+
   for (let idx = 0; idx < inputLength; idx += 1) {
     const char = input[idx];
     if (escaped === false) {
@@ -64,7 +67,7 @@ module.exports.parse = (input) => {
           finalizeSegment(idx);
           break;
         case ",":
-          if (isInvalidTermination(idx, ["]", "}"]) || getParent(cResult) === null) {
+          if (isInvalidTermination(idx, ["]", "}"])) {
             throwError("Bad Group Separator", { char: idx });
           }
           finalizeSegment(idx);
@@ -94,7 +97,7 @@ module.exports.parse = (input) => {
           newChild(false);
           break;
         case "}":
-          if (isInvalidTermination(idx, ["]", "}"]) || getParent(cResult) === null) {
+          if (isInvalidTermination(idx, ["]", "}"]) || getParent(cResult) === result) {
             throwError("Bad Group Terminator", { char: idx });
           }
           finalizeSegment(idx);
@@ -109,11 +112,12 @@ module.exports.parse = (input) => {
     charPrev = char;
   }
   finalizeSegment(inputLength);
+  finishChild();
   if (getParent(cResult) !== null) {
     throwError("Non Terminated Group");
   }
   if (inArray !== false) {
     throwError("Non Terminated List");
   }
-  return result;
+  return result.length === 1 ? result[0] : result;
 };

@@ -18,6 +18,15 @@ describe("Testing compiler", () => {
     });
   });
 
+  it("Testing Top Level Or", () => {
+    const input = ["a,b"];
+    const tower = compiler.compile(input);
+    expect(tower).to.deep.equal({
+      a: {},
+      b: {}
+    });
+  });
+
   it("Testing Nested Or", () => {
     const input = ["{a,{b,c}}"];
     const tower = compiler.compile(input);
@@ -39,11 +48,12 @@ describe("Testing compiler", () => {
   });
 
   it("Testing Complex Path", () => {
-    const input = ["a[1].{hello.you,there[1].*,{a.b}}[{1}]"];
+    const input = ["a[1].{hello.you,there[1].*,{a.b}}[{1}],a[2],a[1].*"];
     const tower = compiler.compile(input);
     expect(tower).to.deep.equal({
       a: {
         "[1]": {
+          "*": {},
           hello: {
             you: {
               "[1]": {}
@@ -61,7 +71,8 @@ describe("Testing compiler", () => {
               "[1]": {}
             }
           }
-        }
+        },
+        "[2]": {}
       }
     });
   });

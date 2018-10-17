@@ -67,6 +67,6 @@ const buildRecursive = (tower, path, needle) => {
 
 module.exports.compile = (needles) => {
   const tower = {};
-  needles.forEach(needle => buildRecursive(tower, parse(needle), needle));
+  needles.forEach(needle => buildRecursive(tower, [parse(needle)], needle));
   return tower;
 };
