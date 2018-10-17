@@ -39,9 +39,6 @@ module.exports.parse = (input) => {
   };
 
   // group related logic
-  const toParent = () => {
-    cResult = getParent(cResult);
-  };
   const newChild = (asOr) => {
     const child = setParent(asOr ? markOr([]) : [], cResult);
     cResult.push(child);
@@ -53,7 +50,7 @@ module.exports.parse = (input) => {
       parent.splice(-1, 1);
       parent.push(cResult[0]);
     }
-    toParent();
+    cResult = getParent(cResult);
   };
 
   for (let idx = 0; idx < inputLength; idx += 1) {
@@ -102,7 +99,7 @@ module.exports.parse = (input) => {
           }
           finalizeSegment(idx);
           finishChild();
-          toParent();
+          finishChild();
           break;
         default:
           break;

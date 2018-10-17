@@ -74,7 +74,7 @@ describe("Testing Parser", () => {
     });
 
     it("Testing Or Escaped", () => {
-      expect(parse("{a\\,b}")).to.deep.equal([["a\\,b"]]);
+      expect(parse("{a\\,b}")).to.deep.equal(["a\\,b"]);
     });
 
     it("Testing Escaped final Dot", () => {
