@@ -7,8 +7,13 @@ const markOr = input => Object.defineProperty(input, OR, { value: true, writable
 const isOr = input => (input[OR] === true);
 module.exports.isOr = isOr;
 
-const Result = () => {
+const Result = (input) => {
   let cResult = markOr([]);
+
+  const throwError = (msg, context = {}) => {
+    throw new Error(Object.entries(context)
+      .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
+  };
 
   const newChild = (asOr) => {
     const child = setParent(asOr ? markOr([]) : [], cResult);
@@ -27,9 +32,8 @@ const Result = () => {
   newChild(false);
 
   return {
-    add: input => cResult.push(input),
-    getParent: () => getParent(cResult),
-    getGrandParent: () => getParent(getParent(cResult)),
+    throwError,
+    add: ele => cResult.push(ele),
     startGroup: () => {
       newChild(true);
       newChild(false);
@@ -39,13 +43,19 @@ const Result = () => {
       newChild(false);
     },
     finishGroup: () => {
+      if (getParent(getParent(cResult)) === null) {
+        throwError("Unexpected Group Terminator");
+      }
       finishChild();
       finishChild();
     },
     finalize: () => {
       finishChild();
-    },
-    getFinalResult: () => (cResult.length === 1 ? cResult[0] : cResult)
+      if (getParent(cResult) !== null) {
+        throwError("Non Terminated Group");
+      }
+      return cResult.length === 1 ? cResult[0] : cResult;
+    }
   };
 };
 
@@ -55,7 +65,7 @@ module.exports.parse = (input) => {
   }
 
   // setup
-  const result = Result();
+  const result = Result(input);
 
   let inArray = false;
   let escaped = false;
@@ -65,10 +75,7 @@ module.exports.parse = (input) => {
   let charPrev = null;
 
   // generification
-  const throwError = (msg, context = {}) => {
-    throw new Error(Object.entries(context)
-      .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
-  };
+  const throwError = result.throwError;
   const isInvalidTermination = (idx, allowedTerminators) => (start === idx && !allowedTerminators.includes(charPrev));
   const finalizeSegment = (idx) => {
     const segment = input.slice(start, idx);
@@ -121,7 +128,7 @@ module.exports.parse = (input) => {
           result.startGroup();
           break;
         case "}":
-          if (isInvalidTermination(idx, ["]", "}"]) || result.getGrandParent() === null) {
+          if (isInvalidTermination(idx, ["]", "}"])) {
             throwError("Bad Group Terminator", { char: idx });
           }
           finalizeSegment(idx);
@@ -135,12 +142,8 @@ module.exports.parse = (input) => {
     charPrev = char;
   }
   finalizeSegment(inputLength);
-  result.finalize();
-  if (result.getParent() !== null) {
-    throwError("Non Terminated Group");
-  }
   if (inArray !== false) {
     throwError("Non Terminated Array");
   }
-  return result.getFinalResult();
+  return result.finalize();
 };

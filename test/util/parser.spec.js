@@ -149,7 +149,7 @@ describe("Testing Parser", () => {
     });
 
     it("Testing Ends with Curly Bracket", () => {
-      expect(() => parse("a}")).to.throw("Bad Group Terminator: a}, char 1");
+      expect(() => parse("a}")).to.throw("Unexpected Group Terminator: a}");
     });
 
     it("Testing Group Starts with Comma", () => {
