@@ -93,7 +93,7 @@ describe("Testing Parser", () => {
     });
 
     it("Testing Ends with Dot", () => {
-      expect(() => parse("a.")).to.throw("Bad Path Separator: a., char 1");
+      expect(() => parse("a.")).to.throw("Bad Terminator: a.");
     });
 
     it("Testing Double Dot", () => {
@@ -103,7 +103,7 @@ describe("Testing Parser", () => {
 
   describe("Array Selector", () => {
     it("Testing Empty Array", () => {
-      expect(() => parse("[]")).to.throw("Bad Array Terminator: [], char 1");
+      expect(() => parse("[]")).to.throw("Bad Array Terminator: []");
     });
 
     it("Testing Invalid Array Content", () => {
@@ -115,7 +115,7 @@ describe("Testing Parser", () => {
     });
 
     it("Testing Only Opening Bracket", () => {
-      expect(() => parse("[")).to.throw("Non Terminated Array: [");
+      expect(() => parse("[{1}")).to.throw("Non Terminated Array: [");
     });
 
     it("Testing Starts with Bracket", () => {
@@ -123,15 +123,15 @@ describe("Testing Parser", () => {
     });
 
     it("Testing Ends with Bracket", () => {
-      expect(() => parse("a]")).to.throw("Bad Array Terminator: a], char 1");
+      expect(() => parse("a]")).to.throw("Bad Array Terminator: a]");
     });
 
     it("Testing Nested Array Notation", () => {
-      expect(() => parse("[[")).to.throw("Bad Array Start: [[, char 1");
+      expect(() => parse("[[")).to.throw("Bad Array Start: [[");
     });
 
     it("Testing Double Nested Array In Group", () => {
-      expect(() => parse("[{1,[2]}]")).to.throw("Bad Array Start: [{1,[2]}], char 4");
+      expect(() => parse("[{1,[2]}]")).to.throw("Bad Array Start: [{1,[2]}]");
     });
 
     it("Testing Or In Array Escaped (Invalid Group)", () => {
@@ -139,7 +139,7 @@ describe("Testing Parser", () => {
     });
 
     it("Testing Array Escaped", () => {
-      expect(() => parse("a\\[0]")).to.throw("Bad Array Terminator: a\\[0], char 4");
+      expect(() => parse("a\\[0]")).to.throw("Bad Array Terminator: a\\[0]");
     });
   });
 

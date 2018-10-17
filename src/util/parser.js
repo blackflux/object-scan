@@ -8,13 +8,28 @@ const isOr = input => (input[OR] === true);
 module.exports.isOr = isOr;
 
 const Result = (input) => {
-  let cResult = markOr([]);
-
   const throwError = (msg, context = {}) => {
     throw new Error(Object.entries(context)
       .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
   };
 
+  let cResult = markOr([]);
+  let inArray = false;
+  let cursor = 0;
+
+  // segment related
+  const finalizeSegment = (idx) => {
+    const segment = input.slice(cursor, idx);
+    if (cursor !== idx) {
+      if (inArray && !/^[*\d]+$/g.test(segment)) {
+        throwError("Bad Array Selector", { selector: segment });
+      }
+      cResult.push(inArray ? `[${segment}]` : segment);
+    }
+    cursor = idx + 1;
+  };
+
+  // group related
   const newChild = (asOr) => {
     const child = setParent(asOr ? markOr([]) : [], cResult);
     cResult.push(child);
@@ -33,7 +48,14 @@ const Result = (input) => {
 
   return {
     throwError,
-    add: ele => cResult.push(ele),
+    getCursor: () => cursor,
+    setInArray: (flag) => {
+      if (inArray === flag) {
+        throwError(inArray ? "Bad Array Start" : "Bad Array Terminator");
+      }
+      inArray = flag;
+    },
+    finalizeSegment,
     startGroup: () => {
       newChild(true);
       newChild(false);
@@ -54,6 +76,9 @@ const Result = (input) => {
       if (getParent(cResult) !== null) {
         throwError("Non Terminated Group");
       }
+      if (inArray) {
+        throwError("Non Terminated Array");
+      }
       return cResult.length === 1 ? cResult[0] : cResult;
     }
   };
@@ -67,26 +92,16 @@ module.exports.parse = (input) => {
   // setup
   const result = Result(input);
 
-  let inArray = false;
+  const inputLength = input.length;
+  let charPrev = null;
   let escaped = false;
 
-  const inputLength = input.length;
-  let start = 0;
-  let charPrev = null;
-
-  // generification
   const throwError = result.throwError;
-  const isInvalidTermination = (idx, allowedTerminators) => (start === idx && !allowedTerminators.includes(charPrev));
-  const finalizeSegment = (idx) => {
-    const segment = input.slice(start, idx);
-    if (start !== idx) {
-      if (inArray && !/^[*\d]+$/g.test(segment)) {
-        throwError("Bad Array Selector", { selector: segment });
-      }
-      result.add(inArray ? `[${segment}]` : segment);
-    }
-    start = idx + 1;
-  };
+  const finalizeSegment = result.finalizeSegment;
+  const isInvalidTermination = (idx, allowedTerminators) => (
+    result.getCursor() === idx
+    && !allowedTerminators.includes(charPrev)
+  );
 
   // parsing
   for (let idx = 0; idx < inputLength; idx += 1) {
@@ -94,7 +109,7 @@ module.exports.parse = (input) => {
     if (escaped === false) {
       switch (char) {
         case ".":
-          if (isInvalidTermination(idx, ["]", "}"]) || idx === inputLength - 1) {
+          if (isInvalidTermination(idx, ["]", "}"])) {
             throwError("Bad Path Separator", { char: idx });
           }
           finalizeSegment(idx);
@@ -107,24 +122,24 @@ module.exports.parse = (input) => {
           result.newGroupElement();
           break;
         case "[":
-          if (isInvalidTermination(idx, [null, "{", ",", "}"]) || inArray !== false) {
+          if (isInvalidTermination(idx, [null, "{", ",", "}"])) {
             throwError("Bad Array Start", { char: idx });
           }
           finalizeSegment(idx);
-          inArray = true;
+          result.setInArray(true);
           break;
         case "]":
-          if (isInvalidTermination(idx, ["}"]) || inArray !== true) {
+          if (isInvalidTermination(idx, ["}"])) {
             throwError("Bad Array Terminator", { char: idx });
           }
           finalizeSegment(idx);
-          inArray = false;
+          result.setInArray(false);
           break;
         case "{":
-          if (isInvalidTermination(idx, [null, ".", "[", "{", ","]) || start !== idx) {
+          if (isInvalidTermination(idx, [null, ".", "[", "{", ","]) || result.getCursor() !== idx) {
             throwError("Bad Group Start", { char: idx });
           }
-          start = idx + 1;
+          finalizeSegment(idx);
           result.startGroup();
           break;
         case "}":
@@ -141,9 +156,9 @@ module.exports.parse = (input) => {
     escaped = char === "\\" ? !escaped : false;
     charPrev = char;
   }
-  finalizeSegment(inputLength);
-  if (inArray !== false) {
-    throwError("Non Terminated Array");
+  if (isInvalidTermination(inputLength, ["]", "}"])) {
+    throwError("Bad Terminator");
   }
+  finalizeSegment(inputLength);
   return result.finalize();
 };
