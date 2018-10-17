@@ -14,6 +14,16 @@ const asString = (() => {
   return input => asStringRec(parse(input));
 })();
 
+const checkError = (input, msg) => {
+  let err;
+  try {
+    parse(input);
+  } catch (e) {
+    err = e;
+  }
+  expect(err.message).to.equal(msg);
+};
+
 describe("Testing Parser", () => {
   describe("Complex Use Cases", () => {
     it("Testing Path Groups", () => {
@@ -89,83 +99,83 @@ describe("Testing Parser", () => {
 
   describe("Invalid Dot Selector", () => {
     it("Testing Starts with Dot", () => {
-      expect(() => parse(".a")).to.throw("Bad Path Separator: .a, char 0");
+      checkError(".a", "Bad Path Separator: .a, char 0");
     });
 
     it("Testing Ends with Dot", () => {
-      expect(() => parse("a.")).to.throw("Bad Terminator: a.");
+      checkError("a.", "Bad Terminator: a., char 2");
     });
 
     it("Testing Double Dot", () => {
-      expect(() => parse("a..b")).to.throw("Bad Path Separator: a..b, char 2");
+      checkError("a..b", "Bad Path Separator: a..b, char 2");
     });
   });
 
   describe("Array Selector", () => {
     it("Testing Empty Array", () => {
-      expect(() => parse("[]")).to.throw("Bad Array Terminator: []");
+      checkError("[]", "Bad Array Terminator: [], char 1");
     });
 
     it("Testing Invalid Array Content", () => {
-      expect(() => parse("[a]")).to.throw("Bad Array Selector: [a], selector a");
+      checkError("[a]", "Bad Array Selector: [a], selector a");
     });
 
     it("Testing Invalid Array Group Content", () => {
-      expect(() => parse("[{1,{0,1,a}}]")).to.throw("Bad Array Selector: [{1,{0,1,a}}], selector a");
+      checkError("[{1,{0,1,a}}]", "Bad Array Selector: [{1,{0,1,a}}], selector a");
     });
 
     it("Testing Only Opening Bracket", () => {
-      expect(() => parse("[{1}")).to.throw("Non Terminated Array: [");
+      checkError("[{1}", "Non Terminated Array: [{1}");
     });
 
     it("Testing Starts with Bracket", () => {
-      expect(() => parse("[a")).to.throw("Bad Array Selector: [a, selector a");
+      checkError("[a", "Bad Array Selector: [a, selector a");
     });
 
     it("Testing Ends with Bracket", () => {
-      expect(() => parse("a]")).to.throw("Bad Array Terminator: a]");
+      checkError("a]", "Bad Array Terminator: a], char 1");
     });
 
     it("Testing Nested Array Notation", () => {
-      expect(() => parse("[[")).to.throw("Bad Array Start: [[");
+      checkError("[[", "Bad Array Start: [[, char 1");
     });
 
     it("Testing Double Nested Array In Group", () => {
-      expect(() => parse("[{1,[2]}]")).to.throw("Bad Array Start: [{1,[2]}]");
+      checkError("[{1,[2]}]", "Bad Array Start: [{1,[2]}], char 4");
     });
 
     it("Testing Or In Array Escaped (Invalid Group)", () => {
-      expect(() => parse("[{0\\,1}]")).to.throw("Bad Array Selector: [{0\\,1}], selector 0\\,1");
+      checkError("[{0\\,1}]", "Bad Array Selector: [{0\\,1}], selector 0\\,1");
     });
 
     it("Testing Array Escaped", () => {
-      expect(() => parse("a\\[0]")).to.throw("Bad Array Terminator: a\\[0]");
+      checkError("a\\[0]", "Bad Array Terminator: a\\[0], char 4");
     });
   });
 
   describe("Simple Group Selector", () => {
     it("Testing Starts with Curly Bracket", () => {
-      expect(() => parse("{a")).to.throw("Non Terminated Group: {a");
+      checkError("{a", "Non Terminated Group: {a");
     });
 
     it("Testing Ends with Curly Bracket", () => {
-      expect(() => parse("a}")).to.throw("Unexpected Group Terminator: a}");
+      checkError("a}", "Unexpected Group Terminator: a}, char 1");
     });
 
     it("Testing Group Starts with Comma", () => {
-      expect(() => parse("{,1,2}")).to.throw("Bad Group Separator: {,1,2}, char 1");
+      checkError("{,1,2}", "Bad Group Separator: {,1,2}, char 1");
     });
 
     it("Testing Group Ends with Comma", () => {
-      expect(() => parse("{1,2,}")).to.throw("Bad Group Terminator: {1,2,}, char 5");
+      checkError("{1,2,}", "Bad Group Terminator: {1,2,}, char 5");
     });
 
     it("Testing Group Stars After Element", () => {
-      expect(() => parse("\\.{2,3}")).to.throw("Bad Group Start: \\.{2,3}, char 2");
+      checkError("\\.{2,3}", "Bad Group Start: \\.{2,3}, char 2");
     });
 
     it("Testing Group Stars After Group", () => {
-      expect(() => parse("{1,2}{2,3}")).to.throw("Bad Group Start: {1,2}{2,3}, char 5");
+      checkError("{1,2}{2,3}", "Bad Group Start: {1,2}{2,3}, char 5");
     });
   });
 });

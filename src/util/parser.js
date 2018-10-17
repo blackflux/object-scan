@@ -1,5 +1,7 @@
+const assert = require("assert");
+
 const PARENT = Symbol("parent");
-const setParent = (input, parent) => Object.defineProperty(input, PARENT, { value: parent, writable: false });
+const setParent = (input, parent) => Object.defineProperty(input, PARENT, { value: parent, writable: true });
 const getParent = input => (input[PARENT] === undefined ? null : input[PARENT]);
 
 const OR = Symbol("or");
@@ -17,24 +19,6 @@ const Result = (input) => {
   let inArray = false;
   let cursor = 0;
 
-  const finishElement = (idx, { msg, finishedOk, finishedRequired = false }) => {
-    const isFinished = cursor === idx;
-    if (finishedRequired && !isFinished) {
-      throwError(msg, { char: idx });
-    }
-    if (isFinished && !finishedOk) {
-      throwError(msg, { char: idx });
-    }
-    const ele = input.slice(cursor, idx);
-    if (cursor !== idx) {
-      if (inArray && !/^[*\d]+$/g.test(ele)) {
-        throwError("Bad Array Selector", { selector: ele });
-      }
-      cResult.push(inArray ? `[${ele}]` : ele);
-    }
-    cursor = idx + 1;
-  };
-
   // group related
   const newChild = (asOr) => {
     const child = setParent(asOr ? markOr([]) : [], cResult);
@@ -46,6 +30,12 @@ const Result = (input) => {
       const parent = getParent(cResult);
       parent.splice(-1, 1);
       parent.push(cResult[0]);
+      // update parent as required
+      const hasParent = getParent(cResult[0]) !== null;
+      assert(hasParent === (typeof cResult[0] === "object"));
+      if (hasParent) {
+        setParent(cResult[0], parent);
+      }
     }
     cResult = getParent(cResult);
   };
@@ -53,13 +43,29 @@ const Result = (input) => {
   newChild(false);
 
   return {
-    setInArray: (flag) => {
+    setInArray: (flag, idx) => {
       if (inArray === flag) {
-        throwError(inArray ? "Bad Array Start" : "Bad Array Terminator");
+        throwError(inArray ? "Bad Array Start" : "Bad Array Terminator", { char: idx });
       }
       inArray = flag;
     },
-    finishElement,
+    finishElement: (idx, { msg, finishedOk, finishedRequired = false }) => {
+      const isFinished = cursor === idx;
+      if (finishedRequired && !isFinished) {
+        throwError(msg, { char: idx });
+      }
+      if (isFinished && !finishedOk) {
+        throwError(msg, { char: idx });
+      }
+      const ele = input.slice(cursor, idx);
+      if (cursor !== idx) {
+        if (inArray && !/^[*\d]+$/g.test(ele)) {
+          throwError("Bad Array Selector", { selector: ele });
+        }
+        cResult.push(inArray ? `[${ele}]` : ele);
+      }
+      cursor = idx + 1;
+    },
     startGroup: () => {
       newChild(true);
       newChild(false);
@@ -68,9 +74,9 @@ const Result = (input) => {
       finishChild();
       newChild(false);
     },
-    finishGroup: () => {
+    finishGroup: (idx) => {
       if (getParent(getParent(cResult)) === null) {
-        throwError("Unexpected Group Terminator");
+        throwError("Unexpected Group Terminator", { char: idx });
       }
       finishChild();
       finishChild();
@@ -114,11 +120,11 @@ module.exports.parse = (input) => {
           break;
         case "[":
           result.finishElement(idx, { msg: "Bad Array Start", finishedOk: [null, "{", ",", "}"].includes(charPrev) });
-          result.setInArray(true);
+          result.setInArray(true, idx);
           break;
         case "]":
           result.finishElement(idx, { msg: "Bad Array Terminator", finishedOk: ["}"].includes(charPrev) });
-          result.setInArray(false);
+          result.setInArray(false, idx);
           break;
         case "{":
           result.finishElement(idx, {
@@ -130,7 +136,7 @@ module.exports.parse = (input) => {
           break;
         case "}":
           result.finishElement(idx, { msg: "Bad Group Terminator", finishedOk: ["]", "}"].includes(charPrev) });
-          result.finishGroup();
+          result.finishGroup(idx);
           break;
         default:
           break;
