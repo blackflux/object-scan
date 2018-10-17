@@ -100,30 +100,28 @@ module.exports.parse = (input) => {
   let charPrev = null;
   let escaped = false;
 
-  const finishElement = result.finishElement;
-
   // parsing
   for (let idx = 0; idx < inputLength; idx += 1) {
     const char = input[idx];
     if (escaped === false) {
       switch (char) {
         case ".":
-          finishElement(idx, { msg: "Bad Path Separator", finishedOk: ["]", "}"].includes(charPrev) });
+          result.finishElement(idx, { msg: "Bad Path Separator", finishedOk: ["]", "}"].includes(charPrev) });
           break;
         case ",":
-          finishElement(idx, { msg: "Bad Group Separator", finishedOk: ["]", "}"].includes(charPrev) });
+          result.finishElement(idx, { msg: "Bad Group Separator", finishedOk: ["]", "}"].includes(charPrev) });
           result.newGroupElement();
           break;
         case "[":
-          finishElement(idx, { msg: "Bad Array Start", finishedOk: [null, "{", ",", "}"].includes(charPrev) });
+          result.finishElement(idx, { msg: "Bad Array Start", finishedOk: [null, "{", ",", "}"].includes(charPrev) });
           result.setInArray(true);
           break;
         case "]":
-          finishElement(idx, { msg: "Bad Array Terminator", finishedOk: ["}"].includes(charPrev) });
+          result.finishElement(idx, { msg: "Bad Array Terminator", finishedOk: ["}"].includes(charPrev) });
           result.setInArray(false);
           break;
         case "{":
-          finishElement(idx, {
+          result.finishElement(idx, {
             msg: "Bad Group Start",
             finishedOk: [null, ".", "[", "{", ","].includes(charPrev),
             finishedRequired: true
@@ -131,7 +129,7 @@ module.exports.parse = (input) => {
           result.startGroup();
           break;
         case "}":
-          finishElement(idx, { msg: "Bad Group Terminator", finishedOk: ["]", "}"].includes(charPrev) });
+          result.finishElement(idx, { msg: "Bad Group Terminator", finishedOk: ["]", "}"].includes(charPrev) });
           result.finishGroup();
           break;
         default:
@@ -141,6 +139,6 @@ module.exports.parse = (input) => {
     escaped = char === "\\" ? !escaped : false;
     charPrev = char;
   }
-  finishElement(inputLength, { msg: "Bad Terminator", finishedOk: ["]", "}"].includes(charPrev) });
+  result.finishElement(inputLength, { msg: "Bad Terminator", finishedOk: ["]", "}"].includes(charPrev) });
   return result.finalizeResult();
 };
