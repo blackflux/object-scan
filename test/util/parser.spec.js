@@ -24,7 +24,7 @@ describe("Testing Parser", () => {
       expect(asString("{a,{b,c}}")).to.deep.equal('{"a",{"b","c"}}');
     });
 
-    it("Testing List Group Content", () => {
+    it("Testing Array Group Content", () => {
       expect(asString("[{1,{0,1}}]")).to.deep.equal('{"[1]",{"[0]","[1]"}}');
       expect(asString("[{{0,1},1}]")).to.deep.equal('{{"[0]","[1]"},"[1]"}');
     });
@@ -43,7 +43,7 @@ describe("Testing Parser", () => {
       expect(parse("a.b")).to.deep.equal(["a", "b"]);
     });
 
-    it("Testing List", () => {
+    it("Testing Array", () => {
       expect(parse("a[0]")).to.deep.equal(["a", "[0]"]);
     });
 
@@ -56,19 +56,19 @@ describe("Testing Parser", () => {
       expect(parse("a.b,c.d")).to.deep.equal([["a", "b"], ["c", "d"]]);
     });
 
-    it("Testing Or In List", () => {
+    it("Testing Or In Array", () => {
       expect(parse("[{0,1}]")).to.deep.equal(["[0]", "[1]"]);
     });
 
-    it("Testing List In Or", () => {
+    it("Testing Array In Or", () => {
       expect(parse("{[0],[1]}")).to.deep.equal(["[0]", "[1]"]);
     });
 
-    it("Testing List in Path", () => {
+    it("Testing Array in Path", () => {
       expect(parse("a.*.c[0]")).to.deep.equal(["a", "*", "c", "[0]"]);
     });
 
-    it("Testing List After Or", () => {
+    it("Testing Array After Or", () => {
       expect(parse("{a,b}[0]")).to.deep.equal([['a', 'b'], '[0]']);
     });
   });
@@ -101,45 +101,45 @@ describe("Testing Parser", () => {
     });
   });
 
-  describe("List Selector", () => {
-    it("Testing Empty List", () => {
-      expect(() => parse("[]")).to.throw("Bad List Terminator: [], char 1");
+  describe("Array Selector", () => {
+    it("Testing Empty Array", () => {
+      expect(() => parse("[]")).to.throw("Bad Array Terminator: [], char 1");
     });
 
-    it("Testing Invalid List Content", () => {
-      expect(() => parse("[a]")).to.throw("Bad List Selector: [a], selector a");
+    it("Testing Invalid Array Content", () => {
+      expect(() => parse("[a]")).to.throw("Bad Array Selector: [a], selector a");
     });
 
-    it("Testing Invalid List Group Content", () => {
-      expect(() => parse("[{1,{0,1,a}}]")).to.throw("Bad List Selector: [{1,{0,1,a}}], selector a");
+    it("Testing Invalid Array Group Content", () => {
+      expect(() => parse("[{1,{0,1,a}}]")).to.throw("Bad Array Selector: [{1,{0,1,a}}], selector a");
     });
 
     it("Testing Only Opening Bracket", () => {
-      expect(() => parse("[")).to.throw("Non Terminated List: [");
+      expect(() => parse("[")).to.throw("Non Terminated Array: [");
     });
 
     it("Testing Starts with Bracket", () => {
-      expect(() => parse("[a")).to.throw("Bad List Selector: [a, selector a");
+      expect(() => parse("[a")).to.throw("Bad Array Selector: [a, selector a");
     });
 
     it("Testing Ends with Bracket", () => {
-      expect(() => parse("a]")).to.throw("Bad List Terminator: a], char 1");
+      expect(() => parse("a]")).to.throw("Bad Array Terminator: a], char 1");
     });
 
-    it("Testing Nested List Notation", () => {
-      expect(() => parse("[[")).to.throw("Bad List Start: [[, char 1");
+    it("Testing Nested Array Notation", () => {
+      expect(() => parse("[[")).to.throw("Bad Array Start: [[, char 1");
     });
 
-    it("Testing Double Nested List In Group", () => {
-      expect(() => parse("[{1,[2]}]")).to.throw("Bad List Start: [{1,[2]}], char 4");
+    it("Testing Double Nested Array In Group", () => {
+      expect(() => parse("[{1,[2]}]")).to.throw("Bad Array Start: [{1,[2]}], char 4");
     });
 
-    it("Testing Or In List Escaped (Invalid Group)", () => {
-      expect(() => parse("[{0\\,1}]")).to.throw("Bad List Selector: [{0\\,1}], selector 0\\,1");
+    it("Testing Or In Array Escaped (Invalid Group)", () => {
+      expect(() => parse("[{0\\,1}]")).to.throw("Bad Array Selector: [{0\\,1}], selector 0\\,1");
     });
 
-    it("Testing List Escaped", () => {
-      expect(() => parse("a\\[0]")).to.throw("Bad List Terminator: a\\[0], char 4");
+    it("Testing Array Escaped", () => {
+      expect(() => parse("a\\[0]")).to.throw("Bad Array Terminator: a\\[0], char 4");
     });
   });
 

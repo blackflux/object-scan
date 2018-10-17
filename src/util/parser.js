@@ -51,7 +51,7 @@ module.exports.parse = (input) => {
     const segment = input.slice(start, idx);
     if (start !== idx) {
       if (inArray && !/^[*\d]+$/g.test(segment)) {
-        throwError("Bad List Selector", { selector: segment });
+        throwError("Bad Array Selector", { selector: segment });
       }
       cResult.push(inArray ? `[${segment}]` : segment);
     }
@@ -79,14 +79,14 @@ module.exports.parse = (input) => {
           break;
         case "[":
           if (isInvalidTermination(idx, [null, "{", ",", "}"]) || inArray !== false) {
-            throwError("Bad List Start", { char: idx });
+            throwError("Bad Array Start", { char: idx });
           }
           finalizeSegment(idx);
           inArray = true;
           break;
         case "]":
           if (isInvalidTermination(idx, ["}"]) || inArray !== true) {
-            throwError("Bad List Terminator", { char: idx });
+            throwError("Bad Array Terminator", { char: idx });
           }
           finalizeSegment(idx);
           inArray = false;
@@ -120,7 +120,7 @@ module.exports.parse = (input) => {
     throwError("Non Terminated Group");
   }
   if (inArray !== false) {
-    throwError("Non Terminated List");
+    throwError("Non Terminated Array");
   }
   return result.length === 1 ? result[0] : result;
 };
