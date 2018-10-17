@@ -21,7 +21,7 @@ module.exports = (input) => {
     throw new Error(Object.entries(context)
       .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
   };
-  const invalidTermination = (idx, allowedTerminators) => (start === idx && !allowedTerminators.includes(charPrev));
+  const isInvalidTermination = (idx, allowedTerminators) => (start === idx && !allowedTerminators.includes(charPrev));
   const finalizeSegment = (idx) => {
     const segment = input.slice(start, idx);
     if (start !== idx) {
@@ -38,33 +38,33 @@ module.exports = (input) => {
     if (escaped === false) {
       switch (char) {
         case ".":
-          if (invalidTermination(idx, ["]", "}"]) || idx === inputLength - 1) {
+          if (isInvalidTermination(idx, ["]", "}"]) || idx === inputLength - 1) {
             throwError("Bad Path Separator", { char: idx });
           }
           finalizeSegment(idx);
           break;
         case ",":
-          if (invalidTermination(idx, ["]", "}"]) || getParent(cResult) === null) {
+          if (isInvalidTermination(idx, ["]", "}"]) || getParent(cResult) === null) {
             throwError("Bad Group Separator", { char: idx });
           }
           finalizeSegment(idx);
           break;
         case "[":
-          if (invalidTermination(idx, [null, "{", ","]) || inArray !== false) {
+          if (isInvalidTermination(idx, [null, "{", ","]) || inArray !== false) {
             throwError("Bad List Start", { char: idx });
           }
           finalizeSegment(idx);
           inArray = true;
           break;
         case "]":
-          if (invalidTermination(idx, ["}"]) || inArray !== true) {
+          if (isInvalidTermination(idx, ["}"]) || inArray !== true) {
             throwError("Bad List Terminator", { char: idx });
           }
           finalizeSegment(idx);
           inArray = false;
           break;
         case "{":
-          if (invalidTermination(idx, [null, ".", "[", "{", ","]) || start !== idx) {
+          if (isInvalidTermination(idx, [null, ".", "[", "{", ","]) || start !== idx) {
             throwError("Bad Group Start", { char: idx });
           }
           start = idx + 1;
@@ -72,7 +72,7 @@ module.exports = (input) => {
           cResult = cResult[cResult.length - 1];
           break;
         case "}":
-          if (invalidTermination(idx, ["]", "}"]) || getParent(cResult) === null) {
+          if (isInvalidTermination(idx, ["]", "}"]) || getParent(cResult) === null) {
             throwError("Bad Group Terminator", { char: idx });
           }
           finalizeSegment(idx);
