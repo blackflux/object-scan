@@ -7,23 +7,9 @@ const markOr = input => Object.defineProperty(input, OR, { value: true, writable
 const isOr = input => (input[OR] === true);
 module.exports.isOr = isOr;
 
-module.exports.parse = (input) => {
-  if (input === "") {
-    return "";
-  }
+const Result = () => {
+  let cResult = markOr([]);
 
-  // setup
-  const result = [];
-
-  let cResult = result;
-  let inArray = false;
-  let escaped = false;
-
-  const inputLength = input.length;
-  let start = 0;
-  let charPrev = null;
-
-  // group related logic
   const newChild = (asOr) => {
     const child = setParent(asOr ? markOr([]) : [], cResult);
     cResult.push(child);
@@ -38,8 +24,45 @@ module.exports.parse = (input) => {
     cResult = getParent(cResult);
   };
 
-  markOr(result);
   newChild(false);
+
+  return {
+    add: input => cResult.push(input),
+    getParent: () => getParent(cResult),
+    getGrandParent: () => getParent(getParent(cResult)),
+    startGroup: () => {
+      newChild(true);
+      newChild(false);
+    },
+    newGroupElement: () => {
+      finishChild();
+      newChild(false);
+    },
+    finishGroup: () => {
+      finishChild();
+      finishChild();
+    },
+    finalize: () => {
+      finishChild();
+    },
+    getFinalResult: () => (cResult.length === 1 ? cResult[0] : cResult)
+  };
+};
+
+module.exports.parse = (input) => {
+  if (input === "") {
+    return "";
+  }
+
+  // setup
+  const result = Result();
+
+  let inArray = false;
+  let escaped = false;
+
+  const inputLength = input.length;
+  let start = 0;
+  let charPrev = null;
 
   // generification
   const throwError = (msg, context = {}) => {
@@ -53,7 +76,7 @@ module.exports.parse = (input) => {
       if (inArray && !/^[*\d]+$/g.test(segment)) {
         throwError("Bad Array Selector", { selector: segment });
       }
-      cResult.push(inArray ? `[${segment}]` : segment);
+      result.add(inArray ? `[${segment}]` : segment);
     }
     start = idx + 1;
   };
@@ -74,8 +97,7 @@ module.exports.parse = (input) => {
             throwError("Bad Group Separator", { char: idx });
           }
           finalizeSegment(idx);
-          finishChild();
-          newChild(false);
+          result.newGroupElement();
           break;
         case "[":
           if (isInvalidTermination(idx, [null, "{", ",", "}"]) || inArray !== false) {
@@ -96,16 +118,14 @@ module.exports.parse = (input) => {
             throwError("Bad Group Start", { char: idx });
           }
           start = idx + 1;
-          newChild(true);
-          newChild(false);
+          result.startGroup();
           break;
         case "}":
-          if (isInvalidTermination(idx, ["]", "}"]) || getParent(cResult) === result) {
+          if (isInvalidTermination(idx, ["]", "}"]) || result.getGrandParent() === null) {
             throwError("Bad Group Terminator", { char: idx });
           }
           finalizeSegment(idx);
-          finishChild();
-          finishChild();
+          result.finishGroup();
           break;
         default:
           break;
@@ -115,12 +135,12 @@ module.exports.parse = (input) => {
     charPrev = char;
   }
   finalizeSegment(inputLength);
-  finishChild();
-  if (getParent(cResult) !== null) {
+  result.finalize();
+  if (result.getParent() !== null) {
     throwError("Non Terminated Group");
   }
   if (inArray !== false) {
     throwError("Non Terminated Array");
   }
-  return result.length === 1 ? result[0] : result;
+  return result.getFinalResult();
 };
