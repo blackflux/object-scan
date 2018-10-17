@@ -17,14 +17,20 @@ const Result = (input) => {
   let inArray = false;
   let cursor = 0;
 
-  // segment related
-  const finalizeSegment = (idx) => {
-    const segment = input.slice(cursor, idx);
+  const finishElement = (idx, { msg, finishedOk, finishedRequired = false }) => {
+    const isFinished = cursor === idx;
+    if (finishedRequired && !isFinished) {
+      throwError(msg, { char: idx });
+    }
+    if (isFinished && !finishedOk) {
+      throwError(msg, { char: idx });
+    }
+    const ele = input.slice(cursor, idx);
     if (cursor !== idx) {
-      if (inArray && !/^[*\d]+$/g.test(segment)) {
-        throwError("Bad Array Selector", { selector: segment });
+      if (inArray && !/^[*\d]+$/g.test(ele)) {
+        throwError("Bad Array Selector", { selector: ele });
       }
-      cResult.push(inArray ? `[${segment}]` : segment);
+      cResult.push(inArray ? `[${ele}]` : ele);
     }
     cursor = idx + 1;
   };
@@ -47,15 +53,13 @@ const Result = (input) => {
   newChild(false);
 
   return {
-    throwError,
-    getCursor: () => cursor,
     setInArray: (flag) => {
       if (inArray === flag) {
         throwError(inArray ? "Bad Array Start" : "Bad Array Terminator");
       }
       inArray = flag;
     },
-    finalizeSegment,
+    finishElement,
     startGroup: () => {
       newChild(true);
       newChild(false);
@@ -71,7 +75,7 @@ const Result = (input) => {
       finishChild();
       finishChild();
     },
-    finalize: () => {
+    finalizeResult: () => {
       finishChild();
       if (getParent(cResult) !== null) {
         throwError("Non Terminated Group");
@@ -96,12 +100,7 @@ module.exports.parse = (input) => {
   let charPrev = null;
   let escaped = false;
 
-  const throwError = result.throwError;
-  const finalizeSegment = result.finalizeSegment;
-  const isInvalidTermination = (idx, allowedTerminators) => (
-    result.getCursor() === idx
-    && !allowedTerminators.includes(charPrev)
-  );
+  const finishElement = result.finishElement;
 
   // parsing
   for (let idx = 0; idx < inputLength; idx += 1) {
@@ -109,44 +108,30 @@ module.exports.parse = (input) => {
     if (escaped === false) {
       switch (char) {
         case ".":
-          if (isInvalidTermination(idx, ["]", "}"])) {
-            throwError("Bad Path Separator", { char: idx });
-          }
-          finalizeSegment(idx);
+          finishElement(idx, { msg: "Bad Path Separator", finishedOk: ["]", "}"].includes(charPrev) });
           break;
         case ",":
-          if (isInvalidTermination(idx, ["]", "}"])) {
-            throwError("Bad Group Separator", { char: idx });
-          }
-          finalizeSegment(idx);
+          finishElement(idx, { msg: "Bad Group Separator", finishedOk: ["]", "}"].includes(charPrev) });
           result.newGroupElement();
           break;
         case "[":
-          if (isInvalidTermination(idx, [null, "{", ",", "}"])) {
-            throwError("Bad Array Start", { char: idx });
-          }
-          finalizeSegment(idx);
+          finishElement(idx, { msg: "Bad Array Start", finishedOk: [null, "{", ",", "}"].includes(charPrev) });
           result.setInArray(true);
           break;
         case "]":
-          if (isInvalidTermination(idx, ["}"])) {
-            throwError("Bad Array Terminator", { char: idx });
-          }
-          finalizeSegment(idx);
+          finishElement(idx, { msg: "Bad Array Terminator", finishedOk: ["}"].includes(charPrev) });
           result.setInArray(false);
           break;
         case "{":
-          if (isInvalidTermination(idx, [null, ".", "[", "{", ","]) || result.getCursor() !== idx) {
-            throwError("Bad Group Start", { char: idx });
-          }
-          finalizeSegment(idx);
+          finishElement(idx, {
+            msg: "Bad Group Start",
+            finishedOk: [null, ".", "[", "{", ","].includes(charPrev),
+            finishedRequired: true
+          });
           result.startGroup();
           break;
         case "}":
-          if (isInvalidTermination(idx, ["]", "}"])) {
-            throwError("Bad Group Terminator", { char: idx });
-          }
-          finalizeSegment(idx);
+          finishElement(idx, { msg: "Bad Group Terminator", finishedOk: ["]", "}"].includes(charPrev) });
           result.finishGroup();
           break;
         default:
@@ -156,9 +141,6 @@ module.exports.parse = (input) => {
     escaped = char === "\\" ? !escaped : false;
     charPrev = char;
   }
-  if (isInvalidTermination(inputLength, ["]", "}"])) {
-    throwError("Bad Terminator");
-  }
-  finalizeSegment(inputLength);
-  return result.finalize();
+  finishElement(inputLength, { msg: "Bad Terminator", finishedOk: ["]", "}"].includes(charPrev) });
+  return result.finalizeResult();
 };
