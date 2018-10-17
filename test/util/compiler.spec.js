@@ -28,6 +28,16 @@ describe("Testing compiler", () => {
     });
   });
 
+  it("Testing Nested Or in List", () => {
+    const input = ["[{1,{0,2}}]"];
+    const tower = compiler.compile(input);
+    expect(tower).to.deep.equal({
+      "[0]": {},
+      "[1]": {},
+      "[2]": {}
+    });
+  });
+
   it("Testing traversing", () => {
     const input = ["a.{b,c}.d", "a.{c,e}.f", "a.b.d.g"];
     const tower = compiler.compile(input);
