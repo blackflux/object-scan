@@ -2,7 +2,12 @@ const PARENT = Symbol("parent");
 const setParent = (input, parent) => Object.defineProperty(input, PARENT, { value: parent, writable: false });
 const getParent = input => (input[PARENT] === undefined ? null : input[PARENT]);
 
-module.exports = (input) => {
+const OR = Symbol("or");
+const markOr = input => Object.defineProperty(input, OR, { value: true, writable: false });
+const isOr = input => (input[OR] === true);
+module.exports.isOr = isOr;
+
+module.exports.parse = (input) => {
   if (input === "") {
     return [""];
   }
@@ -33,6 +38,24 @@ module.exports = (input) => {
     start = idx + 1;
   };
 
+  // group related logic
+  const toParent = () => {
+    cResult = getParent(cResult);
+  };
+  const newChild = (asOr) => {
+    const child = setParent(asOr ? markOr([]) : [], cResult);
+    cResult.push(child);
+    cResult = child;
+  };
+  const finishChild = () => {
+    if (cResult.length === 1) {
+      const parent = getParent(cResult);
+      parent.splice(-1, 1);
+      parent.push(cResult[0]);
+    }
+    toParent();
+  };
+
   for (let idx = 0; idx < inputLength; idx += 1) {
     const char = input[idx];
     if (escaped === false) {
@@ -48,6 +71,8 @@ module.exports = (input) => {
             throwError("Bad Group Separator", { char: idx });
           }
           finalizeSegment(idx);
+          finishChild();
+          newChild(false);
           break;
         case "[":
           if (isInvalidTermination(idx, [null, "{", ","]) || inArray !== false) {
@@ -68,15 +93,16 @@ module.exports = (input) => {
             throwError("Bad Group Start", { char: idx });
           }
           start = idx + 1;
-          cResult.push(setParent([], cResult));
-          cResult = cResult[cResult.length - 1];
+          newChild(true);
+          newChild(false);
           break;
         case "}":
           if (isInvalidTermination(idx, ["]", "}"]) || getParent(cResult) === null) {
             throwError("Bad Group Terminator", { char: idx });
           }
           finalizeSegment(idx);
-          cResult = getParent(cResult);
+          finishChild();
+          toParent();
           break;
         default:
           break;
