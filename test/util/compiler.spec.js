@@ -43,26 +43,25 @@ describe("Testing compiler", () => {
     const tower = compiler.compile(input);
     expect(tower).to.deep.equal({
       a: {
-        "[1]":
-          {
-            hello: {
-              you: {
-                "[1]": {}
-              }
-            },
-            there: {
-              "[1]": {
-                "*": {
-                  "[1]": {}
-                }
-              }
-            },
-            a: {
-              b: {
+        "[1]": {
+          hello: {
+            you: {
+              "[1]": {}
+            }
+          },
+          there: {
+            "[1]": {
+              "*": {
                 "[1]": {}
               }
             }
+          },
+          a: {
+            b: {
+              "[1]": {}
+            }
           }
+        }
       }
     });
   });
