@@ -9,12 +9,12 @@ const markOr = input => Object.defineProperty(input, OR, { value: true, writable
 const isOr = input => (input[OR] === true);
 module.exports.isOr = isOr;
 
-const Result = (input) => {
-  const throwError = (msg, context = {}) => {
-    throw new Error(Object.entries(context)
-      .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
-  };
+const throwError = (msg, input, context = {}) => {
+  throw new Error(Object.entries(context)
+    .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
+};
 
+const Result = (input) => {
   let cResult = markOr([]);
   let inArray = false;
   let cursor = 0;
@@ -45,22 +45,22 @@ const Result = (input) => {
   return {
     setInArray: (flag, idx) => {
       if (inArray === flag) {
-        throwError(inArray ? "Bad Array Start" : "Bad Array Terminator", { char: idx });
+        throwError(inArray ? "Bad Array Start" : "Bad Array Terminator", input, { char: idx });
       }
       inArray = flag;
     },
     finishElement: (idx, { err, fins, finishedReq = false }) => {
       const isFinished = cursor === idx;
       if (finishedReq && !isFinished) {
-        throwError(err, { char: idx });
+        throwError(err, input, { char: idx });
       }
       if (isFinished && !fins.includes(input[idx - 1] || null)) {
-        throwError(err, { char: idx });
+        throwError(err, input, { char: idx });
       }
       const ele = input.slice(cursor, idx);
       if (cursor !== idx) {
         if (inArray && !/^[*\d]+$/g.test(ele)) {
-          throwError("Bad Array Selector", { selector: ele });
+          throwError("Bad Array Selector", input, { selector: ele });
         }
         cResult.push(inArray ? `[${ele}]` : ele);
       }
@@ -76,7 +76,7 @@ const Result = (input) => {
     },
     finishGroup: (idx) => {
       if (getParent(getParent(cResult)) === null) {
-        throwError("Unexpected Group Terminator", { char: idx });
+        throwError("Unexpected Group Terminator", input, { char: idx });
       }
       finishChild();
       finishChild();
@@ -84,10 +84,10 @@ const Result = (input) => {
     finalizeResult: () => {
       finishChild();
       if (getParent(cResult) !== null) {
-        throwError("Non Terminated Group");
+        throwError("Non Terminated Group", input);
       }
       if (inArray) {
-        throwError("Non Terminated Array");
+        throwError("Non Terminated Array", input);
       }
       return cResult.length === 1 ? cResult[0] : cResult;
     }
