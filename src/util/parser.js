@@ -12,6 +12,7 @@ module.exports.parse = (input) => {
     return "";
   }
 
+  // setup
   const result = [];
 
   let cResult = result;
@@ -21,22 +22,6 @@ module.exports.parse = (input) => {
   const inputLength = input.length;
   let start = 0;
   let charPrev = null;
-
-  const throwError = (msg, context = {}) => {
-    throw new Error(Object.entries(context)
-      .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
-  };
-  const isInvalidTermination = (idx, allowedTerminators) => (start === idx && !allowedTerminators.includes(charPrev));
-  const finalizeSegment = (idx) => {
-    const segment = input.slice(start, idx);
-    if (start !== idx) {
-      if (inArray && !/^[*\d]+$/g.test(segment)) {
-        throwError("Bad List Selector", { selector: segment });
-      }
-      cResult.push(inArray ? `[${segment}]` : segment);
-    }
-    start = idx + 1;
-  };
 
   // group related logic
   const newChild = (asOr) => {
@@ -56,6 +41,24 @@ module.exports.parse = (input) => {
   markOr(result);
   newChild(false);
 
+  // generification
+  const throwError = (msg, context = {}) => {
+    throw new Error(Object.entries(context)
+      .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
+  };
+  const isInvalidTermination = (idx, allowedTerminators) => (start === idx && !allowedTerminators.includes(charPrev));
+  const finalizeSegment = (idx) => {
+    const segment = input.slice(start, idx);
+    if (start !== idx) {
+      if (inArray && !/^[*\d]+$/g.test(segment)) {
+        throwError("Bad List Selector", { selector: segment });
+      }
+      cResult.push(inArray ? `[${segment}]` : segment);
+    }
+    start = idx + 1;
+  };
+
+  // parsing
   for (let idx = 0; idx < inputLength; idx += 1) {
     const char = input[idx];
     if (escaped === false) {
