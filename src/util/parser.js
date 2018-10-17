@@ -99,23 +99,16 @@ module.exports.parse = (input) => {
     return "";
   }
 
-  // setup
   const result = Result(input);
-
   const inputLength = input.length;
   let escaped = false;
 
-  // parsing
   for (let idx = 0; idx < inputLength; idx += 1) {
     const char = input[idx];
     if (escaped === false) {
       switch (char) {
         case ".":
           result.finishElement(idx, { err: "Bad Path Separator", fins: ["]", "}"] });
-          break;
-        case ",":
-          result.finishElement(idx, { err: "Bad Group Separator", fins: ["]", "}"] });
-          result.newGroupElement();
           break;
         case "[":
           result.finishElement(idx, { err: "Bad Array Start", fins: [null, "{", ",", "}"] });
@@ -129,6 +122,10 @@ module.exports.parse = (input) => {
           result.finishElement(idx, { err: "Bad Group Start", fins: [null, ".", "[", "{", ","], finishedReq: true });
           result.startGroup();
           break;
+        case ",":
+          result.finishElement(idx, { err: "Bad Group Separator", fins: ["]", "}"] });
+          result.newGroupElement();
+          break;
         case "}":
           result.finishElement(idx, { err: "Bad Group Terminator", fins: ["]", "}"] });
           result.finishGroup(idx);
@@ -139,6 +136,7 @@ module.exports.parse = (input) => {
     }
     escaped = char === "\\" ? !escaped : false;
   }
+
   result.finishElement(inputLength, { err: "Bad Terminator", fins: ["]", "}"] });
   return result.finalizeResult();
 };
