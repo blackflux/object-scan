@@ -38,6 +38,35 @@ describe("Testing compiler", () => {
     });
   });
 
+  it("Testing Complex Path", () => {
+    const input = ["a[1].{hello.you,there[1].*,{a.b}}[{1}]"];
+    const tower = compiler.compile(input);
+    expect(tower).to.deep.equal({
+      a: {
+        "[1]":
+          {
+            hello: {
+              you: {
+                "[1]": {}
+              }
+            },
+            there: {
+              "[1]": {
+                "*": {
+                  "[1]": {}
+                }
+              }
+            },
+            a: {
+              b: {
+                "[1]": {}
+              }
+            }
+          }
+      }
+    });
+  });
+
   it("Testing traversing", () => {
     const input = ["a.{b,c}.d", "a.{c,e}.f", "a.b.d.g"];
     const tower = compiler.compile(input);
