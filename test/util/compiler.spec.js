@@ -7,6 +7,27 @@ describe("Testing compiler", () => {
     expect(() => compiler.compile(input)).to.throw(`Redundant Needle Target: "{a,b}" vs "a"`);
   });
 
+  it("Testing Or Paths", () => {
+    const input = ["{a,b.c}"];
+    const tower = compiler.compile(input);
+    expect(tower).to.deep.equal({
+      a: {},
+      b: {
+        c: {}
+      }
+    });
+  });
+
+  it("Testing Nested Or", () => {
+    const input = ["{a,{b,c}}"];
+    const tower = compiler.compile(input);
+    expect(tower).to.deep.equal({
+      a: {},
+      b: {},
+      c: {}
+    });
+  });
+
   it("Testing traversing", () => {
     const input = ["a.{b,c}.d", "a.{c,e}.f", "a.b.d.g"];
     const tower = compiler.compile(input);
