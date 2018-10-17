@@ -75,7 +75,7 @@ module.exports.parse = (input) => {
           newChild(false);
           break;
         case "[":
-          if (isInvalidTermination(idx, [null, "{", ","]) || inArray !== false) {
+          if (isInvalidTermination(idx, [null, "{", ",", "}"]) || inArray !== false) {
             throwError("Bad List Start", { char: idx });
           }
           finalizeSegment(idx);

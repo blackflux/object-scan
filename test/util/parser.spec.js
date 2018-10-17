@@ -62,6 +62,10 @@ describe("Testing Parser", () => {
     it("Testing List in Path", () => {
       expect(parse("a.*.c[0]")).to.deep.equal(["a", "*", "c", "[0]"]);
     });
+
+    it("Testing List After Or", () => {
+      expect(parse("{a,b}[0]")).to.deep.equal([['a', 'b'], '[0]']);
+    });
   });
 
   describe("Testing Escaping", () => {
