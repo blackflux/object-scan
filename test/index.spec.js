@@ -191,19 +191,19 @@ describe("Testing Find", () => {
     it("Testing empty needle only matches on top level", () => {
       const find = objectScan(["", "**"], {
         useArraySelector: false,
-        excludeFn: (key, value, { needle }) => needle !== ""
+        filterFn: (key, value, { needle }) => needle === ""
       });
       expect(find(arrayInput)).to.deep.equal(["[0]", "[1]"]);
     });
   });
 
   it("Testing null value", () => {
-    const find = objectScan(["**"], { excludeFn: (key, value) => value !== null });
+    const find = objectScan(["**"], { filterFn: (key, value) => value === null });
     expect(find({ key: null })).to.deep.equal(["key"]);
   });
 
   it("Testing undefined value", () => {
-    const find = objectScan(["**"], { excludeFn: (key, value) => value !== undefined });
+    const find = objectScan(["**"], { filterFn: (key, value) => value === undefined });
     expect(find({ key: undefined })).to.deep.equal(["key"]);
   });
 
@@ -498,7 +498,7 @@ describe("Testing Find", () => {
 
   it("Testing Filter Function", () => {
     const find = objectScan(["**"], {
-      excludeFn: (key, value) => typeof value !== "string" || value !== "a"
+      filterFn: (key, value) => typeof value === "string" && value === "a"
     });
     expect(find(haystack)).to.deep.equal([
       "simple",
@@ -610,7 +610,7 @@ describe("Testing Find", () => {
     expect(objectScan(["**"])(input)).to
       .deep.equal(["a", "a.b", "a.b.c", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]);
     expect(objectScan(["**.f"])(input)).to.deep.equal(["a.e.f"]);
-    expect(objectScan(["**"], { excludeFn: (key, value) => typeof value !== "string" })(input)).to
+    expect(objectScan(["**"], { filterFn: (key, value) => typeof value === "string" })(input)).to
       .deep.equal(["a.b.c", "a.e.f", "a.h[0]", "a.h[1]", "k"]);
     expect(objectScan(["**"], { breakFn: key => key === "a.b" })(input)).to
       .deep.equal(["a", "a.b", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]);
