@@ -1,33 +1,29 @@
-const OR = Symbol("or");
-const markOr = input => Object.defineProperty(input, OR, { value: true, writable: false });
-const isOr = input => (input[OR] === true);
-module.exports.isOr = isOr;
-
 const throwError = (msg, input, context = {}) => {
   throw new Error(Object.entries(context)
     .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
 };
 
-const Result = (input) => {
-  const parentStack = [];
+const getSimple = (arrOrSet) => {
+  if (Array.isArray(arrOrSet)) {
+    return arrOrSet.length === 1 ? arrOrSet[0] : arrOrSet;
+  }
+  return arrOrSet.size === 1 ? arrOrSet.values().next().value : arrOrSet;
+};
 
-  let cResult = markOr([]);
+const Result = (input) => {
+  let cResult = new Set();
   let inArray = false;
   let cursor = 0;
 
   // group related
+  const parentStack = [];
   const newChild = (asOr) => {
-    const child = asOr ? markOr([]) : [];
     parentStack.push(cResult);
-    cResult.push(child);
-    cResult = child;
+    cResult = asOr ? new Set() : [];
   };
   const finishChild = () => {
     const parent = parentStack.pop();
-    if (cResult.length === 1) {
-      parent.splice(-1, 1);
-      parent.push(cResult[0]);
-    }
+    parent[Array.isArray(parent) ? "push" : "add"](getSimple(cResult));
     cResult = parent;
   };
 
@@ -42,14 +38,14 @@ const Result = (input) => {
     },
     finishElement: (idx, { err, fins, finishedReq = false }) => {
       const isFinished = cursor === idx;
-      if (finishedReq && !isFinished) {
-        throwError(err, input, { char: idx });
-      }
       if (isFinished && !fins.includes(input[idx - 1] || null)) {
         throwError(err, input, { char: idx });
       }
-      const ele = input.slice(cursor, idx);
-      if (cursor !== idx) {
+      if (!isFinished) {
+        if (finishedReq) {
+          throwError(err, input, { char: idx });
+        }
+        const ele = input.slice(cursor, idx);
         if (inArray && !/^[*\d]+$/g.test(ele)) {
           throwError("Bad Array Selector", input, { selector: ele });
         }
@@ -80,12 +76,12 @@ const Result = (input) => {
       if (inArray) {
         throwError("Non Terminated Array", input);
       }
-      return cResult.length === 1 ? cResult[0] : cResult;
+      return getSimple(cResult);
     }
   };
 };
 
-module.exports.parse = (input) => {
+module.exports = (input) => {
   if (input === "") {
     return "";
   }
