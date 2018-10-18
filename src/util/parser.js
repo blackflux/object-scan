@@ -18,16 +18,11 @@ const Result = (input) => {
   // group related
   const newChild = (asOr) => {
     parentStack.push(cResult);
-    const child = asOr ? markOr([]) : [];
-    cResult.push(child);
-    cResult = child;
+    cResult = asOr ? markOr([]) : [];
   };
   const finishChild = () => {
     const parent = parentStack.pop();
-    if (cResult.length === 1) {
-      parent.splice(-1, 1);
-      parent.push(cResult[0]);
-    }
+    parent.push(cResult.length === 1 ? cResult[0] : cResult);
     cResult = parent;
   };
 
