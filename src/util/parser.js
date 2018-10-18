@@ -9,13 +9,12 @@ const throwError = (msg, input, context = {}) => {
 };
 
 const Result = (input) => {
-  const parentStack = [];
-
   let cResult = markOr([]);
   let inArray = false;
   let cursor = 0;
 
   // group related
+  const parentStack = [];
   const newChild = (asOr) => {
     parentStack.push(cResult);
     cResult = asOr ? markOr([]) : [];
