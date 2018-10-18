@@ -1,15 +1,34 @@
-const OR = Symbol("or");
-const markOr = input => Object.defineProperty(input, OR, { value: true, writable: false });
-const isOr = input => (input[OR] === true);
-module.exports.isOr = isOr;
-
 const throwError = (msg, input, context = {}) => {
   throw new Error(Object.entries(context)
     .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
 };
 
+class CSet extends Set {
+  push(e) {
+    this.add(e);
+  }
+
+  first() {
+    return this.values().next().value;
+  }
+
+  len() {
+    return this.size;
+  }
+}
+
+class CArray extends Array {
+  first() {
+    return this[0];
+  }
+
+  len() {
+    return this.length;
+  }
+}
+
 const Result = (input) => {
-  let cResult = markOr([]);
+  let cResult = new CSet();
   let inArray = false;
   let cursor = 0;
 
@@ -17,11 +36,11 @@ const Result = (input) => {
   const parentStack = [];
   const newChild = (asOr) => {
     parentStack.push(cResult);
-    cResult = asOr ? markOr([]) : [];
+    cResult = asOr ? new CSet() : new CArray();
   };
   const finishChild = () => {
     const parent = parentStack.pop();
-    parent.push(cResult.length === 1 ? cResult[0] : cResult);
+    parent.push(cResult.len() === 1 ? cResult.first() : cResult);
     cResult = parent;
   };
 
@@ -74,12 +93,12 @@ const Result = (input) => {
       if (inArray) {
         throwError("Non Terminated Array", input);
       }
-      return cResult.length === 1 ? cResult[0] : cResult;
+      return cResult.len() === 1 ? cResult.first() : cResult;
     }
   };
 };
 
-module.exports.parse = (input) => {
+module.exports = (input) => {
   if (input === "") {
     return "";
   }

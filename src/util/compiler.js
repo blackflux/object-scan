@@ -1,5 +1,5 @@
 /* compile needles to hierarchical map object */
-const { parse, isOr } = require("./parser");
+const parser = require("./parser");
 
 const IS_MATCH = Symbol("isMatch");
 const markMatch = input => Object.defineProperty(input, IS_MATCH, { value: true, writable: false });
@@ -51,11 +51,11 @@ const buildRecursive = (tower, path, needle) => {
     return;
   }
   if (Array.isArray(path[0])) {
-    if (isOr(path[0])) {
-      path[0].forEach(c => buildRecursive(tower, [c, ...path.slice(1)], needle));
-    } else {
-      buildRecursive(tower, [...path[0], ...path.slice(1)], needle);
-    }
+    buildRecursive(tower, [...path[0], ...path.slice(1)], needle);
+    return;
+  }
+  if (path[0] instanceof Set) {
+    path[0].forEach(c => buildRecursive(tower, [c, ...path.slice(1)], needle));
     return;
   }
   if (tower[path[0]] === undefined) {
@@ -67,6 +67,6 @@ const buildRecursive = (tower, path, needle) => {
 
 module.exports.compile = (needles) => {
   const tower = {};
-  needles.forEach(needle => buildRecursive(tower, [parse(needle)], needle));
+  needles.forEach(needle => buildRecursive(tower, [parser(needle)], needle));
   return tower;
 };
