@@ -17,8 +17,8 @@ const Result = (input) => {
 
   // group related
   const newChild = (asOr) => {
-    const child = asOr ? markOr([]) : [];
     parentStack.push(cResult);
+    const child = asOr ? markOr([]) : [];
     cResult.push(child);
     cResult = child;
   };
