@@ -42,14 +42,14 @@ const Result = (input) => {
     },
     finishElement: (idx, { err, fins, finishedReq = false }) => {
       const isFinished = cursor === idx;
-      if (finishedReq && !isFinished) {
-        throwError(err, input, { char: idx });
-      }
       if (isFinished && !fins.includes(input[idx - 1] || null)) {
         throwError(err, input, { char: idx });
       }
-      const ele = input.slice(cursor, idx);
-      if (cursor !== idx) {
+      if (!isFinished) {
+        if (finishedReq) {
+          throwError(err, input, { char: idx });
+        }
+        const ele = input.slice(cursor, idx);
         if (inArray && !/^[*\d]+$/g.test(ele)) {
           throwError("Bad Array Selector", input, { selector: ele });
         }
