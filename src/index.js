@@ -37,8 +37,8 @@ const find = (haystack, search, pathIn, parents, ctx) => {
 
   if (compiler.isMatch(search)) {
     if (
-      ctx.excludeFn === undefined
-      || ctx.excludeFn(formatPath(pathIn, ctx), haystack, Object.assign(compiler.getMeta(search), { parents })) !== true
+      ctx.filterFn === undefined
+      || ctx.filterFn(formatPath(pathIn, ctx), haystack, Object.assign(compiler.getMeta(search), { parents })) !== false
     ) {
       if (ctx.callbackFn !== undefined) {
         ctx.callbackFn(formatPath(pathIn, ctx), haystack, Object.assign(compiler.getMeta(search), { parents }));
@@ -69,7 +69,7 @@ const find = (haystack, search, pathIn, parents, ctx) => {
 };
 
 module.exports = (needles, {
-  excludeFn = undefined,
+  filterFn = undefined,
   breakFn = undefined,
   callbackFn = undefined,
   arrayCallbackFn = undefined,
@@ -79,7 +79,7 @@ module.exports = (needles, {
 } = {}) => {
   const search = compiler.compile(new Set(needles)); // keep separate for performance
   return haystack => [...new Set(find(haystack, search, [], [], {
-    excludeFn,
+    filterFn,
     breakFn,
     callbackFn,
     arrayCallbackFn,
