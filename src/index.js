@@ -24,6 +24,11 @@ const find = (haystack, search, pathIn, parents, ctx) => {
     for (let i = 0; i < haystack.length; i += 1) {
       result.push(...find(haystack[i], search, pathIn.concat(i), parents, ctx));
     }
+    if (compiler.isMatch(search)) {
+      if (ctx.arrayCallbackFn !== undefined) {
+        ctx.arrayCallbackFn(formatPath(pathIn, ctx), haystack, Object.assign(compiler.getMeta(search), { parents }));
+      }
+    }
     return result;
   }
   if (search[""] !== undefined && parents.length === 0) {
@@ -67,6 +72,7 @@ module.exports = (needles, {
   excludeFn = undefined,
   breakFn = undefined,
   callbackFn = undefined,
+  arrayCallbackFn = undefined,
   joined = true,
   escapePaths = true,
   useArraySelector = true
@@ -76,6 +82,7 @@ module.exports = (needles, {
     excludeFn,
     breakFn,
     callbackFn,
+    arrayCallbackFn,
     joined,
     escapePaths,
     useArraySelector
