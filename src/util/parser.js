@@ -1,9 +1,3 @@
-const assert = require("assert");
-
-const PARENT = Symbol("parent");
-const setParent = (input, parent) => Object.defineProperty(input, PARENT, { value: parent, writable: true });
-const getParent = input => (input[PARENT] === undefined ? null : input[PARENT]);
-
 const OR = Symbol("or");
 const markOr = input => Object.defineProperty(input, OR, { value: true, writable: false });
 const isOr = input => (input[OR] === true);
@@ -15,29 +9,26 @@ const throwError = (msg, input, context = {}) => {
 };
 
 const Result = (input) => {
+  const parentStack = [];
+
   let cResult = markOr([]);
   let inArray = false;
   let cursor = 0;
 
   // group related
   const newChild = (asOr) => {
-    const child = setParent(asOr ? markOr([]) : [], cResult);
+    const child = asOr ? markOr([]) : [];
+    parentStack.push(cResult);
     cResult.push(child);
     cResult = child;
   };
   const finishChild = () => {
+    const parent = parentStack.pop();
     if (cResult.length === 1) {
-      const parent = getParent(cResult);
       parent.splice(-1, 1);
       parent.push(cResult[0]);
-      // update parent as required
-      const hasParent = getParent(cResult[0]) !== null;
-      assert(hasParent === (typeof cResult[0] === "object"));
-      if (hasParent) {
-        setParent(cResult[0], parent);
-      }
     }
-    cResult = getParent(cResult);
+    cResult = parent;
   };
 
   newChild(false);
@@ -75,7 +66,7 @@ const Result = (input) => {
       newChild(false);
     },
     finishGroup: (idx) => {
-      if (getParent(getParent(cResult)) === null) {
+      if (parentStack.length < 2) {
         throwError("Unexpected Group Terminator", input, { char: idx });
       }
       finishChild();
@@ -83,7 +74,7 @@ const Result = (input) => {
     },
     finalizeResult: () => {
       finishChild();
-      if (getParent(cResult) !== null) {
+      if (parentStack.length !== 0) {
         throwError("Non Terminated Group", input);
       }
       if (inArray) {
