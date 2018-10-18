@@ -3,32 +3,15 @@ const throwError = (msg, input, context = {}) => {
     .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
 };
 
-class CSet extends Set {
-  push(e) {
-    this.add(e);
+const getSimple = (input) => {
+  if (Array.isArray(input)) {
+    return input.length === 1 ? input[0] : input;
   }
-
-  first() {
-    return this.values().next().value;
-  }
-
-  len() {
-    return this.size;
-  }
-}
-
-class CArray extends Array {
-  first() {
-    return this[0];
-  }
-
-  len() {
-    return this.length;
-  }
-}
+  return input.size === 1 ? input.values().next().value : input;
+};
 
 const Result = (input) => {
-  let cResult = new CSet();
+  let cResult = new Set();
   let inArray = false;
   let cursor = 0;
 
@@ -36,11 +19,11 @@ const Result = (input) => {
   const parentStack = [];
   const newChild = (asOr) => {
     parentStack.push(cResult);
-    cResult = asOr ? new CSet() : new CArray();
+    cResult = asOr ? new Set() : [];
   };
   const finishChild = () => {
     const parent = parentStack.pop();
-    parent.push(cResult.len() === 1 ? cResult.first() : cResult);
+    parent[Array.isArray(parent) ? "push" : "add"](getSimple(cResult));
     cResult = parent;
   };
 
@@ -93,7 +76,7 @@ const Result = (input) => {
       if (inArray) {
         throwError("Non Terminated Array", input);
       }
-      return cResult.len() === 1 ? cResult.first() : cResult;
+      return getSimple(cResult);
     }
   };
 };
