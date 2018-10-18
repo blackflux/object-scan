@@ -1,23 +1,25 @@
 const assert = require("assert");
 const expect = require('chai').expect;
-const { parse, isOr } = require("./../../src/util/parser");
+const parser = require("./../../src/util/parser");
 
 const asString = (() => {
   const asStringRec = (input) => {
     if (Array.isArray(input)) {
-      const isOrArray = isOr(input);
-      return `${isOrArray ? "{" : "["}${input.map(e => asStringRec(e)).join(",")}${isOrArray ? "}" : "]"}`;
+      return `[${input.map(e => asStringRec(e)).join(",")}]`;
+    }
+    if (input instanceof Set) {
+      return `{${[...input].map(e => asStringRec(e)).join(",")}}`;
     }
     assert(typeof input === "string");
     return `"${input}"`;
   };
-  return input => asStringRec(parse(input));
+  return input => asStringRec(parser(input));
 })();
 
 const checkError = (input, msg) => {
   let err;
   try {
-    parse(input);
+    parser(input);
   } catch (e) {
     err = e;
   }
@@ -42,58 +44,58 @@ describe("Testing Parser", () => {
 
   describe("Testing Simple Use Cases", () => {
     it("Testing Empty", () => {
-      expect(parse("")).to.deep.equal("");
+      expect(parser("")).to.deep.equal("");
     });
 
     it("Testing Simple", () => {
-      expect(parse("a")).to.deep.equal("a");
+      expect(parser("a")).to.deep.equal("a");
     });
 
     it("Testing Path", () => {
-      expect(parse("a.b")).to.deep.equal(["a", "b"]);
+      expect(parser("a.b")).to.deep.equal(["a", "b"]);
     });
 
     it("Testing Array", () => {
-      expect(parse("a[0]")).to.deep.equal(["a", "[0]"]);
+      expect(parser("a[0]")).to.deep.equal(["a", "[0]"]);
     });
 
     it("Testing Or", () => {
-      expect(parse("{a,b}")).to.deep.equal(["a", "b"]);
+      expect(parser("{a,b}")).to.deep.equal(new Set(["a", "b"]));
     });
 
     it("Testing Comma Outside Group", () => {
-      expect(parse("a,b")).to.deep.equal(["a", "b"]);
-      expect(parse("a.b,c.d")).to.deep.equal([["a", "b"], ["c", "d"]]);
+      expect(parser("a,b")).to.deep.equal(new Set(["a", "b"]));
+      expect(parser("a.b,c.d")).to.deep.equal(new Set([["a", "b"], ["c", "d"]]));
     });
 
     it("Testing Or In Array", () => {
-      expect(parse("[{0,1}]")).to.deep.equal(["[0]", "[1]"]);
+      expect(parser("[{0,1}]")).to.deep.equal(new Set(["[0]", "[1]"]));
     });
 
     it("Testing Array In Or", () => {
-      expect(parse("{[0],[1]}")).to.deep.equal(["[0]", "[1]"]);
+      expect(parser("{[0],[1]}")).to.deep.equal(new Set(["[0]", "[1]"]));
     });
 
     it("Testing Array in Path", () => {
-      expect(parse("a.*.c[0]")).to.deep.equal(["a", "*", "c", "[0]"]);
+      expect(parser("a.*.c[0]")).to.deep.equal(["a", "*", "c", "[0]"]);
     });
 
     it("Testing Array After Or", () => {
-      expect(parse("{a,b}[0]")).to.deep.equal([['a', 'b'], '[0]']);
+      expect(parser("{a,b}[0]")).to.deep.equal([new Set(['a', 'b']), '[0]']);
     });
   });
 
   describe("Testing Escaping", () => {
     it("Testing Path Escaped", () => {
-      expect(parse("a\\.b")).to.deep.equal("a\\.b");
+      expect(parser("a\\.b")).to.deep.equal("a\\.b");
     });
 
     it("Testing Or Escaped", () => {
-      expect(parse("{a\\,b}")).to.deep.equal("a\\,b");
+      expect(parser("{a\\,b}")).to.deep.equal("a\\,b");
     });
 
     it("Testing Escaped final Dot", () => {
-      expect(parse("a.\\.")).to.deep.equal(["a", "\\."]);
+      expect(parser("a.\\.")).to.deep.equal(["a", "\\."]);
     });
   });
 
