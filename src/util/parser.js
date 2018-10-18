@@ -1,5 +1,3 @@
-const assert = require("assert");
-
 const OR = Symbol("or");
 const markOr = input => Object.defineProperty(input, OR, { value: true, writable: false });
 const isOr = input => (input[OR] === true);
@@ -11,7 +9,7 @@ const throwError = (msg, input, context = {}) => {
 };
 
 const Result = (input) => {
-  const parentLookup = new Map();
+  const parentStack = [];
 
   let cResult = markOr([]);
   let inArray = false;
@@ -20,19 +18,15 @@ const Result = (input) => {
   // group related
   const newChild = (asOr) => {
     const child = asOr ? markOr([]) : [];
-    parentLookup.set(child, cResult);
+    parentStack.push(cResult);
     cResult.push(child);
     cResult = child;
   };
   const finishChild = () => {
-    const parent = parentLookup.get(cResult);
+    const parent = parentStack.pop();
     if (cResult.length === 1) {
       parent.splice(-1, 1);
       parent.push(cResult[0]);
-      assert(parentLookup.has(cResult[0]));
-      parentLookup.set(cResult[0], parent);
-      const removed = parentLookup.delete(cResult);
-      assert(removed === true);
     }
     cResult = parent;
   };
@@ -60,7 +54,6 @@ const Result = (input) => {
           throwError("Bad Array Selector", input, { selector: ele });
         }
         cResult.push(inArray ? `[${ele}]` : ele);
-        parentLookup.set(cResult[cResult.length - 1], cResult);
       }
       cursor = idx + 1;
     },
@@ -73,7 +66,7 @@ const Result = (input) => {
       newChild(false);
     },
     finishGroup: (idx) => {
-      if (!parentLookup.has(parentLookup.get(cResult))) {
+      if (parentStack.length < 2) {
         throwError("Unexpected Group Terminator", input, { char: idx });
       }
       finishChild();
@@ -81,13 +74,12 @@ const Result = (input) => {
     },
     finalizeResult: () => {
       finishChild();
-      if (parentLookup.has(cResult)) {
+      if (parentStack.length !== 0) {
         throwError("Non Terminated Group", input);
       }
       if (inArray) {
         throwError("Non Terminated Array", input);
       }
-      parentLookup.clear();
       return cResult.length === 1 ? cResult[0] : cResult;
     }
   };
