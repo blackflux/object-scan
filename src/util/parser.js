@@ -1,9 +1,5 @@
 const assert = require("assert");
 
-const PARENT = Symbol("parent");
-const setParent = (input, parent) => Object.defineProperty(input, PARENT, { value: parent, writable: true });
-const getParent = input => (input[PARENT] === undefined ? null : input[PARENT]);
-
 const OR = Symbol("or");
 const markOr = input => Object.defineProperty(input, OR, { value: true, writable: false });
 const isOr = input => (input[OR] === true);
@@ -15,29 +11,30 @@ const throwError = (msg, input, context = {}) => {
 };
 
 const Result = (input) => {
+  const parentLookup = new Map();
+
   let cResult = markOr([]);
   let inArray = false;
   let cursor = 0;
 
   // group related
   const newChild = (asOr) => {
-    const child = setParent(asOr ? markOr([]) : [], cResult);
+    const child = asOr ? markOr([]) : [];
+    parentLookup.set(child, cResult);
     cResult.push(child);
     cResult = child;
   };
   const finishChild = () => {
+    const parent = parentLookup.get(cResult);
     if (cResult.length === 1) {
-      const parent = getParent(cResult);
       parent.splice(-1, 1);
       parent.push(cResult[0]);
-      // update parent as required
-      const hasParent = getParent(cResult[0]) !== null;
-      assert(hasParent === (typeof cResult[0] === "object"));
-      if (hasParent) {
-        setParent(cResult[0], parent);
-      }
+      assert(parentLookup.has(cResult[0]));
+      parentLookup.set(cResult[0], parent);
+      const removed = parentLookup.delete(cResult);
+      assert(removed === true);
     }
-    cResult = getParent(cResult);
+    cResult = parent;
   };
 
   newChild(false);
@@ -63,6 +60,7 @@ const Result = (input) => {
           throwError("Bad Array Selector", input, { selector: ele });
         }
         cResult.push(inArray ? `[${ele}]` : ele);
+        parentLookup.set(cResult[cResult.length - 1], cResult);
       }
       cursor = idx + 1;
     },
@@ -75,7 +73,7 @@ const Result = (input) => {
       newChild(false);
     },
     finishGroup: (idx) => {
-      if (getParent(getParent(cResult)) === null) {
+      if (!parentLookup.has(parentLookup.get(cResult))) {
         throwError("Unexpected Group Terminator", input, { char: idx });
       }
       finishChild();
@@ -83,12 +81,13 @@ const Result = (input) => {
     },
     finalizeResult: () => {
       finishChild();
-      if (getParent(cResult) !== null) {
+      if (parentLookup.has(cResult)) {
         throwError("Non Terminated Group", input);
       }
       if (inArray) {
         throwError("Non Terminated Array", input);
       }
+      parentLookup.clear();
       return cResult.length === 1 ? cResult[0] : cResult;
     }
   };
