@@ -21,13 +21,13 @@ const formatPath = (input, ctx) => (ctx.joined ? input.reduce((p, c) => {
 const find = (haystack, search, pathIn, parents, ctx) => {
   const result = [];
   if (ctx.useArraySelector === false && Array.isArray(haystack)) {
-    for (let i = 0; i < haystack.length; i += 1) {
-      result.push(...find(haystack[i], search, pathIn.concat(i), parents, ctx));
-    }
     if (compiler.isMatch(search)) {
       if (ctx.arrayCallbackFn !== undefined) {
         ctx.arrayCallbackFn(formatPath(pathIn, ctx), haystack, Object.assign(compiler.getMeta(search), { parents }));
       }
+    }
+    for (let i = 0; i < haystack.length; i += 1) {
+      result.push(...find(haystack[i], search, pathIn.concat(i), parents, ctx));
     }
     return result;
   }
