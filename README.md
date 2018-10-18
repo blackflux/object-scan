@@ -49,13 +49,15 @@ Signature for all functions is `Fn(key, value, { parents, isMatch, needle, needl
 - `needle` is the needle that matches if `isMatch` is true, otherwise `null`.
 - `needles` are all needles that triggered the function call.
 
-#### excludeFn
+#### filterFn
 
 Type: `function`<br>
 Default: `undefined`
 
 Called for every intermittent result. 
-If function is defined and returns true, the entry is excluded from the final result. 
+If function is defined and returns false, the entry is excluded from the final result.
+
+This method is conceptually similar to [Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
 
 #### breakFn
 
@@ -154,7 +156,7 @@ objectScan(["**[*]"])(obj);
 // => ["a.h[0]", "a.h[1]"]
 
 // value function
-objectScan(["**"], { excludeFn: (key, value) => typeof value !== "string" })(obj);
+objectScan(["**"], { filterFn: (key, value) => typeof value === "string" })(obj);
 // => ["a.b.c", "a.e.f", "a.h[0]", "a.h[1]", "k"]
 objectScan(["**"], { breakFn: key => key === "a.b" })(obj);
 // => ["a", "a.b", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]
