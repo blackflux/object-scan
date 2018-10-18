@@ -3,11 +3,11 @@ const throwError = (msg, input, context = {}) => {
     .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
 };
 
-const getSimple = (input) => {
-  if (Array.isArray(input)) {
-    return input.length === 1 ? input[0] : input;
+const getSimple = (arrOrSet) => {
+  if (Array.isArray(arrOrSet)) {
+    return arrOrSet.length === 1 ? arrOrSet[0] : arrOrSet;
   }
-  return input.size === 1 ? input.values().next().value : input;
+  return arrOrSet.size === 1 ? arrOrSet.values().next().value : arrOrSet;
 };
 
 const Result = (input) => {
