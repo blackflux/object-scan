@@ -282,6 +282,51 @@ describe("Testing Find", () => {
     });
   });
 
+  describe("Testing arrayCallbackFn", () => {
+    const input = {
+      array: [{ id: 1 }, { id: 2 }]
+    };
+    const tester = (useArraySelector, needles) => {
+      const result = {
+        default: [],
+        array: []
+      };
+      objectScan(needles, {
+        useArraySelector,
+        callbackFn: (k, v) => {
+          result.default.push(k);
+        },
+        arrayCallbackFn: (k, v) => {
+          result.array.push(k);
+        }
+      })(input);
+      return result;
+    };
+
+    it("Testing arrayCallbackFn with useArraySelector == true", () => {
+      expect(tester(true, ["array"])).to.deep.equal({
+        default: ["array"],
+        array: []
+      });
+    });
+
+    describe("Testing arrayCallbackFn with useArraySelector == false", () => {
+      it("Test arrayCallbackFn, matched array", () => {
+        expect(tester(false, ["array"])).to.deep.equal({
+          default: ["array[0]", "array[1]"],
+          array: ["array"]
+        });
+      });
+
+      it("Test arrayCallbackFn, not matched array", () => {
+        expect(tester(false, ["array.id"])).to.deep.equal({
+          default: ["array[0].id", "array[1].id"],
+          array: []
+        });
+      });
+    });
+  });
+
   describe("Testing Fn parents", () => {
     describe("Testing Object Target", () => {
       const input = { one: [{ child: "b" }] };

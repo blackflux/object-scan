@@ -72,6 +72,13 @@ Default: `undefined`
 
 Called for every final result.
 
+#### arrayCallbackFn
+
+Type: `function`<br>
+Default: `undefined`
+
+Called when `useArraySelector` is `false` for every array that contains _top level_ matches.
+
 #### joined
 
 Type: `boolean`<br>
