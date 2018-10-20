@@ -377,6 +377,39 @@ describe("Testing Find", () => {
     });
   });
 
+  describe("Testing useArraySelector + breakFn", () => {
+    const input = { child: [{ id: 1 }] };
+    const pattern = ["child.id", "child[0].id"];
+
+    const execTest = (useArraySelector, breakFn) => {
+      const result = [];
+      objectScan(pattern, {
+        breakFn: (k) => {
+          result.push(k);
+          return breakFn(k);
+        },
+        useArraySelector
+      })(input);
+      return result;
+    };
+
+    it("Testing useArraySelector = false, breakFn (BREAKING)", () => {
+      expect(execTest(false, k => k === "child")).to.deep.equal(["", "child"]);
+    });
+
+    it("Testing useArraySelector = false, breakFn", () => {
+      expect(execTest(false, () => false)).to.deep.equal(["", "child", "child[0]", "child[0].id"]);
+    });
+
+    it("Testing useArraySelector = true, breakFn (BREAKING)", () => {
+      expect(execTest(true, k => k === "child")).to.deep.equal(["", "child"]);
+    });
+
+    it("Testing useArraySelector = true, breakFn", () => {
+      expect(execTest(true, () => false)).to.deep.equal(["", "child", "child[0]", "child[0].id"]);
+    });
+  });
+
   describe("Testing Fn needles", () => {
     const input = [{ parent: { child: "value" } }];
     const pattern = ["[*].*.child", "[*].parent"];
