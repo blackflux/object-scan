@@ -197,10 +197,7 @@ describe("Testing Find", () => {
     });
 
     it("Testing empty needle returned with breakFn (since top level)", () => {
-      const find = objectScan([""], {
-        useArraySelector: true,
-        breakFn: () => true
-      });
+      const find = objectScan([""], { breakFn: () => true });
       expect(find(arrayInput)).to.deep.equal([""]);
     });
   });
