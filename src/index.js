@@ -29,11 +29,10 @@ const find = (haystack, search, pathIn, parents, ctx) => {
         ctx.arrayCallbackFn(formatPath(pathIn, ctx), haystack, Object.assign(compiler.getMeta(search), { parents }));
       }
     }
-    if (evalBreakFn(haystack, search, pathIn, parents, ctx)) {
-      return result;
-    }
-    for (let i = 0; i < haystack.length; i += 1) {
-      result.push(...find(haystack[i], search, pathIn.concat(i), parents, ctx));
+    if (!evalBreakFn(haystack, search, pathIn, parents, ctx)) {
+      for (let i = 0; i < haystack.length; i += 1) {
+        result.push(...find(haystack[i], search, pathIn.concat(i), parents, ctx));
+      }
     }
     return result;
   }
@@ -52,22 +51,21 @@ const find = (haystack, search, pathIn, parents, ctx) => {
       result.push(formatPath(pathIn, ctx));
     }
   }
-  if (evalBreakFn(haystack, search, pathIn, parents, ctx)) {
-    return result;
-  }
-  if (haystack instanceof Object) {
-    const isArray = Array.isArray(haystack);
-    const parentsOut = [haystack].concat(parents);
-    Object.entries(haystack).forEach(([key, value]) => {
-      const pathOut = pathIn.concat(isArray ? parseInt(key, 10) : key);
-      Object.entries(search).forEach(([entry, subSearch]) => {
-        if (entry === "**") {
-          [subSearch, search].forEach(s => result.push(...find(value, s, pathOut, parentsOut, ctx)));
-        } else if (matches(entry, key, isArray, subSearch)) {
-          result.push(...find(value, subSearch, pathOut, parentsOut, ctx));
-        }
+  if (!evalBreakFn(haystack, search, pathIn, parents, ctx)) {
+    if (haystack instanceof Object) {
+      const isArray = Array.isArray(haystack);
+      const parentsOut = [haystack].concat(parents);
+      Object.entries(haystack).forEach(([key, value]) => {
+        const pathOut = pathIn.concat(isArray ? parseInt(key, 10) : key);
+        Object.entries(search).forEach(([entry, subSearch]) => {
+          if (entry === "**") {
+            [subSearch, search].forEach(s => result.push(...find(value, s, pathOut, parentsOut, ctx)));
+          } else if (matches(entry, key, isArray, subSearch)) {
+            result.push(...find(value, subSearch, pathOut, parentsOut, ctx));
+          }
+        });
       });
-    });
+    }
   }
   return result;
 };
