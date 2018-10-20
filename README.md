@@ -64,7 +64,7 @@ This method is conceptually similar to [Array.filter()](https://developer.mozill
 Type: `function`<br>
 Default: `undefined`
 
-Called for every potential (partial) result at least once.
+Called for every key (at least once) that could be (part of) a match.
 If function is defined and returns true, all nested entries under the current key are excluded from search and from the final result.
 
 #### callbackFn

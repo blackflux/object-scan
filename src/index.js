@@ -18,6 +18,9 @@ const formatPath = (input, ctx) => (ctx.joined ? input.reduce((p, c) => {
   return `${p}${isNumber || p === "" ? "" : "."}${isNumber ? `[${c}]` : (ctx.escapePaths ? escape(c) : c)}`;
 }, "") : input);
 
+const evalBreakFn = (haystack, search, pathIn, parents, ctx) => ctx.breakFn !== undefined
+  && ctx.breakFn(formatPath(pathIn, ctx), haystack, Object.assign(compiler.getMeta(search), { parents })) === true;
+
 const find = (haystack, search, pathIn, parents, ctx) => {
   const result = [];
   if (ctx.useArraySelector === false && Array.isArray(haystack)) {
@@ -25,6 +28,9 @@ const find = (haystack, search, pathIn, parents, ctx) => {
       if (ctx.arrayCallbackFn !== undefined) {
         ctx.arrayCallbackFn(formatPath(pathIn, ctx), haystack, Object.assign(compiler.getMeta(search), { parents }));
       }
+    }
+    if (evalBreakFn(haystack, search, pathIn, parents, ctx)) {
+      return result;
     }
     for (let i = 0; i < haystack.length; i += 1) {
       result.push(...find(haystack[i], search, pathIn.concat(i), parents, ctx));
@@ -46,10 +52,7 @@ const find = (haystack, search, pathIn, parents, ctx) => {
       result.push(formatPath(pathIn, ctx));
     }
   }
-  if (
-    ctx.breakFn === undefined
-    || ctx.breakFn(formatPath(pathIn, ctx), haystack, Object.assign(compiler.getMeta(search), { parents })) !== true
-  ) {
+  if (!evalBreakFn(haystack, search, pathIn, parents, ctx)) {
     if (haystack instanceof Object) {
       const isArray = Array.isArray(haystack);
       const parentsOut = [haystack].concat(parents);
