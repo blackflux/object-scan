@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const sortFn = require('../../src/util/sortFn');
+const sortFn = require('../../src/util/sort-fn');
 
 describe('Testing sortFn.', () => {
   it('Testing basic sort.', () => {

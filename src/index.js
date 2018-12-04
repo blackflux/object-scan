@@ -1,5 +1,5 @@
 const compiler = require('./util/compiler');
-const sortFn = require('./util/sortFn');
+const sortFn = require('./util/sort-fn');
 
 const escape = input => String(input).replace(/[,.*[\]{}]/g, '\\$&');
 
