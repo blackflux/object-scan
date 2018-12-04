@@ -1,4 +1,5 @@
 const compiler = require('./util/compiler');
+const sortFn = require('./util/sort-fn');
 
 const escape = input => String(input).replace(/[,.*[\]{}]/g, '\\$&');
 
@@ -87,4 +88,8 @@ module.exports = (needles, {
     escapePaths,
     useArraySelector
   }))];
+};
+
+module.exports.util = {
+  sortFn
 };
