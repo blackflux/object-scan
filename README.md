@@ -90,6 +90,15 @@ Can be set to false to return each key as a list. When dealing with special char
 
 Important: Setting this to `false` improves performance.
 
+#### sorted
+
+Type: `boolean`<br>
+Default: `false`
+
+When set to `true`, the results are ordered in a way that they can be safely deleted from the input in order.
+
+Important: Can only be set to `true` when joined is set to `false`.
+
 #### escapePaths
 
 Type: `boolean`<br>
