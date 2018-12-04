@@ -35,16 +35,18 @@
   },
   "homepage": "https://github.com/blackflux/object-scan#readme",
   "devDependencies": {
-    "babel-cli": "7.0.0-beta.3",
     "babel-eslint": "10.0.1",
-    "babel-plugin-transform-flow-comments": "7.0.0-beta.3",
-    "babel-preset-flow": "7.0.0-beta.3",
-    "babel-register": "7.0.0-beta.3",
     "chai": "4.2.0",
     "coveralls": "3.0.2",
-    "js-gardener": "1.31.8",
+    "js-gardener": "1.34.2",
     "nyc": "13.1.0",
-    "semantic-release": "15.10.3"
+    "semantic-release": "15.12.4",
+    "@babel/register": "7.0.0",
+    "@babel/core": "7.2.0",
+    "@babel/cli": "7.2.0",
+    "@babel/plugin-transform-flow-comments": "7.2.0",
+    "@babel/plugin-proposal-object-rest-spread": "7.2.0",
+    "@babel/preset-flow": "7.0.0"
   },
   "nyc": {
     "tempDir": "./coverage/.nyc_output",
@@ -63,7 +65,7 @@
       "text-summary"
     ],
     "require": [
-      "babel-register"
+      "@babel/register"
     ],
     "extension": [],
     "cache": true,
