@@ -273,6 +273,28 @@ describe('Testing Find', () => {
     ]);
   });
 
+  describe('Testing sorting', () => {
+    it('Testing number sort', () => {
+      const find = objectScan(['**'], { joined: false, sorted: true });
+      expect(find([1, 2, 3])).to.deep.equal([[2], [1], [0]]);
+    });
+
+    it('Testing string sort', () => {
+      const find = objectScan(['**'], { joined: false, sorted: true });
+      expect(find({ a: 1, b: 2, c: 3 })).to.deep.equal([['c'], ['b'], ['a']]);
+    });
+
+    it('Testing length sort', () => {
+      const find = objectScan(['**'], { joined: false, sorted: true });
+      expect(find({ a: { b: 1 }, c: 2 })).to.deep.equal([['a', 'b'], ['c'], ['a']]);
+    });
+
+    it('Testing identical sort', () => {
+      const find = objectScan(['**', 'a.b'], { joined: false, sorted: true });
+      expect(find({ a: { b: 1 }, c: 2 })).to.deep.equal([['a', 'b'], ['a', 'b'], ['c'], ['a']]);
+    });
+  });
+
   it('Testing callbackFn', () => {
     const result = {};
     objectScan(['**.child'], {

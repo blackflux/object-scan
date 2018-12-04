@@ -1,3 +1,4 @@
+const assert = require('assert');
 const compiler = require('./util/compiler');
 const sortFn = require('./util/sort-fn');
 
@@ -75,21 +76,22 @@ module.exports = (needles, {
   callbackFn = undefined,
   arrayCallbackFn = undefined,
   joined = true,
+  sorted = false,
   escapePaths = true,
   useArraySelector = true
 } = {}) => {
+  assert(sorted === false || joined === false, 'Sorted can only be used with joined set to false');
   const search = compiler.compile(new Set(needles)); // keep separate for performance
-  return haystack => [...new Set(find(haystack, search, [], [], {
-    filterFn,
-    breakFn,
-    callbackFn,
-    arrayCallbackFn,
-    joined,
-    escapePaths,
-    useArraySelector
-  }))];
-};
-
-module.exports.util = {
-  sortFn
+  return (haystack) => {
+    const result = [...new Set(find(haystack, search, [], [], {
+      filterFn,
+      breakFn,
+      callbackFn,
+      arrayCallbackFn,
+      joined,
+      escapePaths,
+      useArraySelector
+    }))];
+    return sorted === true ? result.sort(sortFn) : result;
+  };
 };
