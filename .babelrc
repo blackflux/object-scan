@@ -1,8 +1,9 @@
 {
   "presets": [
-    "flow"
+    "@babel/preset-flow"
   ],
   "plugins": [
-    "transform-flow-comments"
+    "@babel/plugin-transform-flow-comments",
+    "@babel/plugin-proposal-object-rest-spread"
   ]
 }

@@ -1,9 +1,11 @@
-const compiler = require("./util/compiler");
+const assert = require('assert');
+const compiler = require('./util/compiler');
+const sortFn = require('./util/sort-fn');
 
-const escape = input => String(input).replace(/[,.*[\]{}]/g, "\\$&");
+const escape = input => String(input).replace(/[,.*[\]{}]/g, '\\$&');
 
 const matches = (wildcard, key, isArray, subSearch) => {
-  if (wildcard === (isArray ? "[*]" : "*")) {
+  if (wildcard === (isArray ? '[*]' : '*')) {
     return true;
   }
   if (isArray && !wildcard.match(/^\[.*]$/)) {
@@ -13,10 +15,10 @@ const matches = (wildcard, key, isArray, subSearch) => {
 };
 
 const formatPath = (input, ctx) => (ctx.joined ? input.reduce((p, c) => {
-  const isNumber = typeof c === "number";
+  const isNumber = typeof c === 'number';
   // eslint-disable-next-line no-nested-ternary
-  return `${p}${isNumber || p === "" ? "" : "."}${isNumber ? `[${c}]` : (ctx.escapePaths ? escape(c) : c)}`;
-}, "") : input);
+  return `${p}${isNumber || p === '' ? '' : '.'}${isNumber ? `[${c}]` : (ctx.escapePaths ? escape(c) : c)}`;
+}, '') : input);
 
 const find = (haystack, search, pathIn, parents, ctx) => {
   const recurseHaystack = ctx.breakFn === undefined
@@ -36,8 +38,8 @@ const find = (haystack, search, pathIn, parents, ctx) => {
     }
     return result;
   }
-  if (search[""] !== undefined && parents.length === 0) {
-    result.push(...find(haystack, search[""], pathIn, parents, ctx));
+  if (search[''] !== undefined && parents.length === 0) {
+    result.push(...find(haystack, search[''], pathIn, parents, ctx));
   }
 
   if (compiler.isMatch(search)) {
@@ -57,7 +59,7 @@ const find = (haystack, search, pathIn, parents, ctx) => {
     Object.entries(haystack).forEach(([key, value]) => {
       const pathOut = pathIn.concat(isArray ? parseInt(key, 10) : key);
       Object.entries(search).forEach(([entry, subSearch]) => {
-        if (entry === "**") {
+        if (entry === '**') {
           [subSearch, search].forEach(s => result.push(...find(value, s, pathOut, parentsOut, ctx)));
         } else if (matches(entry, key, isArray, subSearch)) {
           result.push(...find(value, subSearch, pathOut, parentsOut, ctx));
@@ -74,17 +76,22 @@ module.exports = (needles, {
   callbackFn = undefined,
   arrayCallbackFn = undefined,
   joined = true,
+  sorted = false,
   escapePaths = true,
   useArraySelector = true
 } = {}) => {
+  assert(sorted === false || joined === false, 'Sorted can only be used with joined set to false');
   const search = compiler.compile(new Set(needles)); // keep separate for performance
-  return haystack => [...new Set(find(haystack, search, [], [], {
-    filterFn,
-    breakFn,
-    callbackFn,
-    arrayCallbackFn,
-    joined,
-    escapePaths,
-    useArraySelector
-  }))];
+  return (haystack) => {
+    const result = [...new Set(find(haystack, search, [], [], {
+      filterFn,
+      breakFn,
+      callbackFn,
+      arrayCallbackFn,
+      joined,
+      escapePaths,
+      useArraySelector
+    }))];
+    return sorted === true ? result.sort(sortFn) : result;
+  };
 };

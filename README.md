@@ -24,7 +24,7 @@ Install with [npm](https://www.npmjs.com/):
 ```js
 const objectScan = require('object-scan');
 
-objectScan(["a.*.f"])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
+objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 // => [ 'a.e.f' ]
 ```
 
@@ -90,6 +90,15 @@ Can be set to false to return each key as a list. When dealing with special char
 
 Important: Setting this to `false` improves performance.
 
+#### sorted
+
+Type: `boolean`<br>
+Default: `false`
+
+When set to `true`, the results are ordered in a way that they can be safely deleted from the input in order.
+
+Important: Can only be set to `true` when joined is set to `false`.
+
 #### escapePaths
 
 Type: `boolean`<br>
@@ -120,45 +129,45 @@ const obj = {
     e: {
       f: 'g'
     },
-    h: ["i", "j"]
+    h: ['i', 'j']
   },
-  k: "l"
+  k: 'l'
 };
 
 // top level keys
-objectScan(["*"])(obj);
+objectScan(['*'])(obj);
 // => ["a", "k"]
 
 // nested keys
-objectScan(["a.*.f"])(obj);
+objectScan(['a.*.f'])(obj);
 // => ["a.e.f"]
-objectScan(["*.*.*"])(obj);
+objectScan(['*.*.*'])(obj);
 // => ["a.b.c", "a.e.f"]
 
 // or filter
-objectScan(["a.*.{c,f}"])(obj);
+objectScan(['a.*.{c,f}'])(obj);
 // => ["a.b.c", "a.e.f"]
-objectScan(["a.*.{c,f}"], { joined: false })(obj);
+objectScan(['a.*.{c,f}'], { joined: false })(obj);
 // => [["a", "b", "c"], ["a", "e", "f"]]
 
 // list filter
-objectScan(["*.*[*]"])(obj);
+objectScan(['*.*[*]'])(obj);
 // => ["a.h[0]", "a.h[1]"]
-objectScan(["*[*]"])(obj);
+objectScan(['*[*]'])(obj);
 // => []
 
 // deep star filter
-objectScan(["**"])(obj);
+objectScan(['**'])(obj);
 // => ["a", "a.b", "a.b.c", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]
-objectScan(["**.f"])(obj);
+objectScan(['**.f'])(obj);
 // => ["a.e.f"]
-objectScan(["**[*]"])(obj);
+objectScan(['**[*]'])(obj);
 // => ["a.h[0]", "a.h[1]"]
 
 // value function
-objectScan(["**"], { filterFn: (key, value) => typeof value === "string" })(obj);
+objectScan(['**'], { filterFn: (key, value) => typeof value === 'string' })(obj);
 // => ["a.b.c", "a.e.f", "a.h[0]", "a.h[1]", "k"]
-objectScan(["**"], { breakFn: key => key === "a.b" })(obj);
+objectScan(['**'], { breakFn: key => key === 'a.b' })(obj);
 // => ["a", "a.b", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]
 ```
 

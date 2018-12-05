@@ -23,7 +23,7 @@ const Result = (input) => {
   };
   const finishChild = () => {
     const parent = parentStack.pop();
-    parent[Array.isArray(parent) ? "push" : "add"](getSimple(cResult));
+    parent[Array.isArray(parent) ? 'push' : 'add'](getSimple(cResult));
     cResult = parent;
   };
 
@@ -32,7 +32,7 @@ const Result = (input) => {
   return {
     setInArray: (flag, idx) => {
       if (inArray === flag) {
-        throwError(inArray ? "Bad Array Start" : "Bad Array Terminator", input, { char: idx });
+        throwError(inArray ? 'Bad Array Start' : 'Bad Array Terminator', input, { char: idx });
       }
       inArray = flag;
     },
@@ -47,7 +47,7 @@ const Result = (input) => {
         }
         const ele = input.slice(cursor, idx);
         if (inArray && !/^[*\d]+$/g.test(ele)) {
-          throwError("Bad Array Selector", input, { selector: ele });
+          throwError('Bad Array Selector', input, { selector: ele });
         }
         cResult.push(inArray ? `[${ele}]` : ele);
       }
@@ -63,7 +63,7 @@ const Result = (input) => {
     },
     finishGroup: (idx) => {
       if (parentStack.length < 2) {
-        throwError("Unexpected Group Terminator", input, { char: idx });
+        throwError('Unexpected Group Terminator', input, { char: idx });
       }
       finishChild();
       finishChild();
@@ -71,10 +71,10 @@ const Result = (input) => {
     finalizeResult: () => {
       finishChild();
       if (parentStack.length !== 0) {
-        throwError("Non Terminated Group", input);
+        throwError('Non Terminated Group', input);
       }
       if (inArray) {
-        throwError("Non Terminated Array", input);
+        throwError('Non Terminated Array', input);
       }
       return getSimple(cResult);
     }
@@ -82,8 +82,8 @@ const Result = (input) => {
 };
 
 module.exports = (input) => {
-  if (input === "") {
-    return "";
+  if (input === '') {
+    return '';
   }
 
   const result = Result(input);
@@ -94,36 +94,36 @@ module.exports = (input) => {
     const char = input[idx];
     if (escaped === false) {
       switch (char) {
-        case ".":
-          result.finishElement(idx, { err: "Bad Path Separator", fins: ["]", "}"] });
+        case '.':
+          result.finishElement(idx, { err: 'Bad Path Separator', fins: [']', '}'] });
           break;
-        case "[":
-          result.finishElement(idx, { err: "Bad Array Start", fins: [null, "{", ",", "}"] });
+        case '[':
+          result.finishElement(idx, { err: 'Bad Array Start', fins: [null, '{', ',', '}'] });
           result.setInArray(true, idx);
           break;
-        case "]":
-          result.finishElement(idx, { err: "Bad Array Terminator", fins: ["}"] });
+        case ']':
+          result.finishElement(idx, { err: 'Bad Array Terminator', fins: ['}'] });
           result.setInArray(false, idx);
           break;
-        case "{":
-          result.finishElement(idx, { err: "Bad Group Start", fins: [null, ".", "[", "{", ","], finishedReq: true });
+        case '{':
+          result.finishElement(idx, { err: 'Bad Group Start', fins: [null, '.', '[', '{', ','], finishedReq: true });
           result.startGroup();
           break;
-        case ",":
-          result.finishElement(idx, { err: "Bad Group Separator", fins: ["]", "}"] });
+        case ',':
+          result.finishElement(idx, { err: 'Bad Group Separator', fins: [']', '}'] });
           result.newGroupElement();
           break;
-        case "}":
-          result.finishElement(idx, { err: "Bad Group Terminator", fins: ["]", "}"] });
+        case '}':
+          result.finishElement(idx, { err: 'Bad Group Terminator', fins: [']', '}'] });
           result.finishGroup(idx);
           break;
         default:
           break;
       }
     }
-    escaped = char === "\\" ? !escaped : false;
+    escaped = char === '\\' ? !escaped : false;
   }
 
-  result.finishElement(inputLength, { err: "Bad Terminator", fins: ["]", "}"] });
+  result.finishElement(inputLength, { err: 'Bad Terminator', fins: [']', '}'] });
   return result.finalizeResult();
 };

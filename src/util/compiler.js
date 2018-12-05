@@ -1,17 +1,17 @@
 /* compile needles to hierarchical map object */
-const parser = require("./parser");
+const parser = require('./parser');
 
-const IS_MATCH = Symbol("isMatch");
+const IS_MATCH = Symbol('isMatch');
 const markMatch = input => Object.defineProperty(input, IS_MATCH, { value: true, writable: false });
 const isMatch = input => input[IS_MATCH] === true;
 module.exports.isMatch = isMatch;
 
-const NEEDLE = Symbol("needle");
+const NEEDLE = Symbol('needle');
 const setNeedle = (input, needle) => Object.defineProperty(input, NEEDLE, { value: needle, writable: false });
 const getNeedle = input => (input[NEEDLE] === undefined ? null : input[NEEDLE]);
 module.exports.getNeedle = getNeedle;
 
-const NEEDLES = Symbol("needles");
+const NEEDLES = Symbol('needles');
 const addNeedle = (input, needle) => {
   if (input[NEEDLES] === undefined) {
     Object.defineProperty(input, NEEDLES, { value: new Set(), writable: false });
@@ -21,13 +21,13 @@ const addNeedle = (input, needle) => {
 const getNeedles = input => [...input[NEEDLES]];
 module.exports.getNeedles = getNeedles;
 
-const WILDCARD_REGEX = Symbol("wildcard-regex");
+const WILDCARD_REGEX = Symbol('wildcard-regex');
 const setWildcardRegex = (input, wildcard) => {
   Object.defineProperty(input, WILDCARD_REGEX, {
     value: new RegExp(`^${wildcard
       .split(/(?<!\\)(?:\\\\)*\*/)
       .map(p => p.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&'))
-      .join(".*")}$`),
+      .join('.*')}$`),
     writable: false
   });
 };
