@@ -98,7 +98,7 @@ module.exports = (input) => {
           result.finishElement(idx, { err: 'Bad Path Separator', fins: [']', '}'] });
           break;
         case '[':
-          result.finishElement(idx, { err: 'Bad Array Start', fins: [null, '{', ',', '}'] });
+          result.finishElement(idx, { err: 'Bad Array Start', fins: [null, '{', ',', '}', ']'] });
           result.setInArray(true, idx);
           break;
         case ']':
