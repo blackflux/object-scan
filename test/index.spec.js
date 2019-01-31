@@ -67,6 +67,20 @@ describe('Testing Find', () => {
     ]);
   });
 
+  it('Testing Arbitrary Location Nested Array', () => {
+    const find = objectScan(['**.nestedArray[*][1]']);
+    expect(find({
+      key: {
+        nestedArray: [['k1', 1], ['k2', 2], ['k3', 3], ['k4', 4]]
+      }
+    })).to.deep.equal([
+      'key.nestedArray[0][1]',
+      'key.nestedArray[1][1]',
+      'key.nestedArray[2][1]',
+      'key.nestedArray[3][1]'
+    ]);
+  });
+
   it('Testing Array Wildcard', () => {
     const find = objectScan(['**[1*]']);
     expect(find(haystack)).to.deep.equal([
