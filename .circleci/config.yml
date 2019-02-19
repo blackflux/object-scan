@@ -2,12 +2,24 @@ workflows:
   version: 2
   node-multi-build:
     jobs:
-      - gally
-      - test-node-v10
-      - test-node-v8.10
+      - gally-create-pr
+      - test-node-v10:
+          requires:
+            - gally-create-pr
+      - test-node-v8.10:
+          requires:
+            - gally-create-pr
+      - gally-auto-merge:
+          requires:
+            - gally-create-pr
+            - test-node-v10
+            - test-node-v8.10
+          filters:
+            branches:
+              only: /dependabot\/.*/
       - release:
           requires:
-            - gally
+            - gally-create-pr
             - test-node-v10
             - test-node-v8.10
           filters:
@@ -15,13 +27,27 @@ workflows:
               only: master
 version: 2
 jobs:
-  gally:
+  gally-create-pr:
     docker:
       - image: 'circleci/node:10'
     steps:
       - checkout
       - run: sudo npm i -g gally
       - run: ga promote $CIRCLE_BRANCH
+  gally-auto-merge:
+    docker:
+      - image: 'circleci/node:10'
+    steps:
+      - run:
+          name: Set PR number
+          command: |
+            echo 'export CIRCLE_PR_NUMBER="${CIRCLE_PR_NUMBER:-${CIRCLE_PULL_REQUEST##*/}}"' >> $BASH_ENV
+            source $BASH_ENV
+            echo $CIRCLE_PR_NUMBER
+      - checkout
+      - run: sudo npm i -g gally
+      - run: ga approve $CIRCLE_PR_NUMBER --condition "base.ref=dev&state=open&user.login=dependabot[bot]"
+      - run: ga merge $CIRCLE_PR_NUMBER --condition "base.ref=dev&state=open&user.login=dependabot[bot]"
   test-node-v10:
     docker:
       - image: 'circleci/node:10'
