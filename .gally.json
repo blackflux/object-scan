@@ -26,7 +26,13 @@
   },
   "protection": {
     "$full-dev": {
-      "@": "$full"
+      "@": "$full",
+      "restrictions": {
+        "users": [
+          "simlu",
+          "MrsFlux"
+        ]
+      }
     },
     "$full-master": {
       "@": "$full",
@@ -38,7 +44,7 @@
       "required_status_checks": {
         "strict": true,
         "contexts": [
-          "ci/circleci: gally",
+          "ci/circleci: gally-create-pr",
           "ci/circleci: test-node-v10",
           "ci/circleci: test-node-v8.10"
         ]
