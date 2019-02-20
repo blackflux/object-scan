@@ -102,14 +102,14 @@ Important: Can only be set to `true` when joined is set to `false`.
 #### escapePaths
 
 Type: `boolean`<br>
-Default: `true
+Default: `true`
 
 When set to false, joined paths for functions and the final result are not escaped.
 
 #### useArraySelector
 
 Type: `boolean`<br>
-Default: `true
+Default: `true`
 
 When set to false no array selectors are used and arrays are automatically traversed.
 
