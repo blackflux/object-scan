@@ -620,6 +620,57 @@ describe('Testing Find', () => {
     });
   });
 
+  it('Testing De-duplication', () => {
+    const result = [];
+    expect(objectScan([
+      'a.b',
+      '**.b',
+      '*.b',
+      '*a.b',
+      'a*.b',
+      'a',
+      '**',
+      '*',
+      '*a',
+      'a*'
+    ], {
+      callbackFn: (key, value, {
+        parents, isMatch, matches, needles
+      }) => {
+        result.push({
+          key, value, parents, isMatch, matches, needles
+        });
+      }
+    })({
+      a: { b: 'c' }
+    })).to.deep.equal([
+      'a', 'a.b'
+    ]);
+    expect(result).to.deep.equal([{
+      key: 'a',
+      value: { b: 'c' },
+      parents: [{ a: { b: 'c' } }],
+      isMatch: true,
+      matches: ['a', '**', '*', '*a', 'a*'],
+      needles: [
+        'a.b', 'a', 'a.b', '**.b', '*.b', '*a.b', 'a*.b', 'a', '**', '*',
+        '*a', 'a*', '**.b', '**', '*.b', '*', '*a.b', '*a', 'a*.b', 'a*'
+      ]
+    }, {
+      key: 'a.b',
+      value: 'c',
+      parents: [{ b: 'c' }, { a: { b: 'c' } }],
+      isMatch: true,
+      // note that '*' matches, because of '**' injection
+      matches: ['a.b', '**', '*', '**.b', '*.b', '*a.b', 'a*.b'],
+      // redundancy due to '**' injection (** matches are not displayed in needles)
+      needles: [
+        'a.b', 'a.b', '**.b', '*.b', '*a.b', 'a*.b', 'a', '**', '*', '*a',
+        'a*', '**.b', '**', '*.b', '*', '**.b', '*.b', '*a.b', 'a*.b'
+      ]
+    }]);
+  });
+
   it('Testing Misc Tests', () => {
     const input = {
       a: {

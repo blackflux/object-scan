@@ -47,6 +47,29 @@ describe('Testing compiler', () => {
     });
   });
 
+  it('Testing Star Inout', () => {
+    const input = [
+      'a.b',
+      '**.b',
+      '*.b',
+      '*a.b',
+      'a*.b',
+      'a',
+      '**',
+      '*',
+      '*a',
+      'a*'
+    ];
+    const tower = compiler.compile(input);
+    expect(tower).to.deep.equal({
+      a: { b: {} },
+      '**': { b: {} },
+      '*': { b: {} },
+      '*a': { b: {} },
+      'a*': { b: {} }
+    });
+  });
+
   it('Testing Complex Path', () => {
     const input = ['a[1].{hello.you,there[1].*,{a.b}}[{1}],a[2],a[1].*'];
     const tower = compiler.compile(input);
