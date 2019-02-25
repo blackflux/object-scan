@@ -35,19 +35,19 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 - Partial key and index wildcard matching, e.g. `mark*` or `[1*]`
 - Infinite nested matches with `**`
 - Simple or-clause for key and index with `{a,b}` and `[{0,1}]`
+- Tree is only traversed once and only unique results are returned.
 - Full support for escaping
 - Lots of tests to ensure correctness
 
 ### Options
 
-**Note on Functions:**
-Signature for all functions is `Fn(key, value, { parents, isMatch, needle, needles })`, where:
+**Note on Functions:** Signature for all functions is `Fn(key, value, { parents, isMatch, matches, needles })`, where:
 - `key` is the key that the function is called for (respects `joined` option).
 - `value` is the value of that key.
 - `parents` is an array containing all parents as `[parent, grandparent, ...]`. Contains parents that are arrays only iff `useArraySelector` is true.
-- `isMatch` is true if this is a valid (intermittent) result.
-- `needle` is the needle that matches if `isMatch` is true, otherwise `null`.
-- `needles` are all needles that triggered the function call.
+- `isMatch` is true if exactly matched by at least one key. Indicates valid (intermittent) result.
+- `matches` are all needles matching key exactly.
+- `needles` are all needles matching key (partially).
 
 #### filterFn
 
@@ -64,8 +64,9 @@ This method is conceptually similar to [Array.filter()](https://developer.mozill
 Type: `function`<br>
 Default: `undefined`
 
-Called for every key (at least once) that could be (part of) a match.
-If function is defined and returns true, all nested entries under the current key are excluded from search and from the final result.
+Called for every key that could be (part of) a match. If function is
+defined and returns true, all nested entries under the current key are
+excluded from search and from the final result.
 
 #### callbackFn
 
@@ -79,7 +80,7 @@ Called for every final result.
 Type: `function`<br>
 Default: `undefined`
 
-Called when `useArraySelector` is `false` for every array that contains _top level_ matches.
+Called when `useArraySelector` is `false` for every array that contains non-nested entries matched by a needle.
 
 #### joined
 

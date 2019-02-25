@@ -20,35 +20,36 @@ const formatPath = (input, ctx) => (ctx.joined ? input.reduce((p, c) => {
   return `${p}${isNumber || p === '' ? '' : '.'}${isNumber ? `[${c}]` : (ctx.escapePaths ? escape(c) : c)}`;
 }, '') : input);
 
-const find = (haystack, search, pathIn, parents, ctx) => {
+const find = (haystack, searches, pathIn, parents, ctx) => {
   const recurseHaystack = ctx.breakFn === undefined
-    || ctx.breakFn(formatPath(pathIn, ctx), haystack, Object.assign(compiler.getMeta(search), { parents })) !== true;
+    || ctx.breakFn(formatPath(pathIn, ctx), haystack, compiler.getMeta(searches, parents)) !== true;
 
   const result = [];
   if (ctx.useArraySelector === false && Array.isArray(haystack)) {
-    if (compiler.isMatch(search)) {
-      if (ctx.arrayCallbackFn !== undefined) {
-        ctx.arrayCallbackFn(formatPath(pathIn, ctx), haystack, Object.assign(compiler.getMeta(search), { parents }));
+    if (ctx.arrayCallbackFn !== undefined) {
+      if (searches.some(s => compiler.isMatch(s))) {
+        ctx.arrayCallbackFn(formatPath(pathIn, ctx), haystack, compiler.getMeta(searches, parents));
       }
     }
     if (recurseHaystack) {
       for (let i = 0; i < haystack.length; i += 1) {
-        result.push(...find(haystack[i], search, pathIn.concat(i), parents, ctx));
+        result.push(...find(haystack[i], searches, pathIn.concat(i), parents, ctx));
       }
     }
     return result;
   }
-  if (search[''] !== undefined && parents.length === 0) {
-    result.push(...find(haystack, search[''], pathIn, parents, ctx));
+  if (parents.length === 0 && searches[0][''] !== undefined) {
+    assert(searches.length === 1);
+    result.push(...find(haystack, [searches[0]['']], pathIn, parents, ctx));
   }
 
-  if (compiler.isMatch(search)) {
+  if (searches.some(s => compiler.isMatch(s))) {
     if (
       ctx.filterFn === undefined
-      || ctx.filterFn(formatPath(pathIn, ctx), haystack, Object.assign(compiler.getMeta(search), { parents })) !== false
+      || ctx.filterFn(formatPath(pathIn, ctx), haystack, compiler.getMeta(searches, parents)) !== false
     ) {
       if (ctx.callbackFn !== undefined) {
-        ctx.callbackFn(formatPath(pathIn, ctx), haystack, Object.assign(compiler.getMeta(search), { parents }));
+        ctx.callbackFn(formatPath(pathIn, ctx), haystack, compiler.getMeta(searches, parents));
       }
       result.push(formatPath(pathIn, ctx));
     }
@@ -58,13 +59,17 @@ const find = (haystack, search, pathIn, parents, ctx) => {
     const parentsOut = [haystack].concat(parents);
     Object.entries(haystack).forEach(([key, value]) => {
       const pathOut = pathIn.concat(isArray ? parseInt(key, 10) : key);
-      Object.entries(search).forEach(([entry, subSearch]) => {
-        if (entry === '**') {
-          [subSearch, search].forEach(s => result.push(...find(value, s, pathOut, parentsOut, ctx)));
-        } else if (matches(entry, key, isArray, subSearch)) {
-          result.push(...find(value, subSearch, pathOut, parentsOut, ctx));
-        }
-      });
+      result.push(...find(value, searches.reduce((p, s) => {
+        Object.entries(s).forEach(([entry, subSearch]) => {
+          if (entry === '**') {
+            p.push(s);
+            p.push(subSearch);
+          } else if (matches(entry, key, isArray, subSearch)) {
+            p.push(subSearch);
+          }
+        });
+        return p;
+      }, []), pathOut, parentsOut, ctx));
     });
   }
   return result;
@@ -83,7 +88,7 @@ module.exports = (needles, {
   assert(sorted === false || joined === false, 'Sorted can only be used with joined set to false');
   const search = compiler.compile(new Set(needles)); // keep separate for performance
   return (haystack) => {
-    const result = [...new Set(find(haystack, search, [], [], {
+    const result = find(haystack, [search], [], [], {
       filterFn,
       breakFn,
       callbackFn,
@@ -91,7 +96,7 @@ module.exports = (needles, {
       joined,
       escapePaths,
       useArraySelector
-    }))];
+    });
     return sorted === true ? result.sort(sortFn) : result;
   };
 };

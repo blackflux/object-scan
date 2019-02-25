@@ -34,10 +34,14 @@ const setWildcardRegex = (input, wildcard) => {
 const getWildcardRegex = input => input[WILDCARD_REGEX];
 module.exports.getWildcardRegex = getWildcardRegex;
 
-module.exports.getMeta = input => ({
-  isMatch: isMatch(input),
-  needle: getNeedle(input),
-  needles: getNeedles(input)
+module.exports.getMeta = (inputs, parents = null) => ({
+  isMatch: inputs.some(e => isMatch(e)),
+  matches: inputs.map(e => getNeedle(e)).filter(e => e !== null),
+  needles: inputs.reduce((p, e) => {
+    p.push(...getNeedles(e));
+    return p;
+  }, []),
+  parents
 });
 
 const buildRecursive = (tower, path, needle) => {

@@ -171,10 +171,10 @@ describe('Testing Find', () => {
     const needles = [''];
     const arrayInput = [{ id: 1 }, { id: 2 }];
     const objectInput = { id: {} };
-    const callbackFn = (key, value, { isMatch, needle, parents }) => {
+    const callbackFn = (key, value, { isMatch, matches, parents }) => {
       expect(isMatch).to.equal(true);
       expect(parents).to.deep.equal([]);
-      expect(needle).to.equal('');
+      expect(matches).to.deep.equal(['']);
     };
 
     it('Testing array objects with useArraySelector === true', () => {
@@ -205,7 +205,7 @@ describe('Testing Find', () => {
     it('Testing empty needle only matches on top level', () => {
       const find = objectScan(['', '**'], {
         useArraySelector: false,
-        filterFn: (key, value, { needle }) => needle === ''
+        filterFn: (key, value, { matches }) => matches.includes('')
       });
       expect(find(arrayInput)).to.deep.equal(['[0]', '[1]']);
     });
@@ -303,9 +303,9 @@ describe('Testing Find', () => {
       expect(find({ a: { b: 1 }, c: 2 })).to.deep.equal([['a', 'b'], ['c'], ['a']]);
     });
 
-    it('Testing identical sort', () => {
+    it('Testing identical sort (now de-duplicated)', () => {
       const find = objectScan(['**', 'a.b'], { joined: false, sorted: true });
-      expect(find({ a: { b: 1 }, c: 2 })).to.deep.equal([['a', 'b'], ['a', 'b'], ['c'], ['a']]);
+      expect(find({ a: { b: 1 }, c: 2 })).to.deep.equal([['a', 'b'], ['c'], ['a']]);
     });
   });
 
@@ -459,8 +459,8 @@ describe('Testing Find', () => {
       const result = [];
       objectScan(pattern, { callbackFn: (k, v, { needles }) => result.push(`${needles} => ${k}`) })(input);
       expect(result).to.deep.equal([
-        '[*].*.child => [0].parent.child',
-        '[*].parent => [0].parent'
+        '[*].*.child,[*].parent => [0].parent',
+        '[*].*.child => [0].parent.child'
       ]);
     });
 
@@ -472,9 +472,8 @@ describe('Testing Find', () => {
       expect(result).to.deep.equal([
         '[*].*.child,[*].parent =>  (false)',
         '[*].*.child,[*].parent => [0] (false)',
-        '[*].*.child => [0].parent (false)',
-        '[*].*.child => [0].parent.child (true)',
-        '[*].parent => [0].parent (true)'
+        '[*].*.child,[*].parent => [0].parent (true)',
+        '[*].*.child => [0].parent.child (true)'
       ]);
     });
   });
@@ -485,22 +484,21 @@ describe('Testing Find', () => {
 
     it('Testing needle on callbackFn', () => {
       const result = [];
-      objectScan(pattern, { callbackFn: (k, v, { needle }) => result.push(`${needle} => ${k}`) })(input);
+      objectScan(pattern, { callbackFn: (k, v, { matches }) => result.push(`${matches} => ${k}`) })(input);
       expect(result).to.deep.equal([
-        '[*].*.child => [0].parent.child',
-        '[*].parent => [0].parent'
+        '[*].parent => [0].parent',
+        '[*].*.child => [0].parent.child'
       ]);
     });
 
     it('Testing needle on breakFn', () => {
       const result = [];
-      objectScan(pattern, { breakFn: (k, v, { needle }) => result.push(`${needle} => ${k}`) })(input);
+      objectScan(pattern, { breakFn: (k, v, { matches }) => result.push(`${matches} => ${k}`) })(input);
       expect(result).to.deep.equal([
-        'null => ',
-        'null => [0]',
-        'null => [0].parent',
-        '[*].*.child => [0].parent.child',
-        '[*].parent => [0].parent'
+        ' => ',
+        ' => [0]',
+        '[*].parent => [0].parent',
+        '[*].*.child => [0].parent.child'
       ]);
     });
   });
@@ -648,7 +646,7 @@ describe('Testing Find', () => {
     ]);
     expect(objectScan(['a.*'])(input)).to.deep.equal(['a.b', 'a.i']);
     expect(objectScan(['a.b.c'])(input)).to.deep.equal(['a.b.c']);
-    expect(objectScan(['**.{b,i}'])(input)).to.deep.equal(['a.b', 'a.i', 'a.b.i']);
+    expect(objectScan(['**.{b,i}'])(input)).to.deep.equal(['a.b', 'a.b.i', 'a.i']);
     expect(objectScan(['*.{b,i}'])(input)).to.deep.equal(['a.b', 'a.i']);
     expect(objectScan(['a.*.{c,e}'])(input)).to.deep.equal(['a.b.c', 'a.b.e']);
     expect(objectScan(['a.*.g'])(input)).to.deep.equal(['a.b.g']);
