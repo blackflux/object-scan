@@ -49,8 +49,6 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 - `matches` are all needles matching key exactly.
 - `needles` are all needles matching key (partially).
 
-Note: `matches` and `needles` can be hard to interpret when `**` is used.
-
 #### filterFn
 
 Type: `function`<br>
