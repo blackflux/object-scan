@@ -19,6 +19,6 @@ describe('Testing sort-fn', () => {
 
   it('Testing identical sort (error)', () => {
     const result = [1, 3, 5, 6, 4, 3, 5, 6, 1].map(e => [e]);
-    expect(() => result.sort(sortFn)).to.throw('Expected Entries to be Unique.');
+    expect(() => result.sort(sortFn)).to.throw('Unexpected Error: Unique Constraint Violation');
   });
 });
