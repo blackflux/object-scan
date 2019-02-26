@@ -302,11 +302,6 @@ describe('Testing Find', () => {
       const find = objectScan(['**'], { joined: false, sorted: true });
       expect(find({ a: { b: 1 }, c: 2 })).to.deep.equal([['a', 'b'], ['c'], ['a']]);
     });
-
-    it('Testing identical sort (now de-duplicated)', () => {
-      const find = objectScan(['**', 'a.b'], { joined: false, sorted: true });
-      expect(find({ a: { b: 1 }, c: 2 })).to.deep.equal([['a', 'b'], ['c'], ['a']]);
-    });
   });
 
   it('Testing callbackFn', () => {
@@ -634,6 +629,30 @@ describe('Testing Find', () => {
       })(input);
       return { matched, cbs };
     };
+
+    it('Testing Simple De-duplication', () => {
+      expect(executeTest(
+        ['a.b', '**'],
+        { a: { b: 'c' } }
+      )).to.deep.equal({
+        matched: ['a', 'a.b'],
+        cbs: [{
+          key: 'a',
+          value: { b: 'c' },
+          parents: [{ a: { b: 'c' } }],
+          isMatch: true,
+          matches: ['**'],
+          needles: ['a.b', '**']
+        }, {
+          key: 'a.b',
+          value: 'c',
+          parents: [{ b: 'c' }, { a: { b: 'c' } }],
+          isMatch: true,
+          matches: ['a.b', '**'],
+          needles: ['a.b', '**']
+        }]
+      });
+    });
 
     it('Testing Two Levels Deep', () => {
       expect(executeTest(
