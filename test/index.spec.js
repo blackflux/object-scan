@@ -171,10 +171,10 @@ describe('Testing Find', () => {
     const needles = [''];
     const arrayInput = [{ id: 1 }, { id: 2 }];
     const objectInput = { id: {} };
-    const callbackFn = (key, value, { isMatch, matches, parents }) => {
+    const callbackFn = (key, value, { isMatch, matchedBy, parents }) => {
       expect(isMatch).to.equal(true);
       expect(parents).to.deep.equal([]);
-      expect(matches).to.deep.equal(['']);
+      expect(matchedBy).to.deep.equal(['']);
     };
 
     it('Testing array objects with useArraySelector === true', () => {
@@ -202,10 +202,10 @@ describe('Testing Find', () => {
       expect(find(objectInput)).to.deep.equal(['']);
     });
 
-    it('Testing empty needle only matches on top level', () => {
+    it('Testing empty needle only matchedBy on top level', () => {
       const find = objectScan(['', '**'], {
         useArraySelector: false,
-        filterFn: (key, value, { matches }) => matches.includes('')
+        filterFn: (key, value, { matchedBy }) => matchedBy.includes('')
       });
       expect(find(arrayInput)).to.deep.equal(['[0]', '[1]']);
     });
@@ -446,23 +446,23 @@ describe('Testing Find', () => {
     });
   });
 
-  describe('Testing Fn needles', () => {
+  describe('Testing Fn traversedBy', () => {
     const input = [{ parent: { child: 'value' } }];
     const pattern = ['[*].*.child', '[*].parent'];
 
-    it('Testing needles on callbackFn', () => {
+    it('Testing traversedBy on callbackFn', () => {
       const result = [];
-      objectScan(pattern, { callbackFn: (k, v, { needles }) => result.push(`${needles} => ${k}`) })(input);
+      objectScan(pattern, { callbackFn: (k, v, { traversedBy }) => result.push(`${traversedBy} => ${k}`) })(input);
       expect(result).to.deep.equal([
         '[*].*.child,[*].parent => [0].parent',
         '[*].*.child => [0].parent.child'
       ]);
     });
 
-    it('Testing needles on breakFn', () => {
+    it('Testing traversedBy on breakFn', () => {
       const result = [];
       objectScan(pattern, {
-        breakFn: (k, v, { isMatch, needles }) => result.push(`${needles} => ${k} (${isMatch})`)
+        breakFn: (k, v, { isMatch, traversedBy }) => result.push(`${traversedBy} => ${k} (${isMatch})`)
       })(input);
       expect(result).to.deep.equal([
         '[*].*.child,[*].parent =>  (false)',
@@ -477,18 +477,18 @@ describe('Testing Find', () => {
     const input = [{ parent: { child: 'value' } }];
     const pattern = ['[*].*.child', '[*].parent'];
 
-    it('Testing needle on callbackFn', () => {
+    it('Testing matchedBy on callbackFn', () => {
       const result = [];
-      objectScan(pattern, { callbackFn: (k, v, { matches }) => result.push(`${matches} => ${k}`) })(input);
+      objectScan(pattern, { callbackFn: (k, v, { matchedBy }) => result.push(`${matchedBy} => ${k}`) })(input);
       expect(result).to.deep.equal([
         '[*].parent => [0].parent',
         '[*].*.child => [0].parent.child'
       ]);
     });
 
-    it('Testing needle on breakFn', () => {
+    it('Testing matchedBy on breakFn', () => {
       const result = [];
-      objectScan(pattern, { breakFn: (k, v, { matches }) => result.push(`${matches} => ${k}`) })(input);
+      objectScan(pattern, { breakFn: (k, v, { matchedBy }) => result.push(`${matchedBy} => ${k}`) })(input);
       expect(result).to.deep.equal([
         ' => ',
         ' => [0]',
@@ -620,10 +620,10 @@ describe('Testing Find', () => {
       const cbs = [];
       const matched = objectScan(ndls, {
         callbackFn: (key, value, {
-          parents, isMatch, matches, needles
+          parents, isMatch, matchedBy, traversedBy
         }) => {
           cbs.push({
-            key, value, parents, isMatch, matches, needles
+            key, value, parents, isMatch, matchedBy, traversedBy
           });
         }
       })(input);
@@ -641,15 +641,15 @@ describe('Testing Find', () => {
           value: { b: 'c' },
           parents: [{ a: { b: 'c' } }],
           isMatch: true,
-          matches: ['**'],
-          needles: ['a.b', '**']
+          matchedBy: ['**'],
+          traversedBy: ['a.b', '**']
         }, {
           key: 'a.b',
           value: 'c',
           parents: [{ b: 'c' }, { a: { b: 'c' } }],
           isMatch: true,
-          matches: ['a.b', '**'],
-          needles: ['a.b', '**']
+          matchedBy: ['a.b', '**'],
+          traversedBy: ['a.b', '**']
         }]
       });
     });
@@ -665,15 +665,15 @@ describe('Testing Find', () => {
           value: { b: 'c' },
           parents: [{ a: { b: 'c' } }],
           isMatch: true,
-          matches: ['a', '**', '*', '*a', 'a*'],
-          needles: ['a.b', 'a', '**.b', '**', '*.b', '*', '*a.b', '*a', 'a*.b', 'a*']
+          matchedBy: ['a', '**', '*', '*a', 'a*'],
+          traversedBy: ['a.b', 'a', '**.b', '**', '*.b', '*', '*a.b', '*a', 'a*.b', 'a*']
         }, {
           key: 'a.b',
           value: 'c',
           parents: [{ b: 'c' }, { a: { b: 'c' } }],
           isMatch: true,
-          matches: ['a.b', '**', '**.b', '*.b', '*a.b', 'a*.b'],
-          needles: ['a.b', '**.b', '**', '*.b', '*a.b', 'a*.b']
+          matchedBy: ['a.b', '**', '**.b', '*.b', '*a.b', 'a*.b'],
+          traversedBy: ['a.b', '**.b', '**', '*.b', '*a.b', 'a*.b']
         }]
       });
     });
@@ -689,8 +689,8 @@ describe('Testing Find', () => {
           value: 'd',
           parents: [{ c: 'd' }, { b: { c: 'd' } }, { a: { b: { c: 'd' } } }],
           isMatch: true,
-          matches: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c'],
-          needles: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c']
+          matchedBy: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c'],
+          traversedBy: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c']
         }]
       });
     });
@@ -706,8 +706,8 @@ describe('Testing Find', () => {
           value: 0,
           parents: [[0], [[0]], [[[0]]]],
           isMatch: true,
-          matches: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]'],
-          needles: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]']
+          matchedBy: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]'],
+          traversedBy: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]']
         }]
       });
     });
@@ -723,15 +723,15 @@ describe('Testing Find', () => {
           value: { c: 'd' },
           parents: [{ b: { c: 'd' } }, { a: { b: { c: 'd' } } }],
           isMatch: true,
-          matches: ['a.**'],
-          needles: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c', 'a.**']
+          matchedBy: ['a.**'],
+          traversedBy: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c', 'a.**']
         }, {
           key: 'a.b.c',
           value: 'd',
           parents: [{ c: 'd' }, { b: { c: 'd' } }, { a: { b: { c: 'd' } } }],
           isMatch: true,
-          matches: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**', 'a.**.c'],
-          needles: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c', 'a.**']
+          matchedBy: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**', 'a.**.c'],
+          traversedBy: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c', 'a.**']
         }]
       });
     });
@@ -747,15 +747,15 @@ describe('Testing Find', () => {
           value: [0],
           parents: [[[0]], [[[0]]]],
           isMatch: true,
-          matches: ['[0].**'],
-          needles: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]', '[0].**']
+          matchedBy: ['[0].**'],
+          traversedBy: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]', '[0].**']
         }, {
           key: '[0][0][0]',
           value: 0,
           parents: [[0], [[0]], [[[0]]]],
           isMatch: true,
-          matches: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**', '[0].**[0]'],
-          needles: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]', '[0].**']
+          matchedBy: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**', '[0].**[0]'],
+          traversedBy: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]', '[0].**']
         }]
       });
     });

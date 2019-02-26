@@ -4,7 +4,7 @@ const sortFn = require('./util/sort-fn');
 
 const escape = input => String(input).replace(/[,.*[\]{}]/g, '\\$&');
 
-const matches = (wildcard, key, isArray, subSearch) => {
+const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
   if (wildcard === (isArray ? '[*]' : '*')) {
     return true;
   }
@@ -64,7 +64,7 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
           if (entry === '**') {
             p.push(compiler.getStarRecursion(subSearch));
             p.push(subSearch);
-          } else if (matches(entry, key, isArray, subSearch)) {
+          } else if (isWildcardMatch(entry, key, isArray, subSearch)) {
             p.push(subSearch);
           }
         });

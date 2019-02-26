@@ -40,14 +40,14 @@ module.exports.getStarRecursion = getStarRecursion;
 
 module.exports.getMeta = (inputs, parents = null) => ({
   isMatch: inputs.some(e => isMatch(e)),
-  matches: Array.from(inputs.reduce((p, e) => {
+  matchedBy: Array.from(inputs.reduce((p, e) => {
     const needle = getNeedle(e);
     if (needle !== null) {
       p.add(needle);
     }
     return p;
   }, new Set())),
-  needles: Array.from(inputs.reduce((p, e) => {
+  traversedBy: Array.from(inputs.reduce((p, e) => {
     getNeedles(e).forEach(n => p.add(n));
     return p;
   }, new Set())),

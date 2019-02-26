@@ -33,7 +33,7 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 - Object and array matching with e.g. `key.path` and `[1]`
 - Key and index wildcard matching with `*` and `[*]`
 - Partial key and index wildcard matching, e.g. `mark*` or `[1*]`
-- Infinite nested matches with `**`
+- Infinite nested matching with `**`
 - Simple or-clause for key and index with `{a,b}` and `[{0,1}]`
 - Input is traversed exactly once and only unique results are returned.
 - Full support for escaping
@@ -41,13 +41,13 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 
 ### Options
 
-**Note on Functions:** Signature for all functions is `Fn(key, value, { parents, isMatch, matches, needles })`, where:
+**Note on Functions:** Signature for all functions is `Fn(key, value, { parents, isMatch, matchedBy, traversedBy })`, where:
 - `key` is the key that the function is called for (respects `joined` option).
 - `value` is the value of that key.
 - `parents` is an array containing all parents as `[parent, grandparent, ...]`. Contains parents that are arrays only iff `useArraySelector` is true.
 - `isMatch` is true if exactly matched by at least one key. Indicates valid (intermittent) result.
-- `matches` are all needles matching key exactly.
-- `needles` are all needles matching key exactly or any child key exactly.
+- `matchedBy` are all needles matching the key exactly.
+- `traversedBy` are all needles involved in traversing the key
 
 #### filterFn
 
@@ -173,7 +173,7 @@ objectScan(['**'], { breakFn: key => key === 'a.b' })(obj);
 
 ## Edge Cases
 
-The empty needle `""` matches top level object(s). Useful for matching objects nested in arrays by setting `useArraySelector` to `false`. Note that the empty string does not work with [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set).
+The top level object(s) are matched by the empty needle `""`. Useful for matching objects nested in arrays by setting `useArraySelector` to `false`. Note that the empty string does not work with [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set).
 
 ## Special Characters
 

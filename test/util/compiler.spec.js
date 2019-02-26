@@ -188,34 +188,34 @@ describe('Testing compiler', () => {
     expect(compiler.getWildcardRegex(tower.a.e.f)).to.deep.equal(/^f$/);
 
     expect(compiler.getMeta([tower])).to.deep.equal({
-      isMatch: false, matches: [], needles: ['a.{b,c}.d', 'a.{c,e}.f', 'a.b.d.g'], parents: null
+      isMatch: false, matchedBy: [], traversedBy: ['a.{b,c}.d', 'a.{c,e}.f', 'a.b.d.g'], parents: null
     });
     expect(compiler.getMeta([tower.a])).to.deep.equal({
-      isMatch: false, matches: [], needles: ['a.{b,c}.d', 'a.{c,e}.f', 'a.b.d.g'], parents: null
+      isMatch: false, matchedBy: [], traversedBy: ['a.{b,c}.d', 'a.{c,e}.f', 'a.b.d.g'], parents: null
     });
     expect(compiler.getMeta([tower.a.b])).to.deep.equal({
-      isMatch: false, matches: [], needles: ['a.{b,c}.d', 'a.b.d.g'], parents: null
+      isMatch: false, matchedBy: [], traversedBy: ['a.{b,c}.d', 'a.b.d.g'], parents: null
     });
     expect(compiler.getMeta([tower.a.b.d])).to.deep.equal({
-      isMatch: true, matches: ['a.{b,c}.d'], needles: ['a.{b,c}.d', 'a.b.d.g'], parents: null
+      isMatch: true, matchedBy: ['a.{b,c}.d'], traversedBy: ['a.{b,c}.d', 'a.b.d.g'], parents: null
     });
     expect(compiler.getMeta([tower.a.b.d.g])).to.deep.equal({
-      isMatch: true, matches: ['a.b.d.g'], needles: ['a.b.d.g'], parents: null
+      isMatch: true, matchedBy: ['a.b.d.g'], traversedBy: ['a.b.d.g'], parents: null
     });
     expect(compiler.getMeta([tower.a.c])).to.deep.equal({
-      isMatch: false, matches: [], needles: ['a.{b,c}.d', 'a.{c,e}.f'], parents: null
+      isMatch: false, matchedBy: [], traversedBy: ['a.{b,c}.d', 'a.{c,e}.f'], parents: null
     });
     expect(compiler.getMeta([tower.a.c.d])).to.deep.equal({
-      isMatch: true, matches: ['a.{b,c}.d'], needles: ['a.{b,c}.d'], parents: null
+      isMatch: true, matchedBy: ['a.{b,c}.d'], traversedBy: ['a.{b,c}.d'], parents: null
     });
     expect(compiler.getMeta([tower.a.c.f])).to.deep.equal({
-      isMatch: true, matches: ['a.{c,e}.f'], needles: ['a.{c,e}.f'], parents: null
+      isMatch: true, matchedBy: ['a.{c,e}.f'], traversedBy: ['a.{c,e}.f'], parents: null
     });
     expect(compiler.getMeta([tower.a.e])).to.deep.equal({
-      isMatch: false, matches: [], needles: ['a.{c,e}.f'], parents: null
+      isMatch: false, matchedBy: [], traversedBy: ['a.{c,e}.f'], parents: null
     });
     expect(compiler.getMeta([tower.a.e.f])).to.deep.equal({
-      isMatch: true, matches: ['a.{c,e}.f'], needles: ['a.{c,e}.f'], parents: null
+      isMatch: true, matchedBy: ['a.{c,e}.f'], traversedBy: ['a.{c,e}.f'], parents: null
     });
   });
 });
