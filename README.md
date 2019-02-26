@@ -33,29 +33,29 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 - Object and array matching with e.g. `key.path` and `[1]`
 - Key and index wildcard matching with `*` and `[*]`
 - Partial key and index wildcard matching, e.g. `mark*` or `[1*]`
-- Infinite nested matches with `**`
+- Infinite nested matching with `**`
 - Simple or-clause for key and index with `{a,b}` and `[{0,1}]`
+- Input is traversed exactly once and only unique results are returned.
 - Full support for escaping
 - Lots of tests to ensure correctness
 
 ### Options
 
-**Note on Functions:**
-Signature for all functions is `Fn(key, value, { parents, isMatch, needle, needles })`, where:
+**Note on Functions:** Signature for all functions is `Fn(key, value, { parents, isMatch, matchedBy, traversedBy })`, where:
 - `key` is the key that the function is called for (respects `joined` option).
 - `value` is the value of that key.
 - `parents` is an array containing all parents as `[parent, grandparent, ...]`. Contains parents that are arrays only iff `useArraySelector` is true.
-- `isMatch` is true if this is a valid (intermittent) result.
-- `needle` is the needle that matches if `isMatch` is true, otherwise `null`.
-- `needles` are all needles that triggered the function call.
+- `isMatch` is true if exactly matched by at least one key. Indicates valid (intermittent) result.
+- `matchedBy` are all needles matching the key exactly.
+- `traversedBy` are all needles involved in traversing the key
 
 #### filterFn
 
 Type: `function`<br>
 Default: `undefined`
 
-Called for every intermittent result. 
-If function is defined and returns false, the entry is excluded from the final result.
+Called for every exact match. 
+Iff function is defined and returns false, the entry is excluded from the final result.
 
 This method is conceptually similar to [Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
 
@@ -64,7 +64,7 @@ This method is conceptually similar to [Array.filter()](https://developer.mozill
 Type: `function`<br>
 Default: `undefined`
 
-Called for every key (at least once) that could be (part of) a match.
+Called for every key that could be (part of) a matching key.
 If function is defined and returns true, all nested entries under the current key are excluded from search and from the final result.
 
 #### callbackFn
@@ -79,7 +79,7 @@ Called for every final result.
 Type: `function`<br>
 Default: `undefined`
 
-Called when `useArraySelector` is `false` for every array that contains _top level_ matches.
+Called when `useArraySelector` is `false` for every array that contains at least one direct child matched by a needle.
 
 #### joined
 
@@ -173,7 +173,7 @@ objectScan(['**'], { breakFn: key => key === 'a.b' })(obj);
 
 ## Edge Cases
 
-The empty needle `""` matches top level object(s). Useful for matching objects nested in arrays by setting `useArraySelector` to `false`. Note that the empty string does not work with [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set).
+The top level object(s) are matched by the empty needle `""`. Useful for matching objects nested in arrays by setting `useArraySelector` to `false`. Note that the empty string does not work with [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set).
 
 ## Special Characters
 

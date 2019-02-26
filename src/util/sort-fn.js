@@ -12,5 +12,6 @@ module.exports = (a, b) => {
     }
     return String(bEle).localeCompare(String(aEle));
   }
-  return -1;
+  // should never occur since we traverse input exactly once
+  throw new Error('Unexpected Error: Unique Constraint Violation');
 };
