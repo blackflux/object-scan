@@ -47,7 +47,7 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 - `parents` is an array containing all parents as `[parent, grandparent, ...]`. Contains parents that are arrays only iff `useArraySelector` is true.
 - `isMatch` is true if exactly matched by at least one key. Indicates valid (intermittent) result.
 - `matches` are all needles matching key exactly.
-- `needles` are all needles matching key exactly or any child key.
+- `needles` are all needles matching key exactly or any child key exactly.
 
 #### filterFn
 
