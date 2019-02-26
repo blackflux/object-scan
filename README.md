@@ -54,8 +54,8 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 Type: `function`<br>
 Default: `undefined`
 
-Called for every intermittent result. 
-If function is defined and returns false, the entry is excluded from the final result.
+Called for every exact match. 
+Iff function is defined and returns false, the entry is excluded from the final result.
 
 This method is conceptually similar to [Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
 
@@ -64,9 +64,8 @@ This method is conceptually similar to [Array.filter()](https://developer.mozill
 Type: `function`<br>
 Default: `undefined`
 
-Called for every key that could be (part of) a match. If function is
-defined and returns true, all nested entries under the current key are
-excluded from search and from the final result.
+Called for every key that could be (part of) a matching key.
+If function is defined and returns true, all nested entries under the current key are excluded from search and from the final result.
 
 #### callbackFn
 
@@ -80,7 +79,7 @@ Called for every final result.
 Type: `function`<br>
 Default: `undefined`
 
-Called when `useArraySelector` is `false` for every array that contains at least one non-nested entry matched by a needle.
+Called when `useArraySelector` is `false` for every array that contains at least one direct child matched by a needle.
 
 #### joined
 
