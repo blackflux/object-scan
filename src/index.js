@@ -62,7 +62,7 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
       result.push(...find(value, searches.reduce((p, s) => {
         Object.entries(s).forEach(([entry, subSearch]) => {
           if (entry === '**') {
-            p.push(s);
+            p.push(compiler.getStarRecursion(subSearch));
             p.push(subSearch);
           } else if (matches(entry, key, isArray, subSearch)) {
             p.push(subSearch);

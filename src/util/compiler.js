@@ -1,20 +1,22 @@
 /* compile needles to hierarchical map object */
 const parser = require('./parser');
 
+const defineProperty = (target, k, v) => Object.defineProperty(target, k, { value: v, writable: false });
+
 const IS_MATCH = Symbol('isMatch');
-const markMatch = input => Object.defineProperty(input, IS_MATCH, { value: true, writable: false });
+const markMatch = input => defineProperty(input, IS_MATCH, true);
 const isMatch = input => input[IS_MATCH] === true;
 module.exports.isMatch = isMatch;
 
 const NEEDLE = Symbol('needle');
-const setNeedle = (input, needle) => Object.defineProperty(input, NEEDLE, { value: needle, writable: false });
+const setNeedle = (input, needle) => defineProperty(input, NEEDLE, needle);
 const getNeedle = input => (input[NEEDLE] === undefined ? null : input[NEEDLE]);
 module.exports.getNeedle = getNeedle;
 
 const NEEDLES = Symbol('needles');
 const addNeedle = (input, needle) => {
   if (input[NEEDLES] === undefined) {
-    Object.defineProperty(input, NEEDLES, { value: new Set(), writable: false });
+    defineProperty(input, NEEDLES, new Set());
   }
   input[NEEDLES].add(needle);
 };
@@ -23,24 +25,32 @@ module.exports.getNeedles = getNeedles;
 
 const WILDCARD_REGEX = Symbol('wildcard-regex');
 const setWildcardRegex = (input, wildcard) => {
-  Object.defineProperty(input, WILDCARD_REGEX, {
-    value: new RegExp(`^${wildcard
-      .split(/(?<!\\)(?:\\\\)*\*/)
-      .map(p => p.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&'))
-      .join('.*')}$`),
-    writable: false
-  });
+  defineProperty(input, WILDCARD_REGEX, new RegExp(`^${wildcard
+    .split(/(?<!\\)(?:\\\\)*\*/)
+    .map(p => p.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&'))
+    .join('.*')}$`));
 };
 const getWildcardRegex = input => input[WILDCARD_REGEX];
 module.exports.getWildcardRegex = getWildcardRegex;
 
+const STAR_RECURSION = Symbol('star-recursion');
+const setStarRecursion = (input, target) => defineProperty(input, STAR_RECURSION, target);
+const getStarRecursion = input => input[STAR_RECURSION];
+module.exports.getStarRecursion = getStarRecursion;
+
 module.exports.getMeta = (inputs, parents = null) => ({
   isMatch: inputs.some(e => isMatch(e)),
-  matches: inputs.map(e => getNeedle(e)).filter(e => e !== null),
-  needles: inputs.reduce((p, e) => {
-    p.push(...getNeedles(e));
+  matches: Array.from(inputs.reduce((p, e) => {
+    const needle = getNeedle(e);
+    if (needle !== null) {
+      p.add(needle);
+    }
     return p;
-  }, []),
+  }, new Set())),
+  needles: Array.from(inputs.reduce((p, e) => {
+    getNeedles(e).forEach(n => p.add(n));
+    return p;
+  }, new Set())),
   parents
 });
 
@@ -69,8 +79,26 @@ const buildRecursive = (tower, path, needle) => {
   buildRecursive(tower[path[0]], path.slice(1), needle);
 };
 
+const computeStarRecursionsRecursive = (tower) => {
+  const starTarget = tower['**'];
+  if (starTarget !== undefined) {
+    const starRecursion = { '**': starTarget };
+    if (isMatch(starTarget)) {
+      markMatch(starRecursion);
+    }
+    const needle = getNeedle(starTarget);
+    if (needle !== null) {
+      setNeedle(starRecursion, needle);
+    }
+    getNeedles(starTarget).forEach(n => addNeedle(starRecursion, n));
+    setStarRecursion(starTarget, starRecursion);
+  }
+  Object.keys(tower).forEach(k => computeStarRecursionsRecursive(tower[k]));
+};
+
 module.exports.compile = (needles) => {
   const tower = {};
   needles.forEach(needle => buildRecursive(tower, [parser(needle)], needle));
+  computeStarRecursionsRecursive(tower);
   return tower;
 };

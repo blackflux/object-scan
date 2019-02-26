@@ -652,22 +652,14 @@ describe('Testing Find', () => {
       parents: [{ a: { b: 'c' } }],
       isMatch: true,
       matches: ['a', '**', '*', '*a', 'a*'],
-      needles: [
-        'a.b', 'a', 'a.b', '**.b', '*.b', '*a.b', 'a*.b', 'a', '**', '*',
-        '*a', 'a*', '**.b', '**', '*.b', '*', '*a.b', '*a', 'a*.b', 'a*'
-      ]
+      needles: ['a.b', 'a', '**.b', '**', '*.b', '*', '*a.b', '*a', 'a*.b', 'a*']
     }, {
       key: 'a.b',
       value: 'c',
       parents: [{ b: 'c' }, { a: { b: 'c' } }],
       isMatch: true,
-      // note that '*' matches, because of '**' injection
-      matches: ['a.b', '**', '*', '**.b', '*.b', '*a.b', 'a*.b'],
-      // redundancy due to '**' injection (** matches are not displayed in needles)
-      needles: [
-        'a.b', 'a.b', '**.b', '*.b', '*a.b', 'a*.b', 'a', '**', '*', '*a',
-        'a*', '**.b', '**', '*.b', '*', '**.b', '*.b', '*a.b', 'a*.b'
-      ]
+      matches: ['a.b', '**', '**.b', '*.b', '*a.b', 'a*.b'],
+      needles: ['a.b', '**.b', '**', '*.b', '*a.b', 'a*.b']
     }]);
   });
 
