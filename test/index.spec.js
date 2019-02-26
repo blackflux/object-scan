@@ -695,6 +695,23 @@ describe('Testing Find', () => {
       });
     });
 
+    it('Testing Tree Levels Deep Arrays', () => {
+      expect(executeTest(
+        ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]'],
+        [[[0]]]
+      )).to.deep.equal({
+        matched: ['[0][0][0]'],
+        cbs: [{
+          key: '[0][0][0]',
+          value: 0,
+          parents: [[0], [[0]], [[[0]]]],
+          isMatch: true,
+          matches: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]'],
+          needles: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]']
+        }]
+      });
+    });
+
     it('Testing Tree Levels Deep with Two Level Star Match', () => {
       expect(executeTest(
         ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c', 'a.**'],
@@ -715,6 +732,30 @@ describe('Testing Find', () => {
           isMatch: true,
           matches: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**', 'a.**.c'],
           needles: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c', 'a.**']
+        }]
+      });
+    });
+
+    it('Testing Tree Levels Deep with Two Level Star Match Arrays', () => {
+      expect(executeTest(
+        ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]', '[0].**'],
+        [[[0]]]
+      )).to.deep.equal({
+        matched: ['[0][0]', '[0][0][0]'],
+        cbs: [{
+          key: '[0][0]',
+          value: [0],
+          parents: [[[0]], [[[0]]]],
+          isMatch: true,
+          matches: ['[0].**'],
+          needles: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]', '[0].**']
+        }, {
+          key: '[0][0][0]',
+          value: 0,
+          parents: [[0], [[0]], [[[0]]]],
+          isMatch: true,
+          matches: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**', '[0].**[0]'],
+          needles: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]', '[0].**']
         }]
       });
     });
