@@ -47,7 +47,7 @@ describe('Testing compiler', () => {
     });
   });
 
-  it('Testing Star Inout', () => {
+  it('Testing Star Input', () => {
     const input = [
       'a.b',
       '**.b',

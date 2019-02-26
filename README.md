@@ -82,7 +82,7 @@ Called for every final result.
 Type: `function`<br>
 Default: `undefined`
 
-Called when `useArraySelector` is `false` for every array that contains non-nested entries matched by a needle.
+Called when `useArraySelector` is `false` for every array that contains at least one non-nested entry matched by a needle.
 
 #### joined
 
