@@ -620,47 +620,85 @@ describe('Testing Find', () => {
     });
   });
 
-  it('Testing De-duplication', () => {
-    const result = [];
-    expect(objectScan([
-      'a.b',
-      '**.b',
-      '*.b',
-      '*a.b',
-      'a*.b',
-      'a',
-      '**',
-      '*',
-      '*a',
-      'a*'
-    ], {
-      callbackFn: (key, value, {
-        parents, isMatch, matches, needles
-      }) => {
-        result.push({
-          key, value, parents, isMatch, matches, needles
-        });
-      }
-    })({
-      a: { b: 'c' }
-    })).to.deep.equal([
-      'a', 'a.b'
-    ]);
-    expect(result).to.deep.equal([{
-      key: 'a',
-      value: { b: 'c' },
-      parents: [{ a: { b: 'c' } }],
-      isMatch: true,
-      matches: ['a', '**', '*', '*a', 'a*'],
-      needles: ['a.b', 'a', '**.b', '**', '*.b', '*', '*a.b', '*a', 'a*.b', 'a*']
-    }, {
-      key: 'a.b',
-      value: 'c',
-      parents: [{ b: 'c' }, { a: { b: 'c' } }],
-      isMatch: true,
-      matches: ['a.b', '**', '**.b', '*.b', '*a.b', 'a*.b'],
-      needles: ['a.b', '**.b', '**', '*.b', '*a.b', 'a*.b']
-    }]);
+  describe('Testing Multi Target Matching', () => {
+    const executeTest = (ndls, input) => {
+      const cbs = [];
+      const matched = objectScan(ndls, {
+        callbackFn: (key, value, {
+          parents, isMatch, matches, needles
+        }) => {
+          cbs.push({
+            key, value, parents, isMatch, matches, needles
+          });
+        }
+      })(input);
+      return { matched, cbs };
+    };
+
+    it('Testing Two Levels Deep', () => {
+      expect(executeTest(
+        ['a.b', '**.b', '*.b', '*a.b', 'a*.b', 'a', '**', '*', '*a', 'a*'],
+        { a: { b: 'c' } }
+      )).to.deep.equal({
+        matched: ['a', 'a.b'],
+        cbs: [{
+          key: 'a',
+          value: { b: 'c' },
+          parents: [{ a: { b: 'c' } }],
+          isMatch: true,
+          matches: ['a', '**', '*', '*a', 'a*'],
+          needles: ['a.b', 'a', '**.b', '**', '*.b', '*', '*a.b', '*a', 'a*.b', 'a*']
+        }, {
+          key: 'a.b',
+          value: 'c',
+          parents: [{ b: 'c' }, { a: { b: 'c' } }],
+          isMatch: true,
+          matches: ['a.b', '**', '**.b', '*.b', '*a.b', 'a*.b'],
+          needles: ['a.b', '**.b', '**', '*.b', '*a.b', 'a*.b']
+        }]
+      });
+    });
+
+    it('Testing Tree Levels Deep', () => {
+      expect(executeTest(
+        ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c'],
+        { a: { b: { c: 'd' } } }
+      )).to.deep.equal({
+        matched: ['a.b.c'],
+        cbs: [{
+          key: 'a.b.c',
+          value: 'd',
+          parents: [{ c: 'd' }, { b: { c: 'd' } }, { a: { b: { c: 'd' } } }],
+          isMatch: true,
+          matches: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c'],
+          needles: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c']
+        }]
+      });
+    });
+
+    it('Testing Tree Levels Deep with Two Level Star Match', () => {
+      expect(executeTest(
+        ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c', 'a.**'],
+        { a: { b: { c: 'd' } } }
+      )).to.deep.equal({
+        matched: ['a.b', 'a.b.c'],
+        cbs: [{
+          key: 'a.b',
+          value: { c: 'd' },
+          parents: [{ b: { c: 'd' } }, { a: { b: { c: 'd' } } }],
+          isMatch: true,
+          matches: ['a.**'],
+          needles: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c', 'a.**']
+        }, {
+          key: 'a.b.c',
+          value: 'd',
+          parents: [{ c: 'd' }, { b: { c: 'd' } }, { a: { b: { c: 'd' } } }],
+          isMatch: true,
+          matches: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**', 'a.**.c'],
+          needles: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c', 'a.**']
+        }]
+      });
+    });
   });
 
   it('Testing Misc Tests', () => {
