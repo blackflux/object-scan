@@ -84,7 +84,6 @@ describe('Testing compiler', () => {
       '[0*]'
     ];
     const tower = compiler.compile(input);
-    console.log(JSON.stringify(tower));
     expect(tower).to.deep.equal({
       '[0]': { '[1]': {} },
       '**': { '[1]': {} },
