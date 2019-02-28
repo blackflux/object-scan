@@ -25,11 +25,6 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
 
   const result = [];
   if (ctx.useArraySelector === false && Array.isArray(haystack)) {
-    if (ctx.arrayCallbackFn !== undefined) {
-      if (searches.some(s => compiler.isMatch(s))) {
-        ctx.arrayCallbackFn(formatPath(pathIn, ctx), haystack, compiler.getMeta(searches, parents));
-      }
-    }
     if (recurseHaystack) {
       for (let i = 0; i < haystack.length; i += 1) {
         result.push(...find(haystack[i], searches, pathIn.concat(i), parents, ctx));
@@ -80,7 +75,6 @@ module.exports = (needles, {
   filterFn = undefined,
   breakFn = undefined,
   callbackFn = undefined,
-  arrayCallbackFn = undefined,
   joined = true,
   escapePaths = true,
   useArraySelector = true
@@ -90,7 +84,6 @@ module.exports = (needles, {
     filterFn,
     breakFn,
     callbackFn,
-    arrayCallbackFn,
     joined,
     escapePaths,
     useArraySelector

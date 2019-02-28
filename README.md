@@ -75,13 +75,6 @@ Default: `undefined`
 
 Called for every final result.
 
-#### arrayCallbackFn
-
-Type: `function`<br>
-Default: `undefined`
-
-Called when `useArraySelector` is `false` for every array where the direct non-array parent is matched.
-
 #### joined
 
 Type: `boolean`<br>
