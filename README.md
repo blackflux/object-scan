@@ -60,6 +60,13 @@ Iff function is defined and returns false, the entry is excluded from the final 
 
 This method is conceptually similar to [Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
 
+#### callbackFn
+
+Type: `function`<br>
+Default: `undefined`
+
+Called for every final result.
+
 #### breakFn
 
 Type: `function`<br>
@@ -67,13 +74,6 @@ Default: `undefined`
 
 Called for every key that could be (part of) a matching key.
 If function is defined and returns true, all nested entries under the current key are excluded from search and from the final result.
-
-#### callbackFn
-
-Type: `function`<br>
-Default: `undefined`
-
-Called for every final result.
 
 #### joined
 

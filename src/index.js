@@ -73,8 +73,8 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
 
 module.exports = (needles, {
   filterFn = undefined,
-  breakFn = undefined,
   callbackFn = undefined,
+  breakFn = undefined,
   joined = true,
   escapePaths = true,
   useArraySelector = true
@@ -82,8 +82,8 @@ module.exports = (needles, {
   const search = compiler.compile(new Set(needles)); // keep separate for performance
   return haystack => find(haystack, [search], [], [], {
     filterFn,
-    breakFn,
     callbackFn,
+    breakFn,
     joined,
     escapePaths,
     useArraySelector
