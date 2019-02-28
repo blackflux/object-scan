@@ -80,7 +80,7 @@ Called for every final result.
 Type: `function`<br>
 Default: `undefined`
 
-Called when `useArraySelector` is `false` for every array that contains at least one direct child matched by a needle.
+Called when `useArraySelector` is `false` for every array where the direct non-array parent is matched.
 
 #### joined
 
