@@ -46,24 +46,24 @@ describe('Testing Find', () => {
   it('Testing Key Wildcard', () => {
     const find = objectScan(['pa*nt*']);
     expect(find(haystack)).to.deep.equal([
-      'parent1',
-      'parent2'
+      'parent2',
+      'parent1'
     ]);
   });
 
   it('Testing Top Level Nested Array', () => {
     const find = objectScan(['**']);
     expect(find([[0, 1, 2, 3], [0, 1, 2, 3]])).to.deep.equal([
-      '[0]',
-      '[0][0]',
-      '[0][1]',
-      '[0][2]',
-      '[0][3]',
-      '[1]',
-      '[1][0]',
-      '[1][1]',
+      '[1][3]',
       '[1][2]',
-      '[1][3]'
+      '[1][1]',
+      '[1][0]',
+      '[1]',
+      '[0][3]',
+      '[0][2]',
+      '[0][1]',
+      '[0][0]',
+      '[0]'
     ]);
   });
 
@@ -74,23 +74,23 @@ describe('Testing Find', () => {
         nestedArray: [['k1', 1], ['k2', 2], ['k3', 3], ['k4', 4]]
       }
     })).to.deep.equal([
-      'key.nestedArray[0][1]',
-      'key.nestedArray[1][1]',
+      'key.nestedArray[3][1]',
       'key.nestedArray[2][1]',
-      'key.nestedArray[3][1]'
+      'key.nestedArray[1][1]',
+      'key.nestedArray[0][1]'
     ]);
   });
 
   it('Testing Array Wildcard', () => {
     const find = objectScan(['**[1*]']);
     expect(find(haystack)).to.deep.equal([
-      'array1[1]',
-      'array2.nested[1]',
-      'array3[1]',
-      'array4[1]',
-      'array4[10]',
+      'array4[12]',
       'array4[11]',
-      'array4[12]'
+      'array4[10]',
+      'array4[1]',
+      'array3[1]',
+      'array2.nested[1]',
+      'array1[1]'
     ]);
   });
 
@@ -98,58 +98,58 @@ describe('Testing Find', () => {
     const maps = JSON.parse(fs.readFileSync(path.join(__dirname, 'resources', 'maps.json'), 'utf8'));
     const med = JSON.parse(fs.readFileSync(path.join(__dirname, 'resources', 'med.json'), 'utf8'));
     expect(objectScan(['**.lat'])(maps)).to.deep.equal([
-      'results[0].geometry.location.lat',
+      'results[0].geometry.viewport.southwest.lat',
       'results[0].geometry.viewport.northeast.lat',
-      'results[0].geometry.viewport.southwest.lat'
+      'results[0].geometry.location.lat'
     ]);
     expect(objectScan(['**[{1,2}]'])(maps)).to.deep.equal([
-      'results[0].address_components[1]',
-      'results[0].address_components[2]',
-      'results[0].address_components[3].types[1]',
-      'results[0].address_components[4].types[1]',
-      'results[0].address_components[5].types[1]',
+      'results[0].types[1]',
       'results[0].address_components[6].types[1]',
-      'results[0].types[1]'
+      'results[0].address_components[5].types[1]',
+      'results[0].address_components[4].types[1]',
+      'results[0].address_components[3].types[1]',
+      'results[0].address_components[2]',
+      'results[0].address_components[1]'
     ]);
     expect(objectScan(['**.*_*[{0,7}].*_name'])(maps)).to.deep.equal([
-      'results[0].address_components[0].long_name',
-      'results[0].address_components[0].short_name',
+      'results[0].address_components[7].short_name',
       'results[0].address_components[7].long_name',
-      'results[0].address_components[7].short_name'
+      'results[0].address_components[0].short_name',
+      'results[0].address_components[0].long_name'
     ]);
     expect(objectScan(['**.name'])(med)).to.deep.equal([
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug[0].name',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2[0].name',
+      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2[0].name',
       'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug[0].name',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2[0].name'
+      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2[0].name',
+      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug[0].name'
     ]);
     expect(objectScan(['**[0]'])(med)).to.deep.equal([
-      'problems[0]',
-      'problems[0].Diabetes[0]',
-      'problems[0].Diabetes[0].medications[0]',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0]',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0]',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug[0]',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2[0]',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0]',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug[0]',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2[0]',
+      'problems[0].Asthma[0]',
       'problems[0].Diabetes[0].labs[0]',
-      'problems[0].Asthma[0]'
+      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2[0]',
+      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug[0]',
+      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0]',
+      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2[0]',
+      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug[0]',
+      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0]',
+      'problems[0].Diabetes[0].medications[0].medicationsClasses[0]',
+      'problems[0].Diabetes[0].medications[0]',
+      'problems[0].Diabetes[0]',
+      'problems[0]'
     ]);
     expect(objectScan(['**.className*[*].associatedDrug*'])(med)).to.deep.equal([
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2',
+      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2',
       'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2'
+      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2',
+      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug'
     ]);
     expect(objectScan(['**.*at*'])(med)).to.deep.equal([
-      'problems[0].Diabetes[0].medications',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2',
+      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2',
       'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2'
+      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2',
+      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug',
+      'problems[0].Diabetes[0].medications[0].medicationsClasses',
+      'problems[0].Diabetes[0].medications'
     ]);
   });
 
@@ -233,7 +233,7 @@ describe('Testing Find', () => {
       'pa**nt**': null
     };
     expect(objectScan(['pa\\*nt\\*'])(input)).to.deep.equal(['pa\\*nt\\*']);
-    expect(objectScan(['pa*nt*'])(input)).to.deep.equal(['parent', 'pa\\*nt\\*', 'pa\\*\\*nt\\*\\*']);
+    expect(objectScan(['pa*nt*'])(input)).to.deep.equal(['pa\\*\\*nt\\*\\*', 'pa\\*nt\\*', 'parent']);
   });
 
   it('Testing Results Unique', () => {
@@ -246,61 +246,56 @@ describe('Testing Find', () => {
   it('Testing Path Star', () => {
     const find = objectScan(['*.child']);
     expect(find(haystack)).to.deep.equal([
-      'parent1.child',
-      'parent2.child'
+      'parent2.child',
+      'parent1.child'
     ]);
   });
 
   it('Testing Path Multi Matching', () => {
     const find = objectScan(['*.child', '*.parent']);
     expect(find(haystack)).to.deep.equal([
-      'parent1.child',
+      'grandparent1.parent',
       'parent2.child',
-      'grandparent1.parent'
+      'parent1.child'
     ]);
   });
 
   it('Testing Path Or Matching', () => {
     const find = objectScan(['*.{child,parent}']);
     expect(find(haystack)).to.deep.equal([
-      'parent1.child',
+      'grandparent1.parent',
       'parent2.child',
-      'grandparent1.parent'
+      'parent1.child'
     ]);
   });
 
   it('Testing Path Double Star', () => {
     const find = objectScan(['**.child']);
     expect(find(haystack)).to.deep.equal([
-      'parent1.child',
+      'grandparent1.parent.child',
       'parent2.child',
-      'grandparent1.parent.child'
+      'parent1.child'
     ]);
   });
 
   it('Testing Path Double Star (Separated)', () => {
     const find = objectScan(['**.child'], { joined: false });
     expect(find(haystack)).to.deep.equal([
-      ['parent1', 'child'],
+      ['grandparent1', 'parent', 'child'],
       ['parent2', 'child'],
-      ['grandparent1', 'parent', 'child']
+      ['parent1', 'child']
     ]);
   });
 
   describe('Testing sorting', () => {
-    it('Testing number sort', () => {
-      const find = objectScan(['**'], { joined: false, sorted: true });
+    it('Testing array matches revered', () => {
+      const find = objectScan(['**'], { joined: false });
       expect(find([1, 2, 3])).to.deep.equal([[2], [1], [0]]);
     });
 
-    it('Testing string sort', () => {
-      const find = objectScan(['**'], { joined: false, sorted: true });
-      expect(find({ a: 1, b: 2, c: 3 })).to.deep.equal([['c'], ['b'], ['a']]);
-    });
-
-    it('Testing length sort', () => {
-      const find = objectScan(['**'], { joined: false, sorted: true });
-      expect(find({ a: { b: 1 }, c: 2 })).to.deep.equal([['a', 'b'], ['c'], ['a']]);
+    it('Testing inner matches before outer', () => {
+      const find = objectScan(['**'], { joined: false });
+      expect(find({ a: { b: 1 }, c: 2 })).to.deep.equal([['c'], ['a', 'b'], ['a']]);
     });
   });
 
@@ -454,8 +449,8 @@ describe('Testing Find', () => {
       const result = [];
       objectScan(pattern, { callbackFn: (k, v, { traversedBy }) => result.push(`${traversedBy} => ${k}`) })(input);
       expect(result).to.deep.equal([
-        '[*].*.child,[*].parent => [0].parent',
-        '[*].*.child => [0].parent.child'
+        '[*].*.child => [0].parent.child',
+        '[*].*.child,[*].parent => [0].parent'
       ]);
     });
 
@@ -481,8 +476,8 @@ describe('Testing Find', () => {
       const result = [];
       objectScan(pattern, { callbackFn: (k, v, { matchedBy }) => result.push(`${matchedBy} => ${k}`) })(input);
       expect(result).to.deep.equal([
-        '[*].parent => [0].parent',
-        '[*].*.child => [0].parent.child'
+        '[*].*.child => [0].parent.child',
+        '[*].parent => [0].parent'
       ]);
     });
 
@@ -516,26 +511,26 @@ describe('Testing Find', () => {
   it('Testing Array Top Level', () => {
     const find = objectScan(['[*]']);
     expect(find(haystack.array1)).to.deep.equal([
-      '[0]',
+      '[2]',
       '[1]',
-      '[2]'
+      '[0]'
     ]);
   });
 
   it('Testing Array Top Level Or', () => {
     const find = objectScan(['[{0,1}]']);
     expect(find(haystack.array1)).to.deep.equal([
-      '[0]',
-      '[1]'
+      '[1]',
+      '[0]'
     ]);
   });
 
   it('Testing Array Star', () => {
     const find = objectScan(['array1[*]']);
     expect(find(haystack)).to.deep.equal([
-      'array1[0]',
+      'array1[2]',
       'array1[1]',
-      'array1[2]'
+      'array1[0]'
     ]);
   });
 
@@ -549,17 +544,17 @@ describe('Testing Find', () => {
   it('Testing Array Nested Star', () => {
     const find = objectScan(['array2.nested[*]']);
     expect(find(haystack)).to.deep.equal([
-      'array2.nested[0]',
+      'array2.nested[2]',
       'array2.nested[1]',
-      'array2.nested[2]'
+      'array2.nested[0]'
     ]);
   });
 
   it('Testing Object Array', () => {
     const find = objectScan(['array3[*].item']);
     expect(find(haystack)).to.deep.equal([
-      'array3[0].item',
-      'array3[1].item'
+      'array3[1].item',
+      'array3[0].item'
     ]);
   });
 
@@ -568,9 +563,9 @@ describe('Testing Find', () => {
       filterFn: (key, value) => typeof value === 'string' && value === 'a'
     });
     expect(find(haystack)).to.deep.equal([
-      'simple',
+      'array2.nested[0]',
       'array1[0]',
-      'array2.nested[0]'
+      'simple'
     ]);
   });
 
@@ -592,18 +587,18 @@ describe('Testing Find', () => {
     it('Testing Escaped Comma', () => {
       const find = objectScan(['{a\\,b,c\\,d,f\\\\\\,g}']);
       expect(find({ 'a,b': 'c', 'c,d': 'e', 'f\\\\,g': 'h' })).to.deep.equal([
-        'a\\,b',
+        'f\\\\\\,g',
         'c\\,d',
-        'f\\\\\\,g'
+        'a\\,b'
       ]);
     });
 
     it('Testing Escaped Dot', () => {
       const find = objectScan(['{a\\.b,c\\.d,f\\\\\\.g}']);
       expect(find({ 'a.b': 'c', 'c.d': 'e', 'f\\\\.g': 'h' })).to.deep.equal([
-        'a\\.b',
+        'f\\\\\\.g',
         'c\\.d',
-        'f\\\\\\.g'
+        'a\\.b'
       ]);
     });
 
@@ -635,20 +630,20 @@ describe('Testing Find', () => {
         ['a.b', '**'],
         { a: { b: 'c' } }
       )).to.deep.equal({
-        matched: ['a', 'a.b'],
+        matched: ['a.b', 'a'],
         cbs: [{
-          key: 'a',
-          value: { b: 'c' },
-          parents: [{ a: { b: 'c' } }],
-          isMatch: true,
-          matchedBy: ['**'],
-          traversedBy: ['a.b', '**']
-        }, {
           key: 'a.b',
           value: 'c',
           parents: [{ b: 'c' }, { a: { b: 'c' } }],
           isMatch: true,
           matchedBy: ['a.b', '**'],
+          traversedBy: ['a.b', '**']
+        }, {
+          key: 'a',
+          value: { b: 'c' },
+          parents: [{ a: { b: 'c' } }],
+          isMatch: true,
+          matchedBy: ['**'],
           traversedBy: ['a.b', '**']
         }]
       });
@@ -659,21 +654,21 @@ describe('Testing Find', () => {
         ['a.b', '**.b', '*.b', '*a.b', 'a*.b', 'a', '**', '*', '*a', 'a*'],
         { a: { b: 'c' } }
       )).to.deep.equal({
-        matched: ['a', 'a.b'],
+        matched: ['a.b', 'a'],
         cbs: [{
-          key: 'a',
-          value: { b: 'c' },
-          parents: [{ a: { b: 'c' } }],
-          isMatch: true,
-          matchedBy: ['a', '**', '*', '*a', 'a*'],
-          traversedBy: ['a.b', 'a', '**.b', '**', '*.b', '*', '*a.b', '*a', 'a*.b', 'a*']
-        }, {
           key: 'a.b',
           value: 'c',
           parents: [{ b: 'c' }, { a: { b: 'c' } }],
           isMatch: true,
           matchedBy: ['a.b', '**', '**.b', '*.b', '*a.b', 'a*.b'],
           traversedBy: ['a.b', '**.b', '**', '*.b', '*a.b', 'a*.b']
+        }, {
+          key: 'a',
+          value: { b: 'c' },
+          parents: [{ a: { b: 'c' } }],
+          isMatch: true,
+          matchedBy: ['a', '**', '*', '*a', 'a*'],
+          traversedBy: ['a.b', 'a', '**.b', '**', '*.b', '*', '*a.b', '*a', 'a*.b', 'a*']
         }]
       });
     });
@@ -717,20 +712,20 @@ describe('Testing Find', () => {
         ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c', 'a.**'],
         { a: { b: { c: 'd' } } }
       )).to.deep.equal({
-        matched: ['a.b', 'a.b.c'],
+        matched: ['a.b.c', 'a.b'],
         cbs: [{
-          key: 'a.b',
-          value: { c: 'd' },
-          parents: [{ b: { c: 'd' } }, { a: { b: { c: 'd' } } }],
-          isMatch: true,
-          matchedBy: ['a.**'],
-          traversedBy: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c', 'a.**']
-        }, {
           key: 'a.b.c',
           value: 'd',
           parents: [{ c: 'd' }, { b: { c: 'd' } }, { a: { b: { c: 'd' } } }],
           isMatch: true,
           matchedBy: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**', 'a.**.c'],
+          traversedBy: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c', 'a.**']
+        }, {
+          key: 'a.b',
+          value: { c: 'd' },
+          parents: [{ b: { c: 'd' } }, { a: { b: { c: 'd' } } }],
+          isMatch: true,
+          matchedBy: ['a.**'],
           traversedBy: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c', 'a.**']
         }]
       });
@@ -741,20 +736,20 @@ describe('Testing Find', () => {
         ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]', '[0].**'],
         [[[0]]]
       )).to.deep.equal({
-        matched: ['[0][0]', '[0][0][0]'],
+        matched: ['[0][0][0]', '[0][0]'],
         cbs: [{
-          key: '[0][0]',
-          value: [0],
-          parents: [[[0]], [[[0]]]],
-          isMatch: true,
-          matchedBy: ['[0].**'],
-          traversedBy: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]', '[0].**']
-        }, {
           key: '[0][0][0]',
           value: 0,
           parents: [[0], [[0]], [[[0]]]],
           isMatch: true,
           matchedBy: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**', '[0].**[0]'],
+          traversedBy: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]', '[0].**']
+        }, {
+          key: '[0][0]',
+          value: [0],
+          parents: [[[0]], [[[0]]]],
+          isMatch: true,
+          matchedBy: ['[0].**'],
           traversedBy: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]', '[0].**']
         }]
       });
@@ -775,60 +770,60 @@ describe('Testing Find', () => {
       }
     };
     expect(objectScan(['a.**'])(input)).to.deep.equal([
-      'a.b',
-      'a.b.c',
-      'a.b.e',
-      'a.b.g',
-      'a.b.i',
-      'a.b.i.j',
-      'a.b.l',
+      'a.i',
       'a.b.l.g',
-      'a.i'
+      'a.b.l',
+      'a.b.i.j',
+      'a.b.i',
+      'a.b.g',
+      'a.b.e',
+      'a.b.c',
+      'a.b'
     ]);
-    expect(objectScan(['a.*'])(input)).to.deep.equal(['a.b', 'a.i']);
+    expect(objectScan(['a.*'])(input)).to.deep.equal(['a.i', 'a.b']);
     expect(objectScan(['a.b.c'])(input)).to.deep.equal(['a.b.c']);
-    expect(objectScan(['**.{b,i}'])(input)).to.deep.equal(['a.b', 'a.b.i', 'a.i']);
-    expect(objectScan(['*.{b,i}'])(input)).to.deep.equal(['a.b', 'a.i']);
-    expect(objectScan(['a.*.{c,e}'])(input)).to.deep.equal(['a.b.c', 'a.b.e']);
+    expect(objectScan(['**.{b,i}'])(input)).to.deep.equal(['a.i', 'a.b.i', 'a.b']);
+    expect(objectScan(['*.{b,i}'])(input)).to.deep.equal(['a.i', 'a.b']);
+    expect(objectScan(['a.*.{c,e}'])(input)).to.deep.equal(['a.b.e', 'a.b.c']);
     expect(objectScan(['a.*.g'])(input)).to.deep.equal(['a.b.g']);
-    expect(objectScan(['a.**.g'])(input)).to.deep.equal(['a.b.g', 'a.b.l.g']);
+    expect(objectScan(['a.**.g'])(input)).to.deep.equal(['a.b.l.g', 'a.b.g']);
     expect(objectScan(['*'])(input)).to.deep.equal(['a']);
     expect(objectScan(['a'])(input)).to.deep.equal(['a']);
     expect(objectScan(['c'])(input)).to.deep.equal([]);
     expect(objectScan(['**'])(input)).to.deep.equal([
-      'a',
-      'a.b',
-      'a.b.c',
-      'a.b.e',
-      'a.b.g',
-      'a.b.i',
-      'a.b.i.j',
-      'a.b.l',
+      'a.i',
       'a.b.l.g',
-      'a.i'
+      'a.b.l',
+      'a.b.i.j',
+      'a.b.i',
+      'a.b.g',
+      'a.b.e',
+      'a.b.c',
+      'a.b',
+      'a'
     ]);
     expect(objectScan([])({ a: 'a', b: 'b', c: 'c' })).to.deep.equal([]);
-    expect(objectScan(['b*'])({ foo: 'a', bar: 'b', baz: 'c' })).to.deep.equal(['bar', 'baz']);
+    expect(objectScan(['b*'])({ foo: 'a', bar: 'b', baz: 'c' })).to.deep.equal(['baz', 'bar']);
     expect(objectScan(['b'])({ foo: 'a', bar: 'b', baz: 'c' })).to.deep.equal([]);
-    expect(objectScan(['b', 'c'])({ a: 'a', b: 'b', c: 'c' })).to.deep.equal(['b', 'c']);
+    expect(objectScan(['b', 'c'])({ a: 'a', b: 'b', c: 'c' })).to.deep.equal(['c', 'b']);
   });
 
   it('Testing Readme Example', () => {
     const input = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
-    expect(objectScan(['*'])(input)).to.deep.equal(['a', 'k']);
-    expect(objectScan(['a.*.{c,f}'])(input)).to.deep.equal(['a.b.c', 'a.e.f']);
-    expect(objectScan(['a.*.{c,f}'], { joined: false })(input)).to.deep.equal([['a', 'b', 'c'], ['a', 'e', 'f']]);
+    expect(objectScan(['*'])(input)).to.deep.equal(['k', 'a']);
+    expect(objectScan(['a.*.{c,f}'])(input)).to.deep.equal(['a.e.f', 'a.b.c']);
+    expect(objectScan(['a.*.{c,f}'], { joined: false })(input)).to.deep.equal([['a', 'e', 'f'], ['a', 'b', 'c']]);
     expect(objectScan(['a.*.f'])(input)).to.deep.equal(['a.e.f']);
-    expect(objectScan(['*.*.*'])(input)).to.deep.equal(['a.b.c', 'a.e.f']);
+    expect(objectScan(['*.*.*'])(input)).to.deep.equal(['a.e.f', 'a.b.c']);
     expect(objectScan(['**'])(input)).to
-      .deep.equal(['a', 'a.b', 'a.b.c', 'a.e', 'a.e.f', 'a.h', 'a.h[0]', 'a.h[1]', 'k']);
+      .deep.equal(['k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b.c', 'a.b', 'a']);
     expect(objectScan(['**.f'])(input)).to.deep.equal(['a.e.f']);
     expect(objectScan(['**'], { filterFn: (key, value) => typeof value === 'string' })(input)).to
-      .deep.equal(['a.b.c', 'a.e.f', 'a.h[0]', 'a.h[1]', 'k']);
+      .deep.equal(['k', 'a.h[1]', 'a.h[0]', 'a.e.f', 'a.b.c']);
     expect(objectScan(['**'], { breakFn: key => key === 'a.b' })(input)).to
-      .deep.equal(['a', 'a.b', 'a.e', 'a.e.f', 'a.h', 'a.h[0]', 'a.h[1]', 'k']);
-    expect(objectScan(['**[*]'])(input)).to.deep.equal(['a.h[0]', 'a.h[1]']);
-    expect(objectScan(['*.*[*]'])(input)).to.deep.equal(['a.h[0]', 'a.h[1]']);
+      .deep.equal(['k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b', 'a']);
+    expect(objectScan(['**[*]'])(input)).to.deep.equal(['a.h[1]', 'a.h[0]']);
+    expect(objectScan(['*.*[*]'])(input)).to.deep.equal(['a.h[1]', 'a.h[0]']);
     expect(objectScan(['*[*]'])(input)).to.deep.equal([]);
   });
 });
