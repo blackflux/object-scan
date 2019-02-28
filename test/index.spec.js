@@ -394,6 +394,26 @@ describe('Testing Find', () => {
     it('Testing useArraySelector = true, breakFn', () => {
       expect(execTest(true, () => false)).to.deep.equal(['', 'child', 'child[0]', 'child[0].id']);
     });
+
+    it('Testing useArraySelector = false invokes breakFn but not callbackFn', () => {
+      const result = [];
+      objectScan(['**'], {
+        useArraySelector: false,
+        callbackFn: k => result.push(['callbackFn', k]),
+        breakFn: k => result.push(['breakFn', k])
+      })({
+        tag: [[{ id: 1 }]]
+      });
+      expect(result).to.deep.equal([
+        ['breakFn', ''],
+        ['breakFn', 'tag'],
+        ['breakFn', 'tag[0]'],
+        ['breakFn', 'tag[0][0]'],
+        ['breakFn', 'tag[0][0].id'],
+        ['callbackFn', 'tag[0][0].id'],
+        ['callbackFn', 'tag[0][0]']
+      ]);
+    });
   });
 
   describe('Testing Fn traversedBy', () => {
