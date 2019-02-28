@@ -313,51 +313,6 @@ describe('Testing Find', () => {
     });
   });
 
-  describe('Testing arrayCallbackFn', () => {
-    const input = {
-      array: [{ id: 1 }, { id: 2 }]
-    };
-    const tester = (useArraySelector, needles) => {
-      const result = {
-        default: [],
-        array: []
-      };
-      objectScan(needles, {
-        useArraySelector,
-        callbackFn: (k, v) => {
-          result.default.push(k);
-        },
-        arrayCallbackFn: (k, v) => {
-          result.array.push(k);
-        }
-      })(input);
-      return result;
-    };
-
-    it('Testing arrayCallbackFn with useArraySelector == true', () => {
-      expect(tester(true, ['array'])).to.deep.equal({
-        default: ['array'],
-        array: []
-      });
-    });
-
-    describe('Testing arrayCallbackFn with useArraySelector == false', () => {
-      it('Test arrayCallbackFn, matched array', () => {
-        expect(tester(false, ['array'])).to.deep.equal({
-          default: ['array[0]', 'array[1]'],
-          array: ['array']
-        });
-      });
-
-      it('Test arrayCallbackFn, not matched array', () => {
-        expect(tester(false, ['array.id'])).to.deep.equal({
-          default: ['array[0].id', 'array[1].id'],
-          array: []
-        });
-      });
-    });
-  });
-
   describe('Testing Fn parents', () => {
     describe('Testing Object Target', () => {
       const input = { one: [{ child: 'b' }] };
@@ -438,6 +393,26 @@ describe('Testing Find', () => {
 
     it('Testing useArraySelector = true, breakFn', () => {
       expect(execTest(true, () => false)).to.deep.equal(['', 'child', 'child[0]', 'child[0].id']);
+    });
+
+    it('Testing useArraySelector = false invokes breakFn but not callbackFn', () => {
+      const result = [];
+      objectScan(['**'], {
+        useArraySelector: false,
+        callbackFn: k => result.push(['callbackFn', k]),
+        breakFn: k => result.push(['breakFn', k])
+      })({
+        tag: [[{ id: 1 }]]
+      });
+      expect(result).to.deep.equal([
+        ['breakFn', ''],
+        ['breakFn', 'tag'],
+        ['breakFn', 'tag[0]'],
+        ['breakFn', 'tag[0][0]'],
+        ['breakFn', 'tag[0][0].id'],
+        ['callbackFn', 'tag[0][0].id'],
+        ['callbackFn', 'tag[0][0]']
+      ]);
     });
   });
 
