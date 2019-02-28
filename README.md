@@ -34,6 +34,7 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 - Key and index wildcard matching with `*` and `[*]`
 - Partial key and index wildcard matching, e.g. `mark*` or `[1*]`
 - Infinite nested matching with `**`
+- Matches ordered so that they can safely be deleted from the input in order
 - Simple or-clause for key and index with `{a,b}` and `[{0,1}]`
 - Input is traversed exactly once and only unique results are returned.
 - Full support for escaping
@@ -90,15 +91,6 @@ Can be set to false to return each key as a list. When dealing with special char
 
 Important: Setting this to `false` improves performance.
 
-#### sorted
-
-Type: `boolean`<br>
-Default: `false`
-
-When set to `true`, the results are ordered in a way that they can be safely deleted from the input in order.
-
-Important: Can only be set to `true` when joined is set to `false`.
-
 #### escapePaths
 
 Type: `boolean`<br>
@@ -136,39 +128,39 @@ const obj = {
 
 // top level keys
 objectScan(['*'])(obj);
-// => ["a", "k"]
+// => ["k", "a"]
 
 // nested keys
 objectScan(['a.*.f'])(obj);
 // => ["a.e.f"]
 objectScan(['*.*.*'])(obj);
-// => ["a.b.c", "a.e.f"]
+// => ["a.e.f", "a.b.c"]
 
 // or filter
 objectScan(['a.*.{c,f}'])(obj);
-// => ["a.b.c", "a.e.f"]
+// => ["a.e.f", "a.b.c"]
 objectScan(['a.*.{c,f}'], { joined: false })(obj);
-// => [["a", "b", "c"], ["a", "e", "f"]]
+// => [["a", "e", "f"], ["a", "b", "c"]]
 
 // list filter
 objectScan(['*.*[*]'])(obj);
-// => ["a.h[0]", "a.h[1]"]
+// => ["a.h[1]", "a.h[0]"]
 objectScan(['*[*]'])(obj);
 // => []
 
 // deep star filter
 objectScan(['**'])(obj);
-// => ["a", "a.b", "a.b.c", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]
+// => ["k", "a.h[1]", "a.h[0]", "a.h", "a.e.f", "a.e", "a.b.c", "a.b", "a"]
 objectScan(['**.f'])(obj);
 // => ["a.e.f"]
 objectScan(['**[*]'])(obj);
-// => ["a.h[0]", "a.h[1]"]
+// => ["a.h[1]", "a.h[0]"]
 
 // value function
 objectScan(['**'], { filterFn: (key, value) => typeof value === 'string' })(obj);
-// => ["a.b.c", "a.e.f", "a.h[0]", "a.h[1]", "k"]
+// => ["k", "a.h[1]", "a.h[0]", "a.e.f", "a.b.c"]
 objectScan(['**'], { breakFn: key => key === 'a.b' })(obj);
-// => ["a", "a.b", "a.e", "a.e.f", "a.h", "a.h[0]", "a.h[1]", "k"]
+// => ["k", "a.h[1]", "a.h[0]", "a.h", "a.e.f", "a.e", "a.b", "a"]
 ```
 
 ## Edge Cases

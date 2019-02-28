@@ -1,6 +1,5 @@
 const assert = require('assert');
 const compiler = require('./util/compiler');
-const sortFn = require('./util/sort-fn');
 
 const escape = input => String(input).replace(/[,.*[\]{}]/g, '\\$&');
 
@@ -43,21 +42,10 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
     result.push(...find(haystack, [searches[0]['']], pathIn, parents, ctx));
   }
 
-  if (searches.some(s => compiler.isMatch(s))) {
-    if (
-      ctx.filterFn === undefined
-      || ctx.filterFn(formatPath(pathIn, ctx), haystack, compiler.getMeta(searches, parents)) !== false
-    ) {
-      if (ctx.callbackFn !== undefined) {
-        ctx.callbackFn(formatPath(pathIn, ctx), haystack, compiler.getMeta(searches, parents));
-      }
-      result.push(formatPath(pathIn, ctx));
-    }
-  }
   if (recurseHaystack && haystack instanceof Object) {
     const isArray = Array.isArray(haystack);
     const parentsOut = [haystack].concat(parents);
-    Object.entries(haystack).forEach(([key, value]) => {
+    Object.entries(haystack).reverse().forEach(([key, value]) => {
       const pathOut = pathIn.concat(isArray ? parseInt(key, 10) : key);
       result.push(...find(value, searches.reduce((p, s) => {
         Object.entries(s).forEach(([entry, subSearch]) => {
@@ -72,6 +60,19 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
       }, []), pathOut, parentsOut, ctx));
     });
   }
+
+  if (searches.some(s => compiler.isMatch(s))) {
+    if (
+      ctx.filterFn === undefined
+      || ctx.filterFn(formatPath(pathIn, ctx), haystack, compiler.getMeta(searches, parents)) !== false
+    ) {
+      if (ctx.callbackFn !== undefined) {
+        ctx.callbackFn(formatPath(pathIn, ctx), haystack, compiler.getMeta(searches, parents));
+      }
+      result.push(formatPath(pathIn, ctx));
+    }
+  }
+
   return result;
 };
 
@@ -81,22 +82,17 @@ module.exports = (needles, {
   callbackFn = undefined,
   arrayCallbackFn = undefined,
   joined = true,
-  sorted = false,
   escapePaths = true,
   useArraySelector = true
 } = {}) => {
-  assert(sorted === false || joined === false, 'Sorted can only be used with joined set to false');
   const search = compiler.compile(new Set(needles)); // keep separate for performance
-  return (haystack) => {
-    const result = find(haystack, [search], [], [], {
-      filterFn,
-      breakFn,
-      callbackFn,
-      arrayCallbackFn,
-      joined,
-      escapePaths,
-      useArraySelector
-    });
-    return sorted === true ? result.sort(sortFn) : result;
-  };
+  return haystack => find(haystack, [search], [], [], {
+    filterFn,
+    breakFn,
+    callbackFn,
+    arrayCallbackFn,
+    joined,
+    escapePaths,
+    useArraySelector
+  });
 };
