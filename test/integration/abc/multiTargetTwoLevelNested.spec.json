@@ -1,0 +1,94 @@
+{
+  "needles": ["a.b", "**.b", "*.b", "*a.b", "a*.b", "a", "**", "*", "*a", "a*"],
+  "options": {
+    "log": [
+      "key",
+      "value",
+      "parents",
+      "isMatch",
+      "matchedBy",
+      "traversedBy"
+    ]
+  },
+  "result": ["a.b", "a"],
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "value": {"a": {"b": "c"}},
+      "isMatch": false,
+      "matchedBy": [],
+      "traversedBy": [
+        "a.b",
+        "**.b",
+        "*.b",
+        "*a.b",
+        "a*.b",
+        "a",
+        "**",
+        "*",
+        "*a",
+        "a*"
+      ],
+      "parents": []
+    },
+    {
+      "type": "breakFn",
+      "key": "a",
+      "value": {"b": "c"},
+      "isMatch": true,
+      "matchedBy": ["a", "**", "*", "*a", "a*"],
+      "traversedBy": [
+        "a.b",
+        "a",
+        "**.b",
+        "**",
+        "*.b",
+        "*",
+        "*a.b",
+        "*a",
+        "a*.b",
+        "a*"
+      ],
+      "parents": [{"a": {"b": "c"}}]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.b",
+      "value": "c",
+      "isMatch": true,
+      "matchedBy": ["a.b", "**", "**.b", "*.b", "*a.b", "a*.b"],
+      "traversedBy": ["a.b", "**.b", "**", "*.b", "*a.b", "a*.b"],
+      "parents": [{"b": "c"}, {"a": {"b": "c"}}]
+    },
+    {
+      "type": "filterFn",
+      "key": "a.b",
+      "value": "c",
+      "isMatch": true,
+      "matchedBy": ["a.b", "**", "**.b", "*.b", "*a.b", "a*.b"],
+      "traversedBy": ["a.b", "**.b", "**", "*.b", "*a.b", "a*.b"],
+      "parents": [{"b": "c"}, {"a": {"b": "c"}}]
+    },
+    {
+      "type": "filterFn",
+      "key": "a",
+      "value": {"b": "c"},
+      "isMatch": true,
+      "matchedBy": ["a", "**", "*", "*a", "a*"],
+      "traversedBy": [
+        "a.b",
+        "a",
+        "**.b",
+        "**",
+        "*.b",
+        "*",
+        "*a.b",
+        "*a",
+        "a*.b",
+        "a*"
+      ],
+      "parents": [{"a": {"b": "c"}}]
+    }
+  ]
+}

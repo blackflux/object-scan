@@ -42,7 +42,7 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
     const parentsOut = [haystack].concat(parents);
     Object.entries(haystack).reverse().forEach(([key, value]) => {
       const pathOut = pathIn.concat(isArray ? parseInt(key, 10) : key);
-      result.push(...find(value, searches.reduce((p, s) => {
+      const searchesOut = searches.reduce((p, s) => {
         Object.entries(s).forEach(([entry, subSearch]) => {
           if (entry === '**') {
             p.push(compiler.getStarRecursion(subSearch));
@@ -52,7 +52,10 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
           }
         });
         return p;
-      }, []), pathOut, parentsOut, ctx));
+      }, []);
+      if (searchesOut.length !== 0) {
+        result.push(...find(value, searchesOut, pathOut, parentsOut, ctx));
+      }
     });
   }
 
@@ -61,9 +64,6 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
       ctx.filterFn === undefined
       || ctx.filterFn(formatPath(pathIn, ctx), haystack, compiler.getMeta(searches, parents)) !== false
     ) {
-      if (ctx.callbackFn !== undefined) {
-        ctx.callbackFn(formatPath(pathIn, ctx), haystack, compiler.getMeta(searches, parents));
-      }
       result.push(formatPath(pathIn, ctx));
     }
   }
@@ -71,21 +71,21 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
   return result;
 };
 
-module.exports = (needles, {
-  filterFn = undefined,
-  callbackFn = undefined,
-  breakFn = undefined,
-  joined = true,
-  escapePaths = true,
-  useArraySelector = true
-} = {}) => {
+module.exports = (needles, opts) => {
+  const ctx = Object.assign({
+    filterFn: undefined,
+    breakFn: undefined,
+    joined: true,
+    escapePaths: true,
+    useArraySelector: true
+  }, opts);
+  assert(Object.keys(ctx).length === 5, 'Unexpected Option provided!');
+  assert(['function', 'undefined'].includes(typeof ctx.filterFn));
+  assert(['function', 'undefined'].includes(typeof ctx.breakFn));
+  assert(typeof ctx.joined === 'boolean');
+  assert(typeof ctx.escapePaths === 'boolean');
+  assert(typeof ctx.useArraySelector === 'boolean');
+
   const search = compiler.compile(new Set(needles)); // keep separate for performance
-  return haystack => find(haystack, [search], [], [], {
-    filterFn,
-    callbackFn,
-    breakFn,
-    joined,
-    escapePaths,
-    useArraySelector
-  });
+  return haystack => find(haystack, [search], [], [], ctx);
 };
