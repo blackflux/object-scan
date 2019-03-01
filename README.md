@@ -56,25 +56,20 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 Type: `function`<br>
 Default: `undefined`
 
-Called for every exact match. 
-Iff function is defined and returns false, the entry is excluded from the final result.
+If function is defined, it is called for every exact match. If `false`
+is returned, the current key is excluded from the result.
 
-This method is conceptually similar to [Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
-
-#### callbackFn
-
-Type: `function`<br>
-Default: `undefined`
-
-Called for every final result.
+This method is conceptually similar to the callback function in
+[Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
 
 #### breakFn
 
 Type: `function`<br>
 Default: `undefined`
 
-Called for every key that could be (part of) a matching key.
-If function is defined and returns true, all nested entries under the current key are excluded from search and from the final result.
+If function is defined, it is called for every key that is traversed by
+the search. If `true` is returned, all keys under the current key are
+skipped in the search and from the final result.
 
 #### joined
 

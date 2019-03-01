@@ -61,9 +61,6 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
       ctx.filterFn === undefined
       || ctx.filterFn(formatPath(pathIn, ctx), haystack, compiler.getMeta(searches, parents)) !== false
     ) {
-      if (ctx.callbackFn !== undefined) {
-        ctx.callbackFn(formatPath(pathIn, ctx), haystack, compiler.getMeta(searches, parents));
-      }
       result.push(formatPath(pathIn, ctx));
     }
   }
@@ -74,15 +71,13 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
 module.exports = (needles, opts) => {
   const ctx = Object.assign({
     filterFn: undefined,
-    callbackFn: undefined,
     breakFn: undefined,
     joined: true,
     escapePaths: true,
     useArraySelector: true
   }, opts);
-  assert(Object.keys(ctx).length === 6, 'Unexpected Option provided!');
+  assert(Object.keys(ctx).length === 5, 'Unexpected Option provided!');
   assert(['function', 'undefined'].includes(typeof ctx.filterFn));
-  assert(['function', 'undefined'].includes(typeof ctx.callbackFn));
   assert(['function', 'undefined'].includes(typeof ctx.breakFn));
   assert(typeof ctx.joined === 'boolean');
   assert(typeof ctx.escapePaths === 'boolean');

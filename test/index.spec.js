@@ -171,34 +171,34 @@ describe('Testing Find', () => {
     const needles = [''];
     const arrayInput = [{ id: 1 }, { id: 2 }];
     const objectInput = { id: {} };
-    const callbackFn = (key, value, { isMatch, matchedBy, parents }) => {
+    const filterFn = (key, value, { isMatch, matchedBy, parents }) => {
       expect(isMatch).to.equal(true);
       expect(parents).to.deep.equal([]);
       expect(matchedBy).to.deep.equal(['']);
     };
 
     it('Testing array objects with useArraySelector === true', () => {
-      const find = objectScan(needles, { useArraySelector: true, callbackFn });
+      const find = objectScan(needles, { useArraySelector: true, filterFn });
       expect(find(arrayInput)).to.deep.equal(['']);
     });
 
     it('Testing array objects with useArraySelector === false', () => {
-      const find = objectScan(needles, { useArraySelector: false, callbackFn });
+      const find = objectScan(needles, { useArraySelector: false, filterFn });
       expect(find(arrayInput)).to.deep.equal(['[0]', '[1]']);
     });
 
     it('Testing array objects with useArraySelector === false (nested)', () => {
-      const find = objectScan(needles, { useArraySelector: false, callbackFn });
+      const find = objectScan(needles, { useArraySelector: false, filterFn });
       expect(find([arrayInput])).to.deep.equal(['[0][0]', '[0][1]']);
     });
 
     it('Testing object with useArraySelector === true', () => {
-      const find = objectScan(needles, { useArraySelector: true, callbackFn });
+      const find = objectScan(needles, { useArraySelector: true, filterFn });
       expect(find(objectInput)).to.deep.equal(['']);
     });
 
     it('Testing object with useArraySelector === false', () => {
-      const find = objectScan(needles, { useArraySelector: false, callbackFn });
+      const find = objectScan(needles, { useArraySelector: false, filterFn });
       expect(find(objectInput)).to.deep.equal(['']);
     });
 
@@ -299,10 +299,10 @@ describe('Testing Find', () => {
     });
   });
 
-  it('Testing callbackFn', () => {
+  it('Testing filterFn', () => {
     const result = {};
     objectScan(['**.child'], {
-      callbackFn: (k, v) => {
+      filterFn: (k, v) => {
         result[k] = v;
       }
     })(haystack);
@@ -320,7 +320,7 @@ describe('Testing Find', () => {
 
       it('Testing object parents useArraySelector == true', () => {
         const result = objectScan(pattern, {
-          callbackFn: (k, v, { parents }) => {
+          filterFn: (k, v, { parents }) => {
             expect(parents).to.deep.equal([input.one[0], input.one, input]);
           }
         })(input);
@@ -329,7 +329,7 @@ describe('Testing Find', () => {
 
       it('Testing object parents useArraySelector == false', () => {
         const result = objectScan(pattern, {
-          callbackFn: (k, v, { parents }) => {
+          filterFn: (k, v, { parents }) => {
             expect(parents).to.deep.equal([input.one[0], input]);
           },
           useArraySelector: false
@@ -344,7 +344,7 @@ describe('Testing Find', () => {
 
       it('Testing array parents useArraySelector == true', () => {
         const result = objectScan(pattern, {
-          callbackFn: (k, v, { parents }) => {
+          filterFn: (k, v, { parents }) => {
             expect(parents).to.deep.equal([input.one, input]);
           }
         })(input);
@@ -353,7 +353,7 @@ describe('Testing Find', () => {
 
       it('Testing array parents useArraySelector == false', () => {
         const result = objectScan(pattern, {
-          callbackFn: (k, v, { parents }) => {
+          filterFn: (k, v, { parents }) => {
             expect(parents).to.deep.equal([input.one, input]);
           },
           useArraySelector: false
@@ -395,11 +395,11 @@ describe('Testing Find', () => {
       expect(execTest(true, () => false)).to.deep.equal(['', 'child', 'child[0]', 'child[0].id']);
     });
 
-    it('Testing useArraySelector = false invokes breakFn but not callbackFn', () => {
+    it('Testing useArraySelector = false invokes breakFn but not filterFn', () => {
       const result = [];
       objectScan(['**'], {
         useArraySelector: false,
-        callbackFn: k => result.push(['callbackFn', k]),
+        filterFn: k => result.push(['filterFn', k]),
         breakFn: k => result.push(['breakFn', k])
       })({
         tag: [[{ id: 1 }]]
@@ -410,8 +410,8 @@ describe('Testing Find', () => {
         ['breakFn', 'tag[0]'],
         ['breakFn', 'tag[0][0]'],
         ['breakFn', 'tag[0][0].id'],
-        ['callbackFn', 'tag[0][0].id'],
-        ['callbackFn', 'tag[0][0]']
+        ['filterFn', 'tag[0][0].id'],
+        ['filterFn', 'tag[0][0]']
       ]);
     });
   });
@@ -420,9 +420,9 @@ describe('Testing Find', () => {
     const input = [{ parent: { child: 'value' } }];
     const pattern = ['[*].*.child', '[*].parent'];
 
-    it('Testing traversedBy on callbackFn', () => {
+    it('Testing traversedBy on filterFn', () => {
       const result = [];
-      objectScan(pattern, { callbackFn: (k, v, { traversedBy }) => result.push(`${traversedBy} => ${k}`) })(input);
+      objectScan(pattern, { filterFn: (k, v, { traversedBy }) => result.push(`${traversedBy} => ${k}`) })(input);
       expect(result).to.deep.equal([
         '[*].*.child => [0].parent.child',
         '[*].*.child,[*].parent => [0].parent'
@@ -447,9 +447,9 @@ describe('Testing Find', () => {
     const input = [{ parent: { child: 'value' } }];
     const pattern = ['[*].*.child', '[*].parent'];
 
-    it('Testing matchedBy on callbackFn', () => {
+    it('Testing matchedBy on filterFn', () => {
       const result = [];
-      objectScan(pattern, { callbackFn: (k, v, { matchedBy }) => result.push(`${matchedBy} => ${k}`) })(input);
+      objectScan(pattern, { filterFn: (k, v, { matchedBy }) => result.push(`${matchedBy} => ${k}`) })(input);
       expect(result).to.deep.equal([
         '[*].*.child => [0].parent.child',
         '[*].parent => [0].parent'
@@ -589,7 +589,7 @@ describe('Testing Find', () => {
     const executeTest = (ndls, input) => {
       const cbs = [];
       const matched = objectScan(ndls, {
-        callbackFn: (key, value, {
+        filterFn: (key, value, {
           parents, isMatch, matchedBy, traversedBy
         }) => {
           cbs.push({
