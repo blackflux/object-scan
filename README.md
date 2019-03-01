@@ -175,10 +175,13 @@ When dealing with special characters, it might be desirable to set the  `joined`
 
 Conceptually this package works as follows:
  
-(1) During initialization the needles are parsed and build into a search tree. 
+1. During initialization the needles are parsed and built into a search tree. 
 Various information is pre-computed and stored for every node.
 Finally the search function is returned.
 
-(2) When the search function is called, the input is traversed simultaneously with 
+2. When the search function is called, the input is traversed simultaneously with 
 the relevant nodes of the search tree. Processing multiple search tree branches
 in parallel allows for a single traversal of the input.
+
+Having a separate initialization stage allows for a performant search and
+significant speed ups when applying the same search to different input. 
