@@ -1,5 +1,3 @@
-const fs = require('fs');
-const path = require('path');
 const expect = require('chai').expect;
 const objectScan = require('./../src/index');
 
@@ -94,65 +92,6 @@ describe('Testing Find', () => {
     ]);
   });
 
-  it('Testing Large Json Files', () => {
-    const maps = JSON.parse(fs.readFileSync(path.join(__dirname, 'resources', 'maps.json'), 'utf8'));
-    const med = JSON.parse(fs.readFileSync(path.join(__dirname, 'resources', 'med.json'), 'utf8'));
-    expect(objectScan(['**.lat'])(maps)).to.deep.equal([
-      'results[0].geometry.viewport.southwest.lat',
-      'results[0].geometry.viewport.northeast.lat',
-      'results[0].geometry.location.lat'
-    ]);
-    expect(objectScan(['**[{1,2}]'])(maps)).to.deep.equal([
-      'results[0].types[1]',
-      'results[0].address_components[6].types[1]',
-      'results[0].address_components[5].types[1]',
-      'results[0].address_components[4].types[1]',
-      'results[0].address_components[3].types[1]',
-      'results[0].address_components[2]',
-      'results[0].address_components[1]'
-    ]);
-    expect(objectScan(['**.*_*[{0,7}].*_name'])(maps)).to.deep.equal([
-      'results[0].address_components[7].short_name',
-      'results[0].address_components[7].long_name',
-      'results[0].address_components[0].short_name',
-      'results[0].address_components[0].long_name'
-    ]);
-    expect(objectScan(['**.name'])(med)).to.deep.equal([
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2[0].name',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug[0].name',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2[0].name',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug[0].name'
-    ]);
-    expect(objectScan(['**[0]'])(med)).to.deep.equal([
-      'problems[0].Asthma[0]',
-      'problems[0].Diabetes[0].labs[0]',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2[0]',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug[0]',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0]',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2[0]',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug[0]',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0]',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0]',
-      'problems[0].Diabetes[0].medications[0]',
-      'problems[0].Diabetes[0]',
-      'problems[0]'
-    ]);
-    expect(objectScan(['**.className*[*].associatedDrug*'])(med)).to.deep.equal([
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug'
-    ]);
-    expect(objectScan(['**.*at*'])(med)).to.deep.equal([
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug',
-      'problems[0].Diabetes[0].medications[0].medicationsClasses',
-      'problems[0].Diabetes[0].medications'
-    ]);
-  });
-
   describe('Testing greedy array matching', () => {
     const needles = ['*'];
     const input = { key: ['v1', 'v2'] };
@@ -171,34 +110,34 @@ describe('Testing Find', () => {
     const needles = [''];
     const arrayInput = [{ id: 1 }, { id: 2 }];
     const objectInput = { id: {} };
-    const callbackFn = (key, value, { isMatch, matchedBy, parents }) => {
+    const filterFn = (key, value, { isMatch, matchedBy, parents }) => {
       expect(isMatch).to.equal(true);
       expect(parents).to.deep.equal([]);
       expect(matchedBy).to.deep.equal(['']);
     };
 
     it('Testing array objects with useArraySelector === true', () => {
-      const find = objectScan(needles, { useArraySelector: true, callbackFn });
+      const find = objectScan(needles, { useArraySelector: true, filterFn });
       expect(find(arrayInput)).to.deep.equal(['']);
     });
 
     it('Testing array objects with useArraySelector === false', () => {
-      const find = objectScan(needles, { useArraySelector: false, callbackFn });
+      const find = objectScan(needles, { useArraySelector: false, filterFn });
       expect(find(arrayInput)).to.deep.equal(['[0]', '[1]']);
     });
 
     it('Testing array objects with useArraySelector === false (nested)', () => {
-      const find = objectScan(needles, { useArraySelector: false, callbackFn });
+      const find = objectScan(needles, { useArraySelector: false, filterFn });
       expect(find([arrayInput])).to.deep.equal(['[0][0]', '[0][1]']);
     });
 
     it('Testing object with useArraySelector === true', () => {
-      const find = objectScan(needles, { useArraySelector: true, callbackFn });
+      const find = objectScan(needles, { useArraySelector: true, filterFn });
       expect(find(objectInput)).to.deep.equal(['']);
     });
 
     it('Testing object with useArraySelector === false', () => {
-      const find = objectScan(needles, { useArraySelector: false, callbackFn });
+      const find = objectScan(needles, { useArraySelector: false, filterFn });
       expect(find(objectInput)).to.deep.equal(['']);
     });
 
@@ -299,10 +238,10 @@ describe('Testing Find', () => {
     });
   });
 
-  it('Testing callbackFn', () => {
+  it('Testing filterFn', () => {
     const result = {};
     objectScan(['**.child'], {
-      callbackFn: (k, v) => {
+      filterFn: (k, v) => {
         result[k] = v;
       }
     })(haystack);
@@ -320,7 +259,7 @@ describe('Testing Find', () => {
 
       it('Testing object parents useArraySelector == true', () => {
         const result = objectScan(pattern, {
-          callbackFn: (k, v, { parents }) => {
+          filterFn: (k, v, { parents }) => {
             expect(parents).to.deep.equal([input.one[0], input.one, input]);
           }
         })(input);
@@ -329,7 +268,7 @@ describe('Testing Find', () => {
 
       it('Testing object parents useArraySelector == false', () => {
         const result = objectScan(pattern, {
-          callbackFn: (k, v, { parents }) => {
+          filterFn: (k, v, { parents }) => {
             expect(parents).to.deep.equal([input.one[0], input]);
           },
           useArraySelector: false
@@ -344,7 +283,7 @@ describe('Testing Find', () => {
 
       it('Testing array parents useArraySelector == true', () => {
         const result = objectScan(pattern, {
-          callbackFn: (k, v, { parents }) => {
+          filterFn: (k, v, { parents }) => {
             expect(parents).to.deep.equal([input.one, input]);
           }
         })(input);
@@ -353,7 +292,7 @@ describe('Testing Find', () => {
 
       it('Testing array parents useArraySelector == false', () => {
         const result = objectScan(pattern, {
-          callbackFn: (k, v, { parents }) => {
+          filterFn: (k, v, { parents }) => {
             expect(parents).to.deep.equal([input.one, input]);
           },
           useArraySelector: false
@@ -395,11 +334,11 @@ describe('Testing Find', () => {
       expect(execTest(true, () => false)).to.deep.equal(['', 'child', 'child[0]', 'child[0].id']);
     });
 
-    it('Testing useArraySelector = false invokes breakFn but not callbackFn', () => {
+    it('Testing useArraySelector = false invokes breakFn but not filterFn', () => {
       const result = [];
       objectScan(['**'], {
         useArraySelector: false,
-        callbackFn: k => result.push(['callbackFn', k]),
+        filterFn: k => result.push(['filterFn', k]),
         breakFn: k => result.push(['breakFn', k])
       })({
         tag: [[{ id: 1 }]]
@@ -410,8 +349,8 @@ describe('Testing Find', () => {
         ['breakFn', 'tag[0]'],
         ['breakFn', 'tag[0][0]'],
         ['breakFn', 'tag[0][0].id'],
-        ['callbackFn', 'tag[0][0].id'],
-        ['callbackFn', 'tag[0][0]']
+        ['filterFn', 'tag[0][0].id'],
+        ['filterFn', 'tag[0][0]']
       ]);
     });
   });
@@ -420,9 +359,9 @@ describe('Testing Find', () => {
     const input = [{ parent: { child: 'value' } }];
     const pattern = ['[*].*.child', '[*].parent'];
 
-    it('Testing traversedBy on callbackFn', () => {
+    it('Testing traversedBy on filterFn', () => {
       const result = [];
-      objectScan(pattern, { callbackFn: (k, v, { traversedBy }) => result.push(`${traversedBy} => ${k}`) })(input);
+      objectScan(pattern, { filterFn: (k, v, { traversedBy }) => result.push(`${traversedBy} => ${k}`) })(input);
       expect(result).to.deep.equal([
         '[*].*.child => [0].parent.child',
         '[*].*.child,[*].parent => [0].parent'
@@ -447,9 +386,9 @@ describe('Testing Find', () => {
     const input = [{ parent: { child: 'value' } }];
     const pattern = ['[*].*.child', '[*].parent'];
 
-    it('Testing matchedBy on callbackFn', () => {
+    it('Testing matchedBy on filterFn', () => {
       const result = [];
-      objectScan(pattern, { callbackFn: (k, v, { matchedBy }) => result.push(`${matchedBy} => ${k}`) })(input);
+      objectScan(pattern, { filterFn: (k, v, { matchedBy }) => result.push(`${matchedBy} => ${k}`) })(input);
       expect(result).to.deep.equal([
         '[*].*.child => [0].parent.child',
         '[*].parent => [0].parent'
@@ -582,152 +521,6 @@ describe('Testing Find', () => {
       expect(find({ 'some.key': '' })).to.deep.equal([
         'some.key'
       ]);
-    });
-  });
-
-  describe('Testing Multi Target Matching', () => {
-    const executeTest = (ndls, input) => {
-      const cbs = [];
-      const matched = objectScan(ndls, {
-        callbackFn: (key, value, {
-          parents, isMatch, matchedBy, traversedBy
-        }) => {
-          cbs.push({
-            key, value, parents, isMatch, matchedBy, traversedBy
-          });
-        }
-      })(input);
-      return { matched, cbs };
-    };
-
-    it('Testing Simple De-duplication', () => {
-      expect(executeTest(
-        ['a.b', '**'],
-        { a: { b: 'c' } }
-      )).to.deep.equal({
-        matched: ['a.b', 'a'],
-        cbs: [{
-          key: 'a.b',
-          value: 'c',
-          parents: [{ b: 'c' }, { a: { b: 'c' } }],
-          isMatch: true,
-          matchedBy: ['a.b', '**'],
-          traversedBy: ['a.b', '**']
-        }, {
-          key: 'a',
-          value: { b: 'c' },
-          parents: [{ a: { b: 'c' } }],
-          isMatch: true,
-          matchedBy: ['**'],
-          traversedBy: ['a.b', '**']
-        }]
-      });
-    });
-
-    it('Testing Two Levels Deep', () => {
-      expect(executeTest(
-        ['a.b', '**.b', '*.b', '*a.b', 'a*.b', 'a', '**', '*', '*a', 'a*'],
-        { a: { b: 'c' } }
-      )).to.deep.equal({
-        matched: ['a.b', 'a'],
-        cbs: [{
-          key: 'a.b',
-          value: 'c',
-          parents: [{ b: 'c' }, { a: { b: 'c' } }],
-          isMatch: true,
-          matchedBy: ['a.b', '**', '**.b', '*.b', '*a.b', 'a*.b'],
-          traversedBy: ['a.b', '**.b', '**', '*.b', '*a.b', 'a*.b']
-        }, {
-          key: 'a',
-          value: { b: 'c' },
-          parents: [{ a: { b: 'c' } }],
-          isMatch: true,
-          matchedBy: ['a', '**', '*', '*a', 'a*'],
-          traversedBy: ['a.b', 'a', '**.b', '**', '*.b', '*', '*a.b', '*a', 'a*.b', 'a*']
-        }]
-      });
-    });
-
-    it('Testing Tree Levels Deep', () => {
-      expect(executeTest(
-        ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c'],
-        { a: { b: { c: 'd' } } }
-      )).to.deep.equal({
-        matched: ['a.b.c'],
-        cbs: [{
-          key: 'a.b.c',
-          value: 'd',
-          parents: [{ c: 'd' }, { b: { c: 'd' } }, { a: { b: { c: 'd' } } }],
-          isMatch: true,
-          matchedBy: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c'],
-          traversedBy: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c']
-        }]
-      });
-    });
-
-    it('Testing Tree Levels Deep Arrays', () => {
-      expect(executeTest(
-        ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]'],
-        [[[0]]]
-      )).to.deep.equal({
-        matched: ['[0][0][0]'],
-        cbs: [{
-          key: '[0][0][0]',
-          value: 0,
-          parents: [[0], [[0]], [[[0]]]],
-          isMatch: true,
-          matchedBy: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]'],
-          traversedBy: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]']
-        }]
-      });
-    });
-
-    it('Testing Tree Levels Deep with Two Level Star Match', () => {
-      expect(executeTest(
-        ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c', 'a.**'],
-        { a: { b: { c: 'd' } } }
-      )).to.deep.equal({
-        matched: ['a.b.c', 'a.b'],
-        cbs: [{
-          key: 'a.b.c',
-          value: 'd',
-          parents: [{ c: 'd' }, { b: { c: 'd' } }, { a: { b: { c: 'd' } } }],
-          isMatch: true,
-          matchedBy: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**', 'a.**.c'],
-          traversedBy: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c', 'a.**']
-        }, {
-          key: 'a.b',
-          value: { c: 'd' },
-          parents: [{ b: { c: 'd' } }, { a: { b: { c: 'd' } } }],
-          isMatch: true,
-          matchedBy: ['a.**'],
-          traversedBy: ['a.b.c', 'a.*b.c', 'a.b*.c', 'a.*.c', 'a.**.c', 'a.**']
-        }]
-      });
-    });
-
-    it('Testing Tree Levels Deep with Two Level Star Match Arrays', () => {
-      expect(executeTest(
-        ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]', '[0].**'],
-        [[[0]]]
-      )).to.deep.equal({
-        matched: ['[0][0][0]', '[0][0]'],
-        cbs: [{
-          key: '[0][0][0]',
-          value: 0,
-          parents: [[0], [[0]], [[[0]]]],
-          isMatch: true,
-          matchedBy: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**', '[0].**[0]'],
-          traversedBy: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]', '[0].**']
-        }, {
-          key: '[0][0]',
-          value: [0],
-          parents: [[[0]], [[[0]]]],
-          isMatch: true,
-          matchedBy: ['[0].**'],
-          traversedBy: ['[0][0][0]', '[0][0*][0]', '[0][*0][0]', '[0][**][0]', '[0].**[0]', '[0].**']
-        }]
-      });
     });
   });
 
