@@ -42,7 +42,7 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
     const parentsOut = [haystack].concat(parents);
     Object.entries(haystack).reverse().forEach(([key, value]) => {
       const pathOut = pathIn.concat(isArray ? parseInt(key, 10) : key);
-      result.push(...find(value, searches.reduce((p, s) => {
+      const searchesOut = searches.reduce((p, s) => {
         Object.entries(s).forEach(([entry, subSearch]) => {
           if (entry === '**') {
             p.push(compiler.getStarRecursion(subSearch));
@@ -52,7 +52,10 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
           }
         });
         return p;
-      }, []), pathOut, parentsOut, ctx));
+      }, []);
+      if (searchesOut.length !== 0) {
+        result.push(...find(value, searchesOut, pathOut, parentsOut, ctx));
+      }
     });
   }
 

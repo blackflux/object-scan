@@ -1,0 +1,633 @@
+{
+  "info": {
+    "description": "Simple API to retrieve resources related to Age of Empires II. The base URL for retrieving the resources is /api/v1",
+    "title": "Age Of Empires II API",
+    "version": "1.0.0",
+    "license": {
+      "name": "License: BSD-3-Clause",
+      "url": "https://github.com/aalises/age-of-empires-II-api/blob/master/LICENSE"
+    }
+  },
+  "paths": {
+    "/civilizations": {
+      "get": {
+        "summary": "Gets a list of all the civilizations",
+        "tags": [
+          "resources"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "description": "Gets a list of all the civilizations in AOE2",
+        "responses": {
+          "200": {
+            "description": "Civilizations Response",
+            "schema": {
+              "$ref": "#/definitions/CivilizationList"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/civilization/{id}": {
+      "get": {
+        "summary": "Gets a given civilization by ID or name",
+        "tags": [
+          "resources"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "description": "Gets a given civilization by ID (Integer) or name (String with spaces replaced with hyphens/underscores)",
+        "operationId": "Find civilization by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID or name of the civilization to fetch",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Civilization Response",
+            "schema": {
+              "$ref": "#/definitions/Civilization"
+            }
+          },
+          "404": {
+            "description": "Civilization not found",
+            "schema": {
+              "$ref": "#/definitions/NotFoundError"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/units": {
+      "get": {
+        "summary": "Gets a list of all the units",
+        "tags": [
+          "resources"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "description": "Gets a list of all the units in AOE2",
+        "responses": {
+          "200": {
+            "description": "Units Response",
+            "schema": {
+              "$ref": "#/definitions/UnitList"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/unit/{id}": {
+      "get": {
+        "summary": "Gets a given unit by ID or name",
+        "tags": [
+          "resources"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "description": "Gets a given unit by ID (Integer) or name (String with spaces replaced with hyphens/underscores)",
+        "operationId": "Find unit by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID or name of the unit to fetch",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Unit Response",
+            "schema": {
+              "$ref": "#/definitions/Unit"
+            }
+          },
+          "404": {
+            "description": "Unit not found",
+            "schema": {
+              "$ref": "#/definitions/NotFoundError"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/structures": {
+      "get": {
+        "summary": "Gets a list of all the structures",
+        "tags": [
+          "resources"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "description": "Gets a list of all the structures in AOE2",
+        "responses": {
+          "200": {
+            "description": "Structures Response",
+            "schema": {
+              "$ref": "#/definitions/StructureList"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/structure/{id}": {
+      "get": {
+        "summary": "Gets a given structure by ID or name",
+        "tags": [
+          "resources"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "description": "Gets a given structure by ID (Integer) or name (String with spaces replaced with hyphens/underscores)",
+        "operationId": "Find structure by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID or name of the structure to fetch",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Structure Response",
+            "schema": {
+              "$ref": "#/definitions/Structure"
+            }
+          },
+          "404": {
+            "description": "Structure not found",
+            "schema": {
+              "$ref": "#/definitions/NotFoundError"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/technologies": {
+      "get": {
+        "summary": "Gets a list of all the technologies",
+        "tags": [
+          "resources"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "description": "Gets a list of all the technologies in AOE2",
+        "responses": {
+          "200": {
+            "description": "Technologies Response",
+            "schema": {
+              "$ref": "#/definitions/TechnologyList"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    },
+    "/technology/{id}": {
+      "get": {
+        "summary": "Gets a given technology by ID or name",
+        "tags": [
+          "resources"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "description": "Gets a given technology by ID (Integer) or name (String with spaces replaced with hyphens/underscores)",
+        "operationId": "Find technology by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID or name of the technology to fetch",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Technology Response",
+            "schema": {
+              "$ref": "#/definitions/Technology"
+            }
+          },
+          "404": {
+            "description": "Technology not found",
+            "schema": {
+              "$ref": "#/definitions/NotFoundError"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Civilization": {
+      "required": [
+        "name",
+        "id",
+        "expansion",
+        "army_type",
+        "unique_unit",
+        "unique_tech",
+        "team_bonus",
+        "civilization_bonus"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique ID representing the civilization"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the civilization"
+        },
+        "expansion": {
+          "type": "string",
+          "description": "Expansion the civilization was introduced"
+        },
+        "army_type": {
+          "type": "string",
+          "description": "Predominant army type of the civilization (e.g Archers, or Infantry)"
+        },
+        "unique_unit": {
+          "type": "string",
+          "description": "Unique unit of the civilization"
+        },
+        "unique_tech": {
+          "type": "string",
+          "description": "Unique technology of the civilization"
+        },
+        "team_bonus": {
+          "type": "string",
+          "description": "Team bonuses of the civilization"
+        },
+        "civilization_bonus": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Bonuses of the civilization"
+        }
+      }
+    },
+    "CivilizationList": {
+      "properties": {
+        "civilizations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Civilization"
+          }
+        }
+      }
+    },
+    "Unit": {
+      "required": [
+        "id",
+        "name",
+        "expansion",
+        "age",
+        "created_in",
+        "cost",
+        "build_time",
+        "reload_time",
+        "movement_rate",
+        "line_of_sight",
+        "hit_points",
+        "attack",
+        "armor"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique ID representing the unit"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the unit"
+        },
+        "description": {
+          "type": "string",
+          "description": "Short description of the unit"
+        },
+        "expansion": {
+          "type": "string",
+          "description": "Expansion in which the unit was introduced"
+        },
+        "age": {
+          "type": "string",
+          "description": "Age in which the unit can be produced"
+        },
+        "created_in": {
+          "type": "string",
+          "description": "Structure the unit is created in"
+        },
+        "cost": {
+          "type": "object",
+          "$ref": "#/definitions/Cost",
+          "description": "Cost of the unit (JSON Object)"
+        },
+        "build_time": {
+          "type": "integer",
+          "description": "Build time in seconds"
+        },
+        "reload_time": {
+          "type": "number",
+          "description": "Reload time"
+        },
+        "attack_delay": {
+          "type": "number",
+          "description": "Attack delay when you give the order to attack"
+        },
+        "movement_rate": {
+          "type": "number",
+          "description": "Movement Rate"
+        },
+        "line_of_sight": {
+          "type": "integer",
+          "description": "Line of sight of the unit"
+        },
+        "hit_points": {
+          "type": "integer",
+          "description": "Hit points (health) of the unit"
+        },
+        "range": {
+          "type": "string",
+          "description": "Range of the unit. There can be a minimum and maximum range in the format (min-max)"
+        },
+        "attack": {
+          "type": "integer",
+          "description": "Attack of the unit"
+        },
+        "armor": {
+          "type": "string",
+          "description": "Armor of the unit formated as 'melee/pierce'"
+        },
+        "attack_bonus": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Attack bonuses of the unit"
+        },
+        "armor_bonus": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Armor bonuses of the unit"
+        },
+        "search_radius": {
+          "type": "integer",
+          "description": "Search Radius of the unit"
+        },
+        "accuracy": {
+          "type": "string",
+          "description": "Attack accuracy (as %) of the unit"
+        },
+        "blast_radius": {
+          "type": "number",
+          "description": "Attack blast radius"
+        }
+      }
+    },
+    "UnitList": {
+      "properties": {
+        "units": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Unit"
+          }
+        }
+      }
+    },
+    "Structure": {
+      "required": [
+        "id",
+        "name",
+        "expansion",
+        "age",
+        "cost",
+        "build_time",
+        "hit_points",
+        "line_of_sight",
+        "armor"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique ID representing the structure"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the structure"
+        },
+        "description": {
+          "type": "string",
+          "description": "Short description of the structure"
+        },
+        "expansion": {
+          "type": "string",
+          "description": "Expansion the structure was introduced"
+        },
+        "age": {
+          "type": "string",
+          "description": "Age in which the structure can be built"
+        },
+        "cost": {
+          "type": "object",
+          "$ref": "#/definitions/Cost",
+          "description": "Cost of the structure (JSON Object)"
+        },
+        "build_time": {
+          "type": "integer",
+          "description": "Build time in seconds"
+        },
+        "hit_points": {
+          "type": "integer",
+          "description": "Hit points (health) of the structure"
+        },
+        "line_of_sight": {
+          "type": "integer",
+          "description": "Line of sight of the structure"
+        },
+        "armor": {
+          "type": "string",
+          "description": "Armor of the structure formatted as 'melee/pierce'"
+        },
+        "range": {
+          "type": "string",
+          "description": "Range of the structure. There can be a minimum and maximum range in the format (min-max)"
+        },
+        "reload_time": {
+          "type": "number",
+          "description": "Reload time of the structure"
+        },
+        "attack": {
+          "type": "integer",
+          "description": "Attack points of the structure"
+        },
+        "special": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Other information about the structure and the units it can garrison"
+        }
+      }
+    },
+    "StructureList": {
+      "properties": {
+        "structures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Structure"
+          }
+        }
+      }
+    },
+    "Technology": {
+      "required": [
+        "id",
+        "name",
+        "expansion",
+        "age",
+        "develops_in",
+        "cost",
+        "build_time"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique ID representing the technology"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the technology"
+        },
+        "description": {
+          "type": "string",
+          "description": "Short description of the technology"
+        },
+        "expansion": {
+          "type": "string",
+          "description": "Expansion the technology was introduced"
+        },
+        "age": {
+          "type": "string",
+          "description": "Age in which the technology can be developed"
+        },
+        "develops_in": {
+          "type": "string",
+          "description": "Structure the technology is developed in"
+        },
+        "cost": {
+          "type": "object",
+          "$ref": "#/definitions/Cost",
+          "description": "Cost of the technology (JSON Object)"
+        },
+        "build_time": {
+          "type": "integer",
+          "description": "Build time in seconds"
+        },
+        "applies_to": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Units or civilization the technology apply to"
+        }
+      }
+    },
+    "TechnologyList": {
+      "properties": {
+        "technologies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Technology"
+          }
+        }
+      }
+    },
+    "NotFoundError": {
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Description of the error message"
+        }
+      }
+    },
+    "Cost": {
+      "properties": {
+        "Wood": {
+          "type": "integer",
+          "description": "How much wood it costs"
+        },
+        "Food": {
+          "type": "integer",
+          "description": "How much food it costs"
+        },
+        "Stone": {
+          "type": "integer",
+          "description": "How much stone it costs"
+        },
+        "Gold": {
+          "type": "integer",
+          "description": "How much gold it costs"
+        }
+      }
+    }
+  },
+  "swagger": "3.0",
+  "basePath": "/api/v1",
+  "schemes": [
+    "https"
+  ],
+  "externalDocs": {
+    "description": "Project repository",
+    "url": "https://github.com/aalises/age-of-empires-II-api"
+  },
+  "produces": [
+    "application/json"
+  ]
+}
