@@ -71,21 +71,23 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
   return result;
 };
 
-module.exports = (needles, {
-  filterFn = undefined,
-  callbackFn = undefined,
-  breakFn = undefined,
-  joined = true,
-  escapePaths = true,
-  useArraySelector = true
-} = {}) => {
+module.exports = (needles, opts) => {
+  const ctx = Object.assign({
+    filterFn: undefined,
+    callbackFn: undefined,
+    breakFn: undefined,
+    joined: true,
+    escapePaths: true,
+    useArraySelector: true
+  }, opts);
+  assert(Object.keys(ctx).length === 6, 'Unexpected Option provided!');
+  assert(['function', 'undefined'].includes(typeof ctx.filterFn));
+  assert(['function', 'undefined'].includes(typeof ctx.callbackFn));
+  assert(['function', 'undefined'].includes(typeof ctx.breakFn));
+  assert(typeof ctx.joined === 'boolean');
+  assert(typeof ctx.escapePaths === 'boolean');
+  assert(typeof ctx.useArraySelector === 'boolean');
+
   const search = compiler.compile(new Set(needles)); // keep separate for performance
-  return haystack => find(haystack, [search], [], [], {
-    filterFn,
-    callbackFn,
-    breakFn,
-    joined,
-    escapePaths,
-    useArraySelector
-  });
+  return haystack => find(haystack, [search], [], [], ctx);
 };

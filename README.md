@@ -39,6 +39,7 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 - Input is traversed exactly once and only unique results are returned.
 - Full support for escaping
 - Lots of tests to ensure correctness
+- Dependency free and small in size
 
 ### Options
 
