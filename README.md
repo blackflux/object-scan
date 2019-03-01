@@ -71,6 +71,8 @@ If function is defined, it is called for every key that is traversed by
 the search. If `true` is returned, all keys nested under the current key are
 skipped in the search and from the final result.
 
+Note that `breakFn` is called before the corresponding `filterFn` might be called.
+
 #### joined
 
 Type: `boolean`<br>
