@@ -11,10 +11,10 @@ const getDirectories = source => getEntries(source)
 const getFiles = source => getEntries(source)
   .filter(([f, p]) => fs.lstatSync(p).isFile());
 
-const logFn = (type, log, recording) => (key, value, kwargs) => {
+const logFn = (type, log, paramsToLog) => (key, value, kwargs) => {
   log.push(Object
     .entries(Object.assign({ type, key, value }, kwargs))
-    .filter(([k, v]) => recording.concat(['key', 'type']).includes(k))
+    .filter(([k, v]) => (paramsToLog || ['isMatch', 'matchedBy', 'traversedBy']).concat(['key', 'type']).includes(k))
     .reduce((p, [k, v]) => Object.assign(p, { [k]: v }), {}));
 };
 
@@ -31,14 +31,8 @@ describe('Integration Testing', () => {
           it(`Testing ${dirName}/${fileName}`, () => {
             const options = fileContent.options || {};
             const log = options.log === null ? null : [];
-            const opts = Object.assign({}, options.args, {
-              breakFn: options.log === null
-                ? undefined
-                : logFn('breakFn', log, options.log || ['isMatch', 'matchedBy', 'traversedBy']),
-              filterFn: options.log === null
-                ? undefined
-                : logFn('filterFn', log, options.log || ['isMatch', 'matchedBy', 'traversedBy'])
-            });
+            const opts = Object.assign({}, options.args, options.log === null ? {} : ['breakFn', 'filterFn']
+              .reduce((p, c) => Object.assign(p, { [c]: logFn(c, log, options.log) }), {}));
             const result = objectScan(fileContent.needles, opts)(dirInput);
             // eslint-disable-next-line istanbul-prevent-ignore
             /* istanbul ignore if */
