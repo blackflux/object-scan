@@ -170,3 +170,15 @@ The following Characters are considered special and need to
 be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `,`, `.` and `*`. 
 
 When dealing with special characters, it might be desirable to set the  `joined` option to `false`.
+
+## Internals
+
+Conceptually this package works as follows:
+ 
+(1) During initialization the needles are parsed and build into a search tree. 
+Various information is pre-computed and stored for every node.
+Finally the search function is returned.
+
+(2) When the search function is called, the input is traversed simultaneously with 
+the relevant nodes of the search tree. Processing multiple search tree branches
+in parallel allows for a single traversal of the input.
