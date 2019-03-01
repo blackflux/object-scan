@@ -15,20 +15,12 @@
     "matchedBy",
     "traversedBy"
   ],
-  "result": [
-    "[0][0][0]"
-  ],
+  "result": ["[0][0][0]"],
   "log": [
     {
       "type": "breakFn",
       "key": "",
-      "value": [
-        [
-          [
-            0
-          ]
-        ]
-      ],
+      "value": [[[0]]],
       "isMatch": false,
       "matchedBy": [],
       "traversedBy": [
@@ -43,11 +35,7 @@
     {
       "type": "breakFn",
       "key": "[0]",
-      "value": [
-        [
-          0
-        ]
-      ],
+      "value": [[0]],
       "isMatch": false,
       "matchedBy": [],
       "traversedBy": [
@@ -57,22 +45,12 @@
         "[0][**][0]",
         "[0].**[0]"
       ],
-      "parents": [
-        [
-          [
-            [
-              0
-            ]
-          ]
-        ]
-      ]
+      "parents": [[[[0]]]]
     },
     {
       "type": "breakFn",
       "key": "[0][0]",
-      "value": [
-        0
-      ],
+      "value": [0],
       "isMatch": false,
       "matchedBy": [],
       "traversedBy": [
@@ -82,20 +60,7 @@
         "[0][**][0]",
         "[0].**[0]"
       ],
-      "parents": [
-        [
-          [
-            0
-          ]
-        ],
-        [
-          [
-            [
-              0
-            ]
-          ]
-        ]
-      ]
+      "parents": [[[0]], [[[0]]]]
     },
     {
       "type": "breakFn",
@@ -116,23 +81,7 @@
         "[0][**][0]",
         "[0].**[0]"
       ],
-      "parents": [
-        [
-          0
-        ],
-        [
-          [
-            0
-          ]
-        ],
-        [
-          [
-            [
-              0
-            ]
-          ]
-        ]
-      ]
+      "parents": [[0], [[0]], [[[0]]]]
     },
     {
       "type": "filterFn",
@@ -153,23 +102,7 @@
         "[0][**][0]",
         "[0].**[0]"
       ],
-      "parents": [
-        [
-          0
-        ],
-        [
-          [
-            0
-          ]
-        ],
-        [
-          [
-            [
-              0
-            ]
-          ]
-        ]
-      ]
+      "parents": [[0], [[0]], [[[0]]]]
     }
   ]
 }

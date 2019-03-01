@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const expect = require('chai').expect;
+const stringify = require('json-stringify-pretty-compact');
 const objectScan = require('../src/index');
 
 const getEntries = source => fs.readdirSync(source)
@@ -34,10 +35,14 @@ describe('Integration Testing', () => {
               filterFn: logFn('filterFn', log, fileContent.recording || ['isMatch', 'matchedBy', 'traversedBy'])
             });
             const result = objectScan(fileContent.needles, opts)(dirInput);
-            // fs.writeFileSync(filePath, JSON.stringify(Object
-            //   .assign({}, fileContent, { log, result }), null, 2));
-            expect(fileContent.result).to.deep.equal(result);
-            expect(fileContent.log).to.deep.equal(log);
+            // eslint-disable-next-line istanbul-prevent-ignore
+            /* istanbul ignore if */
+            if ([fileContent.log, fileContent.result].includes(undefined)) {
+              fs.writeFileSync(filePath, stringify(Object.assign({}, fileContent, { log, result })));
+            } else {
+              expect(fileContent.result).to.deep.equal(result);
+              expect(fileContent.log).to.deep.equal(log);
+            }
           });
         });
     });

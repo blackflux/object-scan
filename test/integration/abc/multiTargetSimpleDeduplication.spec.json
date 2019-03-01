@@ -1,8 +1,5 @@
 {
-  "needles": [
-    "a.b",
-    "**"
-  ],
+  "needles": ["a.b", "**"],
   "opts": {},
   "recording": [
     "key",
@@ -12,118 +9,52 @@
     "matchedBy",
     "traversedBy"
   ],
-  "result": [
-    "a.b",
-    "a"
-  ],
+  "result": ["a.b", "a"],
   "log": [
     {
       "type": "breakFn",
       "key": "",
-      "value": {
-        "a": {
-          "b": "c"
-        }
-      },
+      "value": {"a": {"b": "c"}},
       "isMatch": false,
       "matchedBy": [],
-      "traversedBy": [
-        "a.b",
-        "**"
-      ],
+      "traversedBy": ["a.b", "**"],
       "parents": []
     },
     {
       "type": "breakFn",
       "key": "a",
-      "value": {
-        "b": "c"
-      },
+      "value": {"b": "c"},
       "isMatch": true,
-      "matchedBy": [
-        "**"
-      ],
-      "traversedBy": [
-        "a.b",
-        "**"
-      ],
-      "parents": [
-        {
-          "a": {
-            "b": "c"
-          }
-        }
-      ]
+      "matchedBy": ["**"],
+      "traversedBy": ["a.b", "**"],
+      "parents": [{"a": {"b": "c"}}]
     },
     {
       "type": "breakFn",
       "key": "a.b",
       "value": "c",
       "isMatch": true,
-      "matchedBy": [
-        "a.b",
-        "**"
-      ],
-      "traversedBy": [
-        "a.b",
-        "**"
-      ],
-      "parents": [
-        {
-          "b": "c"
-        },
-        {
-          "a": {
-            "b": "c"
-          }
-        }
-      ]
+      "matchedBy": ["a.b", "**"],
+      "traversedBy": ["a.b", "**"],
+      "parents": [{"b": "c"}, {"a": {"b": "c"}}]
     },
     {
       "type": "filterFn",
       "key": "a.b",
       "value": "c",
       "isMatch": true,
-      "matchedBy": [
-        "a.b",
-        "**"
-      ],
-      "traversedBy": [
-        "a.b",
-        "**"
-      ],
-      "parents": [
-        {
-          "b": "c"
-        },
-        {
-          "a": {
-            "b": "c"
-          }
-        }
-      ]
+      "matchedBy": ["a.b", "**"],
+      "traversedBy": ["a.b", "**"],
+      "parents": [{"b": "c"}, {"a": {"b": "c"}}]
     },
     {
       "type": "filterFn",
       "key": "a",
-      "value": {
-        "b": "c"
-      },
+      "value": {"b": "c"},
       "isMatch": true,
-      "matchedBy": [
-        "**"
-      ],
-      "traversedBy": [
-        "a.b",
-        "**"
-      ],
-      "parents": [
-        {
-          "a": {
-            "b": "c"
-          }
-        }
-      ]
+      "matchedBy": ["**"],
+      "traversedBy": ["a.b", "**"],
+      "parents": [{"a": {"b": "c"}}]
     }
   ]
 }
