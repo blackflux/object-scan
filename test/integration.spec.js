@@ -10,14 +10,11 @@ const getDirectories = source => getEntries(source)
 const getFiles = source => getEntries(source)
   .filter(([f, p]) => fs.lstatSync(p).isFile());
 
-const logFn = (type, log) => (k, v, { isMatch, matchedBy, traversedBy }) => {
-  log.push({
-    type,
-    key: k,
-    isMatch,
-    matchedBy,
-    traversedBy
-  });
+const logFn = (type, log, recording) => (key, value, kwargs) => {
+  log.push(Object
+    .entries(Object.assign({ type, key, value }, kwargs))
+    .filter(([k, v]) => recording.concat(['key', 'type']).includes(k))
+    .reduce((p, [k, v]) => Object.assign(p, { [k]: v }), {}));
 };
 
 describe('Integration Testing', () => {
@@ -33,8 +30,8 @@ describe('Integration Testing', () => {
           it(`Testing ${dirName}/${fileName}`, () => {
             const log = [];
             const opts = Object.assign({}, fileContent.opts, {
-              breakFn: logFn('breakFn', log),
-              filterFn: logFn('filterFn', log)
+              breakFn: logFn('breakFn', log, fileContent.recording || ['isMatch', 'matchedBy', 'traversedBy']),
+              filterFn: logFn('filterFn', log, fileContent.recording || ['isMatch', 'matchedBy', 'traversedBy'])
             });
             const result = objectScan(fileContent.needles, opts)(dirInput);
             // fs.writeFileSync(filePath, JSON.stringify(Object
