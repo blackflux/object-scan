@@ -78,9 +78,9 @@ Default: `true`
 
 Can be set to false to return each key as a list. When dealing with _special characters_ this can be useful.
 
-Note that [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set) fully support lists.
+Setting this to `false` improves performance.
 
-Important: Setting this to `false` improves performance.
+Note that [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set) fully support lists.
 
 #### escapePaths
 
