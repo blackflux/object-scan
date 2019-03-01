@@ -59,6 +59,10 @@ Default: `undefined`
 If function is defined, it is called for every exact match. If `false`
 is returned, the current key is excluded from the result.
 
+Can be used as a callback function to do processing as matching keys are traversed.
+
+Called in same order as matches would appear in result.
+
 This method is conceptually similar to the callback function in
 [Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
 
