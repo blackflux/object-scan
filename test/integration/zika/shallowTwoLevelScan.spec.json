@@ -1,0 +1,119 @@
+{
+  "needles": ["*.*"],
+  "opts": {},
+  "result": ["attr.region", "attr.num_date", "attr.div", "attr.country"],
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "traversedBy": ["*.*"]
+    },
+    {
+      "type": "breakFn",
+      "key": "xvalue",
+      "isMatch": false,
+      "matchedBy": [],
+      "traversedBy": ["*.*"]
+    },
+    {
+      "type": "breakFn",
+      "key": "yvalue",
+      "isMatch": false,
+      "matchedBy": [],
+      "traversedBy": ["*.*"]
+    },
+    {
+      "type": "breakFn",
+      "key": "children",
+      "isMatch": false,
+      "matchedBy": [],
+      "traversedBy": ["*.*"]
+    },
+    {
+      "type": "breakFn",
+      "key": "strain",
+      "isMatch": false,
+      "matchedBy": [],
+      "traversedBy": ["*.*"]
+    },
+    {
+      "type": "breakFn",
+      "key": "clade",
+      "isMatch": false,
+      "matchedBy": [],
+      "traversedBy": ["*.*"]
+    },
+    {
+      "type": "breakFn",
+      "key": "tvalue",
+      "isMatch": false,
+      "matchedBy": [],
+      "traversedBy": ["*.*"]
+    },
+    {
+      "type": "breakFn",
+      "key": "attr",
+      "isMatch": false,
+      "matchedBy": [],
+      "traversedBy": ["*.*"]
+    },
+    {
+      "type": "breakFn",
+      "key": "attr.region",
+      "isMatch": true,
+      "matchedBy": ["*.*"],
+      "traversedBy": ["*.*"]
+    },
+    {
+      "type": "filterFn",
+      "key": "attr.region",
+      "isMatch": true,
+      "matchedBy": ["*.*"],
+      "traversedBy": ["*.*"]
+    },
+    {
+      "type": "breakFn",
+      "key": "attr.num_date",
+      "isMatch": true,
+      "matchedBy": ["*.*"],
+      "traversedBy": ["*.*"]
+    },
+    {
+      "type": "filterFn",
+      "key": "attr.num_date",
+      "isMatch": true,
+      "matchedBy": ["*.*"],
+      "traversedBy": ["*.*"]
+    },
+    {
+      "type": "breakFn",
+      "key": "attr.div",
+      "isMatch": true,
+      "matchedBy": ["*.*"],
+      "traversedBy": ["*.*"]
+    },
+    {
+      "type": "filterFn",
+      "key": "attr.div",
+      "isMatch": true,
+      "matchedBy": ["*.*"],
+      "traversedBy": ["*.*"]
+    },
+    {
+      "type": "breakFn",
+      "key": "attr.country",
+      "isMatch": true,
+      "matchedBy": ["*.*"],
+      "traversedBy": ["*.*"]
+    },
+    {
+      "type": "filterFn",
+      "key": "attr.country",
+      "isMatch": true,
+      "matchedBy": ["*.*"],
+      "traversedBy": ["*.*"]
+    }
+  ]
+}
