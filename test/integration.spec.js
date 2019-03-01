@@ -36,7 +36,7 @@ describe('Integration Testing', () => {
             const result = objectScan(fileContent.needles, opts)(dirInput);
             // eslint-disable-next-line istanbul-prevent-ignore
             /* istanbul ignore if */
-            if (fileContent.result === undefined) {
+            if (fileContent.result === undefined) { // makes it very convenient to record new tests
               fs.writeFileSync(filePath, stringify(Object.assign({}, fileContent, { log, result })));
             } else {
               expect(fileContent.result).to.deep.equal(result);
