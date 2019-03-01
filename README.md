@@ -94,7 +94,9 @@ When set to false, joined paths for functions and the final result are not escap
 Type: `boolean`<br>
 Default: `true`
 
-When set to false, no array selectors should be used and arrays are automatically traversed.
+When set to false, no array selectors should be used in any needles and arrays are automatically traversed.
+
+Note that the results still include the array selectors.
 
 ## Examples
 
