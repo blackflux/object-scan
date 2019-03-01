@@ -47,7 +47,7 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 - `key` is the key that the function is called for (respects `joined` option).
 - `value` is the value for that key.
 - `parents` is an array containing all parents as `[parent, grandparent, ...]`. Includes parents that are arrays only iff `useArraySelector` is true.
-- `isMatch` is true if exactly matched by at least one key. Indicates valid (intermittent) result.
+- `isMatch` is true if exactly matched by at least one needle.
 - `matchedBy` are all needles matching the key exactly.
 - `traversedBy` are all needles involved in traversing the key.
 
