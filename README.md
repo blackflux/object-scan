@@ -10,7 +10,7 @@
 [![Gardener](https://github.com/blackflux/js-gardener/blob/master/assets/badge.svg)](https://github.com/blackflux/js-gardener)
 [![Gitter](https://github.com/blackflux/js-gardener/blob/master/assets/icons/gitter.svg)](https://gitter.im/blackflux/object-scan)
 
-Find Keys using Wildcard matching and optional value function.
+Find keys in object hierarchies using wildcard matching and callbacks.
 
 ## Install
 
@@ -30,26 +30,26 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 
 ### Features
 
-- Object and array matching with e.g. `key.path` and `[1]`
-- Key and index wildcard matching with `*` and `[*]`
-- Partial key and index wildcard matching, e.g. `mark*` or `[1*]`
-- Infinite nested matching with `**`
-- Matches ordered so that they can safely be deleted from the input in order
-- Simple or-clause for key and index with `{a,b}` and `[{0,1}]`
-- Input is traversed exactly once and only unique results are returned.
+- Object and Array matching with e.g. `key.path` and `[1]`
+- Wildcard matching with `*` and `[*]`
+- Partial Wildcard matching with e.g. `mark*` or `[1*]`
+- Arbitrary depth matching with `**`
+- Simple or-clause with e.g. `{a,b}` and `[{0,1}]`
 - Full support for escaping
-- Lots of tests to ensure correctness
+- Input traversed exactly once during search
+- Matches returned in "delete-safe" order
 - Dependency free and small in size
+- Lots of tests to ensure correctness
 
 ### Options
 
 **Note on Functions:** Signature for all functions is `Fn(key, value, { parents, isMatch, matchedBy, traversedBy })`, where:
 - `key` is the key that the function is called for (respects `joined` option).
-- `value` is the value of that key.
-- `parents` is an array containing all parents as `[parent, grandparent, ...]`. Contains parents that are arrays only iff `useArraySelector` is true.
+- `value` is the value for that key.
+- `parents` is an array containing all parents as `[parent, grandparent, ...]`. Includes parents that are arrays only iff `useArraySelector` is true.
 - `isMatch` is true if exactly matched by at least one key. Indicates valid (intermittent) result.
 - `matchedBy` are all needles matching the key exactly.
-- `traversedBy` are all needles involved in traversing the key
+- `traversedBy` are all needles involved in traversing the key.
 
 #### filterFn
 
@@ -68,7 +68,7 @@ Type: `function`<br>
 Default: `undefined`
 
 If function is defined, it is called for every key that is traversed by
-the search. If `true` is returned, all keys under the current key are
+the search. If `true` is returned, all keys nested under the current key are
 skipped in the search and from the final result.
 
 #### joined
@@ -76,7 +76,9 @@ skipped in the search and from the final result.
 Type: `boolean`<br>
 Default: `true`
 
-Can be set to false to return each key as a list. When dealing with special characters this can be useful.
+Can be set to false to return each key as a list. When dealing with _special characters_ this can be useful.
+
+Note that [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set) fully support lists.
 
 Important: Setting this to `false` improves performance.
 
@@ -92,7 +94,7 @@ When set to false, joined paths for functions and the final result are not escap
 Type: `boolean`<br>
 Default: `true`
 
-When set to false no array selectors are used and arrays are automatically traversed.
+When set to false, no array selectors should be used and arrays are automatically traversed.
 
 ## Examples
 
@@ -154,11 +156,13 @@ objectScan(['**'], { breakFn: key => key === 'a.b' })(obj);
 
 ## Edge Cases
 
-The top level object(s) are matched by the empty needle `""`. Useful for matching objects nested in arrays by setting `useArraySelector` to `false`. Note that the empty string does not work with [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set).
+The top level object(s) are matched by the empty needle `""`. 
+Useful for matching objects nested in arrays by setting `useArraySelector` to `false`.
+Note that the empty string does not work with [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set).
 
 ## Special Characters
 
 The following Characters are considered special and need to 
 be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `,`, `.` and `*`. 
 
-When dealing with special characters the `joined` option might be desirable to set to `false`.
+When dealing with special characters, it might be desirable to set the  `joined` option to `false`.
