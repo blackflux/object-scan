@@ -1,6 +1,8 @@
 {
   "needles": ["*.*"],
-  "opts": {"useArraySelector": false},
+  "options": {
+    "args": {"useArraySelector": false}
+  },
   "result": [
     "children[0].attr",
     "children[0].yvalue",

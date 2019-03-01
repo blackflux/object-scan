@@ -1,14 +1,15 @@
 {
   "needles": ["a.b.c", "a.*b.c", "a.b*.c", "a.*.c", "a.**.c"],
-  "opts": {},
-  "recording": [
-    "key",
-    "value",
-    "parents",
-    "isMatch",
-    "matchedBy",
-    "traversedBy"
-  ],
+  "options": {
+    "log": [
+      "key",
+      "value",
+      "parents",
+      "isMatch",
+      "matchedBy",
+      "traversedBy"
+    ]
+  },
   "result": ["a.b.c"],
   "log": [
     {

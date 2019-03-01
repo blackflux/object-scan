@@ -1,49 +1,9 @@
 {
   "needles": ["**.*\\.*"],
-  "opts": {"useArraySelector": false},
+  "options": {
+    "args": {"useArraySelector": false},
+    "log": null
+  },
   "result": ["e.f\\.g"],
-  "log": [
-    {
-      "type": "breakFn",
-      "key": "",
-      "isMatch": false,
-      "matchedBy": [],
-      "traversedBy": ["**.*\\.*"]
-    },
-    {
-      "type": "breakFn",
-      "key": "e",
-      "isMatch": false,
-      "matchedBy": [],
-      "traversedBy": ["**.*\\.*"]
-    },
-    {
-      "type": "breakFn",
-      "key": "e.f\\.g",
-      "isMatch": true,
-      "matchedBy": ["**.*\\.*"],
-      "traversedBy": ["**.*\\.*"]
-    },
-    {
-      "type": "filterFn",
-      "key": "e.f\\.g",
-      "isMatch": true,
-      "matchedBy": ["**.*\\.*"],
-      "traversedBy": ["**.*\\.*"]
-    },
-    {
-      "type": "breakFn",
-      "key": "a\\.b",
-      "isMatch": false,
-      "matchedBy": [],
-      "traversedBy": ["**.*\\.*"]
-    },
-    {
-      "type": "breakFn",
-      "key": "a\\.b.c",
-      "isMatch": false,
-      "matchedBy": [],
-      "traversedBy": ["**.*\\.*"]
-    }
-  ]
+  "log": null
 }

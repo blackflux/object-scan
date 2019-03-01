@@ -20,7 +20,7 @@ const logFn = (type, log, recording) => (key, value, kwargs) => {
 
 describe('Integration Testing', () => {
   getDirectories(path.join(__dirname, 'integration'))
-    // eslint-disable-next-line import/no-dynamic-require,global-require
+  // eslint-disable-next-line import/no-dynamic-require,global-require
     .map(([dirName, dirPath]) => [dirName, dirPath, require(`${dirPath}.json`)])
     .forEach(([dirName, dirPath, dirInput]) => {
       getFiles(dirPath)
@@ -29,15 +29,20 @@ describe('Integration Testing', () => {
         .map(([fileName, filePath]) => [fileName, filePath, require(filePath)])
         .forEach(([fileName, filePath, fileContent]) => {
           it(`Testing ${dirName}/${fileName}`, () => {
-            const log = [];
-            const opts = Object.assign({}, fileContent.opts, {
-              breakFn: logFn('breakFn', log, fileContent.recording || ['isMatch', 'matchedBy', 'traversedBy']),
-              filterFn: logFn('filterFn', log, fileContent.recording || ['isMatch', 'matchedBy', 'traversedBy'])
+            const options = fileContent.options || {};
+            const log = options.log === null ? null : [];
+            const opts = Object.assign({}, options.args, {
+              breakFn: options.log === null
+                ? undefined
+                : logFn('breakFn', log, options.log || ['isMatch', 'matchedBy', 'traversedBy']),
+              filterFn: options.log === null
+                ? undefined
+                : logFn('filterFn', log, options.log || ['isMatch', 'matchedBy', 'traversedBy'])
             });
             const result = objectScan(fileContent.needles, opts)(dirInput);
             // eslint-disable-next-line istanbul-prevent-ignore
             /* istanbul ignore if */
-            if ([fileContent.log, fileContent.result].includes(undefined)) {
+            if (fileContent.result === undefined) {
               fs.writeFileSync(filePath, stringify(Object.assign({}, fileContent, { log, result })));
             } else {
               expect(fileContent.result).to.deep.equal(result);
