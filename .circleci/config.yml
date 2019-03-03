@@ -65,9 +65,9 @@ jobs:
       - run: yarn test
       - run:
           command: |
-           if [[ -z $CIRCLE_PR_USERNAME ]]; then
-             (git add . && git diff-index --quiet HEAD --) || (git status && exit 1)
-           fi
+            if [[ -z $CIRCLE_PR_USERNAME ]]; then
+              (git add . && git diff-index --quiet HEAD --) || (git status && exit 1)
+            fi
       - run:
           command: |
             if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
