@@ -61,7 +61,7 @@ jobs:
       - image: 'circleci/node:10'
     steps:
       - checkout
-      - run: yarn install --offline --frozen-lockfile
+      - run: yarn install --offline
       - run: yarn test
       - run: >-
           (git add . && git diff-index --quiet HEAD --) || (git status && exit
@@ -76,7 +76,7 @@ jobs:
       - image: 'circleci/node:8.10'
     steps:
       - checkout
-      - run: yarn install --offline --frozen-lockfile
+      - run: yarn install --offline
       - run: yarn test
       - run: >-
           (git add . && git diff-index --quiet HEAD --) || (git status && exit
@@ -86,5 +86,5 @@ jobs:
       - image: 'circleci/node:10'
     steps:
       - checkout
-      - run: yarn install --offline --frozen-lockfile
+      - run: yarn install --offline
       - run: yarn run semantic-release
