@@ -61,6 +61,7 @@ jobs:
       - image: 'circleci/node:10'
     steps:
       - checkout
+      - run: npm install -g npm
       - run: npm ci
       - run: npm t
       - run: >-
@@ -86,5 +87,5 @@ jobs:
       - image: 'circleci/node:10'
     steps:
       - checkout
-      - run: npm i
+      - run: npm ci
       - run: npm run semantic-release
