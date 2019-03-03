@@ -63,6 +63,9 @@ jobs:
       - checkout
       - run: npm i
       - run: npm t
+      - run: >-
+          (git add . && git diff-index --quiet HEAD --) || (git status && exit
+          1);
       - run:
           command: |
             if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
@@ -75,6 +78,9 @@ jobs:
       - checkout
       - run: npm i
       - run: npm t
+      - run: >-
+          (git add . && git diff-index --quiet HEAD --) || (git status && exit
+          1);
   release:
     docker:
       - image: 'circleci/node:10'
