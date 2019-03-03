@@ -61,7 +61,6 @@ jobs:
       - image: 'circleci/node:10'
     steps:
       - checkout
-      - run: npm install -g npm
       - run: npm ci
       - run: npm t
       - run: >-
@@ -77,6 +76,7 @@ jobs:
       - image: 'circleci/node:8.10'
     steps:
       - checkout
+      - run: npm install -g npm
       - run: npm ci
       - run: npm t
       - run: >-
