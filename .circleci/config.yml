@@ -32,7 +32,7 @@ jobs:
       - image: 'circleci/node:10'
     steps:
       - checkout
-      - run: sudo npm i -g gally
+      - run: sudo yarn global add gally
       - run: ga promote $CIRCLE_BRANCH
   gally-auto-merge:
     docker:
@@ -49,7 +49,7 @@ jobs:
 
             echo $CIRCLE_PR_NUMBER
       - checkout
-      - run: sudo npm i -g gally
+      - run: sudo yarn global add gally
       - run: >-
           ga approve $CIRCLE_PR_NUMBER --condition
           "base.ref=dev&state=open&user.login=dependabot[bot]"
@@ -61,24 +61,30 @@ jobs:
       - image: 'circleci/node:10'
     steps:
       - checkout
-      - run: npm i
-      - run: npm t
+      - run: yarn install --frozen-lockfile
+      - run: yarn test
+      - run: >-
+          (git add . && git diff-index --quiet HEAD --) || (git status && exit
+          1);
       - run:
           command: |
             if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
-              npm run coveralls
+              yarn run coveralls
             fi
   test-node-v8.10:
     docker:
       - image: 'circleci/node:8.10'
     steps:
       - checkout
-      - run: npm i
-      - run: npm t
+      - run: yarn install --frozen-lockfile
+      - run: yarn test
+      - run: >-
+          (git add . && git diff-index --quiet HEAD --) || (git status && exit
+          1);
   release:
     docker:
       - image: 'circleci/node:10'
     steps:
       - checkout
-      - run: npm i
-      - run: npm run semantic-release
+      - run: yarn install --frozen-lockfile
+      - run: yarn run semantic-release
