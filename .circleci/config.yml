@@ -63,11 +63,9 @@ jobs:
       - checkout
       - run: yarn install --frozen-lockfile
       - run: yarn test
-      - run:
-          command: |
-            if [[ "$CIRCLE_BRANCH" =~ ^pull\/* ]]; then
-              (git add . && git diff-index --quiet HEAD --) || (git status && exit 1)
-            fi
+      - run: >-
+          (git add . && git diff-index --quiet HEAD --) || (git status && exit
+          1);
       - run:
           command: |
             if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
@@ -80,11 +78,9 @@ jobs:
       - checkout
       - run: yarn install --frozen-lockfile
       - run: yarn test
-      - run:
-          command: |
-            if [[ "$CIRCLE_BRANCH" =~ ^pull\/* ]]; then
-              (git add . && git diff-index --quiet HEAD --) || (git status && exit 1)
-            fi
+      - run: >-
+          (git add . && git diff-index --quiet HEAD --) || (git status && exit
+          1);
   release:
     docker:
       - image: 'circleci/node:10'
