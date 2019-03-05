@@ -13,11 +13,10 @@ const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
   return (isArray ? `[${key}]` : escape(key)).match(compiler.getWildcardRegex(subSearch));
 };
 
-const formatPath = (input, ctx) => (ctx.joined ? input.reduce((p, c) => {
-  const isNumber = typeof c === 'number';
-  // eslint-disable-next-line no-nested-ternary
-  return `${p}${isNumber || p === '' ? '' : '.'}${isNumber ? `[${c}]` : (ctx.escapePaths ? escape(c) : c)}`;
-}, '') : input);
+const formatPath = (input, ctx) => (ctx.joined ? input.reduce(
+  (p, c) => `${p}${typeof c === 'number' ? `[${c}]` : `${p ? '.' : ''}${ctx.escapePaths ? escape(c) : c}`}`,
+  ''
+) : input);
 
 const find = (haystack, searches, pathIn, parents, ctx) => {
   const recurseHaystack = ctx.breakFn === undefined
