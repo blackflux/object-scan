@@ -30,17 +30,17 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 
 ### Features
 
-✓ Object and Array matching with e.g. `key.path` and `[1]`\
-✓️ Wildcard matching with `*` and `[*]`\
-✓ Partial Wildcard matching with e.g. `mark*` or `[1*]`\
-✓️ Arbitrary depth matching with `**`\
-✓️ Simple or-clause with e.g. `{a,b}` and `[{0,1}]`\
-✓️ Full support for escaping\
-✓️ Input traversed exactly once during search\
-✓️ Matches returned in "delete-safe" order\
-✓️ Search syntax is checked for correctness\
-✓️ Dependency free, small in size and very performant\
-✓️ Lots of tests to ensure correctness
+- [x] Object and Array matching with e.g. `key.path` and `[1]`
+- [x] Wildcard matching with `*` and `[*]`
+- [x] Partial Wildcard matching with e.g. `mark*` or `[1*]`
+- [x] Arbitrary depth matching with `**`
+- [x] Simple or-clause with e.g. `{a,b}` and `[{0,1}]`
+- [x] Full support for escaping
+- [x] Input traversed exactly once during search
+- [x] Matches returned in "delete-safe" order
+- [x] Search syntax is checked for correctness
+- [x] Dependency free, small in size and very performant
+- [x] Lots of tests to ensure correctness
 
 ### Options
 
