@@ -14,7 +14,7 @@ const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
 };
 
 const formatPath = (input, ctx) => (ctx.joined ? input.reduce(
-  (p, c) => `${p}${typeof c === 'number' ? `[${c}]` : `${p === '' ? '' : '.'}${ctx.escapePaths ? escape(c) : c}`}`,
+  (p, c) => `${p}${typeof c === 'number' ? `[${c}]` : `${p ? '.' : ''}${ctx.escapePaths ? escape(c) : c}`}`,
   ''
 ) : input);
 
