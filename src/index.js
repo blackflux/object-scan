@@ -71,6 +71,11 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
 };
 
 module.exports = (needles, opts) => {
+  assert(Array.isArray(needles));
+  if (needles.length === 0) {
+    return () => [];
+  }
+
   const ctx = Object.assign({
     filterFn: undefined,
     breakFn: undefined,
