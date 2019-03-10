@@ -41,6 +41,11 @@ describe('Testing Find', () => {
     ]);
   });
 
+  it('Testing No Needles', () => {
+    const find = objectScan([]);
+    expect(find(haystack)).to.deep.equal([]);
+  });
+
   it('Testing Key Wildcard', () => {
     const find = objectScan(['pa*nt*']);
     expect(find(haystack)).to.deep.equal([
