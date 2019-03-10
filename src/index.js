@@ -70,8 +70,9 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
   return result;
 };
 
-module.exports = (needles, opts) => {
+module.exports = (needles, opts = {}) => {
   assert(Array.isArray(needles));
+  assert(opts instanceof Object && !Array.isArray(opts));
   if (needles.length === 0) {
     return () => [];
   }
