@@ -4,14 +4,13 @@
   "description": "Find Keys using Wildcard matching and optional value function.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "npm run clean && npm run gardener && npm run test-simple",
     "clean": "rm -rf lib",
     "build": "npx babel src --out-dir lib --source-maps inline --copy-files --include-dotfiles",
-    "clean-build": "npm run clean && npm run build",
-    "build-artifact": "npm run clean-build && tar -zxvf $(npm pack) && rm *-0.0.0-development.tgz && cd package && tar -zcvf ../release.tar.gz . && cd .. && rm -rf package",
+    "build-clean": "npm run clean && npm run build",
     "test-simple": "nyc mocha \"./test/**/*.spec.js\"",
+    "test": "npm run clean && npm run gardener && npm run test-simple",
     "coveralls": "node ./node_modules/coveralls/bin/coveralls.js < ./coverage/lcov.info",
-    "semantic-release": "npm run build-artifact && npm run clean-build && npx semantic-release",
+    "semantic-release": "npm run build-clean && npx semantic-release",
     "gardener": "node gardener"
   },
   "repository": {
@@ -35,16 +34,17 @@
   },
   "homepage": "https://github.com/blackflux/object-scan#readme",
   "devDependencies": {
-    "@babel/cli": "7.2.3",
-    "@babel/core": "7.4.0",
-    "@babel/plugin-proposal-object-rest-spread": "7.4.0",
-    "@babel/plugin-transform-flow-comments": "7.4.0",
-    "@babel/preset-flow": "7.0.0",
+    "@babel/cli": "7.4.3",
+    "@babel/core": "7.4.3",
+    "@babel/plugin-proposal-object-rest-spread": "7.4.3",
     "@babel/register": "7.4.0",
+    "@blackflux/eslint-plugin-rules": "1.0.0",
+    "@blackflux/robo-config-plugin": "1.3.0",
     "babel-eslint": "10.0.1",
     "chai": "4.2.0",
     "coveralls": "3.0.3",
-    "js-gardener": "1.38.2",
+    "eslint": "5.16.0",
+    "js-gardener": "2.0.1",
     "json-stringify-pretty-compact": "2.0.0",
     "nyc": "13.3.0",
     "semantic-release": "15.13.3"
@@ -76,7 +76,6 @@
       "gardener.js",
       "node_modules/*",
       "coverage/*",
-      "flow-typed/*",
       "lib/*"
     ]
   },
