@@ -34,7 +34,7 @@ describe('Integration Testing', () => {
             const opts = Object.assign({}, options.args, options.log === null ? {} : ['breakFn', 'filterFn']
               .reduce((p, c) => Object.assign(p, { [c]: logFn(c, log, options.log) }), {}));
             const result = objectScan(fileContent.needles, opts)(dirInput);
-            // eslint-disable-next-line istanbul-prevent-ignore
+            // eslint-disable-next-line @blackflux/rules/istanbul-prevent-ignore
             /* istanbul ignore if */
             if (fileContent.result === undefined) { // makes it very convenient to record new tests
               fs.writeFileSync(filePath, stringify(Object.assign({}, fileContent, { log, result })));

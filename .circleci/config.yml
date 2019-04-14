@@ -52,10 +52,10 @@ jobs:
       - run: sudo yarn global add gally
       - run: >-
           ga approve $CIRCLE_PR_NUMBER --condition
-          "base.ref=dev&state=open&user.login=dependabot[bot]"
+          "base.ref=dev&state=open&user.login=dependabot[bot]&mergeable=true"
       - run: >-
           ga merge $CIRCLE_PR_NUMBER --condition
-          "base.ref=dev&state=open&user.login=dependabot[bot]"
+          "base.ref=dev&state=open&user.login=dependabot[bot]&mergeable=true"
   test-node-v10:
     docker:
       - image: 'circleci/node:10'
