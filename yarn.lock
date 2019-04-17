@@ -1551,7 +1551,7 @@ debug@^4.0.0, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
   dependencies:
     ms "^2.1.1"
 
-debuglog@*, debuglog@^1.0.1:
+debuglog@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/debuglog/-/debuglog-1.0.1.tgz#aa24ffb9ac3df9a2351837cfb2d279360cd78492"
   integrity sha1-qiT/uaw9+aI1GDfPstJ5NgzXhJI=
@@ -1906,10 +1906,10 @@ eslint-module-utils@^2.4.0:
     debug "^2.6.8"
     pkg-dir "^2.0.0"
 
-eslint-plugin-import@2.17.1:
-  version "2.17.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.17.1.tgz#b888feb4d9b3ee155113c8dccdd4bec5db33bdf4"
-  integrity sha512-lzD9uvRvW4MsHzIOMJEDSb5MOV9LzgxRPBaovvOhJqzgxRHYfGy9QOrMuwHIh5ehKFJ7Z3DcrcGKDQ0IbP0EdQ==
+eslint-plugin-import@2.17.2:
+  version "2.17.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.17.2.tgz#d227d5c6dc67eca71eb590d2bb62fb38d86e9fcb"
+  integrity sha512-m+cSVxM7oLsIpmwNn2WXTJoReOF9f/CtLMo7qOVmKd1KntBy0hEcuNZ3erTmWjx+DxRO0Zcrm5KwAvI9wHcV5g==
   dependencies:
     array-includes "^3.0.3"
     contains-path "^0.1.0"
@@ -2893,7 +2893,7 @@ import-lazy@^2.1.0:
   resolved "https://registry.yarnpkg.com/import-lazy/-/import-lazy-2.1.0.tgz#05698e3d45c88e8d7e9d92cb0584e77f096f3e43"
   integrity sha1-BWmOPUXIjo1+nZLLBYTnfwlvPkM=
 
-imurmurhash@*, imurmurhash@^0.1.4:
+imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
   integrity sha1-khi5srkoojixPcT7a21XbyMUU+o=
@@ -3428,15 +3428,15 @@ joi@14.3.1:
     isemail "3.x.x"
     topo "3.x.x"
 
-js-gardener@2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.4.tgz#f2d875f99202012a2c8b8504c98bcb63ec6e27ff"
-  integrity sha512-wbwUjYjTE+knJ3aO9ZT0SRLhH1MGfhz2a9EG7W6V/3uZYWLaoJQbwckCZfmckj99gU2sX4FTEMbR11e0ZUyj3A==
+js-gardener@2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.5.tgz#efe82d1ad27473b54022389c1808f559210ea350"
+  integrity sha512-GCsqwu0Mtmd/D2tEm++P51easxsVmZXxo1nvin5MCaSoeAT3Kc2LfrOpMWvF1c74qhYpyAcB/VrQ/iOcmwGwug==
   dependencies:
     chalk "2.4.2"
     eslint "5.16.0"
     eslint-config-airbnb-base "13.1.0"
-    eslint-plugin-import "2.17.1"
+    eslint-plugin-import "2.17.2"
     eslint-plugin-jasmine "2.10.1"
     eslint-plugin-json "1.4.0"
     eslint-plugin-markdown "1.0.0"
@@ -3449,7 +3449,7 @@ js-gardener@2.0.4:
     lodash.get "4.4.2"
     mocha "6.1.3"
     npm-check "5.9.0"
-    robo-config "1.23.3"
+    robo-config "2.1.0"
     tmp "0.1.0"
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
@@ -3729,11 +3729,6 @@ lockfile@^1.0.4:
   dependencies:
     signal-exit "^3.0.2"
 
-lodash._baseindexof@*:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/lodash._baseindexof/-/lodash._baseindexof-3.1.0.tgz#fe52b53a1c6761e42618d654e4a25789ed61822c"
-  integrity sha1-/lK1OhxnYeQmGNZU5KJXie1hgiw=
-
 lodash._baseuniq@~4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash._baseuniq/-/lodash._baseuniq-4.6.0.tgz#0ebb44e456814af7905c6212fa2c9b2d51b841e8"
@@ -3742,32 +3737,10 @@ lodash._baseuniq@~4.6.0:
     lodash._createset "~4.0.0"
     lodash._root "~3.0.0"
 
-lodash._bindcallback@*:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/lodash._bindcallback/-/lodash._bindcallback-3.0.1.tgz#e531c27644cf8b57a99e17ed95b35c748789392e"
-  integrity sha1-5THCdkTPi1epnhftlbNcdIeJOS4=
-
-lodash._cacheindexof@*:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/lodash._cacheindexof/-/lodash._cacheindexof-3.0.2.tgz#3dc69ac82498d2ee5e3ce56091bafd2adc7bde92"
-  integrity sha1-PcaayCSY0u5ePOVgkbr9Ktx73pI=
-
-lodash._createcache@*:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/lodash._createcache/-/lodash._createcache-3.1.2.tgz#56d6a064017625e79ebca6b8018e17440bdcf093"
-  integrity sha1-VtagZAF2JeeevKa4AY4XRAvc8JM=
-  dependencies:
-    lodash._getnative "^3.0.0"
-
 lodash._createset@~4.0.0:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/lodash._createset/-/lodash._createset-4.0.3.tgz#0f4659fbb09d75194fa9e2b88a6644d363c9fe26"
   integrity sha1-D0ZZ+7CddRlPqeK4imZE02PJ/iY=
-
-lodash._getnative@*, lodash._getnative@^3.0.0:
-  version "3.9.1"
-  resolved "https://registry.yarnpkg.com/lodash._getnative/-/lodash._getnative-3.9.1.tgz#570bc7dede46d61cdcde687d65d3eecbaa3aaff5"
-  integrity sha1-VwvH3t5G1hzc3mh9ZdPuy6o6r/U=
 
 lodash._root@~3.0.0:
   version "3.0.1"
@@ -3823,11 +3796,6 @@ lodash.mergewith@4.6.1:
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/lodash.mergewith/-/lodash.mergewith-4.6.1.tgz#639057e726c3afbdb3e7d42741caa8d6e4335927"
   integrity sha512-eWw5r+PYICtEBgrBE5hhlT6aAa75f411bgDz/ZL2KZqYV03USvucsxcHUIlGTDTECs1eunpI7HOV7U+WLDvNdQ==
-
-lodash.restparam@*:
-  version "3.6.1"
-  resolved "https://registry.yarnpkg.com/lodash.restparam/-/lodash.restparam-3.6.1.tgz#936a4e309ef330a7645ed4145986c85ae5b20805"
-  integrity sha1-k2pOMJ7zMKdkXtQUWYbIWuWyCAU=
 
 lodash.set@4.3.2, lodash.set@^4.3.2:
   version "4.3.2"
@@ -4827,10 +4795,10 @@ object-keys@^1.0.11, object-keys@^1.0.12:
   resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.1.1.tgz#1c47f272df277f3b1daf061677d9c82e2322c60e"
   integrity sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==
 
-object-scan@5.0.4:
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/object-scan/-/object-scan-5.0.4.tgz#7ee3cb0b7e4015861146436f91db4df6a12d0ff2"
-  integrity sha512-jsMJ5sZJ4y4i/Y37djde0uooD+/whq7mitXm4AjGWEK4ey94I6zGZdgyUJzxMHYqDcLnsO0oeeXd5Zbbr/LSjg==
+object-scan@5.0.5:
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/object-scan/-/object-scan-5.0.5.tgz#369091f349130f433c9666b45490b57837a11207"
+  integrity sha512-vrgd96HNaRTXbPcjYt++dbnp1BaNvnm6l6kc2FzgCi0hV6YJaNXfizObHU9aOrM50gLp8wek6GViPUWUaVbi4g==
 
 object-treeify@1.1.6:
   version "1.1.6"
@@ -5626,7 +5594,7 @@ readable-stream@~1.1.10:
     isarray "0.0.1"
     string_decoder "~0.10.x"
 
-readdir-scoped-modules@*, readdir-scoped-modules@^1.0.0:
+readdir-scoped-modules@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/readdir-scoped-modules/-/readdir-scoped-modules-1.0.2.tgz#9fafa37d286be5d92cbaebdee030dc9b5f406747"
   integrity sha1-n6+jfShr5dksuuve4DDcm19AZ0c=
@@ -5879,10 +5847,10 @@ rimraf@2, rimraf@2.6.3, rimraf@^2.5.2, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6
   dependencies:
     glob "^7.1.3"
 
-robo-config@1.23.3:
-  version "1.23.3"
-  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-1.23.3.tgz#2e1cb0637e1657d1d36aa0e9b8831435eb9dff84"
-  integrity sha512-GcXuvFG+Bg5r5O0ouk3+18kXXzyc71GEA6Nign4zQ3awwUMMm/uAFg1z3VudjQuJp73c4ECTfFKBIrKFDB2/Fw==
+robo-config@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-2.1.0.tgz#b64ed3a44dec432c8767c411e25d810e6788a16b"
+  integrity sha512-BktbQ+LZKp1YgS5+qG/hy+WeYVolibNaZ3tmAwPFRTfum7qal8VACTO6ab1VhVhQwWiQX30m+IEJrxAc/38eoQ==
   dependencies:
     app-root-path "2.2.1"
     deepmerge "3.2.0"
@@ -5891,7 +5859,7 @@ robo-config@1.23.3:
     lodash.difference "4.5.0"
     lodash.get "4.4.2"
     object-deep-contain "1.0.5"
-    object-scan "5.0.4"
+    object-scan "5.0.5"
     object-treeify "1.1.6"
     smart-fs "1.6.1"
 
