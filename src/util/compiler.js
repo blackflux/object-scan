@@ -3,7 +3,7 @@ const parser = require('./parser');
 
 const defineProperty = (target, k, v) => Object.defineProperty(target, k, { value: v, writable: false });
 
-const IS_MATCH = Symbol('isMatch');
+const IS_MATCH = Symbol('is-match');
 const markMatch = input => defineProperty(input, IS_MATCH, true);
 const isMatch = input => input[IS_MATCH] === true;
 module.exports.isMatch = isMatch;

@@ -36,13 +36,13 @@ const Result = (input) => {
       }
       inArray = flag;
     },
-    finishElement: (idx, { err, fins, finishedReq = false }) => {
+    finishElement: (idx, { err, fins, finReq = false }) => {
       const isFinished = cursor === idx;
       if (isFinished && !fins.includes(input[idx - 1] || null)) {
         throwError(err, input, { char: idx });
       }
       if (!isFinished) {
-        if (finishedReq) {
+        if (finReq) {
           throwError(err, input, { char: idx });
         }
         const ele = input.slice(cursor, idx);
@@ -106,7 +106,7 @@ module.exports = (input) => {
           result.setInArray(false, idx);
           break;
         case '{':
-          result.finishElement(idx, { err: 'Bad Group Start', fins: [null, '.', '[', '{', ','], finishedReq: true });
+          result.finishElement(idx, { err: 'Bad Group Start', fins: [null, '.', '[', '{', ','], finReq: true });
           result.startGroup();
           break;
         case ',':
