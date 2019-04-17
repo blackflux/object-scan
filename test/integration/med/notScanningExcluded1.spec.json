@@ -1,0 +1,27 @@
+{
+  "needles": ["problems[*],!**"],
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "traversedBy": ["problems[*],!**"]
+    },
+    {
+      "type": "breakFn",
+      "key": "problems",
+      "isMatch": true,
+      "matchedBy": ["problems[*],!**"],
+      "traversedBy": ["problems[*],!**"]
+    },
+    {
+      "type": "breakFn",
+      "key": "problems[0]",
+      "isMatch": true,
+      "matchedBy": ["problems[*],!**"],
+      "traversedBy": ["problems[*],!**"]
+    }
+  ],
+  "result": []
+}

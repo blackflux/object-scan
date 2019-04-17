@@ -1,3 +1,5 @@
+const assert = require('assert');
+
 const throwError = (msg, input, context = {}) => {
   throw new Error(Object.entries(context)
     .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
@@ -10,9 +12,21 @@ const getSimple = (arrOrSet) => {
   return arrOrSet.size === 1 ? arrOrSet.values().next().value : arrOrSet;
 };
 
+class CString extends String {
+  constructor(value, excluded) {
+    super(value);
+    this.excluded = excluded;
+  }
+
+  isExcluded() {
+    return this.excluded;
+  }
+}
+
 const Result = (input) => {
   let cResult = new Set();
   let inArray = false;
+  let exclusionLevel = false;
   let cursor = 0;
 
   // group related
@@ -21,10 +35,16 @@ const Result = (input) => {
     parentStack.push(cResult);
     cResult = asOr ? new Set() : [];
   };
+  const finishExcluded = () => {
+    if (exclusionLevel !== false && parentStack.length < exclusionLevel) {
+      exclusionLevel = false;
+    }
+  };
   const finishChild = () => {
     const parent = parentStack.pop();
     parent[Array.isArray(parent) ? 'push' : 'add'](getSimple(cResult));
     cResult = parent;
+    finishExcluded();
   };
 
   newChild(false);
@@ -49,9 +69,15 @@ const Result = (input) => {
         if (inArray && !/^[*\d]+$/g.test(ele)) {
           throwError('Bad Array Selector', input, { selector: ele });
         }
-        cResult.push(inArray ? `[${ele}]` : ele);
+        cResult.push(new CString(inArray ? `[${ele}]` : ele, exclusionLevel !== false));
       }
       cursor = idx + 1;
+    },
+    markExcluded: (idx) => {
+      if (exclusionLevel !== false) {
+        throwError('Redundant Exclusion', input, { char: idx });
+      }
+      exclusionLevel = parentStack.length;
     },
     startGroup: () => {
       newChild(true);
@@ -70,6 +96,7 @@ const Result = (input) => {
     },
     finalizeResult: () => {
       finishChild();
+      assert(exclusionLevel === false);
       if (parentStack.length !== 0) {
         throwError('Non Terminated Group', input);
       }
@@ -83,7 +110,7 @@ const Result = (input) => {
 
 module.exports = (input) => {
   if (input === '') {
-    return '';
+    return new CString('', false);
   }
 
   const result = Result(input);
@@ -98,7 +125,7 @@ module.exports = (input) => {
           result.finishElement(idx, { err: 'Bad Path Separator', fins: [']', '}'] });
           break;
         case '[':
-          result.finishElement(idx, { err: 'Bad Array Start', fins: [null, '{', ',', '}', ']'] });
+          result.finishElement(idx, { err: 'Bad Array Start', fins: [null, '!', '{', ',', '}', ']'] });
           result.setInArray(true, idx);
           break;
         case ']':
@@ -106,7 +133,7 @@ module.exports = (input) => {
           result.setInArray(false, idx);
           break;
         case '{':
-          result.finishElement(idx, { err: 'Bad Group Start', fins: [null, '.', '[', '{', ','], finReq: true });
+          result.finishElement(idx, { err: 'Bad Group Start', fins: [null, '!', '.', '[', '{', ','], finReq: true });
           result.startGroup();
           break;
         case ',':
@@ -116,6 +143,10 @@ module.exports = (input) => {
         case '}':
           result.finishElement(idx, { err: 'Bad Group Terminator', fins: [']', '}'] });
           result.finishGroup(idx);
+          break;
+        case '!':
+          result.finishElement(idx, { err: 'Bad Exclusion', fins: [null, '.', ',', '{', '['], finReq: true });
+          result.markExcluded(idx);
           break;
         default:
           break;

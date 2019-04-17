@@ -111,6 +111,25 @@ describe('Testing Find', () => {
     });
   });
 
+  // todo: add lots more tests (!)
+  // todo: see bookmarked tests and adapt those
+
+  describe('Testing Exclusion', () => {
+    const array = { a: { b: 'c', d: 'e' }, f: ['g', 'h'] };
+
+    it('Testing nested exclusion', () => {
+      expect(objectScan(['a.{*,!b}'])(array)).to.deep.equal(['a.d']);
+    });
+
+    it('Testing two level target exclusion', () => {
+      expect(objectScan(['*.*,!a.b'])(array)).to.deep.equal(['a.d']);
+    });
+
+    it('Testing array exclusion', () => {
+      expect(objectScan(['*[*],!*[0]'])(array)).to.deep.equal(['f[1]']);
+    });
+  });
+
   describe('Testing empty needle behaviour', () => {
     const needles = [''];
     const arrayInput = [{ id: 1 }, { id: 2 }];
@@ -490,7 +509,7 @@ describe('Testing Find', () => {
 
   describe('Testing Escaping', () => {
     it('Testing Escaped Char Matching', () => {
-      [',', '.', '*', '[', ']', '{', '}'].forEach((char) => {
+      ['!', ',', '.', '*', '[', ']', '{', '}'].forEach((char) => {
         const find = objectScan([`\\${char}`]);
         expect(find({ [char]: 'a', b: 'c' })).to.deep.equal([`\\${char}`]);
       });

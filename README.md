@@ -35,6 +35,7 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 - Partial Wildcard matching with e.g. `mark*` or `[1*]`
 - Arbitrary depth matching with `**`
 - Simple or-clause with e.g. `{a,b}` and `[{0,1}]`
+- Simple exclusion with e.g. `!excluded`
 - Full support for escaping
 - Input traversed exactly once during search
 - Matches returned in "delete-safe" order
@@ -161,6 +162,10 @@ objectScan(['**'], { filterFn: (key, value) => typeof value === 'string' })(obj)
 // => ["k", "a.h[1]", "a.h[0]", "a.e.f", "a.b.c"]
 objectScan(['**'], { breakFn: key => key === 'a.b' })(obj);
 // => ["k", "a.h[1]", "a.h[0]", "a.h", "a.e.f", "a.e", "a.b", "a"]
+
+// exclusion filter
+// TODO: add
+
 ```
 
 ## Edge Cases
@@ -172,7 +177,7 @@ Note that the empty string does not work with [_.get](https://lodash.com/docs/#g
 ## Special Characters
 
 The following Characters are considered special and need to 
-be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `,`, `.` and `*`. 
+be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `,`, `.`, `!` and `*`. 
 
 When dealing with special characters, it might be desirable to set the  `joined` option to `false`.
 

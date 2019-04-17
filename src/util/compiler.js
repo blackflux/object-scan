@@ -8,6 +8,11 @@ const markMatch = input => defineProperty(input, IS_MATCH, true);
 const isMatch = input => input[IS_MATCH] === true;
 module.exports.isMatch = isMatch;
 
+const IS_INCLUDED = Symbol('is-included');
+const markIncluded = input => defineProperty(input, IS_INCLUDED, true);
+const isIncluded = input => input !== undefined && input[IS_INCLUDED] === true;
+module.exports.isIncluded = isIncluded;
+
 const NEEDLE = Symbol('needle');
 const setNeedle = (input, needle) => defineProperty(input, NEEDLE, needle);
 const getNeedle = input => (input[NEEDLE] === undefined ? null : input[NEEDLE]);
@@ -76,6 +81,10 @@ const buildRecursive = (tower, path, needle) => {
     Object.assign(tower, { [path[0]]: {} });
     setWildcardRegex(tower[path[0]], path[0]);
   }
+  if (!path[0].isExcluded()) {
+    // ok to call defineProperty multiple times with identical value
+    markIncluded(tower[path[0]]);
+  }
   buildRecursive(tower[path[0]], path.slice(1), needle);
 };
 
@@ -98,6 +107,7 @@ const computeStarRecursionsRecursive = (tower) => {
 
 module.exports.compile = (needles) => {
   const tower = {};
+  markIncluded(tower);
   needles.forEach(needle => buildRecursive(tower, [parser(needle)], needle));
   computeStarRecursionsRecursive(tower);
   return tower;

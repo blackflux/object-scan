@@ -1,4 +1,3 @@
-const assert = require('assert');
 const expect = require('chai').expect;
 const parser = require('./../../src/util/parser');
 
@@ -10,8 +9,7 @@ const asString = (() => {
     if (input instanceof Set) {
       return `{${[...input].map(e => asStringRec(e)).join(',')}}`;
     }
-    assert(typeof input === 'string');
-    return `"${input}"`;
+    return `${input.isExcluded() ? '!' : ''}"${input}"`;
   };
   return input => asStringRec(parser(input));
 })();
@@ -44,58 +42,58 @@ describe('Testing Parser', () => {
 
   describe('Testing Simple Use Cases', () => {
     it('Testing Empty', () => {
-      expect(parser('')).to.deep.equal('');
+      expect(asString('')).to.deep.equal('""');
     });
 
     it('Testing Simple', () => {
-      expect(parser('a')).to.deep.equal('a');
+      expect(asString('a')).to.deep.equal('"a"');
     });
 
     it('Testing Path', () => {
-      expect(parser('a.b')).to.deep.equal(['a', 'b']);
+      expect(asString('a.b')).to.deep.equal('["a","b"]');
     });
 
     it('Testing Array', () => {
-      expect(parser('a[0]')).to.deep.equal(['a', '[0]']);
+      expect(asString('a[0]')).to.deep.equal('["a","[0]"]');
     });
 
     it('Testing Or', () => {
-      expect(parser('{a,b}')).to.deep.equal(new Set(['a', 'b']));
+      expect(asString('{a,b}')).to.deep.equal('{"a","b"}');
     });
 
     it('Testing Comma Outside Group', () => {
-      expect(parser('a,b')).to.deep.equal(new Set(['a', 'b']));
-      expect(parser('a.b,c.d')).to.deep.equal(new Set([['a', 'b'], ['c', 'd']]));
+      expect(asString('a,b')).to.deep.equal('{"a","b"}');
+      expect(asString('a.b,c.d')).to.deep.equal('{["a","b"],["c","d"]}');
     });
 
     it('Testing Or In Array', () => {
-      expect(parser('[{0,1}]')).to.deep.equal(new Set(['[0]', '[1]']));
+      expect(asString('[{0,1}]')).to.deep.equal('{"[0]","[1]"}');
     });
 
     it('Testing Array In Or', () => {
-      expect(parser('{[0],[1]}')).to.deep.equal(new Set(['[0]', '[1]']));
+      expect(asString('{[0],[1]}')).to.deep.equal('{"[0]","[1]"}');
     });
 
     it('Testing Array in Path', () => {
-      expect(parser('a.*.c[0]')).to.deep.equal(['a', '*', 'c', '[0]']);
+      expect(asString('a.*.c[0]')).to.deep.equal('["a","*","c","[0]"]');
     });
 
     it('Testing Array After Or', () => {
-      expect(parser('{a,b}[0]')).to.deep.equal([new Set(['a', 'b']), '[0]']);
+      expect(asString('{a,b}[0]')).to.deep.equal('[{"a","b"},"[0]"]');
     });
   });
 
   describe('Testing Escaping', () => {
     it('Testing Path Escaped', () => {
-      expect(parser('a\\.b')).to.deep.equal('a\\.b');
+      expect(asString('a\\.b')).to.deep.equal('"a\\.b"');
     });
 
     it('Testing Or Escaped', () => {
-      expect(parser('{a\\,b}')).to.deep.equal('a\\,b');
+      expect(asString('{a\\,b}')).to.deep.equal('"a\\,b"');
     });
 
     it('Testing Escaped final Dot', () => {
-      expect(parser('a.\\.')).to.deep.equal(['a', '\\.']);
+      expect(asString('a.\\.')).to.deep.equal('["a","\\."]');
     });
   });
 
@@ -178,6 +176,42 @@ describe('Testing Parser', () => {
 
     it('Testing Group Stars After Group', () => {
       checkError('{1,2}{2,3}', 'Bad Group Start: {1,2}{2,3}, char 5');
+    });
+  });
+
+  // todo: separate multi tests out
+  // todo: write tons more tests
+
+  describe('Testing Exclusion', () => {
+    it('Testing Basic Exclusion', () => {
+      expect(asString('{a,!b.c}')).to.equal('{"a",[!"b",!"c"]}');
+      expect(asString('{a,b.!c}')).to.equal('{"a",["b",!"c"]}');
+      expect(asString('{!a,b.c}')).to.equal('{!"a",["b","c"]}');
+      expect(asString('!{a,b.c}')).to.equal('{!"a",[!"b",!"c"]}');
+    });
+
+    it('Testing Array Exclusion', () => {
+      expect(asString('{[0],[!1][2]}')).to.equal('{"[0]",[!"[1]",!"[2]"]}');
+      expect(asString('{[0],[1][!2]}')).to.equal('{"[0]",["[1]",!"[2]"]}');
+      expect(asString('{[!0],[1][2]}')).to.equal('{!"[0]",["[1]","[2]"]}');
+      expect(asString('{[0],![1][2]}')).to.equal('{"[0]",[!"[1]",!"[2]"]}');
+      expect(asString('![1][{2,3}][4]')).to.equal('[!"[1]",{!"[2]",!"[3]"},!"[4]"]');
+    });
+
+    it('Testing double exclusion', () => {
+      checkError('!!text', 'Bad Exclusion: !!text, char 1');
+    });
+
+    it('Testing redundant exclusion', () => {
+      checkError('!a.!b', 'Redundant Exclusion: !a.!b, char 3');
+    });
+
+    it('Testing in-word exclusion', () => {
+      checkError('test.te!st', 'Bad Exclusion: test.te!st, char 7');
+    });
+
+    it('Testing non terminated exclusion', () => {
+      checkError('!', 'Bad Terminator: !, char 1');
     });
   });
 });

@@ -1,7 +1,7 @@
 const assert = require('assert');
 const compiler = require('./util/compiler');
 
-const escape = input => String(input).replace(/[,.*[\]{}]/g, '\\$&');
+const escape = input => String(input).replace(/[!,.*[\]{}]/g, '\\$&');
 
 const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
   if (wildcard === (isArray ? '[*]' : '*')) {
@@ -17,6 +17,16 @@ const formatPath = (input, ctx) => (ctx.joined ? input.reduce(
   (p, c) => `${p}${typeof c === 'number' ? `[${c}]` : `${p ? '.' : ''}${ctx.escapePaths ? escape(c) : c}`}`,
   ''
 ) : input);
+
+const findLast = (array, fn) => {
+  for (let idx = array.length - 1; idx >= 0; idx -= 1) {
+    const item = array[idx];
+    if (fn(item)) {
+      return item;
+    }
+  }
+  return undefined;
+};
 
 const find = (haystack, searches, pathIn, parents, ctx) => {
   const recurseHaystack = ctx.breakFn === undefined
@@ -52,13 +62,13 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
         });
         return p;
       }, []);
-      if (searchesOut.length !== 0) {
+      if (searchesOut.some(s => compiler.isIncluded(s))) {
         result.push(...find(value, searchesOut, pathOut, parentsOut, ctx));
       }
     });
   }
 
-  if (searches.some(s => compiler.isMatch(s))) {
+  if (compiler.isIncluded(findLast(searches, s => compiler.isMatch(s)))) {
     if (
       ctx.filterFn === undefined
       || ctx.filterFn(formatPath(pathIn, ctx), haystack, compiler.getMeta(searches, parents)) !== false

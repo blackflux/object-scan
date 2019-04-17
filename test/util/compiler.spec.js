@@ -7,6 +7,27 @@ describe('Testing compiler', () => {
     expect(() => compiler.compile(input)).to.throw('Redundant Needle Target: "{a,b}" vs "a"');
   });
 
+  // todo: added test for top level exclusion
+
+  it('Testing similar paths', () => {
+    const input = ['a.b.c.d.e', 'a.b.c.d.f'];
+    const tower = compiler.compile(input);
+    expect(tower).to.deep.equal({ a: { b: { c: { d: { e: {}, f: {} } } } } });
+  });
+
+  it('Testing similar paths exclusion', () => {
+    const input = ['a.b.c.d.e', '!a.b.c.d.f'];
+    const tower = compiler.compile(input);
+    expect(tower).to.deep.equal({ a: { b: { c: { d: { e: {}, f: {} } } } } });
+    expect(compiler.isIncluded(tower)).to.equal(true);
+    expect(compiler.isIncluded(tower.a)).to.equal(true);
+    expect(compiler.isIncluded(tower.a.b)).to.equal(true);
+    expect(compiler.isIncluded(tower.a.b.c)).to.equal(true);
+    expect(compiler.isIncluded(tower.a.b.c.d)).to.equal(true);
+    expect(compiler.isIncluded(tower.a.b.c.d.e)).to.equal(true);
+    expect(compiler.isIncluded(tower.a.b.c.d.f)).to.equal(false);
+  });
+
   it('Testing Or Paths', () => {
     const input = ['{a,b.c}'];
     const tower = compiler.compile(input);
