@@ -413,6 +413,18 @@ describe('Testing Find', () => {
   });
 
   describe('Testing useArraySelector === false', () => {
+    it('Testing Nested Array Ordering', () => {
+      const find = objectScan(['path', ''], { useArraySelector: false });
+      expect(find([{ path: ['a', 'b'] }, { path: ['c', 'd'] }])).to.deep.equal([
+        '[1].path[1]',
+        '[1].path[0]',
+        '[1]',
+        '[0].path[1]',
+        '[0].path[0]',
+        '[0]'
+      ]);
+    });
+
     it('Testing Items Returned Without List Selector', () => {
       const find = objectScan(['array3.item'], { useArraySelector: false });
       expect(find(haystack)).to.deep.equal([
