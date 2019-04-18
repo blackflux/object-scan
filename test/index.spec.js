@@ -136,47 +136,6 @@ describe('Testing Find', () => {
       });
     });
 
-    describe('Testing Redundant Needle Target Errors', () => {
-      it('Mixed subsequent needle collision', () => {
-        expect(() => objectScan(['bar', '!foo', 'foo']))
-          .to.throw('Redundant Needle Target: "!foo" vs "foo"');
-        expect(() => objectScan(['bar', 'foo', '!foo']))
-          .to.throw('Redundant Needle Target: "foo" vs "!foo"');
-      });
-
-      it('Mixed spaced needle collision', () => {
-        expect(() => objectScan(['!foo', 'bar', 'foo']))
-          .to.throw('Redundant Needle Target: "!foo" vs "foo"');
-        expect(() => objectScan(['foo', 'bar', '!foo']))
-          .to.throw('Redundant Needle Target: "foo" vs "!foo"');
-      });
-
-      it('Inclusion, subsequent needle collision', () => {
-        expect(() => objectScan(['once', 'once', '!o*']))
-          .to.throw('Redundant Needle Target: "once" vs "once"');
-      });
-
-      it('Inclusion, spaced needle collision', () => {
-        expect(() => objectScan(['once', '!o*', 'once']))
-          .to.throw('Redundant Needle Target: "once" vs "once"');
-      });
-
-      it('Exclusion, subsequent needle collision', () => {
-        expect(() => objectScan(['!once', '!once', 'o*']))
-          .to.throw('Redundant Needle Target: "!once" vs "!once"');
-      });
-
-      it('Exclusion, spaced needle collision', () => {
-        expect(() => objectScan(['!once', 'o*', '!once']))
-          .to.throw('Redundant Needle Target: "!once" vs "!once"');
-      });
-
-      it('Nexted Exclusion Target collision', () => {
-        expect(() => objectScan(['a.b.c', 'a.!b.*', 'a.b.*']))
-          .to.throw('Redundant Needle Target: "a.!b.*" vs "a.b.*"');
-      });
-    });
-
     describe('Testing Redundant Needle Targets', () => {
       const fixture = { a: { b: { c: 'd' } } };
 

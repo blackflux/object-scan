@@ -2,9 +2,50 @@ const expect = require('chai').expect;
 const compiler = require('./../../src/util/compiler');
 
 describe('Testing compiler', () => {
-  it('Testing redundant needle target', () => {
-    const input = ['{a,b}', 'a'];
-    expect(() => compiler.compile(input)).to.throw('Redundant Needle Target: "{a,b}" vs "a"');
+  describe('Testing Redundant Needle Target Errors', () => {
+    it('Testing redundant needle target', () => {
+      expect(() => compiler.compile(['{a,b}', 'a']))
+        .to.throw('Redundant Needle Target: "{a,b}" vs "a"');
+    });
+
+    it('Mixed subsequent needle collision', () => {
+      expect(() => compiler.compile(['bar', '!foo', 'foo']))
+        .to.throw('Redundant Needle Target: "!foo" vs "foo"');
+      expect(() => compiler.compile(['bar', 'foo', '!foo']))
+        .to.throw('Redundant Needle Target: "foo" vs "!foo"');
+    });
+
+    it('Mixed spaced needle collision', () => {
+      expect(() => compiler.compile(['!foo', 'bar', 'foo']))
+        .to.throw('Redundant Needle Target: "!foo" vs "foo"');
+      expect(() => compiler.compile(['foo', 'bar', '!foo']))
+        .to.throw('Redundant Needle Target: "foo" vs "!foo"');
+    });
+
+    it('Inclusion, subsequent needle collision', () => {
+      expect(() => compiler.compile(['once', 'once', '!o*']))
+        .to.throw('Redundant Needle Target: "once" vs "once"');
+    });
+
+    it('Inclusion, spaced needle collision', () => {
+      expect(() => compiler.compile(['once', '!o*', 'once']))
+        .to.throw('Redundant Needle Target: "once" vs "once"');
+    });
+
+    it('Exclusion, subsequent needle collision', () => {
+      expect(() => compiler.compile(['!once', '!once', 'o*']))
+        .to.throw('Redundant Needle Target: "!once" vs "!once"');
+    });
+
+    it('Exclusion, spaced needle collision', () => {
+      expect(() => compiler.compile(['!once', 'o*', '!once']))
+        .to.throw('Redundant Needle Target: "!once" vs "!once"');
+    });
+
+    it('Nexted Exclusion Target collision', () => {
+      expect(() => compiler.compile(['a.b.c', 'a.!b.*', 'a.b.*']))
+        .to.throw('Redundant Needle Target: "a.!b.*" vs "a.b.*"');
+    });
   });
 
   it('Testing similar paths', () => {
