@@ -107,7 +107,7 @@ describe('Testing Find', () => {
 
     it('Testing arrays matched with useArraySelector === false', () => {
       const find = objectScan(needles, { useArraySelector: false });
-      expect(find(input)).to.deep.equal(['key[0]', 'key[1]']);
+      expect(find(input)).to.deep.equal(['key[1]', 'key[0]']);
     });
   });
 
@@ -128,12 +128,12 @@ describe('Testing Find', () => {
 
     it('Testing array objects with useArraySelector === false', () => {
       const find = objectScan(needles, { useArraySelector: false, filterFn });
-      expect(find(arrayInput)).to.deep.equal(['[0]', '[1]']);
+      expect(find(arrayInput)).to.deep.equal(['[1]', '[0]']);
     });
 
     it('Testing array objects with useArraySelector === false (nested)', () => {
       const find = objectScan(needles, { useArraySelector: false, filterFn });
-      expect(find([arrayInput])).to.deep.equal(['[0][0]', '[0][1]']);
+      expect(find([arrayInput])).to.deep.equal(['[0][1]', '[0][0]']);
     });
 
     it('Testing object with useArraySelector === true', () => {
@@ -151,7 +151,7 @@ describe('Testing Find', () => {
         useArraySelector: false,
         filterFn: (key, value, { matchedBy }) => matchedBy.includes('')
       });
-      expect(find(arrayInput)).to.deep.equal(['[0]', '[1]']);
+      expect(find(arrayInput)).to.deep.equal(['[1]', '[0]']);
     });
 
     it('Testing empty needle returned with breakFn (since top level)', () => {
@@ -302,7 +302,7 @@ describe('Testing Find', () => {
           },
           useArraySelector: false
         })(input);
-        expect(result).to.deep.equal(['one.child[0]', 'one.child[1]', 'one.child[2]']);
+        expect(result).to.deep.equal(['one.child[2]', 'one.child[1]', 'one.child[0]']);
       });
     });
   });
@@ -416,8 +416,8 @@ describe('Testing Find', () => {
     it('Testing Items Returned Without List Selector', () => {
       const find = objectScan(['array3.item'], { useArraySelector: false });
       expect(find(haystack)).to.deep.equal([
-        'array3[0].item',
-        'array3[1].item'
+        'array3[1].item',
+        'array3[0].item'
       ]);
     });
 
