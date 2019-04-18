@@ -31,10 +31,6 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
     }
     return result;
   }
-  if (parents.length === 0 && searches[0][''] !== undefined) {
-    assert(searches.length === 1);
-    result.push(...find(haystack, [searches[0]['']], pathIn, parents, ctx));
-  }
 
   if (recurseHaystack && haystack instanceof Object) {
     const isArray = Array.isArray(haystack);
@@ -56,6 +52,11 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
         result.push(...find(value, searchesOut, pathOut, parentsOut, ctx));
       }
     });
+  }
+
+  if (parents.length === 0 && searches[0][''] !== undefined) {
+    assert(searches.length === 1);
+    result.push(...find(haystack, [searches[0]['']], pathIn, parents, ctx));
   }
 
   if (searches.some(s => compiler.isMatch(s))) {
