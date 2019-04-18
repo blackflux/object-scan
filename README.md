@@ -157,14 +157,15 @@ objectScan(['**.f'])(obj);
 objectScan(['**[*]'])(obj);
 // => ["a.h[1]", "a.h[0]"]
 
+// exclusion filter
+objectScan(['a.*,!a.e'])(obj);
+// => ["a.h", "a.b"]
+
 // value function
 objectScan(['**'], { filterFn: (key, value) => typeof value === 'string' })(obj);
 // => ["k", "a.h[1]", "a.h[0]", "a.e.f", "a.b.c"]
 objectScan(['**'], { breakFn: key => key === 'a.b' })(obj);
 // => ["k", "a.h[1]", "a.h[0]", "a.h", "a.e.f", "a.e", "a.b", "a"]
-
-// exclusion filter
-// TODO: add
 
 ```
 

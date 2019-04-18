@@ -750,6 +750,7 @@ describe('Testing Find', () => {
     expect(objectScan(['**'])(input)).to
       .deep.equal(['k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b.c', 'a.b', 'a']);
     expect(objectScan(['**.f'])(input)).to.deep.equal(['a.e.f']);
+    expect(objectScan(['a.*,!a.e'])(input)).to.deep.equal(['a.h', 'a.b']);
     expect(objectScan(['**'], { filterFn: (key, value) => typeof value === 'string' })(input)).to
       .deep.equal(['k', 'a.h[1]', 'a.h[0]', 'a.e.f', 'a.b.c']);
     expect(objectScan(['**'], { breakFn: key => key === 'a.b' })(input)).to
