@@ -112,21 +112,161 @@ describe('Testing Find', () => {
   });
 
   // todo: add lots more tests (!)
-  // todo: see bookmarked tests and adapt those
 
   describe('Testing Exclusion', () => {
-    const array = { a: { b: 'c', d: 'e' }, f: ['g', 'h'] };
+    const test = (input, needles, result) => expect(objectScan(needles)(input)).to.deep.equal(result);
 
-    it('Testing nested exclusion', () => {
-      expect(objectScan(['a.{*,!b}'])(array)).to.deep.equal(['a.d']);
+    describe('Testing Basic Exclusion', () => {
+      const fixture = { a: { b: 'c', d: 'e' }, f: ['g', 'h'] };
+
+      it('Testing nested exclusion', () => {
+        test(fixture, ['a.{*,!b}'], ['a.d']);
+      });
+
+      it('Testing two level target exclusion', () => {
+        test(fixture, ['*.*,!a.b'], ['a.d']);
+      });
+
+      it('Testing array exclusion', () => {
+        test(fixture, ['*[*],!*[0]'], ['f[1]']);
+      });
+
+      it('Testing Include, exclude, include, exclude', () => {
+        test(fixture, ['**', '!{*.*,*,*[*]}', 'a.*', '!a.b'], ['a.d']);
+      });
     });
 
-    it('Testing two level target exclusion', () => {
-      expect(objectScan(['*.*,!a.b'])(array)).to.deep.equal(['a.d']);
+    describe('Testing Redundant Needle Target Errors', () => {
+      it('Mixed subsequent needle collision', () => {
+        expect(() => objectScan(['bar', '!foo', 'foo']))
+          .to.throw('Redundant Needle Target: "!foo" vs "foo"');
+        expect(() => objectScan(['bar', 'foo', '!foo']))
+          .to.throw('Redundant Needle Target: "foo" vs "!foo"');
+      });
+
+      it('Mixed spaced needle collision', () => {
+        expect(() => objectScan(['!foo', 'bar', 'foo']))
+          .to.throw('Redundant Needle Target: "!foo" vs "foo"');
+        expect(() => objectScan(['foo', 'bar', '!foo']))
+          .to.throw('Redundant Needle Target: "foo" vs "!foo"');
+      });
+
+      it('Inclusion, subsequent needle collision', () => {
+        expect(() => objectScan(['once', 'once', '!o*']))
+          .to.throw('Redundant Needle Target: "once" vs "once"');
+      });
+
+      it('Inclusion, spaced needle collision', () => {
+        expect(() => objectScan(['once', '!o*', 'once']))
+          .to.throw('Redundant Needle Target: "once" vs "once"');
+      });
+
+      it('Exclusion, subsequent needle collision', () => {
+        expect(() => objectScan(['!once', '!once', 'o*']))
+          .to.throw('Redundant Needle Target: "!once" vs "!once"');
+      });
+
+      it('Exclusion, spaced needle collision', () => {
+        expect(() => objectScan(['!once', 'o*', '!once']))
+          .to.throw('Redundant Needle Target: "!once" vs "!once"');
+      });
+
+      it('Nexted Exclusion Target collision', () => {
+        expect(() => objectScan(['a.b.c', 'a.!b.*', 'a.b.*']))
+          .to.throw('Redundant Needle Target: "a.!b.*" vs "a.b.*"');
+      });
     });
 
-    it('Testing array exclusion', () => {
-      expect(objectScan(['*[*],!*[0]'])(array)).to.deep.equal(['f[1]']);
+    describe('Testing Redundant Needle Targets', () => {
+      const fixture = { a: { b: { c: 'd' } } };
+
+      it('Testing nested re-include', () => {
+        test(fixture, ['a.b.c', 'a.!b.*', 'a.b.**'], ['a.b.c']);
+        test(fixture, ['!a.b.c', 'a.b.*', '!a.b.**'], []);
+      });
+    });
+
+    describe('Testing Flat Exclusion', () => {
+      const fixture = {
+        a: { x: null }, b: { x: null }, c: { x: null }, d: { x: null }, e: { x: null }
+      };
+
+      it('Exclusion after two inclusions', () => {
+        test(fixture, ['a.x', '*.x', '!{c,d,e}.x'], ['b.x', 'a.x']);
+      });
+
+      it('Inclusion after exclusion', () => {
+        test(fixture, ['!*.x', 'a.x'], ['a.x']);
+      });
+
+      it('Inclusion only', () => {
+        test(fixture, ['*.x'], ['e.x', 'd.x', 'c.x', 'b.x', 'a.x']);
+      });
+
+      it('Exclusions only', () => {
+        test(fixture, ['!a.x', '!b.x'], []);
+      });
+    });
+
+    describe('Testing Misc Exclusions', () => {
+      const fixture1 = { foo: null, bar: null, baz: null };
+      const fixture2 = {
+        foo: null, foam: null, for: null, forum: null
+      };
+      const fixture3 = {
+        foo: null, one: null, two: null, four: null, do: null, once: null, only: null
+      };
+
+      it('Basic exclusion', () => {
+        test(fixture1, ['foo'], ['foo']);
+        test(fixture1, ['!foo'], []);
+        test(fixture1, ['foo', 'bar'], ['bar', 'foo']);
+        test(fixture1, ['foo', '!bar'], ['foo']);
+        test(fixture1, ['!foo', 'bar'], ['bar']);
+        test(fixture1, ['!foo', '!bar'], []);
+      });
+
+      it('Exclusion only, no results', () => {
+        test(fixture1, ['!foo'], []);
+        test(fixture1, ['!foo', '!bar'], []);
+        test(fixture1, ['!*z'], []);
+        test(fixture1, ['!*z', '!*a*'], []);
+        test(fixture1, ['!*'], []);
+      });
+
+      it('Exclusions are order sensitive', () => {
+        test(fixture1, ['!*a*', '*z'], ['baz']);
+        test(fixture1, ['*z', '!*a*'], []);
+        test(fixture2, ['!*m', 'f*'], ['forum', 'for', 'foam', 'foo']);
+        test(fixture2, ['f*', '!*m'], ['for', 'foo']);
+        test(fixture1, ['!foo', 'bar'], ['bar']);
+        test(fixture1, ['foo', '!bar'], ['foo']);
+      });
+
+      it('Re-Include Excluded', () => {
+        test(fixture1, ['!*'], []);
+        test(fixture1, ['!*a*'], []);
+        test(fixture1, ['bar', '!*a*'], []);
+        test(fixture1, ['!*a*', 'bar'], ['bar']);
+        test(fixture1, ['!*a*', '*'], ['baz', 'bar', 'foo']);
+        test(fixture1, ['!*a*', '*z'], ['baz']);
+      });
+
+      it('Misc Exclusions', () => {
+        test(fixture1, ['*', '!foo'], ['baz', 'bar']);
+        test(fixture1, ['*', '!foo', 'bar'], ['baz', 'bar']);
+        test(fixture1, ['*', '!foo'], ['baz', 'bar']);
+        test(fixture1, ['!foo', '*'], ['baz', 'bar', 'foo']);
+        test(fixture1, ['*', '!foo', '!bar'], ['baz']);
+        test(fixture1, ['foo'], ['foo']);
+        test(fixture1, ['!foo'], []);
+        test(fixture1, ['*', '!foo'], ['baz', 'bar']);
+        test(fixture1, ['foo', 'bar'], ['bar', 'foo']);
+        test(fixture1, ['foo', '!bar'], ['foo']);
+        test(fixture1, ['!foo', 'bar'], ['bar']);
+        test(fixture1, ['!foo', '!bar'], []);
+        test(fixture3, ['*', '!o*', 'once'], ['once', 'do', 'four', 'two', 'foo']);
+      });
     });
   });
 
