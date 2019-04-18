@@ -9,7 +9,7 @@ const isMatch = input => input[IS_MATCH] === true;
 module.exports.isMatch = isMatch;
 
 const HAS_INCLUDES = Symbol('has-includes');
-const flagHasIncludes = input => defineProperty(input, HAS_INCLUDES, true);
+const setHasIncludes = input => defineProperty(input, HAS_INCLUDES, true);
 const hasIncludes = input => input !== undefined && input[HAS_INCLUDES] === true;
 module.exports.hasIncludes = hasIncludes;
 
@@ -83,7 +83,7 @@ const buildRecursive = (tower, path, needle) => {
   }
   if (!path[0].isExcluded()) {
     // ok to call defineProperty multiple times with identical value
-    flagHasIncludes(tower[path[0]]);
+    setHasIncludes(tower[path[0]]);
   }
   buildRecursive(tower[path[0]], path.slice(1), needle);
 };
@@ -107,7 +107,7 @@ const computeStarRecursionsRecursive = (tower) => {
 
 module.exports.compile = (needles) => {
   const tower = {};
-  flagHasIncludes(tower);
+  setHasIncludes(tower);
   needles.forEach(needle => buildRecursive(tower, [parser(needle)], needle));
   computeStarRecursionsRecursive(tower);
   return tower;
