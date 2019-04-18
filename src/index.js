@@ -62,13 +62,13 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
         });
         return p;
       }, []);
-      if (searchesOut.some(s => compiler.isIncluded(s))) {
+      if (searchesOut.some(s => compiler.hasIncludes(s))) {
         result.push(...find(value, searchesOut, pathOut, parentsOut, ctx));
       }
     });
   }
 
-  if (compiler.isIncluded(findLast(searches, s => compiler.isMatch(s)))) {
+  if (compiler.hasIncludes(findLast(searches, s => compiler.isMatch(s)))) {
     if (
       ctx.filterFn === undefined
       || ctx.filterFn(formatPath(pathIn, ctx), haystack, compiler.getMeta(searches, parents)) !== false

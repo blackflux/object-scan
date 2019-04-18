@@ -17,21 +17,21 @@ describe('Testing compiler', () => {
     const input = ['a.b.c.d.e', '!a.b.c.d.f'];
     const tower = compiler.compile(input);
     expect(tower).to.deep.equal({ a: { b: { c: { d: { e: {}, f: {} } } } } });
-    expect(compiler.isIncluded(tower)).to.equal(true);
-    expect(compiler.isIncluded(tower.a)).to.equal(true);
-    expect(compiler.isIncluded(tower.a.b)).to.equal(true);
-    expect(compiler.isIncluded(tower.a.b.c)).to.equal(true);
-    expect(compiler.isIncluded(tower.a.b.c.d)).to.equal(true);
-    expect(compiler.isIncluded(tower.a.b.c.d.e)).to.equal(true);
-    expect(compiler.isIncluded(tower.a.b.c.d.f)).to.equal(false);
+    expect(compiler.hasIncludes(tower)).to.equal(true);
+    expect(compiler.hasIncludes(tower.a)).to.equal(true);
+    expect(compiler.hasIncludes(tower.a.b)).to.equal(true);
+    expect(compiler.hasIncludes(tower.a.b.c)).to.equal(true);
+    expect(compiler.hasIncludes(tower.a.b.c.d)).to.equal(true);
+    expect(compiler.hasIncludes(tower.a.b.c.d.e)).to.equal(true);
+    expect(compiler.hasIncludes(tower.a.b.c.d.f)).to.equal(false);
   });
 
   it('Testing top level exclusion', () => {
     const input = ['!a'];
     const tower = compiler.compile(input);
     expect(tower).to.deep.equal({ a: {} });
-    expect(compiler.isIncluded(tower)).to.equal(true);
-    expect(compiler.isIncluded(tower.a)).to.equal(false);
+    expect(compiler.hasIncludes(tower)).to.equal(true);
+    expect(compiler.hasIncludes(tower.a)).to.equal(false);
   });
 
   it('Testing Or Paths', () => {
