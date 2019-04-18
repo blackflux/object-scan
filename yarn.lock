@@ -175,10 +175,10 @@
   dependencies:
     smart-fs "1.6.1"
 
-"@blackflux/robo-config-plugin@1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@blackflux/robo-config-plugin/-/robo-config-plugin-1.6.0.tgz#f889e9783074584ca0380095f2b472c93f9a88c3"
-  integrity sha512-Cabc+fnFNLF6DRAeVAoTDxkCqyrm/S8vvnjh9mN8E7cwYOQ+WSjPPE98gVMfdEGzku5WFHgkwg0nyFv3G55BlQ==
+"@blackflux/robo-config-plugin@1.7.3":
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/@blackflux/robo-config-plugin/-/robo-config-plugin-1.7.3.tgz#0df27cac7241935a13877633ffbee206ed3f4c21"
+  integrity sha512-+MkoDAydwWXt/X2ZqSDYQXGr4DIZDHgIP4UKhQ2N0oolUbBsF18trGo+hWAK+5c08x3csXvZtiy/OdqfDhfeGA==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -325,9 +325,9 @@
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
 
 "@types/node@*":
-  version "11.13.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.13.4.tgz#f83ec3c3e05b174b7241fadeb6688267fe5b22ca"
-  integrity sha512-+rabAZZ3Yn7tF/XPGHupKIL5EcAbrLxnTr/hgQICxbeuAfWtT0UZSfULE+ndusckBItcv4o6ZeOJplQikVcLvQ==
+  version "11.13.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.13.5.tgz#266564afa8a6a09dc778dfacc703ed3f09c80516"
+  integrity sha512-/OMMBnjVtDuwX1tg2pkYVSqRIDSmNTnvVvmvP/2xiMAAWf4a5+JozrApCrO4WCAILmXVxfNoQ3E+0HJbNpFVGg==
 
 JSONStream@^1.0.4, JSONStream@^1.3.4:
   version "1.3.5"
@@ -1906,10 +1906,10 @@ eslint-module-utils@^2.4.0:
     debug "^2.6.8"
     pkg-dir "^2.0.0"
 
-eslint-plugin-import@2.17.1:
-  version "2.17.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.17.1.tgz#b888feb4d9b3ee155113c8dccdd4bec5db33bdf4"
-  integrity sha512-lzD9uvRvW4MsHzIOMJEDSb5MOV9LzgxRPBaovvOhJqzgxRHYfGy9QOrMuwHIh5ehKFJ7Z3DcrcGKDQ0IbP0EdQ==
+eslint-plugin-import@2.17.2:
+  version "2.17.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.17.2.tgz#d227d5c6dc67eca71eb590d2bb62fb38d86e9fcb"
+  integrity sha512-m+cSVxM7oLsIpmwNn2WXTJoReOF9f/CtLMo7qOVmKd1KntBy0hEcuNZ3erTmWjx+DxRO0Zcrm5KwAvI9wHcV5g==
   dependencies:
     array-includes "^3.0.3"
     contains-path "^0.1.0"
@@ -3428,15 +3428,15 @@ joi@14.3.1:
     isemail "3.x.x"
     topo "3.x.x"
 
-js-gardener@2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.4.tgz#f2d875f99202012a2c8b8504c98bcb63ec6e27ff"
-  integrity sha512-wbwUjYjTE+knJ3aO9ZT0SRLhH1MGfhz2a9EG7W6V/3uZYWLaoJQbwckCZfmckj99gU2sX4FTEMbR11e0ZUyj3A==
+js-gardener@2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.6.tgz#41a3ea17719d565c4ce36b28c410e4fb621a0c11"
+  integrity sha512-pl8/3mv9X2SSTg0jEIBewGSwP9hXqwEIdkeqX3/1dHDP1d2MTQYhy5hqfZkvXgg3FnrhqUrN0NpiRZVe3D4PLQ==
   dependencies:
     chalk "2.4.2"
     eslint "5.16.0"
     eslint-config-airbnb-base "13.1.0"
-    eslint-plugin-import "2.17.1"
+    eslint-plugin-import "2.17.2"
     eslint-plugin-jasmine "2.10.1"
     eslint-plugin-json "1.4.0"
     eslint-plugin-markdown "1.0.0"
@@ -3449,7 +3449,7 @@ js-gardener@2.0.4:
     lodash.get "4.4.2"
     mocha "6.1.3"
     npm-check "5.9.0"
-    robo-config "1.23.3"
+    robo-config "2.1.1"
     tmp "0.1.0"
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
@@ -4827,10 +4827,10 @@ object-keys@^1.0.11, object-keys@^1.0.12:
   resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.1.1.tgz#1c47f272df277f3b1daf061677d9c82e2322c60e"
   integrity sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==
 
-object-scan@5.0.4:
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/object-scan/-/object-scan-5.0.4.tgz#7ee3cb0b7e4015861146436f91db4df6a12d0ff2"
-  integrity sha512-jsMJ5sZJ4y4i/Y37djde0uooD+/whq7mitXm4AjGWEK4ey94I6zGZdgyUJzxMHYqDcLnsO0oeeXd5Zbbr/LSjg==
+object-scan@5.0.5:
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/object-scan/-/object-scan-5.0.5.tgz#369091f349130f433c9666b45490b57837a11207"
+  integrity sha512-vrgd96HNaRTXbPcjYt++dbnp1BaNvnm6l6kc2FzgCi0hV6YJaNXfizObHU9aOrM50gLp8wek6GViPUWUaVbi4g==
 
 object-treeify@1.1.6:
   version "1.1.6"
@@ -5879,10 +5879,10 @@ rimraf@2, rimraf@2.6.3, rimraf@^2.5.2, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6
   dependencies:
     glob "^7.1.3"
 
-robo-config@1.23.3:
-  version "1.23.3"
-  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-1.23.3.tgz#2e1cb0637e1657d1d36aa0e9b8831435eb9dff84"
-  integrity sha512-GcXuvFG+Bg5r5O0ouk3+18kXXzyc71GEA6Nign4zQ3awwUMMm/uAFg1z3VudjQuJp73c4ECTfFKBIrKFDB2/Fw==
+robo-config@2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-2.1.1.tgz#4a0fa2036101aca63ef010e65b39a2aee870ccfa"
+  integrity sha512-tp+B5gnACnesJeCl4bDH+hA4sDbTrJLUC+1ibEHK0xF0Klm6VPG8qLGZrJHTaoXVXJ18D294chh0Ptx27CGA1g==
   dependencies:
     app-root-path "2.2.1"
     deepmerge "3.2.0"
@@ -5891,7 +5891,7 @@ robo-config@1.23.3:
     lodash.difference "4.5.0"
     lodash.get "4.4.2"
     object-deep-contain "1.0.5"
-    object-scan "5.0.4"
+    object-scan "5.0.5"
     object-treeify "1.1.6"
     smart-fs "1.6.1"
 
