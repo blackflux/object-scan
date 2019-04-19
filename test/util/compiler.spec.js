@@ -64,7 +64,7 @@ describe('Testing compiler', () => {
   });
 
   describe('Testing path component exclusion', () => {
-    it('Testing forward negation inheritance in component path', () => {
+    it('Testing forward exclusion inheritance in component path', () => {
       const input = ['{!a}.{b}'];
       const tower = compiler.compile(input);
       expect(tower).to.deep.equal({ a: { b: {} } });
@@ -73,7 +73,7 @@ describe('Testing compiler', () => {
       expect(compiler.hasIncludes(tower.a.b)).to.equal(false);
     });
 
-    it('Testing no backward negation inheritance in component path', () => {
+    it('Testing no backward exclusion inheritance in component path', () => {
       const input = ['{a}.{!b}'];
       const tower = compiler.compile(input);
       expect(tower).to.deep.equal({ a: { b: {} } });
