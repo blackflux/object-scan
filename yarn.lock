@@ -168,12 +168,12 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@blackflux/eslint-plugin-rules@1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.0.3.tgz#6f7bc1a078ac695b6418b32bd7c977bddc3f20cb"
-  integrity sha512-V/W/oxj09IzuXt9EGjKlNFsGKYL3BqGdiKwInIYYUud5STxu1J/Sh20R/kqKKl9cryOsXLyCRwKWyHAuIvyRVg==
+"@blackflux/eslint-plugin-rules@1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.0.4.tgz#b8c97c9add0a9dd11860b2ea900305bfc69e317e"
+  integrity sha512-TtH5/11HCpSsRv8jpPAZoQpg5J22KYj+JTG4GY5/PdqqC28rOiCYxSIRyKls7IYH9hkX1JnFOBFggU7sMk+oZA==
   dependencies:
-    smart-fs "1.6.1"
+    smart-fs "1.6.2"
 
 "@blackflux/robo-config-plugin@1.7.4":
   version "1.7.4"
@@ -6081,6 +6081,17 @@ smart-fs@1.6.1:
     xml-js "1.6.11"
     yaml-boost "1.9.0"
 
+smart-fs@1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.6.2.tgz#df77ee37aae60ef4904a3d618f2426dfd9459b32"
+  integrity sha512-xV1PrwCRtdT5JCWw5kBXe+i9cTTBI8c1LrIaIqMUBdcZdkX2mtx40GVE+laHbVMvOVobE9gksDtb0SGZaUGy1w==
+  dependencies:
+    fs-extra "7.0.1"
+    lodash.clonedeep "4.5.0"
+    lodash.isequal "4.5.0"
+    xml-js "1.6.11"
+    yaml-boost "1.9.1"
+
 snapdragon-node@^2.0.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/snapdragon-node/-/snapdragon-node-2.1.1.tgz#6c175f86ff14bdb0724563e8f3c1b021a286853b"
@@ -7132,6 +7143,16 @@ yaml-boost@1.9.0:
   integrity sha512-L9YIfnA/aPBe+y5PTdyhpAzrV/cHsUebzU01Vef0aU5MeyLJ+bJovCjF9NSkGpcOLk/BmQc8L4ZfN9ExbKUYbA==
   dependencies:
     js-yaml "3.13.0"
+    lodash.get "4.4.2"
+    lodash.mergewith "4.6.1"
+    lodash.set "4.3.2"
+
+yaml-boost@1.9.1:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/yaml-boost/-/yaml-boost-1.9.1.tgz#d74cafcaeb782375988f671fe56ea594725ba3d3"
+  integrity sha512-prfw7xkd8c6EVABd32EaYm24eUAIv2AOUJuetg+5d9377MrAIP5CXRYsFWfK/4AoLtsTm/FicLDuez/X3tDzNA==
+  dependencies:
+    js-yaml "3.13.1"
     lodash.get "4.4.2"
     lodash.mergewith "4.6.1"
     lodash.set "4.3.2"
