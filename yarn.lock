@@ -168,17 +168,17 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@blackflux/eslint-plugin-rules@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.0.2.tgz#42c288e7f5b8febb348c96c7a9154f86e074a36c"
-  integrity sha512-oLrXg5Npqoh/aJ1rCZByrifaWW8lBGdIW7INHSpnzqrQC/sB7q3zf4R4xCdku1/p6h3kADFICSjCPpnH5h/aKw==
+"@blackflux/eslint-plugin-rules@1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.0.4.tgz#b8c97c9add0a9dd11860b2ea900305bfc69e317e"
+  integrity sha512-TtH5/11HCpSsRv8jpPAZoQpg5J22KYj+JTG4GY5/PdqqC28rOiCYxSIRyKls7IYH9hkX1JnFOBFggU7sMk+oZA==
   dependencies:
-    smart-fs "1.6.1"
+    smart-fs "1.6.2"
 
-"@blackflux/robo-config-plugin@1.7.3":
-  version "1.7.3"
-  resolved "https://registry.yarnpkg.com/@blackflux/robo-config-plugin/-/robo-config-plugin-1.7.3.tgz#0df27cac7241935a13877633ffbee206ed3f4c21"
-  integrity sha512-+MkoDAydwWXt/X2ZqSDYQXGr4DIZDHgIP4UKhQ2N0oolUbBsF18trGo+hWAK+5c08x3csXvZtiy/OdqfDhfeGA==
+"@blackflux/robo-config-plugin@1.7.4":
+  version "1.7.4"
+  resolved "https://registry.yarnpkg.com/@blackflux/robo-config-plugin/-/robo-config-plugin-1.7.4.tgz#029159590ffb40b26fb8d2560d233f4e3ee679b6"
+  integrity sha512-F5XGIyYfvV7Du06hPB2asXA7xJFrE6eVKxT6hTPr8H5htjvj3l6/RaVaLZ9j0TPWnUa6aRhIsc8XcdDxy7G64A==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -216,9 +216,9 @@
     universal-user-agent "^2.0.1"
 
 "@octokit/rest@^16.13.1":
-  version "16.24.3"
-  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.24.3.tgz#5f844be604826b352d9683a133839341db2bed23"
-  integrity sha512-fBr2ziN4WT9G9sYTfnNVI/0wCb68ZI5isNU48lfWXQDyAy4ftlrh0SkIbhL7aigXUjcY0cX5J46ypyRPH0/U0g==
+  version "16.25.0"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.25.0.tgz#1111dc2b2058bc77442fd7fbd295dab3991b62bf"
+  integrity sha512-QKIzP0gNYjyIGmY3Gpm3beof0WFwxFR+HhRZ+Wi0fYYhkEUvkJiXqKF56Pf5glzzfhEwOrggfluEld5F/ZxsKw==
   dependencies:
     "@octokit/request" "3.0.0"
     atob-lite "^2.0.0"
@@ -1551,7 +1551,7 @@ debug@^4.0.0, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
   dependencies:
     ms "^2.1.1"
 
-debuglog@*, debuglog@^1.0.1:
+debuglog@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/debuglog/-/debuglog-1.0.1.tgz#aa24ffb9ac3df9a2351837cfb2d279360cd78492"
   integrity sha1-qiT/uaw9+aI1GDfPstJ5NgzXhJI=
@@ -2893,7 +2893,7 @@ import-lazy@^2.1.0:
   resolved "https://registry.yarnpkg.com/import-lazy/-/import-lazy-2.1.0.tgz#05698e3d45c88e8d7e9d92cb0584e77f096f3e43"
   integrity sha1-BWmOPUXIjo1+nZLLBYTnfwlvPkM=
 
-imurmurhash@*, imurmurhash@^0.1.4:
+imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
   integrity sha1-khi5srkoojixPcT7a21XbyMUU+o=
@@ -3428,10 +3428,10 @@ joi@14.3.1:
     isemail "3.x.x"
     topo "3.x.x"
 
-js-gardener@2.0.6:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.6.tgz#41a3ea17719d565c4ce36b28c410e4fb621a0c11"
-  integrity sha512-pl8/3mv9X2SSTg0jEIBewGSwP9hXqwEIdkeqX3/1dHDP1d2MTQYhy5hqfZkvXgg3FnrhqUrN0NpiRZVe3D4PLQ==
+js-gardener@2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.7.tgz#48981ae5cf2e6d9cb8f3360df35734b6350806c0"
+  integrity sha512-6x/o0NQzQkNz/x3ObC3fkn1xUbpgxseRB67d1oCewCncLDiBZ5xibeZz5iDMcoF4Fv30QSj+6LntTBhvKlsEqw==
   dependencies:
     chalk "2.4.2"
     eslint "5.16.0"
@@ -3447,7 +3447,7 @@ js-gardener@2.0.6:
     js-yaml "3.13.1"
     lodash.difference "4.5.0"
     lodash.get "4.4.2"
-    mocha "6.1.3"
+    mocha "6.1.4"
     npm-check "5.9.0"
     robo-config "2.1.1"
     tmp "0.1.0"
@@ -3729,11 +3729,6 @@ lockfile@^1.0.4:
   dependencies:
     signal-exit "^3.0.2"
 
-lodash._baseindexof@*:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/lodash._baseindexof/-/lodash._baseindexof-3.1.0.tgz#fe52b53a1c6761e42618d654e4a25789ed61822c"
-  integrity sha1-/lK1OhxnYeQmGNZU5KJXie1hgiw=
-
 lodash._baseuniq@~4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash._baseuniq/-/lodash._baseuniq-4.6.0.tgz#0ebb44e456814af7905c6212fa2c9b2d51b841e8"
@@ -3742,32 +3737,10 @@ lodash._baseuniq@~4.6.0:
     lodash._createset "~4.0.0"
     lodash._root "~3.0.0"
 
-lodash._bindcallback@*:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/lodash._bindcallback/-/lodash._bindcallback-3.0.1.tgz#e531c27644cf8b57a99e17ed95b35c748789392e"
-  integrity sha1-5THCdkTPi1epnhftlbNcdIeJOS4=
-
-lodash._cacheindexof@*:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/lodash._cacheindexof/-/lodash._cacheindexof-3.0.2.tgz#3dc69ac82498d2ee5e3ce56091bafd2adc7bde92"
-  integrity sha1-PcaayCSY0u5ePOVgkbr9Ktx73pI=
-
-lodash._createcache@*:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/lodash._createcache/-/lodash._createcache-3.1.2.tgz#56d6a064017625e79ebca6b8018e17440bdcf093"
-  integrity sha1-VtagZAF2JeeevKa4AY4XRAvc8JM=
-  dependencies:
-    lodash._getnative "^3.0.0"
-
 lodash._createset@~4.0.0:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/lodash._createset/-/lodash._createset-4.0.3.tgz#0f4659fbb09d75194fa9e2b88a6644d363c9fe26"
   integrity sha1-D0ZZ+7CddRlPqeK4imZE02PJ/iY=
-
-lodash._getnative@*, lodash._getnative@^3.0.0:
-  version "3.9.1"
-  resolved "https://registry.yarnpkg.com/lodash._getnative/-/lodash._getnative-3.9.1.tgz#570bc7dede46d61cdcde687d65d3eecbaa3aaff5"
-  integrity sha1-VwvH3t5G1hzc3mh9ZdPuy6o6r/U=
 
 lodash._root@~3.0.0:
   version "3.0.1"
@@ -3823,11 +3796,6 @@ lodash.mergewith@4.6.1:
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/lodash.mergewith/-/lodash.mergewith-4.6.1.tgz#639057e726c3afbdb3e7d42741caa8d6e4335927"
   integrity sha512-eWw5r+PYICtEBgrBE5hhlT6aAa75f411bgDz/ZL2KZqYV03USvucsxcHUIlGTDTECs1eunpI7HOV7U+WLDvNdQ==
-
-lodash.restparam@*:
-  version "3.6.1"
-  resolved "https://registry.yarnpkg.com/lodash.restparam/-/lodash.restparam-3.6.1.tgz#936a4e309ef330a7645ed4145986c85ae5b20805"
-  integrity sha1-k2pOMJ7zMKdkXtQUWYbIWuWyCAU=
 
 lodash.set@4.3.2, lodash.set@^4.3.2:
   version "4.3.2"
@@ -4218,10 +4186,10 @@ mkdirp@0.5.1, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkd
   dependencies:
     minimist "0.0.8"
 
-mocha@6.1.3:
-  version "6.1.3"
-  resolved "https://registry.yarnpkg.com/mocha/-/mocha-6.1.3.tgz#79d1b370a92dfdb409e6f77bc395ca5afe4cdc93"
-  integrity sha512-QdE/w//EPHrqgT5PNRUjRVHy6IJAzAf1R8n2O8W8K2RZ+NbPfOD5cBDp+PGa2Gptep37C/TdBiaNwakppEzEbg==
+mocha@6.1.4:
+  version "6.1.4"
+  resolved "https://registry.yarnpkg.com/mocha/-/mocha-6.1.4.tgz#e35fada242d5434a7e163d555c705f6875951640"
+  integrity sha512-PN8CIy4RXsIoxoFJzS4QNnCH4psUCPWc4/rPrst/ecSJJbLBkubMiyGCP2Kj/9YnWbotFqAoeXyXMucj7gwCFg==
   dependencies:
     ansi-colors "3.2.3"
     browser-stdout "1.3.1"
@@ -4232,7 +4200,7 @@ mocha@6.1.3:
     glob "7.1.3"
     growl "1.10.5"
     he "1.2.0"
-    js-yaml "3.13.0"
+    js-yaml "3.13.1"
     log-symbols "2.2.0"
     minimatch "3.0.4"
     mkdirp "0.5.1"
@@ -5626,7 +5594,7 @@ readable-stream@~1.1.10:
     isarray "0.0.1"
     string_decoder "~0.10.x"
 
-readdir-scoped-modules@*, readdir-scoped-modules@^1.0.0:
+readdir-scoped-modules@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/readdir-scoped-modules/-/readdir-scoped-modules-1.0.2.tgz#9fafa37d286be5d92cbaebdee030dc9b5f406747"
   integrity sha1-n6+jfShr5dksuuve4DDcm19AZ0c=
@@ -6112,6 +6080,17 @@ smart-fs@1.6.1:
     lodash.isequal "4.5.0"
     xml-js "1.6.11"
     yaml-boost "1.9.0"
+
+smart-fs@1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.6.2.tgz#df77ee37aae60ef4904a3d618f2426dfd9459b32"
+  integrity sha512-xV1PrwCRtdT5JCWw5kBXe+i9cTTBI8c1LrIaIqMUBdcZdkX2mtx40GVE+laHbVMvOVobE9gksDtb0SGZaUGy1w==
+  dependencies:
+    fs-extra "7.0.1"
+    lodash.clonedeep "4.5.0"
+    lodash.isequal "4.5.0"
+    xml-js "1.6.11"
+    yaml-boost "1.9.1"
 
 snapdragon-node@^2.0.1:
   version "2.1.1"
@@ -7164,6 +7143,16 @@ yaml-boost@1.9.0:
   integrity sha512-L9YIfnA/aPBe+y5PTdyhpAzrV/cHsUebzU01Vef0aU5MeyLJ+bJovCjF9NSkGpcOLk/BmQc8L4ZfN9ExbKUYbA==
   dependencies:
     js-yaml "3.13.0"
+    lodash.get "4.4.2"
+    lodash.mergewith "4.6.1"
+    lodash.set "4.3.2"
+
+yaml-boost@1.9.1:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/yaml-boost/-/yaml-boost-1.9.1.tgz#d74cafcaeb782375988f671fe56ea594725ba3d3"
+  integrity sha512-prfw7xkd8c6EVABd32EaYm24eUAIv2AOUJuetg+5d9377MrAIP5CXRYsFWfK/4AoLtsTm/FicLDuez/X3tDzNA==
+  dependencies:
+    js-yaml "3.13.1"
     lodash.get "4.4.2"
     lodash.mergewith "4.6.1"
     lodash.set "4.3.2"
