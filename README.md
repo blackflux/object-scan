@@ -35,7 +35,7 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 - Partial Wildcard matching with e.g. `mark*` or `[1*]`
 - Arbitrary depth matching with `**`
 - Simple or-clause with e.g. `{a,b}` and `[{0,1}]`
-- Simple exclusion with e.g. `!excluded`
+- Simple exclusion with e.g. `!key`
 - Full support for escaping
 - Input traversed exactly once during search
 - Matches returned in "delete-safe" order
