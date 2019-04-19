@@ -69,7 +69,7 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
     result.push(...find(haystack, [searches[0]['']], pathIn, parents, ctx));
   }
 
-  if (compiler.hasIncludes(findLast(searches, s => compiler.isMatch(s)))) {
+  if (compiler.isIncludedMatch(findLast(searches, s => compiler.isMatch(s)))) {
     if (
       ctx.filterFn === undefined
       || ctx.filterFn(formatPath(pathIn, ctx), haystack, compiler.getMeta(searches, parents)) !== false

@@ -134,6 +134,17 @@ describe('Testing Find', () => {
       it('Testing Include, exclude, include, exclude', () => {
         test(fixture, ['**', '!{*.*,*,*[*]}', 'a.*', '!a.b'], ['a.d']);
       });
+
+      it('Testing basic exclude, include', () => {
+        test(fixture, ['!a', 'a.b'], ['a.b']);
+      });
+
+      it('Testing star exclude, include', () => {
+        // todo: why does this exclude "a.d"?
+        test(fixture, ['!**.d', '**'], ['f[1]', 'f[0]', 'f', 'a.b', 'a']);
+        // todo: why does this include anything?
+        test(fixture, ['**', '!a.**', '!f.**'], ['f', 'a']);
+      });
     });
 
     describe('Testing Redundant Needle Targets', () => {
@@ -709,6 +720,31 @@ describe('Testing Find', () => {
     expect(objectScan(['b*'])({ foo: 'a', bar: 'b', baz: 'c' })).to.deep.equal(['baz', 'bar']);
     expect(objectScan(['b'])({ foo: 'a', bar: 'b', baz: 'c' })).to.deep.equal([]);
     expect(objectScan(['b', 'c'])({ a: 'a', b: 'b', c: 'c' })).to.deep.equal(['c', 'b']);
+    expect(objectScan(['!a'])(input)).to.deep.equal([]);
+    expect(objectScan(['!a', 'a.b.c'])(input)).to.deep.equal(['a.b.c']);
+    expect(objectScan(['**', '!a.*'])(input)).to.deep.equal([
+      'a.b.l.g',
+      'a.b.l',
+      'a.b.i.j',
+      'a.b.i',
+      'a.b.g',
+      'a.b.e',
+      'a.b.c',
+      'a'
+    ]);
+    expect(objectScan(['**', '!a.**'])(input)).to.deep.equal(['a']);
+    expect(objectScan(['a.b.*', '!a.b.{g,i,l}'])(input)).to.deep.equal(['a.b.e', 'a.b.c']);
+    expect(objectScan(['**', '!a.b.c'])(input)).to.deep.equal([
+      'a.i',
+      'a.b.l.g',
+      'a.b.l',
+      'a.b.i.j',
+      'a.b.i',
+      'a.b.g',
+      'a.b.e',
+      'a.b',
+      'a'
+    ]);
   });
 
   it('Testing Readme Example', () => {

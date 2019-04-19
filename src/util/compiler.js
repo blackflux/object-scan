@@ -3,14 +3,16 @@ const parser = require('./parser');
 
 const defineProperty = (target, k, v) => Object.defineProperty(target, k, { value: v, writable: false });
 
-const IS_MATCH = Symbol('is-match');
-const markMatch = input => defineProperty(input, IS_MATCH, true);
-const isMatch = input => input[IS_MATCH] === true;
+const MATCH_TYPE = Symbol('match-type');
+const setMatchType = (input, included) => defineProperty(input, MATCH_TYPE, included);
+const isMatch = input => input[MATCH_TYPE] !== undefined;
+const isIncludedMatch = input => input !== undefined && input[MATCH_TYPE] === true;
 module.exports.isMatch = isMatch;
+module.exports.isIncludedMatch = isIncludedMatch;
 
 const HAS_INCLUDES = Symbol('has-includes');
 const setHasIncludes = input => defineProperty(input, HAS_INCLUDES, true);
-const hasIncludes = input => input !== undefined && input[HAS_INCLUDES] === true;
+const hasIncludes = input => input[HAS_INCLUDES] === true;
 module.exports.hasIncludes = hasIncludes;
 
 const NEEDLE = Symbol('needle');
@@ -69,7 +71,7 @@ const buildRecursive = (tower, path, needle, excluded = false) => {
       throw new Error(`Redundant Needle Target: "${tower[NEEDLE]}" vs "${needle}"`);
     }
     setNeedle(tower, needle);
-    markMatch(tower);
+    setMatchType(tower, !excluded);
     return;
   }
   if (Array.isArray(path[0])) {
@@ -94,8 +96,9 @@ const computeStarRecursionsRecursive = (tower) => {
   const starTarget = tower['**'];
   if (starTarget !== undefined) {
     const starRecursion = { '**': starTarget };
+    // todo: remove ?
     if (isMatch(starTarget)) {
-      markMatch(starRecursion);
+      setMatchType(starRecursion, isIncludedMatch(starTarget));
     }
     const needle = getNeedle(starTarget);
     if (needle !== null) {
