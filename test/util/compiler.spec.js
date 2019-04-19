@@ -54,6 +54,8 @@ describe('Testing compiler', () => {
         .to.throw('Redundant Exclusion: "{!a}.{!b}"');
       expect(() => compiler.compile(['{!a,c}.{!b,d}']))
         .to.throw('Redundant Exclusion: "{!a,c}.{!b,d}"');
+      expect(() => compiler.compile(['!{[1][2],*,{a,b},{a.!b}}']))
+        .to.throw('Redundant Exclusion: "!{[1][2],*,{a,b},{a.!b}}"');
     });
   });
 

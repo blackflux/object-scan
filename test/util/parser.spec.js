@@ -200,6 +200,11 @@ describe('Testing Parser', () => {
       expect(asString('!a.!b')).to.equal('[!"a",!"b"]');
     });
 
+    it('Nested Redundant Exclusions', () => {
+      expect(asString('!{[1][2],*,{a,b},{a},{{a}},{a.!b}}'))
+        .to.equal('{[!"[1]","[2]"],!"*",{!"a",!"b"},!"a",!"a",[!"a",!"b"]}');
+    });
+
     describe('Testing Exclusion Errors', () => {
       it('Testing double exclusion', () => {
         checkError('!!text', 'Bad Exclusion: !!text, char 1');
@@ -207,6 +212,10 @@ describe('Testing Parser', () => {
 
       it('Testing redundant exclusion', () => {
         checkError('!{!a,b}', 'Redundant Exclusion: !{!a,b}, char 2');
+      });
+
+      it('Testing redundant exclusion (deeply nested)', () => {
+        checkError('!{a,{{!b}}}', '!{a,{{!b}}}, char 6');
       });
 
       it('Testing in-word exclusion', () => {
