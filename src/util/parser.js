@@ -32,14 +32,15 @@ class CString extends String {
 const Result = (input) => {
   let cResult = new Set();
   let inArray = false;
-  let excluded = false;
+  let excludeNext = false;
   let cursor = 0;
 
   // group related
   const parentStack = [];
   const newChild = (asOr) => {
     if (isExcluded(cResult)) {
-      excluded = true;
+      assert(excludeNext === false);
+      excludeNext = true;
     }
     parentStack.push(cResult);
     cResult = asOr ? new Set() : [];
@@ -72,22 +73,22 @@ const Result = (input) => {
         if (inArray && !/^[*\d]+$/g.test(ele)) {
           throwError('Bad Array Selector', input, { selector: ele });
         }
-        cResult.push(new CString(inArray ? `[${ele}]` : ele, excluded));
-        excluded = false;
+        cResult.push(new CString(inArray ? `[${ele}]` : ele, excludeNext));
+        excludeNext = false;
       }
       cursor = idx + 1;
     },
     startExclusion: (idx) => {
-      if (excluded === true) {
+      if (excludeNext !== false) {
         throwError('Redundant Exclusion', input, { char: idx });
       }
-      excluded = true;
+      excludeNext = true;
     },
     startGroup: () => {
       newChild(true);
-      if (excluded) {
+      if (excludeNext) {
         markExcluded(cResult);
-        excluded = false;
+        excludeNext = false;
       }
       newChild(false);
     },
@@ -104,7 +105,7 @@ const Result = (input) => {
     },
     finalizeResult: () => {
       finishChild();
-      assert(excluded === false);
+      assert(excludeNext === false);
       if (parentStack.length !== 0) {
         throwError('Non Terminated Group', input);
       }
