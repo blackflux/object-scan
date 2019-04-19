@@ -35,7 +35,7 @@ const Result = (input) => {
     parentStack.push(cResult);
     cResult = asOr ? new Set() : [];
   };
-  const finishExcluded = () => {
+  const endExclusion = () => {
     if (exclusionLevel !== false && parentStack.length < exclusionLevel) {
       exclusionLevel = false;
     }
@@ -44,7 +44,7 @@ const Result = (input) => {
     const parent = parentStack.pop();
     parent[Array.isArray(parent) ? 'push' : 'add'](getSimple(cResult));
     cResult = parent;
-    finishExcluded();
+    endExclusion();
   };
 
   newChild(false);
@@ -73,7 +73,7 @@ const Result = (input) => {
       }
       cursor = idx + 1;
     },
-    markExcluded: (idx) => {
+    startExclusion: (idx) => {
       if (exclusionLevel !== false) {
         throwError('Redundant Exclusion', input, { char: idx });
       }
@@ -146,7 +146,7 @@ module.exports = (input) => {
           break;
         case '!':
           result.finishElement(idx, { err: 'Bad Exclusion', fins: [null, '.', ',', '{', '['], finReq: true });
-          result.markExcluded(idx);
+          result.startExclusion(idx);
           break;
         default:
           break;
