@@ -46,12 +46,41 @@ describe('Testing compiler', () => {
       expect(() => compiler.compile(['a.b.c', 'a.!b.*', 'a.b.*']))
         .to.throw('Redundant Needle Target: "a.!b.*" vs "a.b.*"');
     });
+
+    it('Testing redundant exclusion', () => {
+      expect(() => compiler.compile(['!a.!b']))
+        .to.throw('Redundant Exclusion: "!a.!b"');
+      expect(() => compiler.compile(['{!a}.{!b}']))
+        .to.throw('Redundant Exclusion: "{!a}.{!b}"');
+      expect(() => compiler.compile(['{!a,c}.{!b,d}']))
+        .to.throw('Redundant Exclusion: "{!a,c}.{!b,d}"');
+    });
   });
 
   it('Testing similar paths', () => {
     const input = ['a.b.c.d.e', 'a.b.c.d.f'];
     const tower = compiler.compile(input);
     expect(tower).to.deep.equal({ a: { b: { c: { d: { e: {}, f: {} } } } } });
+  });
+
+  describe('Testing path component exclusion', () => {
+    it('Testing forward negation inheritance in component path', () => {
+      const input = ['{!a}.{b}'];
+      const tower = compiler.compile(input);
+      expect(tower).to.deep.equal({ a: { b: {} } });
+      expect(compiler.hasIncludes(tower)).to.equal(true);
+      expect(compiler.hasIncludes(tower.a)).to.equal(false);
+      expect(compiler.hasIncludes(tower.a.b)).to.equal(false);
+    });
+
+    it('Testing no backward negation inheritance in component path', () => {
+      const input = ['{a}.{!b}'];
+      const tower = compiler.compile(input);
+      expect(tower).to.deep.equal({ a: { b: {} } });
+      expect(compiler.hasIncludes(tower)).to.equal(true);
+      expect(compiler.hasIncludes(tower.a)).to.equal(true);
+      expect(compiler.hasIncludes(tower.a.b)).to.equal(false);
+    });
   });
 
   it('Testing similar paths exclusion', () => {

@@ -1,5 +1,11 @@
 const assert = require('assert');
 
+const defineProperty = (target, k, v) => Object.defineProperty(target, k, { value: v, writable: false });
+
+const IS_EXCLUDED = Symbol('is-excluded');
+const markExcluded = input => defineProperty(input, IS_EXCLUDED, true);
+const isExcluded = input => input[IS_EXCLUDED] === true;
+
 const throwError = (msg, input, context = {}) => {
   throw new Error(Object.entries(context)
     .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
@@ -26,25 +32,22 @@ class CString extends String {
 const Result = (input) => {
   let cResult = new Set();
   let inArray = false;
-  let exclusionLevel = false;
+  let excluded = false;
   let cursor = 0;
 
   // group related
   const parentStack = [];
   const newChild = (asOr) => {
+    if (isExcluded(cResult)) {
+      excluded = true;
+    }
     parentStack.push(cResult);
     cResult = asOr ? new Set() : [];
-  };
-  const endExclusion = () => {
-    if (exclusionLevel !== false && parentStack.length < exclusionLevel) {
-      exclusionLevel = false;
-    }
   };
   const finishChild = () => {
     const parent = parentStack.pop();
     parent[Array.isArray(parent) ? 'push' : 'add'](getSimple(cResult));
     cResult = parent;
-    endExclusion();
   };
 
   newChild(false);
@@ -69,18 +72,23 @@ const Result = (input) => {
         if (inArray && !/^[*\d]+$/g.test(ele)) {
           throwError('Bad Array Selector', input, { selector: ele });
         }
-        cResult.push(new CString(inArray ? `[${ele}]` : ele, exclusionLevel !== false));
+        cResult.push(new CString(inArray ? `[${ele}]` : ele, excluded));
+        excluded = false;
       }
       cursor = idx + 1;
     },
     startExclusion: (idx) => {
-      if (exclusionLevel !== false) {
+      if (excluded === true) {
         throwError('Redundant Exclusion', input, { char: idx });
       }
-      exclusionLevel = parentStack.length;
+      excluded = true;
     },
     startGroup: () => {
       newChild(true);
+      if (excluded) {
+        markExcluded(cResult);
+        excluded = false;
+      }
       newChild(false);
     },
     newGroupElement: () => {
@@ -96,7 +104,7 @@ const Result = (input) => {
     },
     finalizeResult: () => {
       finishChild();
-      assert(exclusionLevel === false);
+      assert(excluded === false);
       if (parentStack.length !== 0) {
         throwError('Non Terminated Group', input);
       }

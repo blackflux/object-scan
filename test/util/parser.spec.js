@@ -177,34 +177,45 @@ describe('Testing Parser', () => {
 
   describe('Testing Exclusion', () => {
     it('Testing Basic Exclusion', () => {
-      expect(asString('{a,!b.c}')).to.equal('{"a",[!"b",!"c"]}');
+      expect(asString('{a,!b.c}')).to.equal('{"a",[!"b","c"]}');
       expect(asString('{a,b.!c}')).to.equal('{"a",["b",!"c"]}');
       expect(asString('{!a,b.c}')).to.equal('{!"a",["b","c"]}');
-      expect(asString('!{a,b.c}')).to.equal('{!"a",[!"b",!"c"]}');
+      expect(asString('!{a,b.c}')).to.equal('{!"a",[!"b","c"]}');
     });
 
     it('Testing Array Exclusion', () => {
-      expect(asString('{[0],[!1][2]}')).to.equal('{"[0]",[!"[1]",!"[2]"]}');
+      expect(asString('{[0],[!1][2]}')).to.equal('{"[0]",[!"[1]","[2]"]}');
       expect(asString('{[0],[1][!2]}')).to.equal('{"[0]",["[1]",!"[2]"]}');
       expect(asString('{[!0],[1][2]}')).to.equal('{!"[0]",["[1]","[2]"]}');
-      expect(asString('{[0],![1][2]}')).to.equal('{"[0]",[!"[1]",!"[2]"]}');
-      expect(asString('![1][{2,3}][4]')).to.equal('[!"[1]",{!"[2]",!"[3]"},!"[4]"]');
+      expect(asString('{[0],![1][2]}')).to.equal('{"[0]",[!"[1]","[2]"]}');
+      expect(asString('![1][{2,3}][4]')).to.equal('[!"[1]",{"[2]","[3]"},"[4]"]');
     });
 
-    it('Testing double exclusion', () => {
-      checkError('!!text', 'Bad Exclusion: !!text, char 1');
+    it('Testing Exclusion in Path Group', () => {
+      expect(asString('"**.{*,!location}.lat"'))
+        .to.equal('[""**",{"*",!"location"},"lat""]');
     });
 
-    it('Testing redundant exclusion', () => {
-      checkError('!a.!b', 'Redundant Exclusion: !a.!b, char 3');
+    it('Testing Redundant Exclusion', () => {
+      expect(asString('!a.!b')).to.equal('[!"a",!"b"]');
     });
 
-    it('Testing in-word exclusion', () => {
-      checkError('test.te!st', 'Bad Exclusion: test.te!st, char 7');
-    });
+    describe('Testing Exclusion Errors', () => {
+      it('Testing double exclusion', () => {
+        checkError('!!text', 'Bad Exclusion: !!text, char 1');
+      });
 
-    it('Testing non terminated exclusion', () => {
-      checkError('!', 'Bad Terminator: !, char 1');
+      it('Testing redundant exclusion', () => {
+        checkError('!{!a,b}', 'Redundant Exclusion: !{!a,b}, char 2');
+      });
+
+      it('Testing in-word exclusion', () => {
+        checkError('test.te!st', 'Bad Exclusion: test.te!st, char 7');
+      });
+
+      it('Testing non terminated exclusion', () => {
+        checkError('!', 'Bad Terminator: !, char 1');
+      });
     });
   });
 });

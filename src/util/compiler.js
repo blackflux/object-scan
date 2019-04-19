@@ -59,8 +59,11 @@ module.exports.getMeta = (inputs, parents = null) => ({
   parents
 });
 
-const buildRecursive = (tower, path, needle) => {
+const buildRecursive = (tower, path, needle, excluded = false) => {
   addNeedle(tower, needle);
+  if (!excluded) {
+    setHasIncludes(tower);
+  }
   if (path.length === 0) {
     if (tower[NEEDLE] !== undefined) {
       throw new Error(`Redundant Needle Target: "${tower[NEEDLE]}" vs "${needle}"`);
@@ -70,22 +73,21 @@ const buildRecursive = (tower, path, needle) => {
     return;
   }
   if (Array.isArray(path[0])) {
-    buildRecursive(tower, [...path[0], ...path.slice(1)], needle);
+    buildRecursive(tower, [...path[0], ...path.slice(1)], needle, excluded);
     return;
   }
   if (path[0] instanceof Set) {
-    path[0].forEach(c => buildRecursive(tower, [c, ...path.slice(1)], needle));
+    path[0].forEach(c => buildRecursive(tower, [c, ...path.slice(1)], needle, excluded));
     return;
   }
   if (tower[path[0]] === undefined) {
     Object.assign(tower, { [path[0]]: {} });
     setWildcardRegex(tower[path[0]], path[0]);
   }
-  if (!path[0].isExcluded()) {
-    // ok to call defineProperty multiple times with identical value
-    setHasIncludes(tower[path[0]]);
+  if (excluded && path[0].isExcluded()) {
+    throw new Error(`Redundant Exclusion: "${needle}"`);
   }
-  buildRecursive(tower[path[0]], path.slice(1), needle);
+  buildRecursive(tower[path[0]], path.slice(1), needle, excluded || path[0].isExcluded());
 };
 
 const computeStarRecursionsRecursive = (tower) => {
@@ -107,7 +109,6 @@ const computeStarRecursionsRecursive = (tower) => {
 
 module.exports.compile = (needles) => {
   const tower = {};
-  setHasIncludes(tower);
   needles.forEach(needle => buildRecursive(tower, [parser(needle)], needle));
   computeStarRecursionsRecursive(tower);
   return tower;
