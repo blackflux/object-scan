@@ -177,13 +177,6 @@
       "traversedBy": ["**.{*,!location}.lat"]
     },
     {
-      "type": "filterFn",
-      "key": "results[0].geometry.location.lat",
-      "isMatch": true,
-      "matchedBy": ["**.{*,!location}.lat"],
-      "traversedBy": ["**.{*,!location}.lat"]
-    },
-    {
       "type": "breakFn",
       "key": "results[0].formatted_address",
       "isMatch": false,
@@ -508,7 +501,6 @@
   ],
   "result": [
     "results[0].geometry.viewport.southwest.lat",
-    "results[0].geometry.viewport.northeast.lat",
-    "results[0].geometry.location.lat"
+    "results[0].geometry.viewport.northeast.lat"
   ]
 }

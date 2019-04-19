@@ -15,13 +15,7 @@ const asString = (() => {
 })();
 
 const checkError = (input, msg) => {
-  let err;
-  try {
-    parser(input);
-  } catch (e) {
-    err = e;
-  }
-  expect(err.message).to.equal(msg);
+  expect(() => parser(input)).to.throw(msg);
 };
 
 describe('Testing Parser', () => {
