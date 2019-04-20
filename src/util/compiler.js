@@ -40,23 +40,15 @@ const setWildcardRegex = (input, wildcard) => {
 const getWildcardRegex = input => input[WILDCARD_REGEX];
 module.exports.getWildcardRegex = getWildcardRegex;
 
-const RECURSION_TRIGGERS = Symbol('recursion-triggers');
-const addRecursionTrigger = (input, trigger) => {
-  if (input[RECURSION_TRIGGERS] === undefined) {
-    defineProperty(input, RECURSION_TRIGGERS, new Set());
-  }
-  input[RECURSION_TRIGGERS].add(trigger);
-};
-const isRecursionTrigger = (input, trigger) => (
-  input[RECURSION_TRIGGERS] !== undefined
-  && input[RECURSION_TRIGGERS].has(trigger)
-);
-module.exports.isRecursionTrigger = isRecursionTrigger;
-
 const RECURSIVE = Symbol('recursive');
 const markRecursive = input => defineProperty(input, RECURSIVE, true);
 const isRecursive = input => input[RECURSIVE] === true;
 module.exports.isRecursive = isRecursive;
+
+const RECURSION_POS = Symbol('recursion-pos');
+const setRecursionPos = (input, pos) => defineProperty(input, RECURSION_POS, pos);
+const getRecursionPos = input => input[RECURSION_POS] || 0;
+module.exports.getRecursionPos = getRecursionPos;
 
 module.exports.getMeta = (inputs, parents = null) => ({
   isMatch: inputs.some(e => isMatch(e)),
@@ -74,14 +66,6 @@ module.exports.getMeta = (inputs, parents = null) => ({
   parents
 });
 
-const addRecursionTriggersRec = (root, tower) => {
-  const towerValues = Object.values(tower);
-  if (towerValues.length !== 0) {
-    addRecursionTrigger(root, towerValues[towerValues.length - 1]);
-    towerValues.forEach(v => addRecursionTriggersRec(root, v));
-  }
-};
-
 const buildRecursive = (tower, path, needle, excluded = false) => {
   addNeedle(tower, needle);
   if (!excluded) {
@@ -94,7 +78,7 @@ const buildRecursive = (tower, path, needle, excluded = false) => {
     setNeedle(tower, needle);
     setMatchType(tower, !excluded);
     if (isRecursive(tower)) {
-      addRecursionTriggersRec(tower, tower);
+      setRecursionPos(tower, Object.keys(tower).length);
     }
     return;
   }

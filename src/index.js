@@ -51,20 +51,18 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
     Object.entries(haystack).reverse().forEach(([key, value]) => {
       const pathOut = pathIn.concat(isArray ? parseInt(key, 10) : key);
       const searchesOut = searches.reduce((p, s) => {
-        const segmentStart = p.length;
-        let insertRecursion = compiler.isRecursive(s);
-        Object.entries(s).forEach(([entry, subSearch]) => {
+        const recursionPos = compiler.isRecursive(s) ? compiler.getRecursionPos(s) : null;
+        if (recursionPos === 0) {
+          p.push(s);
+        }
+        Object.entries(s).forEach(([entry, subSearch], idx) => {
           if (isWildcardMatch(entry, key, isArray, subSearch)) {
             p.push(subSearch);
           }
-          if (insertRecursion && compiler.isRecursionTrigger(s, subSearch)) {
+          if (idx + 1 === recursionPos) {
             p.push(s);
-            insertRecursion = false;
           }
         });
-        if (insertRecursion) {
-          p.splice(segmentStart, 0, s);
-        }
         return p;
       }, []);
       if (searchesOut.some(s => compiler.hasIncludes(s))) {
