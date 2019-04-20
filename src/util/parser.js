@@ -1,3 +1,10 @@
+const assert = require('assert');
+const { defineProperty } = require('./helper');
+
+const IS_EXCLUDED = Symbol('is-excluded');
+const markExcluded = input => defineProperty(input, IS_EXCLUDED, true);
+const isExcluded = input => input[IS_EXCLUDED] === true;
+
 const throwError = (msg, input, context = {}) => {
   throw new Error(Object.entries(context)
     .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
@@ -10,20 +17,42 @@ const getSimple = (arrOrSet) => {
   return arrOrSet.size === 1 ? arrOrSet.values().next().value : arrOrSet;
 };
 
+class CString extends String {
+  constructor(value, excluded) {
+    super(value);
+    this.excluded = excluded;
+  }
+
+  isExcluded() {
+    return this.excluded;
+  }
+}
+
 const Result = (input) => {
   let cResult = new Set();
   let inArray = false;
+  let excludeNext = false;
   let cursor = 0;
 
   // group related
   const parentStack = [];
   const newChild = (asOr) => {
+    if (isExcluded(cResult)) {
+      assert(excludeNext === false);
+      excludeNext = true;
+    }
     parentStack.push(cResult);
     cResult = asOr ? new Set() : [];
   };
   const finishChild = () => {
     const parent = parentStack.pop();
-    parent[Array.isArray(parent) ? 'push' : 'add'](getSimple(cResult));
+    const parentIsArray = Array.isArray(parent);
+    const child = getSimple(cResult);
+    if (!parentIsArray && child instanceof Set) {
+      child.forEach(e => parent.add(e));
+    } else {
+      parent[parentIsArray ? 'push' : 'add'](child);
+    }
     cResult = parent;
   };
 
@@ -49,12 +78,23 @@ const Result = (input) => {
         if (inArray && !/^[*\d]+$/g.test(ele)) {
           throwError('Bad Array Selector', input, { selector: ele });
         }
-        cResult.push(inArray ? `[${ele}]` : ele);
+        cResult.push(new CString(inArray ? `[${ele}]` : ele, excludeNext));
+        excludeNext = false;
       }
       cursor = idx + 1;
     },
+    startExclusion: (idx) => {
+      if (excludeNext !== false) {
+        throwError('Redundant Exclusion', input, { char: idx });
+      }
+      excludeNext = true;
+    },
     startGroup: () => {
       newChild(true);
+      if (excludeNext) {
+        markExcluded(cResult);
+        excludeNext = false;
+      }
       newChild(false);
     },
     newGroupElement: () => {
@@ -70,6 +110,7 @@ const Result = (input) => {
     },
     finalizeResult: () => {
       finishChild();
+      assert(excludeNext === false);
       if (parentStack.length !== 0) {
         throwError('Non Terminated Group', input);
       }
@@ -83,7 +124,7 @@ const Result = (input) => {
 
 module.exports = (input) => {
   if (input === '') {
-    return '';
+    return new CString('', false);
   }
 
   const result = Result(input);
@@ -98,7 +139,7 @@ module.exports = (input) => {
           result.finishElement(idx, { err: 'Bad Path Separator', fins: [']', '}'] });
           break;
         case '[':
-          result.finishElement(idx, { err: 'Bad Array Start', fins: [null, '{', ',', '}', ']'] });
+          result.finishElement(idx, { err: 'Bad Array Start', fins: [null, '!', '{', ',', '}', ']'] });
           result.setInArray(true, idx);
           break;
         case ']':
@@ -106,7 +147,7 @@ module.exports = (input) => {
           result.setInArray(false, idx);
           break;
         case '{':
-          result.finishElement(idx, { err: 'Bad Group Start', fins: [null, '.', '[', '{', ','], finReq: true });
+          result.finishElement(idx, { err: 'Bad Group Start', fins: [null, '!', '.', '[', '{', ','], finReq: true });
           result.startGroup();
           break;
         case ',':
@@ -116,6 +157,10 @@ module.exports = (input) => {
         case '}':
           result.finishElement(idx, { err: 'Bad Group Terminator', fins: [']', '}'] });
           result.finishGroup(idx);
+          break;
+        case '!':
+          result.finishElement(idx, { err: 'Bad Exclusion', fins: [null, '.', ',', '{', '['], finReq: true });
+          result.startExclusion(idx);
           break;
         default:
           break;

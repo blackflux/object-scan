@@ -1,0 +1,100 @@
+{
+  "needles": ["a.b", "**.b", "*.b", "*a.b", "a*.b", "a", "**", "*", "*a", "a*"],
+  "options": {
+    "log": [
+      "key",
+      "value",
+      "parents",
+      "isMatch",
+      "matchedBy",
+      "excludedBy",
+      "traversedBy"
+    ]
+  },
+  "result": ["a.b", "a"],
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "value": {"a": {"b": "c"}},
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "a.b",
+        "**.b",
+        "*.b",
+        "*a.b",
+        "a*.b",
+        "a",
+        "**",
+        "*",
+        "*a",
+        "a*"
+      ],
+      "parents": []
+    },
+    {
+      "type": "breakFn",
+      "key": "a",
+      "value": {"b": "c"},
+      "isMatch": true,
+      "matchedBy": ["a", "**", "*", "*a", "a*"],
+      "excludedBy": [],
+      "traversedBy": [
+        "a.b",
+        "a",
+        "**.b",
+        "**",
+        "*.b",
+        "*",
+        "*a.b",
+        "*a",
+        "a*.b",
+        "a*"
+      ],
+      "parents": [{"a": {"b": "c"}}]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.b",
+      "value": "c",
+      "isMatch": true,
+      "matchedBy": ["a.b", "**.b", "**", "*.b", "*a.b", "a*.b"],
+      "excludedBy": [],
+      "traversedBy": ["a.b", "**.b", "**", "*.b", "*a.b", "a*.b"],
+      "parents": [{"b": "c"}, {"a": {"b": "c"}}]
+    },
+    {
+      "type": "filterFn",
+      "key": "a.b",
+      "value": "c",
+      "isMatch": true,
+      "matchedBy": ["a.b", "**.b", "**", "*.b", "*a.b", "a*.b"],
+      "excludedBy": [],
+      "traversedBy": ["a.b", "**.b", "**", "*.b", "*a.b", "a*.b"],
+      "parents": [{"b": "c"}, {"a": {"b": "c"}}]
+    },
+    {
+      "type": "filterFn",
+      "key": "a",
+      "value": {"b": "c"},
+      "isMatch": true,
+      "matchedBy": ["a", "**", "*", "*a", "a*"],
+      "excludedBy": [],
+      "traversedBy": [
+        "a.b",
+        "a",
+        "**.b",
+        "**",
+        "*.b",
+        "*",
+        "*a.b",
+        "*a",
+        "a*.b",
+        "a*"
+      ],
+      "parents": [{"a": {"b": "c"}}]
+    }
+  ]
+}

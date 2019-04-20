@@ -1,0 +1,46 @@
+{
+  "needles": ["**.**.d", "!**.**.c.d"],
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**.d", "!**.**.c.d"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**.d", "!**.**.c.d"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.b",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**.d", "!**.**.c.d"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.b.c",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**.d", "!**.**.c.d"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.b.c.d",
+      "isMatch": false,
+      "matchedBy": ["**.**.d"],
+      "excludedBy": ["!**.**.c.d"],
+      "traversedBy": ["**.**.d", "!**.**.c.d"]
+    }
+  ],
+  "result": []
+}

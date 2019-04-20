@@ -34,22 +34,24 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 - Wildcard matching with `*` and `[*]`
 - Partial Wildcard matching with e.g. `mark*` or `[1*]`
 - Arbitrary depth matching with `**`
-- Simple or-clause with e.g. `{a,b}` and `[{0,1}]`
+- Or-clause with e.g. `{a,b}` and `[{0,1}]`
+- Exclusion with e.g. `!key`
 - Full support for escaping
 - Input traversed exactly once during search
-- Matches returned in "delete-safe" order
+- Results returned in "delete-safe" order
 - Search syntax is checked for correctness
 - Dependency free, small in size and very performant
 - Lots of tests to ensure correctness
 
 ### Options
 
-**Note on Functions:** Signature for all functions is `Fn(key, value, { parents, isMatch, matchedBy, traversedBy })`, where:
+**Note on Functions:** Signature for all functions is `Fn(key, value, { parents, isMatch, matchedBy, excludedBy, traversedBy })`, where:
 - `key` is the key that the function is called for (respects `joined` option).
 - `value` is the value for that key.
 - `parents` is an array containing all parents as `[parent, grandparent, ...]`. Excludes arrays if `useArraySelector` is false.
-- `isMatch` is true if exactly matched by at least one needle.
-- `matchedBy` are all needles matching the key exactly.
+- `isMatch` is true if the last targeting needle exists and is non-excluding.
+- `matchedBy` are all non-excluding needles targeting the key.
+- `excludedBy` are all excluding needles targeting the key.
 - `traversedBy` are all needles involved in traversing the key.
 
 #### filterFn
@@ -57,7 +59,7 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 Type: `function`<br>
 Default: `undefined`
 
-If function is defined, it is called for every exact match. If `false`
+If function is defined, it is called for every match. If `false`
 is returned, the current key is excluded from the result.
 
 Can be used as a callback function to do processing as matching keys are traversed.
@@ -156,6 +158,10 @@ objectScan(['**.f'])(obj);
 objectScan(['**[*]'])(obj);
 // => ["a.h[1]", "a.h[0]"]
 
+// exclusion filter
+objectScan(['a.*,!a.e'])(obj);
+// => ["a.h", "a.b"]
+
 // value function
 objectScan(['**'], { filterFn: (key, value) => typeof value === 'string' })(obj);
 // => ["k", "a.h[1]", "a.h[0]", "a.e.f", "a.b.c"]
@@ -172,7 +178,7 @@ Note that the empty string does not work with [_.get](https://lodash.com/docs/#g
 ## Special Characters
 
 The following Characters are considered special and need to 
-be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `,`, `.` and `*`. 
+be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `,`, `.`, `!` and `*`. 
 
 When dealing with special characters, it might be desirable to set the  `joined` option to `false`.
 

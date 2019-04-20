@@ -14,7 +14,9 @@ const getFiles = source => getEntries(source)
 const logFn = (type, log, paramsToLog) => (key, value, kwargs) => {
   log.push(Object
     .entries(Object.assign({ type, key, value }, kwargs))
-    .filter(([k, v]) => (paramsToLog || ['isMatch', 'matchedBy', 'traversedBy']).concat(['key', 'type']).includes(k))
+    .filter(([k, v]) => (paramsToLog || [
+      'isMatch', 'matchedBy', 'excludedBy', 'traversedBy'
+    ]).concat(['key', 'type']).includes(k))
     .reduce((p, [k, v]) => Object.assign(p, { [k]: v }), {}));
 };
 

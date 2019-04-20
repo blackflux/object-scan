@@ -14,6 +14,7 @@
       "parents",
       "isMatch",
       "matchedBy",
+      "excludedBy",
       "traversedBy"
     ]
   },
@@ -25,6 +26,7 @@
       "value": [[[0]]],
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": [
         "[0][0][0]",
         "[0][0*][0]",
@@ -41,6 +43,7 @@
       "value": [[0]],
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": [
         "[0][0][0]",
         "[0][0*][0]",
@@ -57,6 +60,7 @@
       "value": [0],
       "isMatch": true,
       "matchedBy": ["[0].**"],
+      "excludedBy": [],
       "traversedBy": [
         "[0][0][0]",
         "[0][0*][0]",
@@ -77,9 +81,10 @@
         "[0][0*][0]",
         "[0][*0][0]",
         "[0][**][0]",
-        "[0].**",
-        "[0].**[0]"
+        "[0].**[0]",
+        "[0].**"
       ],
+      "excludedBy": [],
       "traversedBy": [
         "[0][0][0]",
         "[0][0*][0]",
@@ -100,9 +105,10 @@
         "[0][0*][0]",
         "[0][*0][0]",
         "[0][**][0]",
-        "[0].**",
-        "[0].**[0]"
+        "[0].**[0]",
+        "[0].**"
       ],
+      "excludedBy": [],
       "traversedBy": [
         "[0][0][0]",
         "[0][0*][0]",
@@ -119,6 +125,7 @@
       "value": [0],
       "isMatch": true,
       "matchedBy": ["[0].**"],
+      "excludedBy": [],
       "traversedBy": [
         "[0][0][0]",
         "[0][0*][0]",
