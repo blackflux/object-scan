@@ -7,6 +7,7 @@
       "parents",
       "isMatch",
       "matchedBy",
+      "excludedBy",
       "traversedBy"
     ]
   },
@@ -18,6 +19,7 @@
       "value": {"a": {"b": {"c": "d"}}},
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["a.b.c", "a.*b.c", "a.b*.c", "a.*.c", "a.**.c"],
       "parents": []
     },
@@ -27,6 +29,7 @@
       "value": {"b": {"c": "d"}},
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["a.b.c", "a.*b.c", "a.b*.c", "a.*.c", "a.**.c"],
       "parents": [{"a": {"b": {"c": "d"}}}]
     },
@@ -36,6 +39,7 @@
       "value": {"c": "d"},
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["a.b.c", "a.*b.c", "a.b*.c", "a.*.c", "a.**.c"],
       "parents": [{"b": {"c": "d"}}, {"a": {"b": {"c": "d"}}}]
     },
@@ -45,6 +49,7 @@
       "value": "d",
       "isMatch": true,
       "matchedBy": ["a.b.c", "a.*b.c", "a.b*.c", "a.*.c", "a.**.c"],
+      "excludedBy": [],
       "traversedBy": ["a.b.c", "a.*b.c", "a.b*.c", "a.*.c", "a.**.c"],
       "parents": [{"c": "d"}, {"b": {"c": "d"}}, {"a": {"b": {"c": "d"}}}]
     },
@@ -54,6 +59,7 @@
       "value": "d",
       "isMatch": true,
       "matchedBy": ["a.b.c", "a.*b.c", "a.b*.c", "a.*.c", "a.**.c"],
+      "excludedBy": [],
       "traversedBy": ["a.b.c", "a.*b.c", "a.b*.c", "a.*.c", "a.**.c"],
       "parents": [{"c": "d"}, {"b": {"c": "d"}}, {"a": {"b": {"c": "d"}}}]
     }

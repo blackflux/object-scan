@@ -6,6 +6,7 @@
       "key": "",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["!**.b", "**"]
     },
     {
@@ -13,13 +14,15 @@
       "key": "a",
       "isMatch": true,
       "matchedBy": ["**"],
+      "excludedBy": [],
       "traversedBy": ["!**.b", "**"]
     },
     {
       "type": "breakFn",
       "key": "a.b",
       "isMatch": true,
-      "matchedBy": ["!**.b", "**"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.b"],
       "traversedBy": ["!**.b", "**"]
     },
     {
@@ -27,6 +30,7 @@
       "key": "a.b.c",
       "isMatch": true,
       "matchedBy": ["**"],
+      "excludedBy": [],
       "traversedBy": ["!**.b", "**"]
     },
     {
@@ -34,13 +38,15 @@
       "key": "a.b.c",
       "isMatch": true,
       "matchedBy": ["**"],
+      "excludedBy": [],
       "traversedBy": ["!**.b", "**"]
     },
     {
       "type": "filterFn",
       "key": "a.b",
       "isMatch": true,
-      "matchedBy": ["!**.b", "**"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.b"],
       "traversedBy": ["!**.b", "**"]
     },
     {
@@ -48,6 +54,7 @@
       "key": "a",
       "isMatch": true,
       "matchedBy": ["**"],
+      "excludedBy": [],
       "traversedBy": ["!**.b", "**"]
     }
   ],

@@ -6,13 +6,15 @@
       "key": "",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["problems[*],!**"]
     },
     {
       "type": "breakFn",
       "key": "problems",
       "isMatch": false,
-      "matchedBy": ["problems[*],!**"],
+      "matchedBy": [],
+      "excludedBy": ["problems[*],!**"],
       "traversedBy": ["problems[*],!**"]
     },
     {
@@ -20,6 +22,7 @@
       "key": "problems[0]",
       "isMatch": true,
       "matchedBy": ["problems[*],!**"],
+      "excludedBy": ["problems[*],!**"],
       "traversedBy": ["problems[*],!**"]
     }
   ],

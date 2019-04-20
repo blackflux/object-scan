@@ -6,6 +6,7 @@
       "key": "",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
@@ -13,258 +14,295 @@
       "key": "problems",
       "isMatch": true,
       "matchedBy": ["**"],
+      "excludedBy": [],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0]",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Asthma",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Asthma[0]",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0]",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].labs",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].labs[0]",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].labs[0].missing_field",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0]",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0]",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0]",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2[0]",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2[0].strength",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2[0].dose",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2[0].name",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug[0]",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug[0].strength",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug[0].dose",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug[0].name",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0]",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2[0]",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2[0].strength",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2[0].dose",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2[0].name",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug[0]",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug[0].strength",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug[0].dose",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug[0].name",
       "isMatch": true,
-      "matchedBy": ["**", "!**.{*,[*]}"],
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.{*,[*]}"],
       "traversedBy": ["**", "!**.{*,[*]}"]
     },
     {
@@ -272,6 +310,7 @@
       "key": "problems",
       "isMatch": true,
       "matchedBy": ["**"],
+      "excludedBy": [],
       "traversedBy": ["**", "!**.{*,[*]}"]
     }
   ],

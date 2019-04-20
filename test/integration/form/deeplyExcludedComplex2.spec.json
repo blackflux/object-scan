@@ -7,6 +7,7 @@
       "key": "",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -14,6 +15,7 @@
       "key": "fieldset",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -21,6 +23,7 @@
       "key": "fieldset[1]",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -28,6 +31,7 @@
       "key": "fieldset[1].id",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -35,6 +39,7 @@
       "key": "fieldset[1].fieldset",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -42,6 +47,7 @@
       "key": "fieldset[1].fieldset.id",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -49,6 +55,7 @@
       "key": "fieldset[1].fieldset.fieldset",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -56,6 +63,7 @@
       "key": "fieldset[1].fieldset.fieldset.id",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -63,6 +71,7 @@
       "key": "fieldset[1].fieldset.fieldset.field",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -70,6 +79,7 @@
       "key": "fieldset[1].fieldset.fieldset.field[1]",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -77,6 +87,7 @@
       "key": "fieldset[1].fieldset.fieldset.field[1].id",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -84,6 +95,7 @@
       "key": "fieldset[1].fieldset.fieldset.field[1].value",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -91,6 +103,7 @@
       "key": "fieldset[1].fieldset.fieldset.field[1].value.plain",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -98,13 +111,15 @@
       "key": "fieldset[1].fieldset.fieldset.field[1].label",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
       "type": "breakFn",
       "key": "fieldset[1].fieldset.fieldset.field[1].label.plain",
       "isMatch": true,
-      "matchedBy": ["**.**.label.plain", "!**.**.field.label.plain"],
+      "matchedBy": ["**.**.label.plain"],
+      "excludedBy": ["!**.**.field.label.plain"],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -112,6 +127,7 @@
       "key": "fieldset[1].fieldset.fieldset.field[0]",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -119,6 +135,7 @@
       "key": "fieldset[1].fieldset.fieldset.field[0].id",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -126,6 +143,7 @@
       "key": "fieldset[1].fieldset.fieldset.field[0].value",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -133,6 +151,7 @@
       "key": "fieldset[1].fieldset.fieldset.field[0].value.plain",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -140,13 +159,15 @@
       "key": "fieldset[1].fieldset.fieldset.field[0].label",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
       "type": "breakFn",
       "key": "fieldset[1].fieldset.fieldset.field[0].label.plain",
       "isMatch": true,
-      "matchedBy": ["**.**.label.plain", "!**.**.field.label.plain"],
+      "matchedBy": ["**.**.label.plain"],
+      "excludedBy": ["!**.**.field.label.plain"],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -154,6 +175,7 @@
       "key": "fieldset[1].fieldset.fieldset.field[0].choices",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -161,6 +183,7 @@
       "key": "fieldset[1].fieldset.fieldset.field[0].choices.choice",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -168,6 +191,7 @@
       "key": "fieldset[1].fieldset.fieldset.field[0].choices.choice.switch",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -175,6 +199,7 @@
       "key": "fieldset[1].fieldset.fieldset.field[0].choices.choice.id",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -182,6 +207,7 @@
       "key": "fieldset[1].fieldset.fieldset.field[0].choices.choice.label",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -189,6 +215,7 @@
       "key": "fieldset[1].fieldset.fieldset.field[0].choices.choice.label.plain",
       "isMatch": true,
       "matchedBy": ["**.**.label.plain"],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -196,6 +223,7 @@
       "key": "fieldset[1].fieldset.fieldset.field[0].choices.choice.label.plain",
       "isMatch": true,
       "matchedBy": ["**.**.label.plain"],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -203,6 +231,7 @@
       "key": "fieldset[1].fieldset.fieldset.label",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -210,6 +239,7 @@
       "key": "fieldset[1].fieldset.fieldset.label.plain",
       "isMatch": true,
       "matchedBy": ["**.**.label.plain"],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -217,6 +247,7 @@
       "key": "fieldset[1].fieldset.fieldset.label.plain",
       "isMatch": true,
       "matchedBy": ["**.**.label.plain"],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -224,6 +255,7 @@
       "key": "fieldset[1].fieldset.field",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -231,6 +263,7 @@
       "key": "fieldset[1].fieldset.field.id",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -238,6 +271,7 @@
       "key": "fieldset[1].fieldset.field.value",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -245,6 +279,7 @@
       "key": "fieldset[1].fieldset.field.value.plain",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -252,13 +287,15 @@
       "key": "fieldset[1].fieldset.field.label",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
       "type": "breakFn",
       "key": "fieldset[1].fieldset.field.label.plain",
       "isMatch": true,
-      "matchedBy": ["**.**.label.plain", "!**.**.field.label.plain"],
+      "matchedBy": ["**.**.label.plain"],
+      "excludedBy": ["!**.**.field.label.plain"],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -266,6 +303,7 @@
       "key": "fieldset[1].fieldset.field.choices",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -273,6 +311,7 @@
       "key": "fieldset[1].fieldset.field.choices.choice",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -280,6 +319,7 @@
       "key": "fieldset[1].fieldset.field.choices.choice.switch",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -287,6 +327,7 @@
       "key": "fieldset[1].fieldset.field.choices.choice.id",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -294,6 +335,7 @@
       "key": "fieldset[1].fieldset.field.choices.choice.label",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -301,6 +343,7 @@
       "key": "fieldset[1].fieldset.field.choices.choice.label.plain",
       "isMatch": true,
       "matchedBy": ["**.**.label.plain"],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -308,6 +351,7 @@
       "key": "fieldset[1].fieldset.field.choices.choice.label.plain",
       "isMatch": true,
       "matchedBy": ["**.**.label.plain"],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -315,6 +359,7 @@
       "key": "fieldset[1].label",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -322,6 +367,7 @@
       "key": "fieldset[1].label.plain",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -329,6 +375,7 @@
       "key": "fieldset[0]",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -336,6 +383,7 @@
       "key": "fieldset[0].id",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -343,6 +391,7 @@
       "key": "fieldset[0].fieldset",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -350,6 +399,7 @@
       "key": "fieldset[0].fieldset[0]",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -357,6 +407,7 @@
       "key": "fieldset[0].fieldset[0].id",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -364,6 +415,7 @@
       "key": "fieldset[0].fieldset[0].field",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -371,6 +423,7 @@
       "key": "fieldset[0].fieldset[0].field[1]",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -378,6 +431,7 @@
       "key": "fieldset[0].fieldset[0].field[1].id",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -385,6 +439,7 @@
       "key": "fieldset[0].fieldset[0].field[1].value",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -392,6 +447,7 @@
       "key": "fieldset[0].fieldset[0].field[1].value.plain",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -399,13 +455,15 @@
       "key": "fieldset[0].fieldset[0].field[1].label",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
       "type": "breakFn",
       "key": "fieldset[0].fieldset[0].field[1].label.plain",
       "isMatch": true,
-      "matchedBy": ["**.**.label.plain", "!**.**.field.label.plain"],
+      "matchedBy": ["**.**.label.plain"],
+      "excludedBy": ["!**.**.field.label.plain"],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -413,6 +471,7 @@
       "key": "fieldset[0].fieldset[0].field[0]",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -420,6 +479,7 @@
       "key": "fieldset[0].fieldset[0].field[0].id",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -427,6 +487,7 @@
       "key": "fieldset[0].fieldset[0].field[0].value",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -434,6 +495,7 @@
       "key": "fieldset[0].fieldset[0].field[0].value.plain",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -441,13 +503,15 @@
       "key": "fieldset[0].fieldset[0].field[0].label",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
       "type": "breakFn",
       "key": "fieldset[0].fieldset[0].field[0].label.plain",
       "isMatch": true,
-      "matchedBy": ["**.**.label.plain", "!**.**.field.label.plain"],
+      "matchedBy": ["**.**.label.plain"],
+      "excludedBy": ["!**.**.field.label.plain"],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -455,6 +519,7 @@
       "key": "fieldset[0].label",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -462,6 +527,7 @@
       "key": "fieldset[0].label.plain",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -469,6 +535,7 @@
       "key": "title",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     },
     {
@@ -476,6 +543,7 @@
       "key": "title.plain",
       "isMatch": false,
       "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.**.label.plain", "!**.**.field.label.plain"]
     }
   ],

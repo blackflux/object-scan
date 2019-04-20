@@ -45,12 +45,13 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 
 ### Options
 
-**Note on Functions:** Signature for all functions is `Fn(key, value, { parents, isMatch, matchedBy, traversedBy })`, where:
+**Note on Functions:** Signature for all functions is `Fn(key, value, { parents, isMatch, matchedBy, excludedBy, traversedBy })`, where:
 - `key` is the key that the function is called for (respects `joined` option).
 - `value` is the value for that key.
 - `parents` is an array containing all parents as `[parent, grandparent, ...]`. Excludes arrays if `useArraySelector` is false.
 - `isMatch` is true if exactly matched by at least one needle.
-- `matchedBy` are all needles matching the key exactly.
+- `matchedBy` are all needles matching the key exactly and are matches.
+- `excludedBy` are all needles matching the key exactly and are exclusions.
 - `traversedBy` are all needles involved in traversing the key.
 
 #### filterFn
@@ -173,6 +174,11 @@ objectScan(['**'], { breakFn: key => key === 'a.b' })(obj);
 The top level object(s) are matched by the empty needle `""`. 
 Useful for matching objects nested in arrays by setting `useArraySelector` to `false`.
 Note that the empty string does not work with [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set).
+
+## Exclusions
+
+The order of the input is important when using exclusions.
+The final result contains only entries where the last targeting needle is an include.
 
 ## Special Characters
 

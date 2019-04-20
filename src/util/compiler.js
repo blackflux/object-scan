@@ -49,22 +49,25 @@ const setRecursionPos = (input, pos) => defineProperty(input, RECURSION_POS, pos
 const getRecursionPos = input => input[RECURSION_POS] || 0;
 module.exports.getRecursionPos = getRecursionPos;
 
-module.exports.getMeta = (inputs, parents = null) => ({
-  isMatch: inputs.some(e => isMatch(e)),
-  // todo: revisit "matchedBy"
-  matchedBy: Array.from(inputs.reduce((p, e) => {
+module.exports.getMeta = (() => {
+  const extractNeedles = input => Array.from(input.reduce((p, e) => {
     const needle = getNeedle(e);
     if (needle !== null) {
       p.add(needle);
     }
     return p;
-  }, new Set())),
-  traversedBy: Array.from(inputs.reduce((p, e) => {
-    getNeedles(e).forEach(n => p.add(n));
-    return p;
-  }, new Set())),
-  parents
-});
+  }, new Set()));
+  return (inputs, parents = null) => ({
+    isMatch: inputs.some(e => isMatch(e)),
+    matchedBy: extractNeedles(inputs.filter(e => isMatch(e))),
+    excludedBy: extractNeedles(inputs.filter(e => !isMatch(e))),
+    traversedBy: Array.from(inputs.reduce((p, e) => {
+      getNeedles(e).forEach(n => p.add(n));
+      return p;
+    }, new Set())),
+    parents
+  });
+})();
 
 const buildRecursive = (tower, path, needle, excluded = false) => {
   addNeedle(tower, needle);
