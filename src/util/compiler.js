@@ -1,7 +1,6 @@
 /* compile needles to hierarchical map object */
 const parser = require('./parser');
-
-const defineProperty = (target, k, v) => Object.defineProperty(target, k, { value: v, writable: false });
+const { defineProperty } = require('./helper');
 
 const MATCH_TYPE = Symbol('match-type');
 const setMatchType = (input, included) => defineProperty(input, MATCH_TYPE, included);

@@ -1,5 +1,6 @@
 const assert = require('assert');
 const compiler = require('./util/compiler');
+const { findLast } = require('./util/helper');
 
 const escape = input => String(input).replace(/[!,.*[\]{}]/g, '\\$&');
 
@@ -20,16 +21,6 @@ const formatPath = (input, ctx) => (ctx.joined ? input.reduce(
   (p, c) => `${p}${typeof c === 'number' ? `[${c}]` : `${p ? '.' : ''}${ctx.escapePaths ? escape(c) : c}`}`,
   ''
 ) : input);
-
-const findLast = (array, fn) => {
-  for (let idx = array.length - 1; idx >= 0; idx -= 1) {
-    const item = array[idx];
-    if (fn(item)) {
-      return item;
-    }
-  }
-  return undefined;
-};
 
 const find = (haystack, searches, pathIn, parents, ctx) => {
   const recurseHaystack = ctx.breakFn === undefined
