@@ -75,7 +75,7 @@ const Result = (input) => {
           throwError(err, input, { char: idx });
         }
         const ele = input.slice(cursor, idx);
-        if (inArray && !/^[*\d]+$/g.test(ele)) {
+        if (inArray && !/^[?*\d]+$/g.test(ele)) {
           throwError('Bad Array Selector', input, { selector: ele });
         }
         cResult.push(new CString(inArray ? `[${ele}]` : ele, excludeNext));
