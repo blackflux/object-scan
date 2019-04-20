@@ -38,7 +38,7 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 - Exclusion with e.g. `!key`
 - Full support for escaping
 - Input traversed exactly once during search
-- Matches returned in "delete-safe" order
+- Result returned in "delete-safe" order
 - Search syntax is checked for correctness
 - Dependency free, small in size and very performant
 - Lots of tests to ensure correctness
@@ -59,7 +59,7 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 Type: `function`<br>
 Default: `undefined`
 
-If function is defined, it is called for every exact match. If `false`
+If function is defined, it is called for every match. If `false`
 is returned, the current key is excluded from the result.
 
 Can be used as a callback function to do processing as matching keys are traversed.
