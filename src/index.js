@@ -54,9 +54,11 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
         if (compiler.isRecursive(s)) {
           p.push(s);
         }
-        p.push(...Object.entries(s)
-          .filter(([entry, subSearch]) => isWildcardMatch(entry, key, isArray, subSearch))
-          .map(e => e[1]));
+        Object.entries(s).forEach(([entry, subSearch]) => {
+          if (isWildcardMatch(entry, key, isArray, subSearch)) {
+            p.push(subSearch);
+          }
+        });
         return p;
       }, []);
       if (searchesOut.some(s => compiler.hasIncludes(s))) {
