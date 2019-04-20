@@ -2,17 +2,17 @@
 const parser = require('./parser');
 const { defineProperty } = require('./helper');
 
-const MATCH_TYPE = Symbol('match-type');
-const setMatchType = (input, included) => defineProperty(input, MATCH_TYPE, included);
-const isMatch = input => input[MATCH_TYPE] !== undefined;
-const isIncludedMatch = input => input !== undefined && input[MATCH_TYPE] === true;
+const LEAF = Symbol('leaf');
+const markLeaf = (input, match) => defineProperty(input, LEAF, match);
+const isLeaf = input => input[LEAF] !== undefined;
+const isMatch = input => input !== undefined && input[LEAF] === true;
+module.exports.isLeaf = isLeaf;
 module.exports.isMatch = isMatch;
-module.exports.isIncludedMatch = isIncludedMatch;
 
-const HAS_INCLUDES = Symbol('has-includes');
-const setHasIncludes = input => defineProperty(input, HAS_INCLUDES, true);
-const hasIncludes = input => input[HAS_INCLUDES] === true;
-module.exports.hasIncludes = hasIncludes;
+const MATCHABLE = Symbol('matchable');
+const setMatchable = input => defineProperty(input, MATCHABLE, true);
+const isMatchable = input => input[MATCHABLE] === true;
+module.exports.isMatchable = isMatchable;
 
 const NEEDLE = Symbol('needle');
 const setNeedle = (input, needle) => defineProperty(input, NEEDLE, needle);
@@ -51,6 +51,7 @@ module.exports.getRecursionPos = getRecursionPos;
 
 module.exports.getMeta = (inputs, parents = null) => ({
   isMatch: inputs.some(e => isMatch(e)),
+  // todo: revisit "matchedBy"
   matchedBy: Array.from(inputs.reduce((p, e) => {
     const needle = getNeedle(e);
     if (needle !== null) {
@@ -68,14 +69,14 @@ module.exports.getMeta = (inputs, parents = null) => ({
 const buildRecursive = (tower, path, needle, excluded = false) => {
   addNeedle(tower, needle);
   if (!excluded) {
-    setHasIncludes(tower);
+    setMatchable(tower);
   }
   if (path.length === 0) {
     if (tower[NEEDLE] !== undefined) {
       throw new Error(`Redundant Needle Target: "${tower[NEEDLE]}" vs "${needle}"`);
     }
     setNeedle(tower, needle);
-    setMatchType(tower, !excluded);
+    markLeaf(tower, !excluded);
     if (isRecursive(tower)) {
       setRecursionPos(tower, Object.keys(tower).length);
     }

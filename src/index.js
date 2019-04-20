@@ -23,6 +23,11 @@ const formatPath = (input, ctx) => (ctx.joined ? input.reduce(
 ) : input);
 
 const find = (haystack, searches, pathIn, parents, ctx) => {
+  // todo: write test for "why this is up here"
+  if (!searches.some(s => compiler.isMatchable(s))) {
+    return [];
+  }
+
   const recurseHaystack = ctx.breakFn === undefined
     || ctx.breakFn(formatPath(pathIn, ctx), haystack, compiler.getMeta(searches, parents)) !== true;
 
@@ -56,9 +61,7 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
         });
         return p;
       }, []);
-      if (searchesOut.some(s => compiler.hasIncludes(s))) {
-        result.push(...find(value, searchesOut, pathOut, parentsOut, ctx));
-      }
+      result.push(...find(value, searchesOut, pathOut, parentsOut, ctx));
     });
   }
 
@@ -67,7 +70,7 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
     result.push(...find(haystack, [searches[0]['']], pathIn, parents, ctx));
   }
 
-  if (compiler.isIncludedMatch(findLast(searches, s => compiler.isMatch(s)))) {
+  if (compiler.isMatch(findLast(searches, s => compiler.isLeaf(s)))) {
     if (
       ctx.filterFn === undefined
       || ctx.filterFn(formatPath(pathIn, ctx), haystack, compiler.getMeta(searches, parents)) !== false

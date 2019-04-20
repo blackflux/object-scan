@@ -80,18 +80,18 @@ describe('Testing compiler', () => {
       const input = ['{!a}.{b}'];
       const tower = compiler.compile(input);
       expect(tower).to.deep.equal({ a: { b: {} } });
-      expect(compiler.hasIncludes(tower)).to.equal(true);
-      expect(compiler.hasIncludes(tower.a)).to.equal(false);
-      expect(compiler.hasIncludes(tower.a.b)).to.equal(false);
+      expect(compiler.isMatchable(tower)).to.equal(true);
+      expect(compiler.isMatchable(tower.a)).to.equal(false);
+      expect(compiler.isMatchable(tower.a.b)).to.equal(false);
     });
 
     it('Testing no backward exclusion inheritance in component path', () => {
       const input = ['{a}.{!b}'];
       const tower = compiler.compile(input);
       expect(tower).to.deep.equal({ a: { b: {} } });
-      expect(compiler.hasIncludes(tower)).to.equal(true);
-      expect(compiler.hasIncludes(tower.a)).to.equal(true);
-      expect(compiler.hasIncludes(tower.a.b)).to.equal(false);
+      expect(compiler.isMatchable(tower)).to.equal(true);
+      expect(compiler.isMatchable(tower.a)).to.equal(true);
+      expect(compiler.isMatchable(tower.a.b)).to.equal(false);
     });
   });
 
@@ -99,21 +99,21 @@ describe('Testing compiler', () => {
     const input = ['a.b.c.d.e', '!a.b.c.d.f'];
     const tower = compiler.compile(input);
     expect(tower).to.deep.equal({ a: { b: { c: { d: { e: {}, f: {} } } } } });
-    expect(compiler.hasIncludes(tower)).to.equal(true);
-    expect(compiler.hasIncludes(tower.a)).to.equal(true);
-    expect(compiler.hasIncludes(tower.a.b)).to.equal(true);
-    expect(compiler.hasIncludes(tower.a.b.c)).to.equal(true);
-    expect(compiler.hasIncludes(tower.a.b.c.d)).to.equal(true);
-    expect(compiler.hasIncludes(tower.a.b.c.d.e)).to.equal(true);
-    expect(compiler.hasIncludes(tower.a.b.c.d.f)).to.equal(false);
+    expect(compiler.isMatchable(tower)).to.equal(true);
+    expect(compiler.isMatchable(tower.a)).to.equal(true);
+    expect(compiler.isMatchable(tower.a.b)).to.equal(true);
+    expect(compiler.isMatchable(tower.a.b.c)).to.equal(true);
+    expect(compiler.isMatchable(tower.a.b.c.d)).to.equal(true);
+    expect(compiler.isMatchable(tower.a.b.c.d.e)).to.equal(true);
+    expect(compiler.isMatchable(tower.a.b.c.d.f)).to.equal(false);
   });
 
   it('Testing top level exclusion', () => {
     const input = ['!a'];
     const tower = compiler.compile(input);
     expect(tower).to.deep.equal({ a: {} });
-    expect(compiler.hasIncludes(tower)).to.equal(true);
-    expect(compiler.hasIncludes(tower.a)).to.equal(false);
+    expect(compiler.isMatchable(tower)).to.equal(true);
+    expect(compiler.isMatchable(tower.a)).to.equal(false);
   });
 
   it('Testing Or Paths', () => {
@@ -252,16 +252,16 @@ describe('Testing compiler', () => {
       }
     });
 
-    expect(compiler.isMatch(tower)).to.equal(false);
-    expect(compiler.isMatch(tower.a)).to.equal(false);
-    expect(compiler.isMatch(tower.a.b)).to.equal(false);
-    expect(compiler.isMatch(tower.a.b.d)).to.equal(true);
-    expect(compiler.isMatch(tower.a.b.d.g)).to.equal(true);
-    expect(compiler.isMatch(tower.a.c)).to.equal(false);
-    expect(compiler.isMatch(tower.a.c.d)).to.equal(true);
-    expect(compiler.isMatch(tower.a.c.f)).to.equal(true);
-    expect(compiler.isMatch(tower.a.e)).to.equal(false);
-    expect(compiler.isMatch(tower.a.e.f)).to.equal(true);
+    expect(compiler.isLeaf(tower)).to.equal(false);
+    expect(compiler.isLeaf(tower.a)).to.equal(false);
+    expect(compiler.isLeaf(tower.a.b)).to.equal(false);
+    expect(compiler.isLeaf(tower.a.b.d)).to.equal(true);
+    expect(compiler.isLeaf(tower.a.b.d.g)).to.equal(true);
+    expect(compiler.isLeaf(tower.a.c)).to.equal(false);
+    expect(compiler.isLeaf(tower.a.c.d)).to.equal(true);
+    expect(compiler.isLeaf(tower.a.c.f)).to.equal(true);
+    expect(compiler.isLeaf(tower.a.e)).to.equal(false);
+    expect(compiler.isLeaf(tower.a.e.f)).to.equal(true);
 
     expect(compiler.getNeedles(tower)).to.deep.equal(['a.{b,c}.d', 'a.{c,e}.f', 'a.b.d.g']);
     expect(compiler.getNeedles(tower.a)).to.deep.equal(['a.{b,c}.d', 'a.{c,e}.f', 'a.b.d.g']);
