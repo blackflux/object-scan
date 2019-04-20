@@ -42,7 +42,7 @@ describe('Testing compiler', () => {
         .to.throw('Redundant Needle Target: "!once" vs "!once"');
     });
 
-    it('Nexted Exclusion Target collision', () => {
+    it('Nested Exclusion Target collision', () => {
       expect(() => compiler.compile(['a.b.c', 'a.!b.*', 'a.b.*']))
         .to.throw('Redundant Needle Target: "a.!b.*" vs "a.b.*"');
     });
