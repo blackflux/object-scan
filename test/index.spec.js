@@ -111,6 +111,126 @@ describe('Testing Find', () => {
     });
   });
 
+  describe('Testing Exclusion', () => {
+    const test = (input, needles, result) => expect(objectScan(needles)(input)).to.deep.equal(result);
+
+    describe('Testing Basic Exclusion', () => {
+      const fixture = { a: { b: 'c', d: 'e' }, f: ['g', 'h'] };
+
+      it('Testing nested exclusion', () => {
+        test(fixture, ['a.{*,!b}'], ['a.d']);
+      });
+
+      it('Testing two level target exclusion', () => {
+        test(fixture, ['*.*,!a.b'], ['a.d']);
+      });
+
+      it('Testing array exclusion', () => {
+        test(fixture, ['*[*],!*[0]'], ['f[1]']);
+      });
+
+      it('Testing Include, exclude, include, exclude', () => {
+        test(fixture, ['**', '!{*.*,*,*[*]}', 'a.*', '!a.b'], ['a.d']);
+      });
+
+      it('Testing basic exclude, include', () => {
+        test(fixture, ['!a', 'a.b'], ['a.b']);
+      });
+
+      it('Testing star exclude, include', () => {
+        test(fixture, ['!**.d', '**'], ['f[1]', 'f[0]', 'f', 'a.d', 'a.b', 'a']);
+      });
+
+      it('Testing star include, exclude', () => {
+        test(fixture, ['**', '!a.**', '!f.**'], ['f', 'a']);
+      });
+    });
+
+    describe('Testing Redundant Needle Target Exclusion', () => {
+      const fixture = { a: { b: { c: 'd' } } };
+
+      it('Testing nested re-include', () => {
+        test(fixture, ['a.b.c', 'a.!b.*', 'a.b.**'], ['a.b.c']);
+      });
+
+      it('Testing nested re-exclude', () => {
+        test(fixture, ['!a.b.c', 'a.b.*', '!a.b.**'], []);
+      });
+    });
+
+    describe('Testing Flat Exclusion', () => {
+      const fixture = {
+        a: { x: '' }, b: { x: '' }, c: { x: '' }, d: { x: '' }, e: { x: '' }
+      };
+
+      it('Exclusion after two inclusions', () => {
+        test(fixture, ['a.x', '*.x', '!{c,d,e}.x'], ['b.x', 'a.x']);
+      });
+
+      it('Inclusion after exclusion', () => {
+        test(fixture, ['!*.x', 'a.x'], ['a.x']);
+      });
+
+      it('Inclusion only', () => {
+        test(fixture, ['*.x'], ['e.x', 'd.x', 'c.x', 'b.x', 'a.x']);
+      });
+
+      it('Exclusions only', () => {
+        test(fixture, ['!a.x', '!b.x'], []);
+      });
+    });
+
+    describe('Testing Misc Exclusions', () => {
+      const fixture1 = { foo: '', bar: '', baz: '' };
+      const fixture2 = {
+        foo: '', foam: '', for: '', forum: ''
+      };
+      const fixture3 = {
+        foo: '', one: '', two: '', four: '', do: '', once: '', only: ''
+      };
+
+      it('Basic exclusion', () => {
+        test(fixture1, ['foo'], ['foo']);
+        test(fixture1, ['!foo'], []);
+        test(fixture1, ['foo', 'bar'], ['bar', 'foo']);
+      });
+
+      it('Exclusion only, no results', () => {
+        test(fixture1, ['!foo', '!bar'], []);
+        test(fixture1, ['!*z'], []);
+        test(fixture1, ['!*z', '!*a*'], []);
+        test(fixture1, ['!*'], []);
+      });
+
+      it('Exclusions are order sensitive', () => {
+        test(fixture1, ['!*a*', '*z'], ['baz']);
+        test(fixture1, ['*z', '!*a*'], []);
+        test(fixture2, ['!*m', 'f*'], ['forum', 'for', 'foam', 'foo']);
+        test(fixture2, ['f*', '!*m'], ['for', 'foo']);
+      });
+
+      it('Include Excluded', () => {
+        test(fixture1, ['!*a*'], []);
+        test(fixture1, ['!foo', 'bar'], ['bar']);
+        test(fixture1, ['!*a*', 'bar'], ['bar']);
+        test(fixture1, ['!*a*', '*'], ['baz', 'bar', 'foo']);
+      });
+
+      it('Exclude Inclusion', () => {
+        test(fixture1, ['bar', '!*a*'], []);
+        test(fixture1, ['foo', '!bar'], ['foo']);
+      });
+
+      it('One-Star Exclusions', () => {
+        test(fixture1, ['*', '!foo'], ['baz', 'bar']);
+        test(fixture1, ['*', '!foo', 'bar'], ['baz', 'bar']);
+        test(fixture1, ['!foo', '*'], ['baz', 'bar', 'foo']);
+        test(fixture1, ['*', '!foo', '!bar'], ['baz']);
+        test(fixture3, ['*', '!o*', 'once'], ['once', 'do', 'four', 'two', 'foo']);
+      });
+    });
+  });
+
   describe('Testing empty needle behaviour', () => {
     const needles = [''];
     const arrayInput = [{ id: 1 }, { id: 2 }];
@@ -502,7 +622,7 @@ describe('Testing Find', () => {
 
   describe('Testing Escaping', () => {
     it('Testing Escaped Char Matching', () => {
-      [',', '.', '*', '[', ']', '{', '}'].forEach((char) => {
+      ['!', ',', '.', '*', '[', ']', '{', '}'].forEach((char) => {
         const find = objectScan([`\\${char}`]);
         expect(find({ [char]: 'a', b: 'c' })).to.deep.equal([`\\${char}`]);
       });
@@ -591,6 +711,31 @@ describe('Testing Find', () => {
     expect(objectScan(['b*'])({ foo: 'a', bar: 'b', baz: 'c' })).to.deep.equal(['baz', 'bar']);
     expect(objectScan(['b'])({ foo: 'a', bar: 'b', baz: 'c' })).to.deep.equal([]);
     expect(objectScan(['b', 'c'])({ a: 'a', b: 'b', c: 'c' })).to.deep.equal(['c', 'b']);
+    expect(objectScan(['!a'])(input)).to.deep.equal([]);
+    expect(objectScan(['!a', 'a.b.c'])(input)).to.deep.equal(['a.b.c']);
+    expect(objectScan(['**', '!a.*'])(input)).to.deep.equal([
+      'a.b.l.g',
+      'a.b.l',
+      'a.b.i.j',
+      'a.b.i',
+      'a.b.g',
+      'a.b.e',
+      'a.b.c',
+      'a'
+    ]);
+    expect(objectScan(['**', '!a.**'])(input)).to.deep.equal(['a']);
+    expect(objectScan(['a.b.*', '!a.b.{g,i,l}'])(input)).to.deep.equal(['a.b.e', 'a.b.c']);
+    expect(objectScan(['**', '!a.b.c'])(input)).to.deep.equal([
+      'a.i',
+      'a.b.l.g',
+      'a.b.l',
+      'a.b.i.j',
+      'a.b.i',
+      'a.b.g',
+      'a.b.e',
+      'a.b',
+      'a'
+    ]);
   });
 
   it('Testing Readme Example', () => {
@@ -603,6 +748,7 @@ describe('Testing Find', () => {
     expect(objectScan(['**'])(input)).to
       .deep.equal(['k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b.c', 'a.b', 'a']);
     expect(objectScan(['**.f'])(input)).to.deep.equal(['a.e.f']);
+    expect(objectScan(['a.*,!a.e'])(input)).to.deep.equal(['a.h', 'a.b']);
     expect(objectScan(['**'], { filterFn: (key, value) => typeof value === 'string' })(input)).to
       .deep.equal(['k', 'a.h[1]', 'a.h[0]', 'a.e.f', 'a.b.c']);
     expect(objectScan(['**'], { breakFn: key => key === 'a.b' })(input)).to

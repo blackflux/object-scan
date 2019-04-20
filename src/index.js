@@ -1,9 +1,13 @@
 const assert = require('assert');
 const compiler = require('./util/compiler');
+const { findLast } = require('./util/helper');
 
-const escape = input => String(input).replace(/[,.*[\]{}]/g, '\\$&');
+const escape = input => String(input).replace(/[!,.*[\]{}]/g, '\\$&');
 
 const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
+  if (wildcard === '**') {
+    return true;
+  }
   if (wildcard === (isArray ? '[*]' : '*')) {
     return true;
   }
@@ -19,6 +23,10 @@ const formatPath = (input, ctx) => (ctx.joined ? input.reduce(
 ) : input);
 
 const find = (haystack, searches, pathIn, parents, ctx) => {
+  if (!searches.some(s => compiler.hasMatches(s))) {
+    return [];
+  }
+
   const recurseHaystack = ctx.breakFn === undefined
     || ctx.breakFn(formatPath(pathIn, ctx), haystack, compiler.getMeta(searches, parents)) !== true;
 
@@ -38,19 +46,21 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
     Object.entries(haystack).reverse().forEach(([key, value]) => {
       const pathOut = pathIn.concat(isArray ? parseInt(key, 10) : key);
       const searchesOut = searches.reduce((p, s) => {
-        Object.entries(s).forEach(([entry, subSearch]) => {
-          if (entry === '**') {
-            p.push(compiler.getStarRecursion(subSearch));
+        const recursionPos = compiler.isRecursive(s) ? compiler.getRecursionPos(s) : null;
+        if (recursionPos === 0) {
+          p.push(s);
+        }
+        Object.entries(s).forEach(([entry, subSearch], idx) => {
+          if (isWildcardMatch(entry, key, isArray, subSearch)) {
             p.push(subSearch);
-          } else if (isWildcardMatch(entry, key, isArray, subSearch)) {
-            p.push(subSearch);
+          }
+          if (idx + 1 === recursionPos) {
+            p.push(s);
           }
         });
         return p;
       }, []);
-      if (searchesOut.length !== 0) {
-        result.push(...find(value, searchesOut, pathOut, parentsOut, ctx));
-      }
+      result.push(...find(value, searchesOut, pathOut, parentsOut, ctx));
     });
   }
 
@@ -59,7 +69,7 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
     result.push(...find(haystack, [searches[0]['']], pathIn, parents, ctx));
   }
 
-  if (searches.some(s => compiler.isMatch(s))) {
+  if (compiler.isMatch(findLast(searches, s => compiler.isLeaf(s)))) {
     if (
       ctx.filterFn === undefined
       || ctx.filterFn(formatPath(pathIn, ctx), haystack, compiler.getMeta(searches, parents)) !== false
@@ -92,6 +102,6 @@ module.exports = (needles, opts = {}) => {
   assert(typeof ctx.escapePaths === 'boolean');
   assert(typeof ctx.useArraySelector === 'boolean');
 
-  const search = compiler.compile(new Set(needles)); // keep separate for performance
+  const search = compiler.compile(needles); // keep separate for performance
   return haystack => find(haystack, [search], [], [], ctx);
 };
