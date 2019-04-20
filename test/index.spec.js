@@ -193,13 +193,9 @@ describe('Testing Find', () => {
         test(fixture1, ['foo'], ['foo']);
         test(fixture1, ['!foo'], []);
         test(fixture1, ['foo', 'bar'], ['bar', 'foo']);
-        test(fixture1, ['foo', '!bar'], ['foo']);
-        test(fixture1, ['!foo', 'bar'], ['bar']);
-        test(fixture1, ['!foo', '!bar'], []);
       });
 
       it('Exclusion only, no results', () => {
-        test(fixture1, ['!foo'], []);
         test(fixture1, ['!foo', '!bar'], []);
         test(fixture1, ['!*z'], []);
         test(fixture1, ['!*z', '!*a*'], []);
@@ -211,30 +207,25 @@ describe('Testing Find', () => {
         test(fixture1, ['*z', '!*a*'], []);
         test(fixture2, ['!*m', 'f*'], ['forum', 'for', 'foam', 'foo']);
         test(fixture2, ['f*', '!*m'], ['for', 'foo']);
+      });
+
+      it('Include Excluded', () => {
+        test(fixture1, ['!*a*'], []);
         test(fixture1, ['!foo', 'bar'], ['bar']);
+        test(fixture1, ['!*a*', 'bar'], ['bar']);
+        test(fixture1, ['!*a*', '*'], ['baz', 'bar', 'foo']);
+      });
+
+      it('Exclude Inclusion', () => {
+        test(fixture1, ['bar', '!*a*'], []);
         test(fixture1, ['foo', '!bar'], ['foo']);
       });
 
-      it('Re-Include Excluded', () => {
-        test(fixture1, ['!*'], []);
-        test(fixture1, ['!*a*'], []);
-        test(fixture1, ['bar', '!*a*'], []);
-        test(fixture1, ['!*a*', 'bar'], ['bar']);
-        test(fixture1, ['!*a*', '*'], ['baz', 'bar', 'foo']);
-        test(fixture1, ['!*a*', '*z'], ['baz']);
-      });
-
-      it('Misc Exclusions', () => {
+      it('One-Star Exclusions', () => {
         test(fixture1, ['*', '!foo'], ['baz', 'bar']);
         test(fixture1, ['*', '!foo', 'bar'], ['baz', 'bar']);
         test(fixture1, ['!foo', '*'], ['baz', 'bar', 'foo']);
         test(fixture1, ['*', '!foo', '!bar'], ['baz']);
-        test(fixture1, ['foo'], ['foo']);
-        test(fixture1, ['!foo'], []);
-        test(fixture1, ['foo', 'bar'], ['bar', 'foo']);
-        test(fixture1, ['foo', '!bar'], ['foo']);
-        test(fixture1, ['!foo', 'bar'], ['bar']);
-        test(fixture1, ['!foo', '!bar'], []);
         test(fixture3, ['*', '!o*', 'once'], ['once', 'do', 'four', 'two', 'foo']);
       });
     });
