@@ -30,6 +30,19 @@ const addNeedle = (input, needle) => {
 const getNeedles = input => [...input[NEEDLES]];
 module.exports.getNeedles = getNeedles;
 
+const RECURSION_TRIGGERS = Symbol('recursion-triggers');
+const addRecursionTrigger = (input, trigger) => {
+  if (input[RECURSION_TRIGGERS] === undefined) {
+    defineProperty(input, RECURSION_TRIGGERS, new Set());
+  }
+  input[RECURSION_TRIGGERS].add(trigger);
+};
+const isRecursionTrigger = (input, trigger) => (
+  input[RECURSION_TRIGGERS] !== undefined
+  && input[RECURSION_TRIGGERS].has(trigger)
+);
+module.exports.isRecursionTrigger = isRecursionTrigger;
+
 const WILDCARD_REGEX = Symbol('wildcard-regex');
 const setWildcardRegex = (input, wildcard) => {
   defineProperty(input, WILDCARD_REGEX, new RegExp(`^${wildcard
@@ -61,6 +74,14 @@ module.exports.getMeta = (inputs, parents = null) => ({
   parents
 });
 
+const addRecursionTriggersRec = (root, tower) => {
+  const towerValues = Object.values(tower);
+  if (towerValues.length !== 0) {
+    addRecursionTrigger(root, towerValues[towerValues.length - 1]);
+    towerValues.forEach(v => addRecursionTriggersRec(root, v));
+  }
+};
+
 const buildRecursive = (tower, path, needle, excluded = false) => {
   addNeedle(tower, needle);
   if (!excluded) {
@@ -85,9 +106,10 @@ const buildRecursive = (tower, path, needle, excluded = false) => {
   if (tower[path[0]] === undefined) {
     Object.assign(tower, { [path[0]]: {} });
     setWildcardRegex(tower[path[0]], path[0]);
-    if (String(path[0]) === '**') {
-      markRecursive(tower[path[0]]);
-    }
+  }
+  if (String(path[0]) === '**') {
+    markRecursive(tower[path[0]]);
+    addRecursionTriggersRec(tower[path[0]], tower[path[0]]);
   }
   if (excluded && path[0].isExcluded()) {
     throw new Error(`Redundant Exclusion: "${needle}"`);

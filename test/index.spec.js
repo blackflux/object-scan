@@ -140,8 +140,7 @@ describe('Testing Find', () => {
       });
 
       it('Testing star exclude, include', () => {
-        // todo: why does this exclude "a.d"?
-        test(fixture, ['!**.d', '**'], ['f[1]', 'f[0]', 'f', 'a.b', 'a']);
+        test(fixture, ['!**.d', '**'], ['f[1]', 'f[0]', 'f', 'a.d', 'a.b', 'a']);
         // todo: why does this include anything?
         test(fixture, ['**', '!a.**', '!f.**'], ['f', 'a']);
       });

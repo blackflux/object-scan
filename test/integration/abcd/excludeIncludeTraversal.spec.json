@@ -19,7 +19,7 @@
       "type": "breakFn",
       "key": "a.b",
       "isMatch": true,
-      "matchedBy": ["**", "!**.b"],
+      "matchedBy": ["!**.b", "**"],
       "traversedBy": ["!**.b", "**"]
     },
     {
@@ -38,11 +38,18 @@
     },
     {
       "type": "filterFn",
+      "key": "a.b",
+      "isMatch": true,
+      "matchedBy": ["!**.b", "**"],
+      "traversedBy": ["!**.b", "**"]
+    },
+    {
+      "type": "filterFn",
       "key": "a",
       "isMatch": true,
       "matchedBy": ["**"],
       "traversedBy": ["!**.b", "**"]
     }
   ],
-  "result": ["a.b.c", "a"]
+  "result": ["a.b.c", "a.b", "a"]
 }
