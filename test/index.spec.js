@@ -111,8 +111,6 @@ describe('Testing Find', () => {
     });
   });
 
-  // todo: add lots more tests (!)
-
   describe('Testing Exclusion', () => {
     const test = (input, needles, result) => expect(objectScan(needles)(input)).to.deep.equal(result);
 
