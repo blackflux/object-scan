@@ -80,18 +80,18 @@ describe('Testing compiler', () => {
       const input = ['{!a}.{b}'];
       const tower = compiler.compile(input);
       expect(tower).to.deep.equal({ a: { b: {} } });
-      expect(compiler.isMatchable(tower)).to.equal(false);
-      expect(compiler.isMatchable(tower.a)).to.equal(false);
-      expect(compiler.isMatchable(tower.a.b)).to.equal(false);
+      expect(compiler.hasMatches(tower)).to.equal(false);
+      expect(compiler.hasMatches(tower.a)).to.equal(false);
+      expect(compiler.hasMatches(tower.a.b)).to.equal(false);
     });
 
     it('Testing no backward exclusion inheritance in component path', () => {
       const input = ['{a}.{!b}'];
       const tower = compiler.compile(input);
       expect(tower).to.deep.equal({ a: { b: {} } });
-      expect(compiler.isMatchable(tower)).to.equal(false);
-      expect(compiler.isMatchable(tower.a)).to.equal(false);
-      expect(compiler.isMatchable(tower.a.b)).to.equal(false);
+      expect(compiler.hasMatches(tower)).to.equal(false);
+      expect(compiler.hasMatches(tower.a)).to.equal(false);
+      expect(compiler.hasMatches(tower.a.b)).to.equal(false);
     });
   });
 
@@ -99,21 +99,21 @@ describe('Testing compiler', () => {
     const input = ['a.b.c.d.e', '!a.b.c.d.f'];
     const tower = compiler.compile(input);
     expect(tower).to.deep.equal({ a: { b: { c: { d: { e: {}, f: {} } } } } });
-    expect(compiler.isMatchable(tower)).to.equal(true);
-    expect(compiler.isMatchable(tower.a)).to.equal(true);
-    expect(compiler.isMatchable(tower.a.b)).to.equal(true);
-    expect(compiler.isMatchable(tower.a.b.c)).to.equal(true);
-    expect(compiler.isMatchable(tower.a.b.c.d)).to.equal(true);
-    expect(compiler.isMatchable(tower.a.b.c.d.e)).to.equal(true);
-    expect(compiler.isMatchable(tower.a.b.c.d.f)).to.equal(false);
+    expect(compiler.hasMatches(tower)).to.equal(true);
+    expect(compiler.hasMatches(tower.a)).to.equal(true);
+    expect(compiler.hasMatches(tower.a.b)).to.equal(true);
+    expect(compiler.hasMatches(tower.a.b.c)).to.equal(true);
+    expect(compiler.hasMatches(tower.a.b.c.d)).to.equal(true);
+    expect(compiler.hasMatches(tower.a.b.c.d.e)).to.equal(true);
+    expect(compiler.hasMatches(tower.a.b.c.d.f)).to.equal(false);
   });
 
   it('Testing top level exclusion', () => {
     const input = ['!a'];
     const tower = compiler.compile(input);
     expect(tower).to.deep.equal({ a: {} });
-    expect(compiler.isMatchable(tower)).to.equal(false);
-    expect(compiler.isMatchable(tower.a)).to.equal(false);
+    expect(compiler.hasMatches(tower)).to.equal(false);
+    expect(compiler.hasMatches(tower.a)).to.equal(false);
   });
 
   it('Testing Or Paths', () => {

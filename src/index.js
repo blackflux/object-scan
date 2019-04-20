@@ -23,7 +23,7 @@ const formatPath = (input, ctx) => (ctx.joined ? input.reduce(
 ) : input);
 
 const find = (haystack, searches, pathIn, parents, ctx) => {
-  if (!searches.some(s => compiler.isMatchable(s))) {
+  if (!searches.some(s => compiler.hasMatches(s))) {
     return [];
   }
 

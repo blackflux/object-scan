@@ -9,10 +9,10 @@ const isMatch = input => input !== undefined && input[LEAF] === true;
 module.exports.isLeaf = isLeaf;
 module.exports.isMatch = isMatch;
 
-const MATCHABLE = Symbol('matchable');
-const setMatchable = input => defineProperty(input, MATCHABLE, true);
-const isMatchable = input => input[MATCHABLE] === true;
-module.exports.isMatchable = isMatchable;
+const HAS_MATCHES = Symbol('has-matches');
+const setHasMatches = input => defineProperty(input, HAS_MATCHES, true);
+const hasMatches = input => input[HAS_MATCHES] === true;
+module.exports.hasMatches = hasMatches;
 
 const NEEDLE = Symbol('needle');
 const setNeedle = (input, needle) => defineProperty(input, NEEDLE, needle);
@@ -103,17 +103,17 @@ const buildRecursive = (tower, path, needle, excluded = false) => {
   buildRecursive(tower[path[0]], path.slice(1), needle, excluded || path[0].isExcluded());
 };
 
-const setMatchableRec = (tower) => {
+const setHasMatchesRec = (tower) => {
   const towerValues = Object.values(tower);
-  towerValues.forEach(v => setMatchableRec(v));
-  if (isMatch(tower) || towerValues.some(v => isMatchable(v))) {
-    setMatchable(tower);
+  towerValues.forEach(v => setHasMatchesRec(v));
+  if (isMatch(tower) || towerValues.some(v => hasMatches(v))) {
+    setHasMatches(tower);
   }
 };
 
 module.exports.compile = (needles) => {
   const tower = {};
   needles.forEach(needle => buildRecursive(tower, [parser(needle)], needle));
-  setMatchableRec(tower);
+  setHasMatchesRec(tower);
   return tower;
 };
