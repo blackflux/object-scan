@@ -30,6 +30,16 @@ const addNeedle = (input, needle) => {
 const getNeedles = input => [...input[NEEDLES]];
 module.exports.getNeedles = getNeedles;
 
+const WILDCARD_REGEX = Symbol('wildcard-regex');
+const setWildcardRegex = (input, wildcard) => {
+  defineProperty(input, WILDCARD_REGEX, new RegExp(`^${wildcard
+    .split(/(?<!\\)(?:\\\\)*\*/)
+    .map(p => p.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&'))
+    .join('.*')}$`));
+};
+const getWildcardRegex = input => input[WILDCARD_REGEX];
+module.exports.getWildcardRegex = getWildcardRegex;
+
 const RECURSION_TRIGGERS = Symbol('recursion-triggers');
 const addRecursionTrigger = (input, trigger) => {
   if (input[RECURSION_TRIGGERS] === undefined) {
@@ -42,16 +52,6 @@ const isRecursionTrigger = (input, trigger) => (
   && input[RECURSION_TRIGGERS].has(trigger)
 );
 module.exports.isRecursionTrigger = isRecursionTrigger;
-
-const WILDCARD_REGEX = Symbol('wildcard-regex');
-const setWildcardRegex = (input, wildcard) => {
-  defineProperty(input, WILDCARD_REGEX, new RegExp(`^${wildcard
-    .split(/(?<!\\)(?:\\\\)*\*/)
-    .map(p => p.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&'))
-    .join('.*')}$`));
-};
-const getWildcardRegex = input => input[WILDCARD_REGEX];
-module.exports.getWildcardRegex = getWildcardRegex;
 
 const RECURSIVE = Symbol('recursive');
 const markRecursive = input => defineProperty(input, RECURSIVE, true);
