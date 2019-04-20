@@ -1,0 +1,34 @@
+{
+  "needles": ["**.c", "!**.b.c"],
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "traversedBy": ["**.c", "!**.b.c"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a",
+      "isMatch": false,
+      "matchedBy": [],
+      "traversedBy": ["**.c", "!**.b.c"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.b",
+      "isMatch": false,
+      "matchedBy": [],
+      "traversedBy": ["**.c", "!**.b.c"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.b.c",
+      "isMatch": true,
+      "matchedBy": ["**.c", "!**.b.c"],
+      "traversedBy": ["**.c", "!**.b.c"]
+    }
+  ],
+  "result": []
+}
