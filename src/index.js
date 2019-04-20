@@ -4,6 +4,9 @@ const compiler = require('./util/compiler');
 const escape = input => String(input).replace(/[!,.*[\]{}]/g, '\\$&');
 
 const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
+  if (wildcard === '**') {
+    return true;
+  }
   if (wildcard === (isArray ? '[*]' : '*')) {
     return true;
   }
@@ -48,11 +51,10 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
     Object.entries(haystack).reverse().forEach(([key, value]) => {
       const pathOut = pathIn.concat(isArray ? parseInt(key, 10) : key);
       const searchesOut = searches.reduce((p, s) => {
-        Object.entries(s).forEach(([entry, subSearch]) => {
-          if (entry === '**') {
-            p.push(compiler.getStarRecursion(subSearch));
-            p.push(subSearch);
-          } else if (isWildcardMatch(entry, key, isArray, subSearch)) {
+        const subSearches = compiler.isRecursive(s) ? [['**', s]] : [];
+        subSearches.push(...Object.entries(s));
+        subSearches.forEach(([entry, subSearch]) => {
+          if (isWildcardMatch(entry, key, isArray, subSearch)) {
             p.push(subSearch);
           }
         });

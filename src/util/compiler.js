@@ -40,10 +40,10 @@ const setWildcardRegex = (input, wildcard) => {
 const getWildcardRegex = input => input[WILDCARD_REGEX];
 module.exports.getWildcardRegex = getWildcardRegex;
 
-const STAR_RECURSION = Symbol('star-recursion');
-const setStarRecursion = (input, target) => defineProperty(input, STAR_RECURSION, target);
-const getStarRecursion = input => input[STAR_RECURSION];
-module.exports.getStarRecursion = getStarRecursion;
+const RECURSIVE = Symbol('recursive');
+const markRecursive = input => defineProperty(input, RECURSIVE, true);
+const isRecursive = input => input[RECURSIVE] === true;
+module.exports.isRecursive = isRecursive;
 
 module.exports.getMeta = (inputs, parents = null) => ({
   isMatch: inputs.some(e => isMatch(e)),
@@ -85,6 +85,9 @@ const buildRecursive = (tower, path, needle, excluded = false) => {
   if (tower[path[0]] === undefined) {
     Object.assign(tower, { [path[0]]: {} });
     setWildcardRegex(tower[path[0]], path[0]);
+    if (String(path[0]) === '**') {
+      markRecursive(tower[path[0]]);
+    }
   }
   if (excluded && path[0].isExcluded()) {
     throw new Error(`Redundant Exclusion: "${needle}"`);
@@ -92,27 +95,8 @@ const buildRecursive = (tower, path, needle, excluded = false) => {
   buildRecursive(tower[path[0]], path.slice(1), needle, excluded || path[0].isExcluded());
 };
 
-const computeStarRecursionsRecursive = (tower) => {
-  const starTarget = tower['**'];
-  if (starTarget !== undefined) {
-    const starRecursion = { '**': starTarget };
-    // todo: remove ?
-    if (isMatch(starTarget)) {
-      setMatchType(starRecursion, isIncludedMatch(starTarget));
-    }
-    const needle = getNeedle(starTarget);
-    if (needle !== null) {
-      setNeedle(starRecursion, needle);
-    }
-    getNeedles(starTarget).forEach(n => addNeedle(starRecursion, n));
-    setStarRecursion(starTarget, starRecursion);
-  }
-  Object.values(tower).forEach(v => computeStarRecursionsRecursive(v));
-};
-
 module.exports.compile = (needles) => {
   const tower = {};
   needles.forEach(needle => buildRecursive(tower, [parser(needle)], needle));
-  computeStarRecursionsRecursive(tower);
   return tower;
 };
