@@ -42,15 +42,15 @@ const find = (haystack, searches, pathIn, parents, ctx) => {
     Object.entries(haystack).reverse().forEach(([key, value]) => {
       const pathOut = pathIn.concat(isArray ? parseInt(key, 10) : key);
       const searchesOut = searches.reduce((p, s) => {
-        const recursionPos = compiler.isRecursive(s) ? compiler.getRecursionPos(s) : null;
-        if (recursionPos === 0) {
+        const recursionPos = compiler.isRecursive(s) ? compiler.getRecursionPos(s) - 1 : null;
+        if (recursionPos === -1) {
           p.push(s);
         }
         Object.entries(s).forEach(([entry, subSearch], idx) => {
           if (isWildcardMatch(entry, key, isArray, subSearch)) {
             p.push(subSearch);
           }
-          if (idx + 1 === recursionPos) {
+          if (idx === recursionPos) {
             p.push(s);
           }
         });
