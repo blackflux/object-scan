@@ -195,8 +195,8 @@ describe('Testing Parser', () => {
     });
 
     it('Testing Exclusion in Path Group', () => {
-      expect(asString('"**.{*,!location}.lat"'))
-        .to.equal('[""**",{"*",!"location"},"lat""]');
+      expect(asString('**.{*,!location}.lat'))
+        .to.equal('["**",{"*",!"location"},"lat"]');
     });
 
     it('Testing Redundant Exclusion', () => {
