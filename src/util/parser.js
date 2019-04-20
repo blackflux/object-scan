@@ -46,7 +46,13 @@ const Result = (input) => {
   };
   const finishChild = () => {
     const parent = parentStack.pop();
-    parent[Array.isArray(parent) ? 'push' : 'add'](getSimple(cResult));
+    const child = getSimple(cResult);
+    const parentIsArray = Array.isArray(parent);
+    if (!parentIsArray && child instanceof Set) {
+      child.forEach(e => parent.add(e));
+    } else {
+      parent[parentIsArray ? 'push' : 'add'](child);
+    }
     cResult = parent;
   };
 

@@ -25,12 +25,12 @@ describe('Testing Parser', () => {
     });
 
     it('Testing Nested Groups', () => {
-      expect(asString('{a,{b,c}}')).to.deep.equal('{"a",{"b","c"}}');
+      expect(asString('{a,{b,c}}')).to.deep.equal('{"a","b","c"}');
     });
 
     it('Testing Array Group Content', () => {
-      expect(asString('[{1,{0,1}}]')).to.deep.equal('{"[1]",{"[0]","[1]"}}');
-      expect(asString('[{{0,1},1}]')).to.deep.equal('{{"[0]","[1]"},"[1]"}');
+      expect(asString('[{1,{0,1}}]')).to.deep.equal('{"[1]","[0]","[1]"}');
+      expect(asString('[{{0,1},1}]')).to.deep.equal('{"[0]","[1]","[1]"}');
     });
   });
 
@@ -181,6 +181,9 @@ describe('Testing Parser', () => {
       expect(asString('{a,b.!c}')).to.equal('{"a",["b",!"c"]}');
       expect(asString('{!a,b.c}')).to.equal('{!"a",["b","c"]}');
       expect(asString('!{a,b.c}')).to.equal('{!"a",[!"b","c"]}');
+      expect(asString('!a.!b')).to.equal('[!"a",!"b"]');
+      expect(asString('[!0][!1]')).to.equal('[!"[0]",!"[1]"]');
+      expect(asString('!{{a,b},{c,d}}')).to.equal('{!"a",!"b",!"c",!"d"}');
     });
 
     it('Testing Array Exclusion', () => {
@@ -202,7 +205,7 @@ describe('Testing Parser', () => {
 
     it('Nested Redundant Exclusions', () => {
       expect(asString('!{[1][2],*,{a,b},{a},{{a}},{a.!b}}'))
-        .to.equal('{[!"[1]","[2]"],!"*",{!"a",!"b"},!"a",!"a",[!"a",!"b"]}');
+        .to.equal('{[!"[1]","[2]"],!"*",!"a",!"b",!"a",!"a",[!"a",!"b"]}');
     });
 
     describe('Testing Exclusion Errors', () => {
