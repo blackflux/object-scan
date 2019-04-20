@@ -174,8 +174,6 @@ describe('Testing Parser', () => {
     });
   });
 
-  // todo: write tons more tests
-
   describe('Testing Exclusion', () => {
     it('Testing Basic Exclusion', () => {
       expect(asString('{a,!b.c}')).to.equal('{"a",[!"b","c"]}');
@@ -193,6 +191,7 @@ describe('Testing Parser', () => {
       expect(asString('{[!0],[1][2]}')).to.equal('{!"[0]",["[1]","[2]"]}');
       expect(asString('{[0],![1][2]}')).to.equal('{"[0]",[!"[1]","[2]"]}');
       expect(asString('![1][{2,3}][4]')).to.equal('[!"[1]",{"[2]","[3]"},"[4]"]');
+      expect(asString('!{[0][1],[1][2]}')).to.equal('{[!"[0]","[1]"],[!"[1]","[2]"]}');
     });
 
     it('Testing Exclusion in Path Group', () => {
