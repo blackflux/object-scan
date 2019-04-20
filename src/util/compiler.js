@@ -92,10 +92,10 @@ const buildRecursive = (tower, path, needle, excluded = false) => {
   }
   if (tower[path[0]] === undefined) {
     Object.assign(tower, { [path[0]]: {} });
+    if (String(path[0]) === '**') {
+      markRecursive(tower[path[0]]);
+    }
     setWildcardRegex(tower[path[0]], path[0]);
-  }
-  if (String(path[0]) === '**') {
-    markRecursive(tower[path[0]]);
   }
   if (excluded && path[0].isExcluded()) {
     throw new Error(`Redundant Exclusion: "${needle}"`);
