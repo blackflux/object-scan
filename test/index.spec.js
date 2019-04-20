@@ -146,18 +146,21 @@ describe('Testing Find', () => {
       });
     });
 
-    describe('Testing Redundant Needle Targets', () => {
+    describe('Testing Redundant Needle Target Exclusion', () => {
       const fixture = { a: { b: { c: 'd' } } };
 
       it('Testing nested re-include', () => {
         test(fixture, ['a.b.c', 'a.!b.*', 'a.b.**'], ['a.b.c']);
+      });
+
+      it('Testing nested re-exclude', () => {
         test(fixture, ['!a.b.c', 'a.b.*', '!a.b.**'], []);
       });
     });
 
     describe('Testing Flat Exclusion', () => {
       const fixture = {
-        a: { x: null }, b: { x: null }, c: { x: null }, d: { x: null }, e: { x: null }
+        a: { x: '' }, b: { x: '' }, c: { x: '' }, d: { x: '' }, e: { x: '' }
       };
 
       it('Exclusion after two inclusions', () => {
@@ -178,12 +181,12 @@ describe('Testing Find', () => {
     });
 
     describe('Testing Misc Exclusions', () => {
-      const fixture1 = { foo: null, bar: null, baz: null };
+      const fixture1 = { foo: '', bar: '', baz: '' };
       const fixture2 = {
-        foo: null, foam: null, for: null, forum: null
+        foo: '', foam: '', for: '', forum: ''
       };
       const fixture3 = {
-        foo: null, one: null, two: null, four: null, do: null, once: null, only: null
+        foo: '', one: '', two: '', four: '', do: '', once: '', only: ''
       };
 
       it('Basic exclusion', () => {
