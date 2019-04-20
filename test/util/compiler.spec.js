@@ -80,7 +80,7 @@ describe('Testing compiler', () => {
       const input = ['{!a}.{b}'];
       const tower = compiler.compile(input);
       expect(tower).to.deep.equal({ a: { b: {} } });
-      expect(compiler.isMatchable(tower)).to.equal(true);
+      expect(compiler.isMatchable(tower)).to.equal(false);
       expect(compiler.isMatchable(tower.a)).to.equal(false);
       expect(compiler.isMatchable(tower.a.b)).to.equal(false);
     });
@@ -89,8 +89,8 @@ describe('Testing compiler', () => {
       const input = ['{a}.{!b}'];
       const tower = compiler.compile(input);
       expect(tower).to.deep.equal({ a: { b: {} } });
-      expect(compiler.isMatchable(tower)).to.equal(true);
-      expect(compiler.isMatchable(tower.a)).to.equal(true);
+      expect(compiler.isMatchable(tower)).to.equal(false);
+      expect(compiler.isMatchable(tower.a)).to.equal(false);
       expect(compiler.isMatchable(tower.a.b)).to.equal(false);
     });
   });
@@ -112,7 +112,7 @@ describe('Testing compiler', () => {
     const input = ['!a'];
     const tower = compiler.compile(input);
     expect(tower).to.deep.equal({ a: {} });
-    expect(compiler.isMatchable(tower)).to.equal(true);
+    expect(compiler.isMatchable(tower)).to.equal(false);
     expect(compiler.isMatchable(tower.a)).to.equal(false);
   });
 

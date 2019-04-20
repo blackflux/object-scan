@@ -68,9 +68,6 @@ module.exports.getMeta = (inputs, parents = null) => ({
 
 const buildRecursive = (tower, path, needle, excluded = false) => {
   addNeedle(tower, needle);
-  if (!excluded) {
-    setMatchable(tower);
-  }
   if (path.length === 0) {
     if (tower[NEEDLE] !== undefined) {
       throw new Error(`Redundant Needle Target: "${tower[NEEDLE]}" vs "${needle}"`);
@@ -79,6 +76,9 @@ const buildRecursive = (tower, path, needle, excluded = false) => {
     markLeaf(tower, !excluded);
     if (isRecursive(tower)) {
       setRecursionPos(tower, Object.keys(tower).length);
+    }
+    if (!excluded) {
+      setMatchable(tower);
     }
     return;
   }
@@ -103,8 +103,17 @@ const buildRecursive = (tower, path, needle, excluded = false) => {
   buildRecursive(tower[path[0]], path.slice(1), needle, excluded || path[0].isExcluded());
 };
 
+const pullUpMatchable = (tower) => {
+  const towerValues = Object.values(tower);
+  towerValues.forEach(v => pullUpMatchable(v));
+  if (towerValues.some(v => isMatchable(v))) {
+    setMatchable(tower);
+  }
+};
+
 module.exports.compile = (needles) => {
   const tower = {};
   needles.forEach(needle => buildRecursive(tower, [parser(needle)], needle));
+  pullUpMatchable(tower);
   return tower;
 };
