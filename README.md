@@ -38,7 +38,7 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 - Exclusion with e.g. `!key`
 - Full support for escaping
 - Input traversed exactly once during search
-- Result returned in "delete-safe" order
+- Results returned in "delete-safe" order
 - Search syntax is checked for correctness
 - Dependency free, small in size and very performant
 - Lots of tests to ensure correctness
