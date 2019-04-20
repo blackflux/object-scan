@@ -93,6 +93,9 @@ const buildRecursive = (tower, path, needle, excluded = false) => {
     }
     setNeedle(tower, needle);
     setMatchType(tower, !excluded);
+    if (isRecursive(tower)) {
+      addRecursionTriggersRec(tower, tower);
+    }
     return;
   }
   if (Array.isArray(path[0])) {
@@ -109,7 +112,6 @@ const buildRecursive = (tower, path, needle, excluded = false) => {
   }
   if (String(path[0]) === '**') {
     markRecursive(tower[path[0]]);
-    addRecursionTriggersRec(tower[path[0]], tower[path[0]]);
   }
   if (excluded && path[0].isExcluded()) {
     throw new Error(`Redundant Exclusion: "${needle}"`);

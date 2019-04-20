@@ -1,0 +1,48 @@
+{
+  "needles": ["**.d", "!**.c.d", "**.b.c.d"],
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "traversedBy": ["**.d", "!**.c.d", "**.b.c.d"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a",
+      "isMatch": false,
+      "matchedBy": [],
+      "traversedBy": ["**.d", "!**.c.d", "**.b.c.d"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.b",
+      "isMatch": false,
+      "matchedBy": [],
+      "traversedBy": ["**.d", "!**.c.d", "**.b.c.d"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.b.c",
+      "isMatch": false,
+      "matchedBy": [],
+      "traversedBy": ["**.d", "!**.c.d", "**.b.c.d"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.b.c.d",
+      "isMatch": true,
+      "matchedBy": ["**.d", "!**.c.d", "**.b.c.d"],
+      "traversedBy": ["**.d", "!**.c.d", "**.b.c.d"]
+    },
+    {
+      "type": "filterFn",
+      "key": "a.b.c.d",
+      "isMatch": true,
+      "matchedBy": ["**.d", "!**.c.d", "**.b.c.d"],
+      "traversedBy": ["**.d", "!**.c.d", "**.b.c.d"]
+    }
+  ],
+  "result": ["a.b.c.d"]
+}
