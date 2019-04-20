@@ -117,7 +117,7 @@
     {
       "type": "breakFn",
       "key": "fieldset[1].fieldset.fieldset.field[1].label.plain",
-      "isMatch": true,
+      "isMatch": false,
       "matchedBy": ["**.label.plain"],
       "excludedBy": ["!**.field.label.plain"],
       "traversedBy": ["**.label.plain", "!**.field.label.plain"]
@@ -165,7 +165,7 @@
     {
       "type": "breakFn",
       "key": "fieldset[1].fieldset.fieldset.field[0].label.plain",
-      "isMatch": true,
+      "isMatch": false,
       "matchedBy": ["**.label.plain"],
       "excludedBy": ["!**.field.label.plain"],
       "traversedBy": ["**.label.plain", "!**.field.label.plain"]
@@ -293,7 +293,7 @@
     {
       "type": "breakFn",
       "key": "fieldset[1].fieldset.field.label.plain",
-      "isMatch": true,
+      "isMatch": false,
       "matchedBy": ["**.label.plain"],
       "excludedBy": ["!**.field.label.plain"],
       "traversedBy": ["**.label.plain", "!**.field.label.plain"]
@@ -469,7 +469,7 @@
     {
       "type": "breakFn",
       "key": "fieldset[0].fieldset[0].field[1].label.plain",
-      "isMatch": true,
+      "isMatch": false,
       "matchedBy": ["**.label.plain"],
       "excludedBy": ["!**.field.label.plain"],
       "traversedBy": ["**.label.plain", "!**.field.label.plain"]
@@ -517,7 +517,7 @@
     {
       "type": "breakFn",
       "key": "fieldset[0].fieldset[0].field[0].label.plain",
-      "isMatch": true,
+      "isMatch": false,
       "matchedBy": ["**.label.plain"],
       "excludedBy": ["!**.field.label.plain"],
       "traversedBy": ["**.label.plain", "!**.field.label.plain"]

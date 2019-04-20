@@ -28,7 +28,7 @@
     {
       "type": "breakFn",
       "key": "a.b.c",
-      "isMatch": true,
+      "isMatch": false,
       "matchedBy": ["**.c"],
       "excludedBy": ["!**.b.c"],
       "traversedBy": ["**.c", "!**.b.c"]

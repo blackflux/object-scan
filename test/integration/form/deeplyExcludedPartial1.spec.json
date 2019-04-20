@@ -37,7 +37,7 @@
     {
       "type": "breakFn",
       "key": "fieldset[1].fieldset",
-      "isMatch": true,
+      "isMatch": false,
       "matchedBy": ["**.fiel**"],
       "excludedBy": ["!**.fieldset"],
       "traversedBy": ["**.fiel**", "!**.fieldset"]
@@ -53,7 +53,7 @@
     {
       "type": "breakFn",
       "key": "fieldset[1].fieldset.fieldset",
-      "isMatch": true,
+      "isMatch": false,
       "matchedBy": ["**.fiel**"],
       "excludedBy": ["!**.fieldset"],
       "traversedBy": ["**.fiel**", "!**.fieldset"]
@@ -389,7 +389,7 @@
     {
       "type": "breakFn",
       "key": "fieldset[0].fieldset",
-      "isMatch": true,
+      "isMatch": false,
       "matchedBy": ["**.fiel**"],
       "excludedBy": ["!**.fieldset"],
       "traversedBy": ["**.fiel**", "!**.fieldset"]
@@ -397,7 +397,7 @@
     {
       "type": "breakFn",
       "key": "fieldset[0].fieldset[0]",
-      "isMatch": true,
+      "isMatch": false,
       "matchedBy": ["**.fiel**"],
       "excludedBy": ["!**.fieldset"],
       "traversedBy": ["**.fiel**", "!**.fieldset"]

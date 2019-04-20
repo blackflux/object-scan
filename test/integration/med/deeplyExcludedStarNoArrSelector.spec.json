@@ -165,7 +165,7 @@
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2[0].name",
-      "isMatch": true,
+      "isMatch": false,
       "matchedBy": ["**.name"],
       "excludedBy": ["!**.associatedDrug#*.name"],
       "traversedBy": ["**.name", "!**.associatedDrug#*.name"]
@@ -269,7 +269,7 @@
     {
       "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2[0].name",
-      "isMatch": true,
+      "isMatch": false,
       "matchedBy": ["**.name"],
       "excludedBy": ["!**.associatedDrug#*.name"],
       "traversedBy": ["**.name", "!**.associatedDrug#*.name"]

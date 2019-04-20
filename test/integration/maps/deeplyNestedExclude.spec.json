@@ -196,7 +196,7 @@
     {
       "type": "breakFn",
       "key": "results[0].geometry.location.lat",
-      "isMatch": true,
+      "isMatch": false,
       "matchedBy": ["**.{*,!location}.lat"],
       "excludedBy": ["**.{*,!location}.lat"],
       "traversedBy": ["**.{*,!location}.lat"]

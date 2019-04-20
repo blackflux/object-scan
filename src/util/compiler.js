@@ -1,6 +1,6 @@
 /* compile needles to hierarchical map object */
 const parser = require('./parser');
-const { defineProperty } = require('./helper');
+const { defineProperty, findLast } = require('./helper');
 
 const LEAF = Symbol('leaf');
 const markLeaf = (input, match) => defineProperty(input, LEAF, match);
@@ -58,7 +58,7 @@ module.exports.getMeta = (() => {
     return p;
   }, new Set()));
   return (inputs, parents = null) => ({
-    isMatch: inputs.some(e => isMatch(e)),
+    isMatch: isMatch(findLast(inputs, s => isLeaf(s))),
     matchedBy: extractNeedles(inputs.filter(e => isMatch(e))),
     excludedBy: extractNeedles(inputs.filter(e => !isMatch(e))),
     traversedBy: Array.from(inputs.reduce((p, e) => {
