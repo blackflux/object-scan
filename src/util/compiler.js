@@ -1,6 +1,6 @@
 /* compile needles to hierarchical map object */
 const parser = require('./parser');
-const { defineProperty, findLast } = require('./helper');
+const { defineProperty, findLast, parseWildcard } = require('./helper');
 
 const LEAF = Symbol('leaf');
 const markLeaf = (input, match) => defineProperty(input, LEAF, match);
@@ -30,12 +30,7 @@ const getNeedles = input => [...input[NEEDLES]];
 module.exports.getNeedles = getNeedles;
 
 const WILDCARD_REGEX = Symbol('wildcard-regex');
-const setWildcardRegex = (input, wildcard) => {
-  defineProperty(input, WILDCARD_REGEX, new RegExp(`^${wildcard
-    .split(/(?<!\\)(?:\\\\)*\*/)
-    .map(p => p.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&'))
-    .join('.*')}$`));
-};
+const setWildcardRegex = (input, wildcard) => defineProperty(input, WILDCARD_REGEX, parseWildcard(wildcard));
 const getWildcardRegex = input => input[WILDCARD_REGEX];
 module.exports.getWildcardRegex = getWildcardRegex;
 

@@ -2,7 +2,7 @@ const assert = require('assert');
 const compiler = require('./util/compiler');
 const { findLast } = require('./util/helper');
 
-const escape = input => String(input).replace(/[!,.*[\]{}]/g, '\\$&');
+const escape = input => String(input).replace(/[?!,.*[\]{}]/g, '\\$&');
 
 const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
   if (wildcard === '**') {
