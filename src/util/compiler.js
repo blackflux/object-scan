@@ -107,7 +107,7 @@ const computeStarRecursionsRecursive = (tower) => {
     getNeedles(starTarget).forEach(n => addNeedle(starRecursion, n));
     setStarRecursion(starTarget, starRecursion);
   }
-  Object.keys(tower).forEach(k => computeStarRecursionsRecursive(tower[k]));
+  Object.values(tower).forEach(v => computeStarRecursionsRecursive(v));
 };
 
 module.exports.compile = (needles) => {
