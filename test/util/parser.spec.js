@@ -26,6 +26,7 @@ describe('Testing Parser', () => {
 
     it('Testing Nested Groups', () => {
       expect(asString('{a,{b,c}}')).to.deep.equal('{"a","b","c"}');
+      expect(asString('{a,{b,{c}}}')).to.deep.equal('{"a","b","c"}');
     });
 
     it('Testing Array Group Content', () => {
