@@ -227,12 +227,10 @@ describe('Testing Find', () => {
       it('Misc Exclusions', () => {
         test(fixture1, ['*', '!foo'], ['baz', 'bar']);
         test(fixture1, ['*', '!foo', 'bar'], ['baz', 'bar']);
-        test(fixture1, ['*', '!foo'], ['baz', 'bar']);
         test(fixture1, ['!foo', '*'], ['baz', 'bar', 'foo']);
         test(fixture1, ['*', '!foo', '!bar'], ['baz']);
         test(fixture1, ['foo'], ['foo']);
         test(fixture1, ['!foo'], []);
-        test(fixture1, ['*', '!foo'], ['baz', 'bar']);
         test(fixture1, ['foo', 'bar'], ['bar', 'foo']);
         test(fixture1, ['foo', '!bar'], ['foo']);
         test(fixture1, ['!foo', 'bar'], ['bar']);
