@@ -46,8 +46,8 @@ const Result = (input) => {
   };
   const finishChild = () => {
     const parent = parentStack.pop();
-    const child = getSimple(cResult);
     const parentIsArray = Array.isArray(parent);
+    const child = getSimple(cResult);
     if (!parentIsArray && child instanceof Set) {
       child.forEach(e => parent.add(e));
     } else {
