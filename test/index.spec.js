@@ -97,6 +97,28 @@ describe('Testing Find', () => {
     ]);
   });
 
+  describe('Testing wildcard matching', () => {
+    const fixture = {
+      foo: { bar: '', mark: '' },
+      sub: { baz: '', dow: '' },
+      gaw: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+    };
+
+    it('Testing Star Wildcard', () => {
+      expect(objectScan(['f*oo'])(fixture)).to.deep.equal(['foo']);
+      expect(objectScan(['f*o'])(fixture)).to.deep.equal(['foo']);
+      expect(objectScan(['gaw[*2]'])(fixture)).to.deep.equal(['gaw[22]', 'gaw[12]', 'gaw[2]']);
+      expect(objectScan(['gaw[*22]'])(fixture)).to.deep.equal(['gaw[22]']);
+    });
+
+    it('Testing Questionmark Wildcard', () => {
+      expect(objectScan(['f?oo'])(fixture)).to.deep.equal([]);
+      expect(objectScan(['f?o'])(fixture)).to.deep.equal(['foo']);
+      expect(objectScan(['gaw[?2]'])(fixture)).to.deep.equal(['gaw[22]', 'gaw[12]']);
+      expect(objectScan(['gaw[?22]'])(fixture)).to.deep.equal([]);
+    });
+  });
+
   describe('Testing greedy array matching', () => {
     const needles = ['*'];
     const input = { key: ['v1', 'v2'] };
@@ -622,7 +644,7 @@ describe('Testing Find', () => {
 
   describe('Testing Escaping', () => {
     it('Testing Escaped Char Matching', () => {
-      ['!', ',', '.', '*', '[', ']', '{', '}'].forEach((char) => {
+      ['?', '!', ',', '.', '*', '[', ']', '{', '}'].forEach((char) => {
         const find = objectScan([`\\${char}`]);
         expect(find({ [char]: 'a', b: 'c' })).to.deep.equal([`\\${char}`]);
       });
