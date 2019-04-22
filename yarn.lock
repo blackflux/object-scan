@@ -168,12 +168,12 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@blackflux/eslint-plugin-rules@1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.0.6.tgz#c1e9215c6a9f22a0f4464b4a9a2b64b29825e874"
-  integrity sha512-VEYK21tsP1Fe+ibRwjjlsStHO7o8j8UrJP0or93l9S89cuciMSQHzf4Wa7/H/MISoxLWGZwTvPANuDnCjSV3Bg==
+"@blackflux/eslint-plugin-rules@1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.0.8.tgz#7638b9655ba3a4a0e49ec268a1cf1132cab5efbb"
+  integrity sha512-8URV9ooeEFGrTjdibB+qqO/lLg1pW12/1fNlEh8zhKqbk9T9WPn5TnccCDvtdBgX5OlfIphMhpfaPQtFc7RZdw==
   dependencies:
-    smart-fs "1.7.0"
+    smart-fs "1.7.2"
 
 "@blackflux/robo-config-plugin@1.7.6":
   version "1.7.6"
@@ -6074,6 +6074,18 @@ smart-fs@1.7.0:
     xml-js "1.6.11"
     yaml-boost "1.9.2"
 
+smart-fs@1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.7.2.tgz#cd102de4d61f840eb65958cd91508fb1c9ee3eb5"
+  integrity sha512-0DOkmMkcr2yGmHDfO3cu5DdzOXlBE3OWAxE9Pkj/ySOlyVHWHhkLOJs04pV+sjmxE85OSVc7Hw4bBJ+WQR2q9g==
+  dependencies:
+    fs-extra "7.0.1"
+    json-stringify-pretty-compact "2.0.0"
+    lodash.clonedeep "4.5.0"
+    lodash.isequal "4.5.0"
+    xml-js "1.6.11"
+    yaml-boost "1.9.3"
+
 snapdragon-node@^2.0.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/snapdragon-node/-/snapdragon-node-2.1.1.tgz#6c175f86ff14bdb0724563e8f3c1b021a286853b"
@@ -7123,6 +7135,16 @@ yaml-boost@1.9.2:
   version "1.9.2"
   resolved "https://registry.yarnpkg.com/yaml-boost/-/yaml-boost-1.9.2.tgz#fe149e7185341625699907e6bb51eb6c82ca829b"
   integrity sha512-/D168ktcWPhJkp4fqNBFDlpQ/SBDoQRugB92uU3fRsic3pLY/JffCcvWyaDOIppVbtU8QaH3hiDvs+beWa1E+w==
+  dependencies:
+    js-yaml "3.13.1"
+    lodash.get "4.4.2"
+    lodash.mergewith "4.6.1"
+    lodash.set "4.3.2"
+
+yaml-boost@1.9.3:
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/yaml-boost/-/yaml-boost-1.9.3.tgz#106c1b0ae95acfbe7253e1c820e2e38b58ab9d50"
+  integrity sha512-HJXHd+FtqR0M8KyM+6G08aHUXzi5vzodc7mEmxciohX9vsoFPH7Cwufp1yFIBqIhIX90sepBGHLc5WMhV9utsg==
   dependencies:
     js-yaml "3.13.1"
     lodash.get "4.4.2"
