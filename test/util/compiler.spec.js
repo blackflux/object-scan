@@ -73,6 +73,7 @@ describe('Testing compiler', () => {
     expect(compiler.isRecursive(tower)).to.equal(false);
     expect(compiler.isRecursive(tower['**'])).to.equal(true);
     expect(compiler.getRecursionPos(tower['**'])).to.equal(1);
+    expect(compiler.isRecursive(tower['**'].a)).to.equal(false);
     expect(compiler.isRecursive(tower.a)).to.equal(false);
   });
 
