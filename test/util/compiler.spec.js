@@ -8,6 +8,11 @@ describe('Testing compiler', () => {
         .to.throw('Redundant Needle Target: "{a,b}" vs "a"');
     });
 
+    it('Testing redundant self target (starstar)', () => {
+      expect(() => compiler.compile(['**.**']))
+        .to.throw('Redundant Needle Target: "**.**" vs "**.**"');
+    });
+
     it('Mixed subsequent needle collision', () => {
       expect(() => compiler.compile(['bar', '!foo', 'foo']))
         .to.throw('Redundant Needle Target: "!foo" vs "foo"');
@@ -64,11 +69,12 @@ describe('Testing compiler', () => {
   it('Testing recursion position', () => {
     const input = ['!**.a', '**'];
     const tower = compiler.compile(input);
-    expect(tower).to.deep.equal({ '**': { a: {} } });
+    expect(tower).to.deep.equal({ '**': { a: {} }, a: {} });
     expect(compiler.isRecursive(tower)).to.equal(false);
     expect(compiler.isRecursive(tower['**'])).to.equal(true);
     expect(compiler.getRecursionPos(tower['**'])).to.equal(1);
     expect(compiler.isRecursive(tower['**'].a)).to.equal(false);
+    expect(compiler.isRecursive(tower.a)).to.equal(false);
   });
 
   it('Testing similar paths', () => {
@@ -177,7 +183,8 @@ describe('Testing compiler', () => {
       '**': { b: {} },
       '*': { b: {} },
       '*a': { b: {} },
-      'a*': { b: {} }
+      'a*': { b: {} },
+      b: {}
     });
   });
 
@@ -200,7 +207,8 @@ describe('Testing compiler', () => {
       '**': { '[1]': {} },
       '[*]': { '[1]': {} },
       '[*0]': { '[1]': {} },
-      '[0*]': { '[1]': {} }
+      '[0*]': { '[1]': {} },
+      '[1]': {}
     });
   });
 
