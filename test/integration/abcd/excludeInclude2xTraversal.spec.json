@@ -1,5 +1,5 @@
 {
-  "needles": ["!**.**.d", "**.**"],
+  "needles": ["!**.d", "**"],
   "log": [
     {
       "type": "breakFn",
@@ -7,64 +7,72 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["!**.**.d", "**.**"]
+      "traversedBy": ["!**.d", "**"]
     },
     {
       "type": "breakFn",
       "key": "a",
-      "isMatch": false,
-      "matchedBy": [],
+      "isMatch": true,
+      "matchedBy": ["**"],
       "excludedBy": [],
-      "traversedBy": ["!**.**.d", "**.**"]
+      "traversedBy": ["!**.d", "**"]
     },
     {
       "type": "breakFn",
       "key": "a.b",
       "isMatch": true,
-      "matchedBy": ["**.**"],
+      "matchedBy": ["**"],
       "excludedBy": [],
-      "traversedBy": ["!**.**.d", "**.**"]
+      "traversedBy": ["!**.d", "**"]
     },
     {
       "type": "breakFn",
       "key": "a.b.c",
       "isMatch": true,
-      "matchedBy": ["**.**"],
+      "matchedBy": ["**"],
       "excludedBy": [],
-      "traversedBy": ["!**.**.d", "**.**"]
+      "traversedBy": ["!**.d", "**"]
     },
     {
       "type": "breakFn",
       "key": "a.b.c.d",
       "isMatch": true,
-      "matchedBy": ["**.**"],
-      "excludedBy": ["!**.**.d"],
-      "traversedBy": ["!**.**.d", "**.**"]
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.d"],
+      "traversedBy": ["!**.d", "**"]
     },
     {
       "type": "filterFn",
       "key": "a.b.c.d",
       "isMatch": true,
-      "matchedBy": ["**.**"],
-      "excludedBy": ["!**.**.d"],
-      "traversedBy": ["!**.**.d", "**.**"]
+      "matchedBy": ["**"],
+      "excludedBy": ["!**.d"],
+      "traversedBy": ["!**.d", "**"]
     },
     {
       "type": "filterFn",
       "key": "a.b.c",
       "isMatch": true,
-      "matchedBy": ["**.**"],
+      "matchedBy": ["**"],
       "excludedBy": [],
-      "traversedBy": ["!**.**.d", "**.**"]
+      "traversedBy": ["!**.d", "**"]
     },
     {
       "type": "filterFn",
       "key": "a.b",
       "isMatch": true,
-      "matchedBy": ["**.**"],
+      "matchedBy": ["**"],
       "excludedBy": [],
-      "traversedBy": ["!**.**.d", "**.**"]
+      "traversedBy": ["!**.d", "**"]
+    },
+    {
+      "type": "filterFn",
+      "key": "a",
+      "isMatch": true,
+      "matchedBy": ["**"],
+      "excludedBy": [],
+      "traversedBy": ["!**.d", "**"]
     }
   ],
-  "result": ["a.b.c.d", "a.b.c", "a.b"]
+  "result": ["a.b.c.d", "a.b.c", "a.b", "a"]
 }

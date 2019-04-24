@@ -64,7 +64,7 @@ module.exports.getMeta = (() => {
   });
 })();
 
-const buildRecursive = (tower, path, needle, excluded = false) => {
+const buildRecursive = (tower, path, needle, excluded, root = false) => {
   addNeedle(tower, needle);
   if (path.length === 0) {
     if (tower[NEEDLE] !== undefined) {
@@ -95,6 +95,9 @@ const buildRecursive = (tower, path, needle, excluded = false) => {
   if (excluded && path[0].isExcluded()) {
     throw new Error(`Redundant Exclusion: "${needle}"`);
   }
+  if (root === false && String(path[0]) === '**') {
+    buildRecursive(tower, path.slice(1), needle, excluded || path[0].isExcluded());
+  }
   buildRecursive(tower[path[0]], path.slice(1), needle, excluded || path[0].isExcluded());
 };
 
@@ -108,7 +111,7 @@ const setHasMatchesRec = (tower) => {
 
 module.exports.compile = (needles) => {
   const tower = {};
-  needles.forEach(needle => buildRecursive(tower, [parser(needle)], needle));
+  needles.forEach(needle => buildRecursive(tower, [parser(needle)], needle, false, true));
   setHasMatchesRec(tower);
   return tower;
 };

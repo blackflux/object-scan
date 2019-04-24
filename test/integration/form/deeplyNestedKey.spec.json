@@ -1,5 +1,5 @@
 {
-  "needles": ["fieldset[*]", "**.fieldset[*]"],
+  "needles": ["fieldset[*]", "**.*fieldset[*]"],
   "result": ["fieldset[1]", "fieldset[0].fieldset[0]", "fieldset[0]"],
   "log": [
     {
@@ -8,7 +8,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["fieldset[*]", "**.fieldset[*]"]
+      "traversedBy": ["fieldset[*]", "**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -16,15 +16,15 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["fieldset[*]", "**.fieldset[*]"]
+      "traversedBy": ["fieldset[*]", "**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
       "key": "fieldset[1]",
       "isMatch": true,
-      "matchedBy": ["fieldset[*]"],
+      "matchedBy": ["fieldset[*]", "**.*fieldset[*]"],
       "excludedBy": [],
-      "traversedBy": ["fieldset[*]", "**.fieldset[*]"]
+      "traversedBy": ["fieldset[*]", "**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -32,7 +32,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -40,7 +40,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -48,7 +48,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -56,7 +56,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -64,7 +64,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -72,7 +72,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -80,7 +80,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -88,7 +88,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -96,7 +96,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -104,7 +104,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -112,7 +112,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -120,7 +120,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -128,7 +128,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -136,7 +136,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -144,7 +144,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -152,7 +152,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -160,7 +160,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -168,7 +168,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -176,7 +176,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -184,7 +184,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -192,7 +192,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -200,7 +200,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -208,7 +208,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -216,7 +216,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -224,7 +224,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -232,7 +232,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -240,7 +240,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -248,7 +248,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -256,7 +256,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -264,7 +264,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -272,7 +272,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -280,7 +280,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -288,7 +288,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -296,7 +296,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -304,7 +304,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -312,7 +312,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -320,7 +320,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -328,7 +328,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -336,7 +336,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -344,23 +344,23 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "filterFn",
       "key": "fieldset[1]",
       "isMatch": true,
-      "matchedBy": ["fieldset[*]"],
+      "matchedBy": ["fieldset[*]", "**.*fieldset[*]"],
       "excludedBy": [],
-      "traversedBy": ["fieldset[*]", "**.fieldset[*]"]
+      "traversedBy": ["fieldset[*]", "**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
       "key": "fieldset[0]",
       "isMatch": true,
-      "matchedBy": ["fieldset[*]"],
+      "matchedBy": ["fieldset[*]", "**.*fieldset[*]"],
       "excludedBy": [],
-      "traversedBy": ["fieldset[*]", "**.fieldset[*]"]
+      "traversedBy": ["fieldset[*]", "**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -368,7 +368,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -376,15 +376,15 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
       "key": "fieldset[0].fieldset[0]",
       "isMatch": true,
-      "matchedBy": ["**.fieldset[*]"],
+      "matchedBy": ["**.*fieldset[*]"],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -392,7 +392,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -400,7 +400,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -408,7 +408,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -416,7 +416,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -424,7 +424,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -432,7 +432,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -440,7 +440,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -448,7 +448,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -456,7 +456,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -464,7 +464,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -472,7 +472,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -480,7 +480,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -488,7 +488,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -496,15 +496,15 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "filterFn",
       "key": "fieldset[0].fieldset[0]",
       "isMatch": true,
-      "matchedBy": ["**.fieldset[*]"],
+      "matchedBy": ["**.*fieldset[*]"],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -512,7 +512,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -520,15 +520,15 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "filterFn",
       "key": "fieldset[0]",
       "isMatch": true,
-      "matchedBy": ["fieldset[*]"],
+      "matchedBy": ["fieldset[*]", "**.*fieldset[*]"],
       "excludedBy": [],
-      "traversedBy": ["fieldset[*]", "**.fieldset[*]"]
+      "traversedBy": ["fieldset[*]", "**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -536,7 +536,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     },
     {
       "type": "breakFn",
@@ -544,7 +544,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**.fieldset[*]"]
+      "traversedBy": ["**.*fieldset[*]"]
     }
   ]
 }
