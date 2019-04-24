@@ -164,7 +164,7 @@ describe('Testing Find', () => {
       });
 
       it('Testing star include, exclude', () => {
-        test(fixture, ['**', '!a.**', '!f.**'], ['f', 'a']);
+        test(fixture, ['**', '!a.*', '!f[*]'], ['f', 'a']);
       });
     });
 
@@ -172,7 +172,7 @@ describe('Testing Find', () => {
       const fixture = { a: { b: { c: 'd' } } };
 
       it('Testing nested re-include', () => {
-        test(fixture, ['a.b.c', 'a.!b.*', 'a.b.**'], ['a.b.c']);
+        test(fixture, ['a.b.c', 'a.!b.*', 'a.b.**'], ['a.b.c', 'a.b']);
       });
 
       it('Testing nested re-exclude', () => {
@@ -323,7 +323,7 @@ describe('Testing Find', () => {
   });
 
   it('Testing Results Unique', () => {
-    const find = objectScan(['array*.**[1*]', 'array*.*[1*]']);
+    const find = objectScan(['array*.**.*[1**]', 'array*.*[1*]']);
     expect(find(haystack)).to.deep.equal([
       'array2.nested[1]'
     ]);
@@ -374,7 +374,7 @@ describe('Testing Find', () => {
   });
 
   describe('Testing sorting', () => {
-    it('Testing array matches revered', () => {
+    it('Testing array matches reversed', () => {
       const find = objectScan(['**'], { joined: false });
       expect(find([1, 2, 3])).to.deep.equal([[2], [1], [0]]);
     });
@@ -705,7 +705,8 @@ describe('Testing Find', () => {
       'a.b.g',
       'a.b.e',
       'a.b.c',
-      'a.b'
+      'a.b',
+      'a'
     ]);
     expect(objectScan(['a.*'])(input)).to.deep.equal(['a.i', 'a.b']);
     expect(objectScan(['a.b.c'])(input)).to.deep.equal(['a.b.c']);
@@ -745,7 +746,7 @@ describe('Testing Find', () => {
       'a.b.c',
       'a'
     ]);
-    expect(objectScan(['**', '!a.**'])(input)).to.deep.equal(['a']);
+    expect(objectScan(['**', '!a.*.**'])(input)).to.deep.equal(['a']);
     expect(objectScan(['a.b.*', '!a.b.{g,i,l}'])(input)).to.deep.equal(['a.b.e', 'a.b.c']);
     expect(objectScan(['**', '!a.b.c'])(input)).to.deep.equal([
       'a.i',

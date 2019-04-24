@@ -11,7 +11,7 @@
       "traversedBy"
     ]
   },
-  "result": ["a.b.c", "a.b"],
+  "result": ["a.b.c", "a.b", "a"],
   "log": [
     {
       "type": "breakFn",
@@ -27,8 +27,8 @@
       "type": "breakFn",
       "key": "a",
       "value": {"b": {"c": "d"}},
-      "isMatch": false,
-      "matchedBy": [],
+      "isMatch": true,
+      "matchedBy": ["a.**"],
       "excludedBy": [],
       "traversedBy": ["a.b.c", "a.*b.c", "a.b*.c", "a.*.c", "a.**.c", "a.**"],
       "parents": [{"a": {"b": {"c": "d"}}}]
@@ -72,6 +72,16 @@
       "excludedBy": [],
       "traversedBy": ["a.b.c", "a.*b.c", "a.b*.c", "a.*.c", "a.**.c", "a.**"],
       "parents": [{"b": {"c": "d"}}, {"a": {"b": {"c": "d"}}}]
+    },
+    {
+      "type": "filterFn",
+      "key": "a",
+      "value": {"b": {"c": "d"}},
+      "isMatch": true,
+      "matchedBy": ["a.**"],
+      "excludedBy": [],
+      "traversedBy": ["a.b.c", "a.*b.c", "a.b*.c", "a.*.c", "a.**.c", "a.**"],
+      "parents": [{"a": {"b": {"c": "d"}}}]
     }
   ]
 }

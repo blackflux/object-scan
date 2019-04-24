@@ -18,7 +18,7 @@
       "traversedBy"
     ]
   },
-  "result": ["[0][0][0]", "[0][0]"],
+  "result": ["[0][0][0]", "[0][0]", "[0]"],
   "log": [
     {
       "type": "breakFn",
@@ -41,8 +41,8 @@
       "type": "breakFn",
       "key": "[0]",
       "value": [[0]],
-      "isMatch": false,
-      "matchedBy": [],
+      "isMatch": true,
+      "matchedBy": ["[0].**"],
       "excludedBy": [],
       "traversedBy": [
         "[0][0][0]",
@@ -59,14 +59,14 @@
       "key": "[0][0]",
       "value": [0],
       "isMatch": true,
-      "matchedBy": ["[0].**"],
+      "matchedBy": ["[0].**[0]", "[0].**"],
       "excludedBy": [],
       "traversedBy": [
         "[0][0][0]",
+        "[0].**[0]",
         "[0][0*][0]",
         "[0][*0][0]",
         "[0][**][0]",
-        "[0].**[0]",
         "[0].**"
       ],
       "parents": [[[0]], [[[0]]]]
@@ -124,6 +124,23 @@
       "key": "[0][0]",
       "value": [0],
       "isMatch": true,
+      "matchedBy": ["[0].**[0]", "[0].**"],
+      "excludedBy": [],
+      "traversedBy": [
+        "[0][0][0]",
+        "[0].**[0]",
+        "[0][0*][0]",
+        "[0][*0][0]",
+        "[0][**][0]",
+        "[0].**"
+      ],
+      "parents": [[[0]], [[[0]]]]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0]",
+      "value": [[0]],
+      "isMatch": true,
       "matchedBy": ["[0].**"],
       "excludedBy": [],
       "traversedBy": [
@@ -134,7 +151,7 @@
         "[0].**[0]",
         "[0].**"
       ],
-      "parents": [[[0]], [[[0]]]]
+      "parents": [[[[0]]]]
     }
   ]
 }
