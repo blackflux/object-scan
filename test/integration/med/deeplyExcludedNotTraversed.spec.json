@@ -1,29 +1,29 @@
 {
-  "needles": ["problems[*],!*.**"],
+  "needles": ["problems[*],!**"],
   "log": [
     {
       "type": "breakFn",
       "key": "",
       "isMatch": false,
       "matchedBy": [],
-      "excludedBy": [],
-      "traversedBy": ["problems[*],!*.**"]
+      "excludedBy": ["problems[*],!**"],
+      "traversedBy": ["problems[*],!**"]
     },
     {
       "type": "breakFn",
       "key": "problems",
       "isMatch": false,
       "matchedBy": [],
-      "excludedBy": ["problems[*],!*.**"],
-      "traversedBy": ["problems[*],!*.**"]
+      "excludedBy": ["problems[*],!**"],
+      "traversedBy": ["problems[*],!**"]
     },
     {
       "type": "breakFn",
       "key": "problems[0]",
       "isMatch": false,
-      "matchedBy": ["problems[*],!*.**"],
-      "excludedBy": ["problems[*],!*.**"],
-      "traversedBy": ["problems[*],!*.**"]
+      "matchedBy": ["problems[*],!**"],
+      "excludedBy": ["problems[*],!**"],
+      "traversedBy": ["problems[*],!**"]
     }
   ],
   "result": []
