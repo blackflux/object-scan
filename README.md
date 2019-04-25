@@ -115,7 +115,7 @@ Note that the results still include the array selectors.
 Type: `boolean`<br>
 Default: `true`
 
-When set to `false`, no errors are thrown when the input contains a needle multiple times.
+When set to `false`, no errors are thrown when the input contains redundant needle targets.
 
 ## Examples
 
