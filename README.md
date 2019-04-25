@@ -44,7 +44,7 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 
 ### Options
 
-**Note on Functions:** Signature for all functions is
+Signature for all functions is
 
     Fn(key, value, { parents, isMatch, matchedBy, excludedBy, traversedBy })
 
