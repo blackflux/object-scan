@@ -67,13 +67,13 @@ module.exports.getMeta = (() => {
 const buildRecursive = (tower, path, ctx, excluded, root = false) => {
   addNeedle(tower, ctx.needle);
   if (path.length === 0) {
-    if (tower[NEEDLE] !== undefined && ctx.collision) {
+    if (tower[NEEDLE] !== undefined && ctx.strict) {
       throw new Error(`Redundant Needle Target: "${tower[NEEDLE]}" vs "${ctx.needle}"`);
     }
-    setNeedle(tower, ctx.needle, ctx.collision);
-    markLeaf(tower, !excluded, ctx.collision);
+    setNeedle(tower, ctx.needle, ctx.strict);
+    markLeaf(tower, !excluded, ctx.strict);
     if (isRecursive(tower)) {
-      setRecursionPos(tower, Object.keys(tower).length, ctx.collision);
+      setRecursionPos(tower, Object.keys(tower).length, ctx.strict);
     }
     return;
   }
@@ -109,9 +109,9 @@ const setHasMatchesRec = (tower) => {
   }
 };
 
-module.exports.compile = (needles, collision = true) => {
+module.exports.compile = (needles, strict = true) => {
   const tower = {};
-  needles.forEach(needle => buildRecursive(tower, [parser(needle)], { needle, collision }, false, true));
+  needles.forEach(needle => buildRecursive(tower, [parser(needle)], { needle, strict }, false, true));
   setHasMatchesRec(tower);
   return tower;
 };

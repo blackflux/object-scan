@@ -110,12 +110,13 @@ When set to `false`, no array selectors should be used in any needles and arrays
 
 Note that the results still include the array selectors.
 
-#### keyCollision
+#### strict
 
 Type: `boolean`<br>
 Default: `true`
 
-When set to `false`, no errors are thrown when the input contains redundant needle targets.
+When set to `false`, no errors are thrown when:
+- the input contains redundant needles
 
 ## Examples
 

@@ -1,6 +1,6 @@
 {
   "needles": ["!a.b", "a.b", "!a.**.b", "a.**.b"],
-  "options": {"args": {"keyCollision": false}},
+  "options": {"args": {"strict": false}},
   "log": [
     {
       "type": "breakFn",
