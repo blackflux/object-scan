@@ -77,7 +77,7 @@ describe('Testing compiler', () => {
     expect(compiler.isRecursive(tower.a)).to.equal(false);
   });
 
-  it('Testing recursion position on overwrite', () => {
+  it('Testing recursion position for strict=false', () => {
     const input = ['**', '**.b', '!**'];
     const tower = compiler.compile(input, false);
     expect(tower).to.deep.equal({ '**': { b: {} }, b: {} });
