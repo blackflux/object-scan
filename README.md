@@ -44,10 +44,14 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 
 ### Options
 
-**Note on Functions:** Signature for all functions is `Fn(key, value, { parents, isMatch, matchedBy, excludedBy, traversedBy })`, where:
+Signature for all functions is
+
+    Fn(key, value, { parents, isMatch, matchedBy, excludedBy, traversedBy })
+
+where:
 - `key` is the key that the function is called for (respects `joined` option).
 - `value` is the value for that key.
-- `parents` is an array containing all parents as `[parent, grandparent, ...]`. Excludes arrays if `useArraySelector` is false.
+- `parents` is array of form `[parent, grandparent, ...]`. Excludes array parents when `useArraySelector` is false.
 - `isMatch` is true if the last targeting needle exists and is non-excluding.
 - `matchedBy` are all non-excluding needles targeting the key.
 - `excludedBy` are all excluding needles targeting the key.
@@ -102,9 +106,17 @@ When set to false, joined paths for functions and the final result are not escap
 Type: `boolean`<br>
 Default: `true`
 
-When set to false, no array selectors should be used in any needles and arrays are automatically traversed.
+When set to `false`, no array selectors should be used in any needles and arrays are automatically traversed.
 
 Note that the results still include the array selectors.
+
+#### strict
+
+Type: `boolean`<br>
+Default: `true`
+
+When set to `false`, no errors are thrown when:
+- the input contains redundant needles
 
 ## Examples
 
