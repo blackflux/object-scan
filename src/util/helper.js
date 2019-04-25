@@ -1,4 +1,5 @@
-module.exports.defineProperty = (target, k, v) => Object.defineProperty(target, k, { value: v, writable: false });
+module.exports.defineProperty = (target, k, v, readonly = true) => Object
+  .defineProperty(target, k, { value: v, writable: !readonly });
 
 module.exports.findLast = (array, fn) => {
   for (let idx = array.length - 1; idx >= 0; idx -= 1) {
