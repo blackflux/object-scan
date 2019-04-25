@@ -93,15 +93,17 @@ module.exports = (needles, opts = {}) => {
     breakFn: undefined,
     joined: true,
     escapePaths: true,
-    useArraySelector: true
+    useArraySelector: true,
+    strict: true
   }, opts);
-  assert(Object.keys(ctx).length === 5, 'Unexpected Option provided!');
+  assert(Object.keys(ctx).length === 6, 'Unexpected Option provided!');
   assert(['function', 'undefined'].includes(typeof ctx.filterFn));
   assert(['function', 'undefined'].includes(typeof ctx.breakFn));
   assert(typeof ctx.joined === 'boolean');
   assert(typeof ctx.escapePaths === 'boolean');
   assert(typeof ctx.useArraySelector === 'boolean');
+  assert(typeof ctx.strict === 'boolean');
 
-  const search = compiler.compile(needles); // keep separate for performance
+  const search = compiler.compile(needles, ctx.strict); // keep separate for performance
   return haystack => find(haystack, [search], [], [], ctx);
 };

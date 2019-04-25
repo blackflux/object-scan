@@ -77,6 +77,17 @@ describe('Testing compiler', () => {
     expect(compiler.isRecursive(tower.a)).to.equal(false);
   });
 
+  it('Testing recursion position for strict=false', () => {
+    const input = ['**', '**.b', '!**'];
+    const tower = compiler.compile(input, false);
+    expect(tower).to.deep.equal({ '**': { b: {} }, b: {} });
+    expect(compiler.isRecursive(tower)).to.equal(false);
+    expect(compiler.isRecursive(tower['**'])).to.equal(true);
+    expect(compiler.getRecursionPos(tower['**'])).to.equal(1);
+    expect(compiler.isRecursive(tower['**'].b)).to.equal(false);
+    expect(compiler.isRecursive(tower.b)).to.equal(false);
+  });
+
   it('Testing similar paths', () => {
     const input = ['a.b.c.d.e', 'a.b.c.d.f'];
     const tower = compiler.compile(input);
