@@ -94,13 +94,6 @@ Setting this to `false` improves performance.
 
 Note that [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set) fully support lists.
 
-#### escapePaths
-
-Type: `boolean`<br>
-Default: `true`
-
-When set to false, joined paths for functions and the final result are not escaped.
-
 #### useArraySelector
 
 Type: `boolean`<br>
