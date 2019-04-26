@@ -675,10 +675,10 @@ describe('Testing Find', () => {
       ]);
     });
 
-    it('Testing Output not Escaped', () => {
-      const find = objectScan(['*'], { escapePaths: false });
+    it('Testing Output Escaped', () => {
+      const find = objectScan(['*']);
       expect(find({ 'some.key': '' })).to.deep.equal([
-        'some.key'
+        'some\\.key'
       ]);
     });
   });
