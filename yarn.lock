@@ -3428,10 +3428,10 @@ joi@14.3.1:
     isemail "3.x.x"
     topo "3.x.x"
 
-js-gardener@2.0.21:
-  version "2.0.21"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.21.tgz#9eb19ac0c74841195a3033993d025bac71744703"
-  integrity sha512-lvraYrmMm7d2uhTSsK1AxUqulX4lM8Nve1m7y93jIXYldREzOZn9pUN3IVNSJPKFAFGT0wlCjokG/tJJU1+9RA==
+js-gardener@2.0.22:
+  version "2.0.22"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.22.tgz#f95f461760f45cb91d9fb983a5235984bcb810d8"
+  integrity sha512-Zt4gelpkCz2LfZRckd+q/BpAcE9m3DSARGmfOemeXU9/qQL7HSSxXgtuR08BBH/7uTNGheAy79xmoBYeh7DyVA==
   dependencies:
     chalk "2.4.2"
     eslint "5.16.0"
@@ -3449,7 +3449,7 @@ js-gardener@2.0.21:
     lodash.get "4.4.2"
     mocha "6.1.4"
     npm-check "5.9.0"
-    robo-config "3.0.6"
+    robo-config "3.0.7"
     tmp "0.1.0"
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
@@ -4777,10 +4777,10 @@ object-copy@^0.1.0:
     define-property "^0.2.5"
     kind-of "^3.0.3"
 
-object-deep-contain@1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/object-deep-contain/-/object-deep-contain-1.0.7.tgz#636970906775c0d2161271c073a332c7ad2a937e"
-  integrity sha512-64vLW551H3DpCRzsGK9NZ7dsULOxeZl+T0/oNkDoWFP6yHUF1Ve8gzhRwzm/EfSHD15nljKtKgzaVaYLiVum3Q==
+object-deep-contain@1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/object-deep-contain/-/object-deep-contain-1.0.8.tgz#052b0f4f8baaccb62fe1216e9b36bd696261d1a4"
+  integrity sha512-g+sugjuV6hgi9Iuioy7ZKaMaKNIu/vMG8LMu8n00GCfvjsxuru7YJZsWpTffKtPl4axhGvMGmJEJZLbU0ntcRg==
 
 object-keys@^1.0.11, object-keys@^1.0.12:
   version "1.1.1"
@@ -5839,10 +5839,10 @@ rimraf@2, rimraf@2.6.3, rimraf@^2.5.2, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6
   dependencies:
     glob "^7.1.3"
 
-robo-config@3.0.6:
-  version "3.0.6"
-  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.0.6.tgz#27b733ef7e943ddf90bd6fcc882dfff6420e74d1"
-  integrity sha512-qxRjLat4x6uXVrbgO9XBMl+ifL6jOTAP/C+hwcc1Od7OsAkEhexR9HU8yPAZYo07GlGAh7X0wuInOf1UW4dvYw==
+robo-config@3.0.7:
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.0.7.tgz#251b75105875a7d8fa049969d3f7e2da8f08123b"
+  integrity sha512-jGaD0nucLyNRpMkESSGwpyGcaK5/3QeBjQK4zuxCKXBZRXN6nWFAGNip/ou2YsG3aLDiipOfaLWl6OsjnV5FDw==
   dependencies:
     app-root-path "2.2.1"
     deepmerge "3.2.0"
@@ -5850,10 +5850,10 @@ robo-config@3.0.6:
     lodash.clonedeep "4.5.0"
     lodash.difference "4.5.0"
     lodash.get "4.4.2"
-    object-deep-contain "1.0.7"
+    object-deep-contain "1.0.8"
     object-scan "9.0.2"
     object-treeify "1.1.9"
-    smart-fs "1.7.3"
+    smart-fs "1.7.4"
 
 run-async@^0.1.0:
   version "0.1.0"
@@ -6061,18 +6061,6 @@ smart-buffer@^1.0.13:
   version "1.1.15"
   resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-1.1.15.tgz#7f114b5b65fab3e2a35aa775bb12f0d1c649bf16"
   integrity sha1-fxFLW2X6s+KjWqd1uxLw0cZJvxY=
-
-smart-fs@1.7.3:
-  version "1.7.3"
-  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.7.3.tgz#558b2128898997b9f10dc53c0b92f83b237d5a81"
-  integrity sha512-k71F2gDfMVkrRUFBsAvi163DPsgpz+q+mBCL/kV2IMDWMQf0UNxGCA9gCIfNFkgwT+MF5kUQwjQGhUrna+DZmA==
-  dependencies:
-    fs-extra "7.0.1"
-    json-stringify-pretty-compact "2.0.0"
-    lodash.clonedeep "4.5.0"
-    lodash.isequal "4.5.0"
-    xml-js "1.6.11"
-    yaml-boost "1.9.3"
 
 smart-fs@1.7.4:
   version "1.7.4"
@@ -7130,16 +7118,6 @@ yallist@^3.0.0, yallist@^3.0.2:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-3.0.3.tgz#b4b049e314be545e3ce802236d6cd22cd91c3de9"
   integrity sha512-S+Zk8DEWE6oKpV+vI3qWkaK+jSbIK86pCwe2IF/xwIpQ8jEuxpw9NyaGjmp9+BoJv5FV2piqCDcoCtStppiq2A==
-
-yaml-boost@1.9.3:
-  version "1.9.3"
-  resolved "https://registry.yarnpkg.com/yaml-boost/-/yaml-boost-1.9.3.tgz#106c1b0ae95acfbe7253e1c820e2e38b58ab9d50"
-  integrity sha512-HJXHd+FtqR0M8KyM+6G08aHUXzi5vzodc7mEmxciohX9vsoFPH7Cwufp1yFIBqIhIX90sepBGHLc5WMhV9utsg==
-  dependencies:
-    js-yaml "3.13.1"
-    lodash.get "4.4.2"
-    lodash.mergewith "4.6.1"
-    lodash.set "4.3.2"
 
 yaml-boost@1.9.4:
   version "1.9.4"
