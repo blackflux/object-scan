@@ -3428,10 +3428,10 @@ joi@14.3.1:
     isemail "3.x.x"
     topo "3.x.x"
 
-js-gardener@2.0.25:
-  version "2.0.25"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.25.tgz#6e8905bc02105b488d29896f19065fde99db959d"
-  integrity sha512-R0eacqlLwxAhXLVqK7XzNj12d/2pZ9Rvgq4tpdMhKt64mlnfAYbVeimTNbWIyY9HKtIhP7w+zcmn66QhgOXemQ==
+js-gardener@2.0.26:
+  version "2.0.26"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.26.tgz#7abb582d2460cd55a33ec9b0e8b3d8e6dcd7af98"
+  integrity sha512-1canqzz6Yiq+rHEiiq32ioMc+mZNhrJ5tLIW9aOgMtoLx4doMcU2cUrPCx6UstBwlbmpMZ/8C/3Z+RTSVCk7qQ==
   dependencies:
     chalk "2.4.2"
     eslint "5.16.0"
@@ -3449,7 +3449,7 @@ js-gardener@2.0.25:
     lodash.get "4.4.2"
     mocha "6.1.4"
     npm-check "5.9.0"
-    robo-config "3.0.10"
+    robo-config "3.0.11"
     tmp "0.1.0"
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
@@ -4787,10 +4787,10 @@ object-keys@^1.0.11, object-keys@^1.0.12:
   resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.1.1.tgz#1c47f272df277f3b1daf061677d9c82e2322c60e"
   integrity sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==
 
-object-scan@9.0.2:
-  version "9.0.2"
-  resolved "https://registry.yarnpkg.com/object-scan/-/object-scan-9.0.2.tgz#28f4e6a296b97d641652c4dc9130f9d1b466d4f7"
-  integrity sha512-hS6eCBVMJq7d8P4mbDEZr+wsz41e5RtCyXXrkAEo2BLL72YIoqgXT7cjt74iKZPcxkIcHX24haeFI3VQQBdsvw==
+object-scan@9.0.3:
+  version "9.0.3"
+  resolved "https://registry.yarnpkg.com/object-scan/-/object-scan-9.0.3.tgz#11236cede9116e850c9784dd261538a531ab7c51"
+  integrity sha512-FyAY4F18f3beH8iAFWDWA4NaW1pxQUqTMt/baTgPBmpE9wyNBpg3f518CsvPnO9fYaXoiiohRgoh+WljV/eRfQ==
 
 object-treeify@1.1.9:
   version "1.1.9"
@@ -5839,10 +5839,10 @@ rimraf@2, rimraf@2.6.3, rimraf@^2.5.2, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6
   dependencies:
     glob "^7.1.3"
 
-robo-config@3.0.10:
-  version "3.0.10"
-  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.0.10.tgz#29e72ee8ae64add277e4c423df1448f23d942ed0"
-  integrity sha512-Yrw+XzMDx0mzE3cqb3IViz77NDPYT3H0FYKaDT4X3gzJtgNuOQe2oaupXM80KLd6ooLKg5puN3BQORvQwy1dog==
+robo-config@3.0.11:
+  version "3.0.11"
+  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.0.11.tgz#feefb3ea140186798f57e26b603cda03dc692f3c"
+  integrity sha512-Xw/OruKapmKvp6RCEIiPdpNKHmH89aWqp7BeeVJefxO+cdb8veIzcSXm2sCsSBHdXtoZzNU3fo9RDl0+EQ/JDw==
   dependencies:
     app-root-path "2.2.1"
     deepmerge "3.2.0"
@@ -5851,7 +5851,7 @@ robo-config@3.0.10:
     lodash.difference "4.5.0"
     lodash.get "4.4.2"
     object-deep-contain "1.0.9"
-    object-scan "9.0.2"
+    object-scan "9.0.3"
     object-treeify "1.1.9"
     smart-fs "1.7.6"
 
