@@ -17,22 +17,22 @@ Documents configuration tasks managed by [robo-config](https://github.com/blackf
   - <a name="blackfluxrobo-config-plugin-task-idx-ref-semantic-releasenpm-default">:open_file_folder:</a> <a href="#blackfluxrobo-config-plugin-task-ref-semantic-releasenpm-default">`semantic-release/#npm-default`</a>
     - <a name="blackfluxrobo-config-plugin-task-idx-ref-semantic-releasecommit-conventions">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-semantic-releasecommit-conventions">`semantic-release/commit-conventions`</a>
   - <a name="blackfluxrobo-config-plugin-task-idx-ref-packagenpm-default">:open_file_folder:</a> <a href="#blackfluxrobo-config-plugin-task-ref-packagenpm-default">`package/#npm-default`</a>
-    - <a name="blackfluxrobo-config-plugin-task-idx-ref-packagemerge-shallow">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-packagemerge-shallow">`package/merge-shallow`</a>
-    - <a name="blackfluxrobo-config-plugin-task-idx-ref-packagemerge-deep">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-packagemerge-deep">`package/merge-deep`</a>
-    - <a name="blackfluxrobo-config-plugin-task-idx-ref-packagedefault-shallow">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-packagedefault-shallow">`package/default-shallow`</a>
-    - <a name="blackfluxrobo-config-plugin-task-idx-ref-packagedefault-deep">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-packagedefault-deep">`package/default-deep`</a>
+    - <a name="blackfluxrobo-config-plugin-task-idx-ref-packagenpm-default_merge-shallow">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-packagenpm-default_merge-shallow">`package/npm-default_merge-shallow`</a>
+    - <a name="blackfluxrobo-config-plugin-task-idx-ref-packagenpm-default_merge-deep">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-packagenpm-default_merge-deep">`package/npm-default_merge-deep`</a>
+    - <a name="blackfluxrobo-config-plugin-task-idx-ref-packagenpm-default_default-shallow">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-packagenpm-default_default-shallow">`package/npm-default_default-shallow`</a>
+    - <a name="blackfluxrobo-config-plugin-task-idx-ref-packagenpm-default_default-deep">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-packagenpm-default_default-deep">`package/npm-default_default-deep`</a>
   - <a name="blackfluxrobo-config-plugin-task-idx-ref-npmnpm-default">:open_file_folder:</a> <a href="#blackfluxrobo-config-plugin-task-ref-npmnpm-default">`npm/#npm-default`</a>
     - <a name="blackfluxrobo-config-plugin-task-idx-ref-npmnpmignore">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-npmnpmignore">`npm/npmignore`</a>
-  - <a name="blackfluxrobo-config-plugin-task-idx-ref-licensenpm-opensource">:open_file_folder:</a> <a href="#blackfluxrobo-config-plugin-task-ref-licensenpm-opensource">`license/#npm-opensource`</a>
+  - <a name="blackfluxrobo-config-plugin-task-idx-ref-licenseopensource">:open_file_folder:</a> <a href="#blackfluxrobo-config-plugin-task-ref-licenseopensource">`license/#opensource`</a>
     - <a name="blackfluxrobo-config-plugin-task-idx-ref-licensemit-package">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-licensemit-package">`license/MIT-package`</a>
     - <a name="blackfluxrobo-config-plugin-task-idx-ref-licensemit-file">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-licensemit-file">`license/MIT-file`</a>
-  - <a name="blackfluxrobo-config-plugin-task-idx-ref-jetbrainsnpm-default">:open_file_folder:</a> <a href="#blackfluxrobo-config-plugin-task-ref-jetbrainsnpm-default">`jetbrains/#npm-default`</a>
+  - <a name="blackfluxrobo-config-plugin-task-idx-ref-jetbrainsdefault">:open_file_folder:</a> <a href="#blackfluxrobo-config-plugin-task-ref-jetbrainsdefault">`jetbrains/#default`</a>
     - <a name="blackfluxrobo-config-plugin-task-idx-ref-jetbrainsexclude-coverage-folder">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-jetbrainsexclude-coverage-folder">`jetbrains/exclude-coverage-folder`</a>
-  - <a name="blackfluxrobo-config-plugin-task-idx-ref-gitnpm-default">:open_file_folder:</a> <a href="#blackfluxrobo-config-plugin-task-ref-gitnpm-default">`git/#npm-default`</a>
-    - <a name="blackfluxrobo-config-plugin-task-idx-ref-gitgitignore">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-gitgitignore">`git/gitignore`</a>
+  - <a name="blackfluxrobo-config-plugin-task-idx-ref-gitignorenpm-default">:open_file_folder:</a> <a href="#blackfluxrobo-config-plugin-task-ref-gitignorenpm-default">`gitignore/#npm-default`</a>
+    - <a name="blackfluxrobo-config-plugin-task-idx-ref-gitignorenpm-default">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-gitignorenpm-default">`gitignore/npm-default`</a>
   - <a name="blackfluxrobo-config-plugin-task-idx-ref-gallynpm-default">:open_file_folder:</a> <a href="#blackfluxrobo-config-plugin-task-ref-gallynpm-default">`gally/#npm-default`</a>
     - <a name="blackfluxrobo-config-plugin-task-idx-ref-gallytwo-branch">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-gallytwo-branch">`gally/two-branch`</a>
-  - <a name="blackfluxrobo-config-plugin-task-idx-ref-editornpm-default">:open_file_folder:</a> <a href="#blackfluxrobo-config-plugin-task-ref-editornpm-default">`editor/#npm-default`</a>
+  - <a name="blackfluxrobo-config-plugin-task-idx-ref-editordefault">:open_file_folder:</a> <a href="#blackfluxrobo-config-plugin-task-ref-editordefault">`editor/#default`</a>
     - <a name="blackfluxrobo-config-plugin-task-idx-ref-editortwo-space">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-editortwo-space">`editor/two-space`</a>
   - <a name="blackfluxrobo-config-plugin-task-idx-ref-dependabotnpm-default">:open_file_folder:</a> <a href="#blackfluxrobo-config-plugin-task-ref-dependabotnpm-default">`dependabot/#npm-default`</a>
     - <a name="blackfluxrobo-config-plugin-task-idx-ref-dependabotjs-instant">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-dependabotjs-instant">`dependabot/js-instant`</a>
@@ -503,7 +503,7 @@ Manage package.json for npm package on github.
   </tbody>
 </table>
 
-##### :clipboard: <a name="blackfluxrobo-config-plugin-task-ref-packagemerge-shallow">package/merge-shallow</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-packagemerge-shallow">`index`</a>)
+##### :clipboard: <a name="blackfluxrobo-config-plugin-task-ref-packagenpm-default_merge-shallow">package/npm-default_merge-shallow</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-packagenpm-default_merge-shallow">`index`</a>)
 
 _Updating <a href="#blackfluxrobo-config-plugin-target-ref-packagejson">package.json</a> using <a href="#blackfluxrobo-config-plugin-strat-ref-merge-shallow">merge-shallow</a>._
 
@@ -531,7 +531,7 @@ _Updating <a href="#blackfluxrobo-config-plugin-target-ref-packagejson">package.
   </tbody>
 </table>
 
-##### :clipboard: <a name="blackfluxrobo-config-plugin-task-ref-packagemerge-deep">package/merge-deep</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-packagemerge-deep">`index`</a>)
+##### :clipboard: <a name="blackfluxrobo-config-plugin-task-ref-packagenpm-default_merge-deep">package/npm-default_merge-deep</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-packagenpm-default_merge-deep">`index`</a>)
 
 _Updating <a href="#blackfluxrobo-config-plugin-target-ref-packagejson">package.json</a> using <a href="#blackfluxrobo-config-plugin-strat-ref-merge-deep">merge-deep</a>._
 
@@ -566,7 +566,7 @@ _Updating <a href="#blackfluxrobo-config-plugin-target-ref-packagejson">package.
   </tbody>
 </table>
 
-##### :clipboard: <a name="blackfluxrobo-config-plugin-task-ref-packagedefault-shallow">package/default-shallow</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-packagedefault-shallow">`index`</a>)
+##### :clipboard: <a name="blackfluxrobo-config-plugin-task-ref-packagenpm-default_default-shallow">package/npm-default_default-shallow</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-packagenpm-default_default-shallow">`index`</a>)
 
 _Updating <a href="#blackfluxrobo-config-plugin-target-ref-packagejson">package.json</a> using <a href="#blackfluxrobo-config-plugin-strat-ref-default-shallow">default-shallow</a>._
 
@@ -594,7 +594,7 @@ _Updating <a href="#blackfluxrobo-config-plugin-target-ref-packagejson">package.
   </tbody>
 </table>
 
-##### :clipboard: <a name="blackfluxrobo-config-plugin-task-ref-packagedefault-deep">package/default-deep</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-packagedefault-deep">`index`</a>)
+##### :clipboard: <a name="blackfluxrobo-config-plugin-task-ref-packagenpm-default_default-deep">package/npm-default_default-deep</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-packagenpm-default_default-deep">`index`</a>)
 
 _Updating <a href="#blackfluxrobo-config-plugin-target-ref-packagejson">package.json</a> using <a href="#blackfluxrobo-config-plugin-strat-ref-default-deep">default-deep</a>._
 
@@ -678,9 +678,9 @@ _Updating <a href="#blackfluxrobo-config-plugin-target-ref-npmignore">.npmignore
   </tbody>
 </table>
 
-#### :open_file_folder: <a name="blackfluxrobo-config-plugin-task-ref-licensenpm-opensource">license/#npm-opensource</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-licensenpm-opensource">`index`</a>)
+#### :open_file_folder: <a name="blackfluxrobo-config-plugin-task-ref-licenseopensource">license/#opensource</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-licenseopensource">`index`</a>)
 
-Manage license configuration for npm open source package on github.
+Manage license configuration for open source project.
 
 <table>
   <tbody>
@@ -775,9 +775,9 @@ _Updating <a href="#blackfluxrobo-config-plugin-target-ref-license">LICENSE</a> 
   </tbody>
 </table>
 
-#### :open_file_folder: <a name="blackfluxrobo-config-plugin-task-ref-jetbrainsnpm-default">jetbrains/#npm-default</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-jetbrainsnpm-default">`index`</a>)
+#### :open_file_folder: <a name="blackfluxrobo-config-plugin-task-ref-jetbrainsdefault">jetbrains/#default</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-jetbrainsdefault">`index`</a>)
 
-Manage WebStorm configuration for npm package on github.
+Manage WebStorm configuration.
 
 <table>
   <tbody>
@@ -845,7 +845,7 @@ _Updating <a href="#blackfluxrobo-config-plugin-target-ref-ideaprojectnameiml">.
   </tbody>
 </table>
 
-#### :open_file_folder: <a name="blackfluxrobo-config-plugin-task-ref-gitnpm-default">git/#npm-default</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-gitnpm-default">`index`</a>)
+#### :open_file_folder: <a name="blackfluxrobo-config-plugin-task-ref-gitignorenpm-default">gitignore/#npm-default</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-gitignorenpm-default">`index`</a>)
 
 Manage gitignore configuration for npm package on github.
 
@@ -871,7 +871,7 @@ Manage gitignore configuration for npm package on github.
   </tbody>
 </table>
 
-##### :clipboard: <a name="blackfluxrobo-config-plugin-task-ref-gitgitignore">git/gitignore</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-gitgitignore">`index`</a>)
+##### :clipboard: <a name="blackfluxrobo-config-plugin-task-ref-gitignorenpm-default">gitignore/npm-default</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-gitignorenpm-default">`index`</a>)
 
 _Updating <a href="#blackfluxrobo-config-plugin-target-ref-gitignore">.gitignore</a> using <a href="#blackfluxrobo-config-plugin-strat-ref-unique-top">unique-top</a>._
 
@@ -942,7 +942,7 @@ Manage gally configuration for npm package on github.
 
 _Updating <a href="#blackfluxrobo-config-plugin-target-ref-gallyjson">.gally.json</a> using <a href="#blackfluxrobo-config-plugin-strat-ref-overwrite">overwrite</a>._
 
-- Restrictive two-branch [gally](https://github.com/loopmediagroup/gally#readme) config.
+- Restrictive two-branch config.
 
 <table>
   <tbody>
@@ -976,9 +976,9 @@ _Updating <a href="#blackfluxrobo-config-plugin-target-ref-gallyjson">.gally.jso
   </tbody>
 </table>
 
-#### :open_file_folder: <a name="blackfluxrobo-config-plugin-task-ref-editornpm-default">editor/#npm-default</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-editornpm-default">`index`</a>)
+#### :open_file_folder: <a name="blackfluxrobo-config-plugin-task-ref-editordefault">editor/#default</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-editordefault">`index`</a>)
 
-Manage editor configuration for npm package on github.
+Manage editor configuration for project.
 
 <table>
   <tbody>
