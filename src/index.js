@@ -18,7 +18,7 @@ const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
 };
 
 const formatPath = (input, ctx) => (ctx.joined ? input.reduce(
-  (p, c) => `${p}${typeof c === 'number' ? `[${c}]` : `${p ? '.' : ''}${ctx.escapePaths ? escape(c) : c}`}`,
+  (p, c) => `${p}${typeof c === 'number' ? `[${c}]` : `${p ? '.' : ''}${escape(c)}`}`,
   ''
 ) : input);
 
@@ -92,15 +92,13 @@ module.exports = (needles, opts = {}) => {
     filterFn: undefined,
     breakFn: undefined,
     joined: true,
-    escapePaths: true,
     useArraySelector: true,
     strict: true
   }, opts);
-  assert(Object.keys(ctx).length === 6, 'Unexpected Option provided!');
+  assert(Object.keys(ctx).length === 5, 'Unexpected Option provided!');
   assert(['function', 'undefined'].includes(typeof ctx.filterFn));
   assert(['function', 'undefined'].includes(typeof ctx.breakFn));
   assert(typeof ctx.joined === 'boolean');
-  assert(typeof ctx.escapePaths === 'boolean');
   assert(typeof ctx.useArraySelector === 'boolean');
   assert(typeof ctx.strict === 'boolean');
 
