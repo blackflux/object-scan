@@ -133,26 +133,6 @@ describe('Testing Find', () => {
     });
   });
 
-  it('Testing recursion exception', () => {
-    const computeMaxCallStackSize = () => {
-      try {
-        return 1 + computeMaxCallStackSize();
-      } catch (e) {
-        // Call stack overflow
-        return 1;
-      }
-    };
-    const maxDepth = computeMaxCallStackSize();
-
-    const data = {};
-    let cur = data;
-    for (let idx = 0; idx < maxDepth; idx += 1) {
-      cur.key = {};
-      cur = cur.key;
-    }
-    expect(() => objectScan(['**'])(data)).to.throw('Maximum call stack size exceeded');
-  });
-
   describe('Testing Exclusion', () => {
     const test = (input, needles, result) => expect(objectScan(needles)(input)).to.deep.equal(result);
 
@@ -277,34 +257,37 @@ describe('Testing Find', () => {
     const needles = [''];
     const arrayInput = [{ id: 1 }, { id: 2 }];
     const objectInput = { id: {} };
-    const filterFn = (key, value, { isMatch, matchedBy, parents }) => {
+    const filterFn = (ps = []) => (key, value, { isMatch, matchedBy, parents }) => {
       expect(isMatch).to.equal(true);
-      expect(parents).to.deep.equal([]);
+      expect(parents).to.deep.equal(ps);
       expect(matchedBy).to.deep.equal(['']);
     };
 
     it('Testing array objects with useArraySelector === true', () => {
-      const find = objectScan(needles, { useArraySelector: true, filterFn });
+      const find = objectScan(needles, { useArraySelector: true, filterFn: filterFn() });
       expect(find(arrayInput)).to.deep.equal(['']);
     });
 
     it('Testing array objects with useArraySelector === false', () => {
-      const find = objectScan(needles, { useArraySelector: false, filterFn });
+      const find = objectScan(needles, { useArraySelector: false, filterFn: filterFn([[{ id: 1 }, { id: 2 }]]) });
       expect(find(arrayInput)).to.deep.equal(['[1]', '[0]']);
     });
 
     it('Testing array objects with useArraySelector === false (nested)', () => {
-      const find = objectScan(needles, { useArraySelector: false, filterFn });
+      const find = objectScan(needles, {
+        useArraySelector: false,
+        filterFn: filterFn([[{ id: 1 }, { id: 2 }], [[{ id: 1 }, { id: 2 }]]])
+      });
       expect(find([arrayInput])).to.deep.equal(['[0][1]', '[0][0]']);
     });
 
     it('Testing object with useArraySelector === true', () => {
-      const find = objectScan(needles, { useArraySelector: true, filterFn });
+      const find = objectScan(needles, { useArraySelector: true, filterFn: filterFn() });
       expect(find(objectInput)).to.deep.equal(['']);
     });
 
     it('Testing object with useArraySelector === false', () => {
-      const find = objectScan(needles, { useArraySelector: false, filterFn });
+      const find = objectScan(needles, { useArraySelector: false, filterFn: filterFn() });
       expect(find(objectInput)).to.deep.equal(['']);
     });
 
@@ -436,7 +419,7 @@ describe('Testing Find', () => {
       it('Testing object parents useArraySelector == false', () => {
         const result = objectScan(pattern, {
           filterFn: (k, v, { parents }) => {
-            expect(parents).to.deep.equal([input.one[0], input]);
+            expect(parents).to.deep.equal([input.one[0], input.one, input]);
           },
           useArraySelector: false
         })(input);
@@ -460,7 +443,7 @@ describe('Testing Find', () => {
       it('Testing array parents useArraySelector == false', () => {
         const result = objectScan(pattern, {
           filterFn: (k, v, { parents }) => {
-            expect(parents).to.deep.equal([input.one, input]);
+            expect(parents).to.deep.equal([input.one.child, input.one, input]);
           },
           useArraySelector: false
         })(input);
