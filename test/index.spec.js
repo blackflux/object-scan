@@ -134,9 +134,19 @@ describe('Testing Find', () => {
   });
 
   it('Testing recursion exception', () => {
+    const computeMaxCallStackSize = () => {
+      try {
+        return 1 + computeMaxCallStackSize();
+      } catch (e) {
+        // Call stack overflow
+        return 1;
+      }
+    };
+    const maxDepth = computeMaxCallStackSize();
+
     const data = {};
     let cur = data;
-    for (let idx = 0; idx < 10000; idx += 1) {
+    for (let idx = 0; idx < maxDepth; idx += 1) {
       cur.key = {};
       cur = cur.key;
     }
