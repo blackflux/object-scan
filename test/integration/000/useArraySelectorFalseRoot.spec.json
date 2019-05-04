@@ -1,0 +1,78 @@
+{
+  "needles": [""],
+  "options": {
+    "log": [
+      "key",
+      "value",
+      "parents",
+      "isMatch",
+      "matchedBy",
+      "excludedBy",
+      "traversedBy"
+    ],
+    "args": {"useArraySelector": false}
+  },
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "value": [[[0]]],
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [""],
+      "parents": []
+    },
+    {
+      "type": "breakFn",
+      "key": "[0]",
+      "value": [[0]],
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [""],
+      "parents": []
+    },
+    {
+      "type": "breakFn",
+      "key": "[0][0]",
+      "value": [0],
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [""],
+      "parents": []
+    },
+    {
+      "type": "breakFn",
+      "key": "[0][0][0]",
+      "value": 0,
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [""],
+      "parents": []
+    },
+    {
+      "type": "breakFn",
+      "key": "[0][0][0]",
+      "value": 0,
+      "isMatch": true,
+      "matchedBy": [""],
+      "excludedBy": [],
+      "traversedBy": [""],
+      "parents": []
+    },
+    {
+      "type": "filterFn",
+      "key": "[0][0][0]",
+      "value": 0,
+      "isMatch": true,
+      "matchedBy": [""],
+      "excludedBy": [],
+      "traversedBy": [""],
+      "parents": []
+    }
+  ],
+  "result": ["[0][0][0]"]
+}
