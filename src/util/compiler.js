@@ -44,6 +44,11 @@ const setRecursionPos = (input, pos, readonly) => defineProperty(input, RECURSIO
 const getRecursionPos = input => input[RECURSION_POS] || 0;
 module.exports.getRecursionPos = getRecursionPos;
 
+const ENTRIES = Symbol('entries');
+const setEntries = (input, entries) => defineProperty(input, ENTRIES, entries);
+const getEntries = input => input[ENTRIES];
+module.exports.getEntries = getEntries;
+
 module.exports.getMeta = (() => {
   const extractNeedles = input => Array.from(input.reduce((p, e) => {
     const needle = getNeedle(e);
@@ -60,7 +65,7 @@ module.exports.getMeta = (() => {
       getNeedles(e).forEach(n => p.add(n));
       return p;
     }, new Set())),
-    parents
+    parents: parents !== null ? [...parents].reverse() : null
   });
 })();
 
@@ -101,17 +106,18 @@ const buildRecursive = (tower, path, ctx, excluded, root = false) => {
   buildRecursive(tower[path[0]], path.slice(1), ctx, excluded || path[0].isExcluded());
 };
 
-const setHasMatchesRec = (tower) => {
+const finalizeRecursive = (tower) => {
   const towerValues = Object.values(tower);
-  towerValues.forEach(v => setHasMatchesRec(v));
+  towerValues.forEach(v => finalizeRecursive(v));
   if (isMatch(tower) || towerValues.some(v => hasMatches(v))) {
     setHasMatches(tower);
   }
+  setEntries(tower, Object.entries(tower).filter(([k]) => k !== ''));
 };
 
 module.exports.compile = (needles, strict = true) => {
   const tower = {};
   needles.forEach(needle => buildRecursive(tower, [parser(needle)], { needle, strict }, false, true));
-  setHasMatchesRec(tower);
+  finalizeRecursive(tower);
   return tower;
 };

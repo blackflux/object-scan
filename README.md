@@ -51,7 +51,7 @@ Signature for all functions is
 where:
 - `key` is the key that the function is called for (respects `joined` option).
 - `value` is the value for that key.
-- `parents` is array of form `[parent, grandparent, ...]`. Excludes array parents when `useArraySelector` is false.
+- `parents` is array of form `[parent, grandparent, ...]`.
 - `isMatch` is true if the last targeting needle exists and is non-excluding.
 - `matchedBy` are all non-excluding needles targeting the key.
 - `excludedBy` are all excluding needles targeting the key.
