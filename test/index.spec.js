@@ -133,6 +133,16 @@ describe('Testing Find', () => {
     });
   });
 
+  it('Testing recursion exception', () => {
+    const data = {};
+    let cur = data;
+    for (let idx = 0; idx < 10000; idx += 1) {
+      cur.key = {};
+      cur = cur.key;
+    }
+    expect(() => objectScan(['**'])(data)).to.throw('Maximum call stack size exceeded');
+  });
+
   describe('Testing Exclusion', () => {
     const test = (input, needles, result) => expect(objectScan(needles)(input)).to.deep.equal(result);
 
