@@ -74,8 +74,8 @@ const find = (haystack_, searches_, ctx) => {
 
     if (ctx.useArraySelector === false && Array.isArray(haystack)) {
       if (recurseHaystack) {
-        for (let i = 0, len = haystack.length; i < len; i += 1) {
-          stack.push(false, searches, i, depth + 1);
+        for (let idx = 0, len = haystack.length; idx < len; idx += 1) {
+          stack.push(false, searches, idx, depth + 1);
         }
       }
       // eslint-disable-next-line no-continue
