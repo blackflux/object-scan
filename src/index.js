@@ -74,7 +74,7 @@ const find = (haystack_, searches_, ctx) => {
 
     if (ctx.useArraySelector === false && Array.isArray(haystack)) {
       if (recurseHaystack) {
-        for (let i = 0; i < haystack.length; i += 1) {
+        for (let i = 0, len = haystack.length; i < len; i += 1) {
           stack.push(false, searches, i, depth + 1);
         }
       }
@@ -93,25 +93,29 @@ const find = (haystack_, searches_, ctx) => {
 
     if (recurseHaystack && haystack instanceof Object) {
       const isArray = Array.isArray(haystack);
-      Object.keys(haystack).forEach((key) => {
-        const nextSegment = isArray ? parseInt(key, 10) : key;
-        const searchesOut = searches.reduce((p, s) => {
-          const recursionPos = compiler.isRecursive(s) ? compiler.getRecursionPos(s) : null;
+      const keys = isArray ? haystack : Object.keys(haystack);
+      for (let kIdx = 0, kLen = keys.length; kIdx < kLen; kIdx += 1) {
+        const key = isArray ? kIdx : keys[kIdx];
+        const searchesOut = [];
+        for (let sIdx = 0, sLen = searches.length; sIdx < sLen; sIdx += 1) {
+          const search = searches[sIdx];
+          const recursionPos = compiler.isRecursive(search) ? compiler.getRecursionPos(search) : null;
           if (recursionPos === 0) {
-            p.push(s);
+            searchesOut.push(search);
           }
-          compiler.getEntries(s).forEach(([entry, subSearch], idx) => {
-            if (isWildcardMatch(entry, key, isArray, subSearch)) {
-              p.push(subSearch);
+          const entries = compiler.getEntries(search);
+          for (let eIdx = 0, eLen = entries.length; eIdx < eLen; eIdx += 1) {
+            const entry = entries[eIdx];
+            if (isWildcardMatch(entry[0], key, isArray, entry[1])) {
+              searchesOut.push(entry[1]);
             }
-            if (idx + 1 === recursionPos) {
-              p.push(s);
+            if (eIdx + 1 === recursionPos) {
+              searchesOut.push(search);
             }
-          });
-          return p;
-        }, []);
-        stack.push(false, searchesOut, nextSegment, depth + 1);
-      });
+          }
+        }
+        stack.push(false, searchesOut, key, depth + 1);
+      }
     }
   } while (stack.length !== 0);
 
