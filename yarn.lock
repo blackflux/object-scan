@@ -180,6 +180,32 @@
   resolved "https://registry.yarnpkg.com/@blackflux/robo-config-plugin/-/robo-config-plugin-1.10.5.tgz#71428b44f95f1cb8aabfe3d16cb11cfab3a79f0e"
   integrity sha512-h634tYbRgOl86GW0W7aoC0/x6A/K1VS9gJOeaYOg/6z1zo8ou9lWigA+3A7soR1cUXzAp7ejrl55ek/UMJz/nw==
 
+"@hapi/address@2.x.x":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.0.0.tgz#9f05469c88cb2fd3dcd624776b54ee95c312126a"
+  integrity sha512-mV6T0IYqb0xL1UALPFplXYQmR0twnXG0M6jUswpquqT2sD12BOiCiLy3EvMp/Fy7s3DZElC4/aPjEjo2jeZpvw==
+
+"@hapi/hoek@6.x.x":
+  version "6.2.4"
+  resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-6.2.4.tgz#4b95fbaccbfba90185690890bdf1a2fbbda10595"
+  integrity sha512-HOJ20Kc93DkDVvjwHyHawPwPkX44sIrbXazAUDiUXaY2R9JwQGo2PhFfnQtdrsIe4igjG2fPgMra7NYw7qhy0A==
+
+"@hapi/joi@15.0.3":
+  version "15.0.3"
+  resolved "https://registry.yarnpkg.com/@hapi/joi/-/joi-15.0.3.tgz#e94568fd859e5e945126d5675e7dd218484638a7"
+  integrity sha512-z6CesJ2YBwgVCi+ci8SI8zixoj8bGFn/vZb9MBPbSyoxsS2PnWYjHcyTM17VLK6tx64YVK38SDIh10hJypB+ig==
+  dependencies:
+    "@hapi/address" "2.x.x"
+    "@hapi/hoek" "6.x.x"
+    "@hapi/topo" "3.x.x"
+
+"@hapi/topo@3.x.x":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@hapi/topo/-/topo-3.1.0.tgz#5c47cd9637c2953db185aa957a27bcb2a8b7a6f8"
+  integrity sha512-gZDI/eXOIk8kP2PkUKjWu9RW8GGVd2Hkgjxyr/S7Z+JF+0mr7bAlbw+DkTRxnD580o8Kqxlnba9wvqp5aOHBww==
+  dependencies:
+    "@hapi/hoek" "6.x.x"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -3465,6 +3491,11 @@ java-properties@^0.2.9:
   resolved "https://registry.yarnpkg.com/java-properties/-/java-properties-0.2.10.tgz#2551560c25fa1ad94d998218178f233ad9b18f60"
   integrity sha512-CpKJh9VRNhS+XqZtg1UMejETGEiqwCGDC/uwPEEQwc2nfdbSm73SIE29TplG2gLYuBOOTNDqxzG6A9NtEPLt0w==
 
+joi-strict@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.0.2.tgz#cb0bd00cfc3260d6a259324367acef76fcc433ae"
+  integrity sha512-IHOFYARRhGFk8iAbTI0rvYVsXBYW39dSKNLAxrdPC4SYYYE4hrEVNluXwy+8td/p+K8COyhQLm42osBlBpz4GQ==
+
 joi@14.3.1:
   version "14.3.1"
   resolved "https://registry.yarnpkg.com/joi/-/joi-14.3.1.tgz#164a262ec0b855466e0c35eea2a885ae8b6c703c"
@@ -3474,11 +3505,12 @@ joi@14.3.1:
     isemail "3.x.x"
     topo "3.x.x"
 
-js-gardener@2.0.36:
-  version "2.0.36"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.36.tgz#ceb172116eeabe98e7827cbdd00e5abe6678e17c"
-  integrity sha512-q+fzwDkToNp5Gpbrx7bkRYM8TJqxziyQpwycPs7C1rTa/mayoHNolxppWV1qn3IxysGOhM1cebLjfRgPYW6WpQ==
+js-gardener@2.0.38:
+  version "2.0.38"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.38.tgz#7b08df204e4571b53d10b7234ffede236cd32305"
+  integrity sha512-MmShpcfo8zfBRS3iAWFBa/kXjfY5lf5TtgRf7BKyXyhYhAlWqGIVRDknNbzMA2Qz7U5R8F/asyEO8vG883siag==
   dependencies:
+    "@hapi/joi" "15.0.3"
     chalk "2.4.2"
     eslint "5.16.0"
     eslint-config-airbnb-base "13.1.0"
@@ -3489,7 +3521,7 @@ js-gardener@2.0.36:
     eslint-plugin-mocha "5.3.0"
     fancy-log "1.3.3"
     glob "7.1.4"
-    joi "14.3.1"
+    joi-strict "1.0.2"
     js-yaml "3.13.1"
     lodash.difference "4.5.0"
     lodash.get "4.4.2"
