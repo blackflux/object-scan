@@ -3484,10 +3484,10 @@ joi-strict@1.0.2:
   resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.0.2.tgz#cb0bd00cfc3260d6a259324367acef76fcc433ae"
   integrity sha512-IHOFYARRhGFk8iAbTI0rvYVsXBYW39dSKNLAxrdPC4SYYYE4hrEVNluXwy+8td/p+K8COyhQLm42osBlBpz4GQ==
 
-js-gardener@2.0.39:
-  version "2.0.39"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.39.tgz#57bf5412a2331fd561b136e32f1768622ca8c6bf"
-  integrity sha512-Z4plm97GwpcERRwv1+9pwaHVEJkF3Xk67wZSqXIFxmOFkWwMIxe+xDFSTUCPGFnRaCuprHyJH60kUoBrlqeu/A==
+js-gardener@2.0.40:
+  version "2.0.40"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.40.tgz#1411b3884ab2870be5613a16aeec15ed1f192a9f"
+  integrity sha512-zyR22wiRYjZV+yHmf53pp0A3mSF6cN5D2n5rqNN1nYvfvqEwSXazSP13Gnm/EccbMJKmd/uqkIzk61CQSP94zw==
   dependencies:
     "@hapi/joi" "15.0.3"
     chalk "2.4.2"
@@ -3506,7 +3506,7 @@ js-gardener@2.0.39:
     lodash.get "4.4.2"
     mocha "6.1.4"
     npm-check "5.9.0"
-    robo-config "3.0.21"
+    robo-config "3.0.22"
     tmp "0.1.0"
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
@@ -5969,10 +5969,10 @@ rimraf@2, rimraf@2.6.3, rimraf@^2.5.2, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6
   dependencies:
     glob "^7.1.3"
 
-robo-config@3.0.21:
-  version "3.0.21"
-  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.0.21.tgz#e3f2805153b3d0c6c32729ec1c449ae1ae8324fe"
-  integrity sha512-Ioui5XUG7iCKJl5LLTkz2Xp0OmKUtLtgaQhI0cwnTaRRSwRg27PtbDy15S6uAx57I/rXzcKrxXyAj6u04IRMIA==
+robo-config@3.0.22:
+  version "3.0.22"
+  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.0.22.tgz#15c7380c77f3618778c57d9193ea5b8eeda5726c"
+  integrity sha512-SmRv0RPGh0qqTIp0OPP+UAs5iXiHK2HUJippVIlaVSQETTAqTbG010dkvKCtkxbFiti4hK9nfnhQY3ep+aYmBw==
   dependencies:
     "@hapi/joi" "15.0.3"
     app-root-path "2.2.1"
@@ -5984,7 +5984,7 @@ robo-config@3.0.21:
     object-deep-contain "1.0.11"
     object-scan "10.0.3"
     object-treeify "1.1.12"
-    smart-fs "1.7.9"
+    smart-fs "1.8.0"
 
 run-async@^0.1.0:
   version "0.1.0"
@@ -6187,18 +6187,6 @@ smart-buffer@4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-4.0.2.tgz#5207858c3815cc69110703c6b94e46c15634395d"
   integrity sha512-JDhEpTKzXusOqXZ0BUIdH+CjFdO/CR3tLlf5CN34IypI+xMmXW1uB16OOY8z3cICbJlDAVJzNbwBhNO0wt9OAw==
-
-smart-fs@1.7.9:
-  version "1.7.9"
-  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.7.9.tgz#7ca3778f9acedb9b14aecdc28f49c072ac0a64d5"
-  integrity sha512-So3sA4ykt8QlIdbFiBvnicvoMKkGBIAQKoas4k4Y5YB9PtwAjDG6RLbiLBA6QDgtoiiV+DoY5ax5zj2O2VV/dw==
-  dependencies:
-    fs-extra "8.0.1"
-    json-stringify-pretty-compact "2.0.0"
-    lodash.clonedeep "4.5.0"
-    lodash.isequal "4.5.0"
-    xml-js "1.6.11"
-    yaml-boost "1.9.7"
 
 smart-fs@1.8.0:
   version "1.8.0"
