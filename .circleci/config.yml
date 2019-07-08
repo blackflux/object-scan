@@ -3,25 +3,25 @@ workflows:
   node-multi-build:
     jobs:
       - gally-create-pr
-      - test-node-v10:
+      - test-node-v12:
           requires:
             - gally-create-pr
-      - test-node-v8.10:
+      - test-node-v10:
           requires:
             - gally-create-pr
       - gally-auto-merge:
           requires:
             - gally-create-pr
+            - test-node-v12
             - test-node-v10
-            - test-node-v8.10
           filters:
             branches:
               only: /dependabot\/.*/
       - release:
           requires:
             - gally-create-pr
+            - test-node-v12
             - test-node-v10
-            - test-node-v8.10
           filters:
             branches:
               only: master
@@ -29,14 +29,14 @@ version: 2
 jobs:
   gally-create-pr:
     docker:
-      - image: 'circleci/node:10'
+      - image: 'circleci/node:12'
     steps:
       - checkout
       - run: sudo yarn global add gally
       - run: ga promote $CIRCLE_BRANCH
   gally-auto-merge:
     docker:
-      - image: 'circleci/node:10'
+      - image: 'circleci/node:12'
     steps:
       - run:
           name: Set PR number
@@ -77,14 +77,27 @@ jobs:
       - run: >-
           (git add . && git diff-index --quiet HEAD --) || (git status && exit
           1);
+  release:
+    docker:
+      - image: 'circleci/node:12'
+    steps:
+      - checkout
       - run:
           command: |
-            if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
-              yarn run coveralls
+            # sync submodules as checkout doesn't do this automatically
+            if [[ $(git config --file .gitmodules --get-regexp path) ]]; then
+              git submodule sync && git submodule update --init
             fi
-  test-node-v8.10:
+      - run:
+          command: |
+            if [[ -n "${NPM_TOKEN}" ]]; then
+              echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+            fi
+      - run: yarn install --frozen-lockfile
+      - run: yarn run semantic-release
+  test-node-v12:
     docker:
-      - image: 'circleci/node:8.10'
+      - image: 'circleci/node:12'
     steps:
       - checkout
       - run:
@@ -103,21 +116,8 @@ jobs:
       - run: >-
           (git add . && git diff-index --quiet HEAD --) || (git status && exit
           1);
-  release:
-    docker:
-      - image: 'circleci/node:10'
-    steps:
-      - checkout
       - run:
           command: |
-            # sync submodules as checkout doesn't do this automatically
-            if [[ $(git config --file .gitmodules --get-regexp path) ]]; then
-              git submodule sync && git submodule update --init
+            if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
+              yarn run coveralls
             fi
-      - run:
-          command: |
-            if [[ -n "${NPM_TOKEN}" ]]; then
-              echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-            fi
-      - run: yarn install --frozen-lockfile
-      - run: yarn run semantic-release
