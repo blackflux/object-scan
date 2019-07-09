@@ -195,15 +195,6 @@
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-8.0.2.tgz#f63a5ff00e891a4e7aa98f11119f9515c6672032"
   integrity sha512-O6o6mrV4P65vVccxymuruucb+GhP2zl9NLCG8OdoFRS8BEGw3vwpPp20wpAtpbQQxz1CEUtmxJGgWhjq1XA3qw==
 
-"@hapi/joi@15.0.3":
-  version "15.0.3"
-  resolved "https://registry.yarnpkg.com/@hapi/joi/-/joi-15.0.3.tgz#e94568fd859e5e945126d5675e7dd218484638a7"
-  integrity sha512-z6CesJ2YBwgVCi+ci8SI8zixoj8bGFn/vZb9MBPbSyoxsS2PnWYjHcyTM17VLK6tx64YVK38SDIh10hJypB+ig==
-  dependencies:
-    "@hapi/address" "2.x.x"
-    "@hapi/hoek" "6.x.x"
-    "@hapi/topo" "3.x.x"
-
 "@hapi/joi@15.1.0":
   version "15.1.0"
   resolved "https://registry.yarnpkg.com/@hapi/joi/-/joi-15.1.0.tgz#940cb749b5c55c26ab3b34ce362e82b6162c8e7a"
@@ -1674,11 +1665,6 @@ deep-is@~0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
   integrity sha1-s2nW+128E+7PUk+RsHD+7cNXzzQ=
-
-deepmerge@3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-3.2.0.tgz#58ef463a57c08d376547f8869fdc5bcee957f44e"
-  integrity sha512-6+LuZGU7QCNUnAJyX8cIrlzoEgggTM6B7mm+znKOX4t5ltluT9KLjN6g61ECMS0LTsLW7yDpNoxhix5FZcrIow==
 
 deepmerge@3.3.0:
   version "3.3.0"
@@ -3570,10 +3556,10 @@ joi-strict@1.0.2:
   resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.0.2.tgz#cb0bd00cfc3260d6a259324367acef76fcc433ae"
   integrity sha512-IHOFYARRhGFk8iAbTI0rvYVsXBYW39dSKNLAxrdPC4SYYYE4hrEVNluXwy+8td/p+K8COyhQLm42osBlBpz4GQ==
 
-js-gardener@2.0.41:
-  version "2.0.41"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.41.tgz#3799edf42793c148adae381f68fa31736710c4ad"
-  integrity sha512-QuuNSK9+B5zz46sVBLMH4wVjPSP/b8wmiFREi4EfS9t3WkjPZBK7Xd4wQ2ey9GKK1PFMxdV42hMZSp7qvCrDEw==
+js-gardener@2.0.42:
+  version "2.0.42"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.42.tgz#1f3f9c92dac175a0197c6f9b32e6b3163de328a3"
+  integrity sha512-CU/JjB9Ro9kTmxxDg8kq0ZYxbW4sXHX0AKOCGkTSNcwvJUSII/+niNXjaPJ+oCWudsOBwjipENev7IIFCJnapw==
   dependencies:
     "@hapi/joi" "15.1.0"
     chalk "2.4.2"
@@ -3592,7 +3578,7 @@ js-gardener@2.0.41:
     lodash.get "4.4.2"
     mocha "6.1.4"
     npm-check "5.9.0"
-    robo-config "3.0.22"
+    robo-config "3.0.23"
     tmp "0.1.0"
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
@@ -6104,14 +6090,14 @@ rimraf@2, rimraf@2.6.3, rimraf@^2.5.2, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6
   dependencies:
     glob "^7.1.3"
 
-robo-config@3.0.22:
-  version "3.0.22"
-  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.0.22.tgz#15c7380c77f3618778c57d9193ea5b8eeda5726c"
-  integrity sha512-SmRv0RPGh0qqTIp0OPP+UAs5iXiHK2HUJippVIlaVSQETTAqTbG010dkvKCtkxbFiti4hK9nfnhQY3ep+aYmBw==
+robo-config@3.0.23:
+  version "3.0.23"
+  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.0.23.tgz#c1cc1699e79e12e353e3ae8ddc3a3a0d6eb9354d"
+  integrity sha512-RkhZmDsvj/ohPvzy8BtHo9ipVL3xp7FouLXar4KjOfdAHW1S3009TGHyVChOubLc6prm1Gil8WWdUCpul2U14w==
   dependencies:
-    "@hapi/joi" "15.0.3"
+    "@hapi/joi" "15.1.0"
     app-root-path "2.2.1"
-    deepmerge "3.2.0"
+    deepmerge "3.3.0"
     joi-strict "1.0.2"
     lodash.clonedeep "4.5.0"
     lodash.difference "4.5.0"
