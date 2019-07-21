@@ -2,8 +2,17 @@
   "analyzeCommits": {
     "preset": "angular",
     "releaseRules": [
-      {"type": "build", "scope": "deps", "release": "patch"},
-      {"type": "chore", "scope": "deps", "release": "patch"}
-    ]
+      {"type": "feat", "release": "minor"},
+      {"type": "fix", "release": "patch"},
+      {"type": "perf", "release": "patch"},
+      {"type": "docs", "release": "patch"},
+      {"type": "chore", "release": false},
+      {"type": "test", "release": false},
+      {"type": "refactor", "release": false},
+      {"type": "ci", "release": false},
+      {"type": "amend", "release": false},
+      {"scope": "no-release", "release": false}
+    ],
+    "parserOpts": {"noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES"]}
   }
 }
