@@ -168,12 +168,12 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@blackflux/eslint-plugin-rules@1.0.24":
-  version "1.0.24"
-  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.0.24.tgz#9fc319e8d3f75ef2a3658566f98b36ded38b285e"
-  integrity sha512-J/wdUWsKKEW91nr9VDKQxzSpvh7LJGSKVRmL/Lz8PgDQ2jVtY2bpG1ODH/x63P8jrhwReECK2UAPCyxz75diuw==
+"@blackflux/eslint-plugin-rules@1.0.25":
+  version "1.0.25"
+  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.0.25.tgz#f4fa42bd9d1d6e56df254e60c29baab1df35b440"
+  integrity sha512-xhKBkuojpfKG7JCEqnqvp4/tN5wlGV6B3V4FSE5bgDown8HxVmi+UTmJW1JSLM5PTBDwYdAoglcAA08+2ckQ5Q==
   dependencies:
-    smart-fs "1.9.0"
+    smart-fs "1.9.1"
 
 "@blackflux/robo-config-plugin@2.1.4":
   version "2.1.4"
@@ -3564,10 +3564,15 @@ joi-strict@1.0.3:
   resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.0.3.tgz#a00636fdb677815a2134e3c5035c71a40dad9177"
   integrity sha512-fTepIytNXkt+LwDET9bQildo8MrQGQtmPd3586dj4JtWbyIK98nk4+cxmcZBg8Rk/NLhHWMpwrrO9x+71mnHpA==
 
-js-gardener@2.0.53:
-  version "2.0.53"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.53.tgz#ea2e3fb9b5f4195b6dcf93a43f2f0792cc079055"
-  integrity sha512-HO3kCR1q4bCwP3XBFMU0MEpbJyJSrH+X8zb3bh7o5NYF/cCXAs3aHkmL3iGr8AiN2FCqWQSmO8qFe8XJg/QRuQ==
+joi-strict@1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.0.4.tgz#8bf55f7b4d6accd5b530ac98276131b59e982254"
+  integrity sha512-ChSFFa+Z3iD9x9QsBFMEHwXrwt2Gq2OD1fg+Mgje1Tx+Pqt7ma+LXgMdzVoC7GHCxhO3ySDVBtDumES/yycMXg==
+
+js-gardener@2.0.54:
+  version "2.0.54"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.54.tgz#67cf9933d382cb1c397ce897416d592cf605e997"
+  integrity sha512-6gK0ylnGQqrWg7fXKbehshtQ5NLXGsXPz6S4MZfQzYT7H3Gu/rmjMVmwgCkODxfifXWVooMI9QUNdHWTPsFnJQ==
   dependencies:
     "@hapi/joi" "15.1.0"
     chalk "2.4.2"
@@ -3580,7 +3585,7 @@ js-gardener@2.0.53:
     eslint-plugin-mocha "6.0.0"
     fancy-log "1.3.3"
     glob "7.1.4"
-    joi-strict "1.0.3"
+    joi-strict "1.0.4"
     js-yaml "3.13.1"
     lodash.difference "4.5.0"
     lodash.get "4.4.2"
@@ -6362,6 +6367,19 @@ smart-fs@1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.9.0.tgz#0a3326f0c459ab34cad23ff8958e9dbefba2f65b"
   integrity sha512-cp5jeLH+c709jRp74G1pjrS0ywLTZ/X0SQAmz2Vf2vTd9s2MwTmQ//vdr8k9/Cj7uce5zxqtuTqZc7gzpy3PgA==
+  dependencies:
+    fs-extra "8.1.0"
+    json-stringify-pretty-compact "2.0.0"
+    lodash.clonedeep "4.5.0"
+    lodash.isequal "4.5.0"
+    object-align "1.0.1"
+    xml-js "1.6.11"
+    yaml-boost "1.9.9"
+
+smart-fs@1.9.1:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.9.1.tgz#551a11228b4f2e4b6d6adb830a198cd5e6974d5a"
+  integrity sha512-xlI7cfGrKa9kEMd8Uga2cz/sWJoMJGDqqLmlqT4PnNMPYpEPbv5nm18T+NE63VlNonnhUhkNVGxWaqsK01rMRg==
   dependencies:
     fs-extra "8.1.0"
     json-stringify-pretty-compact "2.0.0"
