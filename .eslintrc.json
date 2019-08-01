@@ -1,115 +1,42 @@
 {
   "root": true,
-  "extends": [
-    "airbnb-base",
-    "plugin:jasmine/recommended"
-  ],
+  "extends": ["airbnb-base", "plugin:jasmine/recommended"],
   "rules": {
     "jasmine/expect-single-argument": 0,
     "@blackflux/rules/jasmine-expect-two-arguments": 1,
     "jasmine/new-line-before-expect": 0,
     "@blackflux/rules/istanbul-prevent-ignore": 1,
     "@blackflux/rules/kebab-case-enforce": 1,
-    "max-len": [
-      "error",
-      {
-        "code": 120
-      }
-    ],
+    "max-len": ["error", {"code": 120}],
     "mocha/no-exclusive-tests": "error",
-    "prefer-destructuring": [
-      "error",
-      {
-        "object": false,
-        "array": false
-      }
-    ],
-    "comma-dangle": [
-      "error",
-      "never"
-    ],
-    "indent": [
-      "error",
-      2,
-      {
-        "SwitchCase": 1
-      }
-    ],
-    "quotes": [
-      2,
-      "single",
-      {
-        "avoidEscape": true
-      }
-    ],
-    "linebreak-style": [
-      2,
-      "unix"
-    ],
-    "semi": [
-      2,
-      "always"
-    ],
+    "prefer-destructuring": ["error", {"object": false, "array": false}],
+    "comma-dangle": ["error", "never"],
+    "indent": ["error", 2, {"SwitchCase": 1}],
+    "quotes": [2, "single", {"avoidEscape": true}],
+    "linebreak-style": [2, "unix"],
+    "semi": [2, "always"],
     "no-unused-vars": [
       1,
-      {
-        "vars": "all",
-        "args": "none",
-        "ignoreRestSiblings": true
-      }
+      {"vars": "all", "args": "none", "ignoreRestSiblings": true}
     ],
-    "no-var": [
-      1
-    ],
-    "no-fallthrough": [
-      1
-    ],
+    "no-var": [1],
+    "no-fallthrough": [1],
     "spaced-comment": [
       "error",
       "always",
       {
-        "line": {
-          "exceptions": [
-            "-",
-            "+"
-          ],
-          "markers": [
-            "=",
-            "!"
-          ]
-        },
+        "line": {"exceptions": ["-", "+"], "markers": ["=", "!"]},
         "block": {
-          "exceptions": [
-            "-",
-            "+"
-          ],
-          "markers": [
-            "=",
-            "!",
-            ":",
-            "::"
-          ],
+          "exceptions": ["-", "+"],
+          "markers": ["=", "!", ":", "::"],
           "balanced": true
         }
       }
-    ]
+    ],
+    "@blackflux/rules/prevent-typeof-object": 1
   },
-  "env": {
-    "es6": true,
-    "node": true,
-    "jasmine": true,
-    "mocha": true
-  },
-  "globals": {
-    "logger": true,
-    "log4js": true
-  },
-  "plugins": [
-    "json",
-    "jasmine",
-    "mocha",
-    "markdown",
-    "@blackflux/rules"
-  ],
+  "env": {"es6": true, "node": true, "jasmine": true, "mocha": true},
+  "globals": {"logger": true, "log4js": true},
+  "plugins": ["json", "jasmine", "mocha", "markdown", "@blackflux/rules"],
   "parser": "babel-eslint"
 }
