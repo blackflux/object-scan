@@ -4,19 +4,19 @@ const { defineProperty, findLast, parseWildcard } = require('./helper');
 
 const LEAF = Symbol('leaf');
 const markLeaf = (input, match, readonly) => defineProperty(input, LEAF, match, readonly);
-const isLeaf = input => input[LEAF] !== undefined;
-const isMatch = input => input !== undefined && input[LEAF] === true;
+const isLeaf = (input) => input[LEAF] !== undefined;
+const isMatch = (input) => input !== undefined && input[LEAF] === true;
 module.exports.isLeaf = isLeaf;
 module.exports.isMatch = isMatch;
 
 const HAS_MATCHES = Symbol('has-matches');
-const setHasMatches = input => defineProperty(input, HAS_MATCHES, true);
-const hasMatches = input => input[HAS_MATCHES] === true;
+const setHasMatches = (input) => defineProperty(input, HAS_MATCHES, true);
+const hasMatches = (input) => input[HAS_MATCHES] === true;
 module.exports.hasMatches = hasMatches;
 
 const NEEDLE = Symbol('needle');
 const setNeedle = (input, needle, readonly) => defineProperty(input, NEEDLE, needle, readonly);
-const getNeedle = input => (input[NEEDLE] === undefined ? null : input[NEEDLE]);
+const getNeedle = (input) => (input[NEEDLE] === undefined ? null : input[NEEDLE]);
 module.exports.getNeedle = getNeedle;
 
 const NEEDLES = Symbol('needles');
@@ -26,31 +26,31 @@ const addNeedle = (input, needle) => {
   }
   input[NEEDLES].add(needle);
 };
-const getNeedles = input => [...input[NEEDLES]];
+const getNeedles = (input) => [...input[NEEDLES]];
 module.exports.getNeedles = getNeedles;
 
 const WILDCARD_REGEX = Symbol('wildcard-regex');
 const setWildcardRegex = (input, wildcard) => defineProperty(input, WILDCARD_REGEX, parseWildcard(wildcard));
-const getWildcardRegex = input => input[WILDCARD_REGEX];
+const getWildcardRegex = (input) => input[WILDCARD_REGEX];
 module.exports.getWildcardRegex = getWildcardRegex;
 
 const RECURSIVE = Symbol('recursive');
-const markRecursive = input => defineProperty(input, RECURSIVE, true);
-const isRecursive = input => input[RECURSIVE] === true;
+const markRecursive = (input) => defineProperty(input, RECURSIVE, true);
+const isRecursive = (input) => input[RECURSIVE] === true;
 module.exports.isRecursive = isRecursive;
 
 const RECURSION_POS = Symbol('recursion-pos');
 const setRecursionPos = (input, pos, readonly) => defineProperty(input, RECURSION_POS, pos, readonly);
-const getRecursionPos = input => input[RECURSION_POS] || 0;
+const getRecursionPos = (input) => input[RECURSION_POS] || 0;
 module.exports.getRecursionPos = getRecursionPos;
 
 const ENTRIES = Symbol('entries');
 const setEntries = (input, entries) => defineProperty(input, ENTRIES, entries);
-const getEntries = input => input[ENTRIES];
+const getEntries = (input) => input[ENTRIES];
 module.exports.getEntries = getEntries;
 
 module.exports.getMeta = (() => {
-  const extractNeedles = input => Array.from(input.reduce((p, e) => {
+  const extractNeedles = (input) => Array.from(input.reduce((p, e) => {
     const needle = getNeedle(e);
     if (needle !== null) {
       p.add(needle);
@@ -58,11 +58,11 @@ module.exports.getMeta = (() => {
     return p;
   }, new Set()));
   return (inputs, parents = null) => ({
-    isMatch: isMatch(findLast(inputs, s => isLeaf(s))),
-    matchedBy: extractNeedles(inputs.filter(e => isMatch(e))),
-    excludedBy: extractNeedles(inputs.filter(e => !isMatch(e))),
+    isMatch: isMatch(findLast(inputs, (s) => isLeaf(s))),
+    matchedBy: extractNeedles(inputs.filter((e) => isMatch(e))),
+    excludedBy: extractNeedles(inputs.filter((e) => !isMatch(e))),
     traversedBy: Array.from(inputs.reduce((p, e) => {
-      getNeedles(e).forEach(n => p.add(n));
+      getNeedles(e).forEach((n) => p.add(n));
       return p;
     }, new Set())),
     parents: parents !== null ? [...parents].reverse() : null
@@ -87,7 +87,7 @@ const buildRecursive = (tower, path, ctx, excluded, root = false) => {
     return;
   }
   if (path[0] instanceof Set) {
-    path[0].forEach(c => buildRecursive(tower, [c, ...path.slice(1)], ctx, excluded));
+    path[0].forEach((c) => buildRecursive(tower, [c, ...path.slice(1)], ctx, excluded));
     return;
   }
   if (tower[path[0]] === undefined) {
@@ -108,8 +108,8 @@ const buildRecursive = (tower, path, ctx, excluded, root = false) => {
 
 const finalizeRecursive = (tower) => {
   const towerValues = Object.values(tower);
-  towerValues.forEach(v => finalizeRecursive(v));
-  if (isMatch(tower) || towerValues.some(v => hasMatches(v))) {
+  towerValues.forEach((v) => finalizeRecursive(v));
+  if (isMatch(tower) || towerValues.some((v) => hasMatches(v))) {
     setHasMatches(tower);
   }
   setEntries(tower, Object.entries(tower).filter(([k]) => k !== ''));
@@ -117,7 +117,7 @@ const finalizeRecursive = (tower) => {
 
 module.exports.compile = (needles, strict = true) => {
   const tower = {};
-  needles.forEach(needle => buildRecursive(tower, [parser(needle)], { needle, strict }, false, true));
+  needles.forEach((needle) => buildRecursive(tower, [parser(needle)], { needle, strict }, false, true));
   finalizeRecursive(tower);
   return tower;
 };

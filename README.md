@@ -169,7 +169,7 @@ objectScan(['a.*,!a.e'])(obj);
 // value function
 objectScan(['**'], { filterFn: (key, value) => typeof value === 'string' })(obj);
 // => ["k", "a.h[1]", "a.h[0]", "a.e.f", "a.b.c"]
-objectScan(['**'], { breakFn: key => key === 'a.b' })(obj);
+objectScan(['**'], { breakFn: (key) => key === 'a.b' })(obj);
 // => ["k", "a.h[1]", "a.h[0]", "a.h", "a.e.f", "a.e", "a.b", "a"]
 ```
 

@@ -3,7 +3,7 @@ const compiler = require('./util/compiler');
 const { findLast } = require('./util/helper');
 
 const specialChars = /[?!,.*[\]{}]/g;
-const escape = input => input.replace(specialChars, '\\$&');
+const escape = (input) => input.replace(specialChars, '\\$&');
 
 const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
   if (wildcard === '**') {
@@ -64,7 +64,7 @@ const find = (haystack_, searches_, ctx) => {
       continue;
     }
 
-    if (!searches.some(s => compiler.hasMatches(s))) {
+    if (!searches.some((s) => compiler.hasMatches(s))) {
       // eslint-disable-next-line no-continue
       continue;
     }
@@ -82,11 +82,11 @@ const find = (haystack_, searches_, ctx) => {
       continue;
     }
 
-    if (compiler.isMatch(findLast(searches, s => compiler.isLeaf(s)))) {
+    if (compiler.isMatch(findLast(searches, (s) => compiler.isLeaf(s)))) {
       stack.push(true, searches, segment, depth);
     }
 
-    if (searches[0][''] !== undefined && path.find(p => typeof p === 'string') === undefined) {
+    if (searches[0][''] !== undefined && path.find((p) => typeof p === 'string') === undefined) {
       assert(searches.length === 1);
       stack.push(false, [searches[0]['']], segment, depth);
     }
@@ -129,13 +129,14 @@ module.exports = (needles, opts = {}) => {
     return () => [];
   }
 
-  const ctx = Object.assign({
+  const ctx = {
     filterFn: undefined,
     breakFn: undefined,
     joined: true,
     useArraySelector: true,
-    strict: true
-  }, opts);
+    strict: true,
+    ...opts
+  };
   assert(Object.keys(ctx).length === 5, 'Unexpected Option provided!');
   assert(['function', 'undefined'].includes(typeof ctx.filterFn));
   assert(['function', 'undefined'].includes(typeof ctx.breakFn));
@@ -144,5 +145,5 @@ module.exports = (needles, opts = {}) => {
   assert(typeof ctx.strict === 'boolean');
 
   const search = compiler.compile(needles, ctx.strict); // keep separate for performance
-  return haystack => find(haystack, [search], ctx);
+  return (haystack) => find(haystack, [search], ctx);
 };
