@@ -1388,10 +1388,10 @@ configstore@^3.0.0:
     write-file-atomic "^2.0.0"
     xdg-basedir "^3.0.0"
 
-confusing-browser-globals@^1.0.5:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/confusing-browser-globals/-/confusing-browser-globals-1.0.7.tgz#5ae852bd541a910e7ffb2dbb864a2d21a36ad29b"
-  integrity sha512-cgHI1azax5ATrZ8rJ+ODDML9Fvu67PimB6aNxBrc/QwSaDaM9eTfIEUHx3bBLJJ82ioSb+/5zfsMCCEJax3ByQ==
+confusing-browser-globals@^1.0.7:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/confusing-browser-globals/-/confusing-browser-globals-1.0.8.tgz#93ffec1f82a6e2bf2bc36769cc3a92fa20e502f3"
+  integrity sha512-lI7asCibVJ6Qd3FGU7mu4sfG4try4LX3+GVS+Gv8UlrEf2AeW57piecapnog2UHZSbcX/P/1UDWVaTsblowlZg==
 
 console-control-strings@^1.0.0, console-control-strings@^1.1.0, console-control-strings@~1.1.0:
   version "1.1.0"
@@ -1963,12 +1963,12 @@ escape-string-regexp@1.0.5, escape-string-regexp@^1.0.2, escape-string-regexp@^1
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
-eslint-config-airbnb-base@13.2.0:
-  version "13.2.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-airbnb-base/-/eslint-config-airbnb-base-13.2.0.tgz#f6ea81459ff4dec2dda200c35f1d8f7419d57943"
-  integrity sha512-1mg/7eoB4AUeB0X1c/ho4vb2gYkNH8Trr/EgCT/aGmKhhG+F6vF5s8+iRBlWAzFIAphxIdp3YfEKgEl0f9Xg+w==
+eslint-config-airbnb-base@14.0.0:
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-airbnb-base/-/eslint-config-airbnb-base-14.0.0.tgz#8a7bcb9643d13c55df4dd7444f138bf4efa61e17"
+  integrity sha512-2IDHobw97upExLmsebhtfoD3NAKhV4H0CJWP3Uprd/uk+cHuWYOczPVxQ8PxLFUAw7o3Th1RAU8u1DoUpr+cMA==
   dependencies:
-    confusing-browser-globals "^1.0.5"
+    confusing-browser-globals "^1.0.7"
     object.assign "^4.1.0"
     object.entries "^1.1.0"
 
@@ -3552,15 +3552,15 @@ joi-strict@1.0.4:
   resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.0.4.tgz#8bf55f7b4d6accd5b530ac98276131b59e982254"
   integrity sha512-ChSFFa+Z3iD9x9QsBFMEHwXrwt2Gq2OD1fg+Mgje1Tx+Pqt7ma+LXgMdzVoC7GHCxhO3ySDVBtDumES/yycMXg==
 
-js-gardener@2.0.58:
-  version "2.0.58"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.58.tgz#e9acd271be05354caff2f0d0548c7b04995030fa"
-  integrity sha512-3mQRH8pmwtXrf9eRN4lfJ8ntpft5YB7Ag62aJWAWHnctNckkKdYyzSNjslafMEfMe844IcGU0mAomf5fYHUCbQ==
+js-gardener@2.0.59:
+  version "2.0.59"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.59.tgz#d4f0ecdfb387403b4fc4e4ee0aa956be1ea0b29e"
+  integrity sha512-cRFWSkHQ/bs5VmEVPkjOKU2oaFd7ynuKC37jeN9vwzYP4lDbJI9pC7gHv4T9j2gqiKw8g7nWPncgle4haA6wHQ==
   dependencies:
     "@hapi/joi" "15.1.0"
     chalk "2.4.2"
     eslint "6.1.0"
-    eslint-config-airbnb-base "13.2.0"
+    eslint-config-airbnb-base "14.0.0"
     eslint-plugin-import "2.18.2"
     eslint-plugin-jasmine "2.10.1"
     eslint-plugin-json "1.4.0"
