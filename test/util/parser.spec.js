@@ -4,14 +4,14 @@ const parser = require('./../../src/util/parser');
 const asString = (() => {
   const asStringRec = (input) => {
     if (Array.isArray(input)) {
-      return `[${input.map(e => asStringRec(e)).join(',')}]`;
+      return `[${input.map((e) => asStringRec(e)).join(',')}]`;
     }
     if (input instanceof Set) {
-      return `{${[...input].map(e => asStringRec(e)).join(',')}}`;
+      return `{${[...input].map((e) => asStringRec(e)).join(',')}}`;
     }
     return `${input.isExcluded() ? '!' : ''}"${input}"`;
   };
-  return input => asStringRec(parser(input));
+  return (input) => asStringRec(parser(input));
 })();
 
 const checkError = (input, msg) => {
