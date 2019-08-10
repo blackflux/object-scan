@@ -469,7 +469,7 @@ describe('Testing Find', () => {
     };
 
     it('Testing useArraySelector = false, breakFn (BREAKING)', () => {
-      expect(execTest(false, k => k === 'child')).to.deep.equal(['', 'child']);
+      expect(execTest(false, (k) => k === 'child')).to.deep.equal(['', 'child']);
     });
 
     it('Testing useArraySelector = false, breakFn', () => {
@@ -477,7 +477,7 @@ describe('Testing Find', () => {
     });
 
     it('Testing useArraySelector = true, breakFn (BREAKING)', () => {
-      expect(execTest(true, k => k === 'child')).to.deep.equal(['', 'child']);
+      expect(execTest(true, (k) => k === 'child')).to.deep.equal(['', 'child']);
     });
 
     it('Testing useArraySelector = true, breakFn', () => {
@@ -488,8 +488,8 @@ describe('Testing Find', () => {
       const result = [];
       objectScan(['**'], {
         useArraySelector: false,
-        filterFn: k => result.push(['filterFn', k]),
-        breakFn: k => result.push(['breakFn', k])
+        filterFn: (k) => result.push(['filterFn', k]),
+        breakFn: (k) => result.push(['breakFn', k])
       })({
         tag: [[{ id: 1 }]]
       });
@@ -777,7 +777,7 @@ describe('Testing Find', () => {
     expect(objectScan(['a.*,!a.e'])(input)).to.deep.equal(['a.h', 'a.b']);
     expect(objectScan(['**'], { filterFn: (key, value) => typeof value === 'string' })(input)).to
       .deep.equal(['k', 'a.h[1]', 'a.h[0]', 'a.e.f', 'a.b.c']);
-    expect(objectScan(['**'], { breakFn: key => key === 'a.b' })(input)).to
+    expect(objectScan(['**'], { breakFn: (key) => key === 'a.b' })(input)).to
       .deep.equal(['k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b', 'a']);
     expect(objectScan(['**[*]'])(input)).to.deep.equal(['a.h[1]', 'a.h[0]']);
     expect(objectScan(['*.*[*]'])(input)).to.deep.equal(['a.h[1]', 'a.h[0]']);

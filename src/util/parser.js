@@ -2,8 +2,8 @@ const assert = require('assert');
 const { defineProperty } = require('./helper');
 
 const IS_EXCLUDED = Symbol('is-excluded');
-const markExcluded = input => defineProperty(input, IS_EXCLUDED, true);
-const isExcluded = input => input[IS_EXCLUDED] === true;
+const markExcluded = (input) => defineProperty(input, IS_EXCLUDED, true);
+const isExcluded = (input) => input[IS_EXCLUDED] === true;
 
 const throwError = (msg, input, context = {}) => {
   throw new Error(Object.entries(context)
@@ -49,7 +49,7 @@ const Result = (input) => {
     const parentIsArray = Array.isArray(parent);
     const child = getSimple(cResult);
     if (!parentIsArray && child instanceof Set) {
-      child.forEach(e => parent.add(e));
+      child.forEach((e) => parent.add(e));
     } else {
       parent[parentIsArray ? 'push' : 'add'](child);
     }
