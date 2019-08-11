@@ -168,12 +168,12 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@blackflux/eslint-plugin-rules@1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.1.3.tgz#4ecf0c606b46d58ec30c7f4447fa371fdb7efa82"
-  integrity sha512-PLrBC8THXBOKJYfbgmPJO7qbuYY4wsi6a65ccfyinq2SatLd9ZVWbTnZ8BKzBz5o8zQMUJQ1Jc0eAxwWB3hX+g==
+"@blackflux/eslint-plugin-rules@1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.1.4.tgz#807165f15092c47736e6a3d5670626ae34e75d84"
+  integrity sha512-UtFXmoCk5xarFzQhPkS1EXKOBcDAPBJv/Awbu9YV+9TUixNZ47z2NJujp8ZxFCSTmceLRwbplYSHRcybhAbKNw==
   dependencies:
-    smart-fs "1.9.4"
+    smart-fs "1.9.5"
 
 "@blackflux/robo-config-plugin@2.4.4":
   version "2.4.4"
@@ -4950,6 +4950,11 @@ object-align@1.0.2:
   resolved "https://registry.yarnpkg.com/object-align/-/object-align-1.0.2.tgz#14f003e9a50fbe18acb79b736b655924a06a5ade"
   integrity sha512-YNGCcw5RcGCDpehATXUGvg0ZNJ9cPz0TtnhIvDYO3IlB304ps+T5S5KlkiA8NCn/d212BwkARuxC4RVQQxQtfg==
 
+object-align@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/object-align/-/object-align-1.0.3.tgz#5951029ebfb80356261e154061a5ae39a6442fb9"
+  integrity sha512-u3wXpnjiIniv0QntVOCzP1OSqtPbvye1Dr5/FoVzlfGMlte1j5Njq2plNvlmzYX5HwR/uGAxgdRlmMkO6DiN/g==
+
 object-assign@^4.0.1, object-assign@^4.1.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
@@ -6342,16 +6347,16 @@ smart-fs@1.9.2:
     xml-js "1.6.11"
     yaml-boost "1.9.10"
 
-smart-fs@1.9.4:
-  version "1.9.4"
-  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.9.4.tgz#c555e443285e9050f3de82372c1bfb7429726e9f"
-  integrity sha512-7o51vHHOE9vODZ+FkfARhwwyfVSNxpBuiSwBgTB0/PkWmR7A6ny1mvzMDOAOmEQyEudvi0Jbolh8DFJ9n5AwmA==
+smart-fs@1.9.5:
+  version "1.9.5"
+  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.9.5.tgz#f5e27a9ae6615d294b5a065aba235dd654d50ab6"
+  integrity sha512-YpyOnVqayI8S3jlTG8EttVL7hVdyx8ujricF6k4qe/OE6SeEyKJ32WI9+hucr0Y6XHQ34dEci2AcYGFcj1Cnyg==
   dependencies:
     fs-extra "8.1.0"
     json-stringify-pretty-compact "2.0.0"
     lodash.clonedeep "4.5.0"
     lodash.isequal "4.5.0"
-    object-align "1.0.2"
+    object-align "1.0.3"
     xml-js "1.6.11"
     yaml-boost "1.9.11"
 
