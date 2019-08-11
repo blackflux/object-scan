@@ -3549,20 +3549,15 @@ java-properties@^1.0.0:
   resolved "https://registry.yarnpkg.com/java-properties/-/java-properties-1.0.2.tgz#ccd1fa73907438a5b5c38982269d0e771fe78211"
   integrity sha512-qjdpeo2yKlYTH7nFdK0vbZWuTCesk4o63v5iVOlhMQPfuIZQfW/HI35SjfhA+4qpg36rnFSvUK5b1m+ckIblQQ==
 
-joi-strict@1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.0.4.tgz#8bf55f7b4d6accd5b530ac98276131b59e982254"
-  integrity sha512-ChSFFa+Z3iD9x9QsBFMEHwXrwt2Gq2OD1fg+Mgje1Tx+Pqt7ma+LXgMdzVoC7GHCxhO3ySDVBtDumES/yycMXg==
-
 joi-strict@1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.0.5.tgz#f4abad8bfd39281eb987f8ceb36c76d5d8de30c2"
   integrity sha512-ZOU1FTny1MmAlm6vXoD77LFqif23KZQVC9m7euLkYq0QHDj0GHKz/A/IRXzhkk3DPll/Y7A74b1R9M7M4fqzTw==
 
-js-gardener@2.0.62:
-  version "2.0.62"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.62.tgz#ee186aa522788002e7406a268daa7057bd0fc76d"
-  integrity sha512-giWV+vMfwHJHKMk7345SRakhQUnBGFc/Xf/cNJA3mxJKPxDq8lIQ8jpQ+m9dCt9hs2DjSWdPCIUAwVZ0I/8knQ==
+js-gardener@2.0.63:
+  version "2.0.63"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.63.tgz#3922ec6188aaa43e722f3acec97429a5743c33c2"
+  integrity sha512-OTiPXJDjKp1F9i4zeFo8/TKwi1aWczCfQY6rXbThwqlcYH+1UGOwSulbOOdruyl+ENcTwDScdpYAH2Uo8T7Oaw==
   dependencies:
     "@hapi/joi" "15.1.0"
     chalk "2.4.2"
@@ -3581,7 +3576,7 @@ js-gardener@2.0.62:
     lodash.get "4.4.2"
     mocha "6.2.0"
     npm-check "5.9.0"
-    robo-config "3.1.4"
+    robo-config "3.1.5"
     tmp "0.1.0"
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
@@ -4989,10 +4984,10 @@ object-scan@10.0.6:
   resolved "https://registry.yarnpkg.com/object-scan/-/object-scan-10.0.6.tgz#dc3846b3774ae7a6b5889aa9a6f73134fbd333a6"
   integrity sha512-0SnIzQ+JsR7v0GFnedNZ/nnhv1OU3iVLParKeU4r3yBz/+NOuloAyygCwSQOJmlngW14XB+KHlHYhLrdZq5XNQ==
 
-object-treeify@1.1.14:
-  version "1.1.14"
-  resolved "https://registry.yarnpkg.com/object-treeify/-/object-treeify-1.1.14.tgz#6b1b6ec691710c43e1b36f117a2a51f215999132"
-  integrity sha512-UcEXe/df7Ui/Ov/rrKMu9/ba60JwYGbhqsj0bKgpFB2oMFz9qyFK69ddSQRFyqV1R6b5+3OT3USHl+BsIt02aA==
+object-treeify@1.1.15:
+  version "1.1.15"
+  resolved "https://registry.yarnpkg.com/object-treeify/-/object-treeify-1.1.15.tgz#69214f8e83a87020065601765d312348bd3d7c42"
+  integrity sha512-0JQn7EhJvuBCtlUZed4UDmmC5AvfXng/5ClaWeOR+3ab2PZcVph4iBWsN5ehchhbLluRRv0HaFBQkvnmKS6b6A==
 
 object-visit@^1.0.0:
   version "1.0.1"
@@ -6116,21 +6111,21 @@ rimraf@2, rimraf@2.6.3, rimraf@^2.5.2, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6
   dependencies:
     glob "^7.1.3"
 
-robo-config@3.1.4:
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.1.4.tgz#7d461c0aac7989d4ab29f57e46559e5e628e0748"
-  integrity sha512-ByPtY7IIBPC6e64uPOy7xfUWb+Lp6j4aWAvefBOn/Jmtlar5OrlV9G/UAZzKC7e4nnD9uc+8iBbX1gaJeQVNTQ==
+robo-config@3.1.5:
+  version "3.1.5"
+  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.1.5.tgz#9177f50023b22f84f68c875bf9451762befb1a73"
+  integrity sha512-STjHbn1iKXRS7D8Efuv/6uS+nL+/xJ7iR4UfAWkuWIIkaNZavOxUkUvb0VAHPPwWqRriOIM23bLKC8o4CUKY7A==
   dependencies:
     "@hapi/joi" "15.1.0"
     app-root-path "2.2.1"
     deepmerge "4.0.0"
-    joi-strict "1.0.4"
+    joi-strict "1.0.5"
     lodash.clonedeep "4.5.0"
     lodash.difference "4.5.0"
     lodash.get "4.4.2"
     object-deep-contain "1.0.14"
     object-scan "10.0.6"
-    object-treeify "1.1.14"
+    object-treeify "1.1.15"
     smart-fs "1.9.3"
 
 run-async@^0.1.0:
