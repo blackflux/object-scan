@@ -3554,10 +3554,15 @@ joi-strict@1.0.4:
   resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.0.4.tgz#8bf55f7b4d6accd5b530ac98276131b59e982254"
   integrity sha512-ChSFFa+Z3iD9x9QsBFMEHwXrwt2Gq2OD1fg+Mgje1Tx+Pqt7ma+LXgMdzVoC7GHCxhO3ySDVBtDumES/yycMXg==
 
-js-gardener@2.0.61:
-  version "2.0.61"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.61.tgz#58ed898eb4ee542e10fc5fc9603fd7d9efd4d048"
-  integrity sha512-yfZ3JXkN+kQThbG6PYndOfO/1z/wE5LxbTjhH3LFtnyZXKv18NWkiTB9tFEMtVvq+l/d6i34NJ/9A/h0MW1Wsg==
+joi-strict@1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.0.5.tgz#f4abad8bfd39281eb987f8ceb36c76d5d8de30c2"
+  integrity sha512-ZOU1FTny1MmAlm6vXoD77LFqif23KZQVC9m7euLkYq0QHDj0GHKz/A/IRXzhkk3DPll/Y7A74b1R9M7M4fqzTw==
+
+js-gardener@2.0.62:
+  version "2.0.62"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.62.tgz#ee186aa522788002e7406a268daa7057bd0fc76d"
+  integrity sha512-giWV+vMfwHJHKMk7345SRakhQUnBGFc/Xf/cNJA3mxJKPxDq8lIQ8jpQ+m9dCt9hs2DjSWdPCIUAwVZ0I/8knQ==
   dependencies:
     "@hapi/joi" "15.1.0"
     chalk "2.4.2"
@@ -3570,13 +3575,13 @@ js-gardener@2.0.61:
     eslint-plugin-mocha "6.0.0"
     fancy-log "1.3.3"
     glob "7.1.4"
-    joi-strict "1.0.4"
+    joi-strict "1.0.5"
     js-yaml "3.13.1"
     lodash.difference "4.5.0"
     lodash.get "4.4.2"
     mocha "6.2.0"
     npm-check "5.9.0"
-    robo-config "3.1.2"
+    robo-config "3.1.4"
     tmp "0.1.0"
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
@@ -4969,10 +4974,10 @@ object-copy@^0.1.0:
     define-property "^0.2.5"
     kind-of "^3.0.3"
 
-object-deep-contain@1.0.13:
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/object-deep-contain/-/object-deep-contain-1.0.13.tgz#2d7b94ad5a2e2da535701d1f0d67ce4c2135f8cf"
-  integrity sha512-GYKKbftOzyjAfF6m5gL3YLs2MoE2Z3RtyTvJCljfoUleRIHtObSbCgQzUL2W5lZA9bHOjOh9Qy8Jzo8pZth5eA==
+object-deep-contain@1.0.14:
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/object-deep-contain/-/object-deep-contain-1.0.14.tgz#c9c622e3355259c0935f43fe668d6e667cd2e83f"
+  integrity sha512-WjwbNvoXPAjPidDXvEKnPlB36gMIA0cG5b3i6ZMTAFKPaQWCa5ILE2B3wMc3yykceKTOwnsxgVfmsnrmO0Zl4A==
 
 object-keys@^1.0.11, object-keys@^1.0.12:
   version "1.1.1"
@@ -6111,10 +6116,10 @@ rimraf@2, rimraf@2.6.3, rimraf@^2.5.2, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6
   dependencies:
     glob "^7.1.3"
 
-robo-config@3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.1.2.tgz#ef69bc53ef4416801778b30aa105417eef33d13f"
-  integrity sha512-kCVzK+6juQNkPCOPyUvHD/tEtcUw8tVYTVkUK0hN5BRFLTN2RYmJHxTGVC+6lsSbFO/rzPwfvwOXoYkLfSB+Rw==
+robo-config@3.1.4:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.1.4.tgz#7d461c0aac7989d4ab29f57e46559e5e628e0748"
+  integrity sha512-ByPtY7IIBPC6e64uPOy7xfUWb+Lp6j4aWAvefBOn/Jmtlar5OrlV9G/UAZzKC7e4nnD9uc+8iBbX1gaJeQVNTQ==
   dependencies:
     "@hapi/joi" "15.1.0"
     app-root-path "2.2.1"
@@ -6123,10 +6128,10 @@ robo-config@3.1.2:
     lodash.clonedeep "4.5.0"
     lodash.difference "4.5.0"
     lodash.get "4.4.2"
-    object-deep-contain "1.0.13"
+    object-deep-contain "1.0.14"
     object-scan "10.0.6"
     object-treeify "1.1.14"
-    smart-fs "1.9.2"
+    smart-fs "1.9.3"
 
 run-async@^0.1.0:
   version "0.1.0"
@@ -6334,10 +6339,10 @@ smart-buffer@4.0.2:
   resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-4.0.2.tgz#5207858c3815cc69110703c6b94e46c15634395d"
   integrity sha512-JDhEpTKzXusOqXZ0BUIdH+CjFdO/CR3tLlf5CN34IypI+xMmXW1uB16OOY8z3cICbJlDAVJzNbwBhNO0wt9OAw==
 
-smart-fs@1.9.2:
-  version "1.9.2"
-  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.9.2.tgz#d516a3004c61f86585f0f8ed0f9b82d96d9b8abe"
-  integrity sha512-PfHv+bi2e+lJe5qDo7xvSfgHDRlR7mPyE3EgrUmJ8aeqNUTBrzF67tRcLeLr7t4oz3jfukXOWKOcATiwbJx2fA==
+smart-fs@1.9.3:
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.9.3.tgz#e31c7df571591e79084878ce58f4d7c2b0211ab2"
+  integrity sha512-bxaxG5nWGSwZQH0nldCdBL2Pb9bxHf2PLfrPwFH9j8AKUaiWO1tbWzMCHxDZpkMcIqwdLKH4Esfz8E8lYSZffQ==
   dependencies:
     fs-extra "8.1.0"
     json-stringify-pretty-compact "2.0.0"
