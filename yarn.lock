@@ -168,17 +168,17 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@blackflux/eslint-plugin-rules@1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.3.0.tgz#11a2643b735a6d3ce14a281d4805c7d701b04866"
-  integrity sha512-xSzpNF3okQtDHuSHeCdABmVnfhLz+rthquA2mb9P2UV8mJPK0m+4hhJex/3HxjKx4P+N1pTHoE5luNNcwHjRMg==
+"@blackflux/eslint-plugin-rules@1.3.1":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.3.1.tgz#acef9f761e42b7c7f06a367c547e407cb694a7f3"
+  integrity sha512-ofOOJKQ9u+VcjnyXFzTQ0DGezJe4VGgPPhY81yqrvC9HrWloXhu3CP2FG5Wkd0giqhvK0tIKeBQ8TW/bbPg60g==
   dependencies:
     smart-fs "1.9.5"
 
-"@blackflux/robo-config-plugin@2.5.2":
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/@blackflux/robo-config-plugin/-/robo-config-plugin-2.5.2.tgz#6c90d2731ec4fbe41606f1309dbced8643fb9e83"
-  integrity sha512-OQP2p9jHsIZIPyvYCxTKd3Qa9X30vmgiW53l0b1c+YRds/VVqhZd0GhlybdQ5cHpOw+gQ1hDRe8upjGmqT4nyQ==
+"@blackflux/robo-config-plugin@2.5.4":
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/@blackflux/robo-config-plugin/-/robo-config-plugin-2.5.4.tgz#f4072c7262f3e424721266e5182ed2bdc2b312da"
+  integrity sha512-/V9DIdWzEuoTQk2i11gdm0MNknkEVjOy9amNQhERv6pKJi0R0JXb/7BCHvMDbzSL/mwL3Er9kl9Hov8psoBigQ==
 
 "@hapi/address@2.x.x":
   version "2.0.0"
@@ -190,25 +190,10 @@
   resolved "https://registry.yarnpkg.com/@hapi/bourne/-/bourne-1.3.2.tgz#0a7095adea067243ce3283e1b56b8a8f453b242a"
   integrity sha512-1dVNHT76Uu5N3eJNTYcvxee+jzX4Z9lfciqRRHCU27ihbUcYi+iSc2iml5Ke1LXe1SyJCLA0+14Jh4tXJgOppA==
 
-"@hapi/hoek@6.x.x":
-  version "6.2.4"
-  resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-6.2.4.tgz#4b95fbaccbfba90185690890bdf1a2fbbda10595"
-  integrity sha512-HOJ20Kc93DkDVvjwHyHawPwPkX44sIrbXazAUDiUXaY2R9JwQGo2PhFfnQtdrsIe4igjG2fPgMra7NYw7qhy0A==
-
 "@hapi/hoek@8.x.x":
   version "8.2.1"
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-8.2.1.tgz#924af04cbb22e17359c620d2a9c946e63f58eb77"
   integrity sha512-JPiBy+oSmsq3St7XlipfN5pNA6bDJ1kpa73PrK/zR29CVClDVqy04AanM/M/qx5bSF+I61DdCfAvRrujau+zRg==
-
-"@hapi/joi@15.1.0":
-  version "15.1.0"
-  resolved "https://registry.yarnpkg.com/@hapi/joi/-/joi-15.1.0.tgz#940cb749b5c55c26ab3b34ce362e82b6162c8e7a"
-  integrity sha512-n6kaRQO8S+kepUTbXL9O/UOL788Odqs38/VOfoCrATDtTvyfiO3fgjlSRaNkHabpTLgM7qru9ifqXlXbXk8SeQ==
-  dependencies:
-    "@hapi/address" "2.x.x"
-    "@hapi/hoek" "6.x.x"
-    "@hapi/marker" "1.x.x"
-    "@hapi/topo" "3.x.x"
 
 "@hapi/joi@15.1.1":
   version "15.1.1"
@@ -219,11 +204,6 @@
     "@hapi/bourne" "1.x.x"
     "@hapi/hoek" "8.x.x"
     "@hapi/topo" "3.x.x"
-
-"@hapi/marker@1.x.x":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@hapi/marker/-/marker-1.0.0.tgz#65b0b2b01d1be06304886ce9b4b77b1bfb21a769"
-  integrity sha512-JOfdekTXnJexfE8PyhZFyHvHjt81rBFSAbTIRAhF2vv/2Y1JzoKsGqxH/GpZJoF7aEfYok8JVcAHmSz1gkBieA==
 
 "@hapi/topo@3.x.x":
   version "3.1.3"
@@ -2084,7 +2064,7 @@ eslint-scope@^5.0.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-utils@^1.3.1, eslint-utils@^1.4.0:
+eslint-utils@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/eslint-utils/-/eslint-utils-1.4.0.tgz#e2c3c8dba768425f897cf0f9e51fe2e241485d4c"
   integrity sha512-7ehnzPaP5IIEh1r1tkjuIrxqhNkzUJa9z3R92tLJdZIVdWaczEhr3EbhGtsMrVxi1KeR8qA7Off6SWc5WNQqyQ==
@@ -2095,49 +2075,6 @@ eslint-visitor-keys@^1.0.0, eslint-visitor-keys@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.1.0.tgz#e2a82cea84ff246ad6fb57f9bde5b46621459ec2"
   integrity sha512-8y9YjtM1JBJU/A9Kc+SbaOV4y29sSWckBwMHa+FGtVj5gN/sbnKDf6xJUl+8g7FAij9LVaP8C24DUiH/f/2Z9A==
-
-eslint@6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-6.1.0.tgz#06438a4a278b1d84fb107d24eaaa35471986e646"
-  integrity sha512-QhrbdRD7ofuV09IuE2ySWBz0FyXCq0rriLTZXZqaWSI79CVtHVRdkFuFTViiqzZhkCgfOh9USpriuGN2gIpZDQ==
-  dependencies:
-    "@babel/code-frame" "^7.0.0"
-    ajv "^6.10.0"
-    chalk "^2.1.0"
-    cross-spawn "^6.0.5"
-    debug "^4.0.1"
-    doctrine "^3.0.0"
-    eslint-scope "^5.0.0"
-    eslint-utils "^1.3.1"
-    eslint-visitor-keys "^1.0.0"
-    espree "^6.0.0"
-    esquery "^1.0.1"
-    esutils "^2.0.2"
-    file-entry-cache "^5.0.1"
-    functional-red-black-tree "^1.0.1"
-    glob-parent "^5.0.0"
-    globals "^11.7.0"
-    ignore "^4.0.6"
-    import-fresh "^3.0.0"
-    imurmurhash "^0.1.4"
-    inquirer "^6.4.1"
-    is-glob "^4.0.0"
-    js-yaml "^3.13.1"
-    json-stable-stringify-without-jsonify "^1.0.1"
-    levn "^0.3.0"
-    lodash "^4.17.14"
-    minimatch "^3.0.4"
-    mkdirp "^0.5.1"
-    natural-compare "^1.4.0"
-    optionator "^0.8.2"
-    progress "^2.0.0"
-    regexpp "^2.0.1"
-    semver "^6.1.2"
-    strip-ansi "^5.2.0"
-    strip-json-comments "^3.0.1"
-    table "^5.2.3"
-    text-table "^0.2.0"
-    v8-compile-cache "^2.0.3"
 
 eslint@6.2.0:
   version "6.2.0"
@@ -2182,7 +2119,7 @@ eslint@6.2.0:
     text-table "^0.2.0"
     v8-compile-cache "^2.0.3"
 
-espree@^6.0.0, espree@^6.1.0:
+espree@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/espree/-/espree-6.1.0.tgz#a1e8aa65bf29a331d70351ed814a80e7534e0884"
   integrity sha512-boA7CHRLlVWUSg3iL5Kmlt/xT3Q+sXnKoRYYzj1YeM10A76TEJBbotV5pKbnK42hEUIr121zTv+QLRM5LsCPXQ==
@@ -3644,20 +3581,13 @@ joi-strict@1.0.5:
   resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.0.5.tgz#f4abad8bfd39281eb987f8ceb36c76d5d8de30c2"
   integrity sha512-ZOU1FTny1MmAlm6vXoD77LFqif23KZQVC9m7euLkYq0QHDj0GHKz/A/IRXzhkk3DPll/Y7A74b1R9M7M4fqzTw==
 
-js-gardener@2.0.66:
-  version "2.0.66"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.66.tgz#642e47eaf79fe3c56ea6a9fe867508f5b1b3403f"
-  integrity sha512-AQ5dpnZdAEOfHIt3RmT2l8YKhnGPHJRsgj4Ssfrl4cHo+whHkDiGjDkyMsv/juqZ5JZz7zpwaG1SISpUcvumXA==
+js-gardener@2.0.68:
+  version "2.0.68"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.68.tgz#9fe2eed3a25924cb8f786c67f2d2a2c9e23b4695"
+  integrity sha512-sJEPuozAM6BkgN4uBV7J76+Ex6LLqSRA3kTutjwUq8BMr7IaMQVKD1N6sWFK7m8LfX/vIq1Ko5Pg5rtFWUe9Uw==
   dependencies:
     "@hapi/joi" "15.1.1"
     chalk "2.4.2"
-    eslint "6.1.0"
-    eslint-config-airbnb-base "14.0.0"
-    eslint-plugin-import "2.18.2"
-    eslint-plugin-jasmine "2.10.1"
-    eslint-plugin-json "1.4.0"
-    eslint-plugin-markdown "1.0.0"
-    eslint-plugin-mocha "6.0.0"
     fancy-log "1.3.3"
     glob "7.1.4"
     joi-strict "1.0.5"
@@ -3666,7 +3596,7 @@ js-gardener@2.0.66:
     lodash.get "4.4.2"
     mocha "6.2.0"
     npm-check "5.9.0"
-    robo-config "3.1.7"
+    robo-config "3.1.8"
     tmp "0.1.0"
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
@@ -6200,12 +6130,12 @@ rimraf@2.6.3:
   dependencies:
     glob "^7.1.3"
 
-robo-config@3.1.7:
-  version "3.1.7"
-  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.1.7.tgz#b4afd657e95865f0dc12a02d70e6e9e381ee6445"
-  integrity sha512-2xjBAq9lQDoNJNbf6Hb1OqKxYfILjeV7z6CKw3G7YCJzpMy6AXZ0bRFFGsTURnrOWSO+GC2BBbbYDlZZ5lQTHg==
+robo-config@3.1.8:
+  version "3.1.8"
+  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.1.8.tgz#5a2004e06c047955fb037fc9260a0001879c8da8"
+  integrity sha512-D1FZK6PzOAeQ7TRsbYEMJNzwGvQ2i2pWSFRBFXuEfLyeB4tTRhbJR6L7kqrV80YZO20lz0Enkm6m/1dzE0lWDQ==
   dependencies:
-    "@hapi/joi" "15.1.0"
+    "@hapi/joi" "15.1.1"
     app-root-path "2.2.1"
     deepmerge "4.0.0"
     joi-strict "1.0.5"
