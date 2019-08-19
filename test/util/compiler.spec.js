@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const compiler = require('./../../src/util/compiler');
+const compiler = require('../../src/util/compiler');
 
 describe('Testing compiler', () => {
   describe('Testing Redundant Needle Target Errors', () => {

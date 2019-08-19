@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const parser = require('./../../src/util/parser');
+const parser = require('../../src/util/parser');
 
 const asString = (() => {
   const asStringRec = (input) => {
