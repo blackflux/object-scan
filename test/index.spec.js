@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const objectScan = require('./../src/index');
+const objectScan = require('../src/index');
 
 const haystack = {
   simple: 'a',
