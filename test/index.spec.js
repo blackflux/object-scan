@@ -1,4 +1,5 @@
 const expect = require('chai').expect;
+const { describe } = require('node-tdd');
 const objectScan = require('../src/index');
 
 const haystack = {
@@ -134,37 +135,37 @@ describe('Testing Find', () => {
   });
 
   describe('Testing Exclusion', () => {
-    const test = (input, needles, result) => expect(objectScan(needles)(input)).to.deep.equal(result);
+    const execute = (input, needles, result) => expect(objectScan(needles)(input)).to.deep.equal(result);
 
     describe('Testing Basic Exclusion', () => {
       const fixture = { a: { b: 'c', d: 'e' }, f: ['g', 'h'] };
 
       it('Testing nested exclusion', () => {
-        test(fixture, ['a.{*,!b}'], ['a.d']);
+        execute(fixture, ['a.{*,!b}'], ['a.d']);
       });
 
       it('Testing two level target exclusion', () => {
-        test(fixture, ['*.*,!a.b'], ['a.d']);
+        execute(fixture, ['*.*,!a.b'], ['a.d']);
       });
 
       it('Testing array exclusion', () => {
-        test(fixture, ['*[*],!*[0]'], ['f[1]']);
+        execute(fixture, ['*[*],!*[0]'], ['f[1]']);
       });
 
       it('Testing Include, exclude, include, exclude', () => {
-        test(fixture, ['**', '!{*.*,*,*[*]}', 'a.*', '!a.b'], ['a.d']);
+        execute(fixture, ['**', '!{*.*,*,*[*]}', 'a.*', '!a.b'], ['a.d']);
       });
 
       it('Testing basic exclude, include', () => {
-        test(fixture, ['!a', 'a.b'], ['a.b']);
+        execute(fixture, ['!a', 'a.b'], ['a.b']);
       });
 
       it('Testing star exclude, include', () => {
-        test(fixture, ['!**.d', '**'], ['f[1]', 'f[0]', 'f', 'a.d', 'a.b', 'a']);
+        execute(fixture, ['!**.d', '**'], ['f[1]', 'f[0]', 'f', 'a.d', 'a.b', 'a']);
       });
 
       it('Testing star include, exclude', () => {
-        test(fixture, ['**', '!a.*', '!f[*]'], ['f', 'a']);
+        execute(fixture, ['**', '!a.*', '!f[*]'], ['f', 'a']);
       });
     });
 
@@ -172,11 +173,11 @@ describe('Testing Find', () => {
       const fixture = { a: { b: { c: 'd' } } };
 
       it('Testing nested re-include', () => {
-        test(fixture, ['a.b.c', 'a.!b.*', 'a.b.**'], ['a.b.c', 'a.b']);
+        execute(fixture, ['a.b.c', 'a.!b.*', 'a.b.**'], ['a.b.c', 'a.b']);
       });
 
       it('Testing nested re-exclude', () => {
-        test(fixture, ['!a.b.c', 'a.b.*', '!a.b.**'], []);
+        execute(fixture, ['!a.b.c', 'a.b.*', '!a.b.**'], []);
       });
     });
 
@@ -186,19 +187,19 @@ describe('Testing Find', () => {
       };
 
       it('Exclusion after two inclusions', () => {
-        test(fixture, ['a.x', '*.x', '!{c,d,e}.x'], ['b.x', 'a.x']);
+        execute(fixture, ['a.x', '*.x', '!{c,d,e}.x'], ['b.x', 'a.x']);
       });
 
       it('Inclusion after exclusion', () => {
-        test(fixture, ['!*.x', 'a.x'], ['a.x']);
+        execute(fixture, ['!*.x', 'a.x'], ['a.x']);
       });
 
       it('Inclusion only', () => {
-        test(fixture, ['*.x'], ['e.x', 'd.x', 'c.x', 'b.x', 'a.x']);
+        execute(fixture, ['*.x'], ['e.x', 'd.x', 'c.x', 'b.x', 'a.x']);
       });
 
       it('Exclusions only', () => {
-        test(fixture, ['!a.x', '!b.x'], []);
+        execute(fixture, ['!a.x', '!b.x'], []);
       });
     });
 
@@ -212,43 +213,43 @@ describe('Testing Find', () => {
       };
 
       it('Basic exclusion', () => {
-        test(fixture1, ['foo'], ['foo']);
-        test(fixture1, ['!foo'], []);
-        test(fixture1, ['foo', 'bar'], ['bar', 'foo']);
+        execute(fixture1, ['foo'], ['foo']);
+        execute(fixture1, ['!foo'], []);
+        execute(fixture1, ['foo', 'bar'], ['bar', 'foo']);
       });
 
       it('Exclusion only, no results', () => {
-        test(fixture1, ['!foo', '!bar'], []);
-        test(fixture1, ['!*z'], []);
-        test(fixture1, ['!*z', '!*a*'], []);
-        test(fixture1, ['!*'], []);
+        execute(fixture1, ['!foo', '!bar'], []);
+        execute(fixture1, ['!*z'], []);
+        execute(fixture1, ['!*z', '!*a*'], []);
+        execute(fixture1, ['!*'], []);
       });
 
       it('Exclusions are order sensitive', () => {
-        test(fixture1, ['!*a*', '*z'], ['baz']);
-        test(fixture1, ['*z', '!*a*'], []);
-        test(fixture2, ['!*m', 'f*'], ['forum', 'for', 'foam', 'foo']);
-        test(fixture2, ['f*', '!*m'], ['for', 'foo']);
+        execute(fixture1, ['!*a*', '*z'], ['baz']);
+        execute(fixture1, ['*z', '!*a*'], []);
+        execute(fixture2, ['!*m', 'f*'], ['forum', 'for', 'foam', 'foo']);
+        execute(fixture2, ['f*', '!*m'], ['for', 'foo']);
       });
 
       it('Include Excluded', () => {
-        test(fixture1, ['!*a*'], []);
-        test(fixture1, ['!foo', 'bar'], ['bar']);
-        test(fixture1, ['!*a*', 'bar'], ['bar']);
-        test(fixture1, ['!*a*', '*'], ['baz', 'bar', 'foo']);
+        execute(fixture1, ['!*a*'], []);
+        execute(fixture1, ['!foo', 'bar'], ['bar']);
+        execute(fixture1, ['!*a*', 'bar'], ['bar']);
+        execute(fixture1, ['!*a*', '*'], ['baz', 'bar', 'foo']);
       });
 
       it('Exclude Inclusion', () => {
-        test(fixture1, ['bar', '!*a*'], []);
-        test(fixture1, ['foo', '!bar'], ['foo']);
+        execute(fixture1, ['bar', '!*a*'], []);
+        execute(fixture1, ['foo', '!bar'], ['foo']);
       });
 
       it('One-Star Exclusions', () => {
-        test(fixture1, ['*', '!foo'], ['baz', 'bar']);
-        test(fixture1, ['*', '!foo', 'bar'], ['baz', 'bar']);
-        test(fixture1, ['!foo', '*'], ['baz', 'bar', 'foo']);
-        test(fixture1, ['*', '!foo', '!bar'], ['baz']);
-        test(fixture3, ['*', '!o*', 'once'], ['once', 'do', 'four', 'two', 'foo']);
+        execute(fixture1, ['*', '!foo'], ['baz', 'bar']);
+        execute(fixture1, ['*', '!foo', 'bar'], ['baz', 'bar']);
+        execute(fixture1, ['!foo', '*'], ['baz', 'bar', 'foo']);
+        execute(fixture1, ['*', '!foo', '!bar'], ['baz']);
+        execute(fixture3, ['*', '!o*', 'once'], ['once', 'do', 'four', 'two', 'foo']);
       });
     });
   });
