@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const expect = require('chai').expect;
+const { describe } = require('node-tdd');
 const stringify = require('json-stringify-pretty-compact');
 const objectScan = require('../src/index');
 
@@ -23,6 +24,7 @@ const logFn = (type, log, paramsToLog) => (key, value, kwargs) => {
 };
 
 describe('Integration Testing', () => {
+  // eslint-disable-next-line mocha/no-setup-in-describe
   getDirectories(path.join(__dirname, 'integration'))
   // eslint-disable-next-line import/no-dynamic-require,global-require
     .map(([dirName, dirPath]) => [dirName, dirPath, require(`${dirPath}.json`)])

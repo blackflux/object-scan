@@ -1,4 +1,5 @@
 const expect = require('chai').expect;
+const { describe } = require('node-tdd');
 const parser = require('../../src/util/parser');
 
 const asString = (() => {
