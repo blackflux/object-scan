@@ -189,6 +189,11 @@
   resolved "https://registry.yarnpkg.com/@hapi/bourne/-/bourne-1.3.2.tgz#0a7095adea067243ce3283e1b56b8a8f453b242a"
   integrity sha512-1dVNHT76Uu5N3eJNTYcvxee+jzX4Z9lfciqRRHCU27ihbUcYi+iSc2iml5Ke1LXe1SyJCLA0+14Jh4tXJgOppA==
 
+"@hapi/formula@1.x.x":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@hapi/formula/-/formula-1.2.0.tgz#994649c7fea1a90b91a0a1e6d983523f680e10cd"
+  integrity sha512-UFbtbGPjstz0eWHb+ga/GM3Z9EzqKXFWIbSOFURU0A/Gku0Bky4bCk9/h//K2Xr3IrCfjFNhMm4jyZ5dbCewGA==
+
 "@hapi/hoek@8.x.x":
   version "8.2.2"
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-8.2.2.tgz#6eaa2e1ec3b50dfb8dccbe705dc289094652bc2d"
@@ -203,6 +208,22 @@
     "@hapi/bourne" "1.x.x"
     "@hapi/hoek" "8.x.x"
     "@hapi/topo" "3.x.x"
+
+"@hapi/joi@16.0.0":
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/@hapi/joi/-/joi-16.0.0.tgz#b8bc1bc2608f12ad56edecf4bafa695071991555"
+  integrity sha512-OYWoI/uqs40IdRvPmgn5ame35esBnPR4qhzrE03o+Pb8NnlXIBJZWMXgAlwp43781Ybm0R1iEEMDx0H2lP8mJQ==
+  dependencies:
+    "@hapi/address" "2.x.x"
+    "@hapi/formula" "1.x.x"
+    "@hapi/hoek" "8.x.x"
+    "@hapi/pinpoint" "1.x.x"
+    "@hapi/topo" "3.x.x"
+
+"@hapi/pinpoint@1.x.x":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@hapi/pinpoint/-/pinpoint-1.0.2.tgz#025b7a36dbbf4d35bf1acd071c26b20ef41e0d13"
+  integrity sha512-dtXC/WkZBfC5vxscazuiJ6iq4j9oNx1SHknmIr8hofarpKUZKmlUVYVIhNVzIEgK5Wrc4GMHL5lZtt1uS2flmQ==
 
 "@hapi/topo@3.x.x":
   version "3.1.3"
@@ -3553,21 +3574,27 @@ java-properties@^1.0.0:
   resolved "https://registry.yarnpkg.com/java-properties/-/java-properties-1.0.2.tgz#ccd1fa73907438a5b5c38982269d0e771fe78211"
   integrity sha512-qjdpeo2yKlYTH7nFdK0vbZWuTCesk4o63v5iVOlhMQPfuIZQfW/HI35SjfhA+4qpg36rnFSvUK5b1m+ckIblQQ==
 
+joi-strict@1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.0.10.tgz#fe5c83834ba2921dcea8adb903676de46851f880"
+  integrity sha512-PLcFUzmymaaIrGpQ1H5uvpj7jiW8r+QakCTS1/14BBgoBdyj3XqEJXKHyxRuuCf9d9ux1iBj6OfkWb3GNbFZeg==
+  dependencies:
+    "@hapi/joi" "16.0.0"
+
 joi-strict@1.0.9:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.0.9.tgz#9b05887cbf7160e5bff6bd9a901ce0f6af42f57c"
   integrity sha512-fxky2GApiaabDQ+Itq2T5QPn7y+qpHesSHH1YcA4R81S+/zlvpweiLxbfUEP871SNS9XR+/x5XymwHSMkfbNOg==
 
-js-gardener@2.0.83:
-  version "2.0.83"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.83.tgz#b08da09185760807aeaede68ebe9c041f6664425"
-  integrity sha512-sM2pYSzAMD024jBbxLkWvLbRGEijZuid5mAbsMea5ojmICed1fG9stu5T3j00kTvWzrU3lgx5tAbTcPZz7fymA==
+js-gardener@2.0.84:
+  version "2.0.84"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.84.tgz#c617db8c6088a2f4f06c70c121970004ccf984eb"
+  integrity sha512-JQMoP7xlU0ZuqlXJ9aXzRAmjbAsjzoIWYURGvcfRFcKyO643WPRwJR4vbBARp7G9Abec+E9XR6DLFdLJyOfYig==
   dependencies:
-    "@hapi/joi" "15.1.1"
     chalk "2.4.2"
     fancy-log "1.3.3"
     glob "7.1.4"
-    joi-strict "1.0.9"
+    joi-strict "1.0.10"
     js-yaml "3.13.1"
     lodash.difference "4.5.0"
     lodash.get "4.4.2"
