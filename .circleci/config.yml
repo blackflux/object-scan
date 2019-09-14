@@ -72,7 +72,18 @@ jobs:
             if [[ -n "${NPM_TOKEN}" ]]; then
               echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
             fi
-      - run: yarn install --frozen-lockfile
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - 'yarn-packages-{{ checksum "yarn.lock" }}'
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: 'yarn-packages-{{ checksum "yarn.lock" }}'
+          paths:
+            - ~/.cache/yarn
       - run: yarn test
       - run: >-
           (git add . && git diff-index --quiet HEAD --) || (git status && exit
@@ -93,7 +104,18 @@ jobs:
             if [[ -n "${NPM_TOKEN}" ]]; then
               echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
             fi
-      - run: yarn install --frozen-lockfile
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - 'yarn-packages-{{ checksum "yarn.lock" }}'
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: 'yarn-packages-{{ checksum "yarn.lock" }}'
+          paths:
+            - ~/.cache/yarn
       - run: yarn run semantic-release
   test-node-v12:
     docker:
@@ -111,7 +133,18 @@ jobs:
             if [[ -n "${NPM_TOKEN}" ]]; then
               echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
             fi
-      - run: yarn install --frozen-lockfile
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - 'yarn-packages-{{ checksum "yarn.lock" }}'
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: 'yarn-packages-{{ checksum "yarn.lock" }}'
+          paths:
+            - ~/.cache/yarn
       - run: yarn test
       - run: >-
           (git add . && git diff-index --quiet HEAD --) || (git status && exit
