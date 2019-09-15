@@ -3559,13 +3559,6 @@ java-properties@^1.0.0:
   resolved "https://registry.yarnpkg.com/java-properties/-/java-properties-1.0.2.tgz#ccd1fa73907438a5b5c38982269d0e771fe78211"
   integrity sha512-qjdpeo2yKlYTH7nFdK0vbZWuTCesk4o63v5iVOlhMQPfuIZQfW/HI35SjfhA+4qpg36rnFSvUK5b1m+ckIblQQ==
 
-joi-strict@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.1.1.tgz#ecebac91a37421e27526f64bd3beb7e83058c6ba"
-  integrity sha512-2ZgLzvWzE6KglTz1TS2ptNDntesji9fItT9hBbViej8RB5orLWT9jadhN91Snr6VPNvlZkhvIIpSc6N0TWjBVg==
-  dependencies:
-    "@hapi/joi" "16.0.1"
-
 joi-strict@1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.1.2.tgz#6ccc94f615ccafb4bf707a7764b184ae152690a4"
@@ -3573,10 +3566,10 @@ joi-strict@1.1.2:
   dependencies:
     "@hapi/joi" "16.0.1"
 
-js-gardener@2.0.91:
-  version "2.0.91"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.91.tgz#53e1218d15dff69b10086cac59101278cf753b33"
-  integrity sha512-AC7w1nVtRDGj5pt/TjjD4krh2YI85TQAznsbkaAMdUVwQmW4cojj4BHfgcAZU6YicGc+NO+twNc4OByJCBhzAA==
+js-gardener@2.0.92:
+  version "2.0.92"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.92.tgz#670d2befb584551f3e7befdf3d10179ce034a10e"
+  integrity sha512-LNS/M434ekiDKK2H1U3xjIkh1TmCcADdkP6HswhX8RefmvF6pphXrf4JGIcRHhg4pK5nE2v0/FErtkOaRSEh6A==
   dependencies:
     chalk "2.4.2"
     fancy-log "1.3.3"
@@ -3587,7 +3580,7 @@ js-gardener@2.0.91:
     lodash.get "4.4.2"
     mocha "6.2.0"
     npm-check "5.9.0"
-    robo-config "3.3.7"
+    robo-config "3.3.8"
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"
@@ -5017,10 +5010,10 @@ object-copy@^0.1.0:
     define-property "^0.2.5"
     kind-of "^3.0.3"
 
-object-deep-contain@1.0.18:
-  version "1.0.18"
-  resolved "https://registry.yarnpkg.com/object-deep-contain/-/object-deep-contain-1.0.18.tgz#74fb17fd70648712e131670f813ca47f3f8538ea"
-  integrity sha512-Mr3c+1cGX3WoZr2sTsjbUjurckRNvu9RUPwoP8yeG8nDCnU5dswIcyq6IWrrZQAp/65akHaZl3UC4OxRUCzvNw==
+object-deep-contain@1.0.19:
+  version "1.0.19"
+  resolved "https://registry.yarnpkg.com/object-deep-contain/-/object-deep-contain-1.0.19.tgz#faec02a5552f70c58f972344cfafe9f778cdf274"
+  integrity sha512-SYI0nlnmN0BRurAyXcbIzaO8aih9IYcNbBj1KeawlL5wfB5/jp+agmuLaUXpXHYZQ9zbRficvBSuR7XKcaNe6A==
 
 object-inspect@^1.6.0:
   version "1.6.0"
@@ -5037,10 +5030,10 @@ object-scan@10.0.13:
   resolved "https://registry.yarnpkg.com/object-scan/-/object-scan-10.0.13.tgz#5b6ebbc34bba32fdc92f30edde231eaf53735b41"
   integrity sha512-5w/BPfsSFwjWct98ON3Rjd/s2jQBshjSo3pZCLd7b9P/sUbggUfOFdhMNbDzvKXsYvPc3Y133+BhYGwj0Ot8gw==
 
-object-treeify@1.1.19:
-  version "1.1.19"
-  resolved "https://registry.yarnpkg.com/object-treeify/-/object-treeify-1.1.19.tgz#5987fae7218c2ff0bac547ed632fa23571cc8866"
-  integrity sha512-I1RwSZyxXhgfm3+RYmBSZWozLHe1UuGn6dwW3Ppz3Iub5xzNs0TArp7UgPER22o914EIOcRfCQokRM9MLZGOOQ==
+object-treeify@1.1.20:
+  version "1.1.20"
+  resolved "https://registry.yarnpkg.com/object-treeify/-/object-treeify-1.1.20.tgz#34076946e2b6a14c8a3accef4f3a07686659ebaa"
+  integrity sha512-vtED3MD4Y3lEP1BE6klEP10HWj1XNPC+dCWo7QkrDpXspQVHg5gnJ8cSt9YxZhgGSM3YDV87dEjzOnoHWbGxmg==
 
 object-visit@^1.0.0:
   version "1.0.1"
@@ -6195,20 +6188,20 @@ rimraf@2.6.3:
   dependencies:
     glob "^7.1.3"
 
-robo-config@3.3.7:
-  version "3.3.7"
-  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.3.7.tgz#339ba8ad5f57b311584f96386c4165ae43df78bd"
-  integrity sha512-OQK24nBOBaFTd7OuF4p3aT77m7XCuc2ckFg3srOe05jpzCqvFv/RSw39PnYTrakrDxYvGLZYPQlWq/yoattF1Q==
+robo-config@3.3.8:
+  version "3.3.8"
+  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.3.8.tgz#f506031062b80b5933c467ead8a9222f3491ad5d"
+  integrity sha512-MkT1eGl7bkVnsGKodApmNIlL4Jmy0Fe2B1BPOG1B8tiP5RbkMD6M1D5gnGph4AZkodAPPHkhNn8AQVWcBQtnNQ==
   dependencies:
     app-root-path "2.2.1"
     deepmerge "4.0.0"
-    joi-strict "1.1.1"
+    joi-strict "1.1.2"
     lodash.clonedeep "4.5.0"
     lodash.difference "4.5.0"
     lodash.get "4.4.2"
-    object-deep-contain "1.0.18"
+    object-deep-contain "1.0.19"
     object-scan "10.0.13"
-    object-treeify "1.1.19"
+    object-treeify "1.1.20"
     smart-fs "1.9.12"
 
 run-async@^0.1.0:
