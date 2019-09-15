@@ -9,7 +9,7 @@ workflows:
       - test-node-v10:
           requires:
             - gally-create-pr
-      - gally-auto-merge:
+      - gally-auto-approve:
           requires:
             - gally-create-pr
             - test-node-v12
@@ -34,28 +34,6 @@ jobs:
       - checkout
       - run: sudo yarn global add gally
       - run: ga promote $CIRCLE_BRANCH
-  gally-auto-merge:
-    docker:
-      - image: 'circleci/node:12'
-    steps:
-      - run:
-          name: Set PR number
-          command: >
-            echo 'export
-            CIRCLE_PR_NUMBER="${CIRCLE_PR_NUMBER:-${CIRCLE_PULL_REQUEST##*/}}"'
-            >> $BASH_ENV
-
-            source $BASH_ENV
-
-            echo $CIRCLE_PR_NUMBER
-      - checkout
-      - run: sudo yarn global add gally
-      - run: >-
-          ga approve $CIRCLE_PR_NUMBER --condition
-          "base.ref=dev&state=open&user.login=dependabot-preview[bot]&mergeable=true"
-      - run: >-
-          ga merge $CIRCLE_PR_NUMBER --condition
-          "base.ref=dev&state=open&user.login=dependabot-preview[bot]&mergeable=true"
   test-node-v10:
     docker:
       - image: 'circleci/node:10'
@@ -154,3 +132,22 @@ jobs:
             if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
               yarn run coveralls
             fi
+  gally-auto-approve:
+    docker:
+      - image: 'circleci/node:12'
+    steps:
+      - run:
+          name: Set PR number
+          command: >
+            echo 'export
+            CIRCLE_PR_NUMBER="${CIRCLE_PR_NUMBER:-${CIRCLE_PULL_REQUEST##*/}}"'
+            >> $BASH_ENV
+
+            source $BASH_ENV
+
+            echo $CIRCLE_PR_NUMBER
+      - checkout
+      - run: sudo yarn global add gally
+      - run: >-
+          ga approve $CIRCLE_PR_NUMBER --condition
+          "base.ref=dev&state=open&user.login=dependabot-preview[bot]"
