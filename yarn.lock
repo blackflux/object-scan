@@ -3573,6 +3573,13 @@ joi-strict@1.1.1:
   dependencies:
     "@hapi/joi" "16.0.1"
 
+joi-strict@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.1.2.tgz#6ccc94f615ccafb4bf707a7764b184ae152690a4"
+  integrity sha512-5FJarK5iGIUL4e+CBhvv4B9ptW2GcpUVkTKhNfwYNYMjG2UjQV2PGO5c5oQLUIS7s7ugO5Z9W5+LGuLfeQUqDA==
+  dependencies:
+    "@hapi/joi" "16.0.1"
+
 js-gardener@2.0.89:
   version "2.0.89"
   resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.89.tgz#2ae4a3b21694d3b77c430f5758710b7394ea8c9c"
@@ -4615,16 +4622,16 @@ node-pre-gyp@^0.12.0:
     semver "^5.3.0"
     tar "^4"
 
-node-tdd@2.5.5:
-  version "2.5.5"
-  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.5.5.tgz#3a40b31b8a8a5659fba023a06ed8652e3167d77a"
-  integrity sha512-quWBFiqMDb3ZsrHzIMS9A0/LMTGY7ViPVYak5wa+J0DlMFeNzXV2AfkzJVF2v3X6Ox4IWecx/p7dwrMMclvoCw==
+node-tdd@2.5.6:
+  version "2.5.6"
+  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.5.6.tgz#6c4192038cfda9650c848f199a9b46a21106c910"
+  integrity sha512-15r8eNe60OgZ8b7oHC4ZdFaN2IeRBhWL0e+JaiRhtRIi5eJjvD8zQBnGENYtl3jahE6PvWvuTAUgseEzcJYotA==
   dependencies:
     callsites "3.1.0"
-    joi-strict "1.1.1"
+    joi-strict "1.1.2"
     lodash.get "4.4.2"
     nock "11.3.4"
-    smart-fs "1.9.12"
+    smart-fs "1.9.13"
     timekeeper "2.2.0"
     tmp "0.1.0"
 
@@ -6416,19 +6423,6 @@ smart-fs@1.9.11:
   version "1.9.11"
   resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.9.11.tgz#5e95b397078d5db1f4167338bf360b54f2e99dca"
   integrity sha512-BSCaUQ+HUPT1FM2t5Em8OKfGruOXeyWX1WOXJCVU4HNH01+iLc6EJHPACpHvlASKJ0T8bI5q6DAxzriWWRplzw==
-  dependencies:
-    fs-extra "8.1.0"
-    json-stringify-pretty-compact "2.0.0"
-    lodash.clonedeep "4.5.0"
-    lodash.isequal "4.5.0"
-    object-align "1.0.7"
-    xml-js "1.6.11"
-    yaml-boost "1.9.15"
-
-smart-fs@1.9.12:
-  version "1.9.12"
-  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.9.12.tgz#4897d26cce76f19621dd2bb73350b30b1f82faad"
-  integrity sha512-wkR7Pva0AVAGhjFfIIloY58qebcJ/3Z8GQrrNSYxZ+RD/NPSsZqqJ+NxiER2I8aqu6yk6SVtcjh6g6sl5bBH4g==
   dependencies:
     fs-extra "8.1.0"
     json-stringify-pretty-compact "2.0.0"
