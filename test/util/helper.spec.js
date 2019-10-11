@@ -1,6 +1,8 @@
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
-const { defineProperty, findLast, parseWildcard } = require('../../src/util/helper');
+const {
+  defineProperty, findLast, escape, parseWildcard
+} = require('../../src/util/helper');
 
 describe('Testing Helper', () => {
   describe('Testing defineProperty', () => {
@@ -51,6 +53,12 @@ describe('Testing Helper', () => {
     });
   });
 
+  describe('Testing escape', () => {
+    it('Testing basic escaping', () => {
+      expect(escape('a[]')).to.equal('a\\[\\]');
+    });
+  });
+
   describe('Testing parseWildcard', () => {
     it('Testing empty', () => {
       expect(parseWildcard('')).to.deep.equal(/^$/);
@@ -67,7 +75,25 @@ describe('Testing Helper', () => {
     it('Testing escaped star', () => {
       const result = parseWildcard('pa\\*nt\\*');
       expect(result).to.deep.equal(/^pa\\\*nt\\\*$/);
-      expect(result.test('pa\\*nt\\*')).to.equal(true);
+      expect(result.test(escape('pa*nt*'))).to.equal(true);
+    });
+
+    it('Testing special=false, regex=true', () => {
+      const result = parseWildcard('pa^');
+      expect(result).to.deep.equal(/^pa\^$/);
+      expect(result.test(escape('pa^'))).to.equal(true);
+    });
+
+    it('Testing special=true, regex=true', () => {
+      const result = parseWildcard('pa\\[');
+      expect(result).to.deep.equal(/^pa\\\[$/);
+      expect(result.test(escape('pa['))).to.equal(true);
+    });
+
+    it('Testing special=true, regex=false', () => {
+      const result = parseWildcard('pa\\!');
+      expect(result).to.deep.equal(/^pa\\!$/);
+      expect(result.test(escape('pa!'))).to.equal(true);
     });
   });
 });
