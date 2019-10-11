@@ -11,6 +11,9 @@ module.exports.findLast = (array, fn) => {
   return undefined;
 };
 
+const specialChars = /[?!,.*[\]{}]/g;
+module.exports.escape = (input) => input.replace(specialChars, '\\$&');
+
 module.exports.parseWildcard = (input) => {
   let regex = '';
   let escaped = false;
@@ -21,6 +24,7 @@ module.exports.parseWildcard = (input) => {
     } else if (!escaped && char === '?') {
       regex += '.';
     } else if (['|', '\\', '{', '}', '(', ')', '[', ']', '^', '$', '+', '*', '?', '.'].includes(char)) {
+      // escape all regex characters
       regex += `\\${char}`;
     } else {
       regex += char;
