@@ -21,6 +21,7 @@ module.exports.parseWildcard = (input) => {
     } else if (!escaped && char === '?') {
       regex += '.';
     } else if (['|', '\\', '{', '}', '(', ')', '[', ']', '^', '$', '+', '*', '?', '.'].includes(char)) {
+      // escape all regex characters
       regex += `\\${char}`;
     } else {
       regex += char;
