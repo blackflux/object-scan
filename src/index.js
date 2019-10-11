@@ -1,9 +1,6 @@
 const assert = require('assert');
 const compiler = require('./util/compiler');
-const { findLast } = require('./util/helper');
-
-const specialChars = /[?!,.*[\]{}]/g;
-const escape = (input) => input.replace(specialChars, '\\$&');
+const { findLast, escape } = require('./util/helper');
 
 const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
   if (wildcard === '**') {
