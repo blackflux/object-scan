@@ -43,11 +43,11 @@ describe('Testing Helper', () => {
     });
 
     it('Testing no match is undefined', () => {
-      expect(findLast(input, (e) => e.value === 2)).to.deep.equal(undefined);
+      expect(findLast(input, (e) => e.value === 2)).to.equal(undefined);
     });
 
     it('Testing last match returned', () => {
-      expect(findLast(input, (e) => e.value === 1)).to.deep.equal(input[1]);
+      expect(findLast(input, (e) => e.value === 1)).to.equal(input[1]);
     });
   });
 
