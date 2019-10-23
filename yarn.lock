@@ -166,10 +166,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@blackflux/eslint-plugin-rules@1.3.14":
-  version "1.3.14"
-  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.3.14.tgz#bbd16fd1c506d7d3861828c8394f95e5745a3b5d"
-  integrity sha512-fLSA6PIJ8rVTiMVT+EIcVKGfViR/Tt6HILY7UTaocPitf7Huq91FVnSeltPCjm2ZYJ8apAv+NLEP15S8Y23ITw==
+"@blackflux/eslint-plugin-rules@1.3.15":
+  version "1.3.15"
+  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.3.15.tgz#3c70e85f3a16139b475fe3dd28def52f29780b36"
+  integrity sha512-L8+iF+hwIneYGyrLOS95NqJ1TaaYtMxY4zyiO0o5tsLoXCPNUDNZK3ut0IghmLuYgYShzoUZ9RH5JZghLw4IFg==
   dependencies:
     smart-fs "1.11.0"
 
@@ -2000,17 +2000,18 @@ eslint-plugin-import@2.18.2:
     read-pkg-up "^2.0.0"
     resolve "^1.11.0"
 
-eslint-plugin-json@1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-json/-/eslint-plugin-json-1.4.0.tgz#4d29f3a4c08d412df739bd65049ce23636515af8"
-  integrity sha512-CECvgRAWtUzuepdlPWd+VA7fhyF9HT183pZnl8wQw5x699Mk/MbME/q8xtULBfooi3LUbj6fToieNmsvUcDxWA==
+eslint-plugin-json@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-json/-/eslint-plugin-json-2.0.1.tgz#825ba21fed9522a7080044f0692ffffffbc237e3"
+  integrity sha512-IxKZIlMyBn0tvxlBj2viW0N/UBuoey1oYpV+SNVuNFmy4xsNuwgeoOjzEeFDnVXL0FpIo7UbQSeZ+lfh2D/nLQ==
   dependencies:
-    vscode-json-languageservice "^3.2.1"
+    lodash "^4.17.15"
+    vscode-json-languageservice "^3.3.5"
 
-eslint-plugin-markdown@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-markdown/-/eslint-plugin-markdown-1.0.0.tgz#2d381b44fcf367f1bb53ae166eccf111cd4e1174"
-  integrity sha512-YIrClt3yLgyGov+rInjIoC/05zMxb/c6YXQZkyI9UKuBRFLgCrL37cxthj0JYWiTYtiHq0p8O0Nt0/HrvO48iQ==
+eslint-plugin-markdown@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-markdown/-/eslint-plugin-markdown-1.0.1.tgz#9705786310f84dad9cf800bea1eb5c4acafcc13a"
+  integrity sha512-nAUURNHJGPooBMZMP23FmTbh3LTdgoSqeFBv9FA3fYrJ+vDUJxrp6nKiQF4iDNAmnWQnmnrDvV61BmIF4X9QAQ==
   dependencies:
     object-assign "^4.0.1"
     remark-parse "^5.0.0"
@@ -3560,10 +3561,10 @@ joi-strict@1.1.7:
   dependencies:
     "@hapi/joi" "16.1.7"
 
-js-gardener@2.0.108:
-  version "2.0.108"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.108.tgz#e04780449eb9b9df453546d3f91c972fdc4a5dd2"
-  integrity sha512-iAtRoRcYkKPaoeA4wJerzadj1iyLvJojLK9BcRnaO0N66wu35LUkasYlPW01MoXMA3ABb8oF76rIzTMZDJ9Lsw==
+js-gardener@2.0.109:
+  version "2.0.109"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.109.tgz#ab0c47a579b566f013a69c3408ee36ceb07e6bce"
+  integrity sha512-5JCp/N8cZO0L6vGZ1D8j9Oizq26RmK+ljkAdSibad5f/HwK6UCqeNQOLzN2P8AdJBA4tBClBhc+pyVNuUdRscg==
   dependencies:
     chalk "2.4.2"
     fancy-log "1.3.3"
@@ -3572,7 +3573,7 @@ js-gardener@2.0.108:
     js-yaml "3.13.1"
     lodash.difference "4.5.0"
     lodash.get "4.4.2"
-    mocha "6.2.1"
+    mocha "6.2.2"
     npm-check "5.9.0"
     robo-config "3.4.5"
 
@@ -4368,10 +4369,10 @@ mkdirp@0.5.1, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@~0.5.1:
   dependencies:
     minimist "0.0.8"
 
-mocha@6.2.1:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/mocha/-/mocha-6.2.1.tgz#da941c99437da9bac412097859ff99543969f94c"
-  integrity sha512-VCcWkLHwk79NYQc8cxhkmI8IigTIhsCwZ6RTxQsqK6go4UvEhzJkYuHm8B2YtlSxcYq2fY+ucr4JBwoD6ci80A==
+mocha@6.2.2:
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/mocha/-/mocha-6.2.2.tgz#5d8987e28940caf8957a7d7664b910dc5b2fea20"
+  integrity sha512-FgDS9Re79yU1xz5d+C4rv1G7QagNGHZ+iXF81hO8zY35YZZcLEsJVfFolfsqKFWunATEvNzMK0r/CwWd/szO9A==
   dependencies:
     ansi-colors "3.2.3"
     browser-stdout "1.3.1"
@@ -7294,7 +7295,7 @@ vfile@^2.0.0:
     unist-util-stringify-position "^1.0.0"
     vfile-message "^1.0.0"
 
-vscode-json-languageservice@^3.2.1:
+vscode-json-languageservice@^3.3.5:
   version "3.3.5"
   resolved "https://registry.yarnpkg.com/vscode-json-languageservice/-/vscode-json-languageservice-3.3.5.tgz#e222e8391beeb23cfa40cf17fd57d1594d295fc7"
   integrity sha512-Le6SG5aRdrRc5jVeVMRkYbGH9rrVaZHCW0Oa8zCFQ0T8viUud9qdZ29lSv5NPNLwTB8mn4pYucFyyEPM2YWvLA==
