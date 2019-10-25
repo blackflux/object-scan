@@ -4501,10 +4501,10 @@ nice-try@^1.0.4:
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
 
-nock@11.4.0:
-  version "11.4.0"
-  resolved "https://registry.yarnpkg.com/nock/-/nock-11.4.0.tgz#68c2f9cf533f13ecb1a43e956823dbfba5593d17"
-  integrity sha512-UrVEbEAvhyDoUttrS0fv3znhZ5nEJvlxqgmrC6Gb2Mf9cFci65RMK17e6EjDDQB57g5iwZw1TFnVvyeL0eUlhQ==
+nock@11.6.0:
+  version "11.6.0"
+  resolved "https://registry.yarnpkg.com/nock/-/nock-11.6.0.tgz#481961e0cf78794f200ea71e25d948d668446717"
+  integrity sha512-9ocFR68CxS6nf2XtQNpdSh5n4QQSKl87DhXgLnHO/RD4CsGThFtu8/QG6myHTnrUHRE6JSKpiGjLJdRe2ZSlIA==
   dependencies:
     chai "^4.1.2"
     debug "^4.1.0"
@@ -4580,15 +4580,15 @@ node-pre-gyp@^0.12.0:
     semver "^5.3.0"
     tar "^4"
 
-node-tdd@2.5.16:
-  version "2.5.16"
-  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.5.16.tgz#930aa027c6185feb92f3568e3d6ef16ad758ae8e"
-  integrity sha512-hz6YV9Zi1Pi0O+Q+MLsZejY+w84NvwO/OiYvBeT0MWFHImDSbfeBj+GxuhqvvsZ0wFpqWrDhEzzxVwaq7/ETiw==
+node-tdd@2.5.17:
+  version "2.5.17"
+  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.5.17.tgz#29426e05a5187916cc1a91fac20dc6d6b2942321"
+  integrity sha512-nULYh1U6R/82zoaxZMT+OUnwNpoqKah9FdqZEhXhu13yUqyy25fppbqqhRtE5Sy5CLN+x1lxe2h4MOhVC+jzwQ==
   dependencies:
     callsites "3.1.0"
     joi-strict "1.1.7"
     lodash.get "4.4.2"
-    nock "11.4.0"
+    nock "11.6.0"
     smart-fs "1.11.0"
     timekeeper "2.2.0"
     tmp "0.1.0"
