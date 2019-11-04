@@ -551,10 +551,10 @@ anymatch@^2.0.0:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
 
-app-root-path@2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/app-root-path/-/app-root-path-2.2.1.tgz#d0df4a682ee408273583d43f6f79e9892624bc9a"
-  integrity sha512-91IFKeKk7FjfmezPKkwtaRvSpnUc4gDwPAjA1YZ9Gn0q0PPeW+vbeUsZuyDwjI7+QTHhcLen2v25fi/AmhvbJA==
+app-root-path@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/app-root-path/-/app-root-path-3.0.0.tgz#210b6f43873227e18a4b810a032283311555d5ad"
+  integrity sha512-qMcx+Gy2UZynHjOHOIXPNvpf+9cjvk3cWrBBK7zg4gH9+clobJRb9NGzcT7mQTcV/6Gm/1WelUtqxVXnNlrwcw==
 
 append-transform@^1.0.0:
   version "1.0.0"
@@ -3589,10 +3589,10 @@ joi-strict@1.1.7:
   dependencies:
     "@hapi/joi" "16.1.7"
 
-js-gardener@2.0.111:
-  version "2.0.111"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.111.tgz#8c9ac6046e3beab91e7b63456d9acd1e9b5c5890"
-  integrity sha512-EaqkZqelhYD5FVNPgplc0AhFhOc9tpa5YYrRvngue+tM7fd5EEjwudX96Xaya7rXFqv5eTXuSTRYLVUKIP4M5w==
+js-gardener@2.0.112:
+  version "2.0.112"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.112.tgz#108d03d67a83ad5cfb203c20ea7db023663fc089"
+  integrity sha512-39VfKlWwcL2RJeRY9VYaowivTo2UGcVZvGkW6q4y8tQX2G5hWWUEuoLQbZv2P+CQWVKeBbyYRuzhC7O7TC5fxA==
   dependencies:
     chalk "2.4.2"
     fancy-log "1.3.3"
@@ -3603,7 +3603,7 @@ js-gardener@2.0.111:
     lodash.get "4.4.2"
     mocha "6.2.2"
     npm-check "5.9.0"
-    robo-config "3.4.8"
+    robo-config "3.4.9"
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"
@@ -6173,12 +6173,12 @@ rimraf@2.6.3:
   dependencies:
     glob "^7.1.3"
 
-robo-config@3.4.8:
-  version "3.4.8"
-  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.4.8.tgz#07e22c28f237e62a4747f4142b3f6180a83be0e7"
-  integrity sha512-11bHWJZyAlwpvscY0wMf38y3FwftH08yoJ1E9fFkiw2NFGR61N1a1Csf6BjLtcMFmTvBKqrKF95GDYnOdO0n7g==
+robo-config@3.4.9:
+  version "3.4.9"
+  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.4.9.tgz#9753e1e1ec7902619d24b1889e68d066fed0e947"
+  integrity sha512-q2il26cfe3ioIBLAFkhMt9QDrygF1obqfRg/LJGwudd2vTpfJWT9ldIswhOpj1qb4cVqGfygn1bsVKfb0L0F3Q==
   dependencies:
-    app-root-path "2.2.1"
+    app-root-path "3.0.0"
     deepmerge "4.2.2"
     joi-strict "1.1.7"
     lodash.clonedeep "4.5.0"
