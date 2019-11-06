@@ -2704,10 +2704,10 @@ glob@7.1.3:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-glob@7.1.5, glob@^7.0.0, glob@^7.0.3, glob@^7.1.1, glob@^7.1.3, glob@^7.1.4:
-  version "7.1.5"
-  resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.5.tgz#6714c69bee20f3c3e64c4dd905553e532b40cdc0"
-  integrity sha512-J9dlskqUXK1OeTOYBEn5s8aMukWMwWfs+rPTn/jn50Ux4MNXVhubL1wu/j2t+H4NVI+cXEcCaYellqaPVGXNqQ==
+glob@7.1.6, glob@^7.0.0, glob@^7.0.3, glob@^7.1.1, glob@^7.1.3, glob@^7.1.4:
+  version "7.1.6"
+  resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.6.tgz#141f33b81a7c2492e125594307480c46679278a6"
+  integrity sha512-LwaxwyZ72Lk7vZINtNNrywX0ZuLyStrdDtabefZKAY5ZGJhVtgdznluResxNmPitE0SAO+O26sWTHeKSI2wMBA==
   dependencies:
     fs.realpath "^1.0.0"
     inflight "^1.0.4"
@@ -3588,14 +3588,14 @@ joi-strict@1.1.7:
   dependencies:
     "@hapi/joi" "16.1.7"
 
-js-gardener@2.0.112:
-  version "2.0.112"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.112.tgz#108d03d67a83ad5cfb203c20ea7db023663fc089"
-  integrity sha512-39VfKlWwcL2RJeRY9VYaowivTo2UGcVZvGkW6q4y8tQX2G5hWWUEuoLQbZv2P+CQWVKeBbyYRuzhC7O7TC5fxA==
+js-gardener@2.0.113:
+  version "2.0.113"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.113.tgz#240c4edeaaf9b3bd54738b4cb1dc19160655a5aa"
+  integrity sha512-zfRIvTRUkAkPMyqfWXcBTKEyMEGGO1Gffvz6KirA07ck9+jzccyzJM5F/01rQYRP00wiqYj/dEApkMUyCmqg2Q==
   dependencies:
     chalk "2.4.2"
     fancy-log "1.3.3"
-    glob "7.1.5"
+    glob "7.1.6"
     joi-strict "1.1.7"
     js-yaml "3.13.1"
     lodash.difference "4.5.0"
