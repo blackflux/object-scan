@@ -106,18 +106,18 @@
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.7.4.tgz#75ab2d7110c2cf2fa949959afb05fa346d2231bb"
   integrity sha512-jIwvLO0zCL+O/LmEJQjWA75MQTWwx3c3u2JOTDK5D3/9egrWRRA0/0hk9XXywYnXZVVpzrBYeIQTmhwUaePI9g==
 
-"@babel/plugin-proposal-object-rest-spread@7.6.2":
-  version "7.6.2"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-object-rest-spread/-/plugin-proposal-object-rest-spread-7.6.2.tgz#8ffccc8f3a6545e9f78988b6bf4fe881b88e8096"
-  integrity sha512-LDBXlmADCsMZV1Y9OQwMc0MyGZ8Ta/zlD9N67BfQT8uYwkRswiu2hU6nJKrjrt/58aH/vqfQlR/9yId/7A2gWw==
+"@babel/plugin-proposal-object-rest-spread@7.7.4":
+  version "7.7.4"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-object-rest-spread/-/plugin-proposal-object-rest-spread-7.7.4.tgz#cc57849894a5c774214178c8ab64f6334ec8af71"
+  integrity sha512-rnpnZR3/iWKmiQyJ3LKJpSwLDcX/nSXhdLk4Aq/tXOApIvyu7qoabrige0ylsAJffaUC51WiBu209Q0U+86OWQ==
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
-    "@babel/plugin-syntax-object-rest-spread" "^7.2.0"
+    "@babel/plugin-syntax-object-rest-spread" "^7.7.4"
 
-"@babel/plugin-syntax-object-rest-spread@^7.2.0":
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-object-rest-spread/-/plugin-syntax-object-rest-spread-7.2.0.tgz#3b7a3e733510c57e820b9142a6579ac8b0dfad2e"
-  integrity sha512-t0JKGgqk2We+9may3t0xDdmneaXmyxq0xieYcKHxIsrJO64n1OiMWNUtc5gQK1PA0NpdCRrtZp4z+IUaKugrSA==
+"@babel/plugin-syntax-object-rest-spread@^7.7.4":
+  version "7.7.4"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-object-rest-spread/-/plugin-syntax-object-rest-spread-7.7.4.tgz#47cf220d19d6d0d7b154304701f468fc1cc6ff46"
+  integrity sha512-mObR+r+KZq0XhRVS2BrBKBpr5jqrqzlPvS9C9vuOf5ilSwzloAl7RPWLrgKdWS6IreaVrjHxTjtyqFiOisaCwg==
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
@@ -179,10 +179,10 @@
   dependencies:
     smart-fs "1.11.0"
 
-"@blackflux/robo-config-plugin@2.6.18":
-  version "2.6.18"
-  resolved "https://registry.yarnpkg.com/@blackflux/robo-config-plugin/-/robo-config-plugin-2.6.18.tgz#75d4d78995772ee730a86c0362cf71dc41d8c534"
-  integrity sha512-uHvZJ/YHPuOc0Wip6BrIgrWIHhFGL9PJTGRGNXicotj3ayKNmer1J4S5kcgf9wqNzjEJ6X81RHskJsW67qqS/A==
+"@blackflux/robo-config-plugin@3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@blackflux/robo-config-plugin/-/robo-config-plugin-3.0.1.tgz#2ef76a88a10fcf16eec2336c74019b50bcf83eed"
+  integrity sha512-iC5/y0P8ucnBxj4Cjg49PLkN1KFdnBcveLoq1rr/76ZLB0skw3yCRqy/51/IphPjgpf1QP5hkYw7zY2cBEq1hg==
 
 "@hapi/address@^2.1.2":
   version "2.1.2"
@@ -4672,13 +4672,13 @@ node-pre-gyp@^0.12.0:
     semver "^5.3.0"
     tar "^4"
 
-node-tdd@2.5.18:
-  version "2.5.18"
-  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.5.18.tgz#b9d06830895c7346cdc3b16652477d1d7afa3e07"
-  integrity sha512-wGqh165nwO4yz2VaOTuaqcx7tfkogz9h0upThk0NlN8ogUa2QHf3VVdH/s20V5jFKQNc+FSvNpnW3X3oo1sKYQ==
+node-tdd@2.5.19:
+  version "2.5.19"
+  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.5.19.tgz#7cafc2e895e1a41afa48015a2f870f0dc714d340"
+  integrity sha512-u2hpfyMyvx0uGUVrPi6cqo31OCs/IcBiLfOx1TJpSHf+1zyp/HYKSAuvr79m6+IGChdcgT02f8kpaZRS+mUhCw==
   dependencies:
     callsites "3.1.0"
-    joi-strict "1.1.7"
+    joi-strict "1.1.8"
     lodash.get "4.4.2"
     nock "11.7.0"
     smart-fs "1.11.0"
