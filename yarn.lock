@@ -210,6 +210,17 @@
     "@hapi/pinpoint" "^1.0.2"
     "@hapi/topo" "^3.1.3"
 
+"@hapi/joi@16.1.8":
+  version "16.1.8"
+  resolved "https://registry.yarnpkg.com/@hapi/joi/-/joi-16.1.8.tgz#84c1f126269489871ad4e2decc786e0adef06839"
+  integrity sha512-wAsVvTPe+FwSrsAurNt5vkg3zo+TblvC5Bb1zMVK6SJzZqw9UrJnexxR+76cpePmtUZKHAPxcQ2Bf7oVHyahhg==
+  dependencies:
+    "@hapi/address" "^2.1.2"
+    "@hapi/formula" "^1.2.0"
+    "@hapi/hoek" "^8.2.4"
+    "@hapi/pinpoint" "^1.0.2"
+    "@hapi/topo" "^3.1.3"
+
 "@hapi/pinpoint@^1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@hapi/pinpoint/-/pinpoint-1.0.2.tgz#025b7a36dbbf4d35bf1acd071c26b20ef41e0d13"
@@ -3658,6 +3669,13 @@ joi-strict@1.1.8:
   dependencies:
     "@hapi/joi" "16.1.7"
 
+joi-strict@1.1.9:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.1.9.tgz#95087451a65040bc6d0cd4c1e4e10b433abb2044"
+  integrity sha512-WjlU406m2Oit7w5YgAfn/KKo45nhkjli3dwmhjOiKSEkjes4/tD1kpq8XMAa+lw2cbeWMPPIqqhys0v6YcKGtw==
+  dependencies:
+    "@hapi/joi" "16.1.8"
+
 js-gardener@2.0.116:
   version "2.0.116"
   resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.116.tgz#ddce9f496f72045e477e7f4060fc7ba178bcfec2"
@@ -4672,16 +4690,16 @@ node-pre-gyp@^0.12.0:
     semver "^5.3.0"
     tar "^4"
 
-node-tdd@2.5.19:
-  version "2.5.19"
-  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.5.19.tgz#7cafc2e895e1a41afa48015a2f870f0dc714d340"
-  integrity sha512-u2hpfyMyvx0uGUVrPi6cqo31OCs/IcBiLfOx1TJpSHf+1zyp/HYKSAuvr79m6+IGChdcgT02f8kpaZRS+mUhCw==
+node-tdd@2.5.20:
+  version "2.5.20"
+  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.5.20.tgz#6b50f1623c933ce9cdcd8dec49db920b339f80a3"
+  integrity sha512-pzHzGe2wfp9g7cRnw+F/1/jxrINYrOxUUiY8om/8MqqSsQ/UJdxAkQt4oC4h0KzcT92BGFxWcNgTbf/tJ3QHdw==
   dependencies:
     callsites "3.1.0"
-    joi-strict "1.1.8"
+    joi-strict "1.1.9"
     lodash.get "4.4.2"
     nock "11.7.0"
-    smart-fs "1.11.0"
+    smart-fs "1.11.2"
     timekeeper "2.2.0"
     tmp "0.1.0"
 
