@@ -199,17 +199,6 @@
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-8.2.5.tgz#b307d3f1aced22e05bd6a2403c302eaebb577da3"
   integrity sha512-rmGFzok1zR3xZKd5m3ihWdqafXFxvPHoQ/78+AG5URKbEbJiwBBfRgzbu+07W5f3+07JRshw6QqGbVmCp8ntig==
 
-"@hapi/joi@16.1.7":
-  version "16.1.7"
-  resolved "https://registry.yarnpkg.com/@hapi/joi/-/joi-16.1.7.tgz#360857223a87bb1f5f67691537964c1b4908ed93"
-  integrity sha512-anaIgnZhNooG3LJLrTFzgGALTiO97zRA1UkvQHm9KxxoSiIzCozB3RCNCpDnfhTJD72QlrHA8nwGmNgpFFCIeg==
-  dependencies:
-    "@hapi/address" "^2.1.2"
-    "@hapi/formula" "^1.2.0"
-    "@hapi/hoek" "^8.2.4"
-    "@hapi/pinpoint" "^1.0.2"
-    "@hapi/topo" "^3.1.3"
-
 "@hapi/joi@16.1.8":
   version "16.1.8"
   resolved "https://registry.yarnpkg.com/@hapi/joi/-/joi-16.1.8.tgz#84c1f126269489871ad4e2decc786e0adef06839"
@@ -3655,13 +3644,6 @@ java-properties@^1.0.0:
   resolved "https://registry.yarnpkg.com/java-properties/-/java-properties-1.0.2.tgz#ccd1fa73907438a5b5c38982269d0e771fe78211"
   integrity sha512-qjdpeo2yKlYTH7nFdK0vbZWuTCesk4o63v5iVOlhMQPfuIZQfW/HI35SjfhA+4qpg36rnFSvUK5b1m+ckIblQQ==
 
-joi-strict@1.1.8:
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.1.8.tgz#68e3b8b55a70437438f31ffccd3c83a43f39688f"
-  integrity sha512-shYn0h5fzXN3JDMZSlzc4m+vGdnNboAv2dLlQHu5eAbJoVWWhICGDbeayjMrsPjICePPvHiZwbOzNyyAakznCQ==
-  dependencies:
-    "@hapi/joi" "16.1.7"
-
 joi-strict@1.1.9:
   version "1.1.9"
   resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.1.9.tgz#95087451a65040bc6d0cd4c1e4e10b433abb2044"
@@ -3669,15 +3651,15 @@ joi-strict@1.1.9:
   dependencies:
     "@hapi/joi" "16.1.8"
 
-js-gardener@2.0.117:
-  version "2.0.117"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.117.tgz#6d574a0be0495d6a107461f46bd08e8120b6f5cb"
-  integrity sha512-GycCY9xqiIGTU1Y7o16q8KbZV8YY5/L7Ts8+0WxG6di/OXnoyokRcNpPAIbe/pPmzIPJ+/Tgi2q9E1KCbwioJQ==
+js-gardener@2.0.118:
+  version "2.0.118"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.118.tgz#de509d03bb4bf9c8229376741e084ec40dedc872"
+  integrity sha512-Xpy8Rg7kM3VsVuptTqd1ok56Cei32yaNfhDmIt4dlAj2x0/R7RH+RRJ/cBI8h28eO0rEGBZaFBO22jxMNW9Uhg==
   dependencies:
     chalk "3.0.0"
     fancy-log "1.3.3"
     glob "7.1.6"
-    joi-strict "1.1.8"
+    joi-strict "1.1.9"
     js-yaml "3.13.1"
     lodash.difference "4.5.0"
     lodash.get "4.4.2"
