@@ -3710,13 +3710,6 @@ joi-strict@1.1.10:
   dependencies:
     "@hapi/joi" "16.1.8"
 
-joi-strict@1.1.9:
-  version "1.1.9"
-  resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.1.9.tgz#95087451a65040bc6d0cd4c1e4e10b433abb2044"
-  integrity sha512-WjlU406m2Oit7w5YgAfn/KKo45nhkjli3dwmhjOiKSEkjes4/tD1kpq8XMAa+lw2cbeWMPPIqqhys0v6YcKGtw==
-  dependencies:
-    "@hapi/joi" "16.1.8"
-
 js-gardener@2.0.121:
   version "2.0.121"
   resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.121.tgz#7fbcf225eb6f31f83f7c51141002339263542ed5"
@@ -4786,16 +4779,16 @@ node-pre-gyp@^0.12.0:
     semver "^5.3.0"
     tar "^4"
 
-node-tdd@2.5.20:
-  version "2.5.20"
-  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.5.20.tgz#6b50f1623c933ce9cdcd8dec49db920b339f80a3"
-  integrity sha512-pzHzGe2wfp9g7cRnw+F/1/jxrINYrOxUUiY8om/8MqqSsQ/UJdxAkQt4oC4h0KzcT92BGFxWcNgTbf/tJ3QHdw==
+node-tdd@2.5.22:
+  version "2.5.22"
+  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.5.22.tgz#9222fffe991d5a60a942fe7466feed711bfeb93d"
+  integrity sha512-QRb5IXoOpSBtzdzmxhtyDiN+u1szksTG7h5EAZ3g9IEQq/4ONDr+nw+EOOHYrgWci/wEhhsUEpbQGljVvo9r0A==
   dependencies:
     callsites "3.1.0"
-    joi-strict "1.1.9"
+    joi-strict "1.1.10"
     lodash.get "4.4.2"
     nock "11.7.0"
-    smart-fs "1.11.2"
+    smart-fs "1.11.3"
     timekeeper "2.2.0"
     tmp "0.1.0"
 
@@ -6617,20 +6610,6 @@ smart-buffer@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-4.1.0.tgz#91605c25d91652f4661ea69ccf45f1b331ca21ba"
   integrity sha512-iVICrxOzCynf/SNaBQCw34eM9jROU/s5rzIhpOvzhzuYHfJR/DhZfDkXiZSgKXfgv26HT3Yni3AV/DGw0cGnnw==
-
-smart-fs@1.11.2:
-  version "1.11.2"
-  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.11.2.tgz#e3a2c8bc103f5d1becf80def29c3bab67c5fc47b"
-  integrity sha512-hqwEn6rC6l5cehd7n7zsXe2zmcpHRk2r+QfmEzf/yIlzA+eM0Qtrk/R/Rz5KvHQgefqMOo+vkDntGII+tHli1g==
-  dependencies:
-    fs-extra "8.1.0"
-    js-yaml "3.13.1"
-    json-stringify-pretty-compact "2.0.0"
-    lodash.clonedeep "4.5.0"
-    lodash.isequal "4.5.0"
-    object-align "1.0.9"
-    xml-js "1.6.11"
-    yaml-boost "1.9.18"
 
 smart-fs@1.11.3:
   version "1.11.3"
