@@ -88,7 +88,7 @@ Note that `breakFn` is called before the corresponding `filterFn` might be calle
 Type: `boolean`<br>
 Default: `false`
 
-Keys are returned as a string instead of a list when set to `true`. 
+Keys are returned as a string when set to `true` instead of as a list. 
 
 Setting this option to `true` will negatively impact performance.
 
@@ -182,9 +182,7 @@ Note that the empty string does not work with [_.get](https://lodash.com/docs/#g
 ## Special Characters
 
 The following Characters are considered special and need to 
-be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `,`, `.`, `!`, `?` and `*`. 
-
-When dealing with special characters, it might be desirable to have the  `joined` option as `false` (default).
+be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `,`, `.`, `!`, `?` and `*`.
 
 ## Internals
 
