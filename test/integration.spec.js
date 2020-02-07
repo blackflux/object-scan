@@ -3,9 +3,7 @@ const path = require('path');
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
 const stringify = require('json-stringify-pretty-compact');
-const objectScanOriginal = require('../src/index');
-
-const objectScan = (needles, opts) => objectScanOriginal(needles, { joined: true, ...opts });
+const objectScan = require('../src/index');
 
 const getEntries = (source) => fs.readdirSync(source)
   .map((name) => [name, path.join(source, name)]);
@@ -40,6 +38,7 @@ describe('Integration Testing', () => {
             const options = fileContent.options || {};
             const log = options.log === null ? null : [];
             const opts = {
+              joined: true,
               ...options.args,
               ...(options.log === null ? {} : ['breakFn', 'filterFn']
                 .reduce((p, c) => Object.assign(p, { [c]: logFn(c, log, options.log) }), {}))
