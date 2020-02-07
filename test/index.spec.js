@@ -1,6 +1,8 @@
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
-const objectScan = require('../src/index');
+const objectScanOriginal = require('../src/index');
+
+const objectScan = (needles, opts) => objectScanOriginal(needles, { joined: true, ...opts });
 
 const haystack = {
   simple: 'a',
@@ -28,6 +30,13 @@ const haystack = {
 };
 
 describe('Testing Find', () => {
+  it('Testing default', () => {
+    const find = objectScanOriginal(['simple']);
+    expect(find(haystack)).to.deep.equal([
+      ['simple']
+    ]);
+  });
+
   it('Testing Top Level Exact', () => {
     const find = objectScan(['simple']);
     expect(find(haystack)).to.deep.equal([

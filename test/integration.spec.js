@@ -3,7 +3,9 @@ const path = require('path');
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
 const stringify = require('json-stringify-pretty-compact');
-const objectScan = require('../src/index');
+const objectScanOriginal = require('../src/index');
+
+const objectScan = (needles, opts) => objectScanOriginal(needles, { joined: true, ...opts });
 
 const getEntries = (source) => fs.readdirSync(source)
   .map((name) => [name, path.join(source, name)]);
