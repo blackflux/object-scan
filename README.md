@@ -86,11 +86,11 @@ Note that `breakFn` is called before the corresponding `filterFn` might be calle
 #### joined
 
 Type: `boolean`<br>
-Default: `true`
+Default: `false`
 
-Can be set to false to return each key as a list. When dealing with _special characters_ this can be useful.
+Keys are returned as a string when set to `true` instead of as a list. 
 
-Setting this to `false` improves performance.
+Setting this option to `true` will negatively impact performance.
 
 Note that [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set) fully support lists.
 
@@ -133,43 +133,43 @@ const obj = {
 };
 
 // top level keys
-objectScan(['*'])(obj);
+objectScan(['*'], { joined: true })(obj);
 // => ["k", "a"]
 
 // nested keys
-objectScan(['a.*.f'])(obj);
+objectScan(['a.*.f'], { joined: true })(obj);
 // => ["a.e.f"]
-objectScan(['*.*.*'])(obj);
+objectScan(['*.*.*'], { joined: true })(obj);
 // => ["a.e.f", "a.b.c"]
 
 // or filter
-objectScan(['a.*.{c,f}'])(obj);
+objectScan(['a.*.{c,f}'], { joined: true })(obj);
 // => ["a.e.f", "a.b.c"]
-objectScan(['a.*.{c,f}'], { joined: false })(obj);
+objectScan(['a.*.{c,f}'])(obj);
 // => [["a", "e", "f"], ["a", "b", "c"]]
 
 // list filter
-objectScan(['*.*[*]'])(obj);
+objectScan(['*.*[*]'], { joined: true })(obj);
 // => ["a.h[1]", "a.h[0]"]
-objectScan(['*[*]'])(obj);
+objectScan(['*[*]'], { joined: true })(obj);
 // => []
 
 // deep star filter
-objectScan(['**'])(obj);
+objectScan(['**'], { joined: true })(obj);
 // => ["k", "a.h[1]", "a.h[0]", "a.h", "a.e.f", "a.e", "a.b.c", "a.b", "a"]
-objectScan(['**.f'])(obj);
+objectScan(['**.f'], { joined: true })(obj);
 // => ["a.e.f"]
-objectScan(['**[*]'])(obj);
+objectScan(['**[*]'], { joined: true })(obj);
 // => ["a.h[1]", "a.h[0]"]
 
 // exclusion filter
-objectScan(['a.*,!a.e'])(obj);
+objectScan(['a.*,!a.e'], { joined: true })(obj);
 // => ["a.h", "a.b"]
 
 // value function
-objectScan(['**'], { filterFn: (key, value) => typeof value === 'string' })(obj);
+objectScan(['**'], { filterFn: (key, value) => typeof value === 'string', joined: true })(obj);
 // => ["k", "a.h[1]", "a.h[0]", "a.e.f", "a.b.c"]
-objectScan(['**'], { breakFn: (key) => key === 'a.b' })(obj);
+objectScan(['**'], { breakFn: (key) => key === 'a.b', joined: true })(obj);
 // => ["k", "a.h[1]", "a.h[0]", "a.h", "a.e.f", "a.e", "a.b", "a"]
 ```
 
@@ -182,9 +182,7 @@ Note that the empty string does not work with [_.get](https://lodash.com/docs/#g
 ## Special Characters
 
 The following Characters are considered special and need to 
-be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `,`, `.`, `!`, `?` and `*`. 
-
-When dealing with special characters, it might be desirable to set the  `joined` option to `false`.
+be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `,`, `.`, `!`, `?` and `*`.
 
 ## Internals
 
