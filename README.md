@@ -9,7 +9,7 @@
 [![Semantic-Release](https://github.com/blackflux/js-gardener/blob/master/assets/icons/semver.svg)](https://github.com/semantic-release/semantic-release)
 [![Gardener](https://github.com/blackflux/js-gardener/blob/master/assets/badge.svg)](https://github.com/blackflux/js-gardener)
 
-Find keys in object hierarchies using wildcard matching and callbacks.
+Find keys in object hierarchies using wildcard and glob matching and callbacks.
 
 ## Install
 
@@ -175,28 +175,28 @@ objectScan(['**'], { breakFn: (key) => key === 'a.b' })(obj);
 
 ## Edge Cases
 
-The top level object(s) are matched by the empty needle `""`. 
+The top level object(s) are matched by the empty needle `""`.
 Useful for matching objects nested in arrays by setting `useArraySelector` to `false`.
 Note that the empty string does not work with [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set).
 
 ## Special Characters
 
-The following Characters are considered special and need to 
-be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `,`, `.`, `!`, `?` and `*`. 
+The following Characters are considered special and need to
+be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `,`, `.`, `!`, `?` and `*`.
 
 When dealing with special characters, it might be desirable to set the  `joined` option to `false`.
 
 ## Internals
 
 Conceptually this package works as follows:
- 
-1. During initialization the needles are parsed and built into a search tree. 
+
+1. During initialization the needles are parsed and built into a search tree.
 Various information is pre-computed and stored for every node.
 Finally the search function is returned.
 
-2. When the search function is called, the input is traversed simultaneously with 
+2. When the search function is called, the input is traversed simultaneously with
 the relevant nodes of the search tree. Processing multiple search tree branches
 in parallel allows for a single traversal of the input.
 
 Having a separate initialization stage allows for a performant search and
-significant speed ups when applying the same search to different input. 
+significant speed ups when applying the same search to different input.
