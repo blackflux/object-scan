@@ -129,7 +129,7 @@ module.exports = (needles, opts = {}) => {
   const ctx = {
     filterFn: undefined,
     breakFn: undefined,
-    joined: true,
+    joined: false,
     useArraySelector: true,
     strict: true,
     ...opts

@@ -1,6 +1,13 @@
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
-const objectScan = require('../src/index');
+const objectScanOriginal = require('../src/index');
+
+const objectScan = (needles, opts) => objectScanOriginal(
+  needles,
+  Object.keys(opts || {}).length === 1 && opts.joined === false
+    ? undefined
+    : { joined: true, ...opts }
+);
 
 const haystack = {
   simple: 'a',

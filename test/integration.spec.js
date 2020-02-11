@@ -38,6 +38,7 @@ describe('Integration Testing', () => {
             const options = fileContent.options || {};
             const log = options.log === null ? null : [];
             const opts = {
+              joined: true,
               ...options.args,
               ...(options.log === null ? {} : ['breakFn', 'filterFn']
                 .reduce((p, c) => Object.assign(p, { [c]: logFn(c, log, options.log) }), {}))
