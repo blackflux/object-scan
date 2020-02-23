@@ -296,6 +296,17 @@ describe('Testing compiler', () => {
     expect(compiler.isMatch(tower.a.e)).to.equal(false);
     expect(compiler.isMatch(tower.a.e.f)).to.equal(true);
 
+    expect(compiler.isExclude(tower)).to.equal(false);
+    expect(compiler.isExclude(tower.a)).to.equal(false);
+    expect(compiler.isExclude(tower.a.b)).to.equal(false);
+    expect(compiler.isExclude(tower.a.b.d)).to.equal(false);
+    expect(compiler.isExclude(tower.a.b.d.g)).to.equal(true);
+    expect(compiler.isExclude(tower.a.c)).to.equal(false);
+    expect(compiler.isExclude(tower.a.c.d)).to.equal(false);
+    expect(compiler.isExclude(tower.a.c.f)).to.equal(false);
+    expect(compiler.isExclude(tower.a.e)).to.equal(false);
+    expect(compiler.isExclude(tower.a.e.f)).to.equal(false);
+
     expect(compiler.hasMatches(tower)).to.equal(true);
     expect(compiler.hasMatches(tower.a)).to.equal(true);
     expect(compiler.hasMatches(tower.a.b)).to.equal(true);
