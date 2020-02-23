@@ -1,6 +1,6 @@
 const assert = require('assert');
 const compiler = require('./util/compiler');
-const { findLast, escape } = require('./util/helper');
+const { findLast, reverseWhileCheck, escape } = require('./util/helper');
 
 const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
   if (wildcard === '**') {
@@ -81,6 +81,10 @@ const find = (haystack_, searches_, ctx) => {
 
     if (compiler.isMatch(findLast(searches, (s) => compiler.isLeaf(s)))) {
       stack.push(true, searches, segment, depth);
+    }
+    if (reverseWhileCheck(searches, (s) => compiler.isExclude(s), (s) => compiler.isRecursive(s))) {
+      // eslint-disable-next-line no-continue
+      continue;
     }
 
     if (searches[0][''] !== undefined && path.find((p) => typeof p === 'string') === undefined) {

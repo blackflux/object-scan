@@ -6,8 +6,10 @@ const LEAF = Symbol('leaf');
 const markLeaf = (input, match, readonly) => defineProperty(input, LEAF, match, readonly);
 const isLeaf = (input) => input[LEAF] !== undefined;
 const isMatch = (input) => input !== undefined && input[LEAF] === true;
+const isExclude = (input) => input !== undefined && input[LEAF] === false;
 module.exports.isLeaf = isLeaf;
 module.exports.isMatch = isMatch;
+module.exports.isExclude = isExclude;
 
 const HAS_MATCHES = Symbol('has-matches');
 const setHasMatches = (input) => defineProperty(input, HAS_MATCHES, true);

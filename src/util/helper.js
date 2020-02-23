@@ -11,6 +11,19 @@ module.exports.findLast = (array, fn) => {
   return undefined;
 };
 
+module.exports.reverseWhileCheck = (array, fnWhile, fnCheck) => {
+  for (let idx = array.length - 1; idx >= 0; idx -= 1) {
+    const item = array[idx];
+    if (!fnWhile(item)) {
+      break;
+    }
+    if (fnCheck(item)) {
+      return true;
+    }
+  }
+  return false;
+};
+
 const specialChars = /[?!,.*[\]{}]/g;
 module.exports.escape = (input) => input.replace(specialChars, '\\$&');
 
