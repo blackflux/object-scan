@@ -79,7 +79,7 @@ describe('Testing compiler', () => {
   });
 
   it('Testing recursion position for strict=false', () => {
-    const input = ['**', '**.b', '!**'];
+    const input = ['!**', '**.b', '**'];
     const tower = compiler.compile(input, false);
     expect(tower).to.deep.equal({ '**': { b: {} }, b: {} });
     expect(compiler.isRecursive(tower)).to.equal(false);
@@ -248,6 +248,19 @@ describe('Testing compiler', () => {
               '[1]': {}
             }
           }
+        },
+        '[2]': {}
+      }
+    });
+  });
+
+  it('Testing Complex Path with star exclusion', () => {
+    const input = ['a[1].{hello.you,there[1].*,{a.b}}[{1}],a[2],a[1].*,!a[1].**'];
+    const tower = compiler.compile(input);
+    expect(tower).to.deep.equal({
+      a: {
+        '[1]': {
+          '**': {}
         },
         '[2]': {}
       }

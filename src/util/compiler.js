@@ -72,6 +72,12 @@ module.exports.getMeta = (() => {
 })();
 
 const buildRecursive = (tower, path, ctx, excluded, root = false) => {
+  if (path.length === 1 && String(path[0]) === '**' && (excluded || path[0].isExcluded())) {
+    Object.keys(tower).forEach((k) => {
+      // eslint-disable-next-line no-param-reassign
+      delete tower[k];
+    });
+  }
   addNeedle(tower, ctx.needle);
   if (path.length === 0) {
     if (tower[NEEDLE] !== undefined && ctx.strict) {
