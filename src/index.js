@@ -82,6 +82,7 @@ const find = (haystack_, searches_, ctx) => {
     if (compiler.isMatch(findLast(searches, (s) => compiler.isLeaf(s)))) {
       stack.push(true, searches, segment, depth);
     }
+
     if (reverseWhileCheck(searches, (s) => compiler.isExclude(s), (s) => compiler.isRecursive(s))) {
       // eslint-disable-next-line no-continue
       continue;
