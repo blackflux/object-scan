@@ -3809,13 +3809,6 @@ java-properties@^1.0.0:
   resolved "https://registry.yarnpkg.com/java-properties/-/java-properties-1.0.2.tgz#ccd1fa73907438a5b5c38982269d0e771fe78211"
   integrity sha512-qjdpeo2yKlYTH7nFdK0vbZWuTCesk4o63v5iVOlhMQPfuIZQfW/HI35SjfhA+4qpg36rnFSvUK5b1m+ckIblQQ==
 
-joi-strict@1.1.11:
-  version "1.1.11"
-  resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.1.11.tgz#4a08c14772f10f1ef06ec1a9dbabc1b8aedc5753"
-  integrity sha512-CxN0zLwlKPVjWFFDTvAv8rdmjdsFhAkWNCM1kYMqVwG3zCWG+akyO6bufMA4ovKsm9IYaOklTGi+OKLj3mHg5w==
-  dependencies:
-    "@hapi/joi" "16.1.8"
-
 joi-strict@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.2.0.tgz#45801a951603e4e80377cb4b703d69c8b92d5026"
@@ -4882,20 +4875,20 @@ node-preload@^0.2.0:
   dependencies:
     process-on-spawn "^1.0.0"
 
-node-tdd@2.9.2:
-  version "2.9.2"
-  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.9.2.tgz#67e513ae0859c233848ed4187d8703d2bd65e04d"
-  integrity sha512-XeOph5jgtPlZQqYbsRW4rqUM9X2x0jqBvxtpCpWT1Up8j7NbXdDJ6a5uUGo9Y+Q+vhMorIY1YR2woF3JneSBgQ==
+node-tdd@2.9.3:
+  version "2.9.3"
+  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.9.3.tgz#8e977f96500a037b4c5696d9743c4dad7cd5363c"
+  integrity sha512-YNFcpVyigPbTo5tVlcgXY9n3mgJU/YgnJo31y7qtRg7euR1e+rUAe94/scKma1HowZSgSjCLhlLkULupS+MIcQ==
   dependencies:
     callsites "3.1.0"
-    joi-strict "1.1.11"
+    joi-strict "1.2.0"
     lodash.get "4.4.2"
     minimist "1.2.0"
     nock "12.0.1"
     smart-fs "1.11.8"
     timekeeper "2.2.0"
     tmp "0.1.0"
-    uuid "3.4.0"
+    uuid "7.0.0"
     xml2js "0.4.23"
 
 "nopt@2 || 3":
@@ -7652,7 +7645,12 @@ util-promisify@^2.1.0:
   dependencies:
     object.getownpropertydescriptors "^2.0.3"
 
-uuid@3.4.0, uuid@^3.3.2, uuid@^3.3.3:
+uuid@7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-7.0.0.tgz#1833d4b9ce50b732bfaa271f9cb74e974d303c79"
+  integrity sha512-LNUrNsXdI/fUsypJbWM8Jt4DgQdFAZh41p9C7WE9Cn+CULOEkoG2lgQyH68v3wnIy5K3fN4jdSt270K6IFA3MQ==
+
+uuid@^3.3.2, uuid@^3.3.3:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
