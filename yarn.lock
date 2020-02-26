@@ -3816,10 +3816,10 @@ joi-strict@1.2.0:
   dependencies:
     "@hapi/joi" "16.1.8"
 
-js-gardener@2.0.135:
-  version "2.0.135"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.135.tgz#5ddba1301622cd9e44ff0d795f835fc21b8b45cb"
-  integrity sha512-fOudiysHtV/GYG51TMAU7rnLvr0phOUH4Jw9HvNToeQwwb2fvbIogZs9BLBJ8wSOrDynJhKn2Wk/CQvNtKY/Tw==
+js-gardener@2.0.136:
+  version "2.0.136"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.136.tgz#390e812a7cfd6fd318c48ffe6da8cba29600baa2"
+  integrity sha512-DFB/vB9Z0lCpJVmI/xtgv6mnLiH48bi078+8iRKs4Z+8eHsBFRmNzNv16cbj0Em6a5OmplB0BNg7xM4BtdNGsw==
   dependencies:
     chalk "3.0.0"
     fancy-log "1.3.3"
@@ -3828,7 +3828,7 @@ js-gardener@2.0.135:
     js-yaml "3.13.1"
     lodash.difference "4.5.0"
     lodash.get "4.4.2"
-    mocha "7.0.1"
+    mocha "7.1.0"
     npm-check "5.9.0"
     robo-config "3.4.25"
 
@@ -4318,12 +4318,12 @@ log-driver@^1.2.7:
   resolved "https://registry.yarnpkg.com/log-driver/-/log-driver-1.2.7.tgz#63b95021f0702fedfa2c9bb0a24e7797d71871d8"
   integrity sha512-U7KCmLdqsGHBLeWqYlFA0V0Sl6P08EE1ZrmA9cxjUE0WVqT9qnyVDPz1kzpFEP0jdJuFnasWIfSd7fsaNXkpbg==
 
-log-symbols@2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/log-symbols/-/log-symbols-2.2.0.tgz#5740e1c5d6f0dfda4ad9323b5332107ef6b4c40a"
-  integrity sha512-VeIAFslyIerEJLXHziedo2basKbMKtTw3vfn5IzG0XTjhAVEJyNHnL2p7vc+wBDSdQuUpNw3M2u6xb9QsAY5Eg==
+log-symbols@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/log-symbols/-/log-symbols-3.0.0.tgz#f3a08516a5dea893336a7dee14d18a1cfdab77c4"
+  integrity sha512-dSkNGuI7iG3mfvDzUuYZyvk5dD9ocYCYzNU6CYDE6+Xqd+gwme6Z00NS3dUh8mq/73HaEtT7m6W+yUPtU6BZnQ==
   dependencies:
-    chalk "^2.0.1"
+    chalk "^2.4.2"
 
 loose-envify@^1.0.0:
   version "1.4.0"
@@ -4667,10 +4667,10 @@ mkdirp@^1.0.0:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.3.tgz#4cf2e30ad45959dddea53ad97d518b6c8205e1ea"
   integrity sha512-6uCP4Qc0sWsgMLy1EOqqS/3rjDHOEnsStVr/4vtAIK2Y5i2kA7lFFejYrpIyiN9w0pYf4ckeCYT9f1r1P9KX5g==
 
-mocha@7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/mocha/-/mocha-7.0.1.tgz#276186d35a4852f6249808c6dd4a1376cbf6c6ce"
-  integrity sha512-9eWmWTdHLXh72rGrdZjNbG3aa1/3NRPpul1z0D979QpEnFdCG0Q5tv834N+94QEN2cysfV72YocQ3fn87s70fg==
+mocha@7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/mocha/-/mocha-7.1.0.tgz#c784f579ad0904d29229ad6cb1e2514e4db7d249"
+  integrity sha512-MymHK8UkU0K15Q/zX7uflZgVoRWiTjy0fXE/QjKts6mowUvGxOdPhZ2qj3b0iZdUrNZlW9LAIMFHB4IW+2b3EQ==
   dependencies:
     ansi-colors "3.2.3"
     browser-stdout "1.3.1"
@@ -4683,7 +4683,7 @@ mocha@7.0.1:
     growl "1.10.5"
     he "1.2.0"
     js-yaml "3.13.1"
-    log-symbols "2.2.0"
+    log-symbols "3.0.0"
     minimatch "3.0.4"
     mkdirp "0.5.1"
     ms "2.1.1"
