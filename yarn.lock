@@ -4578,11 +4578,6 @@ mkdirp@0.5.1, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@~0.5.1:
   dependencies:
     minimist "0.0.8"
 
-mkdirp@^1.0.0:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.3.tgz#4cf2e30ad45959dddea53ad97d518b6c8205e1ea"
-  integrity sha512-6uCP4Qc0sWsgMLy1EOqqS/3rjDHOEnsStVr/4vtAIK2Y5i2kA7lFFejYrpIyiN9w0pYf4ckeCYT9f1r1P9KX5g==
-
 mocha@7.1.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/mocha/-/mocha-7.1.0.tgz#c784f579ad0904d29229ad6cb1e2514e4db7d249"
@@ -4706,15 +4701,14 @@ nice-try@^1.0.4:
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
 
-nock@12.0.1:
-  version "12.0.1"
-  resolved "https://registry.yarnpkg.com/nock/-/nock-12.0.1.tgz#6d497d01f23cb52c733545c97e09e8318f6af801"
-  integrity sha512-f5u5k7O5D2YXH2WEFQVLLPa36D5C0dxU9Lrg6KOuaFCMDt7yd1W4S3hbZClCMczxc4EZ0k1bEhPeMWSewrxYNw==
+nock@12.0.2:
+  version "12.0.2"
+  resolved "https://registry.yarnpkg.com/nock/-/nock-12.0.2.tgz#47617b34738e026b29d2294b4579e35b27e6a4d3"
+  integrity sha512-pTckyfP8QHvwXP/oX+zQuSIL3S/mWTd84ba4pOGZlS/FgRZyljv4C3ZyOjgMilvkydSaERML/aJEF13EBUuDTQ==
   dependencies:
     debug "^4.1.0"
     json-stringify-safe "^5.0.1"
     lodash "^4.17.13"
-    mkdirp "^1.0.0"
     propagate "^2.0.0"
 
 node-emoji@^1.0.3, node-emoji@^1.10.0:
@@ -4798,20 +4792,20 @@ node-sass-tilde-importer@^1.0.2:
   dependencies:
     find-parent-dir "^0.3.0"
 
-node-tdd@2.9.4:
-  version "2.9.4"
-  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.9.4.tgz#31e040176880b7e0f7343a173afb729375b0aa04"
-  integrity sha512-LamA7ZQlYqlGaKZaW7sUyh34y58QPT0o5420Hf/VyQmmcF02/1IVSZ7sW6PDUKdrKPitNXOSXE2sm1iErcVBiQ==
+node-tdd@2.9.5:
+  version "2.9.5"
+  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.9.5.tgz#e714efd59ccb9316fc870478a0f9acdf08205ea9"
+  integrity sha512-9L7D1dmK40fJdrOar3AyH0FOKkr/BQ26E2+E8rhMy4Y7hiVFtIvjX54zCnyKvVoVC+9FHsJ8hkWbyljbciZlWQ==
   dependencies:
     callsites "3.1.0"
     joi-strict "1.2.0"
     lodash.get "4.4.2"
     minimist "1.2.0"
-    nock "12.0.1"
+    nock "12.0.2"
     smart-fs "1.11.8"
     timekeeper "2.2.0"
     tmp "0.1.0"
-    uuid "7.0.1"
+    uuid "7.0.2"
     xml2js "0.4.23"
 
 "nopt@2 || 3":
@@ -7566,10 +7560,10 @@ util-promisify@^2.1.0:
   dependencies:
     object.getownpropertydescriptors "^2.0.3"
 
-uuid@7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-7.0.1.tgz#95ed6ff3d8c881cbf85f0f05cc3915ef994818ef"
-  integrity sha512-yqjRXZzSJm9Dbl84H2VDHpM3zMjzSJQ+hn6C4zqd5ilW+7P4ZmLEEqwho9LjP+tGuZlF4xrHQXT0h9QZUS/pWA==
+uuid@7.0.2:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-7.0.2.tgz#7ff5c203467e91f5e0d85cfcbaaf7d2ebbca9be6"
+  integrity sha512-vy9V/+pKG+5ZTYKf+VcphF5Oc6EFiu3W8Nv3P3zIh0EqVI80ZxOzuPfe9EHjkFNvf8+xuTHVeei4Drydlx4zjw==
 
 uuid@^3.3.2, uuid@^3.3.3:
   version "3.4.0"
