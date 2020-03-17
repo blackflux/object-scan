@@ -4748,10 +4748,10 @@ nice-try@^1.0.4:
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
 
-nock@12.0.2:
-  version "12.0.2"
-  resolved "https://registry.yarnpkg.com/nock/-/nock-12.0.2.tgz#47617b34738e026b29d2294b4579e35b27e6a4d3"
-  integrity sha512-pTckyfP8QHvwXP/oX+zQuSIL3S/mWTd84ba4pOGZlS/FgRZyljv4C3ZyOjgMilvkydSaERML/aJEF13EBUuDTQ==
+nock@12.0.3:
+  version "12.0.3"
+  resolved "https://registry.yarnpkg.com/nock/-/nock-12.0.3.tgz#83f25076dbc4c9aa82b5cdf54c9604c7a778d1c9"
+  integrity sha512-QNb/j8kbFnKCiyqi9C5DD0jH/FubFGj5rt9NQFONXwQm3IPB0CULECg/eS3AU1KgZb/6SwUa4/DTRKhVxkGABw==
   dependencies:
     debug "^4.1.0"
     json-stringify-safe "^5.0.1"
@@ -4839,16 +4839,16 @@ node-sass-tilde-importer@^1.0.2:
   dependencies:
     find-parent-dir "^0.3.0"
 
-node-tdd@2.9.11:
-  version "2.9.11"
-  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.9.11.tgz#2c58cf145d969714e5420385e7c26be638c33c87"
-  integrity sha512-yzKh/nlgoqrawgBJyr08J2+0XNl6gzcgOslGWN69Tcoqp8kk46GNdSUL5EIpgCIMeJg20LAoIxzOGF6wUrLqNA==
+node-tdd@2.9.13:
+  version "2.9.13"
+  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.9.13.tgz#b6b134a3f2f6957ccdbf272b35d2ddcce73e6904"
+  integrity sha512-/wDkhPQPQNA4udm7FYhgLA2OOmy8E65zJJ+WAjb6ekO4zXX3jZR15ZhhyiK5Umy4bJPUCMURtW5JpWA1tOPEZg==
   dependencies:
     callsites "3.1.0"
     joi-strict "1.2.1"
     lodash.get "4.4.2"
     minimist "1.2.5"
-    nock "12.0.2"
+    nock "12.0.3"
     smart-fs "1.11.9"
     timekeeper "2.2.0"
     tmp "0.1.0"
