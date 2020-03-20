@@ -773,6 +773,11 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha1-x57Zf380y48robyXkLzDZkdLS3k=
 
+at-least-node@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/at-least-node/-/at-least-node-1.0.0.tgz#602cd4b46e844ad4effc92a8011a3c46e0238dc2"
+  integrity sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==
+
 atob-lite@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/atob-lite/-/atob-lite-2.0.0.tgz#0fef5ad46f1bd7a8502c65727f0367d5ee43d696"
@@ -2645,6 +2650,16 @@ fs-extra@8.1.0, fs-extra@^8.0.0:
     jsonfile "^4.0.0"
     universalify "^0.1.0"
 
+fs-extra@9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-9.0.0.tgz#b6afc31036e247b2466dc99c29ae797d5d4580a3"
+  integrity sha512-pmEYSk3vYsG/bF651KPUXZ+hvjpgWYw/Gc7W9NFUe3ZVLczKKWIij3IKpOrQcdw4TILtibFslZ0UmR8Vvzig4g==
+  dependencies:
+    at-least-node "^1.0.0"
+    graceful-fs "^4.2.0"
+    jsonfile "^6.0.1"
+    universalify "^1.0.0"
+
 fs-minipass@^1.2.5:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/fs-minipass/-/fs-minipass-1.2.7.tgz#ccff8570841e7fe4265693da88936c55aed7f7c7"
@@ -3853,6 +3868,15 @@ jsonfile@^4.0.0:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
+jsonfile@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-6.0.1.tgz#98966cba214378c8c84b82e085907b40bf614179"
+  integrity sha512-jR2b5v7d2vIOust+w3wtFKZIfpC2pnRmFAhAC/BuweZFQR8qZzxH1OyrQ10HmdVYiXWkYUqPVsz91cG7EL2FBg==
+  dependencies:
+    universalify "^1.0.0"
+  optionalDependencies:
+    graceful-fs "^4.1.6"
+
 jsonparse@^1.2.0:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/jsonparse/-/jsonparse-1.3.1.tgz#3f4dae4a91fac315f71062f8521cc239f1366280"
@@ -4801,17 +4825,17 @@ node-sass-tilde-importer@^1.0.2:
   dependencies:
     find-parent-dir "^0.3.0"
 
-node-tdd@2.10.1:
-  version "2.10.1"
-  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.10.1.tgz#19940da016f1ddc745098960b1950b298ccd3871"
-  integrity sha512-32iEVH/LwVRoXKBIhIwsvud84VjVkEMvND0d8lP26u0MyV4LsMq+nzQXVeb+VXL/7gby2x9HYgo03BeZNYn3nQ==
+node-tdd@2.10.2:
+  version "2.10.2"
+  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.10.2.tgz#4547700a22ff9338a9ce63af3d2e7d79e0734a59"
+  integrity sha512-xEPQIsdWlK5EEbMYzz5QzFzy0TwrjAYQhYaQtwzUjTMQHiL4tPvUS5e5CSuvaQkdW0Z8eFeySohx+RXO2dgSJg==
   dependencies:
     callsites "3.1.0"
     joi-strict "1.2.1"
     lodash.get "4.4.2"
     minimist "1.2.5"
     nock "12.0.3"
-    smart-fs "1.11.10"
+    smart-fs "1.11.11"
     timekeeper "2.2.0"
     tmp "0.1.0"
     uuid "7.0.2"
@@ -6666,6 +6690,20 @@ smart-fs@1.11.10:
     xml-js "1.6.11"
     yaml-boost "1.9.21"
 
+smart-fs@1.11.11:
+  version "1.11.11"
+  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.11.11.tgz#8ccb0dfaf5d7174981aa7f6f44bfbafa35b021cd"
+  integrity sha512-qpQ45ACg3kTFEyYi36nb2TpAZqQvW68YoIwl38/VPjNt4ffJ9YGL6jhisTaD6MT9KhWHMshCRlG1QbBRabqGyg==
+  dependencies:
+    fs-extra "9.0.0"
+    js-yaml "3.13.1"
+    json-stringify-pretty-compact "2.0.0"
+    lodash.clonedeep "4.5.0"
+    lodash.isequal "4.5.0"
+    object-align "1.0.11"
+    xml-js "1.6.11"
+    yaml-boost "1.9.21"
+
 smart-fs@1.11.9:
   version "1.11.9"
   resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.11.9.tgz#5a685e47c79edfb9cee69424da0b16ba89752a22"
@@ -7497,6 +7535,11 @@ universalify@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
   integrity sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==
+
+universalify@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/universalify/-/universalify-1.0.0.tgz#b61a1da173e8435b2fe3c67d29b9adf8594bd16d"
+  integrity sha512-rb6X1W158d7pRQBg5gkR8uPaSfiids68LTJQYOtEUhoJUWBdaQHsuT/EUduxXYxcrt4r5PJ4fuHW1MHT6p0qug==
 
 unpipe@~1.0.0:
   version "1.0.0"
