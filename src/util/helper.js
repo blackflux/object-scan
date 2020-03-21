@@ -12,7 +12,8 @@ module.exports.findLast = (array, fn) => {
 };
 
 const specialChars = /[?!,.*[\]{}]/g;
-module.exports.escape = (input) => input.replace(specialChars, '\\$&');
+const escape = (input) => input.replace(specialChars, '\\$&');
+module.exports.escape = escape;
 
 module.exports.parseWildcard = (input) => {
   let regex = '';
@@ -33,3 +34,6 @@ module.exports.parseWildcard = (input) => {
   }
   return new RegExp(`^${regex}$`);
 };
+
+module.exports.toPath = (input) => input
+  .reduce((p, c) => `${p}${typeof c === 'number' ? `[${c}]` : `${p ? '.' : ''}${escape(c)}`}`, '');
