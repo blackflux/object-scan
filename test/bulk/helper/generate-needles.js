@@ -1,6 +1,7 @@
 const assert = require('assert');
 const get = require('lodash.get');
 const objectScan = require('../../../src');
+const { escape } = require('../../../src/util/helper');
 
 
 const generateNeedle = (haystack, {
@@ -32,7 +33,7 @@ const generateNeedle = (haystack, {
     } else {
       key = Array.isArray(root)
         ? Math.floor(root.length * Math.random())
-        : Object.keys(root)[Math.floor(Object.keys(root).length * Math.random())];
+        : escape(Object.keys(root)[Math.floor(Object.keys(root).length * Math.random())]);
     }
     const nexts = objectScan([typeof key === 'number' ? `[${key}]` : key])(root);
     const next = nexts[Math.floor(Math.random() * nexts.length)];

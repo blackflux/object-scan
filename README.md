@@ -182,7 +182,7 @@ Note that the empty string does not work with [_.get](https://lodash.com/docs/#g
 ## Special Characters
 
 The following Characters are considered special and need to
-be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `,`, `.`, `!`, `?` and `*`.
+be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `,`, `.`, `!`, `?`, `*` and `\`.
 
 ## Internals
 

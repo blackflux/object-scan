@@ -670,7 +670,7 @@ describe('Testing Find', () => {
 
     it('Testing Escaped Comma', () => {
       const find = objectScan(['{a\\,b,c\\,d,f\\\\\\,g}']);
-      expect(find({ 'a,b': 'c', 'c,d': 'e', 'f\\\\,g': 'h' })).to.deep.equal([
+      expect(find({ 'a,b': 'c', 'c,d': 'e', 'f\\,g': 'h' })).to.deep.equal([
         'f\\\\\\,g',
         'c\\,d',
         'a\\,b'
@@ -679,7 +679,7 @@ describe('Testing Find', () => {
 
     it('Testing Escaped Dot', () => {
       const find = objectScan(['{a\\.b,c\\.d,f\\\\\\.g}']);
-      expect(find({ 'a.b': 'c', 'c.d': 'e', 'f\\\\.g': 'h' })).to.deep.equal([
+      expect(find({ 'a.b': 'c', 'c.d': 'e', 'f\\.g': 'h' })).to.deep.equal([
         'f\\\\\\.g',
         'c\\.d',
         'a\\.b'
