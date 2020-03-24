@@ -25,29 +25,29 @@ const generateNeedle = (haystack, {
     if (!(root instanceof Object) || Object.keys(root).length === 0) {
       return p;
     }
-    if (doubleStar() === true) {
-      const nexts = objectScan(['**'], opts)(root);
-      if (nexts.length === 0) {
-        return p;
-      }
-      const next = nexts[Math.floor(Math.random() * nexts.length)];
-      root = get(root, next);
-      return p.concat('**');
-    }
-    const nexts = objectScan([Array.isArray(root) && opts.useArraySelector !== false ? '[*]' : '*'], opts)(root);
+    const mkDoubleStar = doubleStar();
+    const nexts = objectScan(
+      mkDoubleStar === true
+        ? ['**']
+        : [Array.isArray(root) && opts.useArraySelector !== false ? '[*]' : '*'],
+      opts
+    )(root);
     if (nexts.length === 0) {
       return p;
     }
     const next = nexts[Math.floor(Math.random() * nexts.length)];
+    if (mkDoubleStar === true) {
+      root = get(root, next);
+      return p.concat('**');
+    }
     const segment = next[next.length - 1];
     if (opts.useArraySelector === false && Number.isInteger(segment)) {
       return p;
     }
     root = get(root, next);
-    if (star() === true) {
-      return p.concat(typeof segment === 'string' ? '*' : '[*]');
-    }
-    return p.concat(typeof segment === 'string' ? escape(segment) : segment);
+    return star() === true
+      ? p.concat(Number.isInteger(segment) ? '[*]' : '*')
+      : p.concat(Number.isInteger(segment) ? segment : escape(segment));
   }, []);
   if (result.length === 0) {
     return '';
