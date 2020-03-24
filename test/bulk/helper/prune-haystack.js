@@ -32,12 +32,27 @@ const pruneHaystackRec = (haystack) => {
   }
 };
 
-module.exports = (haystack, needles) => {
+const isNestedEmptyArray = (haystack) => {
+  if (!Array.isArray(haystack)) {
+    return false;
+  }
+  if (haystack.length === 0) {
+    return true;
+  }
+  return haystack.every((e) => isNestedEmptyArray(e));
+};
+
+module.exports = (haystack, needles, opts) => {
+  if (opts.useArraySelector === false && isNestedEmptyArray(haystack)) {
+    return;
+  }
+
   markNode(haystack);
   needles
     .map((needle) => needle.replace(/^!/, ''))
     .forEach((needle) => {
       const r = objectScan([needle], {
+        ...opts,
         breakFn: (key, value) => markNode(value),
         filterFn: (key, value) => markNode(value),
         strict: false

@@ -2,6 +2,7 @@ const assert = require('assert');
 const keysList = require('../resources/keys');
 const generateHaystack = require('./generate-haystack');
 const generateNeedles = require('./generate-needles');
+const generateOptions = require('./generate-options');
 const pruneHaystack = require('./prune-haystack');
 
 const boolProbFn = (intervalSize, threshold) => () => {
@@ -29,7 +30,8 @@ module.exports = ({
   negateProb = boolProbFn(0.1, 0.2),
   starProb = boolProbFn(0.1, 0.2),
   doubleStarProb = boolProbFn(0.1, 0.2),
-  emptyNeedleProb = boolProbFn(0.1, 0.2)
+  emptyNeedleProb = boolProbFn(0.1, 0.2),
+  useArraySelectorProb = boolProbFn(0.1, 0.8)
 }) => {
   assert(Array.isArray(keys) && keys.length > 0 && keys.every((k) => typeof k === 'string'));
   assert(Number.isInteger(maxNodes) && maxNodes > 0);
@@ -43,6 +45,7 @@ module.exports = ({
   assert(typeof starProb === 'function', 'starProb');
   assert(typeof doubleStarProb === 'function', 'doubleStarProb');
   assert(typeof emptyNeedleProb === 'function', 'emptyNeedleProb');
+  assert(typeof useArraySelectorProb === 'function', 'useArraySelectorProb');
   const params = {
     keys,
     maxNodes,
@@ -55,7 +58,8 @@ module.exports = ({
     negate: negateProb(),
     star: starProb(),
     doubleStar: doubleStarProb(),
-    emptyNeedle: emptyNeedleProb()
+    emptyNeedle: emptyNeedleProb(),
+    useArraySelector: useArraySelectorProb()
   };
   assert(Array.isArray(params.keys));
   assert(typeof params.array === 'function', 'array');
@@ -68,14 +72,17 @@ module.exports = ({
   assert(typeof params.star === 'function', 'star');
   assert(typeof params.doubleStar === 'function', 'doubleStar');
   assert(typeof params.emptyNeedle === 'function', 'emptyNeedle');
+  assert(typeof params.useArraySelector === 'function', 'useArraySelector');
 
   const haystack = generateHaystack(params);
-  const needles = generateNeedles(haystack, params);
+  const opts = generateOptions(params);
+  const needles = generateNeedles(haystack, params, opts);
 
-  pruneHaystack(haystack, needles);
+  pruneHaystack(haystack, needles, opts);
 
   return {
     needles,
+    opts,
     haystack
   };
 };

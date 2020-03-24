@@ -10,7 +10,7 @@ const generateNeedle = (haystack, {
   star,
   doubleStar,
   emptyNeedle
-}) => {
+}, opts) => {
   assert(typeof maxNeedleLength === 'function');
   assert(typeof negate === 'function');
   assert(typeof star === 'function');
@@ -25,20 +25,29 @@ const generateNeedle = (haystack, {
     if (!(root instanceof Object) || Object.keys(root).length === 0) {
       return p;
     }
-    let key;
     if (doubleStar() === true) {
-      key = '**';
-    } else if (star() === true) {
-      key = Array.isArray(root) ? '[*]' : '*';
-    } else {
-      key = Array.isArray(root)
-        ? Math.floor(root.length * Math.random())
-        : escape(Object.keys(root)[Math.floor(Object.keys(root).length * Math.random())]);
+      const nexts = objectScan(['**'], opts)(root);
+      if (nexts.length === 0) {
+        return p;
+      }
+      const next = nexts[Math.floor(Math.random() * nexts.length)];
+      root = get(root, next);
+      return p.concat('**');
     }
-    const nexts = objectScan([typeof key === 'number' ? `[${key}]` : key])(root);
+    const nexts = objectScan([Array.isArray(root) && opts.useArraySelector !== false ? '[*]' : '*'], opts)(root);
+    if (nexts.length === 0) {
+      return p;
+    }
     const next = nexts[Math.floor(Math.random() * nexts.length)];
+    const segment = next[next.length - 1];
+    if (opts.useArraySelector === false && Number.isInteger(segment)) {
+      return p;
+    }
     root = get(root, next);
-    return p.concat(key);
+    if (star() === true) {
+      return p.concat(typeof segment === 'string' ? '*' : '[*]');
+    }
+    return p.concat(typeof segment === 'string' ? escape(segment) : segment);
   }, []);
   if (result.length === 0) {
     return '';
@@ -55,12 +64,12 @@ const generateNeedle = (haystack, {
     }, '')}`;
 };
 
-const generateNeedles = (haystack, params) => {
+const generateNeedles = (haystack, params, opts) => {
   const {
     maxNeedles
   } = params;
   assert(typeof maxNeedles === 'function');
-  return [...new Set([...Array(maxNeedles())].map(() => generateNeedle(haystack, params)))];
+  return [...new Set([...Array(maxNeedles())].map(() => generateNeedle(haystack, params, opts)))];
 };
 
 module.exports = generateNeedles;

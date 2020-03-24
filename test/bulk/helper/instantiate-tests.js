@@ -21,9 +21,10 @@ module.exports = ({
       it(`Testing Bulk ${f}`, () => {
         const testFile = path.join(folder, f);
         const data = fs.smartRead(testFile);
-        const { needles, haystack } = data;
+        const { needles, opts: testOpts, haystack } = data;
         const logs = [];
         const opts = {
+          ...testOpts,
           joined: true,
           strict: false,
           ...['breakFn', 'filterFn']
@@ -39,6 +40,7 @@ module.exports = ({
         const newData = {
           needles,
           searchTree: JSON.parse(JSON.stringify(compile(needles, false))),
+          opts: testOpts,
           result,
           logs,
           haystack
