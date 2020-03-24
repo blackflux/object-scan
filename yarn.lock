@@ -231,12 +231,12 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@blackflux/eslint-plugin-rules@1.3.26":
-  version "1.3.26"
-  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.3.26.tgz#d0083298ef832f042eeb846915fe8b4c28b50a72"
-  integrity sha512-f50X8byhWqzpTnU74tzN/IdePYIGaZRmvE9LjyA9u0Jkb/3yZ+J7HqEGQNxD9FWaKKGDLX22Y+/cPBIgDOC+ow==
+"@blackflux/eslint-plugin-rules@1.3.27":
+  version "1.3.27"
+  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.3.27.tgz#5497e3d63b038b416a58e2ac7fa3efbbb9aad8f9"
+  integrity sha512-hUDIcTg8gTkSHpKHQV/s3ZQyraxWTewDBenk91SS2ngY2r1Q5YBCN7+sZcXEFRqPk90KcpgSquufPFc3DQJq3A==
   dependencies:
-    smart-fs "1.11.10"
+    smart-fs "1.11.11"
 
 "@blackflux/robo-config-plugin@3.1.0":
   version "3.1.0"
@@ -2699,15 +2699,6 @@ fromentries@^1.2.0:
   resolved "https://registry.yarnpkg.com/fromentries/-/fromentries-1.2.0.tgz#e6aa06f240d6267f913cea422075ef88b63e7897"
   integrity sha512-33X7H/wdfO99GdRLLgkjUrD4geAFdq/Uv0kl3HD4da6HDixd2GUg8Mw7dahLCV9r/EARkmtYBB6Tch4EEokFTQ==
 
-fs-extra@8.1.0, fs-extra@^8.0.0:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-8.1.0.tgz#49d43c45a88cd9677668cb7be1b46efdb8d2e1c0"
-  integrity sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==
-  dependencies:
-    graceful-fs "^4.2.0"
-    jsonfile "^4.0.0"
-    universalify "^0.1.0"
-
 fs-extra@9.0.0:
   version "9.0.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-9.0.0.tgz#b6afc31036e247b2466dc99c29ae797d5d4580a3"
@@ -2717,6 +2708,15 @@ fs-extra@9.0.0:
     graceful-fs "^4.2.0"
     jsonfile "^6.0.1"
     universalify "^1.0.0"
+
+fs-extra@^8.0.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-8.1.0.tgz#49d43c45a88cd9677668cb7be1b46efdb8d2e1c0"
+  integrity sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==
+  dependencies:
+    graceful-fs "^4.2.0"
+    jsonfile "^4.0.0"
+    universalify "^0.1.0"
 
 fs-minipass@^1.2.5:
   version "1.2.7"
@@ -6733,20 +6733,6 @@ smart-buffer@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-4.1.0.tgz#91605c25d91652f4661ea69ccf45f1b331ca21ba"
   integrity sha512-iVICrxOzCynf/SNaBQCw34eM9jROU/s5rzIhpOvzhzuYHfJR/DhZfDkXiZSgKXfgv26HT3Yni3AV/DGw0cGnnw==
-
-smart-fs@1.11.10:
-  version "1.11.10"
-  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.11.10.tgz#4a6c58a98e0c4a184705929556296cf19548158e"
-  integrity sha512-x848XvuVMoeoDp/KPK7kapHEJjH3bPHPErLOefJZQQvkOzZot8Z4/CnShj8mR/N1V0zb6mgpIPwbwfNe8zTvUA==
-  dependencies:
-    fs-extra "8.1.0"
-    js-yaml "3.13.1"
-    json-stringify-pretty-compact "2.0.0"
-    lodash.clonedeep "4.5.0"
-    lodash.isequal "4.5.0"
-    object-align "1.0.11"
-    xml-js "1.6.11"
-    yaml-boost "1.9.21"
 
 smart-fs@1.11.11:
   version "1.11.11"
