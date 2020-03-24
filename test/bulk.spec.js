@@ -4,9 +4,8 @@ const generateTests = require('./bulk/helper/generate-tests');
 const instantiateTests = require('./bulk/helper/instantiate-tests');
 
 // todo: add test prob for partial keys (with star) for array and object keys (!)
-// todo: add support for "useArraySelector"
 // todo: check coverage of main logic
-// todo: use shorter keys and keys with special characters
+// todo: pick from different key sets / longer / escaped / etc
 // todo: import released version of objectScan and compare results (?)
 // todo: profile and improve performance
 
