@@ -22,7 +22,7 @@ const generateNeedle = (haystack, {
   const length = maxNeedleLength();
   let root = haystack;
   const result = [...Array(length)].reduce((p) => {
-    if (!(root instanceof Object)) {
+    if (!(root instanceof Object) || Object.keys(root).length === 0) {
       return p;
     }
     let key;
@@ -40,6 +40,9 @@ const generateNeedle = (haystack, {
     root = get(root, next);
     return p.concat(key);
   }, []);
+  if (result.length === 0) {
+    return '';
+  }
   return `${negate() === true ? '!' : ''}${result
     .reduce((p, c) => {
       if (typeof c === 'number') {
