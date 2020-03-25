@@ -10,7 +10,8 @@ const generateNeedle = (haystack, {
   star,
   doubleStar,
   emptyNeedle,
-  partialStar
+  partialStar,
+  questionMark
 }, opts) => {
   assert(typeof maxNeedleLength === 'function');
   assert(typeof negate === 'function');
@@ -18,6 +19,7 @@ const generateNeedle = (haystack, {
   assert(typeof doubleStar === 'function');
   assert(typeof emptyNeedle === 'function');
   assert(typeof partialStar === 'function');
+  assert(typeof questionMark === 'function');
   if (emptyNeedle()) {
     return '';
   }
@@ -58,6 +60,13 @@ const generateNeedle = (haystack, {
         escape(modSegment.substr(0, replaceStart)),
         '*',
         escape(modSegment.substr(replaceStart + replaceLength))
+      ].join('');
+    } else if (questionMark() === true) {
+      const pos = Math.floor(Math.random() * modSegment.length);
+      modSegment = [
+        escape(modSegment.substr(0, pos)),
+        '?',
+        escape(modSegment.substr(pos + 1))
       ].join('');
     } else {
       modSegment = escape(modSegment);
