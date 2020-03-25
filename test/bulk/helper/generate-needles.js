@@ -9,13 +9,15 @@ const generateNeedle = (haystack, {
   negate,
   star,
   doubleStar,
-  emptyNeedle
+  emptyNeedle,
+  partialStar
 }, opts) => {
   assert(typeof maxNeedleLength === 'function');
   assert(typeof negate === 'function');
   assert(typeof star === 'function');
   assert(typeof doubleStar === 'function');
   assert(typeof emptyNeedle === 'function');
+  assert(typeof partialStar === 'function');
   if (emptyNeedle()) {
     return '';
   }
@@ -45,19 +47,29 @@ const generateNeedle = (haystack, {
       return p;
     }
     root = get(root, next);
-    return star() === true
-      ? p.concat(Number.isInteger(segment) ? '[*]' : '*')
-      : p.concat(Number.isInteger(segment) ? segment : escape(segment));
+    if (star() === true) {
+      return p.concat(Number.isInteger(segment) ? '[*]' : '*');
+    }
+    let modSegment = String(segment);
+    if (partialStar() === true) {
+      const replaceLength = Math.floor(modSegment.length * Math.random());
+      const replaceStart = Math.round(Math.random() * (modSegment.length - replaceLength));
+      modSegment = [
+        escape(modSegment.substr(0, replaceStart)),
+        '*',
+        escape(modSegment.substr(replaceStart + replaceLength))
+      ].join('');
+    } else {
+      modSegment = escape(modSegment);
+    }
+    return p.concat(Number.isInteger(segment) ? `[${modSegment}]` : modSegment);
   }, []);
   if (result.length === 0) {
     return '';
   }
   return `${negate() === true ? '!' : ''}${result
     .reduce((p, c) => {
-      if (typeof c === 'number') {
-        return `${p}[${c}]`;
-      }
-      if (c === '[*]') {
+      if (c.startsWith('[')) {
         return `${p}${c}`;
       }
       return p === '' ? c : `${p}.${c}`;

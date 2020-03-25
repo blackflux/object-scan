@@ -30,7 +30,8 @@ module.exports = ({
   starProb = boolProbFn(0.1, 0.2),
   doubleStarProb = boolProbFn(0.1, 0.2),
   emptyNeedleProb = boolProbFn(0.1, 0.2),
-  useArraySelectorProb = boolProbFn(0.1, 0.8)
+  useArraySelectorProb = boolProbFn(0.1, 0.8),
+  partialStarProb = boolProbFn(0.1, 0.2)
 }) => {
   assert(
     Array.isArray(keySets)
@@ -49,6 +50,7 @@ module.exports = ({
   assert(typeof doubleStarProb === 'function', 'doubleStarProb');
   assert(typeof emptyNeedleProb === 'function', 'emptyNeedleProb');
   assert(typeof useArraySelectorProb === 'function', 'useArraySelectorProb');
+  assert(typeof partialStarProb === 'function', 'partialStarProb');
   const params = {
     keys: keySets[Math.floor(keySets.length * Math.random())],
     maxNodes,
@@ -62,7 +64,8 @@ module.exports = ({
     star: starProb(),
     doubleStar: doubleStarProb(),
     emptyNeedle: emptyNeedleProb(),
-    useArraySelector: useArraySelectorProb()
+    useArraySelector: useArraySelectorProb(),
+    partialStar: partialStarProb()
   };
   assert(Array.isArray(params.keys));
   assert(typeof params.array === 'function', 'array');
@@ -76,6 +79,7 @@ module.exports = ({
   assert(typeof params.doubleStar === 'function', 'doubleStar');
   assert(typeof params.emptyNeedle === 'function', 'emptyNeedle');
   assert(typeof params.useArraySelector === 'function', 'useArraySelector');
+  assert(typeof params.partialStar === 'function', 'partialStar');
 
   const haystack = generateHaystack(params);
   const opts = generateOptions(params);

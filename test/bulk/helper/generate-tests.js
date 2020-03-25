@@ -2,6 +2,7 @@ const assert = require('assert');
 const fs = require('smart-fs');
 const path = require('path');
 const generateTest = require('./generate-test');
+
 const keySets = fs
   .walkDir(path.join(__dirname, '..', 'resources', 'key-sets'))
   .map((f) => fs.smartRead(path.join(__dirname, '..', 'resources', 'key-sets', f)));
