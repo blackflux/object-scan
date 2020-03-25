@@ -1,5 +1,4 @@
 const assert = require('assert');
-const keysList = require('../resources/keys');
 const generateHaystack = require('./generate-haystack');
 const generateNeedles = require('./generate-needles');
 const generateOptions = require('./generate-options');
@@ -19,7 +18,7 @@ const intProbFn = (min, max, bias = (x) => x ** 2) => () => {
 };
 
 module.exports = ({
-  keys = keysList,
+  keySets,
   maxNodes = 500,
   arrayProb = boolProbFn(0.1, 0.2),
   objectLengthProb = intProbFn(0, 30),
@@ -33,7 +32,11 @@ module.exports = ({
   emptyNeedleProb = boolProbFn(0.1, 0.2),
   useArraySelectorProb = boolProbFn(0.1, 0.8)
 }) => {
-  assert(Array.isArray(keys) && keys.length > 0 && keys.every((k) => typeof k === 'string'));
+  assert(
+    Array.isArray(keySets)
+    && keySets.length > 0
+    && keySets.every((keys) => Array.isArray(keys) && keys.length > 0 && keys.every((k) => typeof k === 'string'))
+  );
   assert(Number.isInteger(maxNodes) && maxNodes > 0);
   assert(typeof arrayProb === 'function', 'arrayProb');
   assert(typeof objectLengthProb === 'function', 'objectLengthProb');
@@ -47,7 +50,7 @@ module.exports = ({
   assert(typeof emptyNeedleProb === 'function', 'emptyNeedleProb');
   assert(typeof useArraySelectorProb === 'function', 'useArraySelectorProb');
   const params = {
-    keys,
+    keys: keySets[Math.floor(keySets.length * Math.random())],
     maxNodes,
     array: arrayProb(),
     objectLength: objectLengthProb(),
