@@ -74,26 +74,26 @@ describe('Testing Helper', () => {
 
     it('Testing escaped star', () => {
       const result = parseWildcard('pa\\*nt\\*');
-      expect(result).to.deep.equal(/^pa\\\*nt\\\*$/);
-      expect(result.test(escape('pa*nt*'))).to.equal(true);
+      expect(result).to.deep.equal(/^pa\*nt\*$/);
+      expect(result.test('pa*nt*')).to.equal(true);
     });
 
     it('Testing special=false, regex=true', () => {
       const result = parseWildcard('pa^');
       expect(result).to.deep.equal(/^pa\^$/);
-      expect(result.test(escape('pa^'))).to.equal(true);
+      expect(result.test('pa^')).to.equal(true);
     });
 
     it('Testing special=true, regex=true', () => {
       const result = parseWildcard('pa\\[');
-      expect(result).to.deep.equal(/^pa\\\[$/);
-      expect(result.test(escape('pa['))).to.equal(true);
+      expect(result).to.deep.equal(/^pa\[$/);
+      expect(result.test('pa[')).to.equal(true);
     });
 
     it('Testing special=true, regex=false', () => {
       const result = parseWildcard('pa\\!');
-      expect(result).to.deep.equal(/^pa\\!$/);
-      expect(result.test(escape('pa!'))).to.equal(true);
+      expect(result).to.deep.equal(/^pa!$/);
+      expect(result.test('pa!')).to.equal(true);
     });
   });
 });

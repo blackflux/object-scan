@@ -20,17 +20,16 @@ module.exports.parseWildcard = (input) => {
   let escaped = false;
   for (let idx = 0; idx < input.length; idx += 1) {
     const char = input[idx];
-    if (!escaped && char === '*') {
+    if (!escaped && char === '\\') {
+      escaped = true;
+    } else if (!escaped && char === '*') {
       regex += '.*';
     } else if (!escaped && char === '?') {
       regex += '.';
-    } else if (['|', '\\', '{', '}', '(', ')', '[', ']', '^', '$', '+', '*', '?', '.'].includes(char)) {
-      // escape all regex characters
-      regex += `\\${char}`;
     } else {
-      regex += char;
+      regex += char.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+      escaped = false;
     }
-    escaped = char === '\\' ? !escaped : false;
   }
   return new RegExp(`^${regex}$`);
 };
