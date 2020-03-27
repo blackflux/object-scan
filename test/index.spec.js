@@ -692,6 +692,13 @@ describe('Testing Find', () => {
         'some\\.key'
       ]);
     });
+
+    it('Testing question mark matches special character', () => {
+      const find = objectScan(['k?y']);
+      expect(find({ 'k*y': '' })).to.deep.equal([
+        'k\\*y'
+      ]);
+    });
   });
 
   it('Testing Misc Tests', () => {

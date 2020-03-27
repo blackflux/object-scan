@@ -1,6 +1,6 @@
 const assert = require('assert');
 const compiler = require('./util/compiler');
-const { findLast, escape, toPath } = require('./util/helper');
+const { findLast, toPath } = require('./util/helper');
 
 const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
   if (wildcard === '**') {
@@ -12,7 +12,7 @@ const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
   if (isArray && !wildcard.match(/^\[.*]$/)) {
     return false;
   }
-  return (isArray ? `[${key}]` : escape(key)).match(compiler.getWildcardRegex(subSearch));
+  return (isArray ? `[${key}]` : key).match(compiler.getWildcardRegex(subSearch));
 };
 
 const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);
