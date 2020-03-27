@@ -9,7 +9,7 @@ const keySets = fs
 
 module.exports = ({
   folder,
-  count = 10000,
+  count = 100,
   ...params
 }) => {
   assert(typeof folder === 'string');
