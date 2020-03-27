@@ -7,6 +7,7 @@ const instantiateTests = require('./bulk/helper/instantiate-tests');
 // todo: check coverage of main logic
 // todo: import released version of objectScan and compare results (?)
 // todo: profile and improve performance
+// todo: generate keys dynamically (use function in js file or json file)
 
 describe('Generating Bulk Test Coverage Tests', { useTmpDir: true }, () => {
   beforeEach(({ dir }) => {
