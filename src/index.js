@@ -21,9 +21,6 @@ const callFn = (fn, neq, path, ctx, haystack, searches, parents) => {
   if (fn === undefined) {
     return true;
   }
-  if (fn.length === 0) {
-    return fn() !== neq;
-  }
   return fn(formatPath(path, ctx), haystack, compiler.getMeta(searches, parents)) !== neq;
 };
 
