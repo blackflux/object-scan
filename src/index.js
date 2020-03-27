@@ -17,6 +17,16 @@ const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
 
 const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);
 
+const callFn = (fn, neq, path, ctx, haystack, searches, parents) => {
+  if (fn === undefined) {
+    return true;
+  }
+  if (fn.length === 0) {
+    return fn() !== neq;
+  }
+  return fn(formatPath(path, ctx), haystack, compiler.getMeta(searches, parents)) !== neq;
+};
+
 const find = (haystack_, searches_, ctx) => {
   const result = [];
 
@@ -48,10 +58,7 @@ const find = (haystack_, searches_, ctx) => {
     }
 
     if (isResult) {
-      if (
-        ctx.filterFn === undefined
-        || ctx.filterFn(formatPath(path, ctx), haystack, compiler.getMeta(searches, parents)) !== false
-      ) {
+      if (callFn(ctx.filterFn, false, path, ctx, haystack, searches, parents)) {
         result.push(formatPath(path, ctx));
       }
       // eslint-disable-next-line no-continue
@@ -63,8 +70,7 @@ const find = (haystack_, searches_, ctx) => {
       continue;
     }
 
-    const recurseHaystack = ctx.breakFn === undefined
-      || ctx.breakFn(formatPath(path, ctx), haystack, compiler.getMeta(searches, parents)) !== true;
+    const recurseHaystack = callFn(ctx.breakFn, true, path, ctx, haystack, searches, parents);
 
     if (ctx.useArraySelector === false && Array.isArray(haystack)) {
       if (recurseHaystack) {
