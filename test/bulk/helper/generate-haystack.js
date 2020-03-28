@@ -16,7 +16,11 @@ const generateHaystackRec = (params, depth = 0) => {
     return count;
   }
   if (array() === false) {
-    return (typeof keys === 'function' ? keys(objectLength()) : sampleSize(keys, objectLength()))
+    return (
+      typeof keys === 'function'
+        ? keys(objectLength())
+        : sampleSize(keys, Math.min(keys.length, objectLength()))
+    )
       .reduce((p, c) => Object.assign(p, {
         [c]: generateHaystackRec(params, depth + 1)
       }), {});
