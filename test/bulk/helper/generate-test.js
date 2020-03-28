@@ -37,7 +37,10 @@ module.exports = ({
   assert(
     Array.isArray(keySets)
     && keySets.length > 0
-    && keySets.every((keys) => Array.isArray(keys) && keys.length > 0 && keys.every((k) => typeof k === 'string'))
+    && keySets.every((keys) => (
+      (Array.isArray(keys) && keys.length > 0 && keys.every((k) => typeof k === 'string'))
+      || typeof keys === 'function'
+    ))
   );
   assert(Number.isInteger(maxNodes) && maxNodes > 0);
   assert(typeof arrayProb === 'function', 'arrayProb');
@@ -70,7 +73,7 @@ module.exports = ({
     partialStar: partialStarProb(),
     questionMark: questionMarkProb()
   };
-  assert(Array.isArray(params.keys));
+  assert(Array.isArray(params.keys) || typeof params.keys === 'function');
   assert(typeof params.array === 'function', 'array');
   assert(typeof params.objectLength === 'function', 'objectLength');
   assert(typeof params.arrayLength === 'function', 'arrayLength');

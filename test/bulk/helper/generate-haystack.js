@@ -16,7 +16,7 @@ const generateHaystackRec = (params, depth = 0) => {
     return count;
   }
   if (array() === false) {
-    return sampleSize(keys, objectLength())
+    return (typeof keys === 'function' ? keys(objectLength()) : sampleSize(keys, objectLength()))
       .reduce((p, c) => Object.assign(p, {
         [c]: generateHaystackRec(params, depth + 1)
       }), {});
@@ -26,7 +26,10 @@ const generateHaystackRec = (params, depth = 0) => {
 };
 
 module.exports = (params) => {
-  assert(Array.isArray(params.keys) && params.keys.length > 0 && params.keys.every((k) => typeof k === 'string'));
+  assert(
+    (Array.isArray(params.keys) && params.keys.length > 0 && params.keys.every((k) => typeof k === 'string'))
+    || typeof params.keys === 'function'
+  );
   assert(typeof params.array === 'function');
   assert(typeof params.arrayLength === 'function');
   assert(typeof params.objectLength === 'function');
