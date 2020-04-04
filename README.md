@@ -45,7 +45,7 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 ### Search Context
 
 A context can be passed into a search invocation as a second parameter. It is available in all functions
-and can be used to easily manage state across a search invocation without having to recompile the search.
+and can be used to manage state across a search invocation without having to recompile the search.
 
 By default a search invocation returns the matched keys.
 However the context is returned instead when it is not undefined.
