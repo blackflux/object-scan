@@ -21,11 +21,11 @@ const callFn = (fn, neq, path, ctx, haystack, searches, parents) => {
   if (fn === undefined) {
     return true;
   }
-  return fn(formatPath(path, ctx), haystack, compiler.getMeta(searches, parents)) !== neq;
+  return fn(formatPath(path, ctx), haystack, compiler.getMeta(searches, parents, ctx.context)) !== neq;
 };
 
 const find = (haystack_, searches_, ctx) => {
-  const result = [];
+  const result = ctx.context === undefined ? [] : null;
 
   const stack = [false, searches_, null, 0];
   const path = [];
@@ -56,7 +56,9 @@ const find = (haystack_, searches_, ctx) => {
 
     if (isResult) {
       if (callFn(ctx.filterFn, false, path, ctx, haystack, searches, parents)) {
-        result.push(formatPath(path, ctx));
+        if (result !== null) {
+          result.push(formatPath(path, ctx));
+        }
       }
       // eslint-disable-next-line no-continue
       continue;
@@ -116,7 +118,7 @@ const find = (haystack_, searches_, ctx) => {
     }
   } while (stack.length !== 0);
 
-  return result;
+  return result === null ? ctx.context : result;
 };
 
 module.exports = (needles, opts = {}) => {
@@ -142,5 +144,5 @@ module.exports = (needles, opts = {}) => {
   assert(typeof ctx.strict === 'boolean');
 
   const search = compiler.compile(needles, ctx.strict); // keep separate for performance
-  return (haystack) => find(haystack, [search], ctx);
+  return (haystack, context) => find(haystack, [search], { context, ...ctx });
 };
