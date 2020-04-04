@@ -57,7 +57,7 @@ module.exports.getMeta = (() => {
     }
     return p;
   }, new Set()));
-  return (inputs, parents = null) => ({
+  return (inputs, parents = null, context = undefined) => ({
     isMatch: isMatch(findLast(inputs, (s) => isLeaf(s))),
     matchedBy: extractNeedles(inputs.filter((e) => isMatch(e))),
     excludedBy: extractNeedles(inputs.filter((e) => !isMatch(e))),
@@ -65,7 +65,8 @@ module.exports.getMeta = (() => {
       getNeedles(e).forEach((n) => p.add(n));
       return p;
     }, new Set())),
-    parents: parents !== null ? [...parents].reverse() : null
+    parents: parents !== null ? [...parents].reverse() : null,
+    context
   });
 })();
 
