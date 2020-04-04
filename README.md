@@ -74,6 +74,8 @@ Default: `undefined`
 If function is defined, it is called for every match. If `false`
 is returned, the current key is excluded from the result.
 
+The return value of this function has no effect when a search context is provided.
+
 Can be used as a callback function to do processing as matching keys are traversed.
 
 Called in same order as matches would appear in result.
