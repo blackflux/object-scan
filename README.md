@@ -48,7 +48,7 @@ A context can be passed into a search invocation as a second parameter. It is av
 and can be used to manage state across a search invocation without having to recompile the search.
 
 By default a search invocation returns the matched keys.
-However the context is returned instead when it is not undefined.
+However, when it is not undefined, the context is returned instead.
 
 ### Options
 
