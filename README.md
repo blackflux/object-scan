@@ -42,11 +42,19 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 - Dependency free, small in size and very performant
 - Lots of tests to ensure correctness
 
+### Search Context
+
+A context object can be passed into the search as a second parameter. It is available in functions
+and can be used to easily manage state across a search invocation without having to recompile the search.
+
+By default a search invocation returns the matched keys.
+However when a (not undefined) context is passed, that context is returned from the invocation instead.
+
 ### Options
 
 Signature for all functions is
 
-    Fn(key, value, { parents, isMatch, matchedBy, excludedBy, traversedBy })
+    Fn(key, value, { parents, isMatch, matchedBy, excludedBy, traversedBy, context })
 
 where:
 - `key` is the key that the function is called for (respects `joined` option).
@@ -56,6 +64,7 @@ where:
 - `matchedBy` are all non-excluding needles targeting the key.
 - `excludedBy` are all excluding needles targeting the key.
 - `traversedBy` are all needles involved in traversing the key.
+- `context` as passed into the search.
 
 #### filterFn
 

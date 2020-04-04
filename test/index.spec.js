@@ -127,6 +127,20 @@ describe('Testing Find', () => {
     });
   });
 
+  describe('Testing context', () => {
+    it('Testing context passed through', () => {
+      const find = objectScan(['**'], {
+        joined: false,
+        filterFn: (key, value, { context }) => {
+          if (key.length === 3 && key[2] === 'child') {
+            context.push(key);
+          }
+        }
+      });
+      expect(find(haystack, [])).to.deep.equal([['grandparent1', 'parent', 'child']]);
+    });
+  });
+
   describe('Testing greedy array matching', () => {
     const needles = ['*'];
     const input = { key: ['v1', 'v2'] };
