@@ -74,7 +74,7 @@ Note that, for performance reasons, the same object is passed to all callbacks.
 Type: `function`<br>
 Default: `undefined`
 
-If defined, it is invoked for every match. If `false`
+If defined, this callback is invoked for every match. If `false`
 is returned, the current key is excluded from the result.
 
 The return value of this callback has no effect when a search context is provided.
@@ -91,7 +91,7 @@ This method is conceptually similar to
 Type: `function`<br>
 Default: `undefined`
 
-If defined, it is invoked for every key that is traversed by
+If defined, this callback is invoked for every key that is traversed by
 the search. If `true` is returned, all keys nested under the current key are
 skipped in the search and from the final result.
 
