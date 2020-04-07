@@ -29,6 +29,8 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 
 ### Features
 
+- Input traversed exactly once during search
+- Dependency free, small in size and very performant
 - Object and Array matching with e.g. `key.path` and `[1]`
 - Wildcard matching with `*` and `[*]`
 - Partial Wildcard matching with e.g. `mark*`, `m?rk`, `[*1]` or `[?1]`
@@ -36,15 +38,13 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 - Or-clause with e.g. `{a,b}` and `[{0,1}]`
 - Exclusion with e.g. `!key`
 - Full support for escaping
-- Input traversed exactly once during search
 - Results returned in "delete-safe" order
 - Search syntax is checked for correctness
-- Dependency free, small in size and very performant
 - Lots of tests to ensure correctness
 
 ### Search Context
 
-A context can be passed into a search invocation as a second parameter. It is available in all functions
+A context can be passed into a search invocation as a second parameter. It is available in all callbacks
 and can be used to manage state across a search invocation without having to recompile the search.
 
 By default all matched keys are returned from a search invocation.
@@ -52,35 +52,38 @@ However, when it is not undefined, the context is returned instead.
 
 ### Options
 
-Signature for all functions is
+Signature of all callbacks is
 
-    Fn(key, value, { parents, isMatch, matchedBy, excludedBy, traversedBy, context })
+    Fn({ key, value, parents, isMatch, matchedBy, excludedBy, traversedBy, context })
 
 where:
-- `key` is the key that the function is called for (respects `joined` option).
-- `value` is the value for that key.
-- `parents` is array of form `[parent, grandparent, ...]`.
-- `isMatch` is true if the last targeting needle exists and is non-excluding.
-- `matchedBy` are all non-excluding needles targeting the key.
-- `excludedBy` are all excluding needles targeting the key.
-- `traversedBy` are all needles involved in traversing the key.
-- `context` as passed into the search.
+
+- `key <func>`: returns key that callback is invoked for (respects `joined` option).
+- `value <func>`: return value for key.
+- `parents <func>`: returns array of form `[parent, grandparent, ...]`.
+- `isMatch <func>`: returns true if last targeting needle exists and is non-excluding.
+- `matchedBy <func>`: returns all non-excluding needles targeting key.
+- `excludedBy <func>`: returns all excluding needles targeting key.
+- `traversedBy <func>`: returns all needles involved in traversing key.
+- `context <any>`: as passed into the search.
+
+Note that, for performance reasons, the same object is passed to all callbacks.
 
 #### filterFn
 
 Type: `function`<br>
 Default: `undefined`
 
-If function is defined, it is called for every match. If `false`
+If defined, this callback is invoked for every match. If `false`
 is returned, the current key is excluded from the result.
 
-The return value of this function has no effect when a search context is provided.
+The return value of this callback has no effect when a search context is provided.
 
-Can be used as a callback function to do processing as matching keys are traversed.
+Can be used to do processing as matching keys are traversed.
 
-Called in same order as matches would appear in result.
+Invoked in same order as matches would appear in result.
 
-This method is conceptually similar to the callback function in
+This method is conceptually similar to
 [Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
 
 #### breakFn
@@ -88,11 +91,11 @@ This method is conceptually similar to the callback function in
 Type: `function`<br>
 Default: `undefined`
 
-If function is defined, it is called for every key that is traversed by
+If defined, this callback is invoked for every key that is traversed by
 the search. If `true` is returned, all keys nested under the current key are
 skipped in the search and from the final result.
 
-Note that `breakFn` is called before the corresponding `filterFn` might be called.
+Note that `breakFn` is invoked before the corresponding `filterFn` might be invoked.
 
 #### joined
 
@@ -178,9 +181,9 @@ objectScan(['a.*,!a.e'], { joined: true })(obj);
 // => ["a.h", "a.b"]
 
 // value function
-objectScan(['**'], { filterFn: (key, value) => typeof value === 'string', joined: true })(obj);
+objectScan(['**'], { filterFn: ({ value }) => typeof value() === 'string', joined: true })(obj);
 // => ["k", "a.h[1]", "a.h[0]", "a.e.f", "a.b.c"]
-objectScan(['**'], { breakFn: (key) => key === 'a.b', joined: true })(obj);
+objectScan(['**'], { breakFn: ({ key }) => key() === 'a.b', joined: true })(obj);
 // => ["k", "a.h[1]", "a.h[0]", "a.h", "a.e.f", "a.e", "a.b", "a"]
 ```
 
@@ -192,7 +195,7 @@ Note that the empty string does not work with [_.get](https://lodash.com/docs/#g
 
 ## Special Characters
 
-The following Characters are considered special and need to
+The following characters are considered special and need to
 be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `,`, `.`, `!`, `?`, `*` and `\`.
 
 ## Internals
@@ -203,7 +206,7 @@ Conceptually this package works as follows:
 Various information is pre-computed and stored for every node.
 Finally the search function is returned.
 
-2. When the search function is called, the input is traversed simultaneously with
+2. When the search function is invoked, the input is traversed simultaneously with
 the relevant nodes of the search tree. Processing multiple search tree branches
 in parallel allows for a single traversal of the input.
 
