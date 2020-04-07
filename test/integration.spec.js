@@ -14,11 +14,11 @@ const getFiles = (source) => getEntries(source)
 
 const logFn = (type, log, paramsToLog) => (kwargs) => {
   log.push(Object
-    .entries(kwargs)
-    .filter(([k]) => (paramsToLog || ['isMatch', 'matchedBy', 'excludedBy', 'traversedBy']).includes(k))
-    .reduce((p, [k, v]) => Object.assign(p, {
-      [k]: v()
-    }), { type, key: kwargs.key() }));
+    .keys(kwargs)
+    .filter((k) => (paramsToLog || ['isMatch', 'matchedBy', 'excludedBy', 'traversedBy']).includes(k))
+    .reduce((p, k) => Object.assign(p, {
+      [k]: kwargs[k]
+    }), { type, key: kwargs.key }));
 };
 
 describe('Integration Testing', () => {

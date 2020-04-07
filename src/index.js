@@ -31,13 +31,34 @@ const find = (haystack_, searches_, ctx) => {
   let haystack = haystack_;
 
   const kwargs = {
-    key: () => formatPath(path, ctx),
-    value: () => haystack,
-    isMatch: () => compiler.isLastLeafMatch(searches),
-    matchedBy: () => compiler.matchedBy(searches),
-    excludedBy: () => compiler.excludedBy(searches),
-    traversedBy: () => compiler.traversedBy(searches),
-    parents: () => [...parents].reverse(),
+    getKey: () => formatPath(path, ctx),
+    get key() {
+      return kwargs.getKey();
+    },
+    getValue: () => haystack,
+    get value() {
+      return kwargs.getValue();
+    },
+    getIsMatch: () => compiler.isLastLeafMatch(searches),
+    get isMatch() {
+      return kwargs.getIsMatch();
+    },
+    getMatchedBy: () => compiler.matchedBy(searches),
+    get matchedBy() {
+      return kwargs.getMatchedBy();
+    },
+    getExcludedBy: () => compiler.excludedBy(searches),
+    get excludedBy() {
+      return kwargs.getExcludedBy();
+    },
+    getTraversedBy: () => compiler.traversedBy(searches),
+    get traversedBy() {
+      return kwargs.getTraversedBy();
+    },
+    getParents: () => [...parents].reverse(),
+    get parents() {
+      return kwargs.getParents();
+    },
     context: ctx.context
   };
 
