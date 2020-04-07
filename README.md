@@ -54,20 +54,34 @@ However, when it is not undefined, the context is returned instead.
 
 Signature of all callbacks is
 
-    Fn({ key, value, parents, isMatch, matchedBy, excludedBy, traversedBy, context })
+    Fn({
+      key, value, parents, isMatch, matchedBy, excludedBy, traversedBy, context,
+      getKey, getValue, getParents, getIsMatch, getMatchedBy, getExcludedBy, getTraversedBy
+    })
 
 where:
 
-- `key <func>`: returns key that callback is invoked for (respects `joined` option).
-- `value <func>`: return value for key.
-- `parents <func>`: returns array of form `[parent, grandparent, ...]`.
-- `isMatch <func>`: returns true if last targeting needle exists and is non-excluding.
-- `matchedBy <func>`: returns all non-excluding needles targeting key.
-- `excludedBy <func>`: returns all excluding needles targeting key.
-- `traversedBy <func>`: returns all needles involved in traversing key.
-- `context <any>`: as passed into the search.
+- `key`: key that callback is invoked for (respects `joined` option).
+- `getKey`: function that return `key`
+- `value`: value for key.
+- `getValue`: function that return `value`
+- `parents`: array of form `[parent, grandparent, ...]`.
+- `getParents`: function that return `parents`
+- `isMatch`: true iff last targeting needle exists and is non-excluding.
+- `getIsMatch`: function that return `isMatch`
+- `matchedBy`: all non-excluding needles targeting key.
+- `getMatchedBy`: function that return `matchedBy`
+- `excludedBy`: all excluding needles targeting key.
+- `getExcludedBy`: function that return `excludedBy`
+- `traversedBy`: all needles involved in traversing key.
+- `getTraversedBy`: function that return `traversedBy`
+- `context`: as passed into the search.
 
-Note that, for performance reasons, the same object is passed to all callbacks.
+Notes on Performance:
+- Arguments backed by getters use [Functions Getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get)
+and should be accessed via [destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Unpacking_fields_from_objects_passed_as_function_parameter) to prevent redundant computation.
+- Getters should be used to improve performance for conditional access. E.g. `if (isMatch) { getParents() ... }`.
+- For performance reasons, the same object is passed to all callbacks.
 
 #### filterFn
 
@@ -181,9 +195,9 @@ objectScan(['a.*,!a.e'], { joined: true })(obj);
 // => ["a.h", "a.b"]
 
 // value function
-objectScan(['**'], { filterFn: ({ value }) => typeof value() === 'string', joined: true })(obj);
+objectScan(['**'], { filterFn: ({ value }) => typeof value === 'string', joined: true })(obj);
 // => ["k", "a.h[1]", "a.h[0]", "a.e.f", "a.b.c"]
-objectScan(['**'], { breakFn: ({ key }) => key() === 'a.b', joined: true })(obj);
+objectScan(['**'], { breakFn: ({ key }) => key === 'a.b', joined: true })(obj);
 // => ["k", "a.h[1]", "a.h[0]", "a.h", "a.e.f", "a.e", "a.b", "a"]
 ```
 
