@@ -67,6 +67,8 @@ where:
 - `traversedBy <func>`: returns all needles involved in traversing key.
 - `context <any>`: as passed into the search.
 
+Note that, for performance reasons, the same object is passed to all callbacks.
+
 #### filterFn
 
 Type: `function`<br>
