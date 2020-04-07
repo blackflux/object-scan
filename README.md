@@ -62,18 +62,18 @@ Signature of all callbacks is
 where:
 
 - `key`: key that callback is invoked for (respects `joined` option).
-- `getKey`: function that return `key`
 - `value`: value for key.
-- `getValue`: function that return `value`
 - `parents`: array of form `[parent, grandparent, ...]`.
-- `getParents`: function that return `parents`
 - `isMatch`: true iff last targeting needle exists and is non-excluding.
-- `getIsMatch`: function that return `isMatch`
 - `matchedBy`: all non-excluding needles targeting key.
-- `getMatchedBy`: function that return `matchedBy`
 - `excludedBy`: all excluding needles targeting key.
-- `getExcludedBy`: function that return `excludedBy`
 - `traversedBy`: all needles involved in traversing key.
+- `getKey`: function that return `key`
+- `getValue`: function that return `value`
+- `getParents`: function that return `parents`
+- `getIsMatch`: function that return `isMatch`
+- `getMatchedBy`: function that return `matchedBy`
+- `getExcludedBy`: function that return `excludedBy`
 - `getTraversedBy`: function that return `traversedBy`
 - `context`: as passed into the search.
 
