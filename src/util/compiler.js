@@ -53,10 +53,7 @@ const extractNeedles = (searches) => searches.map((e) => getNeedle(e)).filter((e
 module.exports.isLastLeafMatch = (searches) => isMatch(findLast(searches, (s) => isLeaf(s)));
 module.exports.matchedBy = (searches) => extractNeedles(searches.filter((e) => isMatch(e)));
 module.exports.excludedBy = (searches) => extractNeedles(searches.filter((e) => !isMatch(e)));
-module.exports.traversedBy = (searches) => Array.from(searches.reduce((p, e) => {
-  getNeedles(e).forEach((n) => p.add(n));
-  return p;
-}, new Set()));
+module.exports.traversedBy = (searches) => Array.from(new Set([].concat(...searches.map((e) => getNeedles(e)))));
 
 const buildRecursive = (tower, path, ctx, excluded, root = false) => {
   addNeedle(tower, ctx.needle);
