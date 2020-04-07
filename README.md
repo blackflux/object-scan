@@ -29,6 +29,8 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 
 ### Features
 
+- Input traversed exactly once during search
+- Dependency free, small in size and very performant
 - Object and Array matching with e.g. `key.path` and `[1]`
 - Wildcard matching with `*` and `[*]`
 - Partial Wildcard matching with e.g. `mark*`, `m?rk`, `[*1]` or `[?1]`
@@ -36,10 +38,8 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 - Or-clause with e.g. `{a,b}` and `[{0,1}]`
 - Exclusion with e.g. `!key`
 - Full support for escaping
-- Input traversed exactly once during search
 - Results returned in "delete-safe" order
 - Search syntax is checked for correctness
-- Dependency free, small in size and very performant
 - Lots of tests to ensure correctness
 
 ### Search Context
@@ -54,17 +54,18 @@ However, when it is not undefined, the context is returned instead.
 
 Signature for all functions is
 
-    Fn(key, value, { parents, isMatch, matchedBy, excludedBy, traversedBy, context })
+    Fn({ key, value, parents, isMatch, matchedBy, excludedBy, traversedBy, context })
 
 where:
-- `key` is the key that the function is called for (respects `joined` option).
-- `value` is the value for that key.
-- `parents` is array of form `[parent, grandparent, ...]`.
-- `isMatch` is true if the last targeting needle exists and is non-excluding.
-- `matchedBy` are all non-excluding needles targeting the key.
-- `excludedBy` are all excluding needles targeting the key.
-- `traversedBy` are all needles involved in traversing the key.
-- `context` as passed into the search.
+
+- `key <func>`: returns key that function is called for (respects `joined` option).
+- `value <func>`: return value for key.
+- `parents <func>`: returns array of form `[parent, grandparent, ...]`.
+- `isMatch <func>`: returns true if last targeting needle exists and is non-excluding.
+- `matchedBy <func>`: returns all non-excluding needles targeting key.
+- `excludedBy <func>`: returns all excluding needles targeting key.
+- `traversedBy <func>`: returns all needles involved in traversing key.
+- `context <any>`: as passed into the search.
 
 #### filterFn
 
@@ -178,9 +179,9 @@ objectScan(['a.*,!a.e'], { joined: true })(obj);
 // => ["a.h", "a.b"]
 
 // value function
-objectScan(['**'], { filterFn: (key, value) => typeof value === 'string', joined: true })(obj);
+objectScan(['**'], { filterFn: ({ value }) => typeof value() === 'string', joined: true })(obj);
 // => ["k", "a.h[1]", "a.h[0]", "a.e.f", "a.b.c"]
-objectScan(['**'], { breakFn: (key) => key === 'a.b', joined: true })(obj);
+objectScan(['**'], { breakFn: ({ key }) => key() === 'a.b', joined: true })(obj);
 // => ["k", "a.h[1]", "a.h[0]", "a.h", "a.e.f", "a.e", "a.b", "a"]
 ```
 
@@ -192,7 +193,7 @@ Note that the empty string does not work with [_.get](https://lodash.com/docs/#g
 
 ## Special Characters
 
-The following Characters are considered special and need to
+The following characters are considered special and need to
 be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `,`, `.`, `!`, `?`, `*` and `\`.
 
 ## Internals

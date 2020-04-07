@@ -49,26 +49,14 @@ const setEntries = (input, entries) => defineProperty(input, ENTRIES, entries);
 const getEntries = (input) => input[ENTRIES];
 module.exports.getEntries = getEntries;
 
-module.exports.getMeta = (() => {
-  const extractNeedles = (input) => Array.from(input.reduce((p, e) => {
-    const needle = getNeedle(e);
-    if (needle !== null) {
-      p.add(needle);
-    }
-    return p;
-  }, new Set()));
-  return (inputs, parents = null, context = undefined) => ({
-    isMatch: isMatch(findLast(inputs, (s) => isLeaf(s))),
-    matchedBy: extractNeedles(inputs.filter((e) => isMatch(e))),
-    excludedBy: extractNeedles(inputs.filter((e) => !isMatch(e))),
-    traversedBy: Array.from(inputs.reduce((p, e) => {
-      getNeedles(e).forEach((n) => p.add(n));
-      return p;
-    }, new Set())),
-    parents: parents !== null ? [...parents].reverse() : null,
-    context
-  });
-})();
+const extractNeedles = (searches) => searches.map((e) => getNeedle(e)).filter((e) => e !== null);
+module.exports.isLastLeafMatch = (searches) => isMatch(findLast(searches, (s) => isLeaf(s)));
+module.exports.matchedBy = (searches) => extractNeedles(searches.filter((e) => isMatch(e)));
+module.exports.excludedBy = (searches) => extractNeedles(searches.filter((e) => !isMatch(e)));
+module.exports.traversedBy = (searches) => Array.from(searches.reduce((p, e) => {
+  getNeedles(e).forEach((n) => p.add(n));
+  return p;
+}, new Set()));
 
 const buildRecursive = (tower, path, ctx, excluded, root = false) => {
   addNeedle(tower, ctx.needle);
