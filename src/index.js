@@ -17,13 +17,6 @@ const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
 
 const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);
 
-const callFn = (fn, neq, path, ctx, haystack, searches, parents) => {
-  if (fn === undefined) {
-    return true;
-  }
-  return fn(formatPath(path, ctx), haystack, compiler.getMeta(searches, parents, ctx.context)) !== neq;
-};
-
 const find = (haystack_, searches_, ctx) => {
   const result = ctx.context === undefined ? [] : null;
 
@@ -31,12 +24,28 @@ const find = (haystack_, searches_, ctx) => {
   const path = [];
   const parents = [];
 
+  let depth;
+  let segment;
+  let searches;
+  let isResult;
   let haystack = haystack_;
+
+  const kwargs = {
+    key: () => formatPath(path, ctx),
+    value: () => haystack,
+    isMatch: () => compiler.isLastLeafMatch(searches),
+    matchedBy: () => compiler.matchedBy(searches),
+    excludedBy: () => compiler.excludedBy(searches),
+    traversedBy: () => compiler.traversedBy(searches),
+    parents: () => [...parents].reverse(),
+    context: ctx.context
+  };
+
   do {
-    const depth = stack.pop();
-    const segment = stack.pop();
-    const searches = stack.pop();
-    const isResult = stack.pop();
+    depth = stack.pop();
+    segment = stack.pop();
+    searches = stack.pop();
+    isResult = stack.pop();
 
     const diff = path.length - depth;
     for (let idx = 0; idx < diff; idx += 1) {
@@ -55,7 +64,7 @@ const find = (haystack_, searches_, ctx) => {
     }
 
     if (isResult) {
-      if (callFn(ctx.filterFn, false, path, ctx, haystack, searches, parents)) {
+      if (ctx.filterFn === undefined || ctx.filterFn(kwargs) !== false) {
         if (result !== null) {
           result.push(formatPath(path, ctx));
         }
@@ -69,7 +78,7 @@ const find = (haystack_, searches_, ctx) => {
       continue;
     }
 
-    const recurseHaystack = callFn(ctx.breakFn, true, path, ctx, haystack, searches, parents);
+    const recurseHaystack = ctx.breakFn === undefined || ctx.breakFn(kwargs) !== true;
 
     if (ctx.useArraySelector === false && Array.isArray(haystack)) {
       if (recurseHaystack) {
