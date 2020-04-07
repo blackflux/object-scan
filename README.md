@@ -44,7 +44,7 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 
 ### Search Context
 
-A context can be passed into a search invocation as a second parameter. It is available in all functions
+A context can be passed into a search invocation as a second parameter. It is available in all callbacks
 and can be used to manage state across a search invocation without having to recompile the search.
 
 By default all matched keys are returned from a search invocation.
@@ -52,13 +52,13 @@ However, when it is not undefined, the context is returned instead.
 
 ### Options
 
-Signature for all functions is
+Signature of all callbacks is
 
     Fn({ key, value, parents, isMatch, matchedBy, excludedBy, traversedBy, context })
 
 where:
 
-- `key <func>`: returns key that function is called for (respects `joined` option).
+- `key <func>`: returns key that callback is invoked for (respects `joined` option).
 - `value <func>`: return value for key.
 - `parents <func>`: returns array of form `[parent, grandparent, ...]`.
 - `isMatch <func>`: returns true if last targeting needle exists and is non-excluding.
@@ -72,16 +72,16 @@ where:
 Type: `function`<br>
 Default: `undefined`
 
-If function is defined, it is called for every match. If `false`
+If defined, it is invoked for every match. If `false`
 is returned, the current key is excluded from the result.
 
-The return value of this function has no effect when a search context is provided.
+The return value of this callback has no effect when a search context is provided.
 
-Can be used as a callback function to do processing as matching keys are traversed.
+Can be used to do processing as matching keys are traversed.
 
-Called in same order as matches would appear in result.
+Invoked in same order as matches would appear in result.
 
-This method is conceptually similar to the callback function in
+This method is conceptually similar to
 [Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
 
 #### breakFn
@@ -89,11 +89,11 @@ This method is conceptually similar to the callback function in
 Type: `function`<br>
 Default: `undefined`
 
-If function is defined, it is called for every key that is traversed by
+If defined, it is invoked for every key that is traversed by
 the search. If `true` is returned, all keys nested under the current key are
 skipped in the search and from the final result.
 
-Note that `breakFn` is called before the corresponding `filterFn` might be called.
+Note that `breakFn` is invoked before the corresponding `filterFn` might be invoked.
 
 #### joined
 
@@ -204,7 +204,7 @@ Conceptually this package works as follows:
 Various information is pre-computed and stored for every node.
 Finally the search function is returned.
 
-2. When the search function is called, the input is traversed simultaneously with
+2. When the search function is invoked, the input is traversed simultaneously with
 the relevant nodes of the search tree. Processing multiple search tree branches
 in parallel allows for a single traversal of the input.
 
