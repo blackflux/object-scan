@@ -3850,15 +3850,22 @@ joi-strict@1.2.1:
   dependencies:
     "@hapi/joi" "17.1.1"
 
-js-gardener@2.0.150:
-  version "2.0.150"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.150.tgz#a8d827d37ded82020ba70465941785da5ce9eaa4"
-  integrity sha512-M9X6Qhsf1exK/hp3i63yNaCugdU6c3b6h/W3/UvLq3dK/Lws7DRi0wxu9Q0gEj+OzJrEV6IBTNAW13gBj2OChg==
+joi-strict@1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.2.2.tgz#177ebf5f303d171d0d019252d75a0095c7b4abdf"
+  integrity sha512-tzanWyh9yhmiFJ2er/vVXhBWhzmjxJtR9lyru3Mvojlsu4qosWDzFTk4pQpBwx+AneelHqQZ7BTi/gLa2nEs1g==
+  dependencies:
+    "@hapi/joi" "17.1.1"
+
+js-gardener@2.0.151:
+  version "2.0.151"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.151.tgz#98bfa486c87311a03f18ae88e15fa2594ca65425"
+  integrity sha512-LdSZbdUx7MpKpIXUf/pbeRV6kEIXVSlxRio4U66L/z3PBY0OYPGuu3oMd7D9mq67Abgr8AlMhVKmamYXx819fQ==
   dependencies:
     chalk "4.0.0"
     fancy-log "1.3.3"
     glob "7.1.6"
-    joi-strict "1.2.1"
+    joi-strict "1.2.2"
     js-yaml "3.13.1"
     lodash.difference "4.5.0"
     lodash.get "4.4.2"
@@ -4900,13 +4907,13 @@ node-sass-tilde-importer@^1.0.2:
   dependencies:
     find-parent-dir "^0.3.0"
 
-node-tdd@2.10.4:
-  version "2.10.4"
-  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.10.4.tgz#0a3b1452fa814ec3304b1883d1ab385c26c06322"
-  integrity sha512-QkoiYznDa07QR3po/5L+LVPX2hkrEuyFvHfJ7ph0IQIYoOM4TnuAU84Ve7lo6PU276yevx59abyZoVHBZQicTQ==
+node-tdd@2.10.5:
+  version "2.10.5"
+  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.10.5.tgz#afd410ec18e995e6cd0f8fa82a0033691b741665"
+  integrity sha512-jrnfOlxffRhIHFUh94J/+kroLnhBb/7+osYDoWeJ0drs/8bNnere7v99B5y4/xMC4NXPe68zZS6htnssZ/LdZg==
   dependencies:
     callsites "3.1.0"
-    joi-strict "1.2.1"
+    joi-strict "1.2.2"
     lodash.get "4.4.2"
     minimist "1.2.5"
     nock "12.0.3"
