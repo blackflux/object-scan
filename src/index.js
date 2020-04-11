@@ -17,29 +17,56 @@ const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
 
 const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);
 
-const callFn = (fn, neq, path, ctx, haystack, searches, parents) => {
-  if (fn === undefined) {
-    return true;
-  }
-  if (fn.length === 0) {
-    return fn() !== neq;
-  }
-  return fn(formatPath(path, ctx), haystack, compiler.getMeta(searches, parents)) !== neq;
-};
-
 const find = (haystack_, searches_, ctx) => {
-  const result = [];
+  const result = ctx.context === undefined ? [] : null;
 
   const stack = [false, searches_, null, 0];
   const path = [];
   const parents = [];
 
+  let depth;
+  let segment;
+  let searches;
+  let isResult;
   let haystack = haystack_;
+
+  const kwargs = {
+    getKey: () => formatPath(path, ctx),
+    get key() {
+      return kwargs.getKey();
+    },
+    getValue: () => haystack,
+    get value() {
+      return kwargs.getValue();
+    },
+    getIsMatch: () => compiler.isLastLeafMatch(searches),
+    get isMatch() {
+      return kwargs.getIsMatch();
+    },
+    getMatchedBy: () => compiler.matchedBy(searches),
+    get matchedBy() {
+      return kwargs.getMatchedBy();
+    },
+    getExcludedBy: () => compiler.excludedBy(searches),
+    get excludedBy() {
+      return kwargs.getExcludedBy();
+    },
+    getTraversedBy: () => compiler.traversedBy(searches),
+    get traversedBy() {
+      return kwargs.getTraversedBy();
+    },
+    getParents: () => [...parents].reverse(),
+    get parents() {
+      return kwargs.getParents();
+    },
+    context: ctx.context
+  };
+
   do {
-    const depth = stack.pop();
-    const segment = stack.pop();
-    const searches = stack.pop();
-    const isResult = stack.pop();
+    depth = stack.pop();
+    segment = stack.pop();
+    searches = stack.pop();
+    isResult = stack.pop();
 
     const diff = path.length - depth;
     for (let idx = 0; idx < diff; idx += 1) {
@@ -58,8 +85,10 @@ const find = (haystack_, searches_, ctx) => {
     }
 
     if (isResult) {
-      if (callFn(ctx.filterFn, false, path, ctx, haystack, searches, parents)) {
-        result.push(formatPath(path, ctx));
+      if (ctx.filterFn === undefined || ctx.filterFn(kwargs) !== false) {
+        if (result !== null) {
+          result.push(formatPath(path, ctx));
+        }
       }
       // eslint-disable-next-line no-continue
       continue;
@@ -70,7 +99,7 @@ const find = (haystack_, searches_, ctx) => {
       continue;
     }
 
-    const recurseHaystack = callFn(ctx.breakFn, true, path, ctx, haystack, searches, parents);
+    const recurseHaystack = ctx.breakFn === undefined || ctx.breakFn(kwargs) !== true;
 
     if (ctx.useArraySelector === false && Array.isArray(haystack)) {
       if (recurseHaystack) {
@@ -119,7 +148,7 @@ const find = (haystack_, searches_, ctx) => {
     }
   } while (stack.length !== 0);
 
-  return result;
+  return result === null ? ctx.context : result;
 };
 
 module.exports = (needles, opts = {}) => {
@@ -145,5 +174,5 @@ module.exports = (needles, opts = {}) => {
   assert(typeof ctx.strict === 'boolean');
 
   const search = compiler.compile(needles, ctx.strict); // keep separate for performance
-  return (haystack) => find(haystack, [search], ctx);
+  return (haystack, context) => find(haystack, [search], { context, ...ctx });
 };

@@ -127,6 +127,20 @@ describe('Testing Find', () => {
     });
   });
 
+  describe('Testing context', () => {
+    it('Testing context passed through', () => {
+      const find = objectScan(['**'], {
+        joined: false,
+        filterFn: ({ key, context }) => {
+          if (key.length === 3 && key[2] === 'child') {
+            context.push(key);
+          }
+        }
+      });
+      expect(find(haystack, [])).to.deep.equal([['grandparent1', 'parent', 'child']]);
+    });
+  });
+
   describe('Testing greedy array matching', () => {
     const needles = ['*'];
     const input = { key: ['v1', 'v2'] };
@@ -265,7 +279,7 @@ describe('Testing Find', () => {
     const needles = [''];
     const arrayInput = [{ id: 1 }, { id: 2 }];
     const objectInput = { id: {} };
-    const filterFn = (ps = []) => (key, value, { isMatch, matchedBy, parents }) => {
+    const filterFn = (ps = []) => ({ isMatch, parents, matchedBy }) => {
       expect(isMatch).to.equal(true);
       expect(parents).to.deep.equal(ps);
       expect(matchedBy).to.deep.equal(['']);
@@ -302,7 +316,7 @@ describe('Testing Find', () => {
     it('Testing empty needle only matchedBy on top level', () => {
       const find = objectScan(['', '**'], {
         useArraySelector: false,
-        filterFn: (key, value, { matchedBy }) => matchedBy.includes('')
+        filterFn: ({ matchedBy }) => matchedBy.includes('')
       });
       expect(find(arrayInput)).to.deep.equal(['[1]', '[0]']);
     });
@@ -314,12 +328,12 @@ describe('Testing Find', () => {
   });
 
   it('Testing null value', () => {
-    const find = objectScan(['**'], { filterFn: (key, value) => value === null });
+    const find = objectScan(['**'], { filterFn: ({ value }) => value === null });
     expect(find({ key: null })).to.deep.equal(['key']);
   });
 
   it('Testing undefined value', () => {
-    const find = objectScan(['**'], { filterFn: (key, value) => value === undefined });
+    const find = objectScan(['**'], { filterFn: ({ value }) => value === undefined });
     expect(find({ key: undefined })).to.deep.equal(['key']);
   });
 
@@ -399,8 +413,8 @@ describe('Testing Find', () => {
   it('Testing filterFn', () => {
     const result = {};
     objectScan(['**.child'], {
-      filterFn: (k, v) => {
-        result[k] = v;
+      filterFn: ({ key, value }) => {
+        result[key] = value;
       }
     })(haystack);
     expect(result).to.deep.equal({
@@ -417,7 +431,7 @@ describe('Testing Find', () => {
 
       it('Testing object parents useArraySelector == true', () => {
         const result = objectScan(pattern, {
-          filterFn: (k, v, { parents }) => {
+          filterFn: ({ parents }) => {
             expect(parents).to.deep.equal([input.one[0], input.one, input]);
           }
         })(input);
@@ -426,7 +440,7 @@ describe('Testing Find', () => {
 
       it('Testing object parents useArraySelector == false', () => {
         const result = objectScan(pattern, {
-          filterFn: (k, v, { parents }) => {
+          filterFn: ({ parents }) => {
             expect(parents).to.deep.equal([input.one[0], input.one, input]);
           },
           useArraySelector: false
@@ -441,7 +455,7 @@ describe('Testing Find', () => {
 
       it('Testing array parents useArraySelector == true', () => {
         const result = objectScan(pattern, {
-          filterFn: (k, v, { parents }) => {
+          filterFn: ({ parents }) => {
             expect(parents).to.deep.equal([input.one, input]);
           }
         })(input);
@@ -450,7 +464,7 @@ describe('Testing Find', () => {
 
       it('Testing array parents useArraySelector == false', () => {
         const result = objectScan(pattern, {
-          filterFn: (k, v, { parents }) => {
+          filterFn: ({ parents }) => {
             expect(parents).to.deep.equal([input.one.child, input.one, input]);
           },
           useArraySelector: false
@@ -467,9 +481,9 @@ describe('Testing Find', () => {
     const execTest = (useArraySelector, breakFn) => {
       const result = [];
       objectScan(pattern, {
-        breakFn: (k) => {
-          result.push(k);
-          return breakFn(k);
+        breakFn: ({ key }) => {
+          result.push(key);
+          return breakFn(key);
         },
         useArraySelector
       })(input);
@@ -496,8 +510,8 @@ describe('Testing Find', () => {
       const result = [];
       objectScan(['**'], {
         useArraySelector: false,
-        filterFn: (k) => result.push(['filterFn', k]),
-        breakFn: (k) => result.push(['breakFn', k])
+        filterFn: ({ key }) => result.push(['filterFn', key]),
+        breakFn: ({ key }) => result.push(['breakFn', key])
       })({
         tag: [[{ id: 1 }]]
       });
@@ -519,7 +533,9 @@ describe('Testing Find', () => {
 
     it('Testing traversedBy on filterFn', () => {
       const result = [];
-      objectScan(pattern, { filterFn: (k, v, { traversedBy }) => result.push(`${traversedBy} => ${k}`) })(input);
+      objectScan(pattern, {
+        filterFn: ({ key, traversedBy }) => result.push(`${traversedBy} => ${key}`)
+      })(input);
       expect(result).to.deep.equal([
         '[*].*.child => [0].parent.child',
         '[*].*.child,[*].parent => [0].parent'
@@ -529,7 +545,7 @@ describe('Testing Find', () => {
     it('Testing traversedBy on breakFn', () => {
       const result = [];
       objectScan(pattern, {
-        breakFn: (k, v, { isMatch, traversedBy }) => result.push(`${traversedBy} => ${k} (${isMatch})`)
+        breakFn: ({ key, isMatch, traversedBy }) => result.push(`${traversedBy} => ${key} (${isMatch})`)
       })(input);
       expect(result).to.deep.equal([
         '[*].*.child,[*].parent =>  (false)',
@@ -546,7 +562,7 @@ describe('Testing Find', () => {
 
     it('Testing matchedBy on filterFn', () => {
       const result = [];
-      objectScan(pattern, { filterFn: (k, v, { matchedBy }) => result.push(`${matchedBy} => ${k}`) })(input);
+      objectScan(pattern, { filterFn: ({ key, matchedBy }) => result.push(`${matchedBy} => ${key}`) })(input);
       expect(result).to.deep.equal([
         '[*].*.child => [0].parent.child',
         '[*].parent => [0].parent'
@@ -555,7 +571,9 @@ describe('Testing Find', () => {
 
     it('Testing matchedBy on breakFn', () => {
       const result = [];
-      objectScan(pattern, { breakFn: (k, v, { matchedBy }) => result.push(`${matchedBy} => ${k}`) })(input);
+      objectScan(pattern, {
+        breakFn: ({ key, matchedBy }) => result.push(`${matchedBy} => ${key}`)
+      })(input);
       expect(result).to.deep.equal([
         ' => ',
         ' => [0]',
@@ -644,7 +662,7 @@ describe('Testing Find', () => {
 
   it('Testing Filter Function', () => {
     const find = objectScan(['**'], {
-      filterFn: (key, value) => typeof value === 'string' && value === 'a'
+      filterFn: ({ value }) => typeof value === 'string' && value === 'a'
     });
     expect(find(haystack)).to.deep.equal([
       'array2.nested[0]',
@@ -790,9 +808,9 @@ describe('Testing Find', () => {
       .deep.equal(['k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b.c', 'a.b', 'a']);
     expect(objectScan(['**.f'])(input)).to.deep.equal(['a.e.f']);
     expect(objectScan(['a.*,!a.e'])(input)).to.deep.equal(['a.h', 'a.b']);
-    expect(objectScan(['**'], { filterFn: (key, value) => typeof value === 'string' })(input)).to
+    expect(objectScan(['**'], { filterFn: ({ value }) => typeof value === 'string' })(input)).to
       .deep.equal(['k', 'a.h[1]', 'a.h[0]', 'a.e.f', 'a.b.c']);
-    expect(objectScan(['**'], { breakFn: (key) => key === 'a.b' })(input)).to
+    expect(objectScan(['**'], { breakFn: ({ key }) => key === 'a.b' })(input)).to
       .deep.equal(['k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b', 'a']);
     expect(objectScan(['**[*]'])(input)).to.deep.equal(['a.h[1]', 'a.h[0]']);
     expect(objectScan(['*.*[*]'])(input)).to.deep.equal(['a.h[1]', 'a.h[0]']);

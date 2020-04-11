@@ -12,21 +12,19 @@ const getDirectories = (source) => getEntries(source)
 const getFiles = (source) => getEntries(source)
   .filter(([f, p]) => fs.lstatSync(p).isFile());
 
-const logFn = (type, log, paramsToLog) => (key, value, kwargs) => {
+const logFn = (type, log, paramsToLog) => (kwargs) => {
   log.push(Object
-    .entries({
-      type, key, value, ...kwargs
-    })
-    .filter(([k, v]) => (paramsToLog || [
-      'isMatch', 'matchedBy', 'excludedBy', 'traversedBy'
-    ]).concat(['key', 'type']).includes(k))
-    .reduce((p, [k, v]) => Object.assign(p, { [k]: v }), {}));
+    .keys(kwargs)
+    .filter((k) => (paramsToLog || ['isMatch', 'matchedBy', 'excludedBy', 'traversedBy']).includes(k))
+    .reduce((p, k) => Object.assign(p, {
+      [k]: kwargs[k]
+    }), { type, key: kwargs.key }));
 };
 
 describe('Integration Testing', () => {
   // eslint-disable-next-line mocha/no-setup-in-describe
   getDirectories(path.join(__dirname, 'integration'))
-  // eslint-disable-next-line import/no-dynamic-require,global-require
+    // eslint-disable-next-line import/no-dynamic-require,global-require
     .map(([dirName, dirPath]) => [dirName, dirPath, require(`${dirPath}.json`)])
     .forEach(([dirName, dirPath, dirInput]) => {
       getFiles(dirPath)
