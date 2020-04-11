@@ -29,8 +29,8 @@ module.exports = ({
           strict: false,
           ...['breakFn', 'filterFn']
             .reduce((prev, type) => Object.assign(prev, {
-              [type]: (key, value, {
-                isMatch, matchedBy, excludedBy, traversedBy
+              [type]: ({
+                key, isMatch, matchedBy, excludedBy, traversedBy
               }) => logs.push({
                 type, key, isMatch, matchedBy, excludedBy, traversedBy
               })
