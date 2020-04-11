@@ -1,8 +1,14 @@
 const assert = require('assert');
+const fs = require('smart-fs');
+const path = require('path');
 const generateHaystack = require('./generate-haystack');
 const generateNeedles = require('./generate-needles');
 const generateOptions = require('./generate-options');
 const pruneHaystack = require('./prune-haystack');
+
+const keySetsDefault = fs
+  .walkDir(path.join(__dirname, '..', 'resources', 'key-sets'))
+  .map((f) => fs.smartRead(path.join(__dirname, '..', 'resources', 'key-sets', f)));
 
 const boolProbFn = (intervalSize, threshold) => () => {
   const intervalPos = Math.random() * (1 - intervalSize);
@@ -18,7 +24,7 @@ const intProbFn = (min, max, bias = (x) => x ** 2) => () => {
 };
 
 module.exports = ({
-  keySets,
+  keySets = keySetsDefault,
   maxNodes = 500,
   arrayProb = boolProbFn(0.1, 0.2),
   objectLengthProb = intProbFn(0, 30),
