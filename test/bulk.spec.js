@@ -1,4 +1,3 @@
-const expect = require('chai').expect;
 const path = require('path');
 const { describe } = require('node-tdd');
 const generateTest = require('./bulk/helper/generate-test');
@@ -10,18 +9,10 @@ const instantiateTests = require('./bulk/helper/instantiate-tests');
 // todo: import released version of objectScan and compare results (?)
 // todo: profile and improve performance
 
-describe('Testing generateTest', () => {
-  it('Generating test with default params', () => {
-    const keySets = ['abcdefghijklmnopqrstuvwxyz'.split()];
-    const r = generateTest({ keySets });
-    expect(Object.keys(r)).to.deep.equal(['needles', 'opts', 'haystack']);
-  });
-});
-
 describe('Generating Bulk Test Coverage Tests', { useTmpDir: true }, () => {
   beforeEach(({ dir }) => {
-    generateTests({ folder: dir, count: 1 });
-    generateTests({ folder: dir, count: 1 });
+    generateTest({ file: path.join(dir, 'file.json') });
+    generateTest({ file: path.join(dir, 'file.json') });
 
     describe('Running Bulk Test Coverage Tests', () => {
       instantiateTests({ folder: dir, init: true });

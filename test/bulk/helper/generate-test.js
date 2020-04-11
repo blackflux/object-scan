@@ -24,6 +24,7 @@ const intProbFn = (min, max, bias = (x) => x ** 2) => () => {
 };
 
 module.exports = ({
+  file,
   keySets = keySetsDefault,
   maxNodes = 500,
   arrayProb = boolProbFn(0.1, 0.2),
@@ -40,6 +41,7 @@ module.exports = ({
   partialStarProb = boolProbFn(0.1, 0.2),
   questionMarkProb = boolProbFn(0.1, 0.2)
 }) => {
+  assert(typeof file === 'string');
   assert(
     Array.isArray(keySets)
     && keySets.length > 0
@@ -100,9 +102,11 @@ module.exports = ({
 
   pruneHaystack(haystack, needles, opts);
 
-  return {
-    needles,
-    opts,
-    haystack
-  };
+  if (!fs.existsSync(file)) {
+    fs.smartWrite(file, {
+      needles,
+      opts,
+      haystack
+    });
+  }
 };
