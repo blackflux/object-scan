@@ -254,6 +254,13 @@ describe('Testing compiler', () => {
     });
   });
 
+  it('Testing matchedBy results are unique', () => {
+    const input = ['**', '**.**'];
+    const tower = compiler.compile(input, false);
+    expect(compiler.matchedBy([tower['**']['**'], tower['**']['**']]))
+      .to.deep.equal(['**.**']);
+  });
+
   it('Testing traversing', () => {
     const input = ['a.{b,c}.d', 'a.{c,e}.f', '!a.b.d.g'];
     const tower = compiler.compile(input);

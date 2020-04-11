@@ -49,7 +49,7 @@ const setEntries = (input, entries) => defineProperty(input, ENTRIES, entries);
 const getEntries = (input) => input[ENTRIES];
 module.exports.getEntries = getEntries;
 
-const extractNeedles = (searches) => searches.map((e) => getNeedle(e)).filter((e) => e !== null);
+const extractNeedles = (searches) => Array.from(new Set(searches.map((e) => getNeedle(e)).filter((e) => e !== null)));
 module.exports.isLastLeafMatch = (searches) => isMatch(findLast(searches, (s) => isLeaf(s)));
 module.exports.matchedBy = (searches) => extractNeedles(searches.filter((e) => isMatch(e)));
 module.exports.excludedBy = (searches) => extractNeedles(searches.filter((e) => !isMatch(e)));
