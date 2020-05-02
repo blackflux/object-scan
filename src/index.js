@@ -155,7 +155,7 @@ module.exports = (needles, opts = {}) => {
   assert(Array.isArray(needles));
   assert(opts instanceof Object && !Array.isArray(opts));
   if (needles.length === 0) {
-    return () => [];
+    return (_, ctx) => (ctx === undefined ? [] : ctx);
   }
 
   const ctx = {
