@@ -3851,21 +3851,21 @@ joi-strict@1.2.2:
   dependencies:
     "@hapi/joi" "17.1.1"
 
-js-gardener@2.0.155:
-  version "2.0.155"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.155.tgz#16700a11a444d6412dacfcc8aafd34fd6f91b9f3"
-  integrity sha512-ANSqW+Gy17IcWaBLFVqijL5xZYospMhN8D2RiEQknriItm5WlsM/Rh+oiQIqLy9XUeOKDm9lD9ZEmDRN0pVmlg==
+js-gardener@2.0.156:
+  version "2.0.156"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.156.tgz#c96d29db44f33f5a2bed39159f2ebe55adae6015"
+  integrity sha512-VGtZJuas1wv2KjD8fpiyQKmjFnfD502gP+ZFICbxQnF1aySIr3FMUzZuNoSX9QZzJMJ0cndwfMEGxgKottRpdg==
   dependencies:
     chalk "4.0.0"
     fancy-log "1.3.3"
     glob "7.1.6"
     joi-strict "1.2.2"
-    js-yaml "3.13.1"
+    js-yaml "3.14.0"
     lodash.difference "4.5.0"
     lodash.get "4.4.2"
     mocha "7.1.2"
     npm-check "5.9.2"
-    robo-config "3.5.6"
+    robo-config "3.7.0"
 
 js-tokens@^3.0.0:
   version "3.0.2"
@@ -3877,10 +3877,18 @@ js-tokens@^4.0.0:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
-js-yaml@3.13.1, js-yaml@^3.13.0, js-yaml@^3.13.1, js-yaml@^3.4.2:
+js-yaml@3.13.1:
   version "3.13.1"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
   integrity sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
+  dependencies:
+    argparse "^1.0.7"
+    esprima "^4.0.0"
+
+js-yaml@3.14.0, js-yaml@^3.13.0, js-yaml@^3.13.1, js-yaml@^3.4.2:
+  version "3.14.0"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.14.0.tgz#a7a34170f26a21bb162424d8adacb4113a69e482"
+  integrity sha512-/4IbIeHcD9VMHFqDR/gQ7EdZdLimOvW2DdcxFjdyyZ9NsbS+ccrXqVWDtab/lRl5AlUqmpBx8EhPaWR+OtY17A==
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
@@ -6484,10 +6492,10 @@ rimraf@^3.0.0:
   dependencies:
     glob "^7.1.3"
 
-robo-config@3.5.6:
-  version "3.5.6"
-  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.5.6.tgz#ec9d952bfaad10b25cd2101c21149ad2e37f95c6"
-  integrity sha512-xbJGvLdJBdUMuqhAE5zQjyOK+uDuo1Zy5IAXMtu2nM9Jh+AUvn/OvgobUwMNckuG7SaS2lSLZnLcbZh1bSyXoA==
+robo-config@3.7.0:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.7.0.tgz#d053a38b926158a8952ce3a2f4bcfc2be553db17"
+  integrity sha512-VBsF56/guYIKEke3JZY2FEVgz3PiiOU4yqBpna3iSGoACMO0en+DsWHfYZd7UqCjw0pF/q05zFq3taDZ5ezk4g==
   dependencies:
     app-root-path "3.0.0"
     deepmerge "4.2.2"
