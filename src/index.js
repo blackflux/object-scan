@@ -63,6 +63,10 @@ const find = (haystack_, searches_, ctx) => {
     get parents() {
       return kwargs.getParents();
     },
+    getIsCircular: () => parents.includes(haystack),
+    get isCircular() {
+      return kwargs.getIsCircular();
+    },
     context: ctx.context
   };
 
