@@ -437,8 +437,10 @@ describe('Testing Find', () => {
 
       it('Testing object parents useArraySelector == true', () => {
         const result = objectScan(pattern, {
-          filterFn: ({ parents }) => {
+          filterFn: ({ parents, parent, getParent }) => {
             expect(parents).to.deep.equal([input.one[0], input.one, input]);
+            expect(parent).to.deep.equal(input.one[0]);
+            expect(getParent()).to.deep.equal(input.one[0]);
           }
         })(input);
         expect(result).to.deep.equal(['one[0].child']);
