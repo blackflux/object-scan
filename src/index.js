@@ -55,6 +55,10 @@ const find = (haystack_, searches_, ctx) => {
     get traversedBy() {
       return kwargs.getTraversedBy();
     },
+    getParent: () => parents[parents.length - 1],
+    get parent() {
+      return kwargs.getParent();
+    },
     getParents: () => [...parents].reverse(),
     get parents() {
       return kwargs.getParents();

@@ -55,26 +55,28 @@ However, when it is not undefined, the context is returned instead.
 Signature of all callbacks is
 
     Fn({
-      key, value, parents, isMatch, matchedBy, excludedBy, traversedBy, context,
-      getKey, getValue, getParents, getIsMatch, getMatchedBy, getExcludedBy, getTraversedBy
+      key, value, parent, parents, isMatch, matchedBy, excludedBy, traversedBy, context,
+      getKey, getValue, getParent, getParents, getIsMatch, getMatchedBy, getExcludedBy, getTraversedBy
     })
 
 where:
 
 - `key`: key that callback is invoked for (respects `joined` option).
 - `value`: value for key.
+- `parent`: current parent.
 - `parents`: array of form `[parent, grandparent, ...]`.
 - `isMatch`: true iff last targeting needle exists and is non-excluding.
 - `matchedBy`: all non-excluding needles targeting key.
 - `excludedBy`: all excluding needles targeting key.
 - `traversedBy`: all needles involved in traversing key.
-- `getKey`: function that return `key`
-- `getValue`: function that return `value`
-- `getParents`: function that return `parents`
-- `getIsMatch`: function that return `isMatch`
-- `getMatchedBy`: function that return `matchedBy`
-- `getExcludedBy`: function that return `excludedBy`
-- `getTraversedBy`: function that return `traversedBy`
+- `getKey`: function that returns `key`
+- `getValue`: function that returns `value`
+- `getParent`: function that returns `parent`
+- `getParents`: function that returns `parents`
+- `getIsMatch`: function that returns `isMatch`
+- `getMatchedBy`: function that returns `matchedBy`
+- `getExcludedBy`: function that returns `excludedBy`
+- `getTraversedBy`: function that returns `traversedBy`
 - `context`: as passed into the search.
 
 Notes on Performance:
