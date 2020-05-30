@@ -535,6 +535,33 @@ describe('Testing Find', () => {
     });
   });
 
+  describe('Testing isCircular', () => {
+    let input;
+    before(() => {
+      input = { a: { b: null } };
+      input.a.b = input;
+    });
+
+    it('Testing traversedBy on filterFn', () => {
+      const result = [];
+      objectScan(['**', ''], {
+        filterFn: ({ key, isCircular }) => {
+          result.push([key, isCircular]);
+        },
+        breakFn: ({ key }) => key.length > 10
+      })(input);
+      expect(result).to.deep.equal([
+        ['a.b.a.b.a.b', true],
+        ['a.b.a.b.a', true],
+        ['a.b.a.b', true],
+        ['a.b.a', true],
+        ['a.b', true],
+        ['a', false],
+        ['', false]
+      ]);
+    });
+  });
+
   describe('Testing Fn traversedBy', () => {
     const input = [{ parent: { child: 'value' } }];
     const pattern = ['[*].*.child', '[*].parent'];

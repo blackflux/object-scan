@@ -55,8 +55,9 @@ However, when it is not undefined, the context is returned instead.
 Signature of all callbacks is
 
     Fn({
-      key, value, parent, parents, isMatch, matchedBy, excludedBy, traversedBy, context,
-      getKey, getValue, getParent, getParents, getIsMatch, getMatchedBy, getExcludedBy, getTraversedBy
+      key, value, parent, parents, isMatch, matchedBy, excludedBy, traversedBy, isCircular
+      getKey, getValue, getParent, getParents, getIsMatch, getMatchedBy, getExcludedBy, getTraversedBy, getIsCircular
+      context
     })
 
 where:
@@ -69,6 +70,7 @@ where:
 - `matchedBy`: all non-excluding needles targeting key.
 - `excludedBy`: all excluding needles targeting key.
 - `traversedBy`: all needles involved in traversing key.
+- `isCircular`: true iff `value` contained in `parents`
 - `getKey`: function that returns `key`
 - `getValue`: function that returns `value`
 - `getParent`: function that returns `parent`
@@ -77,7 +79,8 @@ where:
 - `getMatchedBy`: function that returns `matchedBy`
 - `getExcludedBy`: function that returns `excludedBy`
 - `getTraversedBy`: function that returns `traversedBy`
-- `context`: as passed into the search.
+- `getIsCircular`: function that returns `isCircular`
+- `context`: as passed into the search
 
 Notes on Performance:
 - Arguments backed by getters use [Functions Getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get)
