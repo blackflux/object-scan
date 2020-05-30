@@ -103,7 +103,11 @@ const finalizeRecursive = (tower) => {
 
 module.exports.compile = (needles, strict = true) => {
   const tower = {};
-  needles.forEach((needle) => buildRecursive(tower, [parser(needle)], { needle, strict }, false, true));
+  for (let idx = 0; idx < needles.length; idx += 1) {
+    const needle = needles[idx];
+    const tree = parser(needle);
+    buildRecursive(tower, [tree], { needle, strict }, false, true);
+  }
   finalizeRecursive(tower);
   return tower;
 };
