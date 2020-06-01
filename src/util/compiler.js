@@ -101,9 +101,7 @@ const finalizeRecursive = (tower) => {
   setEntries(tower, Object.entries(tower).filter(([k]) => k !== ''));
 };
 
-const iterate = (tree) => {
-  const result = [];
-
+const iterate = (tree, cb) => {
   const stack = [tree];
   const parent = [-1];
   const count = [];
@@ -147,19 +145,18 @@ const iterate = (tree) => {
       }
     } else if (inc === true) {
       path.push(e);
+      cb('ADD', e);
       if (idx === stack.length - 1) {
-        result.push(path.join('.'));
+        cb('FIN', path);
         inc = false;
       } else {
         idx += 1;
       }
     } else {
-      path.pop();
+      cb('RM', path.pop());
       idx -= 1;
     }
   }
-
-  return result;
 };
 module.exports.iterate = iterate;
 

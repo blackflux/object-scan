@@ -30,21 +30,24 @@ describe('Testing compiler', () => {
           return result;
         };
       })();
-      recIterate = (obj, path = []) => {
+      recIterate = (obj, cb, path = []) => {
         if (obj.length === 0) {
-          return [path.join('.')];
+          cb('FIN', path);
+          return;
         }
         if (Array.isArray(obj[0])) {
-          return recIterate([...obj[0], ...obj.slice(1)], path);
+          recIterate([...obj[0], ...obj.slice(1)], cb, path);
+          return;
         }
         if (obj[0] instanceof Set) {
-          const result = [];
           obj[0].forEach((e) => {
-            result.push(...recIterate([e, ...obj.slice(1)], path));
+            recIterate([e, ...obj.slice(1)], cb, path);
           });
-          return result;
+          return;
         }
-        return recIterate(obj.slice(1), path.concat(obj[0]));
+        cb('ADD', obj[0]);
+        recIterate(obj.slice(1), cb, path.concat(obj[0]));
+        cb('RM', obj[0]);
       };
       visualize = (obj) => {
         if (Array.isArray(obj)) {
@@ -60,8 +63,10 @@ describe('Testing compiler', () => {
     it('Mass Testing Iterate Correctness', () => {
       for (let idx = 0; idx < 1000; idx += 1) {
         const data = [treeGen()];
-        const r1 = recIterate(data);
-        const r2 = compiler.iterate(data);
+        const r1 = [];
+        const r2 = [];
+        recIterate(data, (...args) => r1.push(args));
+        compiler.iterate(data, (type, arg) => r2.push([type, type === 'FIN' ? arg.slice(0) : arg]));
         expect(r1, visualize(data)).to.deep.equal(r2);
       }
     });
