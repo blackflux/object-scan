@@ -105,7 +105,7 @@ module.exports.compile = (needles, strict = true) => {
   const tower = {};
   for (let idx = 0; idx < needles.length; idx += 1) {
     const needle = needles[idx];
-    const tree = parser(needle);
+    const tree = parser.parse(needle);
     buildRecursive(tower, [tree], { needle, strict }, false, true);
   }
   finalizeRecursive(tower);

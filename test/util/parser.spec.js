@@ -12,11 +12,11 @@ const asString = (() => {
     }
     return `${input.isExcluded() ? '!' : ''}"${input}"`;
   };
-  return (input) => asStringRec(parser(input));
+  return (input) => asStringRec(parser.parse(input));
 })();
 
 const checkError = (input, msg) => {
-  expect(() => parser(input)).to.throw(msg);
+  expect(() => parser.parse(input)).to.throw(msg);
 };
 
 describe('Testing Parser', () => {
