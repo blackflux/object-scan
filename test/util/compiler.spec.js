@@ -3,6 +3,70 @@ const { describe } = require('node-tdd');
 const compiler = require('../../src/util/compiler');
 
 describe('Testing compiler', () => {
+  describe('Testing iterate', () => {
+    let treeGen;
+    let recIterate;
+    let visualize;
+    before(() => {
+      treeGen = (() => {
+        const CHARS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
+        const MAX_DEPTH = 4;
+        const MAX_WIDTH = 4;
+
+        let index = 0;
+        return (depth = 0) => {
+          if (depth === 0) {
+            index = 0;
+          }
+          if (!(index < CHARS.length) || Math.random() * MAX_DEPTH < depth) {
+            index += 1;
+            return CHARS[(index - 1) % CHARS.length];
+          }
+          const result = Math.random() > 0.5 ? new Set() : [];
+          for (let idx = 0, len = Math.ceil(Math.random() * MAX_WIDTH); idx < len; idx += 1) {
+            const entry = treeGen(depth + 1);
+            result[Array.isArray(result) ? 'push' : 'add'](entry);
+          }
+          return result;
+        };
+      })();
+      recIterate = (obj, path = []) => {
+        if (obj.length === 0) {
+          return [path.join('.')];
+        }
+        if (Array.isArray(obj[0])) {
+          return recIterate([...obj[0], ...obj.slice(1)], path);
+        }
+        if (obj[0] instanceof Set) {
+          const result = [];
+          obj[0].forEach((e) => {
+            result.push(...recIterate([e, ...obj.slice(1)], path));
+          });
+          return result;
+        }
+        return recIterate(obj.slice(1), path.concat(obj[0]));
+      };
+      visualize = (obj) => {
+        if (Array.isArray(obj)) {
+          return `[${obj.map((e) => visualize(e)).join(',')}]`;
+        }
+        if (obj instanceof Set) {
+          return `{${[...obj].map((e) => visualize(e)).join(',')}}`;
+        }
+        return obj;
+      };
+    });
+
+    it('Mass Testing Iterate Correctness', () => {
+      for (let idx = 0; idx < 1000; idx += 1) {
+        const data = [treeGen()];
+        const r1 = recIterate(data);
+        const r2 = compiler.iterate(data);
+        expect(r1, visualize(data)).to.deep.equal(r2);
+      }
+    });
+  });
+
   describe('Testing Redundant Needle Target Errors', () => {
     it('Testing redundant needle target', () => {
       expect(() => compiler.compile(['{a,b}', 'a']))
