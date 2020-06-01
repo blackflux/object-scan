@@ -28,32 +28,36 @@ const iter = (obj) => {
 
   while (idx >= 0) {
     const e = stack[idx];
-    if (Array.isArray(e)) {
-      stack.splice(idx, 1, ...e);
-      parent.splice(idx, 1, ...new Array(e.length).fill(parent[idx]));
-      depth[parent[idx]] += e.length - 1;
-    } else if (e instanceof Set) {
-      const eArray = [...e]; // todo: remember this (!)
-      if (count[idx] === undefined) {
-        count[idx] = 0;
-        depth[idx] = 0;
-      } else if (depth[idx] !== 0) {
-        stack.splice(idx + 1, depth[idx]);
-        parent.splice(idx + 1, depth[idx]);
-        depth[idx] = 0;
-      }
-
-      if (count[idx] < eArray.length) {
-        stack.splice(idx + 1, 0, eArray[count[idx]]);
-        parent.splice(idx + 1, 0, idx);
-        count[idx] = (count[idx] || 0) + 1;
-        depth[idx] += 1;
-        inc = true;
-        idx += 1;
+    if (e instanceof Set) {
+      stack[idx] = [...e];
+      stack[idx].or = true;
+    } else if (Array.isArray(e)) {
+      if (e.or !== true) {
+        stack.splice(idx, 1, ...e);
+        parent.splice(idx, 1, ...new Array(e.length).fill(parent[idx]));
+        depth[parent[idx]] += e.length - 1;
       } else {
-        count[idx] = 0;
-        inc = false;
-        idx -= 1;
+        if (count[idx] === undefined) {
+          count[idx] = 0;
+          depth[idx] = 0;
+        } else if (depth[idx] !== 0) {
+          stack.splice(idx + 1, depth[idx]);
+          parent.splice(idx + 1, depth[idx]);
+          depth[idx] = 0;
+        }
+
+        if (count[idx] < e.length) {
+          stack.splice(idx + 1, 0, e[count[idx]]);
+          parent.splice(idx + 1, 0, idx);
+          count[idx] = (count[idx] || 0) + 1;
+          depth[idx] += 1;
+          inc = true;
+          idx += 1;
+        } else {
+          count[idx] = 0;
+          inc = false;
+          idx -= 1;
+        }
       }
     } else {
       if (inc === true) {
@@ -122,9 +126,9 @@ for (let idx = 0; idx < 100000; idx += 1) {
   }
 }
 
-// const bench = (name, fnRaw, count = 1000) => {
+// const bench = (name, fnRaw, count = 10000) => {
 //   const fn = fnRaw();
-//   for (let i = 0; i < count * 10; i += 1) {
+//   for (let i = 0; i < Math.min(count * 10, 10000); i += 1) {
 //     fn();
 //   }
 //   console.time(name);
