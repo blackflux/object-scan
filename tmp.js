@@ -19,8 +19,9 @@ const iter = (obj) => {
   const result = [];
 
   const stack = [obj];
+  const parent = [-1];
   const count = [];
-  const depth = [0];
+  const depth = [];
   const path = [];
   let idx = 0;
   let inc = true;
@@ -29,21 +30,24 @@ const iter = (obj) => {
     const e = stack[idx];
     if (Array.isArray(e)) {
       stack.splice(idx, 1, ...e);
-      depth.splice(idx, 1, ...new Array(e.length).fill(depth[idx]));
+      parent.splice(idx, 1, ...new Array(e.length).fill(parent[idx]));
+      depth[parent[idx]] += e.length - 1;
     } else if (e instanceof Set) {
-      while (depth[idx + 1] !== undefined && depth[idx + 1] > depth[idx]) {
-        depth.splice(idx + 1, 1);
-        stack.splice(idx + 1, 1);
-      }
-
-      const eArray = [...e];
+      const eArray = [...e]; // todo: remember this (!)
       if (count[idx] === undefined) {
         count[idx] = 0;
+        depth[idx] = 0;
+      } else if (depth[idx] !== 0) {
+        stack.splice(idx + 1, depth[idx]);
+        parent.splice(idx + 1, depth[idx]);
+        depth[idx] = 0;
       }
+
       if (count[idx] < eArray.length) {
         stack.splice(idx + 1, 0, eArray[count[idx]]);
-        depth.splice(idx + 1, 0, depth[idx] + 1);
+        parent.splice(idx + 1, 0, idx);
         count[idx] = (count[idx] || 0) + 1;
+        depth[idx] += 1;
         inc = true;
         idx += 1;
       } else {
