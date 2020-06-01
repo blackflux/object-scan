@@ -126,23 +126,18 @@ for (let idx = 0; idx < 100000; idx += 1) {
   }
 }
 
-// const bench = (name, fnRaw, count = 10000) => {
-//   const fn = fnRaw();
-//   for (let i = 0; i < Math.min(count * 10, 10000); i += 1) {
-//     fn();
-//   }
-//   console.time(name);
-//   for (let i = 0; i < count; i += 1) {
-//     fn();
-//   }
-//   console.timeEnd(name);
-// };
-//
-// bench('rec', () => () => {
-//   const d = [rand()];
-//   rec(d);
-// });
-// bench('iter', () => () => {
-//   const d = [rand()];
-//   iter(d);
-// });
+const bench = (name, fnRaw, fnData, count = 10000) => {
+  const fn = fnRaw();
+  for (let i = 0; i < Math.min(count * 10, 10000); i += 1) {
+    fn(fnData());
+  }
+  const data = (new Array(count)).fill(1).map(() => fnData());
+  console.time(name);
+  for (let i = 0; i < count; i += 1) {
+    fn(data[i]);
+  }
+  console.timeEnd(name);
+};
+
+bench('rec', () => (d) => rec(d), () => [rand()]);
+bench('iter', (d) => () => iter(d), () => [rand()]);
