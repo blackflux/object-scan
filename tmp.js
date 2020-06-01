@@ -20,7 +20,7 @@ const iter = (obj) => {
 
   const stack = [obj];
   const count = [];
-  const depth = [];
+  const depth = [0];
   const path = [];
   let idx = 0;
   let inc = true;
@@ -29,7 +29,7 @@ const iter = (obj) => {
     const e = stack[idx];
     if (Array.isArray(e)) {
       stack.splice(idx, 1, ...e);
-      depth.splice(idx, 1, ...new Array(e.length).fill(depth[idx] || 0));
+      depth.splice(idx, 1, ...new Array(e.length).fill(depth[idx]));
     } else if (e instanceof Set) {
       if (depth[idx] === undefined) {
         depth[idx] = (depth[idx - 1] || 0) + 1;
@@ -107,7 +107,7 @@ const visualize = (obj) => {
   return obj;
 };
 
-for (let idx = 0; idx < 10000; idx += 1) {
+for (let idx = 0; idx < 100000; idx += 1) {
   const data = [rand()];
   const r1 = rec(data);
   const r2 = iter(data);
