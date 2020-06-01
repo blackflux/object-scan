@@ -1,6 +1,6 @@
 const iterate = (tree, cb) => {
   const stack = [tree];
-  const parent = [-1];
+  const parent = [null];
   const count = [];
   const depth = [];
   const path = [];
@@ -16,7 +16,9 @@ const iterate = (tree, cb) => {
       if (e.or !== true) {
         stack.splice(idx, 1, ...e);
         parent.splice(idx, 1, ...new Array(e.length).fill(parent[idx]));
-        depth[parent[idx]] += e.length - 1;
+        if (parent[idx] !== null) {
+          depth[parent[idx]] += e.length - 1;
+        }
       } else {
         if (count[idx] === undefined) {
           count[idx] = 0;
@@ -36,7 +38,6 @@ const iterate = (tree, cb) => {
           idx += 1;
         } else {
           count[idx] = 0;
-          inc = false;
           idx -= 1;
         }
       }
