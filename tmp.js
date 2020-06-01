@@ -1,5 +1,3 @@
-const assert = require('assert');
-
 const rec = (obj, path = []) => {
   if (obj.length === 0) {
     return [path.join('.')];
@@ -17,107 +15,57 @@ const rec = (obj, path = []) => {
   return rec(obj.slice(1), path.concat(obj[0]));
 };
 
-class OrArray extends Array {
-  next() {
-    if (this.idx === undefined) {
-      this.idx = 0;
-    }
-    if (this.idx < this.length) {
-      this.idx += 1;
-      return this[this.idx - 1];
-    }
-    return null;
-  }
-
-  reset() {
-    this.idx = 0;
-  }
-
-  set offset(value) {
-    this._offset = value;
-  }
-
-  get offset() {
-    return this._offset || 0;
-  }
-}
-
-const iter = (input) => {
+const iter = (obj) => {
   const result = [];
 
-  const stack = [input];
-  let cOr = new OrArray();
-  let idx = 0;
-
-  let inc = true;
+  const stack = [obj];
+  const count = [];
+  const depth = [];
   const path = [];
+  let idx = 0;
+  let inc = true;
 
-  while (inc === true || idx >= 0) {
-    // console.log('S', idx, inc, stack);
+  while (idx >= 0) {
+    const e = stack[idx];
+    if (Array.isArray(e)) {
+      stack.splice(idx, 1, ...e);
+      depth.splice(idx, 1, ...new Array(e.length).fill(depth[idx] || 0));
+    } else if (e instanceof Set) {
+      if (depth[idx] === undefined) {
+        depth[idx] = (depth[idx - 1] || 0) + 1;
+      }
+      while (depth[idx + 1] !== undefined && depth[idx + 1] > depth[idx]) {
+        depth.splice(idx + 1, 1);
+        stack.splice(idx + 1, 1);
+      }
 
-    const obj = stack[idx];
-    if (obj instanceof Set) {
-      cOr = new OrArray(...obj);
-      stack[idx] = cOr;
-      inc = true;
-    } else if (obj instanceof OrArray) {
-      const next = obj.next();
-      if (next === null) {
-        cOr = null;
-        obj.reset();
-        idx -= 1;
-        inc = false;
-      } else {
-        cOr = obj;
-        const offset = stack.slice(idx, cOr.offset).reduce((p, c) => p + (c.offset || 0), 0);
-        stack.splice(idx + 1, offset, next);
-        cOr.offset = 1;
+      const eArray = [...e];
+      if (count[idx] === undefined) {
+        count[idx] = 0;
+      }
+      if (count[idx] < eArray.length) {
+        stack.splice(idx + 1, 0, eArray[count[idx]]);
+        depth.splice(idx + 1, 0, depth[idx] + 1);
+        count[idx] = (count[idx] || 0) + 1;
         inc = true;
         idx += 1;
+      } else {
+        count[idx] = 0;
+        inc = false;
+        idx -= 1;
       }
-    } else if (Array.isArray(obj)) {
-      stack.splice(idx, 1, ...obj);
-      cOr.offset += obj.length - 1;
-      inc = true;
     } else {
       if (inc === true) {
-        path.push(obj);
-        if (stack.length === idx + 1) {
+        path.push(e);
+        if (idx === stack.length - 1) {
           result.push(path.join('.'));
-          path.pop();
           inc = false;
-          idx -= 1;
         } else {
           idx += 1;
         }
       } else {
         path.pop();
         idx -= 1;
-      }
-    }
-  }
-
-  return result;
-};
-
-const iter2 = (obj) => {
-  const result = [];
-  const stack = [[[], obj]];
-
-  while (stack.length !== 0) {
-    const [path, cur] = stack.pop();
-    if (cur.length === 0) {
-      result.push(path.join('.'));
-    } else {
-      const [next, ...further] = cur;
-      if (Array.isArray(next)) {
-        stack.push([path, next.concat(further)]);
-      } else if (next instanceof Set) {
-        [...next].reverse().forEach((e) => {
-          stack.push([path, [e, further]]);
-        });
-      } else {
-        stack.push([path.concat(cur[0]), cur.slice(1)]);
       }
     }
   }
@@ -159,10 +107,10 @@ const visualize = (obj) => {
   return obj;
 };
 
-for (let idx = 0; idx < 1000; idx += 1) {
+for (let idx = 0; idx < 10000; idx += 1) {
   const data = [rand()];
   const r1 = rec(data);
-  const r2 = iter2(data);
+  const r2 = iter(data);
 
   if (r1.length !== r2.length || r1.some((e, i) => e !== r2[i])) {
     console.log(idx);
@@ -173,23 +121,23 @@ for (let idx = 0; idx < 1000; idx += 1) {
   }
 }
 
-const bench = (name, fnRaw, count = 1000) => {
-  const fn = fnRaw();
-  for (let i = 0; i < count * 10; i += 1) {
-    fn();
-  }
-  console.time(name);
-  for (let i = 0; i < count; i += 1) {
-    fn();
-  }
-  console.timeEnd(name);
-};
-
-bench('rec', () => () => {
-  const d = [rand()];
-  rec(d);
-});
-bench('iter', () => () => {
-  const d = [rand()];
-  iter2(d);
-});
+// const bench = (name, fnRaw, count = 1000) => {
+//   const fn = fnRaw();
+//   for (let i = 0; i < count * 10; i += 1) {
+//     fn();
+//   }
+//   console.time(name);
+//   for (let i = 0; i < count; i += 1) {
+//     fn();
+//   }
+//   console.timeEnd(name);
+// };
+//
+// bench('rec', () => () => {
+//   const d = [rand()];
+//   rec(d);
+// });
+// bench('iter', () => () => {
+//   const d = [rand()];
+//   iter(d);
+// });
