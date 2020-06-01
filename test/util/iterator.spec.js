@@ -69,4 +69,4 @@ describe('Testing iterate', () => {
       expect(r1, visualize(data)).to.deep.equal(r2);
     }
   });
-})
+});
