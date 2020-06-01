@@ -32,7 +32,7 @@ const iter = (obj) => {
       depth.splice(idx, 1, ...new Array(e.length).fill(depth[idx]));
     } else if (e instanceof Set) {
       if (depth[idx] === undefined) {
-        depth[idx] = (depth[idx - 1] || 0) + 1;
+        depth[idx] = depth[idx - 1] + 1;
       }
       while (depth[idx + 1] !== undefined && depth[idx + 1] > depth[idx]) {
         depth.splice(idx + 1, 1);
