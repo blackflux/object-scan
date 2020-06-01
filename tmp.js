@@ -59,19 +59,17 @@ const iter = (obj) => {
           idx -= 1;
         }
       }
-    } else {
-      if (inc === true) {
-        path.push(e);
-        if (idx === stack.length - 1) {
-          result.push(path.join('.'));
-          inc = false;
-        } else {
-          idx += 1;
-        }
+    } else if (inc === true) {
+      path.push(e);
+      if (idx === stack.length - 1) {
+        result.push(path.join('.'));
+        inc = false;
       } else {
-        path.pop();
-        idx -= 1;
+        idx += 1;
       }
+    } else {
+      path.pop();
+      idx -= 1;
     }
   }
 
