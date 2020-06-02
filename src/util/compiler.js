@@ -115,7 +115,7 @@ module.exports.compile = (needles, strict = true) => {
         stack.push(next);
       } else {
         stack[stack.length - 1]
-          .filter((cur) => cur !== tower || excluded)
+          .filter((cur) => cur !== tower)
           .forEach((cur) => {
             addNeedle(cur, needle);
             if (strict && cur[NEEDLE] !== undefined) {
