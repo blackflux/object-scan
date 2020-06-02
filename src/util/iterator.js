@@ -7,7 +7,7 @@ const iterate = (tree, cb) => {
   let idx = 0;
   let inc = true;
 
-  while (idx >= 0) {
+  while (idx !== -1) {
     const e = stack[idx];
     if (e instanceof Set) {
       stack[idx] = [...e];
