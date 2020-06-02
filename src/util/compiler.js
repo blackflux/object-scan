@@ -56,15 +56,6 @@ module.exports.matchedBy = (searches) => extractNeedles(searches.filter((e) => i
 module.exports.excludedBy = (searches) => extractNeedles(searches.filter((e) => !isMatch(e)));
 module.exports.traversedBy = (searches) => Array.from(new Set([].concat(...searches.map((e) => getNeedles(e)))));
 
-const finalizeRecursive = (tower) => {
-  const towerValues = Object.values(tower);
-  towerValues.forEach((v) => finalizeRecursive(v));
-  if (isMatch(tower) || towerValues.some((v) => hasMatches(v))) {
-    setHasMatches(tower);
-  }
-  setEntries(tower, Object.entries(tower).filter(([k]) => k !== ''));
-};
-
 const iterate = (tree, needle, cb) => {
   let excluded = false;
   iterator.iterate(tree, (type, p) => {
@@ -85,50 +76,63 @@ const iterate = (tree, needle, cb) => {
   });
 };
 
+const applyNeedle = (tower, needle, strict) => {
+  const tree = [parser.parse(needle)];
+  const stack = [[tower]];
+  iterate(tree, needle, (type, p, excluded) => {
+    if (type === 'RM') {
+      stack.pop();
+    } else if (type === 'ADD') {
+      const next = [];
+      stack[stack.length - 1].forEach((cur) => {
+        addNeedle(cur, needle);
+        if (cur[p] === undefined) {
+          const child = {};
+          // eslint-disable-next-line no-param-reassign
+          cur[p] = child;
+          if (String(p) === '**') {
+            markRecursive(child);
+          }
+          setWildcardRegex(child, p);
+        }
+        next.push(cur[p]);
+        if (String(p) === '**') {
+          next.push(cur);
+        }
+      });
+      stack.push(next);
+    } else {
+      stack[stack.length - 1]
+        .filter((cur) => cur !== tower)
+        .forEach((cur) => {
+          addNeedle(cur, needle);
+          if (strict && cur[NEEDLE] !== undefined) {
+            throw new Error(`Redundant Needle Target: "${cur[NEEDLE]}" vs "${needle}"`);
+          }
+          setNeedle(cur, needle, strict);
+          markLeaf(cur, !excluded, strict);
+          if (isRecursive(cur)) {
+            setRecursionPos(cur, Object.keys(cur).length, strict);
+          }
+        });
+    }
+  });
+};
+
+const finalizeRecursive = (tower) => {
+  const towerValues = Object.values(tower);
+  towerValues.forEach((v) => finalizeRecursive(v));
+  if (isMatch(tower) || towerValues.some((v) => hasMatches(v))) {
+    setHasMatches(tower);
+  }
+  setEntries(tower, Object.entries(tower).filter(([k]) => k !== ''));
+};
+
 module.exports.compile = (needles, strict = true) => {
   const tower = {};
   for (let idx = 0; idx < needles.length; idx += 1) {
     const needle = needles[idx];
-    const tree = [parser.parse(needle)];
-    const stack = [[tower]];
-    iterate(tree, needle, (type, p, excluded) => {
-      if (type === 'RM') {
-        stack.pop();
-      } else if (type === 'ADD') {
-        const next = [];
-        stack[stack.length - 1].forEach((cur) => {
-          addNeedle(cur, needle);
-          if (cur[p] === undefined) {
-            const child = {};
-            // eslint-disable-next-line no-param-reassign
-            cur[p] = child;
-            if (String(p) === '**') {
-              markRecursive(child);
-            }
-            setWildcardRegex(child, p);
-          }
-          next.push(cur[p]);
-          if (String(p) === '**') {
-            next.push(cur);
-          }
-        });
-        stack.push(next);
-      } else {
-        stack[stack.length - 1]
-          .filter((cur) => cur !== tower)
-          .forEach((cur) => {
-            addNeedle(cur, needle);
-            if (strict && cur[NEEDLE] !== undefined) {
-              throw new Error(`Redundant Needle Target: "${cur[NEEDLE]}" vs "${needle}"`);
-            }
-            setNeedle(cur, needle, strict);
-            markLeaf(cur, !excluded, strict);
-            if (isRecursive(cur)) {
-              setRecursionPos(cur, Object.keys(cur).length, strict);
-            }
-          });
-      }
-    });
+    applyNeedle(tower, needle, strict);
   }
   finalizeRecursive(tower);
   return tower;
