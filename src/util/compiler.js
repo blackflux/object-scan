@@ -68,7 +68,6 @@ const finalizeRecursive = (tower) => {
 const iterate = (tree, needle, cb) => {
   let excluded = false;
   iterator.iterate(tree, (type, p) => {
-
     if (type === 'RM') {
       if (p.isExcluded()) {
         excluded = false;
