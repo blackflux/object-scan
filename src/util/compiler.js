@@ -68,11 +68,10 @@ const iterate = (tower, needle, { onAdd, onFin }) => {
       }
       stack.pop();
     } else if (type === 'ADD') {
-      const isExcluded = p.isExcluded();
-      if (excluded && isExcluded) {
-        throw new Error(`Redundant Exclusion: "${needle}"`);
-      }
-      if (isExcluded) {
+      if (p.isExcluded()) {
+        if (excluded) {
+          throw new Error(`Redundant Exclusion: "${needle}"`);
+        }
         excluded = true;
       }
       const toAdd = [];
