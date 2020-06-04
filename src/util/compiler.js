@@ -119,13 +119,51 @@ const applyNeedle = (tower, needle, strict) => {
   });
 };
 
-const finalizeRecursive = (tower) => {
-  const towerValues = Object.values(tower);
-  towerValues.forEach((v) => finalizeRecursive(v));
-  if (isMatch(tower) || towerValues.some((v) => hasMatches(v))) {
-    setHasMatches(tower);
+// todo: separate this into `traverser.traverse()` ???
+// todo: check for correctness
+const finalizeTower = (tower) => {
+  const stack = [tower];
+  const depth = [0];
+  const matches = [false];
+
+  let inc = true;
+  let match = false;
+
+  while (stack.length !== 0) {
+    if (inc === true) {
+      const cur = stack[stack.length - 1];
+      const entries = Object.entries(cur);
+      if (entries.length !== 0) {
+        const d = depth[depth.length - 1] + 1;
+        entries.forEach((e) => {
+          stack.push(e[1]);
+          depth.push(d);
+        });
+        matches[d] = false;
+      } else {
+        inc = false;
+      }
+      setEntries(cur, entries.filter(([k]) => k !== ''));
+    } else {
+      const cur = stack.pop();
+      const d = depth.pop();
+
+      if (!match) {
+        match = isMatch(cur);
+      }
+      if (match) {
+        matches[d] = true;
+        setHasMatches(cur);
+      }
+
+      if (d === depth[depth.length - 1]) {
+        match = false;
+        inc = true;
+      } else {
+        match = matches[d];
+      }
+    }
   }
-  setEntries(tower, Object.entries(tower).filter(([k]) => k !== ''));
 };
 
 module.exports.compile = (needles, strict = true) => {
@@ -134,6 +172,6 @@ module.exports.compile = (needles, strict = true) => {
     const needle = needles[idx];
     applyNeedle(tower, needle, strict);
   }
-  finalizeRecursive(tower);
+  finalizeTower(tower);
   return tower;
 };
