@@ -3,7 +3,7 @@ workflows:
   node-multi-build:
     jobs:
       - gally-create-pr
-      - test-node-v13:
+      - test-node-v14:
           requires:
             - gally-create-pr
       - test-node-v12:
@@ -15,7 +15,7 @@ workflows:
       - gally-auto-approve:
           requires:
             - gally-create-pr
-            - test-node-v13
+            - test-node-v14
             - test-node-v12
             - test-node-v10
           filters:
@@ -24,7 +24,7 @@ workflows:
       - release:
           requires:
             - gally-create-pr
-            - test-node-v13
+            - test-node-v14
             - test-node-v12
             - test-node-v10
           filters:
@@ -156,9 +156,9 @@ jobs:
       - run: >-
           ga approve $CIRCLE_PR_NUMBER --condition
           "base.ref=dev&state=open&user.login=dependabot-preview[bot]"
-  test-node-v13:
+  test-node-v14:
     docker:
-      - image: 'circleci/node:13'
+      - image: 'circleci/node:14'
     steps:
       - checkout
       - run:
