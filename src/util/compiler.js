@@ -120,7 +120,7 @@ const applyNeedle = (tower, needle, strict) => {
 };
 
 // todo: separate this into `traverser.traverse()` ???
-// todo: check for correctness
+// todo: check for correctness against recursive implementation
 const finalizeTower = (tower) => {
   const stack = [tower];
   const depth = [0];
