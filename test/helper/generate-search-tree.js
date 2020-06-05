@@ -1,4 +1,5 @@
-const CHARS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
+const CHARS = require('./resources/chars.json');
+
 const MAX_DEPTH = 7;
 const MAX_WIDTH = 7;
 
