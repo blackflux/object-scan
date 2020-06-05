@@ -11,9 +11,6 @@ const parsedToNeedle = (obj) => {
   if (obj instanceof Set) {
     return `{${[...obj].map((e) => parsedToNeedle(e)).join(',')}}`;
   }
-  if (Number.isInteger(obj)) {
-    return `[${obj}]`;
-  }
   return obj;
 };
 
