@@ -92,17 +92,18 @@ const applyNeedle = (tower, needle, strict) => {
   iterate(tower, needle, {
     onAdd: (cur, p, next) => {
       addNeedle(cur, needle);
+      const isRec = String(p) === '**';
       if (cur[p] === undefined) {
         const child = {};
         // eslint-disable-next-line no-param-reassign
         cur[p] = child;
-        if (String(p) === '**') {
+        if (isRec) {
           markRecursive(child);
         }
         setWildcardRegex(child, p);
       }
       next(cur[p]);
-      if (String(p) === '**') {
+      if (isRec) {
         next(cur);
       }
     },
