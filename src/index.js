@@ -55,9 +55,17 @@ const find = (haystack_, searches_, ctx) => {
     get traversedBy() {
       return kwargs.getTraversedBy();
     },
+    getParent: () => parents[parents.length - 1],
+    get parent() {
+      return kwargs.getParent();
+    },
     getParents: () => [...parents].reverse(),
     get parents() {
       return kwargs.getParents();
+    },
+    getIsCircular: () => parents.includes(haystack),
+    get isCircular() {
+      return kwargs.getIsCircular();
     },
     context: ctx.context
   };
@@ -155,7 +163,7 @@ module.exports = (needles, opts = {}) => {
   assert(Array.isArray(needles));
   assert(opts instanceof Object && !Array.isArray(opts));
   if (needles.length === 0) {
-    return () => [];
+    return (_, ctx) => (ctx === undefined ? [] : ctx);
   }
 
   const ctx = {

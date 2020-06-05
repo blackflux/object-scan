@@ -122,7 +122,7 @@ const Result = (input) => {
   };
 };
 
-module.exports = (input) => {
+module.exports.parse = (input) => {
   if (input === '') {
     return new CString('', false);
   }
