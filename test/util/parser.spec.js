@@ -22,7 +22,7 @@ const checkError = (input, msg) => {
 };
 
 describe('Testing Parser', () => {
-  it('Multiple Iterations Keep Result Consistent', () => {
+  it('Test Result Stabilizes', () => {
     for (let idx = 0; idx < 1000; idx += 1) {
       const needle = parsedToNeedle(generateParsed());
       const parsed = parser.parse(needle);
