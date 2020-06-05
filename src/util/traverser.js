@@ -1,31 +1,33 @@
 module.exports.traverse = (obj, cb) => {
   const stack = [obj];
-  const depth = [0];
+  const counts = [1];
+  let depth = 0;
 
   let inc = true;
 
   while (stack.length !== 0) {
     if (inc === true) {
       const cur = stack[stack.length - 1];
-      const curDepth = depth[depth.length - 1];
+      cb('ENTER', cur, depth);
+
       const values = Object.values(cur);
       if (values.length !== 0) {
-        const d = curDepth + 1;
-        values.forEach((e) => {
-          stack.push(e);
-          depth.push(d);
-        });
+        stack.push(...values);
+        depth += 1;
+        counts[depth] = values.length;
       } else {
         inc = false;
       }
-      cb('ENTER', cur, curDepth);
     } else {
       const cur = stack.pop();
-      const curDepth = depth.pop();
-      if (curDepth === depth[depth.length - 1]) {
+      cb('EXIT', cur, depth);
+      counts[depth] -= 1;
+      if (counts[depth] === 0) {
+        counts.pop();
+        depth -= 1;
+      } else {
         inc = true;
       }
-      cb('EXIT', cur, curDepth);
     }
   }
 };
