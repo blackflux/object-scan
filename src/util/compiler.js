@@ -1,6 +1,7 @@
 /* compile needles to hierarchical map object */
 const parser = require('./parser');
 const iterator = require('./iterator');
+const traverser = require('./traverser');
 const { defineProperty, findLast, parseWildcard } = require('./helper');
 
 const LEAF = Symbol('leaf');
@@ -119,51 +120,24 @@ const applyNeedle = (tower, needle, strict) => {
   });
 };
 
-// todo: separate this into `traverser.traverse()` ???
-// todo: check for correctness against recursive implementation
 const finalizeTower = (tower) => {
-  const stack = [tower];
-  const depth = [0];
-  const matches = [false];
+  const matches = [];
+  let lastDepth = -1;
 
-  let inc = true;
-  let match = false;
-
-  while (stack.length !== 0) {
-    if (inc === true) {
-      const cur = stack[stack.length - 1];
-      const entries = Object.entries(cur);
-      if (entries.length !== 0) {
-        const d = depth[depth.length - 1] + 1;
-        entries.forEach((e) => {
-          stack.push(e[1]);
-          depth.push(d);
-        });
-        matches[d] = false;
-      } else {
-        inc = false;
+  traverser.traverse(tower, (type, obj, depth) => {
+    if (type === 'ENTER') {
+      if (lastDepth < depth) {
+        matches[depth] = false;
       }
-      setEntries(cur, entries.filter(([k]) => k !== ''));
     } else {
-      const cur = stack.pop();
-      const d = depth.pop();
-
-      if (!match) {
-        match = isMatch(cur);
+      if (matches[depth + 1] === true || isMatch(obj)) {
+        matches[depth] = true;
+        setHasMatches(obj);
       }
-      if (match) {
-        matches[d] = true;
-        setHasMatches(cur);
-      }
-
-      if (d === depth[depth.length - 1]) {
-        match = false;
-        inc = true;
-      } else {
-        match = matches[d];
-      }
+      setEntries(obj, Object.entries(obj).filter(([k]) => k !== ''));
     }
-  }
+    lastDepth = depth;
+  });
 };
 
 module.exports.compile = (needles, strict = true) => {
