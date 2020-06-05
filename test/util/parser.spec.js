@@ -1,6 +1,8 @@
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
 const parser = require('../../src/util/parser');
+const generateParsed = require('../helper/generate-parsed');
+const parsedToNeedle = require('../helper/parsed-to-needle');
 
 const asString = (() => {
   const asStringRec = (input) => {
@@ -20,6 +22,16 @@ const checkError = (input, msg) => {
 };
 
 describe('Testing Parser', () => {
+  it('Multiple Iterations Keep Result Consistent', () => {
+    for (let idx = 0; idx < 1000; idx += 1) {
+      const needle = parsedToNeedle(generateParsed());
+      const parsed = parser.parse(needle);
+      const needleOptimized = parsedToNeedle(parsed);
+      const parsedOptimized = parser.parse(needleOptimized);
+      expect(needleOptimized).to.deep.equal(parsedToNeedle(parsedOptimized));
+    }
+  });
+
   describe('Complex Use Cases', () => {
     it('Testing Path Groups', () => {
       expect(asString('{a,b.c}')).to.equal('{"a",["b","c"]}');
