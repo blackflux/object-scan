@@ -2,19 +2,15 @@ const CHARS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.s
 const MAX_DEPTH = 7;
 const MAX_WIDTH = 7;
 
-let index = 0;
-const generateSearchTree = (depth = 0) => {
-  if (depth === 0) {
-    index = 0;
-  }
-  if (!(index < CHARS.length) || Math.random() * MAX_DEPTH < depth) {
+const generateSearchTree = (depth, ctx) => {
+  if (!(ctx.index < CHARS.length) || Math.random() * MAX_DEPTH < depth) {
     return {};
   }
   const result = {};
   for (let idx = 0, len = Math.ceil(Math.random() * MAX_WIDTH); idx < len; idx += 1) {
-    result[CHARS[index % CHARS.length]] = generateSearchTree(depth + 1);
-    index += 1;
+    result[CHARS[ctx.index % CHARS.length]] = generateSearchTree(depth + 1, ctx);
+    ctx.index += 1;
   }
   return result;
 };
-module.exports = () => generateSearchTree();
+module.exports = () => generateSearchTree(0, { index: 0 });
