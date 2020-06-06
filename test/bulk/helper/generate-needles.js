@@ -9,7 +9,6 @@ const generateNeedle = (haystack, {
   negate,
   star,
   doubleStar,
-  emptyNeedle,
   partialStar,
   questionMark
 }, opts) => {
@@ -17,12 +16,8 @@ const generateNeedle = (haystack, {
   assert(typeof negate === 'function');
   assert(typeof star === 'function');
   assert(typeof doubleStar === 'function');
-  assert(typeof emptyNeedle === 'function');
   assert(typeof partialStar === 'function');
   assert(typeof questionMark === 'function');
-  if (emptyNeedle()) {
-    return '';
-  }
   const length = maxNeedleLength();
   let root = haystack;
   const result = [...Array(length)].reduce((p) => {
@@ -87,10 +82,16 @@ const generateNeedle = (haystack, {
 
 const generateNeedles = (haystack, params, opts) => {
   const {
-    maxNeedles
+    maxNeedles,
+    emptyNeedle
   } = params;
   assert(typeof maxNeedles === 'function');
-  return [...new Set([...Array(maxNeedles())].map(() => generateNeedle(haystack, params, opts)))];
+  assert(typeof emptyNeedle === 'function');
+  const r = [...new Set([...Array(maxNeedles())].map(() => generateNeedle(haystack, params, opts)))];
+  if (emptyNeedle()) {
+    r[Math.floor(Math.random() * r.length)] = '';
+  }
+  return r;
 };
 
 module.exports = generateNeedles;
