@@ -25,6 +25,7 @@ const intProbFn = (min, max, bias = (x) => x ** 2) => () => {
 
 module.exports = ({
   file,
+  meta = {},
   keySets = keySetsDefault,
   maxNodes = 500,
   arrayProb = boolProbFn(0.1, 0.2),
@@ -42,6 +43,7 @@ module.exports = ({
   questionMarkProb = boolProbFn(0.1, 0.2)
 }) => {
   assert(typeof file === 'string');
+  assert(meta instanceof Object && !Array.isArray(meta));
   assert(
     Array.isArray(keySets)
     && keySets.length > 0
@@ -104,6 +106,7 @@ module.exports = ({
 
   if (!fs.existsSync(file)) {
     fs.smartWrite(file, {
+      meta,
       needles,
       opts,
       haystack
