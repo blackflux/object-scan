@@ -54,6 +54,12 @@ describe('Testing Find', () => {
     expect(find(haystack)).to.deep.equal([]);
   });
 
+  it('Testing No Needles With Context', () => {
+    const find = objectScan([]);
+    const context = { meta: [] };
+    expect(find(haystack, context)).to.equal(context);
+  });
+
   it('Testing Key Wildcard', () => {
     const find = objectScan(['pa*nt*']);
     expect(find(haystack)).to.deep.equal([
@@ -431,8 +437,10 @@ describe('Testing Find', () => {
 
       it('Testing object parents useArraySelector == true', () => {
         const result = objectScan(pattern, {
-          filterFn: ({ parents }) => {
+          filterFn: ({ parents, parent, getParent }) => {
             expect(parents).to.deep.equal([input.one[0], input.one, input]);
+            expect(parent).to.deep.equal(input.one[0]);
+            expect(getParent()).to.deep.equal(input.one[0]);
           }
         })(input);
         expect(result).to.deep.equal(['one[0].child']);
@@ -523,6 +531,33 @@ describe('Testing Find', () => {
         ['breakFn', 'tag[0][0].id'],
         ['filterFn', 'tag[0][0].id'],
         ['filterFn', 'tag[0][0]']
+      ]);
+    });
+  });
+
+  describe('Testing isCircular', () => {
+    let input;
+    before(() => {
+      input = { a: { b: null } };
+      input.a.b = input;
+    });
+
+    it('Testing traversedBy on filterFn', () => {
+      const result = [];
+      objectScan(['**', ''], {
+        filterFn: ({ key, isCircular }) => {
+          result.push([key, isCircular]);
+        },
+        breakFn: ({ key }) => key.length > 10
+      })(input);
+      expect(result).to.deep.equal([
+        ['a.b.a.b.a.b', true],
+        ['a.b.a.b.a', true],
+        ['a.b.a.b', true],
+        ['a.b.a', true],
+        ['a.b', true],
+        ['a', false],
+        ['', false]
       ]);
     });
   });
