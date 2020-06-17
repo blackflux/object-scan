@@ -2750,6 +2750,16 @@ fs-extra@9.0.0:
     jsonfile "^6.0.1"
     universalify "^1.0.0"
 
+fs-extra@9.0.1:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-9.0.1.tgz#910da0062437ba4c39fedd863f1675ccfefcb9fc"
+  integrity sha512-h2iAoN838FqAFJY2/qVpzFXy+EBxfVE220PalAqQLDVsFOHLJrZvut5puAbCdNv6WJk+B8ihI+k0c7JK5erwqQ==
+  dependencies:
+    at-least-node "^1.0.0"
+    graceful-fs "^4.2.0"
+    jsonfile "^6.0.1"
+    universalify "^1.0.0"
+
 fs-extra@^8.0.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-8.1.0.tgz#49d43c45a88cd9677668cb7be1b46efdb8d2e1c0"
@@ -4959,17 +4969,17 @@ node-sass-tilde-importer@^1.0.2:
   dependencies:
     find-parent-dir "^0.3.0"
 
-node-tdd@2.11.4:
-  version "2.11.4"
-  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.11.4.tgz#71d47af9503ae2bb2573c0d0d59e5af0c4ebaf8b"
-  integrity sha512-EeeG1MOmFUM6JqGRNFI+AOmAPcgPr74R5dZII7eVXrihBYHSjNsdbtUTNT5nCN+nLs1F0H0eEB32aK/Esa5TxQ==
+node-tdd@2.11.5:
+  version "2.11.5"
+  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.11.5.tgz#32859fb1f140b205b9f7c00b626438f29d479ddb"
+  integrity sha512-eZ0Wdwqgw0YYnlDWEctWXqH4+YJJwuIFZRTinodgmRtUAOz3WoXJ/dXBSBp+/8lQXSqBPE+px3Kk1BVucsKFMQ==
   dependencies:
     callsites "3.1.0"
     joi-strict "1.2.2"
     lodash.get "4.4.2"
     minimist "1.2.5"
     nock "12.0.3"
-    smart-fs "1.11.13"
+    smart-fs "1.11.14"
     timekeeper "2.2.0"
     tmp "0.2.1"
     uuid "8.1.0"
@@ -6817,6 +6827,20 @@ smart-fs@1.11.13:
   integrity sha512-2F4bHTZpDgw2DWEjkWT92ySIKTRHMtasEEQBJ0QccpipjhYGDWL+Hmubr0VUxrRcjfpiAwi5pocKJ49mSa4x2Q==
   dependencies:
     fs-extra "9.0.0"
+    js-yaml "3.14.0"
+    json-stringify-pretty-compact "2.0.0"
+    lodash.clonedeep "4.5.0"
+    lodash.isequal "4.5.0"
+    object-align "1.0.11"
+    xml-js "1.6.11"
+    yaml-boost "1.9.22"
+
+smart-fs@1.11.14:
+  version "1.11.14"
+  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.11.14.tgz#deb05c5c7249424467334990567e9e36d22ee26e"
+  integrity sha512-+7Gc5Raujv9bdg7niPm+mHVk5n0neulK9RGwx7CdX8UGXkj7MTPbmzFHEW+z1jY/6F7zPMZ8U6CZueXr9N80NA==
+  dependencies:
+    fs-extra "9.0.1"
     js-yaml "3.14.0"
     json-stringify-pretty-compact "2.0.0"
     lodash.clonedeep "4.5.0"
