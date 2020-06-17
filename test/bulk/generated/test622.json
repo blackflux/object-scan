@@ -1,0 +1,1122 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "many",
+      "arrayLengthProb": "min",
+      "maxDepthProb": "min",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "few",
+      "negateProb": "few",
+      "starProb": "never",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "never",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "bit.behavior",
+    "!incom?",
+    "air",
+    "use.hesitant",
+    "view",
+    "hiss.owl",
+    "verse",
+    "view.l?de",
+    "!view.ply",
+    "chilly.brothers",
+    "bit.behavio?",
+    "verse.grant",
+    "use",
+    "part",
+    "r?gret",
+    "exchange.judicious",
+    "his?.obstruct",
+    "toes",
+    "shape"
+  ],
+  "searchTree": {
+    "bit": {
+      "behavior": {},
+      "behavio?": {}
+    },
+    "incom?": {},
+    "air": {},
+    "use": {
+      "hesitant": {}
+    },
+    "view": {
+      "l?de": {},
+      "ply": {}
+    },
+    "hiss": {
+      "owl": {}
+    },
+    "verse": {
+      "grant": {}
+    },
+    "chilly": {
+      "brothers": {}
+    },
+    "part": {},
+    "r?gret": {},
+    "exchange": {
+      "judicious": {}
+    },
+    "his?": {
+      "obstruct": {}
+    },
+    "toes": {},
+    "shape": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "regret",
+    "part",
+    "air",
+    "shape",
+    "exchange.judicious",
+    "view.lade",
+    "view",
+    "hiss.owl",
+    "hiss.obstruct",
+    "toes",
+    "bit.behavior",
+    "chilly.brothers",
+    "use.hesitant",
+    "use",
+    "verse.grant",
+    "verse"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "bit.behavior",
+        "!incom?",
+        "air",
+        "use.hesitant",
+        "view",
+        "hiss.owl",
+        "verse",
+        "view.l?de",
+        "!view.ply",
+        "chilly.brothers",
+        "bit.behavio?",
+        "verse.grant",
+        "use",
+        "part",
+        "r?gret",
+        "exchange.judicious",
+        "his?.obstruct",
+        "toes",
+        "shape"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "regret",
+      "isMatch": true,
+      "matchedBy": [
+        "r?gret"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "r?gret"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "regret",
+      "isMatch": true,
+      "matchedBy": [
+        "r?gret"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "r?gret"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "part",
+      "isMatch": true,
+      "matchedBy": [
+        "part"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "part"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "part",
+      "isMatch": true,
+      "matchedBy": [
+        "part"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "part"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "income",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!incom?"
+      ],
+      "traversedBy": [
+        "!incom?"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "air",
+      "isMatch": true,
+      "matchedBy": [
+        "air"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "air"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "air",
+      "isMatch": true,
+      "matchedBy": [
+        "air"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "air"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "shape",
+      "isMatch": true,
+      "matchedBy": [
+        "shape"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "shape"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "shape",
+      "isMatch": true,
+      "matchedBy": [
+        "shape"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "shape"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "exchange",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "exchange.judicious"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "exchange.judicious",
+      "isMatch": true,
+      "matchedBy": [
+        "exchange.judicious"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "exchange.judicious"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "exchange.judicious",
+      "isMatch": true,
+      "matchedBy": [
+        "exchange.judicious"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "exchange.judicious"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "view",
+      "isMatch": true,
+      "matchedBy": [
+        "view"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "view",
+        "view.l?de",
+        "!view.ply"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "view.lade",
+      "isMatch": true,
+      "matchedBy": [
+        "view.l?de"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "view.l?de"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "view.lade",
+      "isMatch": true,
+      "matchedBy": [
+        "view.l?de"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "view.l?de"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "view",
+      "isMatch": true,
+      "matchedBy": [
+        "view"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "view",
+        "view.l?de",
+        "!view.ply"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "hiss",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "hiss.owl",
+        "his?.obstruct"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "hiss.owl",
+      "isMatch": true,
+      "matchedBy": [
+        "hiss.owl"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "hiss.owl"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "hiss.owl",
+      "isMatch": true,
+      "matchedBy": [
+        "hiss.owl"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "hiss.owl"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "hiss.obstruct",
+      "isMatch": true,
+      "matchedBy": [
+        "his?.obstruct"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "his?.obstruct"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "hiss.obstruct",
+      "isMatch": true,
+      "matchedBy": [
+        "his?.obstruct"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "his?.obstruct"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "toes",
+      "isMatch": true,
+      "matchedBy": [
+        "toes"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "toes"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "toes",
+      "isMatch": true,
+      "matchedBy": [
+        "toes"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "toes"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "bit",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "bit.behavior",
+        "bit.behavio?"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "bit.behavior",
+      "isMatch": true,
+      "matchedBy": [
+        "bit.behavior",
+        "bit.behavio?"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "bit.behavior",
+        "bit.behavio?"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "bit.behavior",
+      "isMatch": true,
+      "matchedBy": [
+        "bit.behavior",
+        "bit.behavio?"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "bit.behavior",
+        "bit.behavio?"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "chilly",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "chilly.brothers"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "chilly.brothers",
+      "isMatch": true,
+      "matchedBy": [
+        "chilly.brothers"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "chilly.brothers"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "chilly.brothers",
+      "isMatch": true,
+      "matchedBy": [
+        "chilly.brothers"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "chilly.brothers"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "use",
+      "isMatch": true,
+      "matchedBy": [
+        "use"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "use.hesitant",
+        "use"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "use.hesitant",
+      "isMatch": true,
+      "matchedBy": [
+        "use.hesitant"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "use.hesitant"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "use.hesitant",
+      "isMatch": true,
+      "matchedBy": [
+        "use.hesitant"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "use.hesitant"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "use",
+      "isMatch": true,
+      "matchedBy": [
+        "use"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "use.hesitant",
+        "use"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "verse",
+      "isMatch": true,
+      "matchedBy": [
+        "verse"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "verse",
+        "verse.grant"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "verse.grant",
+      "isMatch": true,
+      "matchedBy": [
+        "verse.grant"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "verse.grant"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "verse.grant",
+      "isMatch": true,
+      "matchedBy": [
+        "verse.grant"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "verse.grant"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "verse",
+      "isMatch": true,
+      "matchedBy": [
+        "verse"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "verse",
+        "verse.grant"
+      ]
+    }
+  ],
+  "haystack": {
+    "creature": {
+      "automatic": 0,
+      "callous": 1,
+      "regret": 2,
+      "contrast": 3,
+      "cool": 4,
+      "collect": 5,
+      "nebulous": 6,
+      "be": 7,
+      "guide": 8,
+      "naive": 9,
+      "nest": 10,
+      "gruesome": 11,
+      "fit": 12,
+      "bustling": 13,
+      "blue-eyed": 14,
+      "treat": 15,
+      "elated": 16,
+      "notebook": 17,
+      "stormy": 18,
+      "part": 19,
+      "team": 20,
+      "bow": 21,
+      "drink": 22,
+      "spectacular": 23,
+      "quack": 24
+    },
+    "verse": {
+      "recite": 25,
+      "hurry": 26,
+      "own": 27,
+      "feet": 28,
+      "alley": 29,
+      "yam": 30,
+      "corrod": 31,
+      "abash": 32,
+      "animate": 33,
+      "present": 34,
+      "woman": 35,
+      "infringe": 36,
+      "grant": 37,
+      "cherries": 38,
+      "search": 39,
+      "capture": 40,
+      "point": 41,
+      "plan": 42,
+      "spiteful": 43,
+      "amusing": 44,
+      "painful": 45,
+      "consult": 46,
+      "scant": 47
+    },
+    "dump": {
+      "adamant": 48,
+      "callous": 49,
+      "low": 50,
+      "woman": 51,
+      "scary": 52,
+      "invincible": 53,
+      "surmise": 54,
+      "desk": 55,
+      "dad": 56,
+      "bit": 57,
+      "five": 58,
+      "phone": 59,
+      "box": 60,
+      "spot": 61,
+      "obscene": 62,
+      "door": 63,
+      "come": 64,
+      "loaf": 65,
+      "count": 66,
+      "fail": 67,
+      "cobweb": 68,
+      "sweater": 69,
+      "lose": 70,
+      "abaft": 71
+    },
+    "pluck": {
+      "obeisant": 72,
+      "story": 73,
+      "bright": 74,
+      "cooing": 75,
+      "macabre": 76,
+      "participate": 77,
+      "sloppy": 78,
+      "mundane": 79,
+      "secretary": 80,
+      "wash": 81,
+      "sneak": 82,
+      "violet": 83,
+      "utopian": 84,
+      "upset": 85,
+      "protective": 86,
+      "previous": 87,
+      "astonish": 88,
+      "present": 89,
+      "dinner": 90,
+      "decrease": 91,
+      "strong": 92,
+      "imbibe": 93,
+      "dine": 94,
+      "distance": 95,
+      "blue-eyed": 96,
+      "wandering": 97,
+      "arch": 98,
+      "quince": 99
+    },
+    "imperil": {
+      "humdrum": 100,
+      "pest": 101,
+      "scat": 102,
+      "handy": 103,
+      "profuse": 104,
+      "evasive": 105,
+      "waggish": 106,
+      "point": 107,
+      "seashore": 108,
+      "flat": 109,
+      "secretary": 110,
+      "knot": 111,
+      "weak": 112,
+      "rod": 113,
+      "hesitant": 114,
+      "judicious": 115,
+      "loud": 116,
+      "development": 117,
+      "holiday": 118,
+      "nonchalant": 119,
+      "combative": 120,
+      "hold": 121,
+      "indicate": 122,
+      "adjustment": 123,
+      "sip": 124,
+      "dusty": 125,
+      "fresh": 126
+    },
+    "use": {
+      "bun": 127,
+      "hesitant": 128,
+      "rainy": 129,
+      "quixotic": 130,
+      "peep": 131,
+      "waggish": 132,
+      "food": 133,
+      "blush": 134,
+      "quarter": 135,
+      "rabbit": 136,
+      "compare": 137,
+      "ride": 138,
+      "nervous": 139,
+      "smooth": 140,
+      "gate": 141,
+      "destroy": 142,
+      "shock": 143,
+      "heavy": 144,
+      "voracious": 145,
+      "pen": 146,
+      "honorable": 147,
+      "goose": 148,
+      "replace": 149,
+      "doubtful": 150,
+      "elated": 151,
+      "infringe": 152,
+      "decorous": 153,
+      "tax": 154,
+      "fall": 155
+    },
+    "chilly": {
+      "well-groomed": 156,
+      "men": 157,
+      "scowl": 158,
+      "cool": 159,
+      "ski": 160,
+      "sneak": 161,
+      "weak": 162,
+      "cemetery": 163,
+      "infringe": 164,
+      "voracious": 165,
+      "protective": 166,
+      "utopian": 167,
+      "imperil": 168,
+      "abundant": 169,
+      "brothers": 170,
+      "strong": 171,
+      "defeated": 172,
+      "rock": 173,
+      "book": 174,
+      "judicious": 175,
+      "five": 176,
+      "disuse": 177,
+      "trouble": 178,
+      "mould": 179,
+      "board": 180,
+      "tricky": 181,
+      "purpose": 182,
+      "care": 183
+    },
+    "glass": {
+      "happy": 184,
+      "hypnotize": 185,
+      "cemetery": 186,
+      "consult": 187,
+      "therapeutic": 188,
+      "grade": 189,
+      "watery": 190,
+      "abaft": 191,
+      "development": 192,
+      "transfer": 193,
+      "honorable": 194,
+      "pocket": 195,
+      "salute": 196,
+      "substance": 197,
+      "furniture": 198,
+      "elated": 199,
+      "exultant": 200,
+      "behavior": 201,
+      "moo": 202,
+      "pen": 203,
+      "engine": 204,
+      "horn": 205,
+      "self": 206,
+      "recondite": 207,
+      "birds": 208,
+      "collar": 209,
+      "decrease": 210,
+      "have": 211
+    },
+    "illustrate": {
+      "drink": 220,
+      "full": 213,
+      "yarn": 214,
+      "finicky": 215,
+      "partake": 224,
+      "paper": 217,
+      "amused": 218,
+      "historical": 219,
+      "rod": 221,
+      "quiet": 222,
+      "supply": 223,
+      "explore": 225,
+      "fuzzy": 226,
+      "provide": 227,
+      "clever": 228,
+      "grade": 229,
+      "ducks": 230,
+      "volleyball": 231,
+      "design": 232,
+      "innocent": 233,
+      "lawyer": 234,
+      "elated": 235,
+      "sedate": 236
+    },
+    "bit": {
+      "compare": 291,
+      "abounding": 292,
+      "bow": 293,
+      "earth": 294,
+      "adaptable": 295,
+      "spoon": 296,
+      "behavior": 297,
+      "station": 298,
+      "accept": 299,
+      "explore": 300,
+      "think": 301,
+      "expansion": 302,
+      "apply": 303,
+      "board": 304,
+      "extra-small": 305,
+      "aboriginal": 306,
+      "persuade": 307,
+      "box": 308,
+      "desk": 309,
+      "rabbit": 310,
+      "structure": 311,
+      "initiate": 312,
+      "ornament": 313,
+      "tongue": 314
+    },
+    "sleep": {
+      "merge": 262,
+      "appliance": 263,
+      "rich": 264,
+      "utopian": 265,
+      "helpful": 266,
+      "stale": 267,
+      "far-flung": 268,
+      "powerful": 269,
+      "collar": 270,
+      "extra-small": 271,
+      "rate": 272,
+      "infest": 273,
+      "explore": 274,
+      "replace": 275,
+      "charge": 276,
+      "snake": 277,
+      "aberrant": 278,
+      "good": 279,
+      "aquatic": 280,
+      "macho": 281,
+      "contend": 282,
+      "vegetable": 283,
+      "wandering": 284,
+      "box": 285,
+      "delete": 286,
+      "jealous": 287,
+      "aboriginal": 290,
+      "miscreant": 289
+    },
+    "intelligent": {
+      "import": 315,
+      "brain": 316,
+      "damaged": 317,
+      "plough": 318,
+      "bent": 319,
+      "push": 320,
+      "incredible": 321,
+      "youthful": 322,
+      "low": 323,
+      "impel": 324,
+      "replace": 325,
+      "high-pitched": 326,
+      "glass": 327,
+      "prohibit": 328,
+      "tank": 329,
+      "integrate": 330,
+      "match": 331,
+      "quixotic": 332,
+      "credit": 333,
+      "persuade": 334,
+      "crave": 335,
+      "regret": 336,
+      "wash": 337,
+      "laugh": 338
+    },
+    "crave": {
+      "notebook": 339,
+      "glistening": 340,
+      "elated": 341,
+      "bustling": 342,
+      "sew": 343,
+      "scant": 344,
+      "bit": 345,
+      "replace": 346,
+      "yoke": 347,
+      "contribute": 348,
+      "public": 349,
+      "adaptable": 350,
+      "tax": 351,
+      "surmise": 352,
+      "amused": 353,
+      "meek": 354,
+      "merge": 355,
+      "trampl": 356,
+      "act": 357,
+      "integrate": 358,
+      "substance": 359,
+      "illustrious": 360,
+      "contend": 361,
+      "seashore": 362,
+      "oven": 363,
+      "successful": 364,
+      "ducks": 365,
+      "end": 366
+    },
+    "aquatic": {
+      "travel": 367,
+      "foot": 368,
+      "rainstorm": 369,
+      "draw": 370,
+      "cool": 371,
+      "things": 372,
+      "bumpy": 373,
+      "grip": 374,
+      "passenger": 375,
+      "snow": 376,
+      "wash": 378,
+      "spill": 379,
+      "violet": 380,
+      "melodic": 381,
+      "optimize": 382,
+      "cling": 383,
+      "snake": 384,
+      "cork": 385,
+      "womanly": 386,
+      "join": 387,
+      "come": 388,
+      "report": 389,
+      "dad": 390
+    },
+    "toes": {
+      "fumbling": 391,
+      "waggish": 392,
+      "ink": 393,
+      "bow": 394,
+      "mice": 395,
+      "quit": 396,
+      "soup": 397,
+      "act": 398,
+      "gate": 399,
+      "mould": 400,
+      "occupy": 401,
+      "match": 402,
+      "foamy": 403,
+      "mushy": 404,
+      "rich": 405,
+      "nest": 406,
+      "sight": 407,
+      "bustling": 408,
+      "push": 409,
+      "follow": 410,
+      "bedroom": 411,
+      "parallel": 412,
+      "orange": 413,
+      "tree": 414,
+      "five": 415
+    },
+    "hiss": {
+      "obstruct": 416,
+      "weight": 417,
+      "common": 418,
+      "story": 419,
+      "miscreant": 420,
+      "quarter": 421,
+      "spring": 422,
+      "yarn": 423,
+      "vague": 424,
+      "kaput": 425,
+      "sloppy": 426,
+      "wonderful": 427,
+      "frail": 428,
+      "guide": 429,
+      "spoon": 430,
+      "join": 431,
+      "end": 432,
+      "historical": 433,
+      "dinner": 434,
+      "solve": 435,
+      "prove": 436,
+      "rabbit": 437,
+      "walk": 438,
+      "park": 439,
+      "owl": 440
+    },
+    "view": {
+      "purring": 441,
+      "govern": 442,
+      "jar": 443,
+      "loaf": 444,
+      "oven": 445,
+      "closed": 446,
+      "hiss": 447,
+      "crave": 466,
+      "skillful": 449,
+      "fail": 450,
+      "interesting": 451,
+      "capture": 452,
+      "eminent": 453,
+      "humiliate": 454,
+      "chief": 455,
+      "seed": 456,
+      "utopian": 457,
+      "lade": 458,
+      "whimsical": 459,
+      "trampl": 460,
+      "sign": 461,
+      "fizz": 462,
+      "ambiguous": 463,
+      "nonchalant": 464,
+      "pull": 465,
+      "heavy": 467,
+      "ply": 468
+    },
+    "exchange": {
+      "branch": 469,
+      "thoughtless": 470,
+      "needy": 471,
+      "judicious": 472,
+      "coil": 473,
+      "handsome": 474,
+      "report": 475,
+      "uttermost": 476,
+      "inconclusive": 477,
+      "scar": 478,
+      "sneak": 479,
+      "partake": 480,
+      "greedy": 481,
+      "five": 482,
+      "blush": 483,
+      "injure": 484,
+      "petite": 485,
+      "page": 486,
+      "glass": 487,
+      "stormy": 488,
+      "strong": 489,
+      "illustrate": 490,
+      "approach": 491,
+      "invincible": 492,
+      "oranges": 493,
+      "gruesome": 494,
+      "nervous": 495,
+      "upbeat": 496,
+      "shocking": 497,
+      "womanly": 498
+    },
+    "inconclusive": {
+      "bed": 499,
+      "beef": 500,
+      "mind": 501,
+      "impel": 502,
+      "ply": 503,
+      "flawless": 504,
+      "abash": 505,
+      "boy": 506,
+      "sack": 507,
+      "transport": 508,
+      "underwear": 509,
+      "volleyball": 510,
+      "follow": 511,
+      "ignorant": 512,
+      "overrated": 513,
+      "top": 514,
+      "kindly": 515,
+      "kid": 516,
+      "immense": 517,
+      "low": 518,
+      "material": 519,
+      "drink": 520,
+      "search": 521,
+      "arch": 522,
+      "squalid": 523,
+      "team": 524,
+      "mean": 525,
+      "debt": 526
+    },
+    "optimize": 527,
+    "shape": 528,
+    "love": 529,
+    "air": 530,
+    "income": 531,
+    "part": 532,
+    "splendid": 533,
+    "silky": 534,
+    "regret": 535
+  }
+}

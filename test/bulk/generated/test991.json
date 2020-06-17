@@ -1,0 +1,399 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "latin-basic-random",
+      "arrayProb": "never",
+      "objectLengthProb": "many",
+      "arrayLengthProb": "some",
+      "maxDepthProb": "many",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "some",
+      "negateProb": "few",
+      "starProb": "never",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "never",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "!v'P<eKiE^X4Bz.dVH0?k",
+    "**",
+    "T",
+    "3W\\\\O~xm\\]'PZ^\\!Dqo)>",
+    "5\\}?Y\\!",
+    "zKx8^rT",
+    "!**",
+    "lEJ&5zitDBs-cNGF97LZ",
+    "+q\\\\\\}86",
+    "\"sNRCk",
+    ":^zYSefQ6MH1"
+  ],
+  "searchTree": {
+    "v'P<eKiE^X4Bz": {
+      "dVH0?k": {}
+    },
+    "**": {},
+    "T": {},
+    "3W\\\\O~xm\\]'PZ^\\!Dqo)>": {},
+    "5\\}?Y\\!": {},
+    "zKx8^rT": {},
+    "lEJ&5zitDBs-cNGF97LZ": {},
+    "+q\\\\\\}86": {},
+    "\"sNRCk": {},
+    ":^zYSefQ6MH1": {}
+  },
+  "opts": {
+    "useArraySelector": true
+  },
+  "result": [
+    ":^zYSefQ6MH1",
+    "T",
+    "lEJ&5zitDBs-cNGF97LZ",
+    "5\\}>Y\\!",
+    "+q\\\\\\}86",
+    "3W\\\\O~xm\\]'PZ^\\!Dqo)>",
+    "zKx8^rT",
+    "\"sNRCk"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "!v'P<eKiE^X4Bz.dVH0?k",
+        "**",
+        "T",
+        "3W\\\\O~xm\\]'PZ^\\!Dqo)>",
+        "5\\}?Y\\!",
+        "zKx8^rT",
+        "!**",
+        "lEJ&5zitDBs-cNGF97LZ",
+        "+q\\\\\\}86",
+        "\"sNRCk",
+        ":^zYSefQ6MH1"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": ":^zYSefQ6MH1",
+      "isMatch": true,
+      "matchedBy": [
+        ":^zYSefQ6MH1"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        ":^zYSefQ6MH1"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": ":^zYSefQ6MH1",
+      "isMatch": true,
+      "matchedBy": [
+        ":^zYSefQ6MH1"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        ":^zYSefQ6MH1"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "T",
+      "isMatch": true,
+      "matchedBy": [
+        "T"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "T"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "T",
+      "isMatch": true,
+      "matchedBy": [
+        "T"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "T"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "lEJ&5zitDBs-cNGF97LZ",
+      "isMatch": true,
+      "matchedBy": [
+        "lEJ&5zitDBs-cNGF97LZ"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "lEJ&5zitDBs-cNGF97LZ"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "lEJ&5zitDBs-cNGF97LZ",
+      "isMatch": true,
+      "matchedBy": [
+        "lEJ&5zitDBs-cNGF97LZ"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "lEJ&5zitDBs-cNGF97LZ"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "5\\}>Y\\!",
+      "isMatch": true,
+      "matchedBy": [
+        "5\\}?Y\\!"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "5\\}?Y\\!"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "5\\}>Y\\!",
+      "isMatch": true,
+      "matchedBy": [
+        "5\\}?Y\\!"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "5\\}?Y\\!"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "+q\\\\\\}86",
+      "isMatch": true,
+      "matchedBy": [
+        "+q\\\\\\}86"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "+q\\\\\\}86"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "+q\\\\\\}86",
+      "isMatch": true,
+      "matchedBy": [
+        "+q\\\\\\}86"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "+q\\\\\\}86"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "3W\\\\O~xm\\]'PZ^\\!Dqo)>",
+      "isMatch": true,
+      "matchedBy": [
+        "3W\\\\O~xm\\]'PZ^\\!Dqo)>"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "3W\\\\O~xm\\]'PZ^\\!Dqo)>"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "3W\\\\O~xm\\]'PZ^\\!Dqo)>",
+      "isMatch": true,
+      "matchedBy": [
+        "3W\\\\O~xm\\]'PZ^\\!Dqo)>"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "3W\\\\O~xm\\]'PZ^\\!Dqo)>"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "zKx8^rT",
+      "isMatch": true,
+      "matchedBy": [
+        "zKx8^rT"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "zKx8^rT"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "zKx8^rT",
+      "isMatch": true,
+      "matchedBy": [
+        "zKx8^rT"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "zKx8^rT"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "\"sNRCk",
+      "isMatch": true,
+      "matchedBy": [
+        "\"sNRCk"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "\"sNRCk"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "\"sNRCk",
+      "isMatch": true,
+      "matchedBy": [
+        "\"sNRCk"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "\"sNRCk"
+      ]
+    }
+  ],
+  "haystack": {
+    "v'P<eKiE^X4Bz": {
+      "<\"jRx{s8mi": 929,
+      "W^T=>nFo}*w": 930,
+      "fw": 931,
+      "^K/J8X<*u@ra": 932,
+      "B)-l@tP": 933,
+      "rJ#2lz,Ak!KUC0[8];v": 934,
+      "LvAyD^znOwS*1.": 935,
+      "|jR{g2(a/}>": 936,
+      ".Q<v[#?56,~=*g}TzZP": 937,
+      "k+>PyTd`.1xVa#": 938,
+      "OFz[x)WGA?\\=RMvQkZ89": 939,
+      "yZ+Mk1VRI&": 940,
+      "a[OA(6mE<t+@": 941,
+      "n2aN": 942,
+      "\\\"B4{$E/Vc=2w0PD": 943,
+      "$(p5x": 944,
+      "_QwhuBI-bz\"Ny<]=": 945,
+      "=RWH;%d]hf<sq.8Qr": 946,
+      "rBeEg|NSbml1h(4G": 947,
+      "wnT<o/RNsUE6%.8'7i": 948,
+      "dVH0>k": 949,
+      "Y;GBEr^": 950,
+      "eDmU<PKwi6Yt-X\\1c": 951,
+      "f;S&": 952,
+      "wy@SvtsG|6W/p": 953,
+      "\"hqs3t;jB+EgfmW{_": 954,
+      "V#{l$]~&": 955,
+      "wu-a9,^)rTGey+PM": 956
+    },
+    "cdKWu": 957,
+    "HP2": 958,
+    "\"sNRCk": 959,
+    "\"[lChX$ZOy]Mda1w'e(": 960,
+    "?ux": 961,
+    "zKx8^rT": 962,
+    "K)~aM6SRc4VUW": 963,
+    "\\qXd(QObji]g)$'": 964,
+    "?}&nHo\"*-E^K>zP": 965,
+    "nD\\": 966,
+    ".<mr4C:{u}'_": 967,
+    "h)b*FQ": 968,
+    "3W\\O~xm]'PZ^!Dqo)>": 969,
+    "u8dK<^+wrZ(aNnM": 970,
+    "t*z#|5j}EQRXD9TgA{": 971,
+    "4m0}R": 972,
+    "=!X>9W+a<i": 973,
+    "x@q+4=$;noV.\"pW'?L-a": 974,
+    "=U": 975,
+    "+q\\}86": 976,
+    "U)$Q#+!KgE[YM1": 977,
+    "uqP!DVL^(%6/t,Hyl|": 978,
+    "JSK&5mLF(P^G)": 979,
+    "]~A,jcuCBRo'fp%>yZ5": 980,
+    "5}>Y!": 981,
+    "lEJ&5zitDBs-cNGF97LZ": 982,
+    ",Kzye0V8]ucgH!": 983,
+    "T": 984,
+    ":^zYSefQ6MH1": 985
+  }
+}

@@ -1,0 +1,484 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "many",
+      "arrayLengthProb": "max",
+      "maxDepthProb": "many",
+      "maxNeedlesProb": "many",
+      "maxNeedleLengthProb": "max",
+      "negateProb": "never",
+      "starProb": "never",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "never",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "salve",
+    "present",
+    "bouncy",
+    "boiling",
+    "glorious",
+    "money",
+    "shy",
+    "nervous",
+    "chip",
+    "dedicate",
+    "ticket",
+    "tricky",
+    "river",
+    "shoe"
+  ],
+  "searchTree": {
+    "salve": {},
+    "present": {},
+    "bouncy": {},
+    "boiling": {},
+    "glorious": {},
+    "money": {},
+    "shy": {},
+    "nervous": {},
+    "chip": {},
+    "dedicate": {},
+    "ticket": {},
+    "tricky": {},
+    "river": {},
+    "shoe": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "chip",
+    "shoe",
+    "boiling",
+    "glorious",
+    "bouncy",
+    "shy",
+    "present",
+    "tricky",
+    "river",
+    "money",
+    "nervous",
+    "salve",
+    "dedicate",
+    "ticket"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "salve",
+        "present",
+        "bouncy",
+        "boiling",
+        "glorious",
+        "money",
+        "shy",
+        "nervous",
+        "chip",
+        "dedicate",
+        "ticket",
+        "tricky",
+        "river",
+        "shoe"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "chip",
+      "isMatch": true,
+      "matchedBy": [
+        "chip"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "chip"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "chip",
+      "isMatch": true,
+      "matchedBy": [
+        "chip"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "chip"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "shoe",
+      "isMatch": true,
+      "matchedBy": [
+        "shoe"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "shoe"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "shoe",
+      "isMatch": true,
+      "matchedBy": [
+        "shoe"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "shoe"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "boiling",
+      "isMatch": true,
+      "matchedBy": [
+        "boiling"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "boiling"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "boiling",
+      "isMatch": true,
+      "matchedBy": [
+        "boiling"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "boiling"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "glorious",
+      "isMatch": true,
+      "matchedBy": [
+        "glorious"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "glorious"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "glorious",
+      "isMatch": true,
+      "matchedBy": [
+        "glorious"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "glorious"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "bouncy",
+      "isMatch": true,
+      "matchedBy": [
+        "bouncy"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "bouncy"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "bouncy",
+      "isMatch": true,
+      "matchedBy": [
+        "bouncy"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "bouncy"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "shy",
+      "isMatch": true,
+      "matchedBy": [
+        "shy"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "shy"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "shy",
+      "isMatch": true,
+      "matchedBy": [
+        "shy"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "shy"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "present",
+      "isMatch": true,
+      "matchedBy": [
+        "present"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "present"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "present",
+      "isMatch": true,
+      "matchedBy": [
+        "present"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "present"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "tricky",
+      "isMatch": true,
+      "matchedBy": [
+        "tricky"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "tricky"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "tricky",
+      "isMatch": true,
+      "matchedBy": [
+        "tricky"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "tricky"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "river",
+      "isMatch": true,
+      "matchedBy": [
+        "river"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "river"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "river",
+      "isMatch": true,
+      "matchedBy": [
+        "river"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "river"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "money",
+      "isMatch": true,
+      "matchedBy": [
+        "money"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "money"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "money",
+      "isMatch": true,
+      "matchedBy": [
+        "money"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "money"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "nervous",
+      "isMatch": true,
+      "matchedBy": [
+        "nervous"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "nervous"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "nervous",
+      "isMatch": true,
+      "matchedBy": [
+        "nervous"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "nervous"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "salve",
+      "isMatch": true,
+      "matchedBy": [
+        "salve"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "salve"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "salve",
+      "isMatch": true,
+      "matchedBy": [
+        "salve"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "salve"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "dedicate",
+      "isMatch": true,
+      "matchedBy": [
+        "dedicate"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "dedicate"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "dedicate",
+      "isMatch": true,
+      "matchedBy": [
+        "dedicate"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "dedicate"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "ticket",
+      "isMatch": true,
+      "matchedBy": [
+        "ticket"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "ticket"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "ticket",
+      "isMatch": true,
+      "matchedBy": [
+        "ticket"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "ticket"
+      ]
+    }
+  ],
+  "haystack": {
+    "imperil": {
+      "mistake": 932,
+      "come": 933,
+      "quizzical": 934,
+      "present": 935,
+      "kaput": 936,
+      "sneak": 937,
+      "speak": 938,
+      "mindless": 939,
+      "illustrious": 940,
+      "impeach": 941,
+      "obstruct": 942,
+      "moo": 943,
+      "animate": 944,
+      "value": 945,
+      "grieving": 946,
+      "prevent": 947,
+      "partake": 948,
+      "contain": 949,
+      "phone": 950,
+      "peaceful": 951,
+      "nip": 952,
+      "own": 953,
+      "sore": 954,
+      "fresh": 955,
+      "regret": 956,
+      "cork": 957
+    },
+    "bumpy": 958,
+    "ticket": 959,
+    "dedicate": 960,
+    "salve": 961,
+    "nervous": 962,
+    "money": 963,
+    "river": 964,
+    "cover": 965,
+    "tricky": 966,
+    "present": 967,
+    "low": 968,
+    "shy": 969,
+    "parallel": 970,
+    "historical": 971,
+    "bouncy": 972,
+    "glorious": 973,
+    "boiling": 974,
+    "shoe": 975,
+    "astonish": 976,
+    "adjustment": 977,
+    "chip": 978,
+    "ritzy": 979
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "max",
+      "arrayLengthProb": "some",
+      "maxDepthProb": "some",
+      "maxNeedlesProb": "many",
+      "maxNeedleLengthProb": "many",
+      "negateProb": "few",
+      "starProb": "always",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "never",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "",
+    "!*"
+  ],
+  "searchTree": {
+    "": {},
+    "*": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    ""
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "",
+        "!*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": true,
+      "matchedBy": [
+        ""
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        ""
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "",
+      "isMatch": true,
+      "matchedBy": [
+        ""
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        ""
+      ]
+    }
+  ],
+  "haystack": {
+    "watch": {
+      "abusive": 812,
+      "drum": 813,
+      "branch": 814,
+      "befitting": 815,
+      "ablaze": 816,
+      "coil": 817,
+      "brothers": 818,
+      "worm": 819,
+      "kick": 820,
+      "drunk": 821,
+      "merge": 822,
+      "laugh": 823,
+      "disgusted": 824,
+      "relate": 825,
+      "mistake": 826,
+      "loaf": 827,
+      "pollution": 828,
+      "rake": 829,
+      "free": 830,
+      "violet": 831,
+      "reminiscent": 832,
+      "decorous": 833,
+      "wind": 834,
+      "ugly": 835,
+      "team": 836,
+      "rule": 837,
+      "distance": 838,
+      "earn": 839,
+      "absurd": 840,
+      "obscene": 841
+    },
+    "engine": 842,
+    "thirsty": 843,
+    "better": 844,
+    "thundering": 845,
+    "afterthought": 846,
+    "dependent": 847,
+    "travel": 848,
+    "disuse": 849,
+    "turn": 850,
+    "wandering": 851,
+    "chief": 852,
+    "leave": 853,
+    "retain": 854,
+    "writing": 855,
+    "confine": 856,
+    "explore": 857,
+    "substance": 858,
+    "occur": 859,
+    "ply": 860,
+    "rake": 861,
+    "ball": 862,
+    "tame": 863,
+    "cross": 864,
+    "poor": 865,
+    "meek": 866,
+    "beautiful": 867,
+    "helpless": 868,
+    "boot": 869,
+    "youthful": 870
+  }
+}

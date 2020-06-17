@@ -1,0 +1,501 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "some",
+      "arrayLengthProb": "many",
+      "maxDepthProb": "max",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "few",
+      "negateProb": "few",
+      "starProb": "some",
+      "doubleStarProb": "always",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "few",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "**.**",
+    "**",
+    "!**"
+  ],
+  "searchTree": {
+    "**": {
+      "**": {}
+    }
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "befitting",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "price",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "rule",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "provide",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "operate",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "weight",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "elated",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "safe",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "ball",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "travel",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "spring",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "tasteful",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vegetable",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vegetable.cobweb",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vegetable.men",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vegetable.imperil",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vegetable.powerful",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vegetable.fifth",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vegetable.stew",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vegetable.tan",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vegetable.bedroom",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vegetable.birds",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vegetable.temper",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vegetable.wandering",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vegetable.goose",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vegetable.appliance",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vegetable.hurry",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vegetable.handsome",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    }
+  ],
+  "haystack": {
+    "vegetable": {
+      "handsome": 743,
+      "hurry": 744,
+      "appliance": 745,
+      "goose": 746,
+      "wandering": 747,
+      "temper": 748,
+      "birds": 749,
+      "bedroom": 750,
+      "tan": 751,
+      "stew": 752,
+      "fifth": 753,
+      "powerful": 754,
+      "imperil": 755,
+      "men": 756,
+      "cobweb": 757
+    },
+    "tasteful": 758,
+    "spring": 759,
+    "travel": 760,
+    "ball": 761,
+    "safe": 762,
+    "elated": 763,
+    "weight": 764,
+    "operate": 765,
+    "provide": 766,
+    "rule": 767,
+    "price": 768,
+    "befitting": 769
+  }
+}

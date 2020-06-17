@@ -1,0 +1,105 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "latin-basic-random",
+      "arrayProb": "some",
+      "objectLengthProb": "some",
+      "arrayLengthProb": "some",
+      "maxDepthProb": "many",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "few",
+      "negateProb": "few",
+      "starProb": "some",
+      "doubleStarProb": "always",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "never",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "**",
+    "!**",
+    ""
+  ],
+  "searchTree": {
+    "**": {},
+    "": {}
+  },
+  "opts": {
+    "useArraySelector": true
+  },
+  "result": [
+    ""
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "!**",
+        ""
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": true,
+      "matchedBy": [
+        ""
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        ""
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "",
+      "isMatch": true,
+      "matchedBy": [
+        ""
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        ""
+      ]
+    }
+  ],
+  "haystack": {
+    "2": 762,
+    "QD/fN#Ut,l9B": [
+      745,
+      746,
+      747,
+      748,
+      749,
+      750,
+      751,
+      752,
+      753,
+      754,
+      755,
+      756
+    ],
+    "m2K.at7hs-": 757,
+    "\\x=CQWZ>(z": 758,
+    "@pY_u.7oW": 759,
+    "j-cO,At`": 760,
+    "QY5b'og^1|*NE": 761,
+    "l1o,4L[<u%&xPb!?>.Ct": 763,
+    "(": 764,
+    "4A+:UQtk[FMo)'X}S!N": 765,
+    "[efoj|Ha]<Ul`*O": 766,
+    "s*-": 767,
+    "Mo#!EqFS)~7c": 768,
+    "8C~6U": 769,
+    "}@]V*zf~:cWuDI": 770,
+    "e`\"": 771,
+    "d.uLiR@": 772
+  }
+}

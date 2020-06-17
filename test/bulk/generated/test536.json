@@ -1,0 +1,915 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "some",
+      "arrayLengthProb": "many",
+      "maxDepthProb": "max",
+      "maxNeedlesProb": "some",
+      "maxNeedleLengthProb": "min",
+      "negateProb": "never",
+      "starProb": "never",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "never",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "wet",
+    "combative",
+    "**",
+    "leave",
+    "abundant",
+    "impeach",
+    "grip",
+    "pardon",
+    "mindless",
+    "hearing"
+  ],
+  "searchTree": {
+    "wet": {},
+    "combative": {},
+    "**": {},
+    "leave": {},
+    "abundant": {},
+    "impeach": {},
+    "grip": {},
+    "pardon": {},
+    "mindless": {},
+    "hearing": {}
+  },
+  "opts": {
+    "useArraySelector": true
+  },
+  "result": [
+    "protective",
+    "absent",
+    "grip",
+    "combative",
+    "abundant",
+    "breakfast",
+    "wet",
+    "public",
+    "leave",
+    "impeach",
+    "lade",
+    "mindless",
+    "hearing",
+    "pardon",
+    "illuminate",
+    "abash.miss",
+    "abash.tan",
+    "abash.capture",
+    "abash.food",
+    "abash.crush",
+    "abash.faulty",
+    "abash.delete",
+    "abash.ugly",
+    "abash.immense",
+    "abash.aquatic",
+    "abash.injure",
+    "abash.dinner",
+    "abash.nip",
+    "abash.collapse",
+    "abash.seashore",
+    "abash"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "wet",
+        "combative",
+        "**",
+        "leave",
+        "abundant",
+        "impeach",
+        "grip",
+        "pardon",
+        "mindless",
+        "hearing"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "protective",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "protective",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "absent",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "absent",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "grip",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "grip"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "grip"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "grip",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "grip"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "grip"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "combative",
+      "isMatch": true,
+      "matchedBy": [
+        "combative",
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "combative",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "combative",
+      "isMatch": true,
+      "matchedBy": [
+        "combative",
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "combative",
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "abundant",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "abundant"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "abundant"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "abundant",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "abundant"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "abundant"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "breakfast",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "breakfast",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "wet",
+      "isMatch": true,
+      "matchedBy": [
+        "wet",
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "wet",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "wet",
+      "isMatch": true,
+      "matchedBy": [
+        "wet",
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "wet",
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "public",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "public",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "leave",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "leave"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "leave"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "leave",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "leave"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "leave"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "impeach",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "impeach"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "impeach"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "impeach",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "impeach"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "impeach"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "lade",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "lade",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "mindless",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "mindless"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "mindless"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "mindless",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "mindless"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "mindless"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "hearing",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "hearing"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "hearing"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "hearing",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "hearing"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "hearing"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "pardon",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "pardon"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "pardon"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "pardon",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "pardon"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "pardon"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "illuminate",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "illuminate",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "abash",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "abash.miss",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "abash.miss",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "abash.tan",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "abash.tan",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "abash.capture",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "abash.capture",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "abash.food",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "abash.food",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "abash.crush",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "abash.crush",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "abash.faulty",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "abash.faulty",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "abash.delete",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "abash.delete",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "abash.ugly",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "abash.ugly",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "abash.immense",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "abash.immense",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "abash.aquatic",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "abash.aquatic",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "abash.injure",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "abash.injure",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "abash.dinner",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "abash.dinner",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "abash.nip",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "abash.nip",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "abash.collapse",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "abash.collapse",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "abash.seashore",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "abash.seashore",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "abash",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    }
+  ],
+  "haystack": {
+    "abash": {
+      "seashore": 741,
+      "collapse": 742,
+      "nip": 743,
+      "dinner": 744,
+      "injure": 745,
+      "aquatic": 746,
+      "immense": 747,
+      "ugly": 748,
+      "delete": 749,
+      "faulty": 750,
+      "crush": 751,
+      "food": 752,
+      "capture": 753,
+      "tan": 754,
+      "miss": 755
+    },
+    "illuminate": 756,
+    "pardon": 757,
+    "hearing": 758,
+    "mindless": 759,
+    "lade": 760,
+    "impeach": 761,
+    "leave": 762,
+    "public": 763,
+    "wet": 764,
+    "breakfast": 765,
+    "abundant": 766,
+    "combative": 767,
+    "grip": 768,
+    "absent": 769,
+    "protective": 770
+  }
+}

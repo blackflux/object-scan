@@ -1,0 +1,164 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "latin-basic-random",
+      "arrayProb": "some",
+      "objectLengthProb": "some",
+      "arrayLengthProb": "max",
+      "maxDepthProb": "some",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "max",
+      "negateProb": "few",
+      "starProb": "never",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "never",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "**",
+    "N18G",
+    "!**",
+    "\\}KhyB>\\,\\[C9-%g<Q4=c1z"
+  ],
+  "searchTree": {
+    "**": {},
+    "N18G": {},
+    "\\}KhyB>\\,\\[C9-%g<Q4=c1z": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "\\}KhyB>\\,\\[C9-%g<Q4=c1z",
+    "N18G"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "N18G",
+        "!**",
+        "\\}KhyB>\\,\\[C9-%g<Q4=c1z"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "\\}KhyB>\\,\\[C9-%g<Q4=c1z",
+      "isMatch": true,
+      "matchedBy": [
+        "\\}KhyB>\\,\\[C9-%g<Q4=c1z"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "\\}KhyB>\\,\\[C9-%g<Q4=c1z"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "\\}KhyB>\\,\\[C9-%g<Q4=c1z",
+      "isMatch": true,
+      "matchedBy": [
+        "\\}KhyB>\\,\\[C9-%g<Q4=c1z"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "\\}KhyB>\\,\\[C9-%g<Q4=c1z"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "N18G",
+      "isMatch": true,
+      "matchedBy": [
+        "N18G"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "N18G"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "N18G",
+      "isMatch": true,
+      "matchedBy": [
+        "N18G"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "N18G"
+      ]
+    }
+  ],
+  "haystack": {
+    "z7tYhJ}\"5Tgsrl": [
+      757,
+      758,
+      759,
+      760,
+      761,
+      762,
+      763,
+      764,
+      765,
+      766,
+      767,
+      768,
+      769,
+      770,
+      771,
+      772,
+      773,
+      774,
+      775,
+      776,
+      777,
+      778,
+      779,
+      780,
+      781,
+      782,
+      783,
+      784,
+      785,
+      786
+    ],
+    "N18G": 787,
+    "+OU=B": 788,
+    "<xz(OC`H": 789,
+    "{kJ!YPe6,": 790,
+    "zip7lP\\h}": 791,
+    "\"?!6XY$%EO1(d{e": 792,
+    "ZI": 793,
+    "|N*W1pQlIeosDOg": 794,
+    "+5;Ljm": 795,
+    "}KhyB>,[C9-%g<Q4=c1z": 796,
+    "UQRew#%u./jkiC6'5m": 797,
+    "3]p|#L$-qXzCJ": 798,
+    "H:!": 799
+  }
+}

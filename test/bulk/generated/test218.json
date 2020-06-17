@@ -1,0 +1,277 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "some",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "max",
+      "maxDepthProb": "few",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "max",
+      "negateProb": "never",
+      "starProb": "never",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "few",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "sweater.**",
+    "sidew?lk",
+    "**",
+    "quack",
+    "river",
+    "qu*k"
+  ],
+  "searchTree": {
+    "sweater": {
+      "**": {}
+    },
+    "sidew?lk": {},
+    "**": {},
+    "quack": {},
+    "river": {},
+    "qu*k": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "river",
+    "sidewalk",
+    "quack",
+    "sweater.sticky",
+    "sweater.overrated",
+    "sweater.board",
+    "sweater"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "sweater.**",
+        "sidew?lk",
+        "**",
+        "quack",
+        "river",
+        "qu*k"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "river",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "river"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "river"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "river",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "river"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "river"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "sidewalk",
+      "isMatch": true,
+      "matchedBy": [
+        "sidew?lk",
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "sidew?lk",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "sidewalk",
+      "isMatch": true,
+      "matchedBy": [
+        "sidew?lk",
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "sidew?lk",
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "quack",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "quack",
+        "qu*k"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "quack",
+        "qu*k"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "quack",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "quack",
+        "qu*k"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "quack",
+        "qu*k"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "sweater",
+      "isMatch": true,
+      "matchedBy": [
+        "sweater.**",
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "sweater.**",
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "sweater.sticky",
+      "isMatch": true,
+      "matchedBy": [
+        "sweater.**",
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "sweater.**",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "sweater.sticky",
+      "isMatch": true,
+      "matchedBy": [
+        "sweater.**",
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "sweater.**",
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "sweater.overrated",
+      "isMatch": true,
+      "matchedBy": [
+        "sweater.**",
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "sweater.**",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "sweater.overrated",
+      "isMatch": true,
+      "matchedBy": [
+        "sweater.**",
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "sweater.**",
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "sweater.board",
+      "isMatch": true,
+      "matchedBy": [
+        "sweater.**",
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "sweater.**",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "sweater.board",
+      "isMatch": true,
+      "matchedBy": [
+        "sweater.**",
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "sweater.**",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "sweater",
+      "isMatch": true,
+      "matchedBy": [
+        "sweater.**",
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "sweater.**",
+        "**"
+      ]
+    }
+  ],
+  "haystack": {
+    "sweater": {
+      "board": 0,
+      "overrated": 562,
+      "sticky": 563
+    },
+    "quack": 564,
+    "sidewalk": 565,
+    "river": 566
+  }
+}

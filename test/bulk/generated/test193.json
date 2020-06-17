@@ -1,0 +1,363 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "latin-basic-random",
+      "arrayProb": "some",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "max",
+      "maxDepthProb": "many",
+      "maxNeedlesProb": "max",
+      "maxNeedleLengthProb": "many",
+      "negateProb": "never",
+      "starProb": "never",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "few",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "nO*ru_;)\\!=\"",
+    "**",
+    "ZL?\\{wT\\}&Vk3D\\?4F",
+    "X-s/hT?\"",
+    "nOY?s\\}hru_;)\\!=\"",
+    "8kr.**",
+    "X-?/hTq\"",
+    "8kr.:4<d8AR\\,_",
+    "ZL\\*\\{wT\\}&Vk3D\\?4F",
+    ":Y4cg>=\\!rN<M(uaZ"
+  ],
+  "searchTree": {
+    "nO*ru_;)\\!=\"": {},
+    "**": {},
+    "ZL?\\{wT\\}&Vk3D\\?4F": {},
+    "X-s/hT?\"": {},
+    "nOY?s\\}hru_;)\\!=\"": {},
+    "8kr": {
+      "**": {},
+      ":4<d8AR\\,_": {}
+    },
+    "X-?/hTq\"": {},
+    "ZL\\*\\{wT\\}&Vk3D\\?4F": {},
+    ":Y4cg>=\\!rN<M(uaZ": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "ZL\\*\\{wT\\}&Vk3D\\?4F",
+    ":Y4cg>=\\!rN<M(uaZ",
+    "nOYFs\\}hru_;)\\!=\"",
+    "X-s/hTq\"",
+    "8kr.:4<d8AR\\,_",
+    "8kr.b",
+    "8kr.G)wgbd\\,o/t",
+    "8kr.QAPN`oKad\\!\\}\\[jL\\{2p%\\?5",
+    "8kr"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "nO*ru_;)\\!=\"",
+        "**",
+        "ZL?\\{wT\\}&Vk3D\\?4F",
+        "X-s/hT?\"",
+        "nOY?s\\}hru_;)\\!=\"",
+        "8kr.**",
+        "X-?/hTq\"",
+        "8kr.:4<d8AR\\,_",
+        "ZL\\*\\{wT\\}&Vk3D\\?4F",
+        ":Y4cg>=\\!rN<M(uaZ"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "ZL\\*\\{wT\\}&Vk3D\\?4F",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "ZL?\\{wT\\}&Vk3D\\?4F",
+        "ZL\\*\\{wT\\}&Vk3D\\?4F"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "ZL?\\{wT\\}&Vk3D\\?4F",
+        "ZL\\*\\{wT\\}&Vk3D\\?4F"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "ZL\\*\\{wT\\}&Vk3D\\?4F",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "ZL?\\{wT\\}&Vk3D\\?4F",
+        "ZL\\*\\{wT\\}&Vk3D\\?4F"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "ZL?\\{wT\\}&Vk3D\\?4F",
+        "ZL\\*\\{wT\\}&Vk3D\\?4F"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": ":Y4cg>=\\!rN<M(uaZ",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        ":Y4cg>=\\!rN<M(uaZ"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        ":Y4cg>=\\!rN<M(uaZ"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": ":Y4cg>=\\!rN<M(uaZ",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        ":Y4cg>=\\!rN<M(uaZ"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        ":Y4cg>=\\!rN<M(uaZ"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "nOYFs\\}hru_;)\\!=\"",
+      "isMatch": true,
+      "matchedBy": [
+        "nO*ru_;)\\!=\"",
+        "**",
+        "nOY?s\\}hru_;)\\!=\""
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "nO*ru_;)\\!=\"",
+        "**",
+        "nOY?s\\}hru_;)\\!=\""
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "nOYFs\\}hru_;)\\!=\"",
+      "isMatch": true,
+      "matchedBy": [
+        "nO*ru_;)\\!=\"",
+        "**",
+        "nOY?s\\}hru_;)\\!=\""
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "nO*ru_;)\\!=\"",
+        "**",
+        "nOY?s\\}hru_;)\\!=\""
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "X-s/hTq\"",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "X-s/hT?\"",
+        "X-?/hTq\""
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "X-s/hT?\"",
+        "X-?/hTq\""
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "X-s/hTq\"",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "X-s/hT?\"",
+        "X-?/hTq\""
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "X-s/hT?\"",
+        "X-?/hTq\""
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "8kr",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "8kr.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "8kr.**",
+        "8kr.:4<d8AR\\,_"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "8kr.:4<d8AR\\,_",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "8kr.**",
+        "8kr.:4<d8AR\\,_"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "8kr.**",
+        "8kr.:4<d8AR\\,_"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "8kr.:4<d8AR\\,_",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "8kr.**",
+        "8kr.:4<d8AR\\,_"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "8kr.**",
+        "8kr.:4<d8AR\\,_"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "8kr.b",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "8kr.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "8kr.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "8kr.b",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "8kr.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "8kr.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "8kr.G)wgbd\\,o/t",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "8kr.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "8kr.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "8kr.G)wgbd\\,o/t",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "8kr.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "8kr.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "8kr.QAPN`oKad\\!\\}\\[jL\\{2p%\\?5",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "8kr.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "8kr.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "8kr.QAPN`oKad\\!\\}\\[jL\\{2p%\\?5",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "8kr.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "8kr.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "8kr",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "8kr.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "8kr.**",
+        "8kr.:4<d8AR\\,_"
+      ]
+    }
+  ],
+  "haystack": {
+    "8kr": {
+      "QAPN`oKad!}[jL{2p%?5": 877,
+      "G)wgbd,o/t": 878,
+      "b": 879,
+      ":4<d8AR,_": 880
+    },
+    "X-s/hTq\"": 881,
+    "nOYFs}hru_;)!=\"": 882,
+    ":Y4cg>=!rN<M(uaZ": 883,
+    "ZL*{wT}&Vk3D?4F": 884
+  }
+}

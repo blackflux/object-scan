@@ -1,0 +1,617 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "some",
+      "objectLengthProb": "max",
+      "arrayLengthProb": "few",
+      "maxDepthProb": "many",
+      "maxNeedlesProb": "few",
+      "maxNeedleLengthProb": "many",
+      "negateProb": "never",
+      "starProb": "never",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "never",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "tangible",
+    "interesting",
+    "judicious",
+    "abaft",
+    "re?ind",
+    "obtainable",
+    "bi?.amu?ing",
+    "preach",
+    "door",
+    "useless",
+    "bumpy",
+    "operate",
+    "act",
+    "ride",
+    "ju?icious",
+    "follo?"
+  ],
+  "searchTree": {
+    "tangible": {},
+    "interesting": {},
+    "judicious": {},
+    "abaft": {},
+    "re?ind": {},
+    "obtainable": {},
+    "bi?": {
+      "amu?ing": {}
+    },
+    "preach": {},
+    "door": {},
+    "useless": {},
+    "bumpy": {},
+    "operate": {},
+    "act": {},
+    "ride": {},
+    "ju?icious": {},
+    "follo?": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "[0].tangible",
+    "[0].operate",
+    "[0].interesting",
+    "[0].rewind",
+    "[0].act",
+    "[0].door",
+    "[0].judicious",
+    "[0].useless",
+    "[0].preach",
+    "[0].ride",
+    "[0].abaft",
+    "[0].obtainable",
+    "[0].follow",
+    "[0].bumpy"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "tangible",
+        "interesting",
+        "judicious",
+        "abaft",
+        "re?ind",
+        "obtainable",
+        "bi?.amu?ing",
+        "preach",
+        "door",
+        "useless",
+        "bumpy",
+        "operate",
+        "act",
+        "ride",
+        "ju?icious",
+        "follo?"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[4]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "tangible",
+        "interesting",
+        "judicious",
+        "abaft",
+        "re?ind",
+        "obtainable",
+        "bi?.amu?ing",
+        "preach",
+        "door",
+        "useless",
+        "bumpy",
+        "operate",
+        "act",
+        "ride",
+        "ju?icious",
+        "follo?"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[3]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "tangible",
+        "interesting",
+        "judicious",
+        "abaft",
+        "re?ind",
+        "obtainable",
+        "bi?.amu?ing",
+        "preach",
+        "door",
+        "useless",
+        "bumpy",
+        "operate",
+        "act",
+        "ride",
+        "ju?icious",
+        "follo?"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[2]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "tangible",
+        "interesting",
+        "judicious",
+        "abaft",
+        "re?ind",
+        "obtainable",
+        "bi?.amu?ing",
+        "preach",
+        "door",
+        "useless",
+        "bumpy",
+        "operate",
+        "act",
+        "ride",
+        "ju?icious",
+        "follo?"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[1]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "tangible",
+        "interesting",
+        "judicious",
+        "abaft",
+        "re?ind",
+        "obtainable",
+        "bi?.amu?ing",
+        "preach",
+        "door",
+        "useless",
+        "bumpy",
+        "operate",
+        "act",
+        "ride",
+        "ju?icious",
+        "follo?"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "tangible",
+        "interesting",
+        "judicious",
+        "abaft",
+        "re?ind",
+        "obtainable",
+        "bi?.amu?ing",
+        "preach",
+        "door",
+        "useless",
+        "bumpy",
+        "operate",
+        "act",
+        "ride",
+        "ju?icious",
+        "follo?"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].tangible",
+      "isMatch": true,
+      "matchedBy": [
+        "tangible"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "tangible"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].tangible",
+      "isMatch": true,
+      "matchedBy": [
+        "tangible"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "tangible"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].operate",
+      "isMatch": true,
+      "matchedBy": [
+        "operate"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "operate"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].operate",
+      "isMatch": true,
+      "matchedBy": [
+        "operate"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "operate"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].interesting",
+      "isMatch": true,
+      "matchedBy": [
+        "interesting"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "interesting"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].interesting",
+      "isMatch": true,
+      "matchedBy": [
+        "interesting"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "interesting"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].rewind",
+      "isMatch": true,
+      "matchedBy": [
+        "re?ind"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "re?ind"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].rewind",
+      "isMatch": true,
+      "matchedBy": [
+        "re?ind"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "re?ind"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].act",
+      "isMatch": true,
+      "matchedBy": [
+        "act"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "act"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].act",
+      "isMatch": true,
+      "matchedBy": [
+        "act"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "act"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].door",
+      "isMatch": true,
+      "matchedBy": [
+        "door"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "door"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].door",
+      "isMatch": true,
+      "matchedBy": [
+        "door"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "door"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].judicious",
+      "isMatch": true,
+      "matchedBy": [
+        "judicious",
+        "ju?icious"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "judicious",
+        "ju?icious"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].judicious",
+      "isMatch": true,
+      "matchedBy": [
+        "judicious",
+        "ju?icious"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "judicious",
+        "ju?icious"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].useless",
+      "isMatch": true,
+      "matchedBy": [
+        "useless"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "useless"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].useless",
+      "isMatch": true,
+      "matchedBy": [
+        "useless"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "useless"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].preach",
+      "isMatch": true,
+      "matchedBy": [
+        "preach"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "preach"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].preach",
+      "isMatch": true,
+      "matchedBy": [
+        "preach"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "preach"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].ride",
+      "isMatch": true,
+      "matchedBy": [
+        "ride"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "ride"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].ride",
+      "isMatch": true,
+      "matchedBy": [
+        "ride"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "ride"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].abaft",
+      "isMatch": true,
+      "matchedBy": [
+        "abaft"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "abaft"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].abaft",
+      "isMatch": true,
+      "matchedBy": [
+        "abaft"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "abaft"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].obtainable",
+      "isMatch": true,
+      "matchedBy": [
+        "obtainable"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "obtainable"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].obtainable",
+      "isMatch": true,
+      "matchedBy": [
+        "obtainable"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "obtainable"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].follow",
+      "isMatch": true,
+      "matchedBy": [
+        "follo?"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "follo?"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].follow",
+      "isMatch": true,
+      "matchedBy": [
+        "follo?"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "follo?"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].bumpy",
+      "isMatch": true,
+      "matchedBy": [
+        "bumpy"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "bumpy"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].bumpy",
+      "isMatch": true,
+      "matchedBy": [
+        "bumpy"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "bumpy"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].bit",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "bi?.amu?ing"
+      ]
+    }
+  ],
+  "haystack": [
+    {
+      "bit": 817,
+      "bumpy": 818,
+      "sting": 819,
+      "follow": 820,
+      "obtainable": 821,
+      "abaft": 822,
+      "part": 823,
+      "growth": 824,
+      "corrod": 825,
+      "holistic": 826,
+      "hum": 827,
+      "stormy": 828,
+      "exclusive": 829,
+      "ride": 830,
+      "sight": 831,
+      "preach": 832,
+      "tread": 833,
+      "useless": 834,
+      "judicious": 835,
+      "door": 836,
+      "beautiful": 837,
+      "act": 838,
+      "rewind": 839,
+      "pink": 840,
+      "design": 841,
+      "interesting": 842,
+      "rule": 843,
+      "operate": 844,
+      "tangible": 845,
+      "macabre": 846
+    },
+    847,
+    848,
+    849,
+    850
+  ]
+}

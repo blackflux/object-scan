@@ -1,0 +1,438 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "many",
+      "arrayLengthProb": "min",
+      "maxDepthProb": "some",
+      "maxNeedlesProb": "many",
+      "maxNeedleLengthProb": "some",
+      "negateProb": "never",
+      "starProb": "never",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "never",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "idolize",
+    "join",
+    "talented",
+    "water",
+    "glistening",
+    "succinct",
+    "persuade",
+    "part",
+    "police.expansion",
+    "respect",
+    "supply",
+    "declare"
+  ],
+  "searchTree": {
+    "idolize": {},
+    "join": {},
+    "talented": {},
+    "water": {},
+    "glistening": {},
+    "succinct": {},
+    "persuade": {},
+    "part": {},
+    "police": {
+      "expansion": {}
+    },
+    "respect": {},
+    "supply": {},
+    "declare": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "succinct",
+    "part",
+    "glistening",
+    "join",
+    "water",
+    "supply",
+    "talented",
+    "declare",
+    "respect",
+    "persuade",
+    "idolize",
+    "police.expansion"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "idolize",
+        "join",
+        "talented",
+        "water",
+        "glistening",
+        "succinct",
+        "persuade",
+        "part",
+        "police.expansion",
+        "respect",
+        "supply",
+        "declare"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "succinct",
+      "isMatch": true,
+      "matchedBy": [
+        "succinct"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "succinct"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "succinct",
+      "isMatch": true,
+      "matchedBy": [
+        "succinct"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "succinct"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "part",
+      "isMatch": true,
+      "matchedBy": [
+        "part"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "part"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "part",
+      "isMatch": true,
+      "matchedBy": [
+        "part"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "part"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "glistening",
+      "isMatch": true,
+      "matchedBy": [
+        "glistening"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "glistening"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "glistening",
+      "isMatch": true,
+      "matchedBy": [
+        "glistening"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "glistening"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "join",
+      "isMatch": true,
+      "matchedBy": [
+        "join"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "join"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "join",
+      "isMatch": true,
+      "matchedBy": [
+        "join"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "join"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "water",
+      "isMatch": true,
+      "matchedBy": [
+        "water"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "water"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "water",
+      "isMatch": true,
+      "matchedBy": [
+        "water"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "water"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "supply",
+      "isMatch": true,
+      "matchedBy": [
+        "supply"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "supply"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "supply",
+      "isMatch": true,
+      "matchedBy": [
+        "supply"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "supply"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "talented",
+      "isMatch": true,
+      "matchedBy": [
+        "talented"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "talented"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "talented",
+      "isMatch": true,
+      "matchedBy": [
+        "talented"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "talented"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "declare",
+      "isMatch": true,
+      "matchedBy": [
+        "declare"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "declare"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "declare",
+      "isMatch": true,
+      "matchedBy": [
+        "declare"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "declare"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "respect",
+      "isMatch": true,
+      "matchedBy": [
+        "respect"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "respect"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "respect",
+      "isMatch": true,
+      "matchedBy": [
+        "respect"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "respect"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "persuade",
+      "isMatch": true,
+      "matchedBy": [
+        "persuade"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "persuade"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "persuade",
+      "isMatch": true,
+      "matchedBy": [
+        "persuade"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "persuade"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "idolize",
+      "isMatch": true,
+      "matchedBy": [
+        "idolize"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "idolize"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "idolize",
+      "isMatch": true,
+      "matchedBy": [
+        "idolize"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "idolize"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "police",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "police.expansion"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "police.expansion",
+      "isMatch": true,
+      "matchedBy": [
+        "police.expansion"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "police.expansion"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "police.expansion",
+      "isMatch": true,
+      "matchedBy": [
+        "police.expansion"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "police.expansion"
+      ]
+    }
+  ],
+  "haystack": {
+    "police": {
+      "horse": 731,
+      "lake": 732,
+      "parallel": 733,
+      "plough": 734,
+      "chubby": 735,
+      "kick": 736,
+      "finicky": 737,
+      "safe": 738,
+      "secretary": 739,
+      "talented": 740,
+      "mine": 741,
+      "dare": 742,
+      "beautiful": 743,
+      "debt": 744,
+      "station": 745,
+      "previous": 746,
+      "expansion": 747,
+      "weight": 748,
+      "stormy": 749,
+      "scale": 750,
+      "gigantic": 751,
+      "doubtful": 752,
+      "premium": 753
+    },
+    "idolize": 754,
+    "innovate": 755,
+    "persuade": 756,
+    "hesitant": 757,
+    "respect": 758,
+    "declare": 759,
+    "talented": 760,
+    "giant": 761,
+    "supply": 762,
+    "water": 763,
+    "join": 764,
+    "abundant": 765,
+    "lowly": 766,
+    "right": 767,
+    "beef": 768,
+    "glistening": 769,
+    "earn": 770,
+    "shocking": 771,
+    "sidewalk": 772,
+    "match": 773,
+    "rhythm": 774,
+    "part": 775,
+    "succinct": 776
+  }
+}

@@ -1,0 +1,275 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "some",
+      "objectLengthProb": "some",
+      "arrayLengthProb": "min",
+      "maxDepthProb": "max",
+      "maxNeedlesProb": "some",
+      "maxNeedleLengthProb": "max",
+      "negateProb": "few",
+      "starProb": "never",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "never",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "search",
+    "contribute",
+    "caus?",
+    "!cau?e",
+    "?ow",
+    "!bow",
+    "rabbit.poor",
+    "!contribute",
+    "rabbit.prove",
+    "cause",
+    "!searc?",
+    "contr?bute",
+    "!contrast",
+    "c?ntribute"
+  ],
+  "searchTree": {
+    "search": {},
+    "contribute": {},
+    "caus?": {},
+    "cau?e": {},
+    "?ow": {},
+    "bow": {},
+    "rabbit": {
+      "poor": {},
+      "prove": {}
+    },
+    "cause": {},
+    "searc?": {},
+    "contr?bute": {},
+    "contrast": {},
+    "c?ntribute": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "cause",
+    "contribute",
+    "rabbit.poor",
+    "rabbit.prove"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "search",
+        "contribute",
+        "caus?",
+        "!cau?e",
+        "?ow",
+        "!bow",
+        "rabbit.poor",
+        "!contribute",
+        "rabbit.prove",
+        "cause",
+        "!searc?",
+        "contr?bute",
+        "!contrast",
+        "c?ntribute"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "search",
+      "isMatch": false,
+      "matchedBy": [
+        "search"
+      ],
+      "excludedBy": [
+        "!searc?"
+      ],
+      "traversedBy": [
+        "search",
+        "!searc?"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cause",
+      "isMatch": true,
+      "matchedBy": [
+        "caus?",
+        "cause"
+      ],
+      "excludedBy": [
+        "!cau?e"
+      ],
+      "traversedBy": [
+        "caus?",
+        "!cau?e",
+        "cause"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cause",
+      "isMatch": true,
+      "matchedBy": [
+        "caus?",
+        "cause"
+      ],
+      "excludedBy": [
+        "!cau?e"
+      ],
+      "traversedBy": [
+        "caus?",
+        "!cau?e",
+        "cause"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "bow",
+      "isMatch": false,
+      "matchedBy": [
+        "?ow"
+      ],
+      "excludedBy": [
+        "!bow"
+      ],
+      "traversedBy": [
+        "?ow",
+        "!bow"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "contribute",
+      "isMatch": true,
+      "matchedBy": [
+        "contr?bute",
+        "c?ntribute"
+      ],
+      "excludedBy": [
+        "!contribute"
+      ],
+      "traversedBy": [
+        "contribute",
+        "!contribute",
+        "contr?bute",
+        "c?ntribute"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "contribute",
+      "isMatch": true,
+      "matchedBy": [
+        "contr?bute",
+        "c?ntribute"
+      ],
+      "excludedBy": [
+        "!contribute"
+      ],
+      "traversedBy": [
+        "contribute",
+        "!contribute",
+        "contr?bute",
+        "c?ntribute"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "rabbit",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "rabbit.poor",
+        "rabbit.prove"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "rabbit.poor",
+      "isMatch": true,
+      "matchedBy": [
+        "rabbit.poor"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "rabbit.poor"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "rabbit.poor",
+      "isMatch": true,
+      "matchedBy": [
+        "rabbit.poor"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "rabbit.poor"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "rabbit.prove",
+      "isMatch": true,
+      "matchedBy": [
+        "rabbit.prove"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "rabbit.prove"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "rabbit.prove",
+      "isMatch": true,
+      "matchedBy": [
+        "rabbit.prove"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "rabbit.prove"
+      ]
+    }
+  ],
+  "haystack": {
+    "follow": [],
+    "forgetful": [],
+    "giant": [],
+    "report": [],
+    "rabbit": {
+      "steadfast": 724,
+      "pest": 725,
+      "recondite": 726,
+      "rhythm": 727,
+      "merge": 728,
+      "illustrate": 729,
+      "watery": 730,
+      "prove": 731,
+      "smooth": 732,
+      "drink": 733,
+      "innocent": 734,
+      "soup": 735,
+      "poor": 736
+    },
+    "contribute": 737,
+    "river": 738,
+    "bow": 739,
+    "contrast": 740,
+    "hateful": 741,
+    "mundane": 742,
+    "cause": 743,
+    "search": 744
+  }
+}

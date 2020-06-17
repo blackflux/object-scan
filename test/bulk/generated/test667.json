@@ -1,0 +1,1554 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "some",
+      "objectLengthProb": "many",
+      "arrayLengthProb": "min",
+      "maxDepthProb": "few",
+      "maxNeedlesProb": "few",
+      "maxNeedleLengthProb": "some",
+      "negateProb": "never",
+      "starProb": "some",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "never",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "**",
+    "*.**",
+    "weight",
+    "*",
+    "**.publi?",
+    "favour"
+  ],
+  "searchTree": {
+    "**": {
+      "publi?": {}
+    },
+    "*": {
+      "**": {}
+    },
+    "weight": {},
+    "publi?": {},
+    "favour": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "alert",
+    "mammoth",
+    "favour",
+    "arise",
+    "spring",
+    "friendly",
+    "idiotic",
+    "console",
+    "arch",
+    "bent",
+    "better",
+    "solve",
+    "weight",
+    "knot",
+    "bow",
+    "makeshift",
+    "cake.retain",
+    "cake.conclude",
+    "cake.impeach",
+    "cake.tan",
+    "cake.pardon",
+    "cake.cool",
+    "cake.alley",
+    "cake.arch",
+    "cake.love",
+    "cake.consult",
+    "cake.loaf",
+    "cake.cake",
+    "cake.pest",
+    "cake.sweltering",
+    "cake.substance",
+    "cake.aromatic",
+    "cake.meek",
+    "cake.stale",
+    "cake.judicious",
+    "cake.left",
+    "cake.blow",
+    "cake.control",
+    "cake.public",
+    "cake.own",
+    "cake.ignorant",
+    "cake"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "*.**",
+        "weight",
+        "*",
+        "**.publi?",
+        "favour"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "alert",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "alert",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "mammoth",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "mammoth",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "favour",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*",
+        "favour"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*",
+        "favour"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "favour",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*",
+        "favour"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*",
+        "favour"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "arise",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "arise",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "spring",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "spring",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "friendly",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "friendly",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "idiotic",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "idiotic",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "console",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "console",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "arch",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "arch",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "bent",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "bent",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "better",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "better",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "solve",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "solve",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "weight",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*",
+        "weight"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*",
+        "weight"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "weight",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*",
+        "weight"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*",
+        "weight"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "knot",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "knot",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "bow",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "bow",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "makeshift",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "makeshift",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.retain",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.retain",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.conclude",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.conclude",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.impeach",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.impeach",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.tan",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.tan",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.pardon",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.pardon",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.cool",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.cool",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.alley",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.alley",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.arch",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.arch",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.love",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.love",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.consult",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.consult",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.loaf",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.loaf",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.cake",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.cake",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.pest",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.pest",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.sweltering",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.sweltering",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.substance",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.substance",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.aromatic",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.aromatic",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.meek",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.meek",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.stale",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.stale",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.judicious",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.judicious",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.left",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.left",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.blow",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.blow",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.control",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.control",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.public",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.public",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.own",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.own",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cake.ignorant",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake.ignorant",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cake",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "humdrum",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "wandering",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "sky",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "polite",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "upbeat",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "tangible",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.publi?",
+        "*.**",
+        "*"
+      ]
+    }
+  ],
+  "haystack": {
+    "tangible": [],
+    "upbeat": [],
+    "polite": [],
+    "sky": [],
+    "wandering": [],
+    "humdrum": [],
+    "cake": {
+      "ignorant": 0,
+      "own": 0,
+      "public": 1,
+      "control": 563,
+      "blow": 564,
+      "left": 565,
+      "judicious": 566,
+      "stale": 567,
+      "meek": 568,
+      "aromatic": 569,
+      "substance": 570,
+      "sweltering": 571,
+      "pest": 572,
+      "cake": 573,
+      "loaf": 574,
+      "consult": 575,
+      "love": 576,
+      "arch": 577,
+      "alley": 578,
+      "cool": 579,
+      "pardon": 580,
+      "tan": 581,
+      "impeach": 582,
+      "conclude": 583,
+      "retain": 584
+    },
+    "makeshift": 585,
+    "bow": 586,
+    "knot": 587,
+    "weight": 588,
+    "solve": 589,
+    "better": 590,
+    "bent": 591,
+    "arch": 592,
+    "console": 593,
+    "idiotic": 594,
+    "friendly": 595,
+    "spring": 596,
+    "arise": 597,
+    "favour": 598,
+    "mammoth": 599,
+    "alert": 600
+  }
+}

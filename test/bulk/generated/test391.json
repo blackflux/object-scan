@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "many",
+      "maxDepthProb": "max",
+      "maxNeedlesProb": "many",
+      "maxNeedleLengthProb": "some",
+      "negateProb": "never",
+      "starProb": "always",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "few",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "**",
+    "*"
+  ],
+  "searchTree": {
+    "**": {},
+    "*": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "favour"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "favour",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "favour",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "*"
+      ]
+    }
+  ],
+  "haystack": {
+    "favour": {}
+  }
+}

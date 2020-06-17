@@ -1,0 +1,527 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "many",
+      "maxDepthProb": "few",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "few",
+      "negateProb": "never",
+      "starProb": "some",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "never",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "*.locket.*.encircle",
+    "*.*",
+    "rebuild.*.bow",
+    "writing.*.pardon",
+    "*",
+    "*.locket.*.*",
+    "writing.join",
+    "gate",
+    "rebuild",
+    "writing.sob.pardon",
+    "*.*.fall.illustrious.birds",
+    "*.*.cars",
+    "writing.*.conclude.*",
+    "*.*.credit"
+  ],
+  "searchTree": {
+    "*": {
+      "locket": {
+        "*": {
+          "encircle": {},
+          "*": {}
+        }
+      },
+      "*": {
+        "fall": {
+          "illustrious": {
+            "birds": {}
+          }
+        },
+        "cars": {},
+        "credit": {}
+      }
+    },
+    "rebuild": {
+      "*": {
+        "bow": {}
+      }
+    },
+    "writing": {
+      "*": {
+        "pardon": {},
+        "conclude": {
+          "*": {}
+        }
+      },
+      "join": {},
+      "sob": {
+        "pardon": {}
+      }
+    },
+    "gate": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "gate",
+    "rebuild.desk",
+    "rebuild.bit",
+    "rebuild.popcorn",
+    "rebuild.periodic",
+    "rebuild.crazy",
+    "rebuild",
+    "writing.locket",
+    "writing.sob",
+    "writing.join",
+    "writing"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.locket.*.encircle",
+        "*.*",
+        "rebuild.*.bow",
+        "writing.*.pardon",
+        "*",
+        "*.locket.*.*",
+        "writing.join",
+        "gate",
+        "rebuild",
+        "writing.sob.pardon",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "writing.*.conclude.*",
+        "*.*.credit"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "gate",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "gate"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.locket.*.encircle",
+        "*.*",
+        "*",
+        "*.locket.*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "gate"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "gate",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "gate"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.locket.*.encircle",
+        "*.*",
+        "*",
+        "*.locket.*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "gate"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "rebuild",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "rebuild"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.locket.*.encircle",
+        "*.*",
+        "*",
+        "*.locket.*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "rebuild.*.bow",
+        "rebuild"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "rebuild.desk",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "rebuild.*.bow"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "rebuild.desk",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "rebuild.*.bow"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "rebuild.bit",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "rebuild.*.bow"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "rebuild.bit",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "rebuild.*.bow"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "rebuild.popcorn",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "rebuild.*.bow"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "rebuild.popcorn",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "rebuild.*.bow"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "rebuild.periodic",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "rebuild.*.bow"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "rebuild.periodic",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "rebuild.*.bow"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "rebuild.crazy",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "rebuild.*.bow"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "rebuild.crazy",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "rebuild.*.bow"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "rebuild",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "rebuild"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.locket.*.encircle",
+        "*.*",
+        "*",
+        "*.locket.*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "rebuild.*.bow",
+        "rebuild"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "writing",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.locket.*.encircle",
+        "*.*",
+        "*",
+        "*.locket.*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "writing.*.pardon",
+        "writing.join",
+        "writing.sob.pardon",
+        "writing.*.conclude.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "writing.locket",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.locket.*.encircle",
+        "*.locket.*.*",
+        "*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "writing.*.pardon",
+        "writing.*.conclude.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "writing.locket",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.locket.*.encircle",
+        "*.locket.*.*",
+        "*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "writing.*.pardon",
+        "writing.*.conclude.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "writing.sob",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "writing.*.pardon",
+        "writing.*.conclude.*",
+        "writing.sob.pardon"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "writing.sob",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "writing.*.pardon",
+        "writing.*.conclude.*",
+        "writing.sob.pardon"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "writing.join",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "writing.join"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "writing.*.pardon",
+        "writing.*.conclude.*",
+        "writing.join"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "writing.join",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "writing.join"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "writing.*.pardon",
+        "writing.*.conclude.*",
+        "writing.join"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "writing",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.locket.*.encircle",
+        "*.*",
+        "*",
+        "*.locket.*.*",
+        "*.*.fall.illustrious.birds",
+        "*.*.cars",
+        "*.*.credit",
+        "writing.*.pardon",
+        "writing.join",
+        "writing.sob.pardon",
+        "writing.*.conclude.*"
+      ]
+    }
+  ],
+  "haystack": {
+    "writing": {
+      "join": 59,
+      "sob": 72,
+      "locket": 115
+    },
+    "rebuild": {
+      "crazy": 188,
+      "periodic": 307,
+      "popcorn": 334,
+      "bit": 420,
+      "desk": 509
+    },
+    "gate": 510
+  }
+}

@@ -1,0 +1,506 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "max",
+      "arrayLengthProb": "many",
+      "maxDepthProb": "some",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "many",
+      "negateProb": "few",
+      "starProb": "never",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "few",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "macabre",
+    "finicky",
+    "rattle",
+    "!spectacular",
+    "chilly",
+    "n*e.rhythm",
+    "spectacular",
+    "!*violet",
+    "f*y",
+    "!hat",
+    "rich",
+    "!activity",
+    "ab*ard",
+    "activity",
+    "contr*te",
+    "!finicky",
+    "perpetual",
+    "partake",
+    "tricky"
+  ],
+  "searchTree": {
+    "macabre": {},
+    "finicky": {},
+    "rattle": {},
+    "spectacular": {},
+    "chilly": {},
+    "n*e": {
+      "rhythm": {}
+    },
+    "*violet": {},
+    "f*y": {},
+    "hat": {},
+    "rich": {},
+    "activity": {},
+    "ab*ard": {},
+    "contr*te": {},
+    "perpetual": {},
+    "partake": {},
+    "tricky": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "macabre",
+    "rattle",
+    "partake",
+    "spectacular",
+    "rich",
+    "chilly",
+    "finicky",
+    "contribute",
+    "activity",
+    "tricky",
+    "aboard",
+    "perpetual",
+    "note.rhythm"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "macabre",
+        "finicky",
+        "rattle",
+        "!spectacular",
+        "chilly",
+        "n*e.rhythm",
+        "spectacular",
+        "!*violet",
+        "f*y",
+        "!hat",
+        "rich",
+        "!activity",
+        "ab*ard",
+        "activity",
+        "contr*te",
+        "!finicky",
+        "perpetual",
+        "partake",
+        "tricky"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "macabre",
+      "isMatch": true,
+      "matchedBy": [
+        "macabre"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "macabre"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "macabre",
+      "isMatch": true,
+      "matchedBy": [
+        "macabre"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "macabre"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "rattle",
+      "isMatch": true,
+      "matchedBy": [
+        "rattle"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "rattle"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "rattle",
+      "isMatch": true,
+      "matchedBy": [
+        "rattle"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "rattle"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "partake",
+      "isMatch": true,
+      "matchedBy": [
+        "partake"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "partake"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "partake",
+      "isMatch": true,
+      "matchedBy": [
+        "partake"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "partake"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "spectacular",
+      "isMatch": true,
+      "matchedBy": [
+        "spectacular"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "!spectacular",
+        "spectacular"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "spectacular",
+      "isMatch": true,
+      "matchedBy": [
+        "spectacular"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "!spectacular",
+        "spectacular"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "rich",
+      "isMatch": true,
+      "matchedBy": [
+        "rich"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "rich"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "rich",
+      "isMatch": true,
+      "matchedBy": [
+        "rich"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "rich"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "chilly",
+      "isMatch": true,
+      "matchedBy": [
+        "chilly"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "chilly"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "chilly",
+      "isMatch": true,
+      "matchedBy": [
+        "chilly"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "chilly"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "finicky",
+      "isMatch": true,
+      "matchedBy": [
+        "f*y"
+      ],
+      "excludedBy": [
+        "!finicky"
+      ],
+      "traversedBy": [
+        "finicky",
+        "!finicky",
+        "f*y"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "finicky",
+      "isMatch": true,
+      "matchedBy": [
+        "f*y"
+      ],
+      "excludedBy": [
+        "!finicky"
+      ],
+      "traversedBy": [
+        "finicky",
+        "!finicky",
+        "f*y"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "contribute",
+      "isMatch": true,
+      "matchedBy": [
+        "contr*te"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "contr*te"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "contribute",
+      "isMatch": true,
+      "matchedBy": [
+        "contr*te"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "contr*te"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "activity",
+      "isMatch": true,
+      "matchedBy": [
+        "activity"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "!activity",
+        "activity"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "activity",
+      "isMatch": true,
+      "matchedBy": [
+        "activity"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "!activity",
+        "activity"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "tricky",
+      "isMatch": true,
+      "matchedBy": [
+        "tricky"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "tricky"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "tricky",
+      "isMatch": true,
+      "matchedBy": [
+        "tricky"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "tricky"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "aboard",
+      "isMatch": true,
+      "matchedBy": [
+        "ab*ard"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "ab*ard"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "aboard",
+      "isMatch": true,
+      "matchedBy": [
+        "ab*ard"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "ab*ard"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "perpetual",
+      "isMatch": true,
+      "matchedBy": [
+        "perpetual"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "perpetual"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "perpetual",
+      "isMatch": true,
+      "matchedBy": [
+        "perpetual"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "perpetual"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "note",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "n*e.rhythm"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "note.rhythm",
+      "isMatch": true,
+      "matchedBy": [
+        "n*e.rhythm"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "n*e.rhythm"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "note.rhythm",
+      "isMatch": true,
+      "matchedBy": [
+        "n*e.rhythm"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "n*e.rhythm"
+      ]
+    }
+  ],
+  "haystack": {
+    "note": {
+      "drunk": 783,
+      "infringe": 784,
+      "secretary": 785,
+      "family": 786,
+      "contend": 787,
+      "hunt": 788,
+      "lamentable": 789,
+      "rhythm": 790,
+      "needy": 791,
+      "guide": 792,
+      "obstruct": 793,
+      "join": 794,
+      "blue-eyed": 795,
+      "act": 796,
+      "dashing": 797,
+      "bent": 798,
+      "tacky": 799,
+      "happy": 800,
+      "material": 801,
+      "temper": 802,
+      "destroy": 803,
+      "admit": 804,
+      "third": 805,
+      "strive": 806,
+      "achiever": 807,
+      "shock": 808,
+      "search": 809,
+      "price": 810,
+      "snow": 811,
+      "hateful": 812
+    },
+    "protective": 813,
+    "hat": 814,
+    "afterthought": 815,
+    "box": 816,
+    "perpetual": 817,
+    "aboard": 818,
+    "tricky": 819,
+    "activity": 820,
+    "seed": 821,
+    "chubby": 822,
+    "cork": 823,
+    "contribute": 824,
+    "pollution": 825,
+    "space": 826,
+    "finicky": 827,
+    "chilly": 828,
+    "brain": 829,
+    "rich": 830,
+    "violet": 831,
+    "spectacular": 832,
+    "useless": 833,
+    "wandering": 834,
+    "partake": 835,
+    "earth": 836,
+    "owl": 837,
+    "rattle": 838,
+    "momentous": 839,
+    "macabre": 840,
+    "profuse": 841
+  }
+}

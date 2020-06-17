@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "few",
+      "maxDepthProb": "max",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "max",
+      "negateProb": "few",
+      "starProb": "always",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "few",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "*",
+    "!*"
+  ],
+  "searchTree": {
+    "*": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [],
+  "logs": [],
+  "haystack": {
+    "nonchalant": {}
+  }
+}

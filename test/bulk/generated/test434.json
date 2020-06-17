@@ -1,0 +1,615 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "latin-basic-random",
+      "arrayProb": "never",
+      "objectLengthProb": "some",
+      "arrayLengthProb": "max",
+      "maxDepthProb": "min",
+      "maxNeedlesProb": "max",
+      "maxNeedleLengthProb": "min",
+      "negateProb": "few",
+      "starProb": "never",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "few",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "!o*@nv8b",
+    "!\\?E3",
+    "9\\{~*|nD\\}jA30>L\\\\J\"e;:t",
+    "9\\{~|nD\\}jA30>L\\\\J\"e;:t",
+    "aFL)UGD=18e|\\{Ez6<4B2",
+    "6*",
+    "P",
+    "\\?E3",
+    "6",
+    "2g\\*PG~",
+    "O7X\\.\\!5",
+    "*;:t",
+    "ORG=m",
+    "*h",
+    "!ORG*=m",
+    "!d<KF;'\\*v\\]V`$kT",
+    "!HmRw8i@L7VaQ"
+  ],
+  "searchTree": {
+    "6": {},
+    "o*@nv8b": {},
+    "\\?E3": {},
+    "9\\{~*|nD\\}jA30>L\\\\J\"e;:t": {},
+    "9\\{~|nD\\}jA30>L\\\\J\"e;:t": {},
+    "aFL)UGD=18e|\\{Ez6<4B2": {},
+    "6*": {},
+    "P": {},
+    "2g\\*PG~": {},
+    "O7X\\.\\!5": {},
+    "*;:t": {},
+    "ORG=m": {},
+    "*h": {},
+    "ORG*=m": {},
+    "d<KF;'\\*v\\]V`$kT": {},
+    "HmRw8i@L7VaQ": {}
+  },
+  "opts": {
+    "useArraySelector": true
+  },
+  "result": [
+    "9\\{~|nD\\}jA30>L\\\\J\"e;:t",
+    "O7X\\.\\!5",
+    "\\?E3",
+    "aFL)UGD=18e|\\{Ez6<4B2",
+    "P",
+    "h",
+    "2g\\*PG~",
+    "6"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "!o*@nv8b",
+        "!\\?E3",
+        "9\\{~*|nD\\}jA30>L\\\\J\"e;:t",
+        "9\\{~|nD\\}jA30>L\\\\J\"e;:t",
+        "aFL)UGD=18e|\\{Ez6<4B2",
+        "6*",
+        "P",
+        "\\?E3",
+        "6",
+        "2g\\*PG~",
+        "O7X\\.\\!5",
+        "*;:t",
+        "ORG=m",
+        "*h",
+        "!ORG*=m",
+        "!d<KF;'\\*v\\]V`$kT",
+        "!HmRw8i@L7VaQ"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "9\\{~|nD\\}jA30>L\\\\J\"e;:t",
+      "isMatch": true,
+      "matchedBy": [
+        "9\\{~*|nD\\}jA30>L\\\\J\"e;:t",
+        "9\\{~|nD\\}jA30>L\\\\J\"e;:t",
+        "*;:t"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "9\\{~*|nD\\}jA30>L\\\\J\"e;:t",
+        "9\\{~|nD\\}jA30>L\\\\J\"e;:t",
+        "*;:t"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "9\\{~|nD\\}jA30>L\\\\J\"e;:t",
+      "isMatch": true,
+      "matchedBy": [
+        "9\\{~*|nD\\}jA30>L\\\\J\"e;:t",
+        "9\\{~|nD\\}jA30>L\\\\J\"e;:t",
+        "*;:t"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "9\\{~*|nD\\}jA30>L\\\\J\"e;:t",
+        "9\\{~|nD\\}jA30>L\\\\J\"e;:t",
+        "*;:t"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "O7X\\.\\!5",
+      "isMatch": true,
+      "matchedBy": [
+        "O7X\\.\\!5"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "O7X\\.\\!5"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "O7X\\.\\!5",
+      "isMatch": true,
+      "matchedBy": [
+        "O7X\\.\\!5"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "O7X\\.\\!5"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "\\?E3",
+      "isMatch": true,
+      "matchedBy": [
+        "\\?E3"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "!\\?E3",
+        "\\?E3"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "\\?E3",
+      "isMatch": true,
+      "matchedBy": [
+        "\\?E3"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "!\\?E3",
+        "\\?E3"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "aFL)UGD=18e|\\{Ez6<4B2",
+      "isMatch": true,
+      "matchedBy": [
+        "aFL)UGD=18e|\\{Ez6<4B2"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "aFL)UGD=18e|\\{Ez6<4B2"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "aFL)UGD=18e|\\{Ez6<4B2",
+      "isMatch": true,
+      "matchedBy": [
+        "aFL)UGD=18e|\\{Ez6<4B2"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "aFL)UGD=18e|\\{Ez6<4B2"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "P",
+      "isMatch": true,
+      "matchedBy": [
+        "P"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "P"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "P",
+      "isMatch": true,
+      "matchedBy": [
+        "P"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "P"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "h",
+      "isMatch": true,
+      "matchedBy": [
+        "*h"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*h"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "h",
+      "isMatch": true,
+      "matchedBy": [
+        "*h"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*h"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "ORG=m",
+      "isMatch": false,
+      "matchedBy": [
+        "ORG=m"
+      ],
+      "excludedBy": [
+        "!ORG*=m"
+      ],
+      "traversedBy": [
+        "ORG=m",
+        "!ORG*=m"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "2g\\*PG~",
+      "isMatch": true,
+      "matchedBy": [
+        "2g\\*PG~"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "2g\\*PG~"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "2g\\*PG~",
+      "isMatch": true,
+      "matchedBy": [
+        "2g\\*PG~"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "2g\\*PG~"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "6",
+      "isMatch": true,
+      "matchedBy": [
+        "6",
+        "6*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "6",
+        "6*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "6",
+      "isMatch": true,
+      "matchedBy": [
+        "6",
+        "6*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "6",
+        "6*"
+      ]
+    }
+  ],
+  "haystack": {
+    "6": {
+      "Kwlcoq@=H5&N|d": 229,
+      "G;": 230,
+      "uQG^'9": 231,
+      "0'whHun$O)1I?W*d6Vt5": 232,
+      "DUJl)": 233,
+      "k:-&7\"ponBYX(I=": 234,
+      "BspOdR~-rYCo:": 235,
+      "[4": 236,
+      "|DhJ<;zp6*~kE": 237,
+      ".iYWoStjX;7": 238,
+      "G": 239,
+      "7pO&fhzY[3WsbE%Lg-j9": 240,
+      "Auwq!~g|": 241,
+      "e7o*iZs": 242,
+      "tg'%h\"FwST)a0XkN:": 243,
+      "]fXV*JqR-": 244,
+      "5E0-awx": 245,
+      "Vx": 246
+    },
+    "2g*PG~": {
+      "bJ\"Yr*": 0,
+      "WF>G~O:": 1,
+      "#Y2J\\>AaR": 2,
+      "~d^": 3,
+      "s!I<FG*]8o": 4,
+      "m]'xA!_pJ|Wa\\5O:l6n": 5,
+      "V|": 6,
+      "C/i4cBw<OEAyVx3dzF9^": 7,
+      ">{wj)A-RBVD_/Gbf`2Cy": 8,
+      "4r#fSxM": 9,
+      "1qSf7": 10,
+      "/U2}@": 11,
+      "J<a7]FU)+*/{eQkr(": 12,
+      "fMI7U_uAe|ym1Z}": 13
+    },
+    "o?:7kwPqA$Tj/@nv8b": {
+      "0": 30,
+      "#VR-0COl5=YtWiP8&,g": 14,
+      "OQ|#": 15,
+      "3tf6Am=Ia{/JqV7": 16,
+      "*Qrg": 17,
+      "]ObMwGvkB": 18,
+      "@LyTsZf#8b~'Q,%&[ePg": 19,
+      "OA3u987n": 20,
+      "Obrf*Z-Yt": 21,
+      "(PR&4Z": 22,
+      "unl+yZ:\"": 23,
+      "yuSO.,k*~l": 24,
+      "p~r$}/#L\"": 25,
+      "y+*76IQZ<!": 26,
+      "~%/Kv+?anO": 27,
+      "%sf-R": 28,
+      "(Xy|k]lR": 29
+    },
+    "}5=P1XV?I{hT4i": {
+      "Dw5YhN.K=mcsoe2L&": 31,
+      "|iE'7j+": 32,
+      "ths-DGU/&0z\",(\\)5@^+": 33,
+      "^I|gU_]FP/vHJRj@dz": 34,
+      "\\R:{=%/&sf>9-1lUHb": 35,
+      "LNGB~y`0nU": 36,
+      "brk_x\\Ly/IH)<hZi": 37,
+      "_rIDCmu4=\";!/P']$%[": 38,
+      "#%": 39,
+      "n$xl+XWZdrkG0C*a\"Kbj": 40,
+      "`Hed": 41,
+      "#I|e\"9<*;H?yU": 42,
+      "B": 43,
+      ".)`;@E3OBLI-H+#oSFna": 44,
+      "|c`unG02$wYq<iOQ": 45
+    },
+    "ORG=m": {
+      "UQl@)Hqx&[}_": 46,
+      "#C+]s7(`g": 47,
+      "PEBzsZ\\0d%<tSf4hK[,o": 48,
+      "@C*:?R&J>fp'": 49,
+      "^8(@P~q'Xw]N-$Yn!": 50,
+      "Xq_)[": 51,
+      "L'": 52,
+      "Ex%Q:T`^m\\Pg[K;N#9e": 53,
+      "yjov*`sbmZfF9Y#(8[u": 54,
+      "4/y]Z28o_UmB\"MVD%+J": 55,
+      "[x8T'1)": 56,
+      "QLG<#0rR/v16fe]+": 57,
+      "k/AK54": 58,
+      "^HI?9GDQ|>]%": 59
+    },
+    "h": {
+      "P": 60,
+      "]V\\Bnp*{!@4_;f": 61,
+      "n3<": 62,
+      "I2BH\"47<}k|!JLSr'_G": 63,
+      "uF": 64,
+      "f%n)T~]LI/;ExAZh^6": 65,
+      "yih3b#+jd?9Y<Xo/_qK": 66,
+      "?#QPae:F>SY+h&sE": 67,
+      ".~}b;qCJ*$E4|": 68,
+      "%K,'MHo": 69,
+      "lizFpqy?cW>bI": 70,
+      "T~$e<80+P^&HJ,nQ": 71,
+      "EYT6": 72,
+      "(\\T2": 73,
+      "P`F)j<Xmo:w,#": 74,
+      "q5-N;Gj(v": 75,
+      ")*": 76
+    },
+    "HmRw8i@L7VaQ": {
+      "hL2wYa6#vr": 77,
+      "p": 78,
+      "gP_7{C~": 79,
+      "{lU?eO)njG}5": 80,
+      "_M": 81,
+      "fNcy": 82,
+      "az*B$R%1Uu|CnsH": 83,
+      "^C{>": 84,
+      "Maw+mVI.i/R9|od5uj": 85,
+      "T6J.%2}L7Q/": 86,
+      "(g\"7": 87,
+      "po!cNBl/`6^Fwe*?r5": 88,
+      "z7v$)N4g}5LD\\,I": 89,
+      ".xykOtPv#uKV": 90,
+      "u7X+V[GOYbP3!nMy\"=5": 91,
+      "0Vgs%c>y": 92
+    },
+    ")|4;O5": {
+      "[Q0*?": 93,
+      "d!>JBkwAV6CjOr8a.R:c": 94,
+      "F": 95,
+      "7*nfZMsT4I,": 96,
+      "4,<M'U$C-0V:8B[;N6\"": 97,
+      "wUiZ8mHlAx]": 98,
+      "Y6_": 99,
+      "b/]8": 100,
+      "F,GXa[U|pg=5": 101,
+      "[)6,(FM;gC": 102,
+      "%>\"!N-": 103,
+      "e<R": 104,
+      "d81Ki": 105
+    },
+    "Y:`5#4I1!": {
+      "WX_nlt4$\\3Bo": 106,
+      "y-Zk/;Ho>)=": 107,
+      "<URx#HPYfqjo}@!~G8": 108,
+      "Z'jqnDEJ3V(6d#_f": 109,
+      "/4k": 110,
+      "JA,": 111,
+      "wFky!_-": 112,
+      "JC6>%;": 113,
+      "'u>7-": 114,
+      "RwDt`jA": 115,
+      ">": 116,
+      "'Mo83zlCIA!2": 117,
+      "|UfWNr0oV,S\"hPZ5": 118,
+      "!.;bq<HK7RNF3oBzep": 119,
+      "*|z": 120,
+      "#={y,dO_SP~-;`2\"9l": 121,
+      "F|s<d]J": 122
+    },
+    "5JR&X|xU>7_Q?[2V": {
+      "i7YBhLX:o[wsd~%cz}H9": 123,
+      "Fy?M`R^": 124,
+      "u]": 125,
+      "(U2laA,Kt]M<65jo": 126,
+      "fY@d%s|+XMK5x~h=/#`_": 127,
+      "g%mYLkPo:fH|X": 128,
+      ">;4DdWy@$&": 129,
+      "<gPh(m": 130,
+      "(*": 131,
+      "9$&poXcM": 132,
+      "%op8tVscxO[A1": 133,
+      "y'vmW[K7zG": 134,
+      "Qd/YKM@O;5": 135,
+      "fmt&~oN\\=VXquk": 136,
+      "\\4fw8;d`slbj)@W": 137,
+      "eF_<fMGQDlkIP'>:B": 138,
+      "_6&NGcTiy*<": 139
+    },
+    "P": {
+      "pV7EBxa:cv": 140,
+      "X\\,y2mtF1PY4DT)C0?": 141,
+      "}q1#I)VFp\"UuD(@d+": 142,
+      "~I-\\R1xoc": 143,
+      "<x!5s(Ml9": 144,
+      "dm&P": 145,
+      "35mtH": 146,
+      "_U/GQ2ep9PV": 147,
+      "/]m~TOV\\Qq}U9LaW`k": 148,
+      "Kk~q": 149,
+      "L`h3Z~?7Sa%E&*t": 150,
+      "l8KeCxu.WhPt2#d-i": 151
+    },
+    "1|": {
+      "-)o0^`'": 152,
+      "v!#`_8,0z93Tym": 153,
+      "nie%:p|qTBA!\\Jz": 154,
+      "jcqYbMC": 155,
+      "*~}X;<{7+": 156,
+      "3nk5aE+&sL": 157,
+      "L'rV40_TvdO`n(EYDu": 158,
+      "kjVay;F,\"w=": 159,
+      "b`\\]l1Fgn": 160,
+      "gwnAk": 161,
+      ";*JFa,Edl-T'o#_Cs": 162,
+      "mx./o6T=[ZS": 163,
+      "~]": 164,
+      "mP9tr&683\\AZg':G*0": 165,
+      "WzM2j9-AbFDcrv": 166,
+      "tPTnosbMw_9j6#4": 167
+    },
+    "aFL)UGD=18e|{Ez6<4B2": {
+      "<}H6n-TSvjM": 168,
+      "G%Ch2o8M(V0t~+;b-RD": 169,
+      "!Wk~eh4-'": 170,
+      ",P0R+_<I": 171,
+      "$}": 172,
+      "#?Du(]pT3@Jg-<'Mx": 173,
+      "s:W~mAzctI<D)},U6KF.": 174,
+      "0]:u": 175,
+      "HDu#45w}g(AM97W": 176,
+      "(": 177,
+      "Zh(9?Nm7%GAbsp{": 178,
+      "9#DvAG@jlz`mb+/uZ\\oH": 179,
+      "Y|XofIN,]-ek!AxT3": 180,
+      "M?h/jr'q#-!S90%|": 181,
+      ")}-~$Hj+Q1P\"aVTrv.": 182,
+      "0FPk5sgDR": 183,
+      "Rqo=u(+b5MaZKyx0&S": 184
+    },
+    "d<KF;'*v]V`$kT": {
+      "2Ef)": 185,
+      "fX": 186,
+      "F?`<pzs)eq2r:;#u": 187,
+      "I_9": 188,
+      "#.YlkhS2f9_^": 189,
+      "1C_YZ'l0-J": 190,
+      "q?LAX}*&\"J+i_": 191,
+      "d": 192,
+      "D2\"M,=Zx9<tcKd0;qh": 193,
+      "d)^1fH": 194,
+      "718Z*lFBu3z": 195,
+      "fwV": 196,
+      "\"": 197,
+      "c/bfMkr]o|@*+Pt8": 198,
+      "o~": 199,
+      "1OB@-\\l6": 200,
+      "-Gg%z)eBRw}0*": 201,
+      "S": 202
+    },
+    "?E3": {
+      "9zR`L[haNx]f$j6@W,": 203,
+      "L@g,YUNkp(hf$%!;/^#1": 204,
+      "Vb&qWX,:@3c^Yfn": 205,
+      ")oAj": 206,
+      "Kif": 207,
+      ",]m%?epE752": 208,
+      "cA": 209,
+      "jI": 210,
+      "pL=[CQdvg'42Pj": 211,
+      "3'`y:B.8@QmqM;6^+T1>": 212,
+      "^fX,]": 213,
+      "F,QNE": 214
+    },
+    "O7X.!5": {
+      "e%Ng\\": 215,
+      "_": 216,
+      "g/X`": 217,
+      "FrH@k": 218,
+      ",Np6": 219,
+      "}pay#U4{[3zdrT%b61": 220,
+      "\"k": 221,
+      ":": 222,
+      "=N,S1U7*3vR8\"^;g": 223,
+      "JuFagCh7ckf%O$": 224,
+      "YDyp)\\9R%|MJ7]ax<-": 225,
+      "\\&QD1k": 226,
+      "cuiT!7_'?A": 227,
+      "A`Tiu&": 228
+    },
+    "9{~|nD}jA30>L\\J\"e;:t": {
+      "%L\\": 247,
+      "42,JT^;ms(x89rc": 248,
+      "~3P9e1J2[o{M^": 249,
+      "zuc*/.{": 250,
+      "ez#2M$GJc": 251,
+      "[aC4p6SBc0\\l.])t": 252,
+      "fhAG}_)P'>XtHKmld8": 253,
+      "QFZu": 254,
+      "qB]O90cj45K{7": 255,
+      "b\\hWpN0?n@": 256,
+      "+fzO@NI": 257,
+      "Ll>KoCxa|2=!G": 258,
+      "s0V?2oQaLhHU!{Ny": 259
+    }
+  }
+}

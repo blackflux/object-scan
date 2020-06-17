@@ -1,0 +1,260 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "some",
+      "objectLengthProb": "max",
+      "arrayLengthProb": "few",
+      "maxDepthProb": "few",
+      "maxNeedlesProb": "max",
+      "maxNeedleLengthProb": "min",
+      "negateProb": "few",
+      "starProb": "some",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "never",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "*",
+    "?piders",
+    "**",
+    "!**",
+    "ha?e",
+    "!*",
+    "point",
+    "glorious"
+  ],
+  "searchTree": {
+    "*": {},
+    "?piders": {},
+    "**": {},
+    "ha?e": {},
+    "point": {},
+    "glorious": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "point",
+    "have",
+    "glorious"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "?piders",
+        "**",
+        "!**",
+        "ha?e",
+        "!*",
+        "point",
+        "glorious"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "point",
+      "isMatch": true,
+      "matchedBy": [
+        "point"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "point"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "point",
+      "isMatch": true,
+      "matchedBy": [
+        "point"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "point"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "spiders",
+      "isMatch": false,
+      "matchedBy": [
+        "?piders"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "?piders",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "have",
+      "isMatch": true,
+      "matchedBy": [
+        "ha?e"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "ha?e"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "have",
+      "isMatch": true,
+      "matchedBy": [
+        "ha?e"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "ha?e"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "glorious",
+      "isMatch": true,
+      "matchedBy": [
+        "glorious"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "glorious"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "glorious",
+      "isMatch": true,
+      "matchedBy": [
+        "glorious"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "glorious"
+      ]
+    }
+  ],
+  "haystack": {
+    "lake": {
+      "stale": 0,
+      "sidewalk": 593,
+      "habitual": 594,
+      "sweater": 595,
+      "loaf": 596,
+      "dear": 597,
+      "unbiased": 598,
+      "vessel": 599,
+      "stormy": 600,
+      "rattle": 601,
+      "waggish": 602,
+      "credit": 603,
+      "illustrate": 604,
+      "tax": 605,
+      "hen": 606,
+      "shock": 607,
+      "note": 608,
+      "popcorn": 609,
+      "aboriginal": 610,
+      "glass": 611,
+      "bedroom": 612,
+      "smiling": 613,
+      "exchange": 614,
+      "befitting": 615,
+      "enjoy": 616,
+      "drum": 617,
+      "certain": 618,
+      "worm": 619,
+      "family": 620,
+      "bears": 621
+    },
+    "glorious": 622,
+    "strong": 623,
+    "melodic": 624,
+    "upset": 625,
+    "materialistic": 626,
+    "cover": 627,
+    "regret": 628,
+    "have": 629,
+    "rock": 630,
+    "explore": 631,
+    "tricky": 639,
+    "bouncy": 633,
+    "sneak": 634,
+    "finicky": 635,
+    "scant": 636,
+    "number": 637,
+    "toes": 638,
+    "participate": 640,
+    "spiders": 641,
+    "hat": 642,
+    "fall": 643,
+    "point": 644,
+    "foamy": 645,
+    "take": 646,
+    "rod": 647,
+    "persuade": 648,
+    "recite": 649,
+    "handsomely": 650
+  }
+}

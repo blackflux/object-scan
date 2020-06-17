@@ -1,0 +1,1165 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "latin-basic-char",
+      "arrayProb": "never",
+      "objectLengthProb": "some",
+      "arrayLengthProb": "many",
+      "maxDepthProb": "max",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "many",
+      "negateProb": "few",
+      "starProb": "some",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "few",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "**",
+    "*",
+    "!**",
+    "*.**",
+    "**.*",
+    "*.*.g.**",
+    "**.**",
+    "!*",
+    "\\\\",
+    "|"
+  ],
+  "searchTree": {
+    "**": {
+      "*": {},
+      "**": {}
+    },
+    "*": {
+      "**": {},
+      "*": {
+        "g": {
+          "**": {}
+        }
+      }
+    },
+    "\\\\": {},
+    "|": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "|",
+    "\\\\",
+    "9.A",
+    "9.z",
+    "9.@",
+    "9.(",
+    "9.b",
+    "9.e",
+    "9.\\\\",
+    "9.`",
+    "9.G",
+    "9.H",
+    "9.\\!",
+    "9.)",
+    "9.l",
+    "9.7",
+    "9.4",
+    "9.0"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "*",
+        "!**",
+        "*.**",
+        "**.*",
+        "*.*.g.**",
+        "**.**",
+        "!*",
+        "\\\\",
+        "|"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "P",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.*",
+        "**.**",
+        "*",
+        "*.**",
+        "*.*.g.**",
+        "!*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "e",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.*",
+        "**.**",
+        "*",
+        "*.**",
+        "*.*.g.**",
+        "!*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "|",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**",
+        "|"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.*",
+        "**.**",
+        "*",
+        "*.**",
+        "*.*.g.**",
+        "!*",
+        "|"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "|",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**",
+        "|"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.*",
+        "**.**",
+        "*",
+        "*.**",
+        "*.*.g.**",
+        "!*",
+        "|"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "R",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.*",
+        "**.**",
+        "*",
+        "*.**",
+        "*.*.g.**",
+        "!*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "Q",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.*",
+        "**.**",
+        "*",
+        "*.**",
+        "*.*.g.**",
+        "!*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "Z",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.*",
+        "**.**",
+        "*",
+        "*.**",
+        "*.*.g.**",
+        "!*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "m",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.*",
+        "**.**",
+        "*",
+        "*.**",
+        "*.*.g.**",
+        "!*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "L",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.*",
+        "**.**",
+        "*",
+        "*.**",
+        "*.*.g.**",
+        "!*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "\\]",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.*",
+        "**.**",
+        "*",
+        "*.**",
+        "*.*.g.**",
+        "!*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "\\\\",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**",
+        "\\\\"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.*",
+        "**.**",
+        "*",
+        "*.**",
+        "*.*.g.**",
+        "!*",
+        "\\\\"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "\\\\",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**",
+        "\\\\"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.*",
+        "**.**",
+        "*",
+        "*.**",
+        "*.*.g.**",
+        "!*",
+        "\\\\"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "l",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.*",
+        "**.**",
+        "*",
+        "*.**",
+        "*.*.g.**",
+        "!*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "N",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.*",
+        "**.**",
+        "*",
+        "*.**",
+        "*.*.g.**",
+        "!*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "y",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.*",
+        "**.**",
+        "*",
+        "*.**",
+        "*.*.g.**",
+        "!*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "A",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.*",
+        "**.**",
+        "*",
+        "*.**",
+        "*.*.g.**",
+        "!*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "p",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.*",
+        "**.**",
+        "*",
+        "*.**",
+        "*.*.g.**",
+        "!*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "x",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.*",
+        "**.**",
+        "*",
+        "*.**",
+        "*.*.g.**",
+        "!*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "9",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.*",
+        "**.**",
+        "*",
+        "*.**",
+        "*.*.g.**",
+        "!*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "9.A",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "9.A",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "9.z",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "9.z",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "9.@",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "9.@",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "9.(",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "9.(",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "9.b",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "9.b",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "9.e",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "9.e",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "9.\\\\",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "9.\\\\",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "9.`",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "9.`",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "9.G",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "9.G",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "9.H",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "9.H",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "9.\\!",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "9.\\!",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "9.)",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "9.)",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "9.l",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "9.l",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "9.7",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "9.7",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "9.4",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "9.4",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "9.0",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "9.0",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*",
+        "**.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*",
+        "**.**",
+        "**",
+        "!**",
+        "*.**",
+        "*.*.g.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "8",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.*",
+        "**.**",
+        "*",
+        "*.**",
+        "*.*.g.**",
+        "!*"
+      ]
+    }
+  ],
+  "haystack": {
+    "8": 757,
+    "9": {
+      "0": 743,
+      "4": 744,
+      "7": 749,
+      "l": 738,
+      ")": 739,
+      "!": 740,
+      "H": 741,
+      "G": 742,
+      "`": 745,
+      "\\": 746,
+      "e": 747,
+      "b": 748,
+      "(": 750,
+      "@": 751,
+      "z": 752,
+      "A": 753
+    },
+    "x": 754,
+    "p": 755,
+    "A": 756,
+    "y": 758,
+    "N": 759,
+    "l": 760,
+    "\\": 761,
+    "]": 762,
+    "L": 763,
+    "m": 764,
+    "Z": 765,
+    "Q": 766,
+    "R": 767,
+    "|": 768,
+    "e": 769,
+    "P": 770
+  }
+}

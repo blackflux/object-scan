@@ -1,0 +1,492 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "latin-basic-random",
+      "arrayProb": "some",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "min",
+      "maxDepthProb": "max",
+      "maxNeedlesProb": "few",
+      "maxNeedleLengthProb": "some",
+      "negateProb": "never",
+      "starProb": "always",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "few",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "*",
+    "**",
+    "**.**",
+    "**.*.*.**"
+  ],
+  "searchTree": {
+    "*": {
+      "*": {
+        "**": {}
+      }
+    },
+    "**": {
+      "**": {},
+      "*": {
+        "*": {
+          "**": {}
+        }
+      }
+    }
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "O)Pz#V4TMGf\\.@:>\\,r/Z1",
+    ";:^'iRapd\\,`LBUmzC8",
+    "p\\[bF",
+    "P\\?7/a^1\\\\Ql)GW\\.Z&C",
+    "zpcyAlE\\.\\[7ag\\!oN;",
+    "|nxk^#o04%-5ihfg.dN",
+    "|nxk^#o04%-5ihfg.\\*\\[c|62hSRaOl\\,(1mg",
+    "|nxk^#o04%-5ihfg.'\\[Rwb>GB",
+    "|nxk^#o04%-5ihfg.$m\\*7H<8p50K6e#",
+    "|nxk^#o04%-5ihfg.2JlY:qBNbt8hE|()G",
+    "|nxk^#o04%-5ihfg.\\,N;>4@R\\.bW",
+    "|nxk^#o04%-5ihfg.f:2\\}tKOl@LskR`m\\\\",
+    "|nxk^#o04%-5ihfg"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "**",
+        "**.**",
+        "**.*.*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "O)Pz#V4TMGf\\.@:>\\,r/Z1",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "**.*.*.**",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "O)Pz#V4TMGf\\.@:>\\,r/Z1",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "**.*.*.**",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": ";:^'iRapd\\,`LBUmzC8",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "**.*.*.**",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": ";:^'iRapd\\,`LBUmzC8",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "**.*.*.**",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "p\\[bF",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "**.*.*.**",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "p\\[bF",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "**.*.*.**",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "P\\?7/a^1\\\\Ql)GW\\.Z&C",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "**.*.*.**",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "P\\?7/a^1\\\\Ql)GW\\.Z&C",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "**.*.*.**",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "zpcyAlE\\.\\[7ag\\!oN;",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "**.*.*.**",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "zpcyAlE\\.\\[7ag\\!oN;",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "**.*.*.**",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "|nxk^#o04%-5ihfg",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "**.*.*.**",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "|nxk^#o04%-5ihfg.dN",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*.*.**",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*.*.**",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "|nxk^#o04%-5ihfg.dN",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*.*.**",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*.*.**",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "|nxk^#o04%-5ihfg.\\*\\[c|62hSRaOl\\,(1mg",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*.*.**",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*.*.**",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "|nxk^#o04%-5ihfg.\\*\\[c|62hSRaOl\\,(1mg",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*.*.**",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*.*.**",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "|nxk^#o04%-5ihfg.'\\[Rwb>GB",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*.*.**",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*.*.**",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "|nxk^#o04%-5ihfg.'\\[Rwb>GB",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*.*.**",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*.*.**",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "|nxk^#o04%-5ihfg.$m\\*7H<8p50K6e#",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*.*.**",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*.*.**",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "|nxk^#o04%-5ihfg.$m\\*7H<8p50K6e#",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*.*.**",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*.*.**",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "|nxk^#o04%-5ihfg.2JlY:qBNbt8hE|()G",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*.*.**",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*.*.**",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "|nxk^#o04%-5ihfg.2JlY:qBNbt8hE|()G",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*.*.**",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*.*.**",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "|nxk^#o04%-5ihfg.\\,N;>4@R\\.bW",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*.*.**",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*.*.**",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "|nxk^#o04%-5ihfg.\\,N;>4@R\\.bW",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*.*.**",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*.*.**",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "|nxk^#o04%-5ihfg.f:2\\}tKOl@LskR`m\\\\",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*.*.**",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*.*.**",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "|nxk^#o04%-5ihfg.f:2\\}tKOl@LskR`m\\\\",
+      "isMatch": true,
+      "matchedBy": [
+        "**.*.*.**",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.*.*.**",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "|nxk^#o04%-5ihfg",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "**.*.*.**",
+        "**",
+        "**.**"
+      ]
+    }
+  ],
+  "haystack": {
+    "|nxk^#o04%-5ihfg": {
+      "f:2}tKOl@LskR`m\\": 0,
+      ",N;>4@R.bW": 540,
+      "2JlY:qBNbt8hE|()G": 541,
+      "$m*7H<8p50K6e#": 542,
+      "'[Rwb>GB": 543,
+      "*[c|62hSRaOl,(1mg": 544,
+      "dN": 545
+    },
+    "zpcyAlE.[7ag!oN;": 546,
+    "P?7/a^1\\Ql)GW.Z&C": 547,
+    "p[bF": 548,
+    ";:^'iRapd,`LBUmzC8": 549,
+    "O)Pz#V4TMGf.@:>,r/Z1": 550
+  }
+}

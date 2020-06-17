@@ -1,0 +1,202 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "latin-basic-char",
+      "arrayProb": "some",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "max",
+      "maxDepthProb": "some",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "some",
+      "negateProb": "few",
+      "starProb": "never",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "few",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "?.**",
+    "`.**.**",
+    "`*.**",
+    "O",
+    "?",
+    "**",
+    "`.**",
+    "!**"
+  ],
+  "searchTree": {
+    "?": {
+      "**": {}
+    },
+    "`": {
+      "**": {
+        "**": {}
+      }
+    },
+    "`*": {
+      "**": {}
+    },
+    "O": {},
+    "**": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "?.**",
+        "`.**.**",
+        "`*.**",
+        "O",
+        "?",
+        "**",
+        "`.**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "O",
+      "isMatch": false,
+      "matchedBy": [
+        "?",
+        "O"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "?.**",
+        "?",
+        "O",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "`",
+      "isMatch": false,
+      "matchedBy": [
+        "?",
+        "`.**",
+        "`*.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "?.**",
+        "?",
+        "`.**.**",
+        "`.**",
+        "`*.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "`.>",
+      "isMatch": false,
+      "matchedBy": [
+        "?.**",
+        "`.**",
+        "`*.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "?.**",
+        "`.**.**",
+        "`.**",
+        "`*.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "`.J",
+      "isMatch": false,
+      "matchedBy": [
+        "?.**",
+        "`.**",
+        "`*.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "?.**",
+        "`.**.**",
+        "`.**",
+        "`*.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "`.f",
+      "isMatch": false,
+      "matchedBy": [
+        "?.**",
+        "`.**",
+        "`*.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "?.**",
+        "`.**.**",
+        "`.**",
+        "`*.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "`.z",
+      "isMatch": false,
+      "matchedBy": [
+        "?.**",
+        "`.**",
+        "`*.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "?.**",
+        "`.**.**",
+        "`.**",
+        "`*.**",
+        "**",
+        "!**"
+      ]
+    }
+  ],
+  "haystack": {
+    "`": {
+      "z": 707,
+      "f": 708,
+      "J": 709,
+      ">": 710
+    },
+    "O": 711
+  }
+}

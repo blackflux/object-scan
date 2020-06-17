@@ -1,0 +1,142 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "some",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "min",
+      "maxDepthProb": "min",
+      "maxNeedlesProb": "many",
+      "maxNeedleLengthProb": "min",
+      "negateProb": "few",
+      "starProb": "never",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "never",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "mother",
+    "**",
+    "bound?ry",
+    "!**",
+    "boundary",
+    "mo?her"
+  ],
+  "searchTree": {
+    "mother": {},
+    "**": {},
+    "bound?ry": {},
+    "boundary": {},
+    "mo?her": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "boundary",
+    "mother"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "mother",
+        "**",
+        "bound?ry",
+        "!**",
+        "boundary",
+        "mo?her"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "boundary",
+      "isMatch": true,
+      "matchedBy": [
+        "bound?ry",
+        "boundary"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "bound?ry",
+        "boundary"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "boundary",
+      "isMatch": true,
+      "matchedBy": [
+        "bound?ry",
+        "boundary"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "bound?ry",
+        "boundary"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "mother",
+      "isMatch": true,
+      "matchedBy": [
+        "mother",
+        "mo?her"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "mother",
+        "**",
+        "!**",
+        "mo?her"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "mother",
+      "isMatch": true,
+      "matchedBy": [
+        "mother",
+        "mo?her"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "mother",
+        "**",
+        "!**",
+        "mo?her"
+      ]
+    }
+  ],
+  "haystack": {
+    "mother": {
+      "seed": 0,
+      "peaceful": 1,
+      "woman": 2
+    },
+    "boundary": {
+      "drawer": 3
+    },
+    "obscene": []
+  }
+}

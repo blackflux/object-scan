@@ -1,0 +1,481 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "min",
+      "maxDepthProb": "many",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "few",
+      "negateProb": "few",
+      "starProb": "always",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "few",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "*",
+    "**",
+    "!*",
+    "*.*",
+    "!*.*",
+    "**.**"
+  ],
+  "searchTree": {
+    "*": {
+      "*": {}
+    },
+    "**": {
+      "**": {}
+    }
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "bite",
+    "smiling",
+    "plot",
+    "scarify",
+    "majestic",
+    "strong.purring",
+    "strong.happy",
+    "strong.van",
+    "strong.habitual",
+    "strong.join",
+    "strong"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "**",
+        "!*",
+        "*.*",
+        "!*.*",
+        "**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "bite",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "*.*",
+        "!*.*",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "bite",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "*.*",
+        "!*.*",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "smiling",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "*.*",
+        "!*.*",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "smiling",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "*.*",
+        "!*.*",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "plot",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "*.*",
+        "!*.*",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "plot",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "*.*",
+        "!*.*",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "scarify",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "*.*",
+        "!*.*",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "scarify",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "*.*",
+        "!*.*",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "majestic",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "*.*",
+        "!*.*",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "majestic",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "*.*",
+        "!*.*",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "strong",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "*.*",
+        "!*.*",
+        "**",
+        "**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "strong.purring",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*.*"
+      ],
+      "traversedBy": [
+        "*.*",
+        "!*.*",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "strong.purring",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*.*"
+      ],
+      "traversedBy": [
+        "*.*",
+        "!*.*",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "strong.happy",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*.*"
+      ],
+      "traversedBy": [
+        "*.*",
+        "!*.*",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "strong.happy",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*.*"
+      ],
+      "traversedBy": [
+        "*.*",
+        "!*.*",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "strong.van",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*.*"
+      ],
+      "traversedBy": [
+        "*.*",
+        "!*.*",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "strong.van",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*.*"
+      ],
+      "traversedBy": [
+        "*.*",
+        "!*.*",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "strong.habitual",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*.*"
+      ],
+      "traversedBy": [
+        "*.*",
+        "!*.*",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "strong.habitual",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*.*"
+      ],
+      "traversedBy": [
+        "*.*",
+        "!*.*",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "strong.join",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*.*"
+      ],
+      "traversedBy": [
+        "*.*",
+        "!*.*",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "strong.join",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*.*"
+      ],
+      "traversedBy": [
+        "*.*",
+        "!*.*",
+        "**.**",
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "strong",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "*.*",
+        "!*.*",
+        "**",
+        "**.**"
+      ]
+    }
+  ],
+  "haystack": {
+    "strong": {
+      "join": 555,
+      "habitual": 556,
+      "van": 557,
+      "happy": 558,
+      "purring": 559
+    },
+    "majestic": 560,
+    "scarify": 561,
+    "plot": 562,
+    "smiling": 563,
+    "bite": 564
+  }
+}

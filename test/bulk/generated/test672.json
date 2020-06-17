@@ -1,0 +1,446 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "latin-basic-random",
+      "arrayProb": "some",
+      "objectLengthProb": "some",
+      "arrayLengthProb": "few",
+      "maxDepthProb": "max",
+      "maxNeedlesProb": "max",
+      "maxNeedleLengthProb": "min",
+      "negateProb": "never",
+      "starProb": "some",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "few",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "*",
+    "EMU?B",
+    "\\.n2szCG)P#",
+    "qAi\\*412|Plx97k#0\\?\\\\",
+    "@X",
+    "Z",
+    "1;TX<gz?",
+    "*U",
+    "7*",
+    "mpbGya",
+    "1j5eF",
+    "m*a",
+    "1;TX<gz2"
+  ],
+  "searchTree": {
+    "*": {},
+    "EMU?B": {},
+    "\\.n2szCG)P#": {},
+    "qAi\\*412|Plx97k#0\\?\\\\": {},
+    "@X": {},
+    "Z": {},
+    "1;TX<gz?": {},
+    "*U": {},
+    "7*": {},
+    "mpbGya": {},
+    "1j5eF": {},
+    "m*a": {},
+    "1;TX<gz2": {}
+  },
+  "opts": {
+    "useArraySelector": true
+  },
+  "result": [
+    "/\\];4^sA\\[@",
+    "Z",
+    "\\.n2szCG)P#",
+    "<",
+    "qAi\\*412|Plx97k#0\\?\\\\",
+    "EMUbB",
+    "1j5eF",
+    "xU",
+    "1;TX<gz2",
+    "mpbGya",
+    "@X",
+    "7"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "EMU?B",
+        "\\.n2szCG)P#",
+        "qAi\\*412|Plx97k#0\\?\\\\",
+        "@X",
+        "Z",
+        "1;TX<gz?",
+        "*U",
+        "7*",
+        "mpbGya",
+        "1j5eF",
+        "m*a",
+        "1;TX<gz2"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "/\\];4^sA\\[@",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "/\\];4^sA\\[@",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "Z",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "Z"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "Z"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "Z",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "Z"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "Z"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "\\.n2szCG)P#",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "\\.n2szCG)P#"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "\\.n2szCG)P#"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "\\.n2szCG)P#",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "\\.n2szCG)P#"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "\\.n2szCG)P#"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "<",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "<",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "qAi\\*412|Plx97k#0\\?\\\\",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "qAi\\*412|Plx97k#0\\?\\\\"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "qAi\\*412|Plx97k#0\\?\\\\"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "qAi\\*412|Plx97k#0\\?\\\\",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "qAi\\*412|Plx97k#0\\?\\\\"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "qAi\\*412|Plx97k#0\\?\\\\"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "EMUbB",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "EMU?B"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "EMU?B"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "EMUbB",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "EMU?B"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "EMU?B"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "1j5eF",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "1j5eF"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "1j5eF"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "1j5eF",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "1j5eF"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "1j5eF"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "xU",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "*U"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "*U"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "xU",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "*U"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "*U"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "1;TX<gz2",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "1;TX<gz?",
+        "1;TX<gz2"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "1;TX<gz?",
+        "1;TX<gz2"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "1;TX<gz2",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "1;TX<gz?",
+        "1;TX<gz2"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "1;TX<gz?",
+        "1;TX<gz2"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "mpbGya",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "mpbGya",
+        "m*a"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "mpbGya",
+        "m*a"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "mpbGya",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "mpbGya",
+        "m*a"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "mpbGya",
+        "m*a"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "@X",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "@X"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "@X"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "@X",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "@X"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "@X"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "7",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "7*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "7*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "7",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "7*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "7*"
+      ]
+    }
+  ],
+  "haystack": {
+    "7": 679,
+    "@X": [
+      669,
+      670,
+      671,
+      672
+    ],
+    "mpbGya": 673,
+    "1;TX<gz2": 674,
+    "xU": 675,
+    "1j5eF": 676,
+    "EMUbB": 677,
+    "qAi*412|Plx97k#0?\\": 678,
+    "<": 680,
+    ".n2szCG)P#": 681,
+    "Z": 682,
+    "/];4^sA[@": 683
+  }
+}

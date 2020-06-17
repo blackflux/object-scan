@@ -1,0 +1,193 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "latin-basic-random",
+      "arrayProb": "some",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "min",
+      "maxDepthProb": "some",
+      "maxNeedlesProb": "some",
+      "maxNeedleLengthProb": "few",
+      "negateProb": "few",
+      "starProb": "always",
+      "doubleStarProb": "always",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "few",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "**",
+    "**.**.**",
+    "**.**",
+    "!**",
+    "!**.**"
+  ],
+  "searchTree": {
+    "**": {
+      "**": {
+        "**": {}
+      }
+    }
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.**.**",
+        "**.**",
+        "!**",
+        "!**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vx%Vg+=LFNP3\\,\\*\\.OI0>",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**.**"
+      ],
+      "traversedBy": [
+        "**",
+        "**.**.**",
+        "**.**",
+        "!**",
+        "!**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vx%Vg+=LFNP3\\,\\*\\.OI0>.E=qnd\\]$`G\"lR\\{",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**.**"
+      ],
+      "traversedBy": [
+        "**.**.**",
+        "**.**",
+        "!**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vx%Vg+=LFNP3\\,\\*\\.OI0>.NY3z6i",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**.**"
+      ],
+      "traversedBy": [
+        "**.**.**",
+        "**.**",
+        "!**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vx%Vg+=LFNP3\\,\\*\\.OI0>.eg_\\\\GA=`Xi",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**.**"
+      ],
+      "traversedBy": [
+        "**.**.**",
+        "**.**",
+        "!**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vx%Vg+=LFNP3\\,\\*\\.OI0>.5yO",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**.**"
+      ],
+      "traversedBy": [
+        "**.**.**",
+        "**.**",
+        "!**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vx%Vg+=LFNP3\\,\\*\\.OI0>.@M%;4lX~\\!\\*/B3PH",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**.**"
+      ],
+      "traversedBy": [
+        "**.**.**",
+        "**.**",
+        "!**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": ")9o%>lUXQ\"iILf\\\\Yc4",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**.**"
+      ],
+      "traversedBy": [
+        "**",
+        "**.**.**",
+        "**.**",
+        "!**",
+        "!**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "2CV(\\*LukI&\\!\\\\9o",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**.**"
+      ],
+      "traversedBy": [
+        "**",
+        "**.**.**",
+        "**.**",
+        "!**",
+        "!**.**"
+      ]
+    }
+  ],
+  "haystack": {
+    "2CV(*LukI&!\\9o": [],
+    ")9o%>lUXQ\"iILf\\Yc4": [],
+    "vx%Vg+=LFNP3,*.OI0>": {
+      "@M%;4lX~!*/B3PH": 0,
+      "5yO": 476,
+      "eg_\\GA=`Xi": 0,
+      "NY3z6i": 530,
+      "E=qnd]$`G\"lR{": 531
+    }
+  }
+}

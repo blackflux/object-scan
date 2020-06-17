@@ -1,0 +1,344 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "many",
+      "maxDepthProb": "many",
+      "maxNeedlesProb": "few",
+      "maxNeedleLengthProb": "max",
+      "negateProb": "few",
+      "starProb": "never",
+      "doubleStarProb": "always",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "never",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "**",
+    "!**",
+    "**.**",
+    "**.**.**"
+  ],
+  "searchTree": {
+    "**": {
+      "**": {
+        "**": {}
+      }
+    }
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "understood",
+    "animate",
+    "offer.historical",
+    "offer.things",
+    "offer.locket",
+    "offer.ducks",
+    "offer.shade",
+    "offer.utopian",
+    "offer"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.**",
+        "**.**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "understood",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.**",
+        "**.**.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "understood",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.**",
+        "**.**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "animate",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.**",
+        "**.**.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "animate",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.**",
+        "**.**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "offer",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.**",
+        "**.**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "offer.historical",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**.**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "offer.historical",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**.**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "offer.things",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**.**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "offer.things",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**.**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "offer.locket",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**.**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "offer.locket",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**.**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "offer.ducks",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**.**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "offer.ducks",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**.**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "offer.shade",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**.**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "offer.shade",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**.**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "offer.utopian",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**.**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "offer.utopian",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**.**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "offer",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.**",
+        "**.**.**"
+      ]
+    }
+  ],
+  "haystack": {
+    "offer": {
+      "utopian": 549,
+      "shade": 550,
+      "ducks": 551,
+      "locket": 552,
+      "things": 553,
+      "historical": 554
+    },
+    "animate": 555,
+    "understood": 556
+  }
+}

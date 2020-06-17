@@ -1,0 +1,183 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "latin-basic-random",
+      "arrayProb": "never",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "some",
+      "maxDepthProb": "min",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "min",
+      "negateProb": "few",
+      "starProb": "some",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "never",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "2|G",
+    "*",
+    "\\{70",
+    "-#J\\?MpqLSPT4_",
+    "**",
+    "!\\{70",
+    "\\{?0",
+    "!**",
+    "!2|G"
+  ],
+  "searchTree": {
+    "2|G": {},
+    "*": {},
+    "\\{70": {},
+    "-#J\\?MpqLSPT4_": {},
+    "**": {},
+    "\\{?0": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "\\{70"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "2|G",
+        "*",
+        "\\{70",
+        "-#J\\?MpqLSPT4_",
+        "**",
+        "!\\{70",
+        "\\{?0",
+        "!**",
+        "!2|G"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "%m",
+      "isMatch": false,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "\\{70",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "\\{?0"
+      ],
+      "excludedBy": [
+        "!\\{70",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "\\{70",
+        "!\\{70",
+        "**",
+        "!**",
+        "\\{?0"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "\\{70",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "\\{?0"
+      ],
+      "excludedBy": [
+        "!\\{70",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "\\{70",
+        "!\\{70",
+        "**",
+        "!**",
+        "\\{?0"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "-#J\\?MpqLSPT4_",
+      "isMatch": false,
+      "matchedBy": [
+        "*",
+        "-#J\\?MpqLSPT4_"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "-#J\\?MpqLSPT4_",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "2|G",
+      "isMatch": false,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [
+        "!2|G",
+        "!**"
+      ],
+      "traversedBy": [
+        "2|G",
+        "!2|G",
+        "*",
+        "**",
+        "!**"
+      ]
+    }
+  ],
+  "haystack": {
+    "2|G": {
+      ")IuxjTbp![fJP*kwQl$H": 0,
+      "sZtXR)IuwkH7lGYn^_C": 1,
+      "f-X=VHWc+>RYD": 2,
+      "I!T>U)$3d'gJ\\": 3,
+      "&97PG|kviMyRw'`@": 4
+    },
+    "-#J?MpqLSPT4_": {
+      "V(-!)MtxSO1D#": 5,
+      "&jN": 6,
+      "kd": 7,
+      "kiQO^.+l!7BF\\N": 8,
+      "Y_~BS9*g$uUKJ'.A&4": 9,
+      "5Hfxad": 10
+    },
+    "{70": {
+      "x&`yF82%aAMt(eX/": 11
+    },
+    "%m": {
+      "YSWacf": 12
+    }
+  }
+}

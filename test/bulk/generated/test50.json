@@ -1,0 +1,614 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "max",
+      "maxDepthProb": "few",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "few",
+      "negateProb": "never",
+      "starProb": "some",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "never",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "*.ablaze.peaceful",
+    "cycle.leather",
+    "*.ablaze.*",
+    "cycle.*.ply",
+    "*.*.*.*",
+    "*",
+    "cycle.unequal.dance.*",
+    "*.macabre.*",
+    "*.*",
+    "difficult",
+    "worthless.*.police.*",
+    "*.*.*",
+    "*.bow.*",
+    "worthless",
+    "cycle.*.*",
+    "worthless.*.lowly",
+    "*.*.idolize.*",
+    "*.opposite",
+    "worthless.ablaze.lowly"
+  ],
+  "searchTree": {
+    "*": {
+      "ablaze": {
+        "peaceful": {},
+        "*": {}
+      },
+      "*": {
+        "*": {
+          "*": {}
+        },
+        "idolize": {
+          "*": {}
+        }
+      },
+      "macabre": {
+        "*": {}
+      },
+      "bow": {
+        "*": {}
+      },
+      "opposite": {}
+    },
+    "cycle": {
+      "leather": {},
+      "*": {
+        "ply": {},
+        "*": {}
+      },
+      "unequal": {
+        "dance": {
+          "*": {}
+        }
+      }
+    },
+    "difficult": {},
+    "worthless": {
+      "*": {
+        "police": {
+          "*": {}
+        },
+        "lowly": {}
+      },
+      "ablaze": {
+        "lowly": {}
+      }
+    }
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "worthless.macabre",
+    "worthless.ablaze",
+    "worthless.opposite",
+    "worthless",
+    "cycle.leather",
+    "cycle.bow",
+    "cycle.unequal",
+    "cycle",
+    "difficult.ignorant",
+    "difficult.yoke",
+    "difficult.scrub",
+    "difficult"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.ablaze.peaceful",
+        "cycle.leather",
+        "*.ablaze.*",
+        "cycle.*.ply",
+        "*.*.*.*",
+        "*",
+        "cycle.unequal.dance.*",
+        "*.macabre.*",
+        "*.*",
+        "difficult",
+        "worthless.*.police.*",
+        "*.*.*",
+        "*.bow.*",
+        "worthless",
+        "cycle.*.*",
+        "worthless.*.lowly",
+        "*.*.idolize.*",
+        "*.opposite",
+        "worthless.ablaze.lowly"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "worthless",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "worthless"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.ablaze.peaceful",
+        "*.ablaze.*",
+        "*.*.*.*",
+        "*",
+        "*.macabre.*",
+        "*.*",
+        "*.*.*",
+        "*.bow.*",
+        "*.*.idolize.*",
+        "*.opposite",
+        "worthless.*.police.*",
+        "worthless",
+        "worthless.*.lowly",
+        "worthless.ablaze.lowly"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "worthless.macabre",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*.*.*",
+        "*.*",
+        "*.*.*",
+        "*.*.idolize.*",
+        "*.macabre.*",
+        "worthless.*.police.*",
+        "worthless.*.lowly"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "worthless.macabre",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*.*.*",
+        "*.*",
+        "*.*.*",
+        "*.*.idolize.*",
+        "*.macabre.*",
+        "worthless.*.police.*",
+        "worthless.*.lowly"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "worthless.ablaze",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.ablaze.peaceful",
+        "*.ablaze.*",
+        "*.*.*.*",
+        "*.*",
+        "*.*.*",
+        "*.*.idolize.*",
+        "worthless.*.police.*",
+        "worthless.*.lowly",
+        "worthless.ablaze.lowly"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "worthless.ablaze",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.ablaze.peaceful",
+        "*.ablaze.*",
+        "*.*.*.*",
+        "*.*",
+        "*.*.*",
+        "*.*.idolize.*",
+        "worthless.*.police.*",
+        "worthless.*.lowly",
+        "worthless.ablaze.lowly"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "worthless.opposite",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "*.opposite"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*.*.*",
+        "*.*",
+        "*.*.*",
+        "*.*.idolize.*",
+        "*.opposite",
+        "worthless.*.police.*",
+        "worthless.*.lowly"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "worthless.opposite",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "*.opposite"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*.*.*",
+        "*.*",
+        "*.*.*",
+        "*.*.idolize.*",
+        "*.opposite",
+        "worthless.*.police.*",
+        "worthless.*.lowly"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "worthless",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "worthless"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.ablaze.peaceful",
+        "*.ablaze.*",
+        "*.*.*.*",
+        "*",
+        "*.macabre.*",
+        "*.*",
+        "*.*.*",
+        "*.bow.*",
+        "*.*.idolize.*",
+        "*.opposite",
+        "worthless.*.police.*",
+        "worthless",
+        "worthless.*.lowly",
+        "worthless.ablaze.lowly"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cycle",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.ablaze.peaceful",
+        "*.ablaze.*",
+        "*.*.*.*",
+        "*",
+        "*.macabre.*",
+        "*.*",
+        "*.*.*",
+        "*.bow.*",
+        "*.*.idolize.*",
+        "*.opposite",
+        "cycle.leather",
+        "cycle.*.ply",
+        "cycle.unequal.dance.*",
+        "cycle.*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cycle.leather",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "cycle.leather"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*.*.*",
+        "*.*",
+        "*.*.*",
+        "*.*.idolize.*",
+        "cycle.leather",
+        "cycle.*.ply",
+        "cycle.*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cycle.leather",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "cycle.leather"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*.*.*",
+        "*.*",
+        "*.*.*",
+        "*.*.idolize.*",
+        "cycle.leather",
+        "cycle.*.ply",
+        "cycle.*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cycle.bow",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*.*.*",
+        "*.*",
+        "*.*.*",
+        "*.*.idolize.*",
+        "*.bow.*",
+        "cycle.*.ply",
+        "cycle.*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cycle.bow",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*.*.*",
+        "*.*",
+        "*.*.*",
+        "*.*.idolize.*",
+        "*.bow.*",
+        "cycle.*.ply",
+        "cycle.*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cycle.unequal",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*.*.*",
+        "*.*",
+        "*.*.*",
+        "*.*.idolize.*",
+        "cycle.*.ply",
+        "cycle.*.*",
+        "cycle.unequal.dance.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cycle.unequal",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*.*.*",
+        "*.*",
+        "*.*.*",
+        "*.*.idolize.*",
+        "cycle.*.ply",
+        "cycle.*.*",
+        "cycle.unequal.dance.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cycle",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.ablaze.peaceful",
+        "*.ablaze.*",
+        "*.*.*.*",
+        "*",
+        "*.macabre.*",
+        "*.*",
+        "*.*.*",
+        "*.bow.*",
+        "*.*.idolize.*",
+        "*.opposite",
+        "cycle.leather",
+        "cycle.*.ply",
+        "cycle.unequal.dance.*",
+        "cycle.*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "difficult",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "difficult"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.ablaze.peaceful",
+        "*.ablaze.*",
+        "*.*.*.*",
+        "*",
+        "*.macabre.*",
+        "*.*",
+        "*.*.*",
+        "*.bow.*",
+        "*.*.idolize.*",
+        "*.opposite",
+        "difficult"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "difficult.ignorant",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*.*.*",
+        "*.*",
+        "*.*.*",
+        "*.*.idolize.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "difficult.ignorant",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*.*.*",
+        "*.*",
+        "*.*.*",
+        "*.*.idolize.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "difficult.yoke",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*.*.*",
+        "*.*",
+        "*.*.*",
+        "*.*.idolize.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "difficult.yoke",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*.*.*",
+        "*.*",
+        "*.*.*",
+        "*.*.idolize.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "difficult.scrub",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*.*.*",
+        "*.*",
+        "*.*.*",
+        "*.*.idolize.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "difficult.scrub",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*.*.*",
+        "*.*",
+        "*.*.*",
+        "*.*.idolize.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "difficult",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "difficult"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.ablaze.peaceful",
+        "*.ablaze.*",
+        "*.*.*.*",
+        "*",
+        "*.macabre.*",
+        "*.*",
+        "*.*.*",
+        "*.bow.*",
+        "*.*.idolize.*",
+        "*.opposite",
+        "difficult"
+      ]
+    }
+  ],
+  "haystack": {
+    "difficult": {
+      "scrub": 24,
+      "yoke": 54,
+      "ignorant": 70
+    },
+    "cycle": {
+      "unequal": 86,
+      "bow": 103,
+      "leather": 143
+    },
+    "worthless": {
+      "opposite": 229,
+      "ablaze": 269,
+      "macabre": 293
+    }
+  }
+}

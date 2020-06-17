@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "latin-basic-random",
+      "arrayProb": "never",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "max",
+      "maxDepthProb": "few",
+      "maxNeedlesProb": "some",
+      "maxNeedleLengthProb": "many",
+      "negateProb": "few",
+      "starProb": "never",
+      "doubleStarProb": "always",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "never",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "**",
+    "**.**",
+    "!**"
+  ],
+  "searchTree": {
+    "**": {
+      "**": {}
+    }
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "**.**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "I\\]Dv/G0$N)UoCEx",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "**.**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "I\\]Dv/G0$N)UoCEx.Rdb@0|",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "I\\]Dv/G0$N)UoCEx.\\*",
+      "isMatch": false,
+      "matchedBy": [
+        "**.**"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**"
+      ]
+    }
+  ],
+  "haystack": {
+    "I]Dv/G0$N)UoCEx": {
+      "*": 82,
+      "Rdb@0|": 88
+    }
+  }
+}

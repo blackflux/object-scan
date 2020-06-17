@@ -1,0 +1,220 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "some",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "few",
+      "maxDepthProb": "some",
+      "maxNeedlesProb": "max",
+      "maxNeedleLengthProb": "many",
+      "negateProb": "few",
+      "starProb": "never",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "few",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "af?erthought",
+    "**",
+    "!**",
+    "plough",
+    "scale.**",
+    "p*",
+    "afterthought",
+    "!plough",
+    "!scale.**"
+  ],
+  "searchTree": {
+    "af?erthought": {},
+    "**": {},
+    "plough": {},
+    "scale": {
+      "**": {}
+    },
+    "p*": {},
+    "afterthought": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "af?erthought",
+        "**",
+        "!**",
+        "plough",
+        "scale.**",
+        "p*",
+        "afterthought",
+        "!plough",
+        "!scale.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[2]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "af?erthought",
+        "**",
+        "!**",
+        "plough",
+        "scale.**",
+        "p*",
+        "afterthought",
+        "!plough",
+        "!scale.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[1]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "af?erthought",
+        "**",
+        "!**",
+        "plough",
+        "scale.**",
+        "p*",
+        "afterthought",
+        "!plough",
+        "!scale.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "af?erthought",
+        "**",
+        "!**",
+        "plough",
+        "scale.**",
+        "p*",
+        "afterthought",
+        "!plough",
+        "!scale.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0][4]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "af?erthought",
+        "**",
+        "!**",
+        "plough",
+        "scale.**",
+        "p*",
+        "afterthought",
+        "!plough",
+        "!scale.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0][3]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "af?erthought",
+        "**",
+        "!**",
+        "plough",
+        "scale.**",
+        "p*",
+        "afterthought",
+        "!plough",
+        "!scale.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0][2]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "af?erthought",
+        "**",
+        "!**",
+        "plough",
+        "scale.**",
+        "p*",
+        "afterthought",
+        "!plough",
+        "!scale.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0][1]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "af?erthought",
+        "**",
+        "!**",
+        "plough",
+        "scale.**",
+        "p*",
+        "afterthought",
+        "!plough",
+        "!scale.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0][0]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "af?erthought",
+        "**",
+        "!**",
+        "plough",
+        "scale.**",
+        "p*",
+        "afterthought",
+        "!plough",
+        "!scale.**"
+      ]
+    }
+  ],
+  "haystack": [
+    [
+      532,
+      533,
+      534,
+      535,
+      536
+    ],
+    537,
+    538
+  ]
+}

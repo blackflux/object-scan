@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "min",
+      "maxDepthProb": "min",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "min",
+      "negateProb": "few",
+      "starProb": "always",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "never",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "**",
+    "*",
+    "!**",
+    "!*"
+  ],
+  "searchTree": {
+    "**": {},
+    "*": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [],
+  "logs": [],
+  "haystack": {
+    "interesting": {
+      "illustrate": 0,
+      "tread": 1,
+      "volleyball": 2,
+      "helpful": 3,
+      "holiday": 4
+    },
+    "prevent": {
+      "smooth": 5
+    },
+    "mere": {
+      "common": 6,
+      "callous": 7,
+      "activity": 8,
+      "fall": 9,
+      "account": 10,
+      "beautiful": 11
+    },
+    "birds": {
+      "come": 12,
+      "strive": 13,
+      "dry": 14,
+      "monkey": 15,
+      "hum": 16,
+      "hen": 17
+    },
+    "food": {
+      "control": 18
+    },
+    "illustrate": {},
+    "grade": {
+      "notebook": 19,
+      "arch": 20,
+      "present": 21,
+      "flight": 22,
+      "crown": 23,
+      "loaf": 24
+    }
+  }
+}

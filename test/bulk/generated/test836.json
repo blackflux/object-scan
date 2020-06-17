@@ -1,0 +1,629 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "max",
+      "arrayLengthProb": "min",
+      "maxDepthProb": "max",
+      "maxNeedlesProb": "few",
+      "maxNeedleLengthProb": "max",
+      "negateProb": "never",
+      "starProb": "never",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "few",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "helpless",
+    "ski",
+    "tall",
+    "s*re",
+    "mach*",
+    "st*ng",
+    "treasure",
+    "intelligent",
+    "s*g",
+    "sudden",
+    "space",
+    "instinctive",
+    "neat",
+    "lace",
+    "ta*",
+    "suppose",
+    "friendly",
+    "g*d.beam",
+    "underwear"
+  ],
+  "searchTree": {
+    "helpless": {},
+    "ski": {},
+    "tall": {},
+    "s*re": {},
+    "mach*": {},
+    "st*ng": {},
+    "treasure": {},
+    "intelligent": {},
+    "s*g": {},
+    "sudden": {},
+    "space": {},
+    "instinctive": {},
+    "neat": {},
+    "lace": {},
+    "ta*": {},
+    "suppose": {},
+    "friendly": {},
+    "g*d": {
+      "beam": {}
+    },
+    "underwear": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "instinctive",
+    "neat",
+    "machine",
+    "suppose",
+    "underwear",
+    "intelligent",
+    "ski",
+    "sting",
+    "treasure",
+    "friendly",
+    "tawdry",
+    "space",
+    "sudden",
+    "tall",
+    "lace",
+    "helpless",
+    "seashore",
+    "gold.beam"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "helpless",
+        "ski",
+        "tall",
+        "s*re",
+        "mach*",
+        "st*ng",
+        "treasure",
+        "intelligent",
+        "s*g",
+        "sudden",
+        "space",
+        "instinctive",
+        "neat",
+        "lace",
+        "ta*",
+        "suppose",
+        "friendly",
+        "g*d.beam",
+        "underwear"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "instinctive",
+      "isMatch": true,
+      "matchedBy": [
+        "instinctive"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "instinctive"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "instinctive",
+      "isMatch": true,
+      "matchedBy": [
+        "instinctive"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "instinctive"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "neat",
+      "isMatch": true,
+      "matchedBy": [
+        "neat"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "neat"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "neat",
+      "isMatch": true,
+      "matchedBy": [
+        "neat"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "neat"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "machine",
+      "isMatch": true,
+      "matchedBy": [
+        "mach*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "mach*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "machine",
+      "isMatch": true,
+      "matchedBy": [
+        "mach*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "mach*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "suppose",
+      "isMatch": true,
+      "matchedBy": [
+        "suppose"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "suppose"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "suppose",
+      "isMatch": true,
+      "matchedBy": [
+        "suppose"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "suppose"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "underwear",
+      "isMatch": true,
+      "matchedBy": [
+        "underwear"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "underwear"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "underwear",
+      "isMatch": true,
+      "matchedBy": [
+        "underwear"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "underwear"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "intelligent",
+      "isMatch": true,
+      "matchedBy": [
+        "intelligent"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "intelligent"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "intelligent",
+      "isMatch": true,
+      "matchedBy": [
+        "intelligent"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "intelligent"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "ski",
+      "isMatch": true,
+      "matchedBy": [
+        "ski"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "ski"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "ski",
+      "isMatch": true,
+      "matchedBy": [
+        "ski"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "ski"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "sting",
+      "isMatch": true,
+      "matchedBy": [
+        "st*ng",
+        "s*g"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "st*ng",
+        "s*g"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "sting",
+      "isMatch": true,
+      "matchedBy": [
+        "st*ng",
+        "s*g"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "st*ng",
+        "s*g"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "treasure",
+      "isMatch": true,
+      "matchedBy": [
+        "treasure"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "treasure"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "treasure",
+      "isMatch": true,
+      "matchedBy": [
+        "treasure"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "treasure"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "friendly",
+      "isMatch": true,
+      "matchedBy": [
+        "friendly"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "friendly"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "friendly",
+      "isMatch": true,
+      "matchedBy": [
+        "friendly"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "friendly"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "tawdry",
+      "isMatch": true,
+      "matchedBy": [
+        "ta*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "ta*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "tawdry",
+      "isMatch": true,
+      "matchedBy": [
+        "ta*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "ta*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "space",
+      "isMatch": true,
+      "matchedBy": [
+        "space"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "space"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "space",
+      "isMatch": true,
+      "matchedBy": [
+        "space"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "space"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "sudden",
+      "isMatch": true,
+      "matchedBy": [
+        "sudden"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "sudden"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "sudden",
+      "isMatch": true,
+      "matchedBy": [
+        "sudden"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "sudden"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "tall",
+      "isMatch": true,
+      "matchedBy": [
+        "tall",
+        "ta*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "tall",
+        "ta*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "tall",
+      "isMatch": true,
+      "matchedBy": [
+        "tall",
+        "ta*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "tall",
+        "ta*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "lace",
+      "isMatch": true,
+      "matchedBy": [
+        "lace"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "lace"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "lace",
+      "isMatch": true,
+      "matchedBy": [
+        "lace"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "lace"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "helpless",
+      "isMatch": true,
+      "matchedBy": [
+        "helpless"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "helpless"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "helpless",
+      "isMatch": true,
+      "matchedBy": [
+        "helpless"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "helpless"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "seashore",
+      "isMatch": true,
+      "matchedBy": [
+        "s*re"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "s*re"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "seashore",
+      "isMatch": true,
+      "matchedBy": [
+        "s*re"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "s*re"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "gold",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "g*d.beam"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "gold.beam",
+      "isMatch": true,
+      "matchedBy": [
+        "g*d.beam"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "g*d.beam"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "gold.beam",
+      "isMatch": true,
+      "matchedBy": [
+        "g*d.beam"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "g*d.beam"
+      ]
+    }
+  ],
+  "haystack": {
+    "gold": {
+      "quarter": 1015,
+      "page": 1016,
+      "understood": 1017,
+      "cars": 1018,
+      "wheel": 1019,
+      "bit": 1020,
+      "babies": 1021,
+      "obscene": 1022,
+      "branch": 1023,
+      "boundary": 1024,
+      "imperil": 1025,
+      "amuck": 1026,
+      "obeisant": 1027,
+      "beam": 1028,
+      "gold": 1029,
+      "flat": 1030,
+      "weight": 1031,
+      "boy": 1032,
+      "majestic": 1033,
+      "knit": 1034,
+      "lizards": 1035,
+      "unbiased": 1036,
+      "third": 1037,
+      "low": 1038,
+      "spectacular": 1039,
+      "pollution": 1040,
+      "hiss": 1041,
+      "popcorn": 1042,
+      "roasted": 1043,
+      "grip": 1044
+    },
+    "respect": 1045,
+    "seashore": 1046,
+    "helpless": 1047,
+    "lace": 1048,
+    "tall": 1049,
+    "phone": 1050,
+    "sudden": 1051,
+    "blow": 1052,
+    "space": 1063,
+    "tawdry": 1054,
+    "watery": 1055,
+    "flawless": 1056,
+    "friendly": 1057,
+    "treasure": 1058,
+    "govern": 1059,
+    "sting": 1060,
+    "ski": 1061,
+    "squirrel": 1062,
+    "intelligent": 1064,
+    "underwear": 1065,
+    "reminiscent": 1066,
+    "discovery": 1067,
+    "suppose": 1068,
+    "successful": 1069,
+    "machine": 1070,
+    "neat": 1071,
+    "engine": 1072,
+    "instinctive": 1073
+  }
+}

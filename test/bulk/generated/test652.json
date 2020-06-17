@@ -1,0 +1,145 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "latin-basic-char",
+      "arrayProb": "some",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "max",
+      "maxDepthProb": "max",
+      "maxNeedlesProb": "few",
+      "maxNeedleLengthProb": "min",
+      "negateProb": "few",
+      "starProb": "some",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "few",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "*",
+    "N",
+    "!3",
+    "G",
+    "!G",
+    "!*",
+    "5*",
+    "5",
+    "",
+    "!?"
+  ],
+  "searchTree": {
+    "3": {},
+    "5": {},
+    "*": {},
+    "N": {},
+    "G": {},
+    "5*": {},
+    "": {},
+    "?": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    ""
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "N",
+        "!3",
+        "G",
+        "!G",
+        "!*",
+        "5*",
+        "5",
+        "",
+        "!?"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "N",
+      "isMatch": false,
+      "matchedBy": [
+        "N"
+      ],
+      "excludedBy": [
+        "!*",
+        "!?"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "N",
+        "!?"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "5",
+      "isMatch": false,
+      "matchedBy": [
+        "5",
+        "5*"
+      ],
+      "excludedBy": [
+        "!*",
+        "!?"
+      ],
+      "traversedBy": [
+        "5",
+        "*",
+        "!*",
+        "5*",
+        "!?"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": true,
+      "matchedBy": [
+        ""
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        ""
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "",
+      "isMatch": true,
+      "matchedBy": [
+        ""
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        ""
+      ]
+    }
+  ],
+  "haystack": {
+    "3": {},
+    "5": 886,
+    "N": {
+      "6": 885,
+      "g": 879,
+      "|": 880,
+      "`": 881,
+      "&": 882,
+      "*": 883,
+      "-": 884
+    },
+    "G": 887
+  }
+}

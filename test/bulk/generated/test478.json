@@ -1,0 +1,222 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "some",
+      "objectLengthProb": "max",
+      "arrayLengthProb": "max",
+      "maxDepthProb": "max",
+      "maxNeedlesProb": "many",
+      "maxNeedleLengthProb": "many",
+      "negateProb": "few",
+      "starProb": "never",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "few",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "**",
+    "!el*ed",
+    "!**",
+    "vase",
+    "lizards",
+    "consult",
+    "!instinctive"
+  ],
+  "searchTree": {
+    "**": {},
+    "el*ed": {},
+    "vase": {},
+    "lizards": {},
+    "consult": {},
+    "instinctive": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "consult",
+    "lizards",
+    "vase"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "!el*ed",
+        "!**",
+        "vase",
+        "lizards",
+        "consult",
+        "!instinctive"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "consult",
+      "isMatch": true,
+      "matchedBy": [
+        "consult"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "consult"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "consult",
+      "isMatch": true,
+      "matchedBy": [
+        "consult"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "consult"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "lizards",
+      "isMatch": true,
+      "matchedBy": [
+        "lizards"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "lizards"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "lizards",
+      "isMatch": true,
+      "matchedBy": [
+        "lizards"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "lizards"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "vase",
+      "isMatch": true,
+      "matchedBy": [
+        "vase"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "vase"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "vase",
+      "isMatch": true,
+      "matchedBy": [
+        "vase"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "vase"
+      ]
+    }
+  ],
+  "haystack": {
+    "unbiased": [
+      1015,
+      1016,
+      1017,
+      1018,
+      1019,
+      1020,
+      1021,
+      1022,
+      1023,
+      1024,
+      1025,
+      1026,
+      1027,
+      1028,
+      1029,
+      1030,
+      1031,
+      1032,
+      1033,
+      1034,
+      1035,
+      1036,
+      1037,
+      1038,
+      1039,
+      1040,
+      1041,
+      1042,
+      1043,
+      1044
+    ],
+    "note": 1045,
+    "sky": 1046,
+    "slope": 1047,
+    "exultant": 1048,
+    "melodic": 1049,
+    "price": 1050,
+    "aquatic": 1051,
+    "aboriginal": 1052,
+    "government": 1053,
+    "instinctive": 1054,
+    "grip": 1055,
+    "own": 1056,
+    "guide": 1057,
+    "bed": 1058,
+    "vase": 1059,
+    "detect": 1060,
+    "moan": 1061,
+    "detach": 1062,
+    "familiar": 1063,
+    "lizards": 1064,
+    "sedate": 1065,
+    "curve": 1066,
+    "cake": 1067,
+    "follow": 1068,
+    "consult": 1069,
+    "sting": 1070,
+    "stew": 1071,
+    "elated": 1072,
+    "bit": 1073
+  }
+}

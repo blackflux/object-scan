@@ -1,0 +1,482 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "some",
+      "objectLengthProb": "some",
+      "arrayLengthProb": "few",
+      "maxDepthProb": "some",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "many",
+      "negateProb": "few",
+      "starProb": "never",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "never",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "be",
+    "!prohibit",
+    "eminent",
+    "scat",
+    "?rave",
+    "!crave",
+    "tank",
+    "tan?",
+    "plan",
+    "!bedroom",
+    "volatile",
+    "!plan",
+    "!wandering",
+    "humdrum",
+    "n?st",
+    "left"
+  ],
+  "searchTree": {
+    "be": {},
+    "prohibit": {},
+    "eminent": {},
+    "scat": {},
+    "?rave": {},
+    "crave": {},
+    "tank": {},
+    "tan?": {},
+    "plan": {},
+    "bedroom": {},
+    "volatile": {},
+    "wandering": {},
+    "humdrum": {},
+    "n?st": {},
+    "left": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "[0].left",
+    "[0].be",
+    "[0].volatile",
+    "[0].eminent",
+    "[0].scat",
+    "[0].tank",
+    "[0].nest",
+    "[0].humdrum"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "be",
+        "!prohibit",
+        "eminent",
+        "scat",
+        "?rave",
+        "!crave",
+        "tank",
+        "tan?",
+        "plan",
+        "!bedroom",
+        "volatile",
+        "!plan",
+        "!wandering",
+        "humdrum",
+        "n?st",
+        "left"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[5]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "be",
+        "!prohibit",
+        "eminent",
+        "scat",
+        "?rave",
+        "!crave",
+        "tank",
+        "tan?",
+        "plan",
+        "!bedroom",
+        "volatile",
+        "!plan",
+        "!wandering",
+        "humdrum",
+        "n?st",
+        "left"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[4]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "be",
+        "!prohibit",
+        "eminent",
+        "scat",
+        "?rave",
+        "!crave",
+        "tank",
+        "tan?",
+        "plan",
+        "!bedroom",
+        "volatile",
+        "!plan",
+        "!wandering",
+        "humdrum",
+        "n?st",
+        "left"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[3]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "be",
+        "!prohibit",
+        "eminent",
+        "scat",
+        "?rave",
+        "!crave",
+        "tank",
+        "tan?",
+        "plan",
+        "!bedroom",
+        "volatile",
+        "!plan",
+        "!wandering",
+        "humdrum",
+        "n?st",
+        "left"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[2]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "be",
+        "!prohibit",
+        "eminent",
+        "scat",
+        "?rave",
+        "!crave",
+        "tank",
+        "tan?",
+        "plan",
+        "!bedroom",
+        "volatile",
+        "!plan",
+        "!wandering",
+        "humdrum",
+        "n?st",
+        "left"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[1]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "be",
+        "!prohibit",
+        "eminent",
+        "scat",
+        "?rave",
+        "!crave",
+        "tank",
+        "tan?",
+        "plan",
+        "!bedroom",
+        "volatile",
+        "!plan",
+        "!wandering",
+        "humdrum",
+        "n?st",
+        "left"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "be",
+        "!prohibit",
+        "eminent",
+        "scat",
+        "?rave",
+        "!crave",
+        "tank",
+        "tan?",
+        "plan",
+        "!bedroom",
+        "volatile",
+        "!plan",
+        "!wandering",
+        "humdrum",
+        "n?st",
+        "left"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].left",
+      "isMatch": true,
+      "matchedBy": [
+        "left"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "left"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].left",
+      "isMatch": true,
+      "matchedBy": [
+        "left"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "left"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].be",
+      "isMatch": true,
+      "matchedBy": [
+        "be"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "be"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].be",
+      "isMatch": true,
+      "matchedBy": [
+        "be"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "be"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].volatile",
+      "isMatch": true,
+      "matchedBy": [
+        "volatile"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "volatile"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].volatile",
+      "isMatch": true,
+      "matchedBy": [
+        "volatile"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "volatile"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].crave",
+      "isMatch": false,
+      "matchedBy": [
+        "?rave"
+      ],
+      "excludedBy": [
+        "!crave"
+      ],
+      "traversedBy": [
+        "?rave",
+        "!crave"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].eminent",
+      "isMatch": true,
+      "matchedBy": [
+        "eminent"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "eminent"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].eminent",
+      "isMatch": true,
+      "matchedBy": [
+        "eminent"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "eminent"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].scat",
+      "isMatch": true,
+      "matchedBy": [
+        "scat"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "scat"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].scat",
+      "isMatch": true,
+      "matchedBy": [
+        "scat"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "scat"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].tank",
+      "isMatch": true,
+      "matchedBy": [
+        "tank",
+        "tan?"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "tank",
+        "tan?"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].tank",
+      "isMatch": true,
+      "matchedBy": [
+        "tank",
+        "tan?"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "tank",
+        "tan?"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].nest",
+      "isMatch": true,
+      "matchedBy": [
+        "n?st"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "n?st"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].nest",
+      "isMatch": true,
+      "matchedBy": [
+        "n?st"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "n?st"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].humdrum",
+      "isMatch": true,
+      "matchedBy": [
+        "humdrum"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "humdrum"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].humdrum",
+      "isMatch": true,
+      "matchedBy": [
+        "humdrum"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "humdrum"
+      ]
+    }
+  ],
+  "haystack": [
+    {
+      "volleyball": 600,
+      "prohibit": 601,
+      "humdrum": 614,
+      "houses": 603,
+      "wandering": 604,
+      "nest": 605,
+      "tank": 606,
+      "scat": 607,
+      "eminent": 608,
+      "crave": 609,
+      "match": 610,
+      "plan": 611,
+      "volatile": 612,
+      "be": 613,
+      "left": 615,
+      "notebook": 616,
+      "bedroom": 617
+    },
+    618,
+    619,
+    620,
+    621,
+    622
+  ]
+}

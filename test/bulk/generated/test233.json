@@ -1,0 +1,968 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "min",
+      "maxDepthProb": "min",
+      "maxNeedlesProb": "max",
+      "maxNeedleLengthProb": "max",
+      "negateProb": "never",
+      "starProb": "some",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "few",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "price.provide",
+    "price.*",
+    "snail.*",
+    "*.consult",
+    "beautiful.*",
+    "*ul.p*ake",
+    "*.grip",
+    "*.*",
+    "dance",
+    "*price.*",
+    "beautiful.pancak*e",
+    "snail.tricky",
+    "leave.*",
+    "beautif*l.*",
+    "leave.splendid"
+  ],
+  "searchTree": {
+    "price": {
+      "provide": {},
+      "*": {}
+    },
+    "snail": {
+      "*": {},
+      "tricky": {}
+    },
+    "*": {
+      "consult": {},
+      "grip": {},
+      "*": {}
+    },
+    "beautiful": {
+      "*": {},
+      "pancak*e": {}
+    },
+    "*ul": {
+      "p*ake": {}
+    },
+    "dance": {},
+    "*price": {
+      "*": {}
+    },
+    "leave": {
+      "*": {},
+      "splendid": {}
+    },
+    "beautif*l": {
+      "*": {}
+    }
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "snail.tricky",
+    "snail.hateful",
+    "snail.grip",
+    "snail.shake",
+    "snail.abaft",
+    "leave.early",
+    "leave.nest",
+    "leave.quixotic",
+    "leave.purring",
+    "leave.splendid",
+    "dance",
+    "price.provide",
+    "price.board",
+    "price.sordid",
+    "price.curve",
+    "price.consult",
+    "beautiful.pancake",
+    "beautiful.match",
+    "beautiful.ball",
+    "beautiful.sew",
+    "partake.lace",
+    "present.pray",
+    "present.quizzical",
+    "present.ornament"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "price.provide",
+        "price.*",
+        "snail.*",
+        "*.consult",
+        "beautiful.*",
+        "*ul.p*ake",
+        "*.grip",
+        "*.*",
+        "dance",
+        "*price.*",
+        "beautiful.pancak*e",
+        "snail.tricky",
+        "leave.*",
+        "beautif*l.*",
+        "leave.splendid"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "snail",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "snail.*",
+        "snail.tricky",
+        "*.consult",
+        "*.grip",
+        "*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "snail.tricky",
+      "isMatch": true,
+      "matchedBy": [
+        "snail.*",
+        "snail.tricky",
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "snail.*",
+        "snail.tricky",
+        "*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "snail.tricky",
+      "isMatch": true,
+      "matchedBy": [
+        "snail.*",
+        "snail.tricky",
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "snail.*",
+        "snail.tricky",
+        "*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "snail.hateful",
+      "isMatch": true,
+      "matchedBy": [
+        "snail.*",
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "snail.*",
+        "*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "snail.hateful",
+      "isMatch": true,
+      "matchedBy": [
+        "snail.*",
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "snail.*",
+        "*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "snail.grip",
+      "isMatch": true,
+      "matchedBy": [
+        "snail.*",
+        "*.grip",
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "snail.*",
+        "*.grip",
+        "*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "snail.grip",
+      "isMatch": true,
+      "matchedBy": [
+        "snail.*",
+        "*.grip",
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "snail.*",
+        "*.grip",
+        "*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "snail.shake",
+      "isMatch": true,
+      "matchedBy": [
+        "snail.*",
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "snail.*",
+        "*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "snail.shake",
+      "isMatch": true,
+      "matchedBy": [
+        "snail.*",
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "snail.*",
+        "*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "snail.abaft",
+      "isMatch": true,
+      "matchedBy": [
+        "snail.*",
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "snail.*",
+        "*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "snail.abaft",
+      "isMatch": true,
+      "matchedBy": [
+        "snail.*",
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "snail.*",
+        "*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "leave",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.consult",
+        "*.grip",
+        "*.*",
+        "leave.*",
+        "leave.splendid"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "leave.early",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "leave.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "leave.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "leave.early",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "leave.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "leave.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "leave.nest",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "leave.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "leave.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "leave.nest",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "leave.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "leave.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "leave.quixotic",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "leave.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "leave.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "leave.quixotic",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "leave.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "leave.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "leave.purring",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "leave.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "leave.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "leave.purring",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "leave.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "leave.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "leave.splendid",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "leave.*",
+        "leave.splendid"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "leave.*",
+        "leave.splendid"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "leave.splendid",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "leave.*",
+        "leave.splendid"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "leave.*",
+        "leave.splendid"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "dance",
+      "isMatch": true,
+      "matchedBy": [
+        "dance"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.consult",
+        "*.grip",
+        "*.*",
+        "dance"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "dance",
+      "isMatch": true,
+      "matchedBy": [
+        "dance"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.consult",
+        "*.grip",
+        "*.*",
+        "dance"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "price",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "price.provide",
+        "price.*",
+        "*.consult",
+        "*.grip",
+        "*.*",
+        "*price.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "price.provide",
+      "isMatch": true,
+      "matchedBy": [
+        "price.provide",
+        "price.*",
+        "*.*",
+        "*price.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "price.provide",
+        "price.*",
+        "*.*",
+        "*price.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "price.provide",
+      "isMatch": true,
+      "matchedBy": [
+        "price.provide",
+        "price.*",
+        "*.*",
+        "*price.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "price.provide",
+        "price.*",
+        "*.*",
+        "*price.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "price.board",
+      "isMatch": true,
+      "matchedBy": [
+        "price.*",
+        "*.*",
+        "*price.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "price.*",
+        "*.*",
+        "*price.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "price.board",
+      "isMatch": true,
+      "matchedBy": [
+        "price.*",
+        "*.*",
+        "*price.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "price.*",
+        "*.*",
+        "*price.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "price.sordid",
+      "isMatch": true,
+      "matchedBy": [
+        "price.*",
+        "*.*",
+        "*price.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "price.*",
+        "*.*",
+        "*price.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "price.sordid",
+      "isMatch": true,
+      "matchedBy": [
+        "price.*",
+        "*.*",
+        "*price.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "price.*",
+        "*.*",
+        "*price.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "price.curve",
+      "isMatch": true,
+      "matchedBy": [
+        "price.*",
+        "*.*",
+        "*price.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "price.*",
+        "*.*",
+        "*price.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "price.curve",
+      "isMatch": true,
+      "matchedBy": [
+        "price.*",
+        "*.*",
+        "*price.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "price.*",
+        "*.*",
+        "*price.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "price.consult",
+      "isMatch": true,
+      "matchedBy": [
+        "price.*",
+        "*.consult",
+        "*.*",
+        "*price.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "price.*",
+        "*.consult",
+        "*.*",
+        "*price.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "price.consult",
+      "isMatch": true,
+      "matchedBy": [
+        "price.*",
+        "*.consult",
+        "*.*",
+        "*price.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "price.*",
+        "*.consult",
+        "*.*",
+        "*price.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "beautiful",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.consult",
+        "*.grip",
+        "*.*",
+        "beautiful.*",
+        "beautiful.pancak*e",
+        "*ul.p*ake",
+        "beautif*l.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "beautiful.pancake",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "beautiful.*",
+        "beautiful.pancak*e",
+        "*ul.p*ake",
+        "beautif*l.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "beautiful.*",
+        "beautiful.pancak*e",
+        "*ul.p*ake",
+        "beautif*l.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "beautiful.pancake",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "beautiful.*",
+        "beautiful.pancak*e",
+        "*ul.p*ake",
+        "beautif*l.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "beautiful.*",
+        "beautiful.pancak*e",
+        "*ul.p*ake",
+        "beautif*l.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "beautiful.match",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "beautiful.*",
+        "beautif*l.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "beautiful.*",
+        "beautif*l.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "beautiful.match",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "beautiful.*",
+        "beautif*l.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "beautiful.*",
+        "beautif*l.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "beautiful.ball",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "beautiful.*",
+        "beautif*l.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "beautiful.*",
+        "beautif*l.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "beautiful.ball",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "beautiful.*",
+        "beautif*l.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "beautiful.*",
+        "beautif*l.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "beautiful.sew",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "beautiful.*",
+        "beautif*l.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "beautiful.*",
+        "beautif*l.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "beautiful.sew",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*",
+        "beautiful.*",
+        "beautif*l.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "beautiful.*",
+        "beautif*l.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "partake",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.consult",
+        "*.grip",
+        "*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "partake.lace",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "partake.lace",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "present",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.consult",
+        "*.grip",
+        "*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "present.pray",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "present.pray",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "present.quizzical",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "present.quizzical",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "present.ornament",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "present.ornament",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*"
+      ]
+    }
+  ],
+  "haystack": {
+    "present": {
+      "ornament": 0,
+      "quizzical": 1,
+      "pray": 2
+    },
+    "partake": {
+      "lace": 3
+    },
+    "beautiful": {
+      "sew": 4,
+      "ball": 5,
+      "match": 6,
+      "pancake": 7
+    },
+    "price": {
+      "consult": 8,
+      "curve": 9,
+      "sordid": 10,
+      "board": 11,
+      "provide": 12
+    },
+    "dance": {},
+    "leave": {
+      "splendid": 13,
+      "purring": 14,
+      "quixotic": 15,
+      "nest": 16,
+      "early": 17
+    },
+    "snail": {
+      "abaft": 18,
+      "shake": 19,
+      "grip": 20,
+      "hateful": 21,
+      "tricky": 22
+    }
+  }
+}

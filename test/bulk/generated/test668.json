@@ -1,0 +1,330 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "some",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "few",
+      "maxDepthProb": "some",
+      "maxNeedlesProb": "max",
+      "maxNeedleLengthProb": "few",
+      "negateProb": "never",
+      "starProb": "some",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "never",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "*",
+    "google",
+    "obstruct",
+    "animated",
+    "zinc",
+    "pause",
+    ""
+  ],
+  "searchTree": {
+    "*": {},
+    "google": {},
+    "obstruct": {},
+    "animated": {},
+    "zinc": {},
+    "pause": {},
+    "": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "zinc",
+    "google",
+    "beef",
+    "animated",
+    "pause",
+    "obstruct",
+    "underwear[1]",
+    "underwear[0]",
+    ""
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "google",
+        "obstruct",
+        "animated",
+        "zinc",
+        "pause",
+        ""
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "zinc",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "zinc"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "zinc"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "zinc",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "zinc"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "zinc"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "google",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "google"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "google"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "google",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "google"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "google"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "beef",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "beef",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "animated",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "animated"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "animated"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "animated",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "animated"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "animated"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "pause",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "pause"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "pause"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "pause",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "pause"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "pause"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "obstruct",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "obstruct"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "obstruct"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "obstruct",
+      "isMatch": true,
+      "matchedBy": [
+        "*",
+        "obstruct"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "obstruct"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "underwear",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "underwear[1]",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "underwear[1]",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "underwear[0]",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "underwear[0]",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": true,
+      "matchedBy": [
+        ""
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        ""
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "",
+      "isMatch": true,
+      "matchedBy": [
+        ""
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        ""
+      ]
+    }
+  ],
+  "haystack": {
+    "underwear": [
+      517,
+      518
+    ],
+    "obstruct": 519,
+    "pause": 520,
+    "animated": 521,
+    "beef": 522,
+    "google": 523,
+    "zinc": 524
+  }
+}

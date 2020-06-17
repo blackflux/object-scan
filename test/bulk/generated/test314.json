@@ -1,0 +1,268 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "some",
+      "objectLengthProb": "some",
+      "arrayLengthProb": "few",
+      "maxDepthProb": "many",
+      "maxNeedlesProb": "max",
+      "maxNeedleLengthProb": "many",
+      "negateProb": "never",
+      "starProb": "never",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "never",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "**",
+    "holl?w",
+    "contend",
+    "meek.?weater.river",
+    "sidewalk",
+    "hollow",
+    "family",
+    "c?ntend",
+    "sticky",
+    "shape",
+    "square"
+  ],
+  "searchTree": {
+    "**": {},
+    "holl?w": {},
+    "contend": {},
+    "meek": {
+      "?weater": {
+        "river": {}
+      }
+    },
+    "sidewalk": {},
+    "hollow": {},
+    "family": {},
+    "c?ntend": {},
+    "sticky": {},
+    "shape": {},
+    "square": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "holl?w",
+        "contend",
+        "meek.?weater.river",
+        "sidewalk",
+        "hollow",
+        "family",
+        "c?ntend",
+        "sticky",
+        "shape",
+        "square"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[4]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "holl?w",
+        "contend",
+        "meek.?weater.river",
+        "sidewalk",
+        "hollow",
+        "family",
+        "c?ntend",
+        "sticky",
+        "shape",
+        "square"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[3]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "holl?w",
+        "contend",
+        "meek.?weater.river",
+        "sidewalk",
+        "hollow",
+        "family",
+        "c?ntend",
+        "sticky",
+        "shape",
+        "square"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[2]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "holl?w",
+        "contend",
+        "meek.?weater.river",
+        "sidewalk",
+        "hollow",
+        "family",
+        "c?ntend",
+        "sticky",
+        "shape",
+        "square"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[1]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "holl?w",
+        "contend",
+        "meek.?weater.river",
+        "sidewalk",
+        "hollow",
+        "family",
+        "c?ntend",
+        "sticky",
+        "shape",
+        "square"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "holl?w",
+        "contend",
+        "meek.?weater.river",
+        "sidewalk",
+        "hollow",
+        "family",
+        "c?ntend",
+        "sticky",
+        "shape",
+        "square"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0][3]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "holl?w",
+        "contend",
+        "meek.?weater.river",
+        "sidewalk",
+        "hollow",
+        "family",
+        "c?ntend",
+        "sticky",
+        "shape",
+        "square"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0][2]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "holl?w",
+        "contend",
+        "meek.?weater.river",
+        "sidewalk",
+        "hollow",
+        "family",
+        "c?ntend",
+        "sticky",
+        "shape",
+        "square"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0][1]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "holl?w",
+        "contend",
+        "meek.?weater.river",
+        "sidewalk",
+        "hollow",
+        "family",
+        "c?ntend",
+        "sticky",
+        "shape",
+        "square"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0][0]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "holl?w",
+        "contend",
+        "meek.?weater.river",
+        "sidewalk",
+        "hollow",
+        "family",
+        "c?ntend",
+        "sticky",
+        "shape",
+        "square"
+      ]
+    }
+  ],
+  "haystack": [
+    [
+      679,
+      680,
+      681,
+      682
+    ],
+    683,
+    684,
+    685,
+    686
+  ]
+}

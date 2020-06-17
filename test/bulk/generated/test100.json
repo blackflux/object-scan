@@ -1,0 +1,212 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "latin-basic-random",
+      "arrayProb": "some",
+      "objectLengthProb": "many",
+      "arrayLengthProb": "many",
+      "maxDepthProb": "many",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "min",
+      "negateProb": "few",
+      "starProb": "some",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "never",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "*",
+    "!*",
+    "yB/4&\\!i",
+    "**",
+    "!**",
+    "x'Ey_B+",
+    "(L#\\.v\"\\{>~fcAm+tx"
+  ],
+  "searchTree": {
+    "*": {},
+    "yB/4&\\!i": {},
+    "**": {},
+    "x'Ey_B+": {},
+    "(L#\\.v\"\\{>~fcAm+tx": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "(L#\\.v\"\\{>~fcAm+tx",
+    "x'Ey_B+"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "!*",
+        "yB/4&\\!i",
+        "**",
+        "!**",
+        "x'Ey_B+",
+        "(L#\\.v\"\\{>~fcAm+tx"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "(L#\\.v\"\\{>~fcAm+tx",
+      "isMatch": true,
+      "matchedBy": [
+        "(L#\\.v\"\\{>~fcAm+tx"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "(L#\\.v\"\\{>~fcAm+tx"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "(L#\\.v\"\\{>~fcAm+tx",
+      "isMatch": true,
+      "matchedBy": [
+        "(L#\\.v\"\\{>~fcAm+tx"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "(L#\\.v\"\\{>~fcAm+tx"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "x'Ey_B+",
+      "isMatch": true,
+      "matchedBy": [
+        "x'Ey_B+"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "x'Ey_B+"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "x'Ey_B+",
+      "isMatch": true,
+      "matchedBy": [
+        "x'Ey_B+"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "x'Ey_B+"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "yB/4&\\!i",
+      "isMatch": false,
+      "matchedBy": [
+        "yB/4&\\!i"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "yB/4&\\!i",
+        "**",
+        "!**"
+      ]
+    }
+  ],
+  "haystack": {
+    "hWL(RjXr6u": {
+      "WbL/Yk>\\1jDa": 909,
+      ")WdFrCxK,tL;4Q.qP[}": 910,
+      "|V3lYU`6k": 911,
+      "#EW23hJ{q&NOI": 912,
+      "$nUIz|kS\"mu%": 913,
+      "+_ORCL.8BM;iTu?Q": 914,
+      "(gWd{35N^oa": 915,
+      "gus29z}WQVDdP+'\"H(~R": 916,
+      "m": 917,
+      "=,$^i2zCJ\"AE%Dr*o7(": 918,
+      "5cq{JvZ`ej]4-1.z": 919,
+      "*M": 920,
+      "3tpf/IF%4!K6SD|": 921,
+      "aZL(~Q{EG7N51^A)>-z": 922,
+      "phj0Vt?kGc4g": 923,
+      "_|E": 924,
+      "q'&": 925,
+      "{P": 926,
+      "eh": 927,
+      "pC,j'=Z": 928,
+      "[`Kq~G": 929,
+      "6hv50Xn": 930,
+      "I~D'^n@r*qi2xk": 931,
+      "GXie8Z@k7P=F%!3+": 932,
+      "W_%Vab~(g": 933,
+      "z%3'9,_V2yNvT|?=.cg": 934,
+      "=c3xABa%7#]9DI+h": 935
+    },
+    "f_RK": 936,
+    "9LonN=frga<;!eOVId": 937,
+    "yB/4&!i": 938,
+    "\"YRK@WcfB`lt": 939,
+    "1Y}O:[@zf|T": 940,
+    "yD}8\\": 941,
+    "3Y1'Z^yVe5uD": 942,
+    "O3v\\-w~2>91\"": 943,
+    "=fi]w5E-dYo9v?J)Nty": 944,
+    ":.NG,\"{)csw$RPBoa~?": 945,
+    "u=b+poN*1UR6yQ$\"F": 946,
+    "U)(Ha;s3trDgZOS": 947,
+    "y>$x?JfDU/jpcr]1[s": 948,
+    "iNB]xOCw0)Xn;vsQ#D": 949,
+    "xO>g*<1$": 950,
+    "~6+]FyV0": 951,
+    "eGqLWA}8:": 952,
+    "q^sb*Q!-\"&9": 953,
+    "u%Kk9ScP#'\"": 954,
+    "x'Ey_B+": 955,
+    "CBM2fj%": 956,
+    "^e7/z9!US": 957,
+    "(L#.v\"{>~fcAm+tx": 958,
+    "tRE;`'+!vJ5gZ,Yk%&": 959,
+    "tvDBH": 960
+  }
+}

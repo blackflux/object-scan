@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "latin-basic-char",
+      "arrayProb": "some",
+      "objectLengthProb": "many",
+      "arrayLengthProb": "many",
+      "maxDepthProb": "some",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "few",
+      "negateProb": "few",
+      "starProb": "never",
+      "doubleStarProb": "always",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "few",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "**",
+    "!**",
+    "!**.**"
+  ],
+  "searchTree": {
+    "**": {
+      "**": {}
+    }
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [],
+  "logs": [],
+  "haystack": {
+    "4": 771,
+    "8": 754,
+    "&": {
+      "1": 742,
+      "3": 733,
+      "7": 748,
+      "c": 728,
+      "K": 729,
+      "x": 730,
+      "`": 731,
+      "<": 732,
+      "_": 734,
+      "a": 735,
+      "y": 736,
+      "W": 737,
+      "&": 738,
+      "M": 739,
+      "r": 740,
+      ":": 741,
+      "[": 743,
+      ">": 744,
+      "A": 745,
+      "Y": 746,
+      "G": 747,
+      "R": 749,
+      "$": 750
+    },
+    ":": 751,
+    "E": 752,
+    "M": 753,
+    "s": 755,
+    ",": 756,
+    "Y": 757,
+    "O": 758,
+    "h": 759,
+    "+": 760,
+    "R": 761,
+    "=": 762,
+    "f": 763,
+    "F": 764,
+    "I": 765,
+    "d": 766,
+    "|": 767,
+    "$": 768,
+    "}": 769,
+    "{": 770,
+    "u": 772,
+    "D": 773,
+    "g": 774,
+    "*": 775
+  }
+}

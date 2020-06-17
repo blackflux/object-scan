@@ -1,0 +1,317 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "some",
+      "arrayLengthProb": "many",
+      "maxDepthProb": "many",
+      "maxNeedlesProb": "some",
+      "maxNeedleLengthProb": "some",
+      "negateProb": "few",
+      "starProb": "some",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "few",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "lick",
+    "*",
+    "!*",
+    "dr*nian",
+    "!come",
+    "railway",
+    "tempt",
+    "sneak",
+    "clever",
+    "!decorous",
+    "come"
+  ],
+  "searchTree": {
+    "lick": {},
+    "*": {},
+    "dr*nian": {},
+    "come": {},
+    "railway": {},
+    "tempt": {},
+    "sneak": {},
+    "clever": {},
+    "decorous": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "sneak",
+    "tempt",
+    "clever",
+    "draconian",
+    "railway",
+    "come"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "lick",
+        "*",
+        "!*",
+        "dr*nian",
+        "!come",
+        "railway",
+        "tempt",
+        "sneak",
+        "clever",
+        "!decorous",
+        "come"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "sneak",
+      "isMatch": true,
+      "matchedBy": [
+        "sneak"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "sneak"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "sneak",
+      "isMatch": true,
+      "matchedBy": [
+        "sneak"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "sneak"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "tempt",
+      "isMatch": true,
+      "matchedBy": [
+        "tempt"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "tempt"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "tempt",
+      "isMatch": true,
+      "matchedBy": [
+        "tempt"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "tempt"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "lick",
+      "isMatch": false,
+      "matchedBy": [
+        "lick"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "lick",
+        "*",
+        "!*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "clever",
+      "isMatch": true,
+      "matchedBy": [
+        "clever"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "clever"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "clever",
+      "isMatch": true,
+      "matchedBy": [
+        "clever"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "clever"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "draconian",
+      "isMatch": true,
+      "matchedBy": [
+        "dr*nian"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "dr*nian"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "draconian",
+      "isMatch": true,
+      "matchedBy": [
+        "dr*nian"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "dr*nian"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "railway",
+      "isMatch": true,
+      "matchedBy": [
+        "railway"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "railway"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "railway",
+      "isMatch": true,
+      "matchedBy": [
+        "railway"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "railway"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "come",
+      "isMatch": true,
+      "matchedBy": [
+        "come"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "!come",
+        "come"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "come",
+      "isMatch": true,
+      "matchedBy": [
+        "come"
+      ],
+      "excludedBy": [
+        "!*"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "!come",
+        "come"
+      ]
+    }
+  ],
+  "haystack": {
+    "confiscate": {
+      "detect": 735,
+      "rotten": 736,
+      "numerous": 737,
+      "produce": 738,
+      "push": 739,
+      "rainstorm": 740,
+      "pull": 741,
+      "mind": 742,
+      "poor": 743,
+      "boy": 744,
+      "travel": 745,
+      "left": 746,
+      "water": 747
+    },
+    "come": 748,
+    "detach": 749,
+    "boundary": 750,
+    "railway": 751,
+    "dear": 752,
+    "draconian": 753,
+    "decorous": 754,
+    "squalid": 755,
+    "clever": 756,
+    "mindless": 757,
+    "lick": 758,
+    "tempt": 759,
+    "sneak": 760
+  }
+}

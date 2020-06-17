@@ -1,0 +1,301 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "many",
+      "arrayLengthProb": "few",
+      "maxDepthProb": "max",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "min",
+      "negateProb": "few",
+      "starProb": "some",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "never",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "soup",
+    "*",
+    "**",
+    "!*",
+    "speak",
+    "act",
+    "!**",
+    "approach",
+    "spiders"
+  ],
+  "searchTree": {
+    "soup": {},
+    "*": {},
+    "**": {},
+    "speak": {},
+    "act": {},
+    "approach": {},
+    "spiders": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "approach",
+    "speak",
+    "act",
+    "spiders"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "soup",
+        "*",
+        "**",
+        "!*",
+        "speak",
+        "act",
+        "!**",
+        "approach",
+        "spiders"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "approach",
+      "isMatch": true,
+      "matchedBy": [
+        "approach"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "approach"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "approach",
+      "isMatch": true,
+      "matchedBy": [
+        "approach"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "approach"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "soup",
+      "isMatch": false,
+      "matchedBy": [
+        "soup"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "soup",
+        "*",
+        "!*",
+        "**",
+        "!**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "speak",
+      "isMatch": true,
+      "matchedBy": [
+        "speak"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "speak"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "speak",
+      "isMatch": true,
+      "matchedBy": [
+        "speak"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "speak"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "act",
+      "isMatch": true,
+      "matchedBy": [
+        "act"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "act"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "act",
+      "isMatch": true,
+      "matchedBy": [
+        "act"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "act"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "spiders",
+      "isMatch": true,
+      "matchedBy": [
+        "spiders"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "spiders"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "spiders",
+      "isMatch": true,
+      "matchedBy": [
+        "spiders"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "spiders"
+      ]
+    }
+  ],
+  "haystack": {
+    "mistake": {
+      "shiver": 951,
+      "report": 952,
+      "tame": 953,
+      "loud": 954,
+      "gate": 955,
+      "handsomely": 956,
+      "sleep": 957,
+      "lose": 958,
+      "guide": 959,
+      "optimize": 960,
+      "exultant": 961,
+      "scatter": 962,
+      "rabbit": 963,
+      "direful": 964,
+      "value": 965,
+      "indicate": 966,
+      "horn": 967,
+      "nifty": 968,
+      "materialistic": 969,
+      "brain": 970,
+      "ponder": 971,
+      "pull": 972,
+      "ignore": 973,
+      "afterthought": 974,
+      "rightful": 975,
+      "board": 976,
+      "tent": 977,
+      "weight": 978,
+      "parallel": 979
+    },
+    "space": 980,
+    "spiders": 981,
+    "bumpy": 982,
+    "clever": 983,
+    "obscene": 984,
+    "imperil": 985,
+    "use": 986,
+    "coil": 987,
+    "indicate": 988,
+    "fall": 989,
+    "act": 1006,
+    "flawless": 991,
+    "amusing": 992,
+    "pardon": 993,
+    "subdued": 994,
+    "elderly": 995,
+    "wandering": 996,
+    "speak": 997,
+    "soup": 998,
+    "lamentable": 999,
+    "push": 1000,
+    "approach": 1001,
+    "rightful": 1002,
+    "cross": 1003,
+    "optimize": 1004,
+    "grip": 1005,
+    "ceaseless": 1007,
+    "spring": 1008
+  }
+}

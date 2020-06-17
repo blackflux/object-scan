@@ -1,0 +1,302 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "some",
+      "objectLengthProb": "max",
+      "arrayLengthProb": "few",
+      "maxDepthProb": "many",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "few",
+      "negateProb": "never",
+      "starProb": "never",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "never",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "station",
+    "tricky",
+    "majestic",
+    "fearful",
+    "control",
+    "youthful.scientific",
+    "shake",
+    "respect",
+    "public",
+    "love",
+    "aboriginal",
+    "faded",
+    "flavor",
+    "monkey"
+  ],
+  "searchTree": {
+    "station": {},
+    "tricky": {},
+    "majestic": {},
+    "fearful": {},
+    "control": {},
+    "youthful": {
+      "scientific": {}
+    },
+    "shake": {},
+    "respect": {},
+    "public": {},
+    "love": {},
+    "aboriginal": {},
+    "faded": {},
+    "flavor": {},
+    "monkey": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "station",
+        "tricky",
+        "majestic",
+        "fearful",
+        "control",
+        "youthful.scientific",
+        "shake",
+        "respect",
+        "public",
+        "love",
+        "aboriginal",
+        "faded",
+        "flavor",
+        "monkey"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[1]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "station",
+        "tricky",
+        "majestic",
+        "fearful",
+        "control",
+        "youthful.scientific",
+        "shake",
+        "respect",
+        "public",
+        "love",
+        "aboriginal",
+        "faded",
+        "flavor",
+        "monkey"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "station",
+        "tricky",
+        "majestic",
+        "fearful",
+        "control",
+        "youthful.scientific",
+        "shake",
+        "respect",
+        "public",
+        "love",
+        "aboriginal",
+        "faded",
+        "flavor",
+        "monkey"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0][6]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "station",
+        "tricky",
+        "majestic",
+        "fearful",
+        "control",
+        "youthful.scientific",
+        "shake",
+        "respect",
+        "public",
+        "love",
+        "aboriginal",
+        "faded",
+        "flavor",
+        "monkey"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0][5]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "station",
+        "tricky",
+        "majestic",
+        "fearful",
+        "control",
+        "youthful.scientific",
+        "shake",
+        "respect",
+        "public",
+        "love",
+        "aboriginal",
+        "faded",
+        "flavor",
+        "monkey"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0][4]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "station",
+        "tricky",
+        "majestic",
+        "fearful",
+        "control",
+        "youthful.scientific",
+        "shake",
+        "respect",
+        "public",
+        "love",
+        "aboriginal",
+        "faded",
+        "flavor",
+        "monkey"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0][3]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "station",
+        "tricky",
+        "majestic",
+        "fearful",
+        "control",
+        "youthful.scientific",
+        "shake",
+        "respect",
+        "public",
+        "love",
+        "aboriginal",
+        "faded",
+        "flavor",
+        "monkey"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0][2]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "station",
+        "tricky",
+        "majestic",
+        "fearful",
+        "control",
+        "youthful.scientific",
+        "shake",
+        "respect",
+        "public",
+        "love",
+        "aboriginal",
+        "faded",
+        "flavor",
+        "monkey"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0][1]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "station",
+        "tricky",
+        "majestic",
+        "fearful",
+        "control",
+        "youthful.scientific",
+        "shake",
+        "respect",
+        "public",
+        "love",
+        "aboriginal",
+        "faded",
+        "flavor",
+        "monkey"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0][0]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "station",
+        "tricky",
+        "majestic",
+        "fearful",
+        "control",
+        "youthful.scientific",
+        "shake",
+        "respect",
+        "public",
+        "love",
+        "aboriginal",
+        "faded",
+        "flavor",
+        "monkey"
+      ]
+    }
+  ],
+  "haystack": [
+    [
+      822,
+      823,
+      824,
+      825,
+      826,
+      827,
+      828
+    ],
+    829
+  ]
+}

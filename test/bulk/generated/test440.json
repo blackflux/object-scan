@@ -1,0 +1,158 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "latin-basic-char",
+      "arrayProb": "never",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "many",
+      "maxDepthProb": "max",
+      "maxNeedlesProb": "some",
+      "maxNeedleLengthProb": "many",
+      "negateProb": "few",
+      "starProb": "always",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "never",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "**",
+    "*.*.**",
+    "!**",
+    "*.*.*",
+    "**.**",
+    "*.**",
+    "!*.*.*",
+    "**.*"
+  ],
+  "searchTree": {
+    "**": {
+      "**": {},
+      "*": {}
+    },
+    "*": {
+      "*": {
+        "**": {},
+        "*": {}
+      },
+      "**": {}
+    }
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "9.j",
+    "9"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "*.*.**",
+        "!**",
+        "*.*.*",
+        "**.**",
+        "*.**",
+        "!*.*.*",
+        "**.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "9",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**",
+        "**.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.**",
+        "**.*",
+        "*.*.**",
+        "*.*.*",
+        "*.**",
+        "!*.*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "9.j",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**",
+        "**.*",
+        "*.*.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**",
+        "**.*",
+        "*.*.**",
+        "*.*.*",
+        "!*.*.*",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "9.j",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**",
+        "**.*",
+        "*.*.**",
+        "*.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**",
+        "**.*",
+        "*.*.**",
+        "*.*.*",
+        "!*.*.*",
+        "*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "9",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**",
+        "**.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.**",
+        "**.*",
+        "*.*.**",
+        "*.*.*",
+        "*.**",
+        "!*.*.*"
+      ]
+    }
+  ],
+  "haystack": {
+    "9": {
+      "j": 564
+    }
+  }
+}

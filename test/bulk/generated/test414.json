@@ -1,0 +1,376 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "few",
+      "maxDepthProb": "max",
+      "maxNeedlesProb": "max",
+      "maxNeedleLengthProb": "max",
+      "negateProb": "never",
+      "starProb": "always",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "never",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "*.*",
+    "*",
+    "*.*.*.*"
+  ],
+  "searchTree": {
+    "*": {
+      "*": {
+        "*": {
+          "*": {}
+        }
+      }
+    }
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "crown",
+    "oven",
+    "yoke",
+    "company",
+    "detach.watery",
+    "detach.corrod",
+    "detach.preach",
+    "detach.lace",
+    "detach.point",
+    "detach",
+    "draconian"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "crown",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "crown",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "oven",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "oven",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "yoke",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "yoke",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "company",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "company",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "detach",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "detach.watery",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "detach.watery",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "detach.corrod",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "detach.corrod",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "detach.preach",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "detach.preach",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "detach.lace",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "detach.lace",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "detach.point",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "detach.point",
+      "isMatch": true,
+      "matchedBy": [
+        "*.*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "detach",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "draconian",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*",
+        "*.*.*.*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "draconian",
+      "isMatch": true,
+      "matchedBy": [
+        "*"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.*",
+        "*",
+        "*.*.*.*"
+      ]
+    }
+  ],
+  "haystack": {
+    "draconian": {},
+    "detach": {
+      "point": 550,
+      "lace": 551,
+      "preach": 552,
+      "corrod": 553,
+      "watery": 554
+    },
+    "company": 555,
+    "yoke": 556,
+    "oven": 557,
+    "crown": 558
+  }
+}

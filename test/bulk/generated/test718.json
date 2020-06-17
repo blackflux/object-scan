@@ -1,0 +1,469 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "max",
+      "arrayLengthProb": "few",
+      "maxDepthProb": "max",
+      "maxNeedlesProb": "few",
+      "maxNeedleLengthProb": "few",
+      "negateProb": "few",
+      "starProb": "never",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "never",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "!caption",
+    "!bulb",
+    "carve",
+    "!station",
+    "parallel",
+    "dispose",
+    "boiling",
+    "inconclusive",
+    "!boiling",
+    "bike.nifty",
+    "!inconclusive",
+    "bike.board",
+    "wine",
+    "handsomely",
+    "station",
+    "adaptable",
+    "appliance",
+    "!hateful"
+  ],
+  "searchTree": {
+    "caption": {},
+    "bulb": {},
+    "carve": {},
+    "station": {},
+    "parallel": {},
+    "dispose": {},
+    "boiling": {},
+    "inconclusive": {},
+    "bike": {
+      "nifty": {},
+      "board": {}
+    },
+    "wine": {},
+    "handsomely": {},
+    "adaptable": {},
+    "appliance": {},
+    "hateful": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "appliance",
+    "adaptable",
+    "station",
+    "dispose",
+    "parallel",
+    "wine",
+    "handsomely",
+    "carve",
+    "bike.nifty",
+    "bike.board"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "!caption",
+        "!bulb",
+        "carve",
+        "!station",
+        "parallel",
+        "dispose",
+        "boiling",
+        "inconclusive",
+        "!boiling",
+        "bike.nifty",
+        "!inconclusive",
+        "bike.board",
+        "wine",
+        "handsomely",
+        "station",
+        "adaptable",
+        "appliance",
+        "!hateful"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "appliance",
+      "isMatch": true,
+      "matchedBy": [
+        "appliance"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "appliance"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "appliance",
+      "isMatch": true,
+      "matchedBy": [
+        "appliance"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "appliance"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "boiling",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!boiling"
+      ],
+      "traversedBy": [
+        "boiling",
+        "!boiling"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "adaptable",
+      "isMatch": true,
+      "matchedBy": [
+        "adaptable"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "adaptable"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "adaptable",
+      "isMatch": true,
+      "matchedBy": [
+        "adaptable"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "adaptable"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "station",
+      "isMatch": true,
+      "matchedBy": [
+        "station"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "!station",
+        "station"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "station",
+      "isMatch": true,
+      "matchedBy": [
+        "station"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "!station",
+        "station"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "caption",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!caption"
+      ],
+      "traversedBy": [
+        "!caption"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "dispose",
+      "isMatch": true,
+      "matchedBy": [
+        "dispose"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "dispose"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "dispose",
+      "isMatch": true,
+      "matchedBy": [
+        "dispose"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "dispose"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "inconclusive",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!inconclusive"
+      ],
+      "traversedBy": [
+        "inconclusive",
+        "!inconclusive"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "bulb",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [
+        "!bulb"
+      ],
+      "traversedBy": [
+        "!bulb"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "parallel",
+      "isMatch": true,
+      "matchedBy": [
+        "parallel"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "parallel"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "parallel",
+      "isMatch": true,
+      "matchedBy": [
+        "parallel"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "parallel"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "wine",
+      "isMatch": true,
+      "matchedBy": [
+        "wine"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "wine"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "wine",
+      "isMatch": true,
+      "matchedBy": [
+        "wine"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "wine"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "handsomely",
+      "isMatch": true,
+      "matchedBy": [
+        "handsomely"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "handsomely"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "handsomely",
+      "isMatch": true,
+      "matchedBy": [
+        "handsomely"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "handsomely"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "carve",
+      "isMatch": true,
+      "matchedBy": [
+        "carve"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "carve"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "carve",
+      "isMatch": true,
+      "matchedBy": [
+        "carve"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "carve"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "bike",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "bike.nifty",
+        "bike.board"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "bike.nifty",
+      "isMatch": true,
+      "matchedBy": [
+        "bike.nifty"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "bike.nifty"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "bike.nifty",
+      "isMatch": true,
+      "matchedBy": [
+        "bike.nifty"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "bike.nifty"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "bike.board",
+      "isMatch": true,
+      "matchedBy": [
+        "bike.board"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "bike.board"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "bike.board",
+      "isMatch": true,
+      "matchedBy": [
+        "bike.board"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "bike.board"
+      ]
+    }
+  ],
+  "haystack": {
+    "bike": {
+      "optimize": 1015,
+      "gold": 1016,
+      "overrated": 1017,
+      "nail": 1018,
+      "hypnotize": 1019,
+      "convince": 1020,
+      "adaptable": 1021,
+      "board": 1022,
+      "humdrum": 1023,
+      "voracious": 1024,
+      "lamentable": 1025,
+      "turn": 1026,
+      "nifty": 1027,
+      "shocking": 1028,
+      "obtainable": 1029,
+      "hunt": 1030,
+      "gigantic": 1031,
+      "purring": 1032,
+      "large": 1033,
+      "doubtful": 1034,
+      "sweater": 1035,
+      "color": 1036,
+      "pause": 1037,
+      "scrawny": 1038,
+      "cross": 1039,
+      "adjustment": 1040,
+      "blush": 1041,
+      "wrong": 1042,
+      "daily": 1043,
+      "confine": 1044
+    },
+    "grip": 1045,
+    "carve": 1046,
+    "fumbling": 1047,
+    "handsomely": 1048,
+    "smiling": 1049,
+    "present": 1050,
+    "wine": 1051,
+    "parallel": 1052,
+    "bulb": 1053,
+    "transfer": 1054,
+    "rod": 1055,
+    "inconclusive": 1056,
+    "pluck": 1057,
+    "put": 1058,
+    "structure": 1059,
+    "notify": 1060,
+    "dispose": 1061,
+    "caption": 1062,
+    "station": 1063,
+    "adaptable": 1064,
+    "boiling": 1065,
+    "skin": 1066,
+    "obstruct": 1067,
+    "zinc": 1068,
+    "end": 1069,
+    "hateful": 1070,
+    "brief": 1071,
+    "appliance": 1072,
+    "trampl": 1073
+  }
+}

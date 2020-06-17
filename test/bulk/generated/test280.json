@@ -1,0 +1,460 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "many",
+      "arrayLengthProb": "many",
+      "maxDepthProb": "few",
+      "maxNeedlesProb": "max",
+      "maxNeedleLengthProb": "max",
+      "negateProb": "never",
+      "starProb": "never",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "never",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "monkey",
+    "push",
+    "upset",
+    "ahead",
+    "collapse",
+    "police",
+    "mom",
+    "brothers",
+    "white",
+    "apply",
+    "drop",
+    "activity",
+    "rainstorm"
+  ],
+  "searchTree": {
+    "monkey": {},
+    "push": {},
+    "upset": {},
+    "ahead": {},
+    "collapse": {},
+    "police": {},
+    "mom": {},
+    "brothers": {},
+    "white": {},
+    "apply": {},
+    "drop": {},
+    "activity": {},
+    "rainstorm": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "mom",
+    "police",
+    "white",
+    "push",
+    "activity",
+    "rainstorm",
+    "monkey",
+    "upset",
+    "drop",
+    "collapse",
+    "brothers",
+    "apply",
+    "ahead"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "monkey",
+        "push",
+        "upset",
+        "ahead",
+        "collapse",
+        "police",
+        "mom",
+        "brothers",
+        "white",
+        "apply",
+        "drop",
+        "activity",
+        "rainstorm"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "mom",
+      "isMatch": true,
+      "matchedBy": [
+        "mom"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "mom"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "mom",
+      "isMatch": true,
+      "matchedBy": [
+        "mom"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "mom"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "police",
+      "isMatch": true,
+      "matchedBy": [
+        "police"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "police"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "police",
+      "isMatch": true,
+      "matchedBy": [
+        "police"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "police"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "white",
+      "isMatch": true,
+      "matchedBy": [
+        "white"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "white"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "white",
+      "isMatch": true,
+      "matchedBy": [
+        "white"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "white"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "push",
+      "isMatch": true,
+      "matchedBy": [
+        "push"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "push"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "push",
+      "isMatch": true,
+      "matchedBy": [
+        "push"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "push"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "activity",
+      "isMatch": true,
+      "matchedBy": [
+        "activity"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "activity"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "activity",
+      "isMatch": true,
+      "matchedBy": [
+        "activity"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "activity"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "rainstorm",
+      "isMatch": true,
+      "matchedBy": [
+        "rainstorm"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "rainstorm"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "rainstorm",
+      "isMatch": true,
+      "matchedBy": [
+        "rainstorm"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "rainstorm"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "monkey",
+      "isMatch": true,
+      "matchedBy": [
+        "monkey"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "monkey"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "monkey",
+      "isMatch": true,
+      "matchedBy": [
+        "monkey"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "monkey"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "upset",
+      "isMatch": true,
+      "matchedBy": [
+        "upset"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "upset"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "upset",
+      "isMatch": true,
+      "matchedBy": [
+        "upset"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "upset"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "drop",
+      "isMatch": true,
+      "matchedBy": [
+        "drop"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "drop"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "drop",
+      "isMatch": true,
+      "matchedBy": [
+        "drop"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "drop"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "collapse",
+      "isMatch": true,
+      "matchedBy": [
+        "collapse"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "collapse"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "collapse",
+      "isMatch": true,
+      "matchedBy": [
+        "collapse"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "collapse"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "brothers",
+      "isMatch": true,
+      "matchedBy": [
+        "brothers"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "brothers"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "brothers",
+      "isMatch": true,
+      "matchedBy": [
+        "brothers"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "brothers"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "apply",
+      "isMatch": true,
+      "matchedBy": [
+        "apply"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "apply"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "apply",
+      "isMatch": true,
+      "matchedBy": [
+        "apply"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "apply"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "ahead",
+      "isMatch": true,
+      "matchedBy": [
+        "ahead"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "ahead"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "ahead",
+      "isMatch": true,
+      "matchedBy": [
+        "ahead"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "ahead"
+      ]
+    }
+  ],
+  "haystack": {
+    "bulb": {
+      "difficult": 588,
+      "bustling": 589,
+      "curly": 590,
+      "amusing": 591,
+      "encircle": 592,
+      "seashore": 593,
+      "brainy": 594,
+      "peep": 595,
+      "ski": 596,
+      "salve": 597,
+      "disuse": 598,
+      "fresh": 599,
+      "sloppy": 600,
+      "smile": 601,
+      "beam": 602,
+      "full": 603,
+      "snow": 604,
+      "substance": 605,
+      "skillful": 606,
+      "mass": 607,
+      "yawn": 608,
+      "rainy": 609,
+      "optimize": 610,
+      "earth": 611
+    },
+    "ahead": 612,
+    "plastic": 613,
+    "apply": 614,
+    "handsomely": 615,
+    "brothers": 616,
+    "collapse": 617,
+    "tan": 618,
+    "loaf": 619,
+    "drop": 620,
+    "scientific": 621,
+    "upbeat": 622,
+    "upset": 623,
+    "agonizing": 624,
+    "own": 625,
+    "spit": 626,
+    "voracious": 627,
+    "monkey": 628,
+    "rainstorm": 629,
+    "activity": 630,
+    "fold": 631,
+    "spin": 632,
+    "idiotic": 633,
+    "push": 634,
+    "white": 635,
+    "skin": 636,
+    "powerful": 637,
+    "police": 638,
+    "mom": 639
+  }
+}

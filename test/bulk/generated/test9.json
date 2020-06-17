@@ -1,0 +1,140 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "latin-basic-char",
+      "arrayProb": "never",
+      "objectLengthProb": "max",
+      "arrayLengthProb": "some",
+      "maxDepthProb": "few",
+      "maxNeedlesProb": "max",
+      "maxNeedleLengthProb": "some",
+      "negateProb": "few",
+      "starProb": "always",
+      "doubleStarProb": "always",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "few",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "",
+    "**",
+    "**.**",
+    "!**.**"
+  ],
+  "searchTree": {
+    "": {},
+    "**": {
+      "**": {}
+    }
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    ""
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "",
+        "**",
+        "**.**",
+        "!**.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": true,
+      "matchedBy": [
+        ""
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        ""
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "",
+      "isMatch": true,
+      "matchedBy": [
+        ""
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        ""
+      ]
+    }
+  ],
+  "haystack": {
+    "2": 631,
+    "8": 635,
+    "&": {
+      "0": 604,
+      "5": 581,
+      "8": 596,
+      "=": 580,
+      "P": 582,
+      "A": 583,
+      "c": 584,
+      "M": 585,
+      ">": 586,
+      "z": 587,
+      "?": 588,
+      "H": 589,
+      "t": 590,
+      ";": 591,
+      "Q": 592,
+      "u": 593,
+      "!": 594,
+      "N": 595,
+      "d": 597,
+      "&": 598,
+      "B": 599,
+      "]": 600,
+      "j": 601,
+      "(": 602,
+      "\"": 603,
+      "`": 605,
+      "e": 606,
+      "|": 607,
+      "#": 608,
+      "w": 609
+    },
+    ";": 610,
+    "@": 611,
+    "P": 612,
+    "u": 613,
+    "f": 614,
+    ",": 615,
+    "I": 616,
+    "d": 617,
+    ")": 618,
+    "o": 619,
+    "m": 620,
+    "V": 621,
+    "c": 622,
+    "/": 623,
+    "C": 624,
+    "\"": 625,
+    "^": 626,
+    "L": 627,
+    "h": 628,
+    "'": 629,
+    "J": 630,
+    "D": 632,
+    "O": 633,
+    "j": 634,
+    "N": 636,
+    "y": 637,
+    "W": 638
+  }
+}

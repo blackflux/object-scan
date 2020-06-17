@@ -1,0 +1,445 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "some",
+      "objectLengthProb": "many",
+      "arrayLengthProb": "many",
+      "maxDepthProb": "few",
+      "maxNeedlesProb": "many",
+      "maxNeedleLengthProb": "max",
+      "negateProb": "few",
+      "starProb": "never",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "never",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "!unaccountable",
+    "express",
+    "aboard",
+    "upset",
+    "!praise",
+    "imperil",
+    "sadden",
+    "!damaged",
+    "good",
+    "nest",
+    "praise",
+    "brave",
+    "worthless",
+    "unaccountable",
+    "!flight",
+    "chilly"
+  ],
+  "searchTree": {
+    "unaccountable": {},
+    "express": {},
+    "aboard": {},
+    "upset": {},
+    "praise": {},
+    "imperil": {},
+    "sadden": {},
+    "damaged": {},
+    "good": {},
+    "nest": {},
+    "brave": {},
+    "worthless": {},
+    "flight": {},
+    "chilly": {}
+  },
+  "opts": {
+    "useArraySelector": true
+  },
+  "result": [
+    "express",
+    "good",
+    "brave",
+    "nest",
+    "sadden",
+    "aboard",
+    "unaccountable",
+    "praise",
+    "worthless",
+    "upset",
+    "chilly",
+    "imperil"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "!unaccountable",
+        "express",
+        "aboard",
+        "upset",
+        "!praise",
+        "imperil",
+        "sadden",
+        "!damaged",
+        "good",
+        "nest",
+        "praise",
+        "brave",
+        "worthless",
+        "unaccountable",
+        "!flight",
+        "chilly"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "express",
+      "isMatch": true,
+      "matchedBy": [
+        "express"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "express"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "express",
+      "isMatch": true,
+      "matchedBy": [
+        "express"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "express"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "good",
+      "isMatch": true,
+      "matchedBy": [
+        "good"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "good"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "good",
+      "isMatch": true,
+      "matchedBy": [
+        "good"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "good"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "brave",
+      "isMatch": true,
+      "matchedBy": [
+        "brave"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "brave"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "brave",
+      "isMatch": true,
+      "matchedBy": [
+        "brave"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "brave"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "nest",
+      "isMatch": true,
+      "matchedBy": [
+        "nest"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "nest"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "nest",
+      "isMatch": true,
+      "matchedBy": [
+        "nest"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "nest"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "sadden",
+      "isMatch": true,
+      "matchedBy": [
+        "sadden"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "sadden"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "sadden",
+      "isMatch": true,
+      "matchedBy": [
+        "sadden"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "sadden"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "aboard",
+      "isMatch": true,
+      "matchedBy": [
+        "aboard"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "aboard"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "aboard",
+      "isMatch": true,
+      "matchedBy": [
+        "aboard"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "aboard"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "unaccountable",
+      "isMatch": true,
+      "matchedBy": [
+        "unaccountable"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "!unaccountable",
+        "unaccountable"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "unaccountable",
+      "isMatch": true,
+      "matchedBy": [
+        "unaccountable"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "!unaccountable",
+        "unaccountable"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "praise",
+      "isMatch": true,
+      "matchedBy": [
+        "praise"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "!praise",
+        "praise"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "praise",
+      "isMatch": true,
+      "matchedBy": [
+        "praise"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "!praise",
+        "praise"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "worthless",
+      "isMatch": true,
+      "matchedBy": [
+        "worthless"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "worthless"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "worthless",
+      "isMatch": true,
+      "matchedBy": [
+        "worthless"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "worthless"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "upset",
+      "isMatch": true,
+      "matchedBy": [
+        "upset"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "upset"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "upset",
+      "isMatch": true,
+      "matchedBy": [
+        "upset"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "upset"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "chilly",
+      "isMatch": true,
+      "matchedBy": [
+        "chilly"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "chilly"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "chilly",
+      "isMatch": true,
+      "matchedBy": [
+        "chilly"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "chilly"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "imperil",
+      "isMatch": true,
+      "matchedBy": [
+        "imperil"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "imperil"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "imperil",
+      "isMatch": true,
+      "matchedBy": [
+        "imperil"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "imperil"
+      ]
+    }
+  ],
+  "haystack": {
+    "signify": [
+      546,
+      547,
+      548,
+      549,
+      550,
+      551,
+      552,
+      553,
+      554,
+      555,
+      556,
+      557,
+      558,
+      559,
+      560,
+      561,
+      562,
+      563,
+      564,
+      565,
+      566,
+      567,
+      568,
+      569
+    ],
+    "imperil": 570,
+    "frightened": 571,
+    "pest": 572,
+    "shake": 573,
+    "chilly": 574,
+    "upset": 575,
+    "worthless": 576,
+    "contain": 577,
+    "surmise": 578,
+    "praise": 579,
+    "unaccountable": 580,
+    "pen": 581,
+    "detect": 582,
+    "aboard": 583,
+    "spot": 584,
+    "sadden": 585,
+    "damaged": 586,
+    "omniscient": 587,
+    "exchange": 588,
+    "sleep": 589,
+    "nest": 590,
+    "flight": 591,
+    "brave": 592,
+    "good": 593,
+    "express": 594,
+    "bow": 595,
+    "toes": 596
+  }
+}

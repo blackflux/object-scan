@@ -1,0 +1,388 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "some",
+      "arrayLengthProb": "max",
+      "maxDepthProb": "max",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "many",
+      "negateProb": "never",
+      "starProb": "never",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "never",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "slit",
+    "take",
+    "t?ke",
+    "jealous",
+    "suppo?e",
+    "woman",
+    "in?est",
+    "wom?n",
+    "tasteful",
+    "?asteful",
+    "tank",
+    "suppose",
+    "occupy",
+    "friendly",
+    "infest"
+  ],
+  "searchTree": {
+    "slit": {},
+    "take": {},
+    "t?ke": {},
+    "jealous": {},
+    "suppo?e": {},
+    "woman": {},
+    "in?est": {},
+    "wom?n": {},
+    "tasteful": {},
+    "?asteful": {},
+    "tank": {},
+    "suppose": {},
+    "occupy": {},
+    "friendly": {},
+    "infest": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "tank",
+    "infest",
+    "jealous",
+    "slit",
+    "occupy",
+    "tasteful",
+    "friendly",
+    "suppose",
+    "woman",
+    "take"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "slit",
+        "take",
+        "t?ke",
+        "jealous",
+        "suppo?e",
+        "woman",
+        "in?est",
+        "wom?n",
+        "tasteful",
+        "?asteful",
+        "tank",
+        "suppose",
+        "occupy",
+        "friendly",
+        "infest"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "tank",
+      "isMatch": true,
+      "matchedBy": [
+        "tank"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "tank"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "tank",
+      "isMatch": true,
+      "matchedBy": [
+        "tank"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "tank"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "infest",
+      "isMatch": true,
+      "matchedBy": [
+        "in?est",
+        "infest"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "in?est",
+        "infest"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "infest",
+      "isMatch": true,
+      "matchedBy": [
+        "in?est",
+        "infest"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "in?est",
+        "infest"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "jealous",
+      "isMatch": true,
+      "matchedBy": [
+        "jealous"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "jealous"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "jealous",
+      "isMatch": true,
+      "matchedBy": [
+        "jealous"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "jealous"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "slit",
+      "isMatch": true,
+      "matchedBy": [
+        "slit"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "slit"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "slit",
+      "isMatch": true,
+      "matchedBy": [
+        "slit"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "slit"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "occupy",
+      "isMatch": true,
+      "matchedBy": [
+        "occupy"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "occupy"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "occupy",
+      "isMatch": true,
+      "matchedBy": [
+        "occupy"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "occupy"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "tasteful",
+      "isMatch": true,
+      "matchedBy": [
+        "tasteful",
+        "?asteful"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "tasteful",
+        "?asteful"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "tasteful",
+      "isMatch": true,
+      "matchedBy": [
+        "tasteful",
+        "?asteful"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "tasteful",
+        "?asteful"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "friendly",
+      "isMatch": true,
+      "matchedBy": [
+        "friendly"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "friendly"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "friendly",
+      "isMatch": true,
+      "matchedBy": [
+        "friendly"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "friendly"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "suppose",
+      "isMatch": true,
+      "matchedBy": [
+        "suppo?e",
+        "suppose"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "suppo?e",
+        "suppose"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "suppose",
+      "isMatch": true,
+      "matchedBy": [
+        "suppo?e",
+        "suppose"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "suppo?e",
+        "suppose"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "woman",
+      "isMatch": true,
+      "matchedBy": [
+        "woman",
+        "wom?n"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "woman",
+        "wom?n"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "woman",
+      "isMatch": true,
+      "matchedBy": [
+        "woman",
+        "wom?n"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "woman",
+        "wom?n"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "take",
+      "isMatch": true,
+      "matchedBy": [
+        "take",
+        "t?ke"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "take",
+        "t?ke"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "take",
+      "isMatch": true,
+      "matchedBy": [
+        "take",
+        "t?ke"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "take",
+        "t?ke"
+      ]
+    }
+  ],
+  "haystack": {
+    "overrated": {
+      "sanction": 738,
+      "verse": 739,
+      "flash": 740,
+      "innovate": 741,
+      "succinct": 742,
+      "ruthless": 743,
+      "join": 744,
+      "flight": 745,
+      "cobweb": 746,
+      "clever": 747,
+      "air": 748,
+      "unbiased": 749,
+      "signify": 750,
+      "nest": 751
+    },
+    "take": 752,
+    "feed": 753,
+    "yoke": 754,
+    "woman": 755,
+    "suppose": 756,
+    "friendly": 757,
+    "prohibit": 758,
+    "tasteful": 759,
+    "occupy": 760,
+    "slit": 761,
+    "fearful": 762,
+    "jealous": 763,
+    "infest": 764,
+    "tank": 765,
+    "common": 766
+  }
+}

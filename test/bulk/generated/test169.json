@@ -1,0 +1,591 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "many",
+      "maxDepthProb": "few",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "many",
+      "negateProb": "never",
+      "starProb": "some",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "never",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "*",
+    "lamentable.**.come",
+    "**",
+    "*.**",
+    "enjoy.brave.**",
+    "**.*.*",
+    "lamentable.*.come",
+    "**.**",
+    "**.*.hesitant",
+    "*.*.**.writer.**",
+    "**.rule.*.**"
+  ],
+  "searchTree": {
+    "*": {
+      "**": {},
+      "*": {
+        "**": {
+          "writer": {
+            "**": {}
+          }
+        },
+        "writer": {
+          "**": {}
+        }
+      },
+      "hesitant": {}
+    },
+    "lamentable": {
+      "**": {
+        "come": {}
+      },
+      "come": {},
+      "*": {
+        "come": {}
+      }
+    },
+    "**": {
+      "*": {
+        "*": {},
+        "hesitant": {}
+      },
+      "**": {},
+      "rule": {
+        "*": {
+          "**": {}
+        }
+      }
+    },
+    "enjoy": {
+      "brave": {
+        "**": {}
+      }
+    },
+    "rule": {
+      "*": {
+        "**": {}
+      }
+    }
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "enjoy.toes",
+    "enjoy.flavor",
+    "enjoy.range",
+    "enjoy.money",
+    "enjoy.brave",
+    "enjoy.arch",
+    "enjoy",
+    "lamentable.verse",
+    "lamentable.chief",
+    "lamentable",
+    "search"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "lamentable.**.come",
+        "**",
+        "*.**",
+        "enjoy.brave.**",
+        "**.*.*",
+        "lamentable.*.come",
+        "**.**",
+        "**.*.hesitant",
+        "*.*.**.writer.**",
+        "**.rule.*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "enjoy",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "*.**",
+        "**.*.*",
+        "**.*.hesitant",
+        "*.*.**.writer.**",
+        "**",
+        "**.**",
+        "**.rule.*.**",
+        "enjoy.brave.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "enjoy.toes",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.*.*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.**",
+        "**.*.*",
+        "*.*.**.writer.**",
+        "**.*.hesitant",
+        "**.**",
+        "**",
+        "**.rule.*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "enjoy.toes",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.*.*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.**",
+        "**.*.*",
+        "*.*.**.writer.**",
+        "**.*.hesitant",
+        "**.**",
+        "**",
+        "**.rule.*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "enjoy.flavor",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.*.*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.**",
+        "**.*.*",
+        "*.*.**.writer.**",
+        "**.*.hesitant",
+        "**.**",
+        "**",
+        "**.rule.*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "enjoy.flavor",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.*.*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.**",
+        "**.*.*",
+        "*.*.**.writer.**",
+        "**.*.hesitant",
+        "**.**",
+        "**",
+        "**.rule.*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "enjoy.range",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.*.*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.**",
+        "**.*.*",
+        "*.*.**.writer.**",
+        "**.*.hesitant",
+        "**.**",
+        "**",
+        "**.rule.*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "enjoy.range",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.*.*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.**",
+        "**.*.*",
+        "*.*.**.writer.**",
+        "**.*.hesitant",
+        "**.**",
+        "**",
+        "**.rule.*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "enjoy.money",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.*.*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.**",
+        "**.*.*",
+        "*.*.**.writer.**",
+        "**.*.hesitant",
+        "**.**",
+        "**",
+        "**.rule.*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "enjoy.money",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.*.*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.**",
+        "**.*.*",
+        "*.*.**.writer.**",
+        "**.*.hesitant",
+        "**.**",
+        "**",
+        "**.rule.*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "enjoy.brave",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.*.*",
+        "**.**",
+        "enjoy.brave.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.**",
+        "**.*.*",
+        "*.*.**.writer.**",
+        "**.*.hesitant",
+        "**.**",
+        "**",
+        "**.rule.*.**",
+        "enjoy.brave.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "enjoy.brave",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.*.*",
+        "**.**",
+        "enjoy.brave.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.**",
+        "**.*.*",
+        "*.*.**.writer.**",
+        "**.*.hesitant",
+        "**.**",
+        "**",
+        "**.rule.*.**",
+        "enjoy.brave.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "enjoy.arch",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.*.*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.**",
+        "**.*.*",
+        "*.*.**.writer.**",
+        "**.*.hesitant",
+        "**.**",
+        "**",
+        "**.rule.*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "enjoy.arch",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.*.*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.**",
+        "**.*.*",
+        "*.*.**.writer.**",
+        "**.*.hesitant",
+        "**.**",
+        "**",
+        "**.rule.*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "enjoy",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "*.**",
+        "**.*.*",
+        "**.*.hesitant",
+        "*.*.**.writer.**",
+        "**",
+        "**.**",
+        "**.rule.*.**",
+        "enjoy.brave.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "lamentable",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "*.**",
+        "**.*.*",
+        "**.*.hesitant",
+        "*.*.**.writer.**",
+        "lamentable.**.come",
+        "lamentable.*.come",
+        "**",
+        "**.**",
+        "**.rule.*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "lamentable.verse",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.*.*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.**",
+        "**.*.*",
+        "*.*.**.writer.**",
+        "lamentable.**.come",
+        "lamentable.*.come",
+        "**.*.hesitant",
+        "**.**",
+        "**",
+        "**.rule.*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "lamentable.verse",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.*.*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.**",
+        "**.*.*",
+        "*.*.**.writer.**",
+        "lamentable.**.come",
+        "lamentable.*.come",
+        "**.*.hesitant",
+        "**.**",
+        "**",
+        "**.rule.*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "lamentable.chief",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.*.*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.**",
+        "**.*.*",
+        "*.*.**.writer.**",
+        "lamentable.**.come",
+        "lamentable.*.come",
+        "**.*.hesitant",
+        "**.**",
+        "**",
+        "**.rule.*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "lamentable.chief",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.*.*",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*.**",
+        "**.*.*",
+        "*.*.**.writer.**",
+        "lamentable.**.come",
+        "lamentable.*.come",
+        "**.*.hesitant",
+        "**.**",
+        "**",
+        "**.rule.*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "lamentable",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "*.**",
+        "**.*.*",
+        "**.*.hesitant",
+        "*.*.**.writer.**",
+        "lamentable.**.come",
+        "lamentable.*.come",
+        "**",
+        "**.**",
+        "**.rule.*.**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "search",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "*.**",
+        "**.*.*",
+        "**.*.hesitant",
+        "*.*.**.writer.**",
+        "**",
+        "**.**",
+        "**.rule.*.**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "search",
+      "isMatch": true,
+      "matchedBy": [
+        "*.**",
+        "**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "*.**",
+        "**.*.*",
+        "**.*.hesitant",
+        "*.*.**.writer.**",
+        "**",
+        "**.**",
+        "**.rule.*.**"
+      ]
+    }
+  ],
+  "haystack": {
+    "search": {},
+    "lamentable": {
+      "chief": 0,
+      "verse": 0
+    },
+    "enjoy": {
+      "arch": 119,
+      "brave": 148,
+      "money": 149,
+      "range": 176,
+      "flavor": 226,
+      "toes": 323
+    }
+  }
+}

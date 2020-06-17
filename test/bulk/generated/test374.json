@@ -1,0 +1,383 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "some",
+      "arrayLengthProb": "some",
+      "maxDepthProb": "max",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "some",
+      "negateProb": "few",
+      "starProb": "never",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "never",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "**",
+    "match",
+    "!**",
+    "!ri?ht",
+    "five",
+    "wor?",
+    "right",
+    "helpful",
+    "!boiling",
+    "tough",
+    "clever",
+    "boiling",
+    "!collar"
+  ],
+  "searchTree": {
+    "**": {},
+    "match": {},
+    "ri?ht": {},
+    "five": {},
+    "wor?": {},
+    "right": {},
+    "helpful": {},
+    "boiling": {},
+    "tough": {},
+    "clever": {},
+    "collar": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "helpful",
+    "five",
+    "worm",
+    "boiling",
+    "clever",
+    "right",
+    "match",
+    "tough"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "match",
+        "!**",
+        "!ri?ht",
+        "five",
+        "wor?",
+        "right",
+        "helpful",
+        "!boiling",
+        "tough",
+        "clever",
+        "boiling",
+        "!collar"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "helpful",
+      "isMatch": true,
+      "matchedBy": [
+        "helpful"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "helpful"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "helpful",
+      "isMatch": true,
+      "matchedBy": [
+        "helpful"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "helpful"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "five",
+      "isMatch": true,
+      "matchedBy": [
+        "five"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "five"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "five",
+      "isMatch": true,
+      "matchedBy": [
+        "five"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "five"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "worm",
+      "isMatch": true,
+      "matchedBy": [
+        "wor?"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "wor?"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "worm",
+      "isMatch": true,
+      "matchedBy": [
+        "wor?"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "wor?"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "boiling",
+      "isMatch": true,
+      "matchedBy": [
+        "boiling"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "!boiling",
+        "boiling"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "boiling",
+      "isMatch": true,
+      "matchedBy": [
+        "boiling"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "!boiling",
+        "boiling"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "clever",
+      "isMatch": true,
+      "matchedBy": [
+        "clever"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "clever"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "clever",
+      "isMatch": true,
+      "matchedBy": [
+        "clever"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "clever"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "right",
+      "isMatch": true,
+      "matchedBy": [
+        "right"
+      ],
+      "excludedBy": [
+        "!**",
+        "!ri?ht"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "!ri?ht",
+        "right"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "right",
+      "isMatch": true,
+      "matchedBy": [
+        "right"
+      ],
+      "excludedBy": [
+        "!**",
+        "!ri?ht"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "!ri?ht",
+        "right"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "match",
+      "isMatch": true,
+      "matchedBy": [
+        "match"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "match"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "match",
+      "isMatch": true,
+      "matchedBy": [
+        "match"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "match"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "tough",
+      "isMatch": true,
+      "matchedBy": [
+        "tough"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "tough"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "tough",
+      "isMatch": true,
+      "matchedBy": [
+        "tough"
+      ],
+      "excludedBy": [
+        "!**"
+      ],
+      "traversedBy": [
+        "**",
+        "!**",
+        "tough"
+      ]
+    }
+  ],
+  "haystack": {
+    "loaf": {
+      "guide": 752,
+      "flag": 753,
+      "special": 754,
+      "upset": 755,
+      "snake": 756,
+      "use": 757,
+      "heart": 758,
+      "hold": 759,
+      "scrub": 760,
+      "regret": 761,
+      "befitting": 762,
+      "number": 763,
+      "wind": 764,
+      "strive": 765,
+      "discovery": 766,
+      "top": 767,
+      "value": 768
+    },
+    "tough": 769,
+    "collar": 770,
+    "cake": 771,
+    "match": 772,
+    "right": 773,
+    "clever": 774,
+    "boiling": 775,
+    "guide": 776,
+    "shape": 777,
+    "ugly": 778,
+    "skillful": 779,
+    "worm": 780,
+    "five": 781,
+    "helpful": 782,
+    "kindly": 783
+  }
+}

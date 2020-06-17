@@ -1,0 +1,482 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "some",
+      "objectLengthProb": "many",
+      "arrayLengthProb": "min",
+      "maxDepthProb": "max",
+      "maxNeedlesProb": "few",
+      "maxNeedleLengthProb": "some",
+      "negateProb": "never",
+      "starProb": "never",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "never",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "elated",
+    "humdrum",
+    "page",
+    "dispose",
+    "thoughtless",
+    "loaf",
+    "spot",
+    "soup",
+    "chubby",
+    "parallel",
+    "sweltering",
+    "railway",
+    "adaptable",
+    "beg"
+  ],
+  "searchTree": {
+    "elated": {},
+    "humdrum": {},
+    "page": {},
+    "dispose": {},
+    "thoughtless": {},
+    "loaf": {},
+    "spot": {},
+    "soup": {},
+    "chubby": {},
+    "parallel": {},
+    "sweltering": {},
+    "railway": {},
+    "adaptable": {},
+    "beg": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "parallel",
+    "chubby",
+    "sweltering",
+    "humdrum",
+    "beg",
+    "railway",
+    "page",
+    "dispose",
+    "spot",
+    "soup",
+    "loaf",
+    "elated",
+    "adaptable",
+    "thoughtless"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "elated",
+        "humdrum",
+        "page",
+        "dispose",
+        "thoughtless",
+        "loaf",
+        "spot",
+        "soup",
+        "chubby",
+        "parallel",
+        "sweltering",
+        "railway",
+        "adaptable",
+        "beg"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "parallel",
+      "isMatch": true,
+      "matchedBy": [
+        "parallel"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "parallel"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "parallel",
+      "isMatch": true,
+      "matchedBy": [
+        "parallel"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "parallel"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "chubby",
+      "isMatch": true,
+      "matchedBy": [
+        "chubby"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "chubby"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "chubby",
+      "isMatch": true,
+      "matchedBy": [
+        "chubby"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "chubby"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "sweltering",
+      "isMatch": true,
+      "matchedBy": [
+        "sweltering"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "sweltering"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "sweltering",
+      "isMatch": true,
+      "matchedBy": [
+        "sweltering"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "sweltering"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "humdrum",
+      "isMatch": true,
+      "matchedBy": [
+        "humdrum"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "humdrum"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "humdrum",
+      "isMatch": true,
+      "matchedBy": [
+        "humdrum"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "humdrum"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "beg",
+      "isMatch": true,
+      "matchedBy": [
+        "beg"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "beg"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "beg",
+      "isMatch": true,
+      "matchedBy": [
+        "beg"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "beg"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "railway",
+      "isMatch": true,
+      "matchedBy": [
+        "railway"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "railway"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "railway",
+      "isMatch": true,
+      "matchedBy": [
+        "railway"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "railway"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "page",
+      "isMatch": true,
+      "matchedBy": [
+        "page"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "page"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "page",
+      "isMatch": true,
+      "matchedBy": [
+        "page"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "page"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "dispose",
+      "isMatch": true,
+      "matchedBy": [
+        "dispose"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "dispose"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "dispose",
+      "isMatch": true,
+      "matchedBy": [
+        "dispose"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "dispose"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "spot",
+      "isMatch": true,
+      "matchedBy": [
+        "spot"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "spot"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "spot",
+      "isMatch": true,
+      "matchedBy": [
+        "spot"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "spot"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "soup",
+      "isMatch": true,
+      "matchedBy": [
+        "soup"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "soup"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "soup",
+      "isMatch": true,
+      "matchedBy": [
+        "soup"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "soup"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "loaf",
+      "isMatch": true,
+      "matchedBy": [
+        "loaf"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "loaf"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "loaf",
+      "isMatch": true,
+      "matchedBy": [
+        "loaf"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "loaf"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "elated",
+      "isMatch": true,
+      "matchedBy": [
+        "elated"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "elated"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "elated",
+      "isMatch": true,
+      "matchedBy": [
+        "elated"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "elated"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "adaptable",
+      "isMatch": true,
+      "matchedBy": [
+        "adaptable"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "adaptable"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "adaptable",
+      "isMatch": true,
+      "matchedBy": [
+        "adaptable"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "adaptable"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "thoughtless",
+      "isMatch": true,
+      "matchedBy": [
+        "thoughtless"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "thoughtless"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "thoughtless",
+      "isMatch": true,
+      "matchedBy": [
+        "thoughtless"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "thoughtless"
+      ]
+    }
+  ],
+  "haystack": {
+    "part": {
+      "google": 933,
+      "scat": 934,
+      "pluck": 935,
+      "chairs": 936,
+      "rotten": 937,
+      "callous": 938,
+      "fifth": 939,
+      "income": 940,
+      "ritzy": 941,
+      "probable": 942,
+      "come": 943,
+      "wonderful": 944,
+      "judicious": 945,
+      "jar": 946,
+      "spiteful": 947,
+      "mammoth": 948,
+      "therapeutic": 949,
+      "prohibit": 950,
+      "free": 951,
+      "delete": 952,
+      "utopian": 953,
+      "tongue": 954,
+      "seashore": 955
+    },
+    "thoughtless": 956,
+    "supply": 957,
+    "forgetful": 958,
+    "adaptable": 959,
+    "happy": 960,
+    "elated": 961,
+    "loaf": 962,
+    "soup": 963,
+    "import": 964,
+    "spot": 965,
+    "loud": 966,
+    "dispose": 967,
+    "page": 968,
+    "railway": 969,
+    "beg": 970,
+    "confused": 971,
+    "spectacular": 972,
+    "humdrum": 973,
+    "waggish": 974,
+    "sweltering": 975,
+    "chubby": 976,
+    "come": 977,
+    "parallel": 978
+  }
+}

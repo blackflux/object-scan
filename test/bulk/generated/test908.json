@@ -1,0 +1,369 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "latin-basic-random",
+      "arrayProb": "never",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "many",
+      "maxDepthProb": "min",
+      "maxNeedlesProb": "min",
+      "maxNeedleLengthProb": "min",
+      "negateProb": "few",
+      "starProb": "some",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "few",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "*",
+    "**",
+    "!**",
+    "*je",
+    "!Yk?1w~uE0=q",
+    "rt0\\!G\\[$",
+    "*4",
+    "",
+    "+mLJtv",
+    "3()gCbHu\\*",
+    "Yk\\{1w~uE0=q",
+    "!*",
+    "rt0\\!G?$"
+  ],
+  "searchTree": {
+    "*": {},
+    "**": {},
+    "*je": {},
+    "Yk?1w~uE0=q": {},
+    "rt0\\!G\\[$": {},
+    "*4": {},
+    "": {},
+    "+mLJtv": {},
+    "3()gCbHu\\*": {},
+    "Yk\\{1w~uE0=q": {},
+    "rt0\\!G?$": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "Yk\\{1w~uE0=q",
+    "rt0\\!G\\[$",
+    "Q4",
+    "3()gCbHu\\*",
+    ">je",
+    "+mLJtv",
+    ""
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "*",
+        "**",
+        "!**",
+        "*je",
+        "!Yk?1w~uE0=q",
+        "rt0\\!G\\[$",
+        "*4",
+        "",
+        "+mLJtv",
+        "3()gCbHu\\*",
+        "Yk\\{1w~uE0=q",
+        "!*",
+        "rt0\\!G?$"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "Yk\\{1w~uE0=q",
+      "isMatch": true,
+      "matchedBy": [
+        "Yk\\{1w~uE0=q"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**",
+        "!Yk?1w~uE0=q"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "!Yk?1w~uE0=q",
+        "Yk\\{1w~uE0=q"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "Yk\\{1w~uE0=q",
+      "isMatch": true,
+      "matchedBy": [
+        "Yk\\{1w~uE0=q"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**",
+        "!Yk?1w~uE0=q"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "!Yk?1w~uE0=q",
+        "Yk\\{1w~uE0=q"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "rt0\\!G\\[$",
+      "isMatch": true,
+      "matchedBy": [
+        "rt0\\!G\\[$",
+        "rt0\\!G?$"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "rt0\\!G\\[$",
+        "rt0\\!G?$"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "rt0\\!G\\[$",
+      "isMatch": true,
+      "matchedBy": [
+        "rt0\\!G\\[$",
+        "rt0\\!G?$"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "rt0\\!G\\[$",
+        "rt0\\!G?$"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "Q4",
+      "isMatch": true,
+      "matchedBy": [
+        "*4"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "*4"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "Q4",
+      "isMatch": true,
+      "matchedBy": [
+        "*4"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "*4"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "3()gCbHu\\*",
+      "isMatch": true,
+      "matchedBy": [
+        "3()gCbHu\\*"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "3()gCbHu\\*"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "3()gCbHu\\*",
+      "isMatch": true,
+      "matchedBy": [
+        "3()gCbHu\\*"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "3()gCbHu\\*"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": ">je",
+      "isMatch": true,
+      "matchedBy": [
+        "*je"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "*je"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": ">je",
+      "isMatch": true,
+      "matchedBy": [
+        "*je"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "*je"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "+mLJtv",
+      "isMatch": true,
+      "matchedBy": [
+        "+mLJtv"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "+mLJtv"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "+mLJtv",
+      "isMatch": true,
+      "matchedBy": [
+        "+mLJtv"
+      ],
+      "excludedBy": [
+        "!*",
+        "!**"
+      ],
+      "traversedBy": [
+        "*",
+        "!*",
+        "**",
+        "!**",
+        "+mLJtv"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": true,
+      "matchedBy": [
+        ""
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        ""
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "",
+      "isMatch": true,
+      "matchedBy": [
+        ""
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        ""
+      ]
+    }
+  ],
+  "haystack": {
+    "+mLJtv": {
+      "<w7": 0,
+      "2c:,Tmj": 1,
+      "a-^": 2
+    },
+    ">je": {
+      "v4-w,^fE*lUJ:\"j": 3,
+      "eQ~R@(4Uz": 4
+    },
+    "3()gCbHu*": {
+      "'%\\xRQcwy_.&\"": 5
+    },
+    "Q4": {},
+    "rt0!G[$": {
+      "I": 6,
+      "rt": 7,
+      "&^`wi": 8,
+      "/F": 9
+    },
+    "Yk{1w~uE0=q": {
+      "=TaMug,+": 10,
+      "3B?'C21v0": 11
+    }
+  }
+}

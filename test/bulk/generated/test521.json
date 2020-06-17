@@ -1,0 +1,1034 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "many",
+      "arrayLengthProb": "max",
+      "maxDepthProb": "min",
+      "maxNeedlesProb": "many",
+      "maxNeedleLengthProb": "some",
+      "negateProb": "few",
+      "starProb": "never",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "few",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "match.plastic",
+    "rhy*m",
+    "!quince.s*y",
+    "w*p.overwrou?ht",
+    "tan.exp?ore",
+    "lizards",
+    "early.voracious",
+    "obtainable.?ven",
+    "rhetorical.swim",
+    "ta?.chilly",
+    "match.supply",
+    "rhetorical.l*ge",
+    "c*y.mundane",
+    "!rhythm",
+    "!loud.s*le",
+    "lizar?s",
+    "!express",
+    "!whip.bedroom",
+    "!lou*d.fr*ee"
+  ],
+  "searchTree": {
+    "match": {
+      "plastic": {},
+      "supply": {}
+    },
+    "rhy*m": {},
+    "quince": {
+      "s*y": {}
+    },
+    "w*p": {
+      "overwrou?ht": {}
+    },
+    "tan": {
+      "exp?ore": {}
+    },
+    "lizards": {},
+    "early": {
+      "voracious": {}
+    },
+    "obtainable": {
+      "?ven": {}
+    },
+    "rhetorical": {
+      "swim": {},
+      "l*ge": {}
+    },
+    "ta?": {
+      "chilly": {}
+    },
+    "c*y": {
+      "mundane": {}
+    },
+    "rhythm": {},
+    "loud": {
+      "s*le": {}
+    },
+    "lizar?s": {},
+    "express": {},
+    "whip": {
+      "bedroom": {}
+    },
+    "lou*d": {
+      "fr*ee": {}
+    }
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "lizards",
+    "tan.explore",
+    "tan.chilly",
+    "cemetery.mundane",
+    "early.voracious",
+    "obtainable.oven",
+    "whip.overwrought",
+    "match.plastic",
+    "match.supply",
+    "rhetorical.large",
+    "rhetorical.swim"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "match.plastic",
+        "rhy*m",
+        "!quince.s*y",
+        "w*p.overwrou?ht",
+        "tan.exp?ore",
+        "lizards",
+        "early.voracious",
+        "obtainable.?ven",
+        "rhetorical.swim",
+        "ta?.chilly",
+        "match.supply",
+        "rhetorical.l*ge",
+        "c*y.mundane",
+        "!rhythm",
+        "!loud.s*le",
+        "lizar?s",
+        "!express",
+        "!whip.bedroom",
+        "!lou*d.fr*ee"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "lizards",
+      "isMatch": true,
+      "matchedBy": [
+        "lizards",
+        "lizar?s"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "lizards",
+        "lizar?s"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "lizards",
+      "isMatch": true,
+      "matchedBy": [
+        "lizards",
+        "lizar?s"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "lizards",
+        "lizar?s"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "rhythm",
+      "isMatch": false,
+      "matchedBy": [
+        "rhy*m"
+      ],
+      "excludedBy": [
+        "!rhythm"
+      ],
+      "traversedBy": [
+        "rhy*m",
+        "!rhythm"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "tan",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "tan.exp?ore",
+        "ta?.chilly"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "tan.explore",
+      "isMatch": true,
+      "matchedBy": [
+        "tan.exp?ore"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "tan.exp?ore"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "tan.explore",
+      "isMatch": true,
+      "matchedBy": [
+        "tan.exp?ore"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "tan.exp?ore"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "tan.chilly",
+      "isMatch": true,
+      "matchedBy": [
+        "ta?.chilly"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "ta?.chilly"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "tan.chilly",
+      "isMatch": true,
+      "matchedBy": [
+        "ta?.chilly"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "ta?.chilly"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cemetery",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "c*y.mundane"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "cemetery.mundane",
+      "isMatch": true,
+      "matchedBy": [
+        "c*y.mundane"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "c*y.mundane"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "cemetery.mundane",
+      "isMatch": true,
+      "matchedBy": [
+        "c*y.mundane"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "c*y.mundane"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "early",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "early.voracious"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "early.voracious",
+      "isMatch": true,
+      "matchedBy": [
+        "early.voracious"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "early.voracious"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "early.voracious",
+      "isMatch": true,
+      "matchedBy": [
+        "early.voracious"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "early.voracious"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "obtainable",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "obtainable.?ven"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "obtainable.oven",
+      "isMatch": true,
+      "matchedBy": [
+        "obtainable.?ven"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "obtainable.?ven"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "obtainable.oven",
+      "isMatch": true,
+      "matchedBy": [
+        "obtainable.?ven"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "obtainable.?ven"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "whip",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "w*p.overwrou?ht",
+        "!whip.bedroom"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "whip.overwrought",
+      "isMatch": true,
+      "matchedBy": [
+        "w*p.overwrou?ht"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "w*p.overwrou?ht"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "whip.overwrought",
+      "isMatch": true,
+      "matchedBy": [
+        "w*p.overwrou?ht"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "w*p.overwrou?ht"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "match",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "match.plastic",
+        "match.supply"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "match.plastic",
+      "isMatch": true,
+      "matchedBy": [
+        "match.plastic"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "match.plastic"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "match.plastic",
+      "isMatch": true,
+      "matchedBy": [
+        "match.plastic"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "match.plastic"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "match.supply",
+      "isMatch": true,
+      "matchedBy": [
+        "match.supply"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "match.supply"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "match.supply",
+      "isMatch": true,
+      "matchedBy": [
+        "match.supply"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "match.supply"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "rhetorical",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "rhetorical.swim",
+        "rhetorical.l*ge"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "rhetorical.large",
+      "isMatch": true,
+      "matchedBy": [
+        "rhetorical.l*ge"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "rhetorical.l*ge"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "rhetorical.large",
+      "isMatch": true,
+      "matchedBy": [
+        "rhetorical.l*ge"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "rhetorical.l*ge"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "rhetorical.swim",
+      "isMatch": true,
+      "matchedBy": [
+        "rhetorical.swim"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "rhetorical.swim"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "rhetorical.swim",
+      "isMatch": true,
+      "matchedBy": [
+        "rhetorical.swim"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "rhetorical.swim"
+      ]
+    }
+  ],
+  "haystack": {
+    "square": {
+      "hot": 0,
+      "summon": 1,
+      "count": 2,
+      "elated": 3,
+      "quarter": 4,
+      "cluttered": 5,
+      "gold": 6,
+      "tax": 7,
+      "amuck": 8,
+      "wandering": 9,
+      "debt": 10,
+      "shocking": 11,
+      "coordinated": 12,
+      "passenger": 13,
+      "boy": 14,
+      "spectacular": 15,
+      "subdued": 16,
+      "railway": 17,
+      "encircle": 18,
+      "watch": 19,
+      "book": 20,
+      "rich": 21,
+      "snow": 22,
+      "upset": 23,
+      "persuade": 24,
+      "powerful": 25,
+      "collapse": 26
+    },
+    "board": {
+      "decrease": 27,
+      "spill": 28,
+      "vacuous": 29,
+      "lamentable": 30,
+      "operate": 31,
+      "toes": 32,
+      "imperil": 33,
+      "injure": 34,
+      "ply": 35,
+      "solve": 36,
+      "search": 37,
+      "grant": 38,
+      "brainy": 39,
+      "vegetable": 40,
+      "scientific": 41,
+      "board": 42,
+      "tank": 43,
+      "cycle": 44,
+      "spot": 45,
+      "behavior": 46,
+      "snap": 47,
+      "page": 48,
+      "impel": 49,
+      "arch": 50,
+      "leave": 51,
+      "tongue": 52,
+      "rattle": 53,
+      "queen": 54,
+      "receipt": 55
+    },
+    "rhetorical": {
+      "aboriginal": 56,
+      "yam": 57,
+      "unbiased": 58,
+      "confused": 59,
+      "fifth": 60,
+      "transport": 61,
+      "rod": 62,
+      "tangible": 63,
+      "lade": 64,
+      "periodic": 65,
+      "recondite": 66,
+      "grip": 67,
+      "money": 68,
+      "swim": 69,
+      "scrub": 70,
+      "thundering": 71,
+      "vase": 72,
+      "bow": 73,
+      "lowly": 74,
+      "expansion": 75,
+      "rock": 76,
+      "large": 77,
+      "petite": 78,
+      "follow": 79
+    },
+    "pardon": {
+      "miscreant": 80,
+      "orange": 81,
+      "cars": 82,
+      "cork": 83,
+      "throw": 84,
+      "hurry": 85,
+      "frightening": 86,
+      "nebulous": 87,
+      "grieving": 88,
+      "reading": 89,
+      "adamant": 90,
+      "jealous": 91,
+      "preach": 92,
+      "ugly": 93,
+      "stale": 94,
+      "mammoth": 95,
+      "tricky": 96,
+      "miss": 97,
+      "delete": 98,
+      "hum": 99,
+      "scatter": 100,
+      "dashing": 101,
+      "park": 102,
+      "profuse": 103,
+      "skin": 104,
+      "scowl": 105
+    },
+    "rewind": {
+      "uppity": 106,
+      "desk": 107,
+      "confine": 108,
+      "rhetorical": 109,
+      "explore": 110,
+      "part": 111,
+      "popcorn": 112,
+      "hateful": 113,
+      "probable": 114,
+      "dry": 115,
+      "adaptable": 116,
+      "extra-small": 117,
+      "breakfast": 118,
+      "tan": 119,
+      "rabbit": 120,
+      "chubby": 121,
+      "hat": 122,
+      "blue-eyed": 123,
+      "space": 124,
+      "aboriginal": 125,
+      "ahead": 126,
+      "rainy": 127,
+      "spill": 128,
+      "tasteful": 129,
+      "collect": 130,
+      "womanly": 131,
+      "attention": 132
+    },
+    "sloppy": {
+      "substance": 133,
+      "defeated": 134,
+      "hollow": 135,
+      "flight": 136,
+      "finicky": 137,
+      "macho": 138,
+      "nervous": 139,
+      "reading": 140,
+      "van": 141,
+      "meek": 142,
+      "ruddy": 143,
+      "zinc": 144,
+      "tangible": 145,
+      "inflect": 146,
+      "invention": 147,
+      "expansion": 148,
+      "leave": 149,
+      "squalid": 150,
+      "ant": 151,
+      "understood": 152,
+      "scarify": 153,
+      "weight": 154,
+      "grip": 155,
+      "skin": 156,
+      "sleep": 157,
+      "overwrought": 158,
+      "book": 159,
+      "squealing": 160,
+      "alley": 161,
+      "confiscate": 162
+    },
+    "match": {
+      "voracious": 163,
+      "guide": 164,
+      "aberrant": 165,
+      "early": 166,
+      "end": 167,
+      "carve": 168,
+      "appliance": 169,
+      "ply": 170,
+      "understood": 171,
+      "complete": 172,
+      "match": 173,
+      "peep": 174,
+      "miss": 175,
+      "strong": 176,
+      "seashore": 177,
+      "supply": 178,
+      "consult": 179,
+      "plastic": 180,
+      "leave": 181,
+      "band": 182,
+      "lowly": 183,
+      "point": 184,
+      "probable": 185,
+      "periodic": 186
+    },
+    "whip": {
+      "river": 187,
+      "pray": 188,
+      "shiver": 189,
+      "implicate": 190,
+      "overwrought": 191,
+      "board": 208,
+      "orange": 193,
+      "helpless": 194,
+      "macabre": 195,
+      "whimsical": 196,
+      "bedroom": 197,
+      "helpful": 198,
+      "skate": 199,
+      "idiotic": 200,
+      "quack": 201,
+      "sidewalk": 202,
+      "cross": 203,
+      "seashore": 204,
+      "wet": 205,
+      "spoon": 206,
+      "aboard": 207,
+      "holistic": 209,
+      "self": 210,
+      "scrub": 211,
+      "sight": 212,
+      "lizards": 213,
+      "befitting": 214
+    },
+    "spot": {
+      "substance": 215,
+      "scar": 216,
+      "sweet": 217,
+      "melodic": 218,
+      "forgetful": 219,
+      "blush": 220,
+      "fifth": 221,
+      "writing": 222,
+      "shoe": 223,
+      "blue-eyed": 224,
+      "peep": 225,
+      "glistening": 226,
+      "delete": 227,
+      "secretary": 228,
+      "beautiful": 229,
+      "unbiased": 230,
+      "kaput": 231,
+      "moo": 232,
+      "swallow": 233,
+      "overwrought": 234,
+      "crazy": 235,
+      "hurry": 236,
+      "coast": 237
+    },
+    "quince": {
+      "dare": 238,
+      "efficient": 239,
+      "gate": 240,
+      "travel": 241,
+      "finicky": 242,
+      "chairs": 243,
+      "sadden": 244,
+      "use": 245,
+      "achiever": 246,
+      "surmise": 247,
+      "sore": 248,
+      "treat": 249,
+      "value": 250,
+      "face": 251,
+      "youthful": 252,
+      "blue-eyed": 253,
+      "lizards": 254,
+      "match": 255,
+      "whip": 256,
+      "macho": 257,
+      "lace": 258,
+      "hen": 259,
+      "skate": 260,
+      "convince": 261,
+      "pray": 262,
+      "sweltering": 263,
+      "search": 264,
+      "stormy": 265,
+      "smile": 266,
+      "mind": 267
+    },
+    "detach": {
+      "rabbit": 268,
+      "thundering": 269,
+      "uppity": 270,
+      "loud": 271,
+      "peaceful": 272,
+      "cloud": 273,
+      "oranges": 274,
+      "leather": 275,
+      "public": 276,
+      "mindless": 277,
+      "giant": 278,
+      "daily": 279,
+      "occupy": 280,
+      "fumbling": 281,
+      "draconian": 282,
+      "beautiful": 290,
+      "sordid": 284,
+      "owl": 285,
+      "obstruct": 286,
+      "intelligent": 287,
+      "beef": 288,
+      "moo": 289,
+      "vase": 291,
+      "breakfast": 292,
+      "worthless": 293,
+      "glistening": 294
+    },
+    "obtainable": {
+      "exultant": 295,
+      "extra-large": 296,
+      "flawless": 297,
+      "match": 298,
+      "well-off": 299,
+      "flat": 300,
+      "brave": 301,
+      "tank": 302,
+      "put": 303,
+      "reading": 304,
+      "solve": 305,
+      "shape": 306,
+      "boundary": 307,
+      "scrawny": 308,
+      "yawn": 309,
+      "quarter": 310,
+      "trampl": 311,
+      "oven": 312,
+      "noise": 313,
+      "intelligent": 314,
+      "pen": 315,
+      "cherries": 316,
+      "prevent": 317,
+      "petite": 318
+    },
+    "contrast": {
+      "abounding": 319,
+      "praise": 320,
+      "cope": 321,
+      "aboriginal": 322,
+      "blush": 323,
+      "mundane": 324,
+      "sight": 325,
+      "fuzzy": 326,
+      "elated": 327,
+      "public": 328,
+      "drunk": 329,
+      "squalid": 330,
+      "sordid": 331,
+      "uttermost": 332,
+      "square": 333,
+      "malicious": 334,
+      "contemn": 335,
+      "kid": 336,
+      "conclude": 337,
+      "jealous": 338,
+      "vegetable": 339,
+      "board": 340,
+      "drawer": 341,
+      "frightened": 342,
+      "cloud": 343,
+      "shocking": 344
+    },
+    "early": {
+      "drunk": 345,
+      "alert": 346,
+      "scrub": 347,
+      "sew": 348,
+      "modern": 349,
+      "profuse": 350,
+      "ugly": 351,
+      "join": 352,
+      "trampl": 353,
+      "watch": 354,
+      "abash": 355,
+      "voracious": 356,
+      "incredible": 357,
+      "cluttered": 358,
+      "drink": 359,
+      "coordinated": 360,
+      "macho": 361,
+      "writing": 362,
+      "rhythm": 363,
+      "nifty": 364,
+      "defeated": 365,
+      "bumpy": 366,
+      "mundane": 367,
+      "buzz": 368,
+      "petite": 369,
+      "gate": 370
+    },
+    "merge": {
+      "neat": 371,
+      "dinner": 372,
+      "wind": 373,
+      "weight": 374,
+      "purpose": 375,
+      "count": 376,
+      "debt": 377,
+      "scat": 378,
+      "omniscient": 379,
+      "blue-eyed": 380,
+      "ceaseless": 381,
+      "familiar": 382,
+      "mean": 383,
+      "turn": 384,
+      "temper": 385,
+      "meek": 386,
+      "expansion": 387,
+      "young": 388,
+      "point": 389,
+      "doubtful": 390,
+      "thoughtless": 391,
+      "collapse": 392,
+      "cluttered": 393,
+      "credit": 394
+    },
+    "cemetery": {
+      "ignore": 395,
+      "excellent": 396,
+      "rock": 397,
+      "polite": 398,
+      "solve": 399,
+      "doubtful": 400,
+      "rainstorm": 401,
+      "intelligent": 402,
+      "pink": 403,
+      "family": 404,
+      "uppity": 405,
+      "dedicate": 406,
+      "inconclusive": 407,
+      "tax": 408,
+      "quiet": 409,
+      "pocket": 410,
+      "shy": 411,
+      "soup": 412,
+      "search": 413,
+      "ruthless": 414,
+      "cooing": 415,
+      "mundane": 416,
+      "shade": 417,
+      "light": 418,
+      "successful": 419,
+      "better": 420,
+      "perpetual": 421
+    },
+    "heart": {
+      "grip": 422,
+      "bun": 423,
+      "board": 424,
+      "white": 425,
+      "meek": 426,
+      "cope": 427,
+      "activity": 428,
+      "gold": 429,
+      "melodic": 430,
+      "sting": 431,
+      "snap": 432,
+      "high-pitched": 433,
+      "historical": 434,
+      "sloppy": 435,
+      "railway": 436,
+      "value": 437,
+      "forgetful": 438,
+      "tricky": 439,
+      "holistic": 440,
+      "scale": 441,
+      "gigantic": 442,
+      "tent": 443,
+      "silky": 444,
+      "answer": 445,
+      "arch": 446
+    },
+    "tan": {
+      "signify": 447,
+      "part": 448,
+      "eggnog": 449,
+      "amusing": 450,
+      "utopian": 451,
+      "intelligent": 452,
+      "laugh": 453,
+      "squalid": 454,
+      "enjoy": 455,
+      "indicate": 456,
+      "chilly": 457,
+      "drink": 458,
+      "oven": 459,
+      "lick": 460,
+      "pause": 461,
+      "lose": 462,
+      "unbiased": 463,
+      "men": 464,
+      "squirrel": 465,
+      "shy": 466,
+      "tan": 467,
+      "explore": 468,
+      "attention": 469,
+      "treat": 470,
+      "sting": 471,
+      "damaged": 472,
+      "spiders": 473,
+      "have": 474,
+      "mundane": 475,
+      "dump": 476
+    },
+    "loud": {
+      "holistic": 477,
+      "rock": 478,
+      "spiders": 479,
+      "blush": 480,
+      "wonderful": 481,
+      "marked": 482,
+      "noise": 483,
+      "relate": 484,
+      "mom": 485,
+      "soup": 486,
+      "scale": 487,
+      "draconian": 488,
+      "imperil": 489,
+      "pray": 490,
+      "leather": 491,
+      "flavor": 492,
+      "walk": 493,
+      "overwrought": 494,
+      "successful": 495,
+      "free": 496,
+      "honorable": 497,
+      "nest": 498,
+      "smile": 499,
+      "aboriginal": 500,
+      "weak": 501,
+      "moan": 502
+    },
+    "express": 503,
+    "rhythm": 505,
+    "popcorn": 506,
+    "lizards": 507
+  }
+}

@@ -1,0 +1,258 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "some",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "min",
+      "maxDepthProb": "many",
+      "maxNeedlesProb": "many",
+      "maxNeedleLengthProb": "many",
+      "negateProb": "few",
+      "starProb": "never",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "never",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "**",
+    "!**",
+    "confused.ho?orable",
+    "confused.**",
+    "confused.**.**",
+    "**.**",
+    "confused.**.dusty",
+    "conf?sed.honorable",
+    "confused.honorable",
+    "**.fuzzy"
+  ],
+  "searchTree": {
+    "**": {
+      "**": {},
+      "fuzzy": {}
+    },
+    "confused": {
+      "ho?orable": {},
+      "**": {
+        "**": {},
+        "dusty": {}
+      },
+      "dusty": {},
+      "honorable": {}
+    },
+    "conf?sed": {
+      "honorable": {}
+    },
+    "fuzzy": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "confused.honorable",
+    "confused.blush",
+    "confused.originate",
+    "confused"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "!**",
+        "confused.ho?orable",
+        "confused.**",
+        "confused.**.**",
+        "**.**",
+        "confused.**.dusty",
+        "conf?sed.honorable",
+        "confused.honorable",
+        "**.fuzzy"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "confused",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**",
+        "confused.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.**",
+        "**.fuzzy",
+        "confused.ho?orable",
+        "confused.**",
+        "confused.**.**",
+        "confused.**.dusty",
+        "confused.honorable",
+        "conf?sed.honorable"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "confused.honorable",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**",
+        "confused.ho?orable",
+        "confused.**.**",
+        "confused.honorable",
+        "conf?sed.honorable"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**",
+        "**.fuzzy",
+        "confused.ho?orable",
+        "confused.**",
+        "confused.**.**",
+        "confused.**.dusty",
+        "confused.honorable",
+        "conf?sed.honorable"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "confused.honorable",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**",
+        "confused.ho?orable",
+        "confused.**.**",
+        "confused.honorable",
+        "conf?sed.honorable"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**",
+        "**.fuzzy",
+        "confused.ho?orable",
+        "confused.**",
+        "confused.**.**",
+        "confused.**.dusty",
+        "confused.honorable",
+        "conf?sed.honorable"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "confused.blush",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**",
+        "confused.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**",
+        "**.fuzzy",
+        "confused.**",
+        "confused.**.**",
+        "confused.**.dusty"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "confused.blush",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**",
+        "confused.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**",
+        "**.fuzzy",
+        "confused.**",
+        "confused.**.**",
+        "confused.**.dusty"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "confused.originate",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**",
+        "confused.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**",
+        "**.fuzzy",
+        "confused.**",
+        "confused.**.**",
+        "confused.**.dusty"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "confused.originate",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**",
+        "confused.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**.**",
+        "**",
+        "!**",
+        "**.fuzzy",
+        "confused.**",
+        "confused.**.**",
+        "confused.**.dusty"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "confused",
+      "isMatch": true,
+      "matchedBy": [
+        "**.**",
+        "confused.**.**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "!**",
+        "**.**",
+        "**.fuzzy",
+        "confused.ho?orable",
+        "confused.**",
+        "confused.**.**",
+        "confused.**.dusty",
+        "confused.honorable",
+        "conf?sed.honorable"
+      ]
+    }
+  ],
+  "haystack": {
+    "confused": {
+      "originate": 0,
+      "blush": 533,
+      "honorable": 534
+    }
+  }
+}

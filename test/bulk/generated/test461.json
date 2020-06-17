@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "latin-basic-char",
+      "arrayProb": "never",
+      "objectLengthProb": "few",
+      "arrayLengthProb": "min",
+      "maxDepthProb": "some",
+      "maxNeedlesProb": "many",
+      "maxNeedleLengthProb": "some",
+      "negateProb": "never",
+      "starProb": "never",
+      "doubleStarProb": "never",
+      "emptyNeedleProb": "never",
+      "useArraySelectorProb": "never",
+      "partialStarProb": "never",
+      "questionMarkProb": "never"
+    }
+  },
+  "needles": [
+    "A",
+    "R.A.1",
+    "R.)",
+    "R.A.$.5"
+  ],
+  "searchTree": {
+    "A": {},
+    "R": {
+      "A": {
+        "1": {},
+        "$": {
+          "5": {}
+        }
+      },
+      ")": {}
+    }
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "A",
+    "R.)"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "A",
+        "R.A.1",
+        "R.)",
+        "R.A.$.5"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "A",
+      "isMatch": true,
+      "matchedBy": [
+        "A"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "A"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "A",
+      "isMatch": true,
+      "matchedBy": [
+        "A"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "A"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "R",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "R.A.1",
+        "R.)",
+        "R.A.$.5"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "R.)",
+      "isMatch": true,
+      "matchedBy": [
+        "R.)"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "R.)"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "R.)",
+      "isMatch": true,
+      "matchedBy": [
+        "R.)"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "R.)"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "R.A",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "R.A.1",
+        "R.A.$.5"
+      ]
+    }
+  ],
+  "haystack": {
+    "R": {
+      "A": 533,
+      ")": 534
+    },
+    "A": 535
+  }
+}

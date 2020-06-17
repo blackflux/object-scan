@@ -1,0 +1,1501 @@
+{
+  "meta": {
+    "generator": {
+      "keySets": "words",
+      "arrayProb": "never",
+      "objectLengthProb": "many",
+      "arrayLengthProb": "min",
+      "maxDepthProb": "max",
+      "maxNeedlesProb": "few",
+      "maxNeedleLengthProb": "min",
+      "negateProb": "never",
+      "starProb": "never",
+      "doubleStarProb": "some",
+      "emptyNeedleProb": "few",
+      "useArraySelectorProb": "few",
+      "partialStarProb": "never",
+      "questionMarkProb": "few"
+    }
+  },
+  "needles": [
+    "**",
+    "government",
+    "corrod",
+    "ju?icious",
+    "design",
+    "bead",
+    "flawless",
+    "spiders",
+    "capture",
+    "blue-eye?",
+    "humdrum",
+    "illuminate"
+  ],
+  "searchTree": {
+    "**": {},
+    "government": {},
+    "corrod": {},
+    "ju?icious": {},
+    "design": {},
+    "bead": {},
+    "flawless": {},
+    "spiders": {},
+    "capture": {},
+    "blue-eye?": {},
+    "humdrum": {},
+    "illuminate": {}
+  },
+  "opts": {
+    "useArraySelector": false
+  },
+  "result": [
+    "blue-eyed",
+    "corrod",
+    "wonderful",
+    "design",
+    "spiders",
+    "trampl",
+    "government",
+    "strong",
+    "regular",
+    "sting",
+    "blush",
+    "consult",
+    "illuminate",
+    "abaft",
+    "sign",
+    "flawless",
+    "capture",
+    "humdrum",
+    "prove",
+    "elated",
+    "judicious",
+    "quixotic",
+    "modern",
+    "defeated",
+    "bead",
+    "think.search",
+    "think.bent",
+    "think.wandering",
+    "think.contemn",
+    "think.rainy",
+    "think.pull",
+    "think.arch",
+    "think.grip",
+    "think.charge",
+    "think.beautiful",
+    "think.love",
+    "think.hiss",
+    "think.helpful",
+    "think.travel",
+    "think.push",
+    "think.snap",
+    "think.have",
+    "think.fizz",
+    "think.satiate",
+    "think.theory",
+    "think.dependent",
+    "think.probable",
+    "think.kaput",
+    "think.prevent",
+    "think.notebook",
+    "think.rabbit",
+    "think.defeated",
+    "think"
+  ],
+  "logs": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "government",
+        "corrod",
+        "ju?icious",
+        "design",
+        "bead",
+        "flawless",
+        "spiders",
+        "capture",
+        "blue-eye?",
+        "humdrum",
+        "illuminate"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "blue-eyed",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "blue-eye?"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "blue-eye?"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "blue-eyed",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "blue-eye?"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "blue-eye?"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "corrod",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "corrod"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "corrod"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "corrod",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "corrod"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "corrod"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "wonderful",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "wonderful",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "design",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "design"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "design"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "design",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "design"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "design"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "spiders",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "spiders"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "spiders"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "spiders",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "spiders"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "spiders"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "trampl",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "trampl",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "government",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "government"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "government"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "government",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "government"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "government"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "strong",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "strong",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "regular",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "regular",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "sting",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "sting",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "blush",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "blush",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "consult",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "consult",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "illuminate",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "illuminate"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "illuminate"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "illuminate",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "illuminate"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "illuminate"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "abaft",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "abaft",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "sign",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "sign",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "flawless",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "flawless"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "flawless"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "flawless",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "flawless"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "flawless"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "capture",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "capture"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "capture"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "capture",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "capture"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "capture"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "humdrum",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "humdrum"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "humdrum"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "humdrum",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "humdrum"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "humdrum"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "prove",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "prove",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "elated",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "elated",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "judicious",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "ju?icious"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "ju?icious"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "judicious",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "ju?icious"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "ju?icious"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "quixotic",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "quixotic",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "modern",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "modern",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "defeated",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "defeated",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "bead",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "bead"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "bead"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "bead",
+      "isMatch": true,
+      "matchedBy": [
+        "**",
+        "bead"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**",
+        "bead"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.search",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.search",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.bent",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.bent",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.wandering",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.wandering",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.contemn",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.contemn",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.rainy",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.rainy",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.pull",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.pull",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.arch",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.arch",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.grip",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.grip",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.charge",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.charge",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.beautiful",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.beautiful",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.love",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.love",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.hiss",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.hiss",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.helpful",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.helpful",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.travel",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.travel",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.push",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.push",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.snap",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.snap",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.have",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.have",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.fizz",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.fizz",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.satiate",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.satiate",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.theory",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.theory",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.dependent",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.dependent",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.probable",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.probable",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.kaput",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.kaput",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.prevent",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.prevent",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.notebook",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.notebook",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.rabbit",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.rabbit",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "think.defeated",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think.defeated",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    },
+    {
+      "type": "filterFn",
+      "key": "think",
+      "isMatch": true,
+      "matchedBy": [
+        "**"
+      ],
+      "excludedBy": [],
+      "traversedBy": [
+        "**"
+      ]
+    }
+  ],
+  "haystack": {
+    "think": {
+      "defeated": 956,
+      "rabbit": 957,
+      "notebook": 958,
+      "prevent": 959,
+      "kaput": 960,
+      "probable": 961,
+      "dependent": 962,
+      "theory": 963,
+      "satiate": 964,
+      "fizz": 965,
+      "have": 966,
+      "snap": 967,
+      "push": 968,
+      "travel": 969,
+      "helpful": 970,
+      "hiss": 971,
+      "love": 972,
+      "beautiful": 973,
+      "charge": 974,
+      "grip": 975,
+      "arch": 976,
+      "pull": 977,
+      "rainy": 978,
+      "contemn": 979,
+      "wandering": 980,
+      "bent": 981,
+      "search": 982
+    },
+    "bead": 983,
+    "defeated": 984,
+    "modern": 985,
+    "quixotic": 986,
+    "judicious": 987,
+    "elated": 988,
+    "prove": 989,
+    "humdrum": 990,
+    "capture": 991,
+    "flawless": 992,
+    "sign": 993,
+    "abaft": 994,
+    "illuminate": 995,
+    "consult": 996,
+    "blush": 997,
+    "sting": 998,
+    "regular": 999,
+    "strong": 1000,
+    "government": 1001,
+    "trampl": 1002,
+    "spiders": 1003,
+    "design": 1004,
+    "wonderful": 1005,
+    "corrod": 1006,
+    "blue-eyed": 1007
+  }
+}
