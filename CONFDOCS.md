@@ -9,7 +9,7 @@ Documents configuration tasks managed by [robo-config](https://github.com/blackf
     - <a name="blackfluxrobo-config-plugin-task-idx-ref-structforce-gardener">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-structforce-gardener">`struct/force-gardener`</a>
     - <a name="blackfluxrobo-config-plugin-task-idx-ref-structnpm-base">:open_file_folder:</a> <a href="#blackfluxrobo-config-plugin-task-ref-structnpm-base">`struct/#npm-base`</a>
       - <a name="blackfluxrobo-config-plugin-task-idx-ref-structtemplate-readme">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-structtemplate-readme">`struct/template-readme`</a>
-      - <a name="blackfluxrobo-config-plugin-task-idx-ref-structtemplate-mocha-opts">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-structtemplate-mocha-opts">`struct/template-mocha-opts`</a>
+      - <a name="blackfluxrobo-config-plugin-task-idx-ref-structtemplate-mocharc">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-structtemplate-mocharc">`struct/template-mocharc`</a>
       - <a name="blackfluxrobo-config-plugin-task-idx-ref-structtemplate-index-test">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-structtemplate-index-test">`struct/template-index-test`</a>
       - <a name="blackfluxrobo-config-plugin-task-idx-ref-structtemplate-index">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-structtemplate-index">`struct/template-index`</a>
       - <a name="blackfluxrobo-config-plugin-task-idx-ref-structtemplate-eslintrc">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-structtemplate-eslintrc">`struct/template-eslintrc`</a>
@@ -76,6 +76,7 @@ Manage various configuration files for an open source npm package on github.
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-gardenerjs">gardener.js</a></code><br/>
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-gitignore">.gitignore</a></code><br/>
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-license">LICENSE</a></code><br/>
+<code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-mocharcyml">.mocharc.yml</a></code><br/>
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-npmignore">.npmignore</a></code><br/>
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-packagejson">package.json</a></code><br/>
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-readmemd">README.md</a></code><br/>
@@ -83,8 +84,7 @@ Manage various configuration files for an open source npm package on github.
 <code>├─&nbsp;src</code><br/>
 <code>│&nbsp;&nbsp;└─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-srcindexjs">index.js</a></code><br/>
 <code>└─&nbsp;test</code><br/>
-<code>&nbsp;&nbsp;&nbsp;├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-testindexspecjs">index.spec.js</a></code><br/>
-<code>&nbsp;&nbsp;&nbsp;└─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-testmochaopts">mocha.opts</a></code><br/>
+<code>&nbsp;&nbsp;&nbsp;└─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-testindexspecjs">index.spec.js</a></code><br/>
         </ul>
       </td>
       <td align="left" valign="top">
@@ -142,12 +142,12 @@ Manage basic project structure for npm package on github.
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-babelrc">.babelrc</a></code><br/>
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-eslintrcjson">.eslintrc.json</a></code><br/>
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-gardenerjs">gardener.js</a></code><br/>
+<code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-mocharcyml">.mocharc.yml</a></code><br/>
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-readmemd">README.md</a></code><br/>
 <code>├─&nbsp;src</code><br/>
 <code>│&nbsp;&nbsp;└─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-srcindexjs">index.js</a></code><br/>
 <code>└─&nbsp;test</code><br/>
-<code>&nbsp;&nbsp;&nbsp;├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-testindexspecjs">index.spec.js</a></code><br/>
-<code>&nbsp;&nbsp;&nbsp;└─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-testmochaopts">mocha.opts</a></code><br/>
+<code>&nbsp;&nbsp;&nbsp;└─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-testindexspecjs">index.spec.js</a></code><br/>
         </ul>
       </td>
       <td align="left" valign="top">
@@ -215,12 +215,12 @@ Manage basic project structure for npm package on github.
 <code>project</code><br/>
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-babelrc">.babelrc</a></code><br/>
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-eslintrcjson">.eslintrc.json</a></code><br/>
+<code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-mocharcyml">.mocharc.yml</a></code><br/>
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-readmemd">README.md</a></code><br/>
 <code>├─&nbsp;src</code><br/>
 <code>│&nbsp;&nbsp;└─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-srcindexjs">index.js</a></code><br/>
 <code>└─&nbsp;test</code><br/>
-<code>&nbsp;&nbsp;&nbsp;├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-testindexspecjs">index.spec.js</a></code><br/>
-<code>&nbsp;&nbsp;&nbsp;└─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-testmochaopts">mocha.opts</a></code><br/>
+<code>&nbsp;&nbsp;&nbsp;└─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-testindexspecjs">index.spec.js</a></code><br/>
         </ul>
       </td>
       <td align="left" valign="top">
@@ -269,9 +269,9 @@ _Updating <a href="#blackfluxrobo-config-plugin-target-ref-readmemd">README.md</
   </tbody>
 </table>
 
-###### :clipboard: <a name="blackfluxrobo-config-plugin-task-ref-structtemplate-mocha-opts">struct/template-mocha-opts</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-structtemplate-mocha-opts">`index`</a>)
+###### :clipboard: <a name="blackfluxrobo-config-plugin-task-ref-structtemplate-mocharc">struct/template-mocharc</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-structtemplate-mocharc">`index`</a>)
 
-_Updating <a href="#blackfluxrobo-config-plugin-target-ref-testmochaopts">test/mocha.opts</a> using <a href="#blackfluxrobo-config-plugin-strat-ref-create-only">create-only</a>._
+_Updating <a href="#blackfluxrobo-config-plugin-target-ref-mocharcyml">.mocharc.yml</a> using <a href="#blackfluxrobo-config-plugin-strat-ref-create-only">create-only</a>._
 
 - Create options file for mocha tests.
 
@@ -285,8 +285,7 @@ _Updating <a href="#blackfluxrobo-config-plugin-target-ref-testmochaopts">test/m
       <td align="left" valign="top">
         <ul>
 <code>project</code><br/>
-<code>└─&nbsp;test</code><br/>
-<code>&nbsp;&nbsp;&nbsp;└─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-testmochaopts">mocha.opts</a></code><br/>
+<code>└─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-mocharcyml">.mocharc.yml</a></code><br/>
         </ul>
       </td>
       <td align="left" valign="top">
@@ -1645,7 +1644,7 @@ Execute all configured js-gardener tasks.
 
 Contains lots of information about the project itself.
 
-### <a name="blackfluxrobo-config-plugin-target-ref-testmochaopts">test/mocha.opts</a> ([`link`](https://mochajs.org/#mochaopts)) 
+### <a name="blackfluxrobo-config-plugin-target-ref-mocharcyml">.mocharc.yml</a> ([`link`](https://mochajs.org/#mochaopts)) 
 
 :small_red_triangle: <a href="#blackfluxrobo-config-plugin-req-ref-mocha">mocha</a>, <a href="#blackfluxrobo-config-plugin-req-ref-javascript">javascript</a>
 
