@@ -3886,6 +3886,13 @@ joi-strict@1.2.2:
   dependencies:
     "@hapi/joi" "17.1.1"
 
+joi-strict@1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.2.3.tgz#5dd21345fde40b953a7265e76299682d023fc6f0"
+  integrity sha512-Z7vwDXSwG0h1oKK97lXaML68jQnpLR4z7ygI/I9gE442hO+yiEgS8+ZTn+BrDRrmt5s1jTUytdF4xSk0DGXV2w==
+  dependencies:
+    "@hapi/joi" "17.1.1"
+
 js-gardener@2.0.165:
   version "2.0.165"
   resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.165.tgz#a8813451a3ebe3d5997e4c0a0483e9b989a8ce74"
@@ -4974,16 +4981,18 @@ node-sass-tilde-importer@^1.0.2:
   dependencies:
     find-parent-dir "^0.3.0"
 
-node-tdd@2.16.1:
-  version "2.16.1"
-  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.16.1.tgz#f37a00f3df8e11a6f61ec36b2b4fc11f3dd24bfc"
-  integrity sha512-d3+hS/hFgeSNS5fupRrkbaJEHE5YuZyv3KN9sWiNu0CEfEvdMnzalpfngW6aRdZqBSL3ferwi3uK97n86rFotw==
+node-tdd@2.17.0:
+  version "2.17.0"
+  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.17.0.tgz#ee9c4b455efdb597be3840750774ceb5b5247236"
+  integrity sha512-eBRhEH0DV/yytPZgIRf5N86OLbUXRfEtdDV2vNCdU6KE0W5ZoSKNqQ9gtuaInFHH3faC/wWN8y4gG6Vgwhpemg==
   dependencies:
     callsites "3.1.0"
-    joi-strict "1.2.2"
+    joi-strict "1.2.3"
+    lodash.clonedeep "4.5.0"
     lodash.get "4.4.2"
     minimist "1.2.5"
     nock "13.0.2"
+    object-scan "13.1.2"
     smart-fs "1.11.15"
     timekeeper "2.2.0"
     tmp "0.2.1"
@@ -5404,6 +5413,11 @@ object-scan@13.1.1:
   version "13.1.1"
   resolved "https://registry.yarnpkg.com/object-scan/-/object-scan-13.1.1.tgz#99b4c11cf91e2de8919066d52eab7bfdd757f502"
   integrity sha512-dlrrdiU8BrOEN+dKl+uX7ly4Az18wHi+Abg4nl5ZS3w025FixgFMwsmptRfyHPkgQ3iD4YM5Mbxf1ISuVXU4KQ==
+
+object-scan@13.1.2:
+  version "13.1.2"
+  resolved "https://registry.yarnpkg.com/object-scan/-/object-scan-13.1.2.tgz#d190cdfd8821b6496afd2305568c5e7aaa539e24"
+  integrity sha512-MurZBgumqnz1rM+cQ/3lGM33Mr+MXTvGUg3H1Ylcad4Q71XbBmsFKcqWq6lFc+70W1t3xCsTWYrXT/doZt9LeA==
 
 object-treeify@1.1.25:
   version "1.1.25"
