@@ -48,10 +48,9 @@
   "devDependencies": {
     "@babel/cli": "7.10.5",
     "@babel/core": "7.11.1",
-    "@babel/plugin-proposal-object-rest-spread": "7.11.0",
     "@babel/register": "7.10.5",
     "@blackflux/eslint-plugin-rules": "1.3.33",
-    "@blackflux/robo-config-plugin": "3.9.5",
+    "@blackflux/robo-config-plugin": "3.9.7",
     "babel-eslint": "10.1.0",
     "chai": "4.2.0",
     "coveralls": "3.1.0",
@@ -61,11 +60,12 @@
     "eslint-plugin-json": "2.1.2",
     "eslint-plugin-markdown": "1.0.2",
     "eslint-plugin-mocha": "8.0.0",
-    "js-gardener": "2.0.166",
+    "js-gardener": "2.0.167",
     "json-stringify-pretty-compact": "2.0.0",
     "node-tdd": "2.18.3",
     "nyc": "15.1.0",
-    "semantic-release": "17.1.1"
+    "semantic-release": "17.1.1",
+    "babel-preset-latest-node": "4.1.0"
   },
   "nyc": {
     "tempDir": "./coverage/.nyc_output",
