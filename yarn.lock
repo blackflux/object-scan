@@ -3944,10 +3944,17 @@ joi-strict@1.2.3:
   dependencies:
     "@hapi/joi" "17.1.1"
 
-js-gardener@2.0.168:
-  version "2.0.168"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.168.tgz#1d81c7aecc811c307b0ab7f4f032d82993f6e122"
-  integrity sha512-8tJHJX1qsuwnH4VjcyVAooQMfwl/HshfKzxNoIfR0CpgfHlWWOkXxjVTG/pS6cucPtmxPTgmOj6jz7JQQdgSYw==
+joi-strict@1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/joi-strict/-/joi-strict-1.2.4.tgz#714396979db995962b9a252e775cab8202611144"
+  integrity sha512-6VKum77Xd+cVTfrYGRds9TljqdesOLkOU3JxNJ2T0C3CeJWyAc4vD7vLkEn7GimUuEoyvlqKqQIQ8frl1OmaeA==
+  dependencies:
+    "@hapi/joi" "17.1.1"
+
+js-gardener@2.0.170:
+  version "2.0.170"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.170.tgz#d6b26003981e78cb2cdd16f7b8d062014d014167"
+  integrity sha512-D0QH7wJkGMmgEY3UcKLbv1/urDgiJ2nzns347SZ8iKe+XRJqhtX2B8YCUE1VGWpQ3p8L2DdF36oLTJ7bXNpUTg==
   dependencies:
     chalk "4.1.0"
     fancy-log "1.3.3"
@@ -3958,7 +3965,7 @@ js-gardener@2.0.168:
     lodash.get "4.4.2"
     mocha "8.1.3"
     npm-check "5.9.2"
-    robo-config "3.8.6"
+    robo-config "3.8.9"
 
 js-tokens@^3.0.0:
   version "3.0.2"
@@ -5374,10 +5381,10 @@ object-keys@^1.0.11, object-keys@^1.0.12, object-keys@^1.1.1:
   resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.1.1.tgz#1c47f272df277f3b1daf061677d9c82e2322c60e"
   integrity sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==
 
-object-scan@13.1.2:
-  version "13.1.2"
-  resolved "https://registry.yarnpkg.com/object-scan/-/object-scan-13.1.2.tgz#d190cdfd8821b6496afd2305568c5e7aaa539e24"
-  integrity sha512-MurZBgumqnz1rM+cQ/3lGM33Mr+MXTvGUg3H1Ylcad4Q71XbBmsFKcqWq6lFc+70W1t3xCsTWYrXT/doZt9LeA==
+object-scan@13.1.4:
+  version "13.1.4"
+  resolved "https://registry.yarnpkg.com/object-scan/-/object-scan-13.1.4.tgz#dab76506cef35300ab744cfce5ecf27ad0734de0"
+  integrity sha512-pwc5F73RyduRMz/C+JvEllvV5nPhYj86vpdIykUnsEY6PI5gpRWuilSP3K0qhAxOyTryW6ZW2pHhweb+6ojThA==
 
 object-scan@13.1.5:
   version "13.1.5"
@@ -6551,21 +6558,21 @@ rimraf@^3.0.0:
   dependencies:
     glob "^7.1.3"
 
-robo-config@3.8.6:
-  version "3.8.6"
-  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.8.6.tgz#994d8f2e2024c73591f3f766b1445e8562c39382"
-  integrity sha512-ucreSd4pdWDMSGN6loCcpn9FsHvy6wLblY56UcHZo5jdsXL5AFiRX5ntAAs3elpuP9GqV4p1rIX2zEFrUz2lUg==
+robo-config@3.8.9:
+  version "3.8.9"
+  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.8.9.tgz#151658e9f79c6d1b81c09f4bee623be2f5cbc136"
+  integrity sha512-b3OXo1c9IrOEA1EOUXXYcJYIr/H1GAsJewdFfs8lCxXIvv6GRC+yCh31fBLcTMQV1tPQw05MsMo/JVJWW02xbA==
   dependencies:
     app-root-path "3.0.0"
     deepmerge "4.2.2"
-    joi-strict "1.2.3"
+    joi-strict "1.2.4"
     lodash.clonedeep "4.5.0"
     lodash.difference "4.5.0"
     lodash.get "4.4.2"
     object-deep-contain "1.0.25"
-    object-scan "13.1.2"
+    object-scan "13.1.4"
     object-treeify "1.1.26"
-    smart-fs "1.11.16"
+    smart-fs "1.11.17"
 
 run-async@^0.1.0:
   version "0.1.0"
@@ -6786,20 +6793,6 @@ smart-buffer@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-4.1.0.tgz#91605c25d91652f4661ea69ccf45f1b331ca21ba"
   integrity sha512-iVICrxOzCynf/SNaBQCw34eM9jROU/s5rzIhpOvzhzuYHfJR/DhZfDkXiZSgKXfgv26HT3Yni3AV/DGw0cGnnw==
-
-smart-fs@1.11.16:
-  version "1.11.16"
-  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.11.16.tgz#092b34da10d57f82dbb2d53b0b15eceda7417d9b"
-  integrity sha512-1NbCUyNUIMCOr1sQReWNEbs/t27f92wUrp77eZNfqPZKg/XWYHez2LYWFMeCTPRIZXYSsa6bWeiTMsWzTVmgTA==
-  dependencies:
-    fs-extra "9.0.1"
-    js-yaml "3.14.0"
-    json-stringify-pretty-compact "2.0.0"
-    lodash.clonedeep "4.5.0"
-    lodash.isequal "4.5.0"
-    object-align "1.0.12"
-    xml-js "1.6.11"
-    yaml-boost "1.9.23"
 
 smart-fs@1.11.17:
   version "1.11.17"
