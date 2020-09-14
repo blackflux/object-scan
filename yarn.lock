@@ -309,17 +309,17 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@blackflux/eslint-plugin-rules@1.3.35":
-  version "1.3.35"
-  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.3.35.tgz#dd1211df2c4a88e86b30b2a7a222778e3f7bea10"
-  integrity sha512-VR+cs6qaS3qmhoXW4os8EjEj3PI6ufT0sWUTkwaFDgOqvbKeHBDCQhIXzCFKsjjtftcAWuDiOBkC3Q6q8GfoVg==
+"@blackflux/eslint-plugin-rules@1.3.38":
+  version "1.3.38"
+  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.3.38.tgz#0c36888388b94655818b15e20c203dd8d2a1b17b"
+  integrity sha512-GF15zTQ+3cX4F7NYWWWbchdDaUQl/oszi/cW9aPN/gL+ZQHd+kpEqMopUsaU993qb+dlb2wfeACD4X7gGytoSg==
   dependencies:
-    smart-fs "1.11.17"
+    smart-fs "1.11.19"
 
-"@blackflux/robo-config-plugin@3.9.9":
-  version "3.9.9"
-  resolved "https://registry.yarnpkg.com/@blackflux/robo-config-plugin/-/robo-config-plugin-3.9.9.tgz#3d3b2d196adca8b19deeaea0fc235facdea03937"
-  integrity sha512-0qizWw0DNf6ffYmDvQKC67FWEhjrjYDbWvGqfUI7iCzeBl6L9HutTGMcrDVG1bW175H7re6E/cIgLxLXqcewbA==
+"@blackflux/robo-config-plugin@3.10.2":
+  version "3.10.2"
+  resolved "https://registry.yarnpkg.com/@blackflux/robo-config-plugin/-/robo-config-plugin-3.10.2.tgz#c3614f658851efe92e7d631d5d0229ccb7685840"
+  integrity sha512-B+EF3KFvHsY7zzk+FCzvg5g3NZB2AKQMcInQ0REAaC69MO7m3+2+zwwiYN7Ra/9VSp/mBhM88G4Wx+omIS89UA==
 
 "@eslint/eslintrc@^0.1.3":
   version "0.1.3"
@@ -2355,10 +2355,10 @@ eslint-visitor-keys@^1.0.0, eslint-visitor-keys@^1.1.0, eslint-visitor-keys@^1.3
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.3.0.tgz#30ebd1ef7c2fdff01c3a4f151044af25fab0523e"
   integrity sha512-6J72N8UNa462wa/KFODt/PJ3IU60SDpC3QXC1Hjc1BXXpfL2C9R5+AU7jhe0F6GREqVMh4Juu+NY7xn+6dipUQ==
 
-eslint@7.8.1:
-  version "7.8.1"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.8.1.tgz#e59de3573fb6a5be8ff526c791571646d124a8fa"
-  integrity sha512-/2rX2pfhyUG0y+A123d0ccXtMm7DV7sH1m3lk9nk2DZ2LReq39FXHueR9xZwshE5MdfSf0xunSaMWRqyIA6M1w==
+eslint@7.9.0:
+  version "7.9.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.9.0.tgz#522aeccc5c3a19017cf0cb46ebfd660a79acf337"
+  integrity sha512-V6QyhX21+uXp4T+3nrNfI3hQNBDa/P8ga7LoQOenwrlEFXrEnUEE+ok1dMtaS3b6rmLXhT1TkTIsG75HMLbknA==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@eslint/eslintrc" "^0.1.3"
@@ -3951,10 +3951,10 @@ joi-strict@1.2.4:
   dependencies:
     "@hapi/joi" "17.1.1"
 
-js-gardener@2.0.170:
-  version "2.0.170"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.170.tgz#d6b26003981e78cb2cdd16f7b8d062014d014167"
-  integrity sha512-D0QH7wJkGMmgEY3UcKLbv1/urDgiJ2nzns347SZ8iKe+XRJqhtX2B8YCUE1VGWpQ3p8L2DdF36oLTJ7bXNpUTg==
+js-gardener@2.0.172:
+  version "2.0.172"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.172.tgz#c58a9c5c6548a8066d63a9264c0b276a87efa429"
+  integrity sha512-6mLhusta52HfIHbpeNiV7CXrU3lh1xRVjZNgiwrbPlehwUUVXfZCP/jfqoLTaIDv/t5YTlaH6fwfLSMIl4KPTw==
   dependencies:
     chalk "4.1.0"
     fancy-log "1.3.3"
@@ -3965,7 +3965,7 @@ js-gardener@2.0.170:
     lodash.get "4.4.2"
     mocha "8.1.3"
     npm-check "5.9.2"
-    robo-config "3.8.9"
+    robo-config "3.8.10"
 
 js-tokens@^3.0.0:
   version "3.0.2"
@@ -4961,10 +4961,10 @@ node-sass-tilde-importer@^1.0.2:
   dependencies:
     find-parent-dir "^0.3.0"
 
-node-tdd@2.18.6:
-  version "2.18.6"
-  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.18.6.tgz#90a5dfc038b4e1f039c813de020a3bd089fbe3bf"
-  integrity sha512-lKcS8rcJXN4YP2x7nYf8hs12Quf2KgM8/CP3T1Dko/prmhySbCYoVTq/bwoP0AX4Ggx/VyBx9j2Dp5gv4xxSkw==
+node-tdd@2.18.8:
+  version "2.18.8"
+  resolved "https://registry.yarnpkg.com/node-tdd/-/node-tdd-2.18.8.tgz#ceb126a9424b5995a338e34114d0105b8fc30f11"
+  integrity sha512-5I2qgMRhutPCFonYPpfyAsRt4kdU3PJpe4PRW9zVT9qO2bvmPQZmOvceS+BoPPfAQwAsTBKxAKxhW4XDVZ4olQ==
   dependencies:
     callsites "3.1.0"
     joi-strict "1.2.3"
@@ -4973,7 +4973,7 @@ node-tdd@2.18.6:
     minimist "1.2.5"
     nock "13.0.4"
     object-scan "13.1.5"
-    smart-fs "1.11.18"
+    smart-fs "1.11.19"
     timekeeper "2.2.0"
     tmp "0.2.1"
     uuid "8.3.0"
@@ -5352,6 +5352,11 @@ object-align@1.0.12:
   resolved "https://registry.yarnpkg.com/object-align/-/object-align-1.0.12.tgz#d7903dd86786b9520a81c2e6792e2dce97f829bd"
   integrity sha512-fBDkdd9LFMD2mNvoRi0cLDmmijhic0KurQcU400NuFj27ye7BdBjPyP5dhjaNjHscepB5PO//qA1cUd73ckvjw==
 
+object-align@1.0.13:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/object-align/-/object-align-1.0.13.tgz#17d2680e047db7d0a4c6f659fa86da9bb925e476"
+  integrity sha512-vqLf2gEwYCReZ2HbLIvLbznfICEM54JMoMGGYc04+l+pewumuz/9ltOqvDtJpQs/Zin/x2UaCOK/XIMtMYL0Hw==
+
 object-assign@^4.0.1, object-assign@^4.1.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
@@ -5391,10 +5396,10 @@ object-scan@13.1.5:
   resolved "https://registry.yarnpkg.com/object-scan/-/object-scan-13.1.5.tgz#d4f3a3b0cb89e7a3d6f6a89dd046e70585318105"
   integrity sha512-661amgbFgthyFhAqKHcot+0akjiCHj89/mnX3wWN9nvoGxgNr+jXVtsovVAz1C++fSUg7GPsUSa93U/7H+QNVA==
 
-object-treeify@1.1.26:
-  version "1.1.26"
-  resolved "https://registry.yarnpkg.com/object-treeify/-/object-treeify-1.1.26.tgz#80b882036cb5d0fddc16e8a2affa98ba96f89a74"
-  integrity sha512-0WTfU7SGM8umY4YPpOg+oHXL66E6dPVCr+sMR6KitPmvg8CkVrHUUZYEFtx0+5Wb0HjFEsBwBYXyGRNeX7c/oQ==
+object-treeify@1.1.27:
+  version "1.1.27"
+  resolved "https://registry.yarnpkg.com/object-treeify/-/object-treeify-1.1.27.tgz#4244a90df5ba3d2d92747ebd64b271369379e4f3"
+  integrity sha512-xRDJvP4ptfleTmJm/qPrxv/8Iifgk/xnaNeBqyczbYeQ4Yh5GCGOZaO78MlbwR5nlo9viTxM1kgThgl8/sMEHg==
 
 object-visit@^1.0.0:
   version "1.0.1"
@@ -6558,10 +6563,10 @@ rimraf@^3.0.0:
   dependencies:
     glob "^7.1.3"
 
-robo-config@3.8.9:
-  version "3.8.9"
-  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.8.9.tgz#151658e9f79c6d1b81c09f4bee623be2f5cbc136"
-  integrity sha512-b3OXo1c9IrOEA1EOUXXYcJYIr/H1GAsJewdFfs8lCxXIvv6GRC+yCh31fBLcTMQV1tPQw05MsMo/JVJWW02xbA==
+robo-config@3.8.10:
+  version "3.8.10"
+  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.8.10.tgz#e2a9f23fbbb2ba4a4ed8267762c95fb7dd618a24"
+  integrity sha512-43vz+ONe5jXDHR2eEQsh/nOaAr8oy/hzHmuSSt/ibfx1tqQwDMaw6NP6RiHLo/frQS6VcodV7oCSCsYk8C8yLw==
   dependencies:
     app-root-path "3.0.0"
     deepmerge "4.2.2"
@@ -6571,8 +6576,8 @@ robo-config@3.8.9:
     lodash.get "4.4.2"
     object-deep-contain "1.0.25"
     object-scan "13.1.4"
-    object-treeify "1.1.26"
-    smart-fs "1.11.17"
+    object-treeify "1.1.27"
+    smart-fs "1.11.18"
 
 run-async@^0.1.0:
   version "0.1.0"
@@ -6794,20 +6799,6 @@ smart-buffer@^4.1.0:
   resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-4.1.0.tgz#91605c25d91652f4661ea69ccf45f1b331ca21ba"
   integrity sha512-iVICrxOzCynf/SNaBQCw34eM9jROU/s5rzIhpOvzhzuYHfJR/DhZfDkXiZSgKXfgv26HT3Yni3AV/DGw0cGnnw==
 
-smart-fs@1.11.17:
-  version "1.11.17"
-  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.11.17.tgz#41fe4f45a38a66569023191a164f4c84739e68d9"
-  integrity sha512-MJEEAsAPuy34NztifiYS08Dl/TH7BY9lPnSg8dplofJ8/RbRXgrwWHp2T/rKWhlHEsfH/5fnNUV9hJp/KdcqOg==
-  dependencies:
-    fs-extra "9.0.1"
-    js-yaml "3.14.0"
-    json-stringify-pretty-compact "2.0.0"
-    lodash.clonedeep "4.5.0"
-    lodash.isequal "4.5.0"
-    object-align "1.0.12"
-    xml-js "1.6.11"
-    yaml-boost "1.9.23"
-
 smart-fs@1.11.18:
   version "1.11.18"
   resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.11.18.tgz#9dcc1b20213e56ffa88e1d58d95df0e06d82128e"
@@ -6819,6 +6810,20 @@ smart-fs@1.11.18:
     lodash.clonedeep "4.5.0"
     lodash.isequal "4.5.0"
     object-align "1.0.12"
+    xml-js "1.6.11"
+    yaml-boost "1.9.24"
+
+smart-fs@1.11.19:
+  version "1.11.19"
+  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.11.19.tgz#82e70b13e4046747333c082797ebb9d14b949266"
+  integrity sha512-ycmO+cNcyV2ddd//njnAv7j4ViazaZY0urivob2OW14xr0ECWAjnqZsnT7G+LsvqjhB4GNyHRDDyjYAdjbgrlw==
+  dependencies:
+    fs-extra "9.0.1"
+    js-yaml "3.14.0"
+    json-stringify-pretty-compact "2.0.0"
+    lodash.clonedeep "4.5.0"
+    lodash.isequal "4.5.0"
+    object-align "1.0.13"
     xml-js "1.6.11"
     yaml-boost "1.9.24"
 
@@ -8058,16 +8063,6 @@ yallist@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-4.0.0.tgz#9bb92790d9c0effec63be73519e11a35019a3a72"
   integrity sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
-
-yaml-boost@1.9.23:
-  version "1.9.23"
-  resolved "https://registry.yarnpkg.com/yaml-boost/-/yaml-boost-1.9.23.tgz#7e79110c73c92c0102702f29dcac6cd60e7b8f1a"
-  integrity sha512-XbeEakPKtlQFSyvhJ645KlLEtaUKmNziJD49aIT/h2XiPJBsTYGqrxeedjHMNInDqZHO6O4AQMHQ2aNLHv+Xcw==
-  dependencies:
-    js-yaml "3.14.0"
-    lodash.get "4.4.2"
-    lodash.mergewith "4.6.2"
-    lodash.set "4.3.2"
 
 yaml-boost@1.9.24:
   version "1.9.24"
