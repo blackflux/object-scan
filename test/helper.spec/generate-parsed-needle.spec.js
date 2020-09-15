@@ -1,10 +1,10 @@
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
-const generateParsed = require('../helper/generate-parsed');
+const generateParsedNeedle = require('../helper/generate-parsed-needle');
 
-describe('Testing generate-parsed.js', { cryptoSeed: '04eb4846-3b0c-4168-82fe-5a955f5161e3' }, () => {
+describe('Testing generate-parsed-needle.js', { cryptoSeed: '04eb4846-3b0c-4168-82fe-5a955f5161e3' }, () => {
   it('Testing example', () => {
-    expect(generateParsed()).to.deep.equal(
+    expect(generateParsedNeedle()).to.deep.equal(
       new Set([
         [
           new Set(['a', ['b'], '[9]']),

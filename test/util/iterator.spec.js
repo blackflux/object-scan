@@ -1,8 +1,8 @@
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
 const iterator = require('../../src/util/iterator');
-const parsedToNeedle = require('../helper/parsed-to-needle');
-const generateParsed = require('../helper/generate-parsed');
+const parsedNeedleToString = require('../helper/parsed-needle-to-string');
+const generateParsedNeedle = require('../helper/generate-parsed-needle');
 
 describe('Testing iterator', () => {
   let recIterate;
@@ -30,12 +30,12 @@ describe('Testing iterator', () => {
 
   it('Mass Testing Iterate Correctness', () => {
     for (let idx = 0; idx < 1000; idx += 1) {
-      const data = [generateParsed()];
+      const data = [generateParsedNeedle()];
       const r1 = [];
       const r2 = [];
       recIterate(data, (...args) => r1.push(args));
       iterator.iterate(data, (type, arg) => r2.push([type, type === 'FIN' ? arg.slice(0) : arg]));
-      expect(r1, parsedToNeedle(data)).to.deep.equal(r2);
+      expect(r1, parsedNeedleToString(data)).to.deep.equal(r2);
     }
   });
 
