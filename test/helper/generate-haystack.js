@@ -1,42 +1,29 @@
-const Joi = require('joi-strict');
+const assert = require('assert');
 
 const generateHaystackRec = (params, depth) => {
   const {
-    keys,
-    array,
-    arrayLength,
-    objectLength,
-    maxDepth,
-    maxNodes,
+    generator,
     count
   } = params;
-  if (count >= maxNodes) {
+  const generated = generator({ count, depth });
+  if (generated === undefined) {
     return undefined;
   }
-  if (depth > maxDepth()) {
+  if (generated === null) {
     // eslint-disable-next-line no-param-reassign
     params.count += 1;
     return count;
   }
-  if (array() === false) {
-    return keys(objectLength())
+  if (Array.isArray(generated)) {
+    return generated
       .map((k) => [k, generateHaystackRec(params, depth + 1)])
       .filter(([k, v]) => v !== undefined)
       .reduce((p, [k, v]) => Object.assign(p, { [k]: v }), {});
   }
-  return [...Array(arrayLength())]
+  assert(Number.isInteger(generated));
+  return [...Array(generated)]
     .map(() => generateHaystackRec(params, depth + 1))
     .filter((v) => v !== undefined);
 };
 
-module.exports = (params) => {
-  Joi.assert(params, Joi.object().keys({
-    keys: Joi.function(),
-    array: Joi.function(),
-    arrayLength: Joi.function(),
-    objectLength: Joi.function(),
-    maxDepth: Joi.function(),
-    maxNodes: Joi.number().integer().min(1)
-  }));
-  return generateHaystackRec({ ...params, count: 0 }, 0);
-};
+module.exports = (generator) => generateHaystackRec({ generator, count: 0 }, 0);
