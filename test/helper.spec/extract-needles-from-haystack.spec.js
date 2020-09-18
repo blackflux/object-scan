@@ -6,7 +6,8 @@ const extractNeedlesFromHaystack = require('../helper/extract-needles-from-hayst
 
 describe('Testing extract-needles-from-haystack.js', () => {
   it('Testing example', () => {
-    const haystack = generateHaystack(haystackGenerator('cb8c58e7-436d-4229-8ad5-eca7670fb803'));
+    const generator = haystackGenerator('cb8c58e7-436d-4229-8ad5-eca7670fb803');
+    const haystack = generateHaystack(generator);
     expect(haystack).to.deep.equal({ Q: [{ d: 0, T: [1, { y: 2, h: 3, r: 4 }] }] });
     const needles = extractNeedlesFromHaystack(haystack);
     expect(needles).to.deep.equal([
