@@ -21,7 +21,7 @@ describe('Testing modify-needle.js', () => {
   });
 
   it('Testing no modification', () => {
-    const r = modifyNeedle(needle, params, rng);
+    const r = modifyNeedle(needle, params);
     expect(r).to.deep.equal([
       { value: 'name', string: true, exclude: false },
       { value: '0', string: false, exclude: false },
