@@ -1,9 +1,9 @@
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
-const modifyNeedle = require('../helper/modify-needle');
+const pathToNeedle = require('../helper/path-to-needle');
 const PRNG = require('../helper/prng');
 
-describe('Testing modify-needle.js', () => {
+describe('Testing path-to-needle.js', () => {
   let rng;
   let needle;
   let params;
@@ -21,7 +21,7 @@ describe('Testing modify-needle.js', () => {
   });
 
   it('Testing no modification', () => {
-    const r = modifyNeedle(needle, params);
+    const r = pathToNeedle(needle, params);
     expect(r).to.deep.equal([
       { value: 'name', string: true, exclude: false },
       { value: '0', string: false, exclude: false },
@@ -32,7 +32,7 @@ describe('Testing modify-needle.js', () => {
   });
 
   it('Testing len percentage', () => {
-    const r = modifyNeedle(needle, { ...params, lenPercentage: 0.5 }, rng);
+    const r = pathToNeedle(needle, { ...params, lenPercentage: 0.5 }, rng);
     expect(r).to.deep.equal([
       { value: 'name', string: true, exclude: false },
       { value: '0', string: false, exclude: false },
@@ -41,7 +41,7 @@ describe('Testing modify-needle.js', () => {
   });
 
   it('Testing exclude', () => {
-    const r = modifyNeedle(needle, { ...params, exclude: true }, rng);
+    const r = pathToNeedle(needle, { ...params, exclude: true }, rng);
     expect(r).to.deep.equal([
       { value: 'name', string: true, exclude: false },
       { value: '0', string: false, exclude: false },
@@ -52,7 +52,7 @@ describe('Testing modify-needle.js', () => {
   });
 
   it('Testing question mark', () => {
-    const r = modifyNeedle(needle, { ...params, questionMarkProbability: 1 }, rng);
+    const r = pathToNeedle(needle, { ...params, questionMarkProbability: 1 }, rng);
     expect(r).to.deep.equal([
       { value: 'n?me', string: true, exclude: false },
       { value: '?', string: false, exclude: false },
@@ -63,7 +63,7 @@ describe('Testing modify-needle.js', () => {
   });
 
   it('Testing partial star', () => {
-    const r = modifyNeedle(needle, { ...params, partialStarProbability: 1 }, rng);
+    const r = pathToNeedle(needle, { ...params, partialStarProbability: 1 }, rng);
     expect(r).to.deep.equal([
       { value: 'n*me', string: true, exclude: false },
       { value: '*0', string: false, exclude: false },
@@ -74,7 +74,7 @@ describe('Testing modify-needle.js', () => {
   });
 
   it('Testing single Star', () => {
-    const r = modifyNeedle(needle, { ...params, singleStar: true }, rng);
+    const r = pathToNeedle(needle, { ...params, singleStar: true }, rng);
     expect(r).to.deep.equal([
       { value: 'name', string: true, exclude: false },
       { value: '0', string: false, exclude: false },
@@ -85,7 +85,7 @@ describe('Testing modify-needle.js', () => {
   });
 
   it('Testing double Star', () => {
-    const r = modifyNeedle(needle, { ...params, doubleStar: true }, rng);
+    const r = pathToNeedle(needle, { ...params, doubleStar: true }, rng);
     expect(r).to.deep.equal([
       { value: 'name', string: true, exclude: false },
       { value: '0', string: false, exclude: false },
@@ -95,7 +95,7 @@ describe('Testing modify-needle.js', () => {
   });
 
   it('Testing needle with special characters', () => {
-    const r = modifyNeedle(['*force'], params, rng);
+    const r = pathToNeedle(['*force'], params, rng);
     expect(r).to.deep.equal([
       { value: '\\*force', string: true, exclude: false }
     ]);
