@@ -18,4 +18,9 @@ describe('Testing extract-needles-from-haystack.js', () => {
       ['Q', 0, 'T', 1, 'r']
     ]);
   });
+
+  it('Testing special character in haystack', () => {
+    const needles = extractNeedlesFromHaystack({ '*force': true });
+    expect(needles).to.deep.equal([['*force']]);
+  });
 });
