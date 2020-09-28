@@ -13,8 +13,8 @@ describe('Testing path-to-needle.js', () => {
     params = {
       exclude: false,
       lenPercentage: 1,
-      questionMarkProbability: 0,
-      partialStarProbability: 0,
+      questionMark: 0,
+      partialStar: 0,
       singleStar: 0,
       doubleStar: 0
     };
@@ -45,40 +45,79 @@ describe('Testing path-to-needle.js', () => {
     expect(r).to.deep.equal([
       { value: 'name', string: true, exclude: false },
       { value: '0', string: false, exclude: false },
-      { value: 'value', string: true, exclude: true },
+      { value: 'value', string: true, exclude: false },
       { value: '16', string: false, exclude: false },
-      { value: 'property', string: true, exclude: false }
+      { value: 'property', string: true, exclude: true }
     ]);
   });
 
-  it('Testing question mark', () => {
-    const r = pathToNeedle(needle, { ...params, questionMarkProbability: 1 }, rng);
-    expect(r).to.deep.equal([
-      { value: 'n?me', string: true, exclude: false },
-      { value: '?', string: false, exclude: false },
-      { value: '?alue', string: true, exclude: false },
-      { value: '1?', string: false, exclude: false },
-      { value: 'propert?', string: true, exclude: false }
-    ]);
+  describe('Testing question mark', () => {
+    it('Testing default', () => {
+      const r = pathToNeedle(needle, { ...params, questionMark: 5 }, rng);
+      expect(r).to.deep.equal([
+        { value: 'na?e', string: true, exclude: false },
+        { value: '?', string: false, exclude: false },
+        { value: '?alue', string: true, exclude: false },
+        { value: '?6', string: false, exclude: false },
+        { value: '?roperty', string: true, exclude: false }
+      ]);
+    });
+
+    it('Testing multiple', () => {
+      const r = pathToNeedle(['1234567890'], { ...params, questionMark: 5 }, rng);
+      expect(r).to.deep.equal([
+        { value: '??3?5??890', string: true, exclude: false }
+      ]);
+    });
   });
 
-  it('Testing partial star', () => {
-    const r = pathToNeedle(needle, { ...params, partialStarProbability: 1 }, rng);
-    expect(r).to.deep.equal([
-      { value: 'n*me', string: true, exclude: false },
-      { value: '*0', string: false, exclude: false },
-      { value: 'va*e', string: true, exclude: false },
-      { value: '1*6', string: false, exclude: false },
-      { value: 'pr*perty', string: true, exclude: false }
-    ]);
+  describe('Testing partial star', () => {
+    it('Testing default', () => {
+      const r = pathToNeedle(needle, { ...params, partialStar: 5 }, rng);
+      expect(r).to.deep.equal([
+        { value: 'nam*', string: true, exclude: false },
+        { value: '*', string: false, exclude: false },
+        { value: '*ue', string: true, exclude: false },
+        { value: '16*', string: false, exclude: false },
+        { value: 'property*', string: true, exclude: false }
+      ]);
+    });
+
+    it('Testing multiple', () => {
+      const r = pathToNeedle(['1234567890'], { ...params, partialStar: 5 }, rng);
+      expect(r).to.deep.equal([
+        { value: '**78*9**0', string: true, exclude: false }
+      ]);
+    });
+
+    it('Testing before', () => {
+      const r = pathToNeedle(['0'], { ...params, partialStar: 1 }, PRNG('13b57a37-99a5-483f-a21c-48877ace091a'));
+      expect(r).to.deep.equal([
+        { value: '*0', string: true, exclude: false }
+      ]);
+    });
+
+    it('Testing after', () => {
+      const r = pathToNeedle(['0'], { ...params, partialStar: 1 }, PRNG('e837b890-f558-43a4-bd2c-b50c1116442c'));
+      expect(r).to.deep.equal([
+        { value: '0*', string: true, exclude: false }
+      ]);
+    });
+
+    it('Testing replace', () => {
+      const r = pathToNeedle(['0'], { ...params, partialStar: 1 }, PRNG('4fe2ba45-0932-4ccd-a5ba-374ef4f0aa4c'));
+      expect(r).to.deep.equal([
+        { value: '*', string: true, exclude: false }
+      ]);
+    });
   });
 
   it('Testing single Star', () => {
     const r = pathToNeedle(needle, { ...params, singleStar: 2 }, rng);
     expect(r).to.deep.equal([
       { value: 'name', string: true, exclude: false },
-      { value: '0', string: false, exclude: false },
-      { value: '*', string: true, exclude: false },
+      { value: '*', string: false, exclude: false },
+      { value: 'value', string: true, exclude: false },
       { value: '16', string: false, exclude: false },
       { value: '*', string: true, exclude: false }
     ]);
@@ -89,22 +128,22 @@ describe('Testing path-to-needle.js', () => {
       const r = pathToNeedle(needle, { ...params, doubleStar: 2 }, rng);
       expect(r).to.deep.equal([
         { value: 'name', string: true, exclude: false },
-        { value: '0', string: false, exclude: false },
-        { value: 'value', string: true, exclude: false },
         { value: '**', string: true, exclude: false },
+        { value: '16', string: false, exclude: false },
+        { value: 'property', string: true, exclude: false },
         { value: '**', string: true, exclude: false }
       ]);
     });
 
     it('Testing replace', () => {
-      const r = pathToNeedle([0], { ...params, doubleStar: 1 }, PRNG('fc863e2a-f73e-4e49-b349-70b9ddb82f49'));
+      const r = pathToNeedle([0], { ...params, doubleStar: 1 }, PRNG('fc863e2a-f73e-4e49-b349-70b9ddb82f47'));
       expect(r).to.deep.equal([
         { value: '**', string: true, exclude: false }
       ]);
     });
 
     it('Testing prepend', () => {
-      const r = pathToNeedle([0], { ...params, doubleStar: 1 }, PRNG('25ccb861-5a2d-497b-98e3-9b581691f981'));
+      const r = pathToNeedle([0], { ...params, doubleStar: 1 }, PRNG('46909d48-312d-4045-9230-3e60ef908620'));
       expect(r).to.deep.equal([
         { value: '**', string: true, exclude: false },
         { value: '0', string: false, exclude: false }
@@ -112,7 +151,7 @@ describe('Testing path-to-needle.js', () => {
     });
 
     it('Testing append', () => {
-      const r = pathToNeedle([0], { ...params, doubleStar: 1 }, PRNG('46909d48-312d-4045-9230-3e60ef908620'));
+      const r = pathToNeedle([0], { ...params, doubleStar: 1 }, PRNG('25ccb861-5a2d-497b-98e3-9b581691f981'));
       expect(r).to.deep.equal([
         { value: '0', string: false, exclude: false },
         { value: '**', string: true, exclude: false }
