@@ -7,8 +7,8 @@ module.exports = (needle, params, rng = Math.random) => {
   Joi.assert(params, Joi.object().keys({
     exclude: Joi.boolean(),
     lenPercentage: Joi.number().min(0).max(1),
-    questionMarkProbability: Joi.number().min(0).max(1),
-    partialStarProbability: Joi.number().min(0).max(1),
+    questionMark: Joi.number().integer().min(0),
+    partialStar: Joi.number().integer().min(0),
     singleStar: Joi.number().integer().min(0),
     doubleStar: Joi.number().integer().min(0)
   }));
@@ -19,36 +19,38 @@ module.exports = (needle, params, rng = Math.random) => {
     string: typeof e === 'string',
     exclude: false
   }));
-  for (let idx = 0; idx < result.length; idx += 1) {
-    // generate partial question mark
-    if (rng() < params.questionMarkProbability) {
+  const selectIndices = (len, total = undefined) => {
+    const indices = [...Array(total || result.length).keys()];
+    return sampleArray(indices, Math.min(len, total || result.length), rng);
+  };
+
+  // generate partial question mark
+  if (params.questionMark !== 0) {
+    selectIndices(params.questionMark).forEach((idx) => {
       const e = result[idx];
       const pos = Math.floor(rng() * e.value.length);
       e.value[pos] = '?';
-    }
-    // generate partial star
-    if (rng() < params.partialStarProbability) {
+    });
+  }
+  // generate partial star
+  if (params.partialStar !== 0) {
+    selectIndices(params.partialStar).forEach((idx) => {
       const e = result[idx];
       const len = e.value.length;
       const pos = Math.floor(rng() * len);
       const deleteCount = Math.floor((len - pos) * rng());
       e.value.splice(pos, deleteCount, '*');
-    }
+    });
   }
   // generate single star
   if (params.singleStar !== 0) {
-    const indices = [...Array(result.length).keys()];
-    const indicesSelected = sampleArray(indices, Math.min(params.singleStar, result.length), rng);
-    indicesSelected.forEach((pos) => {
+    selectIndices(params.singleStar).forEach((pos) => {
       result[pos].value = ['*'];
     });
   }
   // generate double star
   if (params.doubleStar !== 0) {
-    const indices = [...Array(result.length + 1).keys()];
-    const indicesSelected = sampleArray(indices, Math.min(params.doubleStar, result.length), rng)
-      .sort()
-      .reverse();
+    const indicesSelected = selectIndices(params.doubleStar, result.length + 1).sort().reverse();
     let posPrev = result.length;
     for (let idx = 0; idx < indicesSelected.length; idx += 1) {
       const pos = indicesSelected[idx];
