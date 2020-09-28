@@ -1,5 +1,6 @@
 const Joi = require('joi-strict');
 const { escape } = require('../../src/util/helper');
+const sampleArray = require('./sample-array');
 
 module.exports = (needle, params, rng = Math.random) => {
   Joi.assert(needle, Joi.array().items(Joi.string(), Joi.number()));
@@ -8,8 +9,8 @@ module.exports = (needle, params, rng = Math.random) => {
     lenPercentage: Joi.number().min(0).max(1),
     questionMarkProbability: Joi.number().min(0).max(1),
     partialStarProbability: Joi.number().min(0).max(1),
-    singleStar: Joi.boolean(),
-    doubleStar: Joi.boolean()
+    singleStar: Joi.number().integer().min(0),
+    doubleStar: Joi.number().integer().min(0)
   }));
   Joi.assert(rng, Joi.function());
 
@@ -35,19 +36,30 @@ module.exports = (needle, params, rng = Math.random) => {
     }
   }
   // generate single star
-  if (params.singleStar === true) {
-    const pos = Math.floor(rng() * result.length);
-    result[pos].value = ['*'];
+  if (params.singleStar !== 0) {
+    const indices = [...Array(result.length).keys()];
+    const indicesSelected = sampleArray(indices, Math.min(params.singleStar, result.length), rng);
+    indicesSelected.forEach((pos) => {
+      result[pos].value = ['*'];
+    });
   }
   // generate double star
-  if (params.doubleStar === true) {
-    const pos = Math.floor(rng() * result.length);
-    const deleteCount = Math.floor((result.length - pos) * rng());
-    result.splice(pos, deleteCount, {
-      value: ['**'],
-      string: true,
-      exclude: false
-    });
+  if (params.doubleStar !== 0) {
+    const indices = [...Array(result.length + 1).keys()];
+    const indicesSelected = sampleArray(indices, Math.min(params.doubleStar, result.length), rng)
+      .sort()
+      .reverse();
+    let posPrev = result.length;
+    for (let idx = 0; idx < indicesSelected.length; idx += 1) {
+      const pos = indicesSelected[idx];
+      const deleteCount = Math.floor((posPrev - pos + 1) * rng());
+      result.splice(pos, deleteCount, {
+        value: ['**'],
+        string: true,
+        exclude: false
+      });
+      posPrev = pos;
+    }
   }
   // crop the result length
   result.length = Math.round(result.length * params.lenPercentage);

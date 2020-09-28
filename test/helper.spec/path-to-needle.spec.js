@@ -15,8 +15,8 @@ describe('Testing path-to-needle.js', () => {
       lenPercentage: 1,
       questionMarkProbability: 0,
       partialStarProbability: 0,
-      singleStar: false,
-      doubleStar: false
+      singleStar: 0,
+      doubleStar: 0
     };
   });
 
@@ -74,24 +74,50 @@ describe('Testing path-to-needle.js', () => {
   });
 
   it('Testing single Star', () => {
-    const r = pathToNeedle(needle, { ...params, singleStar: true }, rng);
+    const r = pathToNeedle(needle, { ...params, singleStar: 2 }, rng);
     expect(r).to.deep.equal([
       { value: 'name', string: true, exclude: false },
       { value: '0', string: false, exclude: false },
       { value: '*', string: true, exclude: false },
       { value: '16', string: false, exclude: false },
-      { value: 'property', string: true, exclude: false }
+      { value: '*', string: true, exclude: false }
     ]);
   });
 
-  it('Testing double Star', () => {
-    const r = pathToNeedle(needle, { ...params, doubleStar: true }, rng);
-    expect(r).to.deep.equal([
-      { value: 'name', string: true, exclude: false },
-      { value: '0', string: false, exclude: false },
-      { value: '**', string: true, exclude: false },
-      { value: 'property', string: true, exclude: false }
-    ]);
+  describe('Testing double Star', () => {
+    it('Testing default', () => {
+      const r = pathToNeedle(needle, { ...params, doubleStar: 2 }, rng);
+      expect(r).to.deep.equal([
+        { value: 'name', string: true, exclude: false },
+        { value: '0', string: false, exclude: false },
+        { value: 'value', string: true, exclude: false },
+        { value: '**', string: true, exclude: false },
+        { value: '**', string: true, exclude: false }
+      ]);
+    });
+
+    it('Testing replace', () => {
+      const r = pathToNeedle([0], { ...params, doubleStar: 1 }, PRNG('fc863e2a-f73e-4e49-b349-70b9ddb82f49'));
+      expect(r).to.deep.equal([
+        { value: '**', string: true, exclude: false }
+      ]);
+    });
+
+    it('Testing prepend', () => {
+      const r = pathToNeedle([0], { ...params, doubleStar: 1 }, PRNG('25ccb861-5a2d-497b-98e3-9b581691f981'));
+      expect(r).to.deep.equal([
+        { value: '**', string: true, exclude: false },
+        { value: '0', string: false, exclude: false }
+      ]);
+    });
+
+    it('Testing append', () => {
+      const r = pathToNeedle([0], { ...params, doubleStar: 1 }, PRNG('46909d48-312d-4045-9230-3e60ef908620'));
+      expect(r).to.deep.equal([
+        { value: '0', string: false, exclude: false },
+        { value: '**', string: true, exclude: false }
+      ]);
+    });
   });
 
   it('Testing needle with special characters', () => {
