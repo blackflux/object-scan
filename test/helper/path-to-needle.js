@@ -19,14 +19,12 @@ module.exports = (needle, params, rng = Math.random) => {
     string: typeof e === 'string',
     exclude: false
   }));
-  const selectIndices = (len, total = undefined) => {
-    const indices = [...Array(total || result.length).keys()];
-    return sampleArray(indices, Math.min(len, total || result.length), rng);
-  };
 
   // generate partial question mark
   if (params.questionMark !== 0) {
-    selectIndices(params.questionMark).forEach((idx) => {
+    const indices = [...Array(result.length).keys()];
+    const indicesSelected = sampleArray(indices, params.questionMark, rng);
+    indicesSelected.forEach((idx) => {
       const e = result[idx];
       const pos = Math.floor(rng() * e.value.length);
       e.value[pos] = '?';
@@ -34,7 +32,9 @@ module.exports = (needle, params, rng = Math.random) => {
   }
   // generate partial star
   if (params.partialStar !== 0) {
-    selectIndices(params.partialStar).forEach((idx) => {
+    const indices = [...Array(result.length).keys()];
+    const indicesSelected = sampleArray(indices, params.partialStar, rng);
+    indicesSelected.forEach((idx) => {
       const e = result[idx];
       const len = e.value.length;
       const pos = Math.floor(rng() * len);
@@ -44,13 +44,17 @@ module.exports = (needle, params, rng = Math.random) => {
   }
   // generate single star
   if (params.singleStar !== 0) {
-    selectIndices(params.singleStar).forEach((pos) => {
+    const indices = [...Array(result.length).keys()];
+    const indicesSelected = sampleArray(indices, Math.min(result.length, params.singleStar), rng);
+    indicesSelected.forEach((pos) => {
       result[pos].value = ['*'];
     });
   }
   // generate double star
   if (params.doubleStar !== 0) {
-    const indicesSelected = selectIndices(params.doubleStar, result.length + 1).sort().reverse();
+    const indices = [...Array(result.length + 1).keys()];
+    const indicesSelected = sampleArray(indices, Math.min(result.length + 1, params.doubleStar), rng)
+      .sort().reverse();
     let posPrev = result.length;
     for (let idx = 0; idx < indicesSelected.length; idx += 1) {
       const pos = indicesSelected[idx];
