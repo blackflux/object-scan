@@ -51,26 +51,65 @@ describe('Testing path-to-needle.js', () => {
     ]);
   });
 
-  it('Testing question mark', () => {
-    const r = pathToNeedle(needle, { ...params, questionMark: 5 }, rng);
-    expect(r).to.deep.equal([
-      { value: 'n?me', string: true, exclude: false },
-      { value: '?', string: false, exclude: false },
-      { value: '?alue', string: true, exclude: false },
-      { value: '?6', string: false, exclude: false },
-      { value: 'prop?rty', string: true, exclude: false }
-    ]);
+  describe('Testing question mark', () => {
+    it('Testing default', () => {
+      const r = pathToNeedle(needle, { ...params, questionMark: 5 }, rng);
+      expect(r).to.deep.equal([
+        { value: 'na?e', string: true, exclude: false },
+        { value: '?', string: false, exclude: false },
+        { value: '?alue', string: true, exclude: false },
+        { value: '?6', string: false, exclude: false },
+        { value: '?roperty', string: true, exclude: false }
+      ]);
+    });
+
+    it('Testing multiple', () => {
+      const r = pathToNeedle(['1234567890'], { ...params, questionMark: 5 }, rng);
+      expect(r).to.deep.equal([
+        { value: '??3?5??890', string: true, exclude: false }
+      ]);
+    });
   });
 
-  it('Testing partial star', () => {
-    const r = pathToNeedle(needle, { ...params, partialStar: 5 }, rng);
-    expect(r).to.deep.equal([
-      { value: 'nam*e', string: true, exclude: false },
-      { value: '*0', string: false, exclude: false },
-      { value: '*lue', string: true, exclude: false },
-      { value: '1*6', string: false, exclude: false },
-      { value: 'prop*ty', string: true, exclude: false }
-    ]);
+  describe('Testing partial star', () => {
+    it('Testing default', () => {
+      const r = pathToNeedle(needle, { ...params, partialStar: 5 }, rng);
+      expect(r).to.deep.equal([
+        { value: 'nam*', string: true, exclude: false },
+        { value: '*', string: false, exclude: false },
+        { value: '*ue', string: true, exclude: false },
+        { value: '16*', string: false, exclude: false },
+        { value: 'property*', string: true, exclude: false }
+      ]);
+    });
+
+    it('Testing multiple', () => {
+      const r = pathToNeedle(['1234567890'], { ...params, partialStar: 5 }, rng);
+      expect(r).to.deep.equal([
+        { value: '**78*9**0', string: true, exclude: false }
+      ]);
+    });
+
+    it('Testing before', () => {
+      const r = pathToNeedle(['0'], { ...params, partialStar: 1 }, PRNG('13b57a37-99a5-483f-a21c-48877ace091a'));
+      expect(r).to.deep.equal([
+        { value: '*0', string: true, exclude: false }
+      ]);
+    });
+
+    it('Testing after', () => {
+      const r = pathToNeedle(['0'], { ...params, partialStar: 1 }, PRNG('e837b890-f558-43a4-bd2c-b50c1116442c'));
+      expect(r).to.deep.equal([
+        { value: '0*', string: true, exclude: false }
+      ]);
+    });
+
+    it('Testing replace', () => {
+      const r = pathToNeedle(['0'], { ...params, partialStar: 1 }, PRNG('4fe2ba45-0932-4ccd-a5ba-374ef4f0aa4c'));
+      expect(r).to.deep.equal([
+        { value: '*', string: true, exclude: false }
+      ]);
+    });
   });
 
   it('Testing single Star', () => {

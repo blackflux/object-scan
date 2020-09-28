@@ -20,44 +20,52 @@ module.exports = (needle, params, rng = Math.random) => {
     exclude: false
   }));
 
+  const generateIndices = (len, total_ = undefined) => {
+    const total = total_ === undefined ? result.length : total_;
+    const indices = [...Array(total).keys()];
+    const indicesSelected = sampleArray(indices, len, rng);
+    const indicesGrouped = indicesSelected.reduce((p, c) => Object.assign(p, { [c]: (p[c] || 0) + 1 }), {});
+    return Object
+      .entries(indicesGrouped)
+      .map(([k, v]) => [parseInt(k, 10), v])
+      .sort((a, b) => a[0] - b[0]);
+  };
+
   // generate partial question mark
   if (params.questionMark !== 0) {
-    const indices = [...Array(result.length).keys()];
-    const indicesSelected = sampleArray(indices, params.questionMark, rng);
-    indicesSelected.forEach((idx) => {
-      const e = result[idx];
-      const pos = Math.floor(rng() * e.value.length);
-      e.value[pos] = '?';
+    generateIndices(params.questionMark).forEach(([idx, count]) => {
+      const value = result[idx].value;
+      generateIndices(count, value.length).forEach(([i]) => {
+        value[i] = '?';
+      });
     });
   }
   // generate partial star
   if (params.partialStar !== 0) {
-    const indices = [...Array(result.length).keys()];
-    const indicesSelected = sampleArray(indices, params.partialStar, rng);
-    indicesSelected.forEach((idx) => {
-      const e = result[idx];
-      const len = e.value.length;
-      const pos = Math.floor(rng() * len);
-      const deleteCount = Math.floor((len - pos) * rng());
-      e.value.splice(pos, deleteCount, '*');
+    generateIndices(params.partialStar).forEach(([idx, count]) => {
+      const value = result[idx].value;
+      const indices = generateIndices(count, value.length + 1);
+      let posPrev = value.length + 1;
+      for (let i = 0; i < indices.length; i += 1) {
+        const [pos] = indices[i];
+        const deleteCount = Math.floor((posPrev - pos + 1) * rng());
+        value.splice(pos, deleteCount, '*');
+        posPrev = pos;
+      }
     });
   }
   // generate single star
   if (params.singleStar !== 0) {
-    const indices = [...Array(result.length).keys()];
-    const indicesSelected = sampleArray(indices, Math.min(result.length, params.singleStar), rng);
-    indicesSelected.forEach((pos) => {
+    generateIndices(params.singleStar).forEach(([pos]) => {
       result[pos].value = ['*'];
     });
   }
   // generate double star
   if (params.doubleStar !== 0) {
-    const indices = [...Array(result.length + 1).keys()];
-    const indicesSelected = sampleArray(indices, Math.min(result.length + 1, params.doubleStar), rng)
-      .sort().reverse();
-    let posPrev = result.length;
+    const indicesSelected = generateIndices(params.doubleStar, result.length + 1);
+    let posPrev = result.length + 1;
     for (let idx = 0; idx < indicesSelected.length; idx += 1) {
-      const pos = indicesSelected[idx];
+      const [pos] = indicesSelected[idx];
       const deleteCount = Math.floor((posPrev - pos + 1) * rng());
       result.splice(pos, deleteCount, {
         value: ['**'],
