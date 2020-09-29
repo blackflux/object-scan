@@ -55,10 +55,10 @@ describe('Testing path-to-needle.js', () => {
     it('Testing default', () => {
       const r = pathToNeedle(needle, { ...params, questionMark: 5 }, rng);
       expect(r).to.deep.equal([
-        { value: 'na?e', string: true, exclude: false },
+        { value: 'name', string: true, exclude: false },
         { value: '?', string: false, exclude: false },
-        { value: '?alue', string: true, exclude: false },
-        { value: '?6', string: false, exclude: false },
+        { value: '?a??e', string: true, exclude: false },
+        { value: '16', string: false, exclude: false },
         { value: '?roperty', string: true, exclude: false }
       ]);
     });
@@ -75,10 +75,10 @@ describe('Testing path-to-needle.js', () => {
     it('Testing default', () => {
       const r = pathToNeedle(needle, { ...params, partialStar: 5 }, rng);
       expect(r).to.deep.equal([
-        { value: 'nam*', string: true, exclude: false },
-        { value: '*', string: false, exclude: false },
-        { value: '*ue', string: true, exclude: false },
-        { value: '16*', string: false, exclude: false },
+        { value: 'name', string: true, exclude: false },
+        { value: '0*', string: false, exclude: false },
+        { value: '**u*e', string: true, exclude: false },
+        { value: '16', string: false, exclude: false },
         { value: 'property*', string: true, exclude: false }
       ]);
     });

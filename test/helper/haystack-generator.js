@@ -13,6 +13,6 @@ module.exports = (seed) => {
     }
     const mkArray = rng() > 0.5;
     const len = Math.floor(rng() * 5);
-    return mkArray ? len : sampleArray(chars, len, rng);
+    return mkArray ? len : sampleArray(chars, len, { rng, unique: true });
   };
 };
