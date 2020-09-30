@@ -2,14 +2,14 @@ const expect = require('chai').expect;
 const { describe } = require('node-tdd');
 const generateHaystack = require('../helper/generate-haystack');
 const haystackGenerator = require('../helper/haystack-generator');
-const extractNeedlesFromHaystack = require('../helper/extract-needles-from-haystack');
+const extractPathsFromHaystack = require('../helper/extract-paths-from-haystack');
 
-describe('Testing extract-needles-from-haystack.js', () => {
+describe('Testing extract-paths-from-haystack.js', () => {
   it('Testing example', () => {
     const generator = haystackGenerator('cb8c58e7-436d-4229-8ad5-eca7670fb803');
     const haystack = generateHaystack(generator);
     expect(haystack).to.deep.equal({ Q: [{ d: 0, T: [1, { y: 2, h: 3, r: 4 }] }] });
-    const needles = extractNeedlesFromHaystack(haystack);
+    const needles = extractPathsFromHaystack(haystack);
     expect(needles).to.deep.equal([
       ['Q', 0, 'd'],
       ['Q', 0, 'T', 0],
@@ -17,5 +17,10 @@ describe('Testing extract-needles-from-haystack.js', () => {
       ['Q', 0, 'T', 1, 'h'],
       ['Q', 0, 'T', 1, 'r']
     ]);
+  });
+
+  it('Testing special character in haystack', () => {
+    const needles = extractPathsFromHaystack({ '*force': true });
+    expect(needles).to.deep.equal([['*force']]);
   });
 });
