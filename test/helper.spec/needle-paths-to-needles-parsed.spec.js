@@ -71,6 +71,13 @@ describe('Testing needle-paths-to-needles-parsed.js', () => {
     expect(parsedNeedleToString(r)).to.deep.equal('{name[0].value[16].{a,b}}');
   });
 
+  it('Testing end, different diff length', () => {
+    const needlePathA = pathToNeedlePath(['name', 0, 'value', 16, 'a'], params);
+    const needlePathB = pathToNeedlePath(['name', 0, 'value', 16, 'b', 'c'], params);
+    const r = needlePathsToNeedlesParsed([needlePathA, needlePathB]);
+    expect(parsedNeedleToString(r)).to.deep.equal('{name[0].value[16].{a,{b.c}}}');
+  });
+
   it('Testing disjoint needles', () => {
     const needlePathA = pathToNeedlePath(['a', 'b'], params);
     const needlePathB = pathToNeedlePath(['c', 'd'], params);
