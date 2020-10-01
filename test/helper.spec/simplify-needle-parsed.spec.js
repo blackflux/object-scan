@@ -22,4 +22,14 @@ describe('Testing simplify-needle-parsed.js', () => {
     const needle = [[[1, 2]]];
     expect(simplifyNeedleParsed(needle)).to.deep.equal([1, 2]);
   });
+
+  it('Testing array simplification', () => {
+    const needle = [[[1, 2], [1]]];
+    expect(simplifyNeedleParsed(needle)).to.deep.equal([[1, 2], 1]);
+  });
+
+  it('Testing set simplification', () => {
+    const needle = new Set([new Set([new Set([1, 2]), new Set([1])])]);
+    expect(simplifyNeedleParsed(needle)).to.deep.equal(new Set([1, 2]));
+  });
 });
