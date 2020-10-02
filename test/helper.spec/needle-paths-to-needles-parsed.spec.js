@@ -24,6 +24,18 @@ describe('Testing needle-paths-to-needles-parsed.js', () => {
     expect(parsedNeedleToString(r)).to.deep.equal('{name[0].value[16].property}');
   });
 
+  it('Testing nested needle merging', () => {
+    const r = needlePathsToNeedlesParsed([
+      pathToNeedlePath([0, '1']),
+      pathToNeedlePath([1, 0, 0]),
+      pathToNeedlePath([1, 1, 0, 0]),
+      pathToNeedlePath([1, 1, 0, 1, 0]),
+      pathToNeedlePath([1, 1, 0, 1, 1])
+    ]);
+    expect(parsedNeedleToString(r))
+      .to.deep.equal('{{[0].1},{[1].{{{[0],{[1][0]},{[1][0][1]}}[0]},{[1][0][1][1]}}}}');
+  });
+
   it('Testing zero length diff (additive)', () => {
     const needlePathA = pathToNeedlePath(['name', 0, 'value', 'property']);
     const needlePathB = pathToNeedlePath(['name', 0, 'value', 16, 'property']);

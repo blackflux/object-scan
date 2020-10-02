@@ -12,8 +12,8 @@ const computeDiff = (a, b) => {
   const startDiff = a.findIndex((e, idx) => b[idx] !== e);
   const lenOffset = b.length - a.length;
 
-  const endDiffA = findLastIndex(a, (e, idx) => b[idx + lenOffset] !== e);
-  const endDiffB = findLastIndex(b, (e, idx) => a[idx - lenOffset] !== e);
+  const endDiffA = findLastIndex(a, (e, idx) => b[idx + lenOffset] !== e || startDiff + Math.max(0, -lenOffset) > idx);
+  const endDiffB = findLastIndex(b, (e, idx) => a[idx - lenOffset] !== e || startDiff + Math.max(0, lenOffset) > idx);
 
   if (startDiff === -1 && endDiffA === -1 && endDiffB === -1) {
     return null;
