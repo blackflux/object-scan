@@ -8,7 +8,7 @@ const normalizePath = (p) => p.map((e) => [
   e.string ? '' : ']'
 ].join(''));
 
-const analyzeDiff = (a, b) => {
+const computeDiff = (a, b) => {
   const startDiff = a.findIndex((e, idx) => b[idx] !== e);
   const lenOffset = b.length - a.length;
 
@@ -38,7 +38,7 @@ const findBestMatch = (haystack, needle) => {
   let diffSize = Number.MAX_SAFE_INTEGER;
 
   haystack.forEach((value) => {
-    const diff = analyzeDiff(value, needle);
+    const diff = computeDiff(value, needle);
     if (diff === null) {
       return;
     }
