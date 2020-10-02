@@ -36,6 +36,41 @@ describe('Testing needle-paths-to-needles-parsed.js', () => {
     expect(parsedNeedleToString(r)).to.deep.equal('{name[0].value[16].property}');
   });
 
+  it('Testing zero length diff (additive)', () => {
+    const needlePathA = pathToNeedlePath(['name', 0, 'value', 'property'], params);
+    const needlePathB = pathToNeedlePath(['name', 0, 'value', 16, 'property'], params);
+    const r = needlePathsToNeedlesParsed([needlePathA, needlePathB]);
+    expect(parsedNeedleToString(r)).to.deep.equal('{name[0].value.{property,{[16].property}}}');
+  });
+
+  it('Testing zero length diff (subtractive)', () => {
+    const needlePathA = pathToNeedlePath(['name', 0, 'value', 16, 'property'], params);
+    const needlePathB = pathToNeedlePath(['name', 0, 'value', 'property'], params);
+    const r = needlePathsToNeedlesParsed([needlePathA, needlePathB]);
+    expect(parsedNeedleToString(r)).to.deep.equal('{name[0].value.{{[16].property},property}}');
+  });
+
+  it('Testing zero length diff (misc)', () => {
+    const needlePathA = pathToNeedlePath(['A', 1, 0], params);
+    const needlePathB = pathToNeedlePath(['A', 1, 1, 0], params);
+    const r = needlePathsToNeedlesParsed([needlePathA, needlePathB]);
+    expect(parsedNeedleToString(r)).to.deep.equal('{A[1].{[0],{[1][0]}}}');
+  });
+
+  it('Testing zero length diff (multi overlap)', () => {
+    const needlePathA = pathToNeedlePath([0, 0, 0], params);
+    const needlePathB = pathToNeedlePath([0, 0, 1, 0, 0], params);
+    const r = needlePathsToNeedlesParsed([needlePathA, needlePathB]);
+    expect(parsedNeedleToString(r)).to.deep.equal('{[0][0].{[0],{[1][0][0]}}}');
+  });
+
+  it('Testing symmetric overlap', () => {
+    const needlePathA = pathToNeedlePath(['name', 0, 'value', 'property'], params);
+    const needlePathB = pathToNeedlePath(['value', 'property', 'other'], params);
+    const r = needlePathsToNeedlesParsed([needlePathA, needlePathB]);
+    expect(parsedNeedleToString(r)).to.deep.equal('{{name[0].value.property},{value.property.other}}');
+  });
+
   it('Testing center, same diff length', () => {
     const needlePathA = pathToNeedlePath(['name', 0, 'value', 16, 'property'], params);
     const needlePathB = pathToNeedlePath(['name', 0, 'other', 16, 'property'], params);
@@ -85,7 +120,7 @@ describe('Testing needle-paths-to-needles-parsed.js', () => {
     expect(parsedNeedleToString(r)).to.deep.equal('{{a.b},{c.d}}');
   });
 
-  it('Testing best match merge', () => {
+  it('Testing best match merge (string)', () => {
     const needlePathA = pathToNeedlePath(['a', 'b', 'c', 'd', 'e'], params);
     const needlePathB = pathToNeedlePath(['f', 'g', 'h', 'i', 'j'], params);
     const needlePathC = pathToNeedlePath(['a', 'b', 'h', 'i', 'j'], params);

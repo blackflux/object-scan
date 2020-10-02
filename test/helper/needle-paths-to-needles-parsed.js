@@ -13,27 +13,28 @@ const findBestMatch = (haystack, needle) => {
   let diffSize = Number.MAX_SAFE_INTEGER;
 
   haystack.forEach((value) => {
-    const startOverlap = needle.findIndex((e, idx) => value[idx] !== e);
-    if (startOverlap === -1) {
+    const startDiff = needle.findIndex((e, idx) => value[idx] !== e);
+    if (startDiff === -1) {
       return;
     }
-    const lenDiff = value.length - needle.length;
+    const lenOffset = value.length - needle.length;
 
-    const endOverlapR = findLastIndex(value, (e, idx) => needle[idx - lenDiff] !== e);
-    const endOverlapP = findLastIndex(needle, (e, idx) => value[idx + lenDiff] !== e);
+    const endDiffV = findLastIndex(value, (e, idx) => needle[idx - lenOffset] !== e);
+    const endDiffP = findLastIndex(needle, (e, idx) => value[idx + lenOffset] !== e);
 
-    const diffLengthR = endOverlapR - startOverlap + 1;
-    const diffLengthP = endOverlapP - startOverlap + 1;
+    const lenDiffV = endDiffV - startDiff + 1;
+    const lenDiffP = endDiffP - startDiff + 1;
 
-    const diffSizeNew = (diffLengthR + diffLengthP) / 2;
+    const diffSizeNew = (lenDiffV + lenDiffP) / 2;
     if (diffSizeNew < diffSize) {
       diffSize = diffSizeNew;
       result = {
         value,
-        startOverlap,
-        diffLengthR,
-        endOverlapP,
-        endOverlapR
+        startDiff,
+        endDiffV,
+        endDiffP,
+        lenDiffV,
+        lenDiffP
       };
     }
   });
@@ -56,14 +57,24 @@ module.exports = (paths) => {
       }
 
       const {
-        value, startOverlap, diffLengthR, endOverlapP, endOverlapR
+        value,
+        startDiff,
+        endDiffV,
+        endDiffP,
+        lenDiffV,
+        lenDiffP
       } = match;
-      if (diffLengthR === value.length) {
+      if (lenDiffV === value.length) {
         result.push(p);
+      } else if (lenDiffV <= 0 || lenDiffP <= 0) {
+        value.splice(startDiff, value.length - startDiff, new Set([
+          value.slice(startDiff, value.length),
+          p.slice(startDiff, p.length)
+        ]));
       } else {
-        value.splice(startOverlap, diffLengthR, new Set([
-          value.slice(startOverlap, endOverlapR + 1),
-          p.slice(startOverlap, endOverlapP + 1)
+        value.splice(startDiff, lenDiffV, new Set([
+          value.slice(startDiff, endDiffV + 1),
+          p.slice(startDiff, endDiffP + 1)
         ]));
       }
     });
