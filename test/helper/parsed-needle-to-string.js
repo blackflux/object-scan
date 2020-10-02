@@ -10,7 +10,7 @@ const parsedNeedleToString = (obj) => {
       return null;
     }
     return `${
-      len === 1 ? '' : '{'
+      isArray || len === 1 ? '' : '{'
     }${r.reduce((prev, next) => {
       if (prev === null) {
         return next;
@@ -20,7 +20,7 @@ const parsedNeedleToString = (obj) => {
       }
       return `${prev}${next.startsWith('[') ? '' : '.'}${next}`;
     }, null)}${
-      len === 1 ? '' : '}'
+      isArray || len === 1 ? '' : '}'
     }`;
   }
   return obj;
