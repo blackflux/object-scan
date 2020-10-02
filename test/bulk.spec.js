@@ -13,13 +13,11 @@ describe('Testing bulk related', () => {
     for (let idx = 0; idx < 100; idx += 1) {
       const haystack = generateHaystack(haystackGenerator());
       const paths = extractPathsFromHaystack(haystack);
-      if (paths.length !== 0) {
-        const needlePaths = paths.map((p) => pathToNeedlePath(p));
-        const needles = needlePathsToNeedlesParsed(needlePaths);
-        const str = parsedNeedleToString(needles);
-        const matches = objectScan([str])(haystack);
-        expect(paths).to.deep.equal(matches.reverse());
-      }
+      const needlePaths = paths.map((p) => pathToNeedlePath(p));
+      const needles = needlePathsToNeedlesParsed(needlePaths);
+      const str = parsedNeedleToString(needles);
+      const matches = objectScan(str === null ? [] : [str])(haystack);
+      expect(paths).to.deep.equal(matches.reverse());
     }
   });
 });
