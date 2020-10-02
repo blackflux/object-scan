@@ -8,33 +8,86 @@ const normalizePath = (p) => p.map((e) => [
   e.string ? '' : ']'
 ].join(''));
 
-const findBestMatch = (haystack, needle) => {
+const computeDiff = (a, b) => {
+  const startDiff = a.findIndex((e, idx) => b[idx] !== e);
+  const lenOffset = b.length - a.length;
+
+  const endDiffA = findLastIndex(a, (e, idx) => b[idx + lenOffset] !== e || startDiff + Math.max(0, -lenOffset) > idx);
+  const endDiffB = findLastIndex(b, (e, idx) => a[idx - lenOffset] !== e || startDiff + Math.max(0, lenOffset) > idx);
+
+  if (startDiff === -1 && endDiffA === -1 && endDiffB === -1) {
+    return null;
+  }
+
+  const lenDiffA = endDiffA - startDiff + 1;
+  const lenDiffB = endDiffB - startDiff + 1;
+
+  const overlapTailA = a.length - Math.max(startDiff, endDiffA + 1);
+  const overlapTailB = b.length - Math.max(startDiff, endDiffB + 1);
+
+  return {
+    a,
+    b,
+    startDiff,
+    endDiffA,
+    endDiffB,
+    lenDiffA,
+    lenDiffB,
+    overlapTailA,
+    overlapTailB
+  };
+};
+
+const applyDiff = (diff) => {
+  const {
+    a,
+    b,
+    startDiff,
+    endDiffA,
+    endDiffB,
+    lenDiffA,
+    lenDiffB,
+    overlapTailA,
+    overlapTailB
+  } = diff;
+  if (lenDiffA === a.length) {
+    return false;
+  }
+  if (lenDiffA === 0 || lenDiffB === 0) {
+    if (overlapTailA > 1 && overlapTailB > 1) {
+      a.splice(startDiff, a.length - overlapTailA + 1 - startDiff, new Set([
+        a.slice(startDiff, a.length - overlapTailA + 1),
+        b.slice(startDiff, b.length - overlapTailB + 1)
+      ]));
+    } else {
+      a.splice(startDiff, a.length - startDiff, new Set([
+        a.slice(startDiff, a.length),
+        b.slice(startDiff, b.length)
+      ]));
+    }
+    return true;
+  }
+  a.splice(startDiff, lenDiffA, new Set([
+    a.slice(startDiff, endDiffA + 1),
+    b.slice(startDiff, endDiffB + 1)
+  ]));
+  return true;
+};
+
+const findBestDiff = (haystack, needle) => {
   let result = null;
   let diffSize = Number.MAX_SAFE_INTEGER;
 
   haystack.forEach((value) => {
-    const startOverlap = needle.findIndex((e, idx) => value[idx] !== e);
-    if (startOverlap === -1) {
+    const diff = computeDiff(value, needle);
+    if (diff === null) {
       return;
     }
-    const lenDiff = value.length - needle.length;
 
-    const endOverlapR = findLastIndex(value, (e, idx) => needle[idx - lenDiff] !== e);
-    const endOverlapP = findLastIndex(needle, (e, idx) => value[idx + lenDiff] !== e);
-
-    const diffLengthR = endOverlapR - startOverlap + 1;
-    const diffLengthP = endOverlapP - startOverlap + 1;
-
-    const diffSizeNew = (diffLengthR + diffLengthP) / 2;
+    const diffSizeNew = (diff.lenDiffA + diff.lenDiffB) / 2;
     if (diffSizeNew < diffSize) {
       diffSize = diffSizeNew;
-      result = {
-        value,
-        startOverlap,
-        diffLengthR,
-        endOverlapP,
-        endOverlapR
-      };
+      result = diff;
     }
   });
   return result;
@@ -50,21 +103,14 @@ module.exports = (paths) => {
         return;
       }
 
-      const match = findBestMatch(result, p);
-      if (match === null) {
+      const diff = findBestDiff(result, p);
+      if (diff === null) {
         return;
       }
 
-      const {
-        value, startOverlap, diffLengthR, endOverlapP, endOverlapR
-      } = match;
-      if (diffLengthR === value.length) {
-        result.push(p);
-      } else {
-        value.splice(startOverlap, diffLengthR, new Set([
-          value.slice(startOverlap, endOverlapR + 1),
-          p.slice(startOverlap, endOverlapP + 1)
-        ]));
+      const applied = applyDiff(diff);
+      if (applied === false) {
+        result.push(diff.b);
       }
     });
   return simplifyNeedleParsed(new Set(result));

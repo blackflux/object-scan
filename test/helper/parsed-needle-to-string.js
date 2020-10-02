@@ -1,15 +1,27 @@
 const parsedNeedleToString = (obj) => {
-  if (Array.isArray(obj)) {
-    return `{${obj.reduce((p, e) => {
-      const parsed = parsedNeedleToString(e);
-      if (p === null) {
-        return parsed;
+  const isArray = Array.isArray(obj);
+  const isSet = obj instanceof Set;
+  if (isArray || isSet) {
+    const r = (isArray ? obj : [...obj])
+      .map((e) => parsedNeedleToString(e))
+      .filter((e) => e !== null);
+    const len = r.length;
+    if (len === 0) {
+      return null;
+    }
+    return `${
+      isArray || len === 1 ? '' : '{'
+    }${r.reduce((prev, next) => {
+      if (prev === null) {
+        return next;
       }
-      return parsed.startsWith('[') ? `${p}${parsed}` : `${p}.${parsed}`;
-    }, null)}}`;
-  }
-  if (obj instanceof Set) {
-    return `{${[...obj].map((e) => parsedNeedleToString(e)).join(',')}}`;
+      if (isSet) {
+        return `${prev},${next}`;
+      }
+      return `${prev}${next.startsWith('[') ? '' : '.'}${next}`;
+    }, null)}${
+      isArray || len === 1 ? '' : '}'
+    }`;
   }
   return obj;
 };

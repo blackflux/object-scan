@@ -1,6 +1,15 @@
 const simplify = (arg) => {
   if (Array.isArray(arg)) {
-    return arg.length === 1 ? simplify(arg[0]) : arg.map((e) => simplify(e));
+    const result = [];
+    arg.forEach((ele_) => {
+      const ele = simplify(ele_);
+      if (Array.isArray(ele)) {
+        result.push(...ele);
+      } else {
+        result.push(ele);
+      }
+    });
+    return result.length === 1 ? result[0] : result;
   }
   if (arg instanceof Set) {
     const result = new Set();
