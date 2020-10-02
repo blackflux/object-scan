@@ -33,7 +33,34 @@ const computeDiff = (a, b) => {
   };
 };
 
-const findBestMatch = (haystack, needle) => {
+const applyDiff = (diff) => {
+  const {
+    a,
+    b,
+    startDiff,
+    endDiffA,
+    endDiffB,
+    lenDiffA,
+    lenDiffB
+  } = diff;
+  if (lenDiffA === a.length) {
+    return false;
+  }
+  if (lenDiffA <= 0 || lenDiffB <= 0) {
+    a.splice(startDiff, a.length - startDiff, new Set([
+      a.slice(startDiff, a.length),
+      b.slice(startDiff, b.length)
+    ]));
+    return true;
+  }
+  a.splice(startDiff, lenDiffA, new Set([
+    a.slice(startDiff, endDiffA + 1),
+    b.slice(startDiff, endDiffB + 1)
+  ]));
+  return true;
+};
+
+const findBestDiff = (haystack, needle) => {
   let result = null;
   let diffSize = Number.MAX_SAFE_INTEGER;
 
@@ -62,31 +89,14 @@ module.exports = (paths) => {
         return;
       }
 
-      const match = findBestMatch(result, p);
-      if (match === null) {
+      const diff = findBestDiff(result, p);
+      if (diff === null) {
         return;
       }
 
-      const {
-        a,
-        startDiff,
-        endDiffA,
-        endDiffB,
-        lenDiffA,
-        lenDiffB
-      } = match;
-      if (lenDiffA === a.length) {
-        result.push(p);
-      } else if (lenDiffA <= 0 || lenDiffB <= 0) {
-        a.splice(startDiff, a.length - startDiff, new Set([
-          a.slice(startDiff, a.length),
-          p.slice(startDiff, p.length)
-        ]));
-      } else {
-        a.splice(startDiff, lenDiffA, new Set([
-          a.slice(startDiff, endDiffA + 1),
-          p.slice(startDiff, endDiffB + 1)
-        ]));
+      const applied = applyDiff(diff);
+      if (applied === false) {
+        result.push(diff.b);
       }
     });
   return simplifyNeedleParsed(new Set(result));
