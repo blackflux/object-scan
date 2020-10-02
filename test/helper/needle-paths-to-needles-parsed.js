@@ -22,6 +22,9 @@ const computeDiff = (a, b) => {
   const lenDiffA = endDiffA - startDiff + 1;
   const lenDiffB = endDiffB - startDiff + 1;
 
+  const overlapTailA = a.length - Math.max(startDiff, endDiffA + 1);
+  const overlapTailB = b.length - Math.max(startDiff, endDiffB + 1);
+
   return {
     a,
     b,
@@ -29,7 +32,9 @@ const computeDiff = (a, b) => {
     endDiffA,
     endDiffB,
     lenDiffA,
-    lenDiffB
+    lenDiffB,
+    overlapTailA,
+    overlapTailB
   };
 };
 
@@ -41,16 +46,25 @@ const applyDiff = (diff) => {
     endDiffA,
     endDiffB,
     lenDiffA,
-    lenDiffB
+    lenDiffB,
+    overlapTailA,
+    overlapTailB
   } = diff;
   if (lenDiffA === a.length) {
     return false;
   }
   if (lenDiffA <= 0 || lenDiffB <= 0) {
-    a.splice(startDiff, a.length - startDiff, new Set([
-      a.slice(startDiff, a.length),
-      b.slice(startDiff, b.length)
-    ]));
+    if (overlapTailA > 1 && overlapTailB > 1) {
+      a.splice(startDiff, a.length - overlapTailA + 1 - startDiff, new Set([
+        a.slice(startDiff, a.length - overlapTailA + 1),
+        b.slice(startDiff, b.length - overlapTailB + 1)
+      ]));
+    } else {
+      a.splice(startDiff, a.length - startDiff, new Set([
+        a.slice(startDiff, a.length),
+        b.slice(startDiff, b.length)
+      ]));
+    }
     return true;
   }
   a.splice(startDiff, lenDiffA, new Set([

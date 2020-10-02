@@ -64,6 +64,13 @@ describe('Testing needle-paths-to-needles-parsed.js', () => {
     expect(parsedNeedleToString(r)).to.deep.equal('{[0][0].{[0],{[1][0][0]}}}');
   });
 
+  it('Testing recursive merge', () => {
+    const needlePathA = pathToNeedlePath([0, 0, 0, 0], params);
+    const needlePathB = pathToNeedlePath([0, 0, 1, 0, 0], params);
+    const r = needlePathsToNeedlesParsed([needlePathA, needlePathB]);
+    expect(parsedNeedleToString(r)).to.deep.equal('{[0][0].{[0],{[1][0]}}[0]}');
+  });
+
   it('Testing symmetric overlap', () => {
     const needlePathA = pathToNeedlePath(['name', 0, 'value', 'property'], params);
     const needlePathB = pathToNeedlePath(['value', 'property', 'other'], params);
