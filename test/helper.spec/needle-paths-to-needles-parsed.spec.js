@@ -49,7 +49,7 @@ describe('Testing needle-paths-to-needles-parsed.js', () => {
     const needlePathA = pathToNeedlePath(['A', 1, 1, 0]);
     const needlePathB = pathToNeedlePath(['A', 1, 0]);
     const r = needlePathsToNeedlesParsed([needlePathA, needlePathB]);
-    expect(parsedNeedleToString(r)).to.deep.equal('{A[1].{[0],{[1][0]}}}');
+    expect(parsedNeedleToString(r)).to.deep.equal('{A[1].{{[1][0]},[0]}}');
   });
 
   it('Testing zero length diff (tail overlap of one)', () => {
