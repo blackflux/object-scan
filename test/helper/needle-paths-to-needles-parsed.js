@@ -10,18 +10,21 @@ const normalizePath = (p) => p.map((e) => [
 
 const analyzeDiff = (a, b) => {
   const startDiff = a.findIndex((e, idx) => b[idx] !== e);
-  if (startDiff === -1) {
-    return null;
-  }
   const lenOffset = b.length - a.length;
 
   const endDiffA = findLastIndex(a, (e, idx) => b[idx + lenOffset] !== e);
   const endDiffB = findLastIndex(b, (e, idx) => a[idx - lenOffset] !== e);
 
+  if (startDiff === -1 && endDiffA === -1 && endDiffB === -1) {
+    return null;
+  }
+
   const lenDiffA = endDiffA - startDiff + 1;
   const lenDiffB = endDiffB - startDiff + 1;
 
   return {
+    a,
+    b,
     startDiff,
     endDiffA,
     endDiffB,
@@ -43,7 +46,7 @@ const findBestMatch = (haystack, needle) => {
     const diffSizeNew = (diff.lenDiffA + diff.lenDiffB) / 2;
     if (diffSizeNew < diffSize) {
       diffSize = diffSizeNew;
-      result = { ...diff, value };
+      result = diff;
     }
   });
   return result;
@@ -65,23 +68,23 @@ module.exports = (paths) => {
       }
 
       const {
-        value,
+        a,
         startDiff,
         endDiffA,
         endDiffB,
         lenDiffA,
         lenDiffB
       } = match;
-      if (lenDiffA === value.length) {
+      if (lenDiffA === a.length) {
         result.push(p);
       } else if (lenDiffA <= 0 || lenDiffB <= 0) {
-        value.splice(startDiff, value.length - startDiff, new Set([
-          value.slice(startDiff, value.length),
+        a.splice(startDiff, a.length - startDiff, new Set([
+          a.slice(startDiff, a.length),
           p.slice(startDiff, p.length)
         ]));
       } else {
-        value.splice(startDiff, lenDiffA, new Set([
-          value.slice(startDiff, endDiffA + 1),
+        a.splice(startDiff, lenDiffA, new Set([
+          a.slice(startDiff, endDiffA + 1),
           p.slice(startDiff, endDiffB + 1)
         ]));
       }
