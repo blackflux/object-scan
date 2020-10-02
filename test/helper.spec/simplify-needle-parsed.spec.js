@@ -25,7 +25,7 @@ describe('Testing simplify-needle-parsed.js', () => {
 
   it('Testing array simplification', () => {
     const needle = [[[1, 2], [1]]];
-    expect(simplifyNeedleParsed(needle)).to.deep.equal([[1, 2], 1]);
+    expect(simplifyNeedleParsed(needle)).to.deep.equal([1, 2, 1]);
   });
 
   it('Testing set simplification', () => {
