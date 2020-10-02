@@ -8,34 +8,42 @@ const normalizePath = (p) => p.map((e) => [
   e.string ? '' : ']'
 ].join(''));
 
+const analyzeDiff = (a, b) => {
+  const startDiff = a.findIndex((e, idx) => b[idx] !== e);
+  if (startDiff === -1) {
+    return null;
+  }
+  const lenOffset = b.length - a.length;
+
+  const endDiffA = findLastIndex(a, (e, idx) => b[idx + lenOffset] !== e);
+  const endDiffB = findLastIndex(b, (e, idx) => a[idx - lenOffset] !== e);
+
+  const lenDiffA = endDiffA - startDiff + 1;
+  const lenDiffB = endDiffB - startDiff + 1;
+
+  return {
+    startDiff,
+    endDiffA,
+    endDiffB,
+    lenDiffA,
+    lenDiffB
+  };
+};
+
 const findBestMatch = (haystack, needle) => {
   let result = null;
   let diffSize = Number.MAX_SAFE_INTEGER;
 
   haystack.forEach((value) => {
-    const startDiff = needle.findIndex((e, idx) => value[idx] !== e);
-    if (startDiff === -1) {
+    const diff = analyzeDiff(value, needle);
+    if (diff === null) {
       return;
     }
-    const lenOffset = value.length - needle.length;
 
-    const endDiffV = findLastIndex(value, (e, idx) => needle[idx - lenOffset] !== e);
-    const endDiffP = findLastIndex(needle, (e, idx) => value[idx + lenOffset] !== e);
-
-    const lenDiffV = endDiffV - startDiff + 1;
-    const lenDiffP = endDiffP - startDiff + 1;
-
-    const diffSizeNew = (lenDiffV + lenDiffP) / 2;
+    const diffSizeNew = (diff.lenDiffA + diff.lenDiffB) / 2;
     if (diffSizeNew < diffSize) {
       diffSize = diffSizeNew;
-      result = {
-        value,
-        startDiff,
-        endDiffV,
-        endDiffP,
-        lenDiffV,
-        lenDiffP
-      };
+      result = { ...diff, value };
     }
   });
   return result;
@@ -59,22 +67,22 @@ module.exports = (paths) => {
       const {
         value,
         startDiff,
-        endDiffV,
-        endDiffP,
-        lenDiffV,
-        lenDiffP
+        endDiffA,
+        endDiffB,
+        lenDiffA,
+        lenDiffB
       } = match;
-      if (lenDiffV === value.length) {
+      if (lenDiffA === value.length) {
         result.push(p);
-      } else if (lenDiffV <= 0 || lenDiffP <= 0) {
+      } else if (lenDiffA <= 0 || lenDiffB <= 0) {
         value.splice(startDiff, value.length - startDiff, new Set([
           value.slice(startDiff, value.length),
           p.slice(startDiff, p.length)
         ]));
       } else {
-        value.splice(startDiff, lenDiffV, new Set([
-          value.slice(startDiff, endDiffV + 1),
-          p.slice(startDiff, endDiffP + 1)
+        value.splice(startDiff, lenDiffA, new Set([
+          value.slice(startDiff, endDiffA + 1),
+          p.slice(startDiff, endDiffB + 1)
         ]));
       }
     });
