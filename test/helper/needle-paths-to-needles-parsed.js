@@ -53,6 +53,9 @@ const applyDiff = (diff) => {
   if (lenDiffA === a.length) {
     return false;
   }
+  if (a.length <= 1 || b.length <= 1) {
+    return false;
+  }
   if (lenDiffA === 0 || lenDiffB === 0) {
     if (overlapTailA > 1 && overlapTailB > 1) {
       a.splice(startDiff, a.length - overlapTailA + 1 - startDiff, new Set([
