@@ -1,7 +1,7 @@
 const sampleArray = require('./sample-array');
 const chars = require('./resources/chars.json');
 
-module.exports = (rng = Math.random) => ({ count, depth }) => {
+module.exports = ({ rng }) => ({ count, depth }) => {
   if (count >= 5) {
     return undefined;
   }
