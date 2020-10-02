@@ -14,15 +14,7 @@ describe('Testing bulk related', () => {
       const haystack = generateHaystack(haystackGenerator());
       const paths = extractPathsFromHaystack(haystack);
       if (paths.length !== 0) {
-        const needlePaths = paths.map((p) => pathToNeedlePath(p, {
-          exclude: false,
-          lenPercentage: 1,
-          questionMark: 0,
-          partialStar: 0,
-          singleStar: 0,
-          doubleStar: 0
-        }));
-
+        const needlePaths = paths.map((p) => pathToNeedlePath(p));
         const needles = needlePathsToNeedlesParsed(needlePaths);
         const str = parsedNeedleToString(needles);
         const matches = objectScan([str])(haystack);
