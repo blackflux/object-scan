@@ -24,4 +24,8 @@ describe('Testing parsed-needle-to-string.js', { cryptoSeed: '04eb4846-3b0c-4168
   it('Testing single element set', () => {
     expect(parsedNeedleToString(new Set(['a']))).to.deep.equal('a');
   });
+
+  it('Testing set containing null', () => {
+    expect(parsedNeedleToString(new Set(['a', null]))).to.deep.equal('a');
+  });
 });
