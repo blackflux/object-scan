@@ -3,6 +3,7 @@ const { describe } = require('node-tdd');
 const PRNG = require('./helper/prng');
 const shuffleArray = require('./helper/shuffle-array');
 const haystackGenerator = require('./helper/haystack-generator');
+const generateKeys = require('./helper/generate-keys');
 const generateHaystack = require('./helper/generate-haystack');
 const extractPathsFromHaystack = require('./helper/extract-paths-from-haystack');
 const needlePathsToNeedlesParsed = require('./helper/needle-paths-to-needles-parsed');
@@ -12,10 +13,11 @@ const objectScan = require('../src/index');
 
 describe('Testing bulk related', () => {
   it('Testing all needles matched', () => {
-    for (let idx = 0; idx < 100; idx += 1) {
+    for (let idx = 0; idx < 50; idx += 1) {
       const seed = `${Math.random()}`;
       const rng = PRNG(seed);
-      const haystack = generateHaystack(haystackGenerator({ rng }));
+      const keys = generateKeys(Math.ceil(rng() * 30), rng);
+      const haystack = generateHaystack(haystackGenerator({ rng, keys }));
       const paths = extractPathsFromHaystack(haystack);
       const pathsShuffled = [...paths];
       shuffleArray(pathsShuffled, rng);
