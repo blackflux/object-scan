@@ -18,8 +18,14 @@ const init = () => {
   const paths = extractPathsFromHaystack(haystack);
   const pathsShuffled = [...paths];
   shuffleArray(pathsShuffled, rng);
+  const pathsFilteredRaw = pathsShuffled
+    .map((p) => p.filter((k) => !Number.isInteger(k)))
+    .filter((p) => p.length !== 0);
+  const pathsFiltered = pathsFilteredRaw
+    .filter((p, i) => pathsFilteredRaw
+      .findIndex((e) => e.length === p.length && e.every((s, j) => s === p[j])) === i);
   return {
-    rng, haystack, paths, pathsShuffled
+    rng, haystack, paths, pathsShuffled, pathsFiltered
   };
 };
 
@@ -48,15 +54,9 @@ describe('Testing bulk related', { timeout: 5 * 60000 }, () => {
   it('Testing without useArraySelector', () => {
     for (let idx = 0; idx < 50; idx += 1) {
       const {
-        rng, haystack, paths, pathsShuffled
+        rng, haystack, paths, pathsFiltered
       } = init();
-      const pathsFiltered = pathsShuffled
-        .map((p) => p.filter((k) => !Number.isInteger(k)))
-        .filter((p) => p.length !== 0);
-      const needlePaths = pathsFiltered
-        .filter((p, i) => pathsFiltered
-          .findIndex((e) => e.length === p.length && e.every((s, j) => s === p[j])) === i)
-        .map((p) => pathToNeedlePath(p));
+      const needlePaths = pathsFiltered.map((p) => pathToNeedlePath(p));
       const needles = needlePathsToNeedlesParsed(needlePaths);
       const str = parsedNeedleToString(needles);
       const needleArray = str === null ? [''] : [str, ''];
@@ -81,14 +81,9 @@ describe('Testing bulk related', { timeout: 5 * 60000 }, () => {
   it('Testing without useArraySelector and modifications', () => {
     for (let idx = 0; idx < 50; idx += 1) {
       const {
-        rng, haystack, paths, pathsShuffled
+        rng, haystack, paths, pathsFiltered
       } = init();
-      const pathsFiltered = pathsShuffled
-        .map((p) => p.filter((k) => !Number.isInteger(k)))
-        .filter((p) => p.length !== 0);
       const needlePaths = pathsFiltered
-        .filter((p, i) => pathsFiltered
-          .findIndex((e) => e.length === p.length && e.every((s, j) => s === p[j])) === i)
         .map((p) => pathToNeedlePath(p, genParam(rng, p.length), rng));
       const needles = needlePathsToNeedlesParsed(needlePaths);
       const str = parsedNeedleToString(needles);
