@@ -7,16 +7,16 @@ describe('Testing generate-parsed-needle.js', { cryptoSeed: '04eb4846-3b0c-4168-
     expect(generateParsedNeedle()).to.deep.equal(
       new Set([
         [
-          new Set(['a', ['b'], '[9]']),
-          ['[11]', '[6]', 'c'],
+          new Set(['\\!', ['"'], '[9]']),
+          ['[11]', '[6]', '#'],
           ['[3]', new Set(['[12]', '[1]']), '[14]', '[2]'],
-          'd'
+          '$'
         ],
         new Set([
           '[13]',
-          new Set(['[8]', 'e', new Set(['[4]', 'f', 'g']), 'h'])
+          new Set(['[8]', '%', new Set(['[4]', '&', '\'']), '('])
         ]),
-        new Set(['i'])
+        new Set([')'])
       ])
     );
   });
