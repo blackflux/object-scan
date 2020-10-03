@@ -90,30 +90,33 @@ const applyDiff = (diff) => {
   return true;
 };
 
-const merge = (paths) => {
-  const result = [...paths];
-  let applied = true;
-  while (applied) {
-    let diff = null;
-    let idx = null;
-    for (let i = 0; i < result.length; i += 1) {
-      const a = result[i];
-      if (Array.isArray(a)) {
-        for (let j = i + 1; j < result.length; j += 1) {
-          const b = result[j];
-          if (Array.isArray(b)) {
-            const diffNew = computeDiff(a, b);
-            if (diff === null || diffNew.weight < diff.weight) {
-              diff = diffNew;
-              idx = j;
-            }
+const findBestDiff = (result) => {
+  let diff = null;
+  for (let i = 0; i < result.length; i += 1) {
+    const a = result[i];
+    if (Array.isArray(a)) {
+      for (let j = i + 1; j < result.length; j += 1) {
+        const b = result[j];
+        if (Array.isArray(b)) {
+          const diffNew = computeDiff(a, b);
+          if (diff === null || diffNew.weight < diff.weight) {
+            diff = diffNew;
           }
         }
       }
     }
+  }
+  return diff;
+};
+
+const merge = (paths) => {
+  const result = [...paths];
+  let applied = true;
+  while (applied) {
+    const diff = findBestDiff(result);
     applied = applyDiff(diff);
     if (applied === true) {
-      result.splice(idx, 1);
+      result.splice(result.indexOf(diff.b), 1);
     }
   }
   return result;
