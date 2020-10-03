@@ -33,7 +33,27 @@ describe('Testing needle-paths-to-needles-parsed.js', () => {
       pathToNeedlePath([1, 1, 0, 1, 1])
     ]);
     expect(parsedNeedleToString(r))
-      .to.deep.equal('{[0].1,[1].{{[0],[1][0],[1][0][1]}[0],[1][0][1][1]}}');
+      .to.deep.equal('{[0].1,[1].{[0][0],[1][0].{[0],[1].{[0],[1]}}}}');
+  });
+
+  it('Testing simplify needles internally (simple)', () => {
+    const r = needlePathsToNeedlesParsed([
+      pathToNeedlePath([1, 0]),
+      pathToNeedlePath([1, 2, 0]),
+      pathToNeedlePath([1, 2, 1])
+    ]);
+    expect(parsedNeedleToString(r)).to.deep.equal('[1].{[0],[2].{[0],[1]}}');
+  });
+
+  it('Testing simplify needles internally (complex)', () => {
+    const r = needlePathsToNeedlesParsed([
+      pathToNeedlePath([0]),
+      pathToNeedlePath([1, 0]),
+      pathToNeedlePath([2, 'Z', 0]),
+      pathToNeedlePath([2, 'Z', 1, 0]),
+      pathToNeedlePath([2, 'Z', 1, 1])
+    ]);
+    expect(parsedNeedleToString(r)).to.deep.equal('{[0],[1][0],[2].Z.{[0],[1].{[0],[1]}}}');
   });
 
   it('Testing zero length diff (additive)', () => {
@@ -76,6 +96,20 @@ describe('Testing needle-paths-to-needles-parsed.js', () => {
     const needlePathB = pathToNeedlePath([0, 0, 1, 0, 0]);
     const r = needlePathsToNeedlesParsed([needlePathA, needlePathB]);
     expect(parsedNeedleToString(r)).to.deep.equal('[0][0].{[0],[1][0]}[0]');
+  });
+
+  it('Testing zero length diff (full overlap end)', () => {
+    const needlePathA = pathToNeedlePath([0, 0]);
+    const needlePathB = pathToNeedlePath([1, 0, 0]);
+    const r = needlePathsToNeedlesParsed([needlePathA, needlePathB]);
+    expect(parsedNeedleToString(r)).to.deep.equal('{[0],[1][0]}[0]');
+  });
+
+  it('Testing zero length diff (full overlap start)', () => {
+    const needlePathA = pathToNeedlePath(['f', 1, 2]);
+    const needlePathB = pathToNeedlePath(['f', 1]);
+    const r = needlePathsToNeedlesParsed([needlePathA, needlePathB]);
+    expect(parsedNeedleToString(r)).to.deep.equal('f.{[1][2],[1]}');
   });
 
   it('Testing symmetric overlap', () => {

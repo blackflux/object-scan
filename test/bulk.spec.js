@@ -1,6 +1,7 @@
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
 const PRNG = require('./helper/prng');
+const shuffleArray = require('./helper/shuffle-array');
 const haystackGenerator = require('./helper/haystack-generator');
 const generateHaystack = require('./helper/generate-haystack');
 const extractPathsFromHaystack = require('./helper/extract-paths-from-haystack');
@@ -16,7 +17,9 @@ describe('Testing bulk related', () => {
       const rng = PRNG(seed);
       const haystack = generateHaystack(haystackGenerator({ rng }));
       const paths = extractPathsFromHaystack(haystack);
-      const needlePaths = paths.map((p) => pathToNeedlePath(p));
+      const pathsShuffled = [...paths];
+      shuffleArray(pathsShuffled, rng);
+      const needlePaths = pathsShuffled.map((p) => pathToNeedlePath(p));
       const needles = needlePathsToNeedlesParsed(needlePaths);
       const str = parsedNeedleToString(needles);
       const matches = objectScan(str === null ? [] : [str])(haystack);
