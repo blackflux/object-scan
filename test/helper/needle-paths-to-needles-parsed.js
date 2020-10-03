@@ -19,7 +19,18 @@ const computeDiff = (a, b) => {
   const edB = findLastIndex(b, (e, idx) => a[idx - lenOffset] !== e || sdB + Math.max(0, lenOffset) > idx);
 
   if (sdA === -1 && sdB === -1 && edA === -1 && edB === -1) {
-    return null;
+    return {
+      a,
+      b,
+      startDiffA: 0,
+      startDiffB: 0,
+      endDiffA: -1,
+      endDiffB: -1,
+      lenDiffA: 0,
+      lenDiffB: 0,
+      overlapTailA: a.length - 1,
+      overlapTailB: b.length - 1
+    };
   }
 
   const startDiffA = sdA === -1 ? a.length : sdA;
@@ -91,7 +102,11 @@ const applyDiff = (diff) => {
 };
 
 const findBestDiff = (haystack, needle) => {
-  let result = -1;
+  if (!Array.isArray(needle)) {
+    return null;
+  }
+
+  let result = null;
   let diffSize = Number.MAX_SAFE_INTEGER;
 
   const hs = haystack.filter((value) => Array.isArray(value));
@@ -99,10 +114,6 @@ const findBestDiff = (haystack, needle) => {
     const value = hs[idx];
 
     const diff = computeDiff(value, needle);
-    if (diff === null) {
-      return null;
-    }
-
     const diffSizeNew = (diff.lenDiffA + diff.lenDiffB) / 2;
     if (diffSizeNew < diffSize) {
       diffSize = diffSizeNew;
@@ -116,21 +127,9 @@ const merge = (paths) => {
   const result = [];
   paths
     .forEach((p) => {
-      if (result.length === 0) {
-        result.push(p);
-        return;
-      }
-      if (!Array.isArray(p)) {
-        result.push(p);
-        return;
-      }
-
       const diff = findBestDiff(result, p);
-      if (diff === -1) {
-        result.push(p);
-        return;
-      }
       if (diff === null) {
+        result.push(p);
         return;
       }
 
