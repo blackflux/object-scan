@@ -18,7 +18,7 @@ describe('Testing bulk related', () => {
       const haystack = generateHaystack(haystackGenerator({ rng }));
       const paths = extractPathsFromHaystack(haystack);
       const pathsShuffled = [...paths];
-      shuffleArray(pathsShuffled);
+      shuffleArray(pathsShuffled, rng);
       const needlePaths = pathsShuffled.map((p) => pathToNeedlePath(p));
       const needles = needlePathsToNeedlesParsed(needlePaths);
       const str = parsedNeedleToString(needles);
