@@ -33,7 +33,7 @@ describe('Testing needle-paths-to-needles-parsed.js', () => {
       pathToNeedlePath([1, 1, 0, 1, 1])
     ]);
     expect(parsedNeedleToString(r))
-      .to.deep.equal('{[0].1,[1].{{[0],[1].{[0],[0][1]}}[0],[1][0][1][1]}}');
+      .to.deep.equal('{[0].1,[1].{[0][0],[1][0].{[0],[1].{[0],[1]}}}}');
   });
 
   it('Testing simplify needles internally (simple)', () => {
@@ -53,7 +53,7 @@ describe('Testing needle-paths-to-needles-parsed.js', () => {
       pathToNeedlePath([2, 'Z', 1, 0]),
       pathToNeedlePath([2, 'Z', 1, 1])
     ]);
-    expect(parsedNeedleToString(r)).to.deep.equal('{[0],{[1],[2].{Z,Z[1]}}[0],[2].Z[1][1]}');
+    expect(parsedNeedleToString(r)).to.deep.equal('{[0],[1][0],[2].Z.{[0],[1].{[0],[1]}}}');
   });
 
   it('Testing zero length diff (additive)', () => {

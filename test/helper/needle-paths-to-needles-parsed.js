@@ -40,11 +40,15 @@ const computeDiff = (a, b) => {
     lenDiffA,
     lenDiffB,
     overlapTailA,
-    overlapTailB
+    overlapTailB,
+    weight: (lenDiffA / (2.0 * a.length)) + (lenDiffB / (2.0 * b.length))
   };
 };
 
 const applyDiff = (diff) => {
+  if (diff === null) {
+    return false;
+  }
   const {
     a,
     b,
@@ -86,43 +90,32 @@ const applyDiff = (diff) => {
   return true;
 };
 
-const findBestDiff = (haystack, needle) => {
-  if (!Array.isArray(needle)) {
-    return null;
-  }
-
-  let result = null;
-  let diffSize = Number.MAX_SAFE_INTEGER;
-
-  const hs = haystack.filter((value) => Array.isArray(value));
-  for (let idx = 0; idx < hs.length; idx += 1) {
-    const value = hs[idx];
-
-    const diff = computeDiff(value, needle);
-    const diffSizeNew = (diff.lenDiffA + diff.lenDiffB) / 2;
-    if (diffSizeNew < diffSize) {
-      diffSize = diffSizeNew;
-      result = diff;
+const merge = (paths) => {
+  const result = [...paths];
+  let applied = true;
+  while (applied) {
+    let diff = null;
+    let idx = null;
+    for (let i = 0; i < result.length; i += 1) {
+      const a = result[i];
+      if (Array.isArray(a)) {
+        for (let j = i + 1; j < result.length; j += 1) {
+          const b = result[j];
+          if (Array.isArray(b)) {
+            const diffNew = computeDiff(a, b);
+            if (diff === null || diffNew.weight < diff.weight) {
+              diff = diffNew;
+              idx = j;
+            }
+          }
+        }
+      }
+    }
+    applied = applyDiff(diff);
+    if (applied === true) {
+      result.splice(idx, 1);
     }
   }
-  return result;
-};
-
-const merge = (paths) => {
-  const result = [];
-  paths
-    .forEach((p) => {
-      const diff = findBestDiff(result, p);
-      if (diff === null) {
-        result.push(p);
-        return;
-      }
-
-      const applied = applyDiff(diff);
-      if (applied === false) {
-        result.push(diff.b);
-      }
-    });
   return result;
 };
 
