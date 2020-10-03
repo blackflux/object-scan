@@ -126,15 +126,15 @@ const merge = (paths) => {
   return result;
 };
 
-const recurse = (obj) => {
-  const r = simplifyNeedleParsed(obj);
-  if (r instanceof Set) {
-    return new Set(merge([...r]).map((e) => recurse(e)));
+const recurse = (obj_) => {
+  const obj = simplifyNeedleParsed(obj_);
+  if (obj instanceof Set) {
+    return new Set(merge([...obj]).map((e) => recurse(e)));
   }
-  if (Array.isArray(r)) {
-    return r.map((e) => recurse(e));
+  if (Array.isArray(obj)) {
+    return obj.map((e) => recurse(e));
   }
-  return r;
+  return obj;
 };
 
 module.exports = (paths) => recurse(new Set(paths.map((p) => normalizePath(p))));
