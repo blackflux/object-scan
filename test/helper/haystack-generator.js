@@ -1,7 +1,7 @@
 const sampleArray = require('./sample-array');
-const chars = require('./resources/chars.json');
+const CHARS = require('./resources/chars.json');
 
-module.exports = ({ rng }) => ({ count, depth }) => {
+module.exports = ({ rng, keys = CHARS }) => ({ count, depth }) => {
   if (count >= 5) {
     return undefined;
   }
@@ -10,5 +10,5 @@ module.exports = ({ rng }) => ({ count, depth }) => {
   }
   const mkArray = rng() > 0.5;
   const len = Math.floor(rng() * 5);
-  return mkArray ? len : sampleArray(chars, len, { rng, unique: true });
+  return mkArray ? len : sampleArray(keys, len, { rng, unique: true });
 };
