@@ -28,8 +28,8 @@ const computeDiff = (a, b) => {
       endDiffB: -1,
       lenDiffA: 0,
       lenDiffB: 0,
-      overlapTailA: a.length - 1,
-      overlapTailB: b.length - 1
+      overlapTailA: a.length,
+      overlapTailB: b.length
     };
   }
 
