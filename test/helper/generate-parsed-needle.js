@@ -1,15 +1,16 @@
+const { escape } = require('../../src/util/helper');
 const CHARS = require('./resources/chars.json');
 
 const MAX_DEPTH = 4;
 const MAX_WIDTH = 4;
 
 const generateParsedNeedle = (depth, ctx) => {
-  if (!(ctx.index < CHARS.length) || Math.random() * MAX_DEPTH < depth) {
+  if (!(ctx.index < ctx.keys.length) || Math.random() * MAX_DEPTH < depth) {
     if (Math.random() > 0.5) {
       return `[${Math.floor(Math.random() * 16)}]`;
     }
     ctx.index += 1;
-    return CHARS[(ctx.index - 1) % CHARS.length];
+    return escape(ctx.keys[(ctx.index - 1) % ctx.keys.length]);
   }
   const result = Math.random() > 0.5 ? new Set() : [];
   for (let idx = 0, len = Math.ceil(Math.random() * MAX_WIDTH); idx < len; idx += 1) {
@@ -18,4 +19,4 @@ const generateParsedNeedle = (depth, ctx) => {
   }
   return result;
 };
-module.exports = () => generateParsedNeedle(0, { index: 0 });
+module.exports = (keys = CHARS) => generateParsedNeedle(0, { index: 0, keys });
