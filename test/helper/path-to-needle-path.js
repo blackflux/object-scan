@@ -2,7 +2,19 @@ const Joi = require('joi-strict');
 const { escape } = require('../../src/util/helper');
 const sampleArray = require('./sample-array');
 
-module.exports = (needle, params, rng = Math.random) => {
+module.exports = (...kwargs) => {
+  const needle = kwargs[0];
+  const params = {
+    exclude: false,
+    lenPercentage: 1,
+    questionMark: 0,
+    partialStar: 0,
+    singleStar: 0,
+    doubleStar: 0,
+    ...(kwargs[1] || {})
+  };
+  const rng = kwargs[2] || Math.random;
+
   Joi.assert(needle, Joi.array().items(Joi.string(), Joi.number()));
   Joi.assert(params, Joi.object().keys({
     exclude: Joi.boolean(),
