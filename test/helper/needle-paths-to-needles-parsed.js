@@ -18,21 +18,6 @@ const computeDiff = (a, b) => {
   const edA = findLastIndex(a, (e, idx) => b[idx + lenOffset] !== e || sdA + Math.max(0, -lenOffset) > idx);
   const edB = findLastIndex(b, (e, idx) => a[idx - lenOffset] !== e || sdB + Math.max(0, lenOffset) > idx);
 
-  if (sdA === -1 && sdB === -1 && edA === -1 && edB === -1) {
-    return {
-      a,
-      b,
-      startDiffA: 0,
-      startDiffB: 0,
-      endDiffA: -1,
-      endDiffB: -1,
-      lenDiffA: 0,
-      lenDiffB: 0,
-      overlapTailA: a.length,
-      overlapTailB: b.length
-    };
-  }
-
   const startDiffA = sdA === -1 ? a.length : sdA;
   const startDiffB = sdB === -1 ? b.length : sdB;
 
