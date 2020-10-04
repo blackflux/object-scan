@@ -26,6 +26,10 @@ module.exports = (...kwargs) => {
   }));
   Joi.assert(rng, Joi.function());
 
+  if (needle.length === 0) {
+    return [];
+  }
+
   const result = needle.map((e) => ({
     value: String(e).split('').map((char) => escape(char)),
     string: typeof e === 'string',

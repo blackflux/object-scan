@@ -21,7 +21,13 @@ const simplify = (arg) => {
         result.add(ele);
       }
     });
-    return result.size === 1 ? result.values().next().value : result;
+    if (result.size === 1) {
+      const value = result.values().next().value;
+      if (!Array.isArray(value) || value.length !== 0) {
+        return value;
+      }
+    }
+    return result;
   }
   return arg;
 };
