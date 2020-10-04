@@ -29,15 +29,16 @@ const Tester = () => {
         .filter((p, i) => pathsFiltered
           .findIndex((e) => e.length === p.length && e.every((s, j) => s === p[j])) === i);
     };
-
-    const needles = useArraySelector ? paths : withoutArraySelector();
-    const needlesShuffled = shuffleArray(needles, rng);
-    const needlePaths = needlesShuffled.map((p) => pathToNeedlePath(p, modify ? {
+    const needlePathParams = (p) => (modify ? {
       questionMark: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
       partialStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
       singleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
       doubleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1
-    } : {}, rng));
+    } : {});
+
+    const needles = useArraySelector ? paths : withoutArraySelector();
+    const needlesShuffled = shuffleArray(needles, rng);
+    const needlePaths = needlesShuffled.map((p) => pathToNeedlePath(p, needlePathParams(p), rng));
     const needlesParsed = needlePathsToNeedlesParsed(needlePaths);
     return parsedNeedleToStringArray(needlesParsed);
   };
