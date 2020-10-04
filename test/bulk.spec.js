@@ -8,7 +8,7 @@ const generateHaystack = require('./helper/generate-haystack');
 const extractPathsFromHaystack = require('./helper/extract-paths-from-haystack');
 const needlePathsToNeedlesParsed = require('./helper/needle-paths-to-needles-parsed');
 const pathToNeedlePath = require('./helper/path-to-needle-path');
-const parsedNeedleToString = require('./helper/parsed-needle-to-string');
+const parsedNeedleToStringArray = require('./helper/parsed-needle-to-string-array');
 const objectScan = require('../src/index');
 
 const Tester = () => {
@@ -18,8 +18,7 @@ const Tester = () => {
   const paths = extractPathsFromHaystack(haystack);
   const withoutArraySelector = () => {
     const pathsFiltered = paths
-      .map((p) => p.filter((k) => !Number.isInteger(k)))
-      .filter((p) => p.length !== 0);
+      .map((p) => p.filter((k) => !Number.isInteger(k)));
     return pathsFiltered
       .filter((p, i) => pathsFiltered
         .findIndex((e) => e.length === p.length && e.every((s, j) => s === p[j])) === i);
@@ -41,11 +40,12 @@ const Tester = () => {
         doubleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1
       } : {}, rng));
       const needlesParsed = needlePathsToNeedlesParsed(needles);
-      const needleString = parsedNeedleToString(needlesParsed);
-      if (useArraySelector) {
-        return needleString === null ? [] : [needleString];
+      const result = parsedNeedleToStringArray(needlesParsed);
+      // todo: can we improve this (??)
+      if (!useArraySelector && !result.includes('')) {
+        result.push('');
       }
-      return needleString === null ? [''] : [needleString, ''];
+      return result;
     }
   };
 };

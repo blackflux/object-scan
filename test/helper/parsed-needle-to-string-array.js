@@ -1,13 +1,16 @@
-const parsedNeedleToString = (obj) => {
+const parsedNeedleToStringArray = (obj, depth = 0) => {
   const isArray = Array.isArray(obj);
   const isSet = obj instanceof Set;
   if (isArray || isSet) {
     const r = (isArray ? obj : [...obj])
-      .map((e) => parsedNeedleToString(e))
-      .filter((e) => e !== null);
+      .map((e) => parsedNeedleToStringArray(e, depth + 1))
+      .filter((e) => !Array.isArray(e) || e.length !== 0);
     const len = r.length;
     if (len === 0) {
-      return null;
+      return depth === 0 ? [] : '';
+    }
+    if (isSet && depth === 0) {
+      return r;
     }
     return `${
       isArray || len === 1 ? '' : '{'
@@ -26,4 +29,11 @@ const parsedNeedleToString = (obj) => {
   return obj;
 };
 
-module.exports = parsedNeedleToString;
+module.exports = (obj) => {
+  // todo: can we improve this ?
+  const r = parsedNeedleToStringArray(obj);
+  if (!Array.isArray(r)) {
+    return [r];
+  }
+  return r;
+};
