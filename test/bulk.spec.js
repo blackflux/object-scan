@@ -12,34 +12,42 @@ const parsedNeedleToStringArray = require('./helper/parsed-needle-to-string-arra
 const objectScan = require('../src/index');
 
 const Tester = () => {
-  const rng = PRNG(`${Math.random()}`);
-  const keys = generateKeys(Math.ceil(rng() * 30), rng);
-  const haystack = generateHaystack(haystackGenerator({ rng, keys }));
-  const paths = extractPathsFromHaystack(haystack);
-  const withoutArraySelector = () => {
-    const pathsFiltered = paths
-      .map((p) => p.filter((k) => !Number.isInteger(k)));
-    return pathsFiltered
-      .filter((p, i) => pathsFiltered
-        .findIndex((e) => e.length === p.length && e.every((s, j) => s === p[j])) === i);
+  const generateData = () => {
+    const rng = PRNG(`${Math.random()}`);
+    const keys = generateKeys(Math.ceil(rng() * 30), rng);
+    const haystack = generateHaystack(haystackGenerator({ rng, keys }));
+    const paths = extractPathsFromHaystack(haystack);
+    return { rng, haystack, paths };
   };
-  const mkNeedles = ({ useArraySelector, modify }) => {
-    const needles = shuffleArray(
-      useArraySelector ? paths : withoutArraySelector(),
-      rng
-    ).map((p) => pathToNeedlePath(p, modify ? {
+  const mkNeedles = ({
+    rng, paths, useArraySelector, modify
+  }) => {
+    const withoutArraySelector = () => {
+      const pathsFiltered = paths
+        .map((p) => p.filter((k) => !Number.isInteger(k)));
+      return pathsFiltered
+        .filter((p, i) => pathsFiltered
+          .findIndex((e) => e.length === p.length && e.every((s, j) => s === p[j])) === i);
+    };
+
+    const needles = useArraySelector ? paths : withoutArraySelector();
+    const needlesShuffled = shuffleArray(needles, rng);
+    const needlePaths = needlesShuffled.map((p) => pathToNeedlePath(p, modify ? {
       questionMark: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
       partialStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
       singleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
       doubleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1
     } : {}, rng));
-    const needlesParsed = needlePathsToNeedlesParsed(needles);
+    const needlesParsed = needlePathsToNeedlesParsed(needlePaths);
     return parsedNeedleToStringArray(needlesParsed);
   };
 
   return {
     executeAndTest: ({ useArraySelector, modify }) => {
-      const needles = mkNeedles({ useArraySelector, modify });
+      const { rng, haystack, paths } = generateData();
+      const needles = mkNeedles({
+        rng, paths, useArraySelector, modify
+      });
       const matches = objectScan(needles, { useArraySelector, strict: !modify })(haystack);
       if (useArraySelector && !modify) {
         expect(matches.reverse(), `Seed: ${rng.seed}`).to.deep.equal(paths);
