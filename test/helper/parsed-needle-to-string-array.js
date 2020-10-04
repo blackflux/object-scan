@@ -12,9 +12,7 @@ const parsedNeedleToStringArray = (obj, depth = 0) => {
     if (isSet && depth === 0) {
       return r;
     }
-    return `${
-      isArray || len === 1 ? '' : '{'
-    }${r.reduce((prev, next) => {
+    const str = r.reduce((prev, next) => {
       if (prev === null) {
         return next;
       }
@@ -22,18 +20,18 @@ const parsedNeedleToStringArray = (obj, depth = 0) => {
         return `${prev},${next}`;
       }
       return `${prev}${next.startsWith('[') ? '' : '.'}${next}`;
-    }, null)}${
-      isArray || len === 1 ? '' : '}'
-    }`;
+    }, null);
+    if (depth === 0) {
+      return [str];
+    }
+    const asBlank = isArray || len === 1;
+    return [
+      asBlank ? '' : '{',
+      str,
+      asBlank ? '' : '}'
+    ].join('');
   }
-  return obj;
+  return depth === 0 ? [obj] : obj;
 };
 
-module.exports = (obj) => {
-  // todo: can we improve this ?
-  const r = parsedNeedleToStringArray(obj);
-  if (!Array.isArray(r)) {
-    return [r];
-  }
-  return r;
-};
+module.exports = (obj) => parsedNeedleToStringArray(obj);
