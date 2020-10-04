@@ -23,24 +23,29 @@ const Tester = () => {
       .filter((p, i) => pathsFiltered
         .findIndex((e) => e.length === p.length && e.every((s, j) => s === p[j])) === i);
   };
+  const mkNeedles = ({ useArraySelector, modify }) => {
+    const needles = shuffleArray(
+      useArraySelector ? paths : withoutArraySelector(),
+      rng
+    ).map((p) => pathToNeedlePath(p, modify ? {
+      questionMark: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
+      partialStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
+      singleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
+      doubleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1
+    } : {}, rng));
+    const needlesParsed = needlePathsToNeedlesParsed(needles);
+    return parsedNeedleToStringArray(needlesParsed);
+  };
 
   return {
-    rng,
-    keys,
-    haystack,
-    paths,
-    needles: ({ useArraySelector, modify }) => {
-      const needles = shuffleArray(
-        useArraySelector ? paths : withoutArraySelector(),
-        rng
-      ).map((p) => pathToNeedlePath(p, modify ? {
-        questionMark: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
-        partialStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
-        singleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
-        doubleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1
-      } : {}, rng));
-      const needlesParsed = needlePathsToNeedlesParsed(needles);
-      return parsedNeedleToStringArray(needlesParsed);
+    executeAndTest: ({ useArraySelector, modify }) => {
+      const needles = mkNeedles({ useArraySelector, modify });
+      const matches = objectScan(needles, { useArraySelector, strict: !modify })(haystack);
+      if (useArraySelector && !modify) {
+        expect(matches.reverse(), `Seed: ${rng.seed}`).to.deep.equal(paths);
+      } else {
+        expect(matches, `Seed: ${rng.seed}`).to.include.deep.members(paths);
+      }
     }
   };
 };
@@ -48,40 +53,25 @@ const Tester = () => {
 describe('Testing bulk related', { timeout: 5 * 60000 }, () => {
   it('Testing with useArraySelector', () => {
     for (let idx = 0; idx < 50; idx += 1) {
-      const tester = Tester();
-      const needles = tester.needles({ useArraySelector: true, modify: false });
-      const matches = objectScan(needles)(tester.haystack);
-      expect(tester.paths, `Seed: ${tester.rng.seed}`).to.deep.equal(matches.reverse());
+      Tester().executeAndTest({ useArraySelector: true, modify: false });
     }
   });
 
   it('Testing without useArraySelector', () => {
     for (let idx = 0; idx < 50; idx += 1) {
-      const tester = Tester();
-      const needles = tester.needles({ useArraySelector: false, modify: false });
-      const matches = objectScan(needles, { useArraySelector: false })(tester.haystack);
-      expect(matches, `Seed: ${tester.rng.seed}`).to.include.deep.members(tester.paths);
+      Tester().executeAndTest({ useArraySelector: false, modify: false });
     }
   });
 
   it('Testing with useArraySelector and modifications', () => {
     for (let idx = 0; idx < 50; idx += 1) {
-      const tester = Tester();
-      const needles = tester.needles({ useArraySelector: true, modify: true });
-      const matches = objectScan(needles, { strict: false })(tester.haystack);
-      expect(matches, `Seed: ${tester.rng.seed}`).to.include.deep.members(tester.paths);
+      Tester().executeAndTest({ useArraySelector: true, modify: true });
     }
   });
 
   it('Testing without useArraySelector and modifications', () => {
     for (let idx = 0; idx < 50; idx += 1) {
-      const tester = Tester();
-      const needles = tester.needles({ useArraySelector: false, modify: true });
-      const matches = objectScan(needles, {
-        useArraySelector: false,
-        strict: false
-      })(tester.haystack);
-      expect(matches, `Seed: ${tester.rng.seed}`).to.include.deep.members(tester.paths);
+      Tester().executeAndTest({ useArraySelector: false, modify: true });
     }
   });
 });
