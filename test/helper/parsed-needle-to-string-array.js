@@ -3,8 +3,7 @@ const parsedNeedleToStringArray = (obj, depth = 0) => {
   const isSet = obj instanceof Set;
   if (isArray || isSet) {
     const r = (isArray ? obj : [...obj])
-      .map((e) => parsedNeedleToStringArray(e, depth + 1))
-      .filter((e) => !Array.isArray(e) || e.length !== 0);
+      .map((e) => parsedNeedleToStringArray(e, depth + 1));
     const len = r.length;
     if (len === 0) {
       return depth === 0 ? [] : '';

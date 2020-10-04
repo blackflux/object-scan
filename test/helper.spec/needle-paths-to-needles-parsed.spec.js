@@ -11,6 +11,11 @@ describe('Testing needle-paths-to-needles-parsed.js', () => {
     expect(parsedNeedleToStringArray(r)).to.deep.equal(['name[0].value[16].property']);
   });
 
+  it('Testing empty array', () => {
+    const r = needlePathsToNeedlesParsed([[]]);
+    expect(parsedNeedleToStringArray(r)).to.deep.equal(['']);
+  });
+
   it('Testing exclude', () => {
     const needlePath = pathToNeedlePath(['name', 0, 'value', 16, 'property']);
     needlePath[3].exclude = true;

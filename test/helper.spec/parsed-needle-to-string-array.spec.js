@@ -36,4 +36,8 @@ describe('Testing parsed-needle-to-string-array.js', { cryptoSeed: '04eb4846-3b0
   it('Testing set containing empty array', () => {
     expect(parsedNeedleToStringArray(new Set(['a', []]))).to.deep.equal(['a', '']);
   });
+
+  it('Testing set containing array', () => {
+    expect(parsedNeedleToStringArray(new Set(['a', ['1', '2']]))).to.deep.equal(['a', '1.2']);
+  });
 });

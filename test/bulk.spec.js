@@ -29,7 +29,7 @@ const Tester = () => {
     keys,
     haystack,
     paths,
-    needles: ({ useArraySelector = true, modify = false }) => {
+    needles: ({ useArraySelector, modify }) => {
       const needles = shuffleArray(
         useArraySelector ? paths : withoutArraySelector(),
         rng
@@ -40,12 +40,7 @@ const Tester = () => {
         doubleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1
       } : {}, rng));
       const needlesParsed = needlePathsToNeedlesParsed(needles);
-      const result = parsedNeedleToStringArray(needlesParsed);
-      // todo: can we improve this (??)
-      if (!useArraySelector && !result.includes('')) {
-        result.push('');
-      }
-      return result;
+      return parsedNeedleToStringArray(needlesParsed);
     }
   };
 };
