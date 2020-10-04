@@ -7,11 +7,11 @@ describe('Testing extract-paths-from-haystack.js', () => {
     const haystack = { a: [{ '&': 0, f: [1, { F: 2, ',': 3, ';': 4 }] }] };
     const needles = extractPathsFromHaystack(haystack);
     expect(needles).to.deep.equal([
-      ['a', 0, '&'],
-      ['a', 0, 'f', 0],
-      ['a', 0, 'f', 1, 'F'],
+      ['a', 0, 'f', 1, ';'],
       ['a', 0, 'f', 1, ','],
-      ['a', 0, 'f', 1, ';']
+      ['a', 0, 'f', 1, 'F'],
+      ['a', 0, 'f', 0],
+      ['a', 0, '&']
     ]);
   });
 

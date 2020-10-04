@@ -51,7 +51,7 @@ const Tester = () => {
       });
       const matches = objectScan(needles, { useArraySelector, strict: !modify })(haystack);
       if (useArraySelector && !modify) {
-        expect(matches.reverse(), `Seed: ${rng.seed}`).to.deep.equal(paths);
+        expect(matches, `Seed: ${rng.seed}`).to.deep.equal(paths);
       } else {
         expect(matches, `Seed: ${rng.seed}`).to.include.deep.members(paths);
       }
