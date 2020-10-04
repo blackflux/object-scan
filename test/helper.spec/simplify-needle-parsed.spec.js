@@ -32,4 +32,9 @@ describe('Testing simplify-needle-parsed.js', () => {
     const needle = new Set([new Set([new Set([1, 2]), new Set([1])])]);
     expect(simplifyNeedleParsed(needle)).to.deep.equal(new Set([1, 2]));
   });
+
+  it('Testing empty array in set is not merged', () => {
+    const needle = new Set([[]]);
+    expect(simplifyNeedleParsed(needle)).to.deep.equal(new Set([[]]));
+  });
 });
