@@ -156,4 +156,9 @@ describe('Testing path-to-needle-path.js', () => {
       { value: '\\*force', string: true, exclude: false }
     ]);
   });
+
+  it('Testing empty needle', () => {
+    const r = pathToNeedlePath([]);
+    expect(r).to.deep.equal([]);
+  });
 });
