@@ -16,8 +16,7 @@ const init = () => {
   const keys = generateKeys(Math.ceil(rng() * 30), rng);
   const haystack = generateHaystack(haystackGenerator({ rng, keys }));
   const paths = extractPathsFromHaystack(haystack);
-  const pathsShuffled = [...paths];
-  shuffleArray(pathsShuffled, rng);
+  const pathsShuffled = shuffleArray(paths, rng);
   const pathsFilteredRaw = pathsShuffled
     .map((p) => p.filter((k) => !Number.isInteger(k)))
     .filter((p) => p.length !== 0);
