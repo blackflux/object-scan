@@ -9,6 +9,7 @@ const extractPathsFromHaystack = require('./helper/extract-paths-from-haystack')
 const needlePathsToNeedlesParsed = require('./helper/needle-paths-to-needles-parsed');
 const pathToNeedlePath = require('./helper/path-to-needle-path');
 const parsedNeedleToStringArray = require('./helper/parsed-needle-to-string-array');
+const stripArraySelectorFromPaths = require('./helper/strip-array-selector-from-paths');
 const objectScan = require('../src/index');
 
 const Tester = () => {
@@ -22,13 +23,6 @@ const Tester = () => {
   const mkNeedles = ({
     rng, paths, useArraySelector, modify
   }) => {
-    const withoutArraySelector = () => {
-      const pathsFiltered = paths
-        .map((p) => p.filter((k) => !Number.isInteger(k)));
-      return pathsFiltered
-        .filter((p, i) => pathsFiltered
-          .findIndex((e) => e.length === p.length && e.every((s, j) => s === p[j])) === i);
-    };
     const needlePathParams = (p) => (modify ? {
       questionMark: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
       partialStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
@@ -36,7 +30,7 @@ const Tester = () => {
       doubleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1
     } : {});
 
-    const needles = useArraySelector ? paths : withoutArraySelector();
+    const needles = useArraySelector ? paths : stripArraySelectorFromPaths(paths);
     const needlesShuffled = shuffleArray(needles, rng);
     const needlePaths = needlesShuffled.map((p) => pathToNeedlePath(p, needlePathParams(p), rng));
     const needlesParsed = needlePathsToNeedlesParsed(needlePaths);
