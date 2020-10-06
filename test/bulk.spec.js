@@ -1,46 +1,33 @@
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
 const generateDataset = require('./helper/generate-dataset');
-const shuffleArray = require('./helper/shuffle-array');
-const needlePathsToNeedlesParsed = require('./helper/needle-paths-to-needles-parsed');
-const pathToNeedlePath = require('./helper/path-to-needle-path');
-const parsedNeedleToStringArray = require('./helper/parsed-needle-to-string-array');
-const stripArraySelectorFromPaths = require('./helper/strip-array-selector-from-paths');
+const generateNeedles = require('./helper/generate-needles');
 const objectScan = require('../src/index');
 
-const Tester = () => {
-  const mkNeedles = ({
-    rng, paths, useArraySelector, modify
-  }) => {
-    const needlePathParams = (p) => (modify ? {
-      questionMark: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
-      partialStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
-      singleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
-      doubleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1
-    } : {});
-
-    const needles = useArraySelector ? paths : stripArraySelectorFromPaths(paths);
-    const needlesShuffled = shuffleArray(needles, rng);
-    const needlePaths = needlesShuffled.map((p) => pathToNeedlePath(p, needlePathParams(p), rng));
-    const needlesParsed = needlePathsToNeedlesParsed(needlePaths);
-    return parsedNeedleToStringArray(needlesParsed);
-  };
-
-  return {
-    executeAndTest: ({ useArraySelector, modify }) => {
-      const { rng, haystack, paths } = generateDataset();
-      const needles = mkNeedles({
-        rng, paths, useArraySelector, modify
-      });
-      const matches = objectScan(needles, { useArraySelector, strict: !modify })(haystack);
-      if (useArraySelector && !modify) {
-        expect(matches, `Seed: ${rng.seed}`).to.deep.equal(paths);
-      } else {
-        expect(matches, `Seed: ${rng.seed}`).to.include.deep.members(paths);
-      }
+const Tester = () => ({
+  executeAndTest: ({ useArraySelector, modify }) => {
+    const { rng, haystack, paths } = generateDataset();
+    const needles = generateNeedles({
+      rng,
+      paths,
+      useArraySelector,
+      modifierParams: modify
+        ? (p) => ({
+          questionMark: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
+          partialStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
+          singleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
+          doubleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1
+        })
+        : () => {}
+    });
+    const matches = objectScan(needles, { useArraySelector, strict: !modify })(haystack);
+    if (useArraySelector && !modify) {
+      expect(matches, `Seed: ${rng.seed}`).to.deep.equal(paths);
+    } else {
+      expect(matches, `Seed: ${rng.seed}`).to.include.deep.members(paths);
     }
-  };
-};
+  }
+});
 
 describe('Testing bulk related', { timeout: 5 * 60000 }, () => {
   it('Testing with useArraySelector', () => {
