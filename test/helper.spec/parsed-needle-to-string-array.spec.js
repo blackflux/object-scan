@@ -40,4 +40,11 @@ describe('Testing parsed-needle-to-string-array.js', { cryptoSeed: '04eb4846-3b0
   it('Testing set containing array', () => {
     expect(parsedNeedleToStringArray(new Set(['a', ['1', '2']]))).to.deep.equal(['a', '1.2']);
   });
+
+  it('Testing exclude pull up', () => {
+    const r = new Set([['name', '[0]', 'value', new Set(['[!16]', '[!17]', '!str']), 'property']]);
+    expect(parsedNeedleToStringArray(r)).to.deep.equal([
+      'name[0].value.!{[16],[17],str}.property'
+    ]);
+  });
 });

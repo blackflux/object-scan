@@ -11,7 +11,12 @@ const parsedNeedleToStringArray = (obj, depth = 0) => {
     if (isSet && depth === 0) {
       return r;
     }
-    const str = r.reduce((prev, next) => {
+    const pullExcludeOut = !isArray
+      && depth !== 0
+      && r.length > 1
+      && r.every((e) => e.startsWith('!') || e.startsWith('[!'));
+    const str = r.reduce((prev, next_) => {
+      const next = pullExcludeOut ? next_.replace(/^(\[?)!/, '$1') : next_;
       if (prev === null) {
         return next;
       }
@@ -25,6 +30,7 @@ const parsedNeedleToStringArray = (obj, depth = 0) => {
     }
     const asBlank = isArray || len === 1;
     return [
+      pullExcludeOut ? '!' : '',
       asBlank ? '' : '{',
       str,
       asBlank ? '' : '}'
