@@ -1,11 +1,13 @@
 const Joi = require('joi-strict');
 const { escape } = require('../../src/util/helper');
 const sampleArray = require('./sample-array');
+const shuffleArray = require('./shuffle-array');
 
 module.exports = (...kwargs) => {
   const needle = kwargs[0];
   const params = {
     exclude: false,
+    shuffle: false,
     lenPercentage: 1,
     questionMark: 0,
     partialStar: 0,
@@ -18,6 +20,7 @@ module.exports = (...kwargs) => {
   Joi.assert(needle, Joi.array().items(Joi.string(), Joi.number()));
   Joi.assert(params, Joi.object().keys({
     exclude: Joi.boolean(),
+    shuffle: Joi.boolean(),
     lenPercentage: Joi.number().min(0).max(1),
     questionMark: Joi.number().integer().min(0),
     partialStar: Joi.number().integer().min(0),
@@ -94,8 +97,12 @@ module.exports = (...kwargs) => {
   // crop the result length
   result.length = Math.round(result.length * params.lenPercentage);
   // mark single element as "exclude"
-  if (params.exclude === true) {
+  if (params.exclude === true && result.length !== 0) {
     result[Math.floor(rng() * result.length)].exclude = true;
+  }
+  // shuffle parameter
+  if (params.shuffle === true) {
+    result.splice(0, result.length, ...shuffleArray(result, rng));
   }
   return result.map((e) => ({
     ...e,
