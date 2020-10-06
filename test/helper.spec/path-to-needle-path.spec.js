@@ -42,6 +42,22 @@ describe('Testing path-to-needle-path.js', () => {
     ]);
   });
 
+  it('Testing shuffle', () => {
+    const r = pathToNeedlePath(needle, { shuffle: true }, rng);
+    expect(r).to.deep.equal([
+      { value: 'value', string: true, exclude: false },
+      { value: 'name', string: true, exclude: false },
+      { value: '16', string: false, exclude: false },
+      { value: '0', string: false, exclude: false },
+      { value: 'property', string: true, exclude: false }
+    ]);
+  });
+
+  it('Testing exclude empty needle', () => {
+    const r = pathToNeedlePath(needle, { exclude: true, lenPercentage: 0 }, rng);
+    expect(r).to.deep.equal([]);
+  });
+
   describe('Testing question mark', () => {
     it('Testing default', () => {
       const r = pathToNeedlePath(needle, { questionMark: 5 }, rng);

@@ -2043,6 +2043,16 @@ dezalgo@^1.0.0, dezalgo@~1.0.3:
     asap "^2.0.0"
     wrappy "1"
 
+diff2html@3.1.13:
+  version "3.1.13"
+  resolved "https://registry.yarnpkg.com/diff2html/-/diff2html-3.1.13.tgz#a50321c55847c9754c874d361cfc0ba2853feeec"
+  integrity sha512-Gs4NbtynANYqkPbbGqZN6zwWJq6JofAb5it76xnEUTpFjWJndaCCjFVUoD7yFjEPB36MtwTtT/ptWcKyD9Vw9g==
+  dependencies:
+    diff "4.0.2"
+    hogan.js "3.0.2"
+  optionalDependencies:
+    highlight.js "10.1.2"
+
 diff@4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/diff/-/diff-4.0.2.tgz#60f3aecb89d5fae520c11aa19efc2bb982aade7d"
@@ -3245,6 +3255,19 @@ highlight-es@^1.0.0:
     chalk "^2.4.0"
     is-es2016-keyword "^1.0.0"
     js-tokens "^3.0.0"
+
+highlight.js@10.1.2:
+  version "10.1.2"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.1.2.tgz#c20db951ba1c22c055010648dfffd7b2a968e00c"
+  integrity sha512-Q39v/Mn5mfBlMff9r+zzA+gWxRsCRKwEMvYTiisLr/XUiFI/4puWt0Ojdko3R3JCNWGdOWaA5g/Yxqa23kC5AA==
+
+hogan.js@3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/hogan.js/-/hogan.js-3.0.2.tgz#4cd9e1abd4294146e7679e41d7898732b02c7bfd"
+  integrity sha1-TNnhq9QpQUbnZ55B14mHMrAse/0=
+  dependencies:
+    mkdirp "0.3.0"
+    nopt "1.0.10"
 
 homedir-polyfill@^1.0.1:
   version "1.0.3"
@@ -4769,6 +4792,11 @@ mixin-deep@^1.2.0:
     for-in "^1.0.2"
     is-extendable "^1.0.1"
 
+mkdirp@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.3.0.tgz#1bbf5ab1ba827af23575143490426455f481fe1e"
+  integrity sha1-G79asbqCevI1dRQ0kEJkVfSB/h4=
+
 mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@^0.5.5, mkdirp@~0.5.0:
   version "0.5.5"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.5.tgz#d91cefd62d1436ca0f41620e251288d420099def"
@@ -4970,6 +4998,13 @@ node-tdd@2.18.10:
     tmp "0.2.1"
     uuid "8.3.0"
     xml2js "0.4.23"
+
+nopt@1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/nopt/-/nopt-1.0.10.tgz#6ddd21bd2a31417b92727dd585f8a6f37608ebee"
+  integrity sha1-bd0hvSoxQXuScn3Vhfim83YI6+4=
+  dependencies:
+    abbrev "1"
 
 nopt@^4.0.1, nopt@^4.0.3:
   version "4.0.3"
@@ -7737,6 +7772,11 @@ uuid@8.3.0:
   version "8.3.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.0.tgz#ab738085ca22dc9a8c92725e459b1d507df5d6ea"
   integrity sha512-fX6Z5o4m6XsXBdli9g7DtWgAx+osMsRRZFKma1mIUsLCz6vRvv+pz5VNbyu9UEDzpMWulZfvpgb/cmDXVulYFQ==
+
+uuid@8.3.1:
+  version "8.3.1"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.1.tgz#2ba2e6ca000da60fce5a196954ab241131e05a31"
+  integrity sha512-FOmRr+FmWEIG8uhZv6C2bTgEVXsHk08kE7mPlrBbEe+c3r9pjceVPgupIfNIhc4yx55H69OXANrUaSuu9eInKg==
 
 uuid@^3.3.2, uuid@^3.3.3:
   version "3.4.0"

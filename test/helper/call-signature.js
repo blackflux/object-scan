@@ -39,6 +39,7 @@ module.exports = ({
   return {
     haystack,
     needles,
+    useArraySelector,
     logs,
     result
   };
