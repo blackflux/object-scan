@@ -14,13 +14,18 @@ module.exports = (...args) => {
   const available = [];
   const result = [];
   while (result.length < len) {
-    if (available.length === 0) {
-      available.push(...Array(arr.length).keys());
+    if (unique) {
+      if (available.length === 0) {
+        available.push(...Array(arr.length).keys());
+      }
+      const index = Math.floor(rng() * available.length);
+      const picked = available.splice(index, 1)[0];
+      const char = arr[picked];
+      result.push(char);
+    } else {
+      const index = Math.floor(rng() * arr.length);
+      result.push(arr[index]);
     }
-    const index = Math.floor(rng() * available.length);
-    const picked = unique ? available.splice(index, 1)[0] : available[index];
-    const char = arr[picked];
-    result.push(char);
   }
   return result;
 };

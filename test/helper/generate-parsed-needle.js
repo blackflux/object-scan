@@ -19,4 +19,7 @@ const generateParsedNeedle = (depth, ctx) => {
   }
   return result;
 };
-module.exports = ({ rng = Math.random, keys = CHARS }) => generateParsedNeedle(0, { index: 0, rng, keys });
+module.exports = ({
+  rng = Math.random,
+  keys = CHARS
+} = {}) => generateParsedNeedle(0, { index: 0, rng, keys });
