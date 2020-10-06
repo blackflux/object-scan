@@ -17,7 +17,7 @@ const log = (...args) => console.log(...args);
 
 for (let count = 1; count <= TEST_COUNT; count += 1) {
   const { rng, haystack, paths } = generateDataset();
-  const useArraySelector = rng() > 0.8;
+  const useArraySelector = rng() > 0.2;
   const needles = generateNeedles({
     rng,
     paths,
