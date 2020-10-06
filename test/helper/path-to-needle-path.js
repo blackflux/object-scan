@@ -94,7 +94,7 @@ module.exports = (...kwargs) => {
   // crop the result length
   result.length = Math.round(result.length * params.lenPercentage);
   // mark single element as "exclude"
-  if (params.exclude === true) {
+  if (params.exclude === true && result.length !== 0) {
     result[Math.floor(rng() * result.length)].exclude = true;
   }
   return result.map((e) => ({

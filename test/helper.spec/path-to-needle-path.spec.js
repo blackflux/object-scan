@@ -42,6 +42,11 @@ describe('Testing path-to-needle-path.js', () => {
     ]);
   });
 
+  it('Testing exclude empty needle', () => {
+    const r = pathToNeedlePath(needle, { exclude: true, lenPercentage: 0 }, rng);
+    expect(r).to.deep.equal([]);
+  });
+
   describe('Testing question mark', () => {
     it('Testing default', () => {
       const r = pathToNeedlePath(needle, { questionMark: 5 }, rng);
