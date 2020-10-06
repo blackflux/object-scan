@@ -1,11 +1,7 @@
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
-const PRNG = require('./helper/prng');
+const generateDataset = require('./helper/generate-dataset');
 const shuffleArray = require('./helper/shuffle-array');
-const haystackGenerator = require('./helper/haystack-generator');
-const generateKeys = require('./helper/generate-keys');
-const generateHaystack = require('./helper/generate-haystack');
-const extractPathsFromHaystack = require('./helper/extract-paths-from-haystack');
 const needlePathsToNeedlesParsed = require('./helper/needle-paths-to-needles-parsed');
 const pathToNeedlePath = require('./helper/path-to-needle-path');
 const parsedNeedleToStringArray = require('./helper/parsed-needle-to-string-array');
@@ -13,13 +9,6 @@ const stripArraySelectorFromPaths = require('./helper/strip-array-selector-from-
 const objectScan = require('../src/index');
 
 const Tester = () => {
-  const generateData = () => {
-    const rng = PRNG(`${Math.random()}`);
-    const keys = generateKeys(Math.ceil(rng() * 30), rng);
-    const haystack = generateHaystack(haystackGenerator({ rng, keys }));
-    const paths = extractPathsFromHaystack(haystack);
-    return { rng, haystack, paths };
-  };
   const mkNeedles = ({
     rng, paths, useArraySelector, modify
   }) => {
@@ -39,7 +28,7 @@ const Tester = () => {
 
   return {
     executeAndTest: ({ useArraySelector, modify }) => {
-      const { rng, haystack, paths } = generateData();
+      const { rng, haystack, paths } = generateDataset();
       const needles = mkNeedles({
         rng, paths, useArraySelector, modify
       });
