@@ -14,6 +14,7 @@ module.exports = {
   needles: [
     '**'
   ],
+  useArraySelector: true,
   logs: [
     {
       cbName: 'breakFn',
