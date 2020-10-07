@@ -1,49 +1,28 @@
 {
   "haystack": {
     "year": {
-      "year": {
-        "p,oud": [
-          0,
-          1
-        ],
-        "welcome": {
-          "p,oud": 2,
-          "get": 3,
-          "year": 4
-        }
-      }
+      "p,oud": 5,
+      "welcome": 4,
+      "get": 2,
+      "year": 3
     }
   },
   "paths": [
     [
       "year",
-      "year",
-      "welcome",
       "year"
     ],
     [
       "year",
-      "year",
-      "welcome",
       "get"
     ],
     [
       "year",
+      "welcome"
+    ],
+    [
       "year",
-      "welcome",
       "p,oud"
-    ],
-    [
-      "year",
-      "year",
-      "p,oud",
-      1
-    ],
-    [
-      "year",
-      "year",
-      "p,oud",
-      0
     ]
   ]
 }
