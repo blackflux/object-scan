@@ -1,4 +1,6 @@
 const expect = require('chai').expect;
+const fs = require('smart-fs');
+const path = require('path');
 const { describe } = require('node-tdd');
 const generateDataset = require('../helper/generate-dataset');
 
@@ -9,7 +11,8 @@ describe('Testing generate-dataset.js', () => {
       rng, haystack, paths
     } = generateDataset(seed);
     expect(rng.seed).to.deep.equal(seed);
-    expect(haystack).to.deep.equal({});
-    expect(paths).to.deep.equal([]);
+    const filename = path.join(`${__filename}__resources`, 'seed-consistency.json');
+    const result = fs.smartWrite(filename, { haystack, paths });
+    expect(result).to.equal(false);
   });
 });
