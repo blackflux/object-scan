@@ -7,6 +7,7 @@ const template = fs.readFileSync(path.join(
   __dirname, 'resources', 'diff-template.mustache'
 )).toString('utf8');
 
+// todo: allow custom sections pass in (for e.g. haystack, needles and result) -> make collapsible
 module.exports = (name, log1, log2) => {
   const str1 = JSON.stringify(log1, null, 2);
   const str2 = JSON.stringify(log2, null, 2);
