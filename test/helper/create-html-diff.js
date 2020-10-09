@@ -7,8 +7,7 @@ const template = fs.readFileSync(path.join(
   __dirname, 'resources', 'diff-template.mustache'
 )).toString('utf8');
 
-// todo: allow custom sections pass in (for e.g. haystack, needles and result) -> make collapsible
-module.exports = (name, log1, log2) => {
+module.exports = (name, log1, log2, meta = null) => {
   const str1 = JSON.stringify(log1, null, 2);
   const str2 = JSON.stringify(log2, null, 2);
 
@@ -23,5 +22,12 @@ module.exports = (name, log1, log2) => {
       'generic-wrapper': template
     }
   });
-  return diffHtml.replace(/\n\s+\n/, '\n');
+  return diffHtml
+    .replace(
+      '</body>',
+      meta === null
+        ? '</body>'
+        : `<pre><code class="prettyprint">\n${JSON.stringify(meta, null, 2)}\n</code></pre>\n</body>`
+    )
+    .replace(/\n\s+\n/, '\n');
 };
