@@ -3971,10 +3971,10 @@ joi-strict@1.2.5:
   dependencies:
     "@hapi/joi" "17.1.1"
 
-js-gardener@2.0.176:
-  version "2.0.176"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.176.tgz#a172e51110fa81dabbafed83acd4c7edc8103783"
-  integrity sha512-61yKYbTwkXIXxKPktPaWgos4wIthp/T7wnFHY99lnrTny5C+/H0X1WzR6Di6UkQHZFtHe+5sjBWjKJZ9fuc6sQ==
+js-gardener@2.0.177:
+  version "2.0.177"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.177.tgz#7037ea4267669f136437db43d1c4dbbd7f68d90f"
+  integrity sha512-I61YtBl8oKgFjtyEwNFyPt6dUGmT7jIRr23V2PAoDPf/DypYrQLTZ3iDNacx8Jfrl1NWVE00O1ueeKAyZ0tIJQ==
   dependencies:
     chalk "4.1.0"
     fancy-log "1.3.3"
@@ -3985,7 +3985,7 @@ js-gardener@2.0.176:
     lodash.get "4.4.2"
     mocha "8.1.3"
     npm-check "5.9.2"
-    robo-config "3.9.0"
+    robo-config "3.10.0"
 
 js-tokens@^3.0.0:
   version "3.0.2"
@@ -4866,6 +4866,11 @@ ms@2.1.2, ms@^2.0.0, ms@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
+
+mustache@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/mustache/-/mustache-4.0.1.tgz#d99beb031701ad433338e7ea65e0489416c854a2"
+  integrity sha512-yL5VE97+OXn4+Er3THSmTdCFCtx5hHWzrolvH+JObZnUYwuaG7XV+Ch4fR2cIrcYI0tFHxS7iyFYl14bW8y2sA==
 
 mute-stream@0.0.5:
   version "0.0.5"
@@ -6585,10 +6590,10 @@ rimraf@^3.0.0:
   dependencies:
     glob "^7.1.3"
 
-robo-config@3.9.0:
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.9.0.tgz#647bca313a925dcac7544bf9029c7f3e2596b6a5"
-  integrity sha512-66jcHYAODIJM+fMBLPobRfuw9ZdTGBvj16g5Bt4EHOQc/bCOqY6Z9RAbGyXrEvdgebxNYJDF6pfPBL2qpwoytg==
+robo-config@3.10.0:
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.10.0.tgz#f5b028ec22f4c73e6a0792356453a0035cbd5707"
+  integrity sha512-G7s2HQlEoOpqmrSLku0SuIpjv3r5c+nZEQ3YMFqc/vJKFOByT2THUiu2VNyFOAT7ne7ZEhd9n4Ld0oDkDVUdZg==
   dependencies:
     app-root-path "3.0.0"
     deepmerge "4.2.2"
@@ -6596,10 +6601,11 @@ robo-config@3.9.0:
     lodash.clonedeep "4.5.0"
     lodash.difference "4.5.0"
     lodash.get "4.4.2"
+    mustache "4.0.1"
     object-deep-contain "1.0.27"
     object-scan "13.1.6"
     object-treeify "1.1.28"
-    smart-fs "1.11.21"
+    smart-fs "1.12.0"
 
 run-async@^0.1.0:
   version "0.1.0"
