@@ -222,6 +222,11 @@ describe('Testing Parser', () => {
         .to.equal('{[!"[1]","[2]"],!"*",!"a",!"b",!"a",!"a",[!"a",!"b"]}');
     });
 
+    it('Correct Across Exclusion Merging', () => {
+      expect(asString('a,!a,a'))
+        .to.equal('{"a",!"a","a"}');
+    });
+
     describe('Testing Exclusion Errors', () => {
       it('Testing double exclusion', () => {
         checkError('!!text', 'Bad Exclusion: !!text, char 1');
