@@ -46,11 +46,6 @@ const markRecursive = (input) => defineProperty(input, RECURSIVE, true);
 const isRecursive = (input) => input[RECURSIVE] === true;
 module.exports.isRecursive = isRecursive;
 
-const RECURSION_POS = Symbol('recursion-pos');
-const setRecursionPos = (input, pos, readonly) => defineProperty(input, RECURSION_POS, pos, readonly);
-const getRecursionPos = (input) => input[RECURSION_POS] || 0;
-module.exports.getRecursionPos = getRecursionPos;
-
 const ENTRIES = Symbol('entries');
 const setEntries = (input, entries) => defineProperty(input, ENTRIES, entries);
 const getEntries = (input) => input[ENTRIES];
@@ -132,9 +127,6 @@ const applyNeedle = (tower, needle, strict, ctx) => {
       markLeaf(cur, !excluded, strict);
       setIndex(cur, ctx.index, strict);
       ctx.index += 1;
-      if (isRecursive(cur)) {
-        setRecursionPos(cur, Object.keys(cur).length, strict);
-      }
     }
   });
 };
