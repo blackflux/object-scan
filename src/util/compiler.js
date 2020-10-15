@@ -2,7 +2,7 @@
 const parser = require('./parser');
 const iterator = require('./iterator');
 const traverser = require('./traverser');
-const { defineProperty, findLast, parseWildcard } = require('./helper');
+const { defineProperty, parseWildcard } = require('./helper');
 
 const LEAF = Symbol('leaf');
 const markLeaf = (input, match, readonly) => defineProperty(input, LEAF, match, readonly);
@@ -57,7 +57,18 @@ const getEntries = (input) => input[ENTRIES];
 module.exports.getEntries = getEntries;
 
 const extractNeedles = (searches) => Array.from(new Set(searches.map((e) => getNeedle(e)).filter((e) => e !== null)));
-module.exports.isLastLeafMatch = (searches) => isMatch(findLast(searches, (s) => isLeaf(s)));
+module.exports.isLastLeafMatch = (searches) => {
+  let maxLeafIndex = Number.MIN_SAFE_INTEGER;
+  let maxLeaf = null;
+  searches.forEach((s) => {
+    const index = getIndex(s);
+    if (index !== null && index > maxLeafIndex) {
+      maxLeafIndex = index;
+      maxLeaf = s;
+    }
+  });
+  return maxLeaf !== null && isMatch(maxLeaf);
+}
 module.exports.matchedBy = (searches) => extractNeedles(searches.filter((e) => isMatch(e)));
 module.exports.excludedBy = (searches) => extractNeedles(searches.filter((e) => !isMatch(e)));
 module.exports.traversedBy = (searches) => Array.from(new Set([].concat(...searches.map((e) => getNeedles(e)))));
