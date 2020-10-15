@@ -68,7 +68,7 @@ module.exports.isLastLeafMatch = (searches) => {
     }
   });
   return maxLeaf !== null && isMatch(maxLeaf);
-}
+};
 module.exports.matchedBy = (searches) => extractNeedles(searches.filter((e) => isMatch(e)));
 module.exports.excludedBy = (searches) => extractNeedles(searches.filter((e) => !isMatch(e)));
 module.exports.traversedBy = (searches) => Array.from(new Set([].concat(...searches.map((e) => getNeedles(e)))));
