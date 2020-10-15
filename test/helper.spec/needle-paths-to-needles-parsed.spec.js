@@ -204,10 +204,12 @@ describe('Testing needle-paths-to-needles-parsed.js', { timeout: 5000 }, () => {
   it('Testing no merge across exclude', () => {
     const needlePathA = pathToNeedlePath(['a', 'b']);
     const needlePathB = pathToNeedlePath(['a', 'b']);
-    const needlePathC = pathToNeedlePath(['a', 'b']);
+    const needlePathC = pathToNeedlePath(['a', 'c']);
+    const needlePathD = pathToNeedlePath(['a', 'b']);
     needlePathB[1].exclude = true;
-    const r = needlePathsToNeedlesParsed([needlePathA, needlePathB, needlePathC]);
-    expect(parsedNeedleToStringArray(r)).to.deep.equal(['a.b', 'a.!b', 'a.b']);
+    needlePathC[1].exclude = true;
+    const r = needlePathsToNeedlesParsed([needlePathA, needlePathB, needlePathC, needlePathD]);
+    expect(parsedNeedleToStringArray(r)).to.deep.equal(['a.b', 'a.!{b,c}', 'a.b']);
   });
 
   it('Testing merge order correctness (simple)', () => {
