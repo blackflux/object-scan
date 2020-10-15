@@ -212,7 +212,7 @@ describe('Testing needle-paths-to-needles-parsed.js', { timeout: 5000 }, () => {
     expect(parsedNeedleToStringArray(r)).to.deep.equal(['a.b', 'a.!{b,c}', 'a.b']);
   });
 
-  it('Testing merge order correctness (simple)', () => {
+  it('Testing merge order (identical path)', () => {
     const needlePathA = pathToNeedlePath(['a', 'b']);
     const needlePathB = pathToNeedlePath(['a', 'c']);
     const needlePathC = pathToNeedlePath(['a', 'b']);
@@ -220,12 +220,12 @@ describe('Testing needle-paths-to-needles-parsed.js', { timeout: 5000 }, () => {
     expect(parsedNeedleToStringArray(r)).to.deep.equal(['a.{b,c}']);
   });
 
-  it('Testing merge order correctness (recursion)', () => {
-    const needlePathA = pathToNeedlePath(['x', 'x']);
-    const needlePathB = pathToNeedlePath(['x', 'a']);
-    const needlePathC = pathToNeedlePath(['x', 'x', 9]);
+  it('Testing merge order (subset path)', () => {
+    const needlePathA = pathToNeedlePath(['a', 'b']);
+    const needlePathB = pathToNeedlePath(['a', 'c']);
+    const needlePathC = pathToNeedlePath(['a', 'b', 9]);
     const r = needlePathsToNeedlesParsed([needlePathA, needlePathB, needlePathC]);
-    expect(parsedNeedleToStringArray(r)).to.deep.equal(['x.{x,x[9],a}']);
+    expect(parsedNeedleToStringArray(r)).to.deep.equal(['a.{b,b[9],c}']);
   });
 
   it('Testing correctness of needle merging', () => {
