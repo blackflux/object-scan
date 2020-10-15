@@ -31,6 +31,11 @@ const addNeedle = (input, needle) => {
 const getNeedles = (input) => [...input[NEEDLES]];
 module.exports.getNeedles = getNeedles;
 
+const INDEX = Symbol('index');
+const setIndex = (input, index, readonly) => defineProperty(input, INDEX, index, readonly);
+const getIndex = (input) => (input[INDEX] === undefined ? null : input[INDEX]);
+module.exports.getIndex = getIndex;
+
 const WILDCARD_REGEX = Symbol('wildcard-regex');
 const setWildcardRegex = (input, wildcard) => defineProperty(input, WILDCARD_REGEX, parseWildcard(wildcard));
 const getWildcardRegex = (input) => input[WILDCARD_REGEX];
@@ -88,7 +93,7 @@ const iterate = (tower, needle, { onAdd, onFin }) => {
   });
 };
 
-const applyNeedle = (tower, needle, strict) => {
+const applyNeedle = (tower, needle, strict, ctx) => {
   iterate(tower, needle, {
     onAdd: (cur, p, next) => {
       addNeedle(cur, needle);
@@ -114,6 +119,8 @@ const applyNeedle = (tower, needle, strict) => {
       }
       setNeedle(cur, needle, strict);
       markLeaf(cur, !excluded, strict);
+      setIndex(cur, ctx.index, strict);
+      ctx.index += 1;
       if (isRecursive(cur)) {
         setRecursionPos(cur, Object.keys(cur).length, strict);
       }
@@ -143,9 +150,10 @@ const finalizeTower = (tower) => {
 
 module.exports.compile = (needles, strict = true) => {
   const tower = {};
+  const ctx = { index: 0 };
   for (let idx = 0; idx < needles.length; idx += 1) {
     const needle = needles[idx];
-    applyNeedle(tower, needle, strict);
+    applyNeedle(tower, needle, strict, ctx);
   }
   finalizeTower(tower);
   return tower;
