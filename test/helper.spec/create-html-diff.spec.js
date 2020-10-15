@@ -7,4 +7,12 @@ describe('Testing create-html-diff.js', () => {
     const r = createHtmlDiff('name', { a: 1 }, { a: 1, b: 2 });
     expect(r.split('\n')).to.deep.equal(fixture('example'));
   });
+
+  it('Testing example with meta', ({ fixture }) => {
+    const r = createHtmlDiff('name', { a: 1 }, { a: 1, b: 2 }, {
+      bool: true,
+      data: { value: 1 }
+    });
+    expect(r.split('\n')).to.deep.equal(fixture('example-with-meta'));
+  });
 });

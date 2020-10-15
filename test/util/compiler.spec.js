@@ -347,6 +347,17 @@ describe('Testing compiler', () => {
     expect(compiler.getWildcardRegex(tower.a.e)).to.deep.equal(/^e$/);
     expect(compiler.getWildcardRegex(tower.a.e.f)).to.deep.equal(/^f$/);
 
+    expect(compiler.getIndex(tower)).to.deep.equal(null);
+    expect(compiler.getIndex(tower.a)).to.deep.equal(null);
+    expect(compiler.getIndex(tower.a.b)).to.deep.equal(null);
+    expect(compiler.getIndex(tower.a.b.d)).to.deep.equal(0);
+    expect(compiler.getIndex(tower.a.b.d.g)).to.deep.equal(4);
+    expect(compiler.getIndex(tower.a.c)).to.deep.equal(null);
+    expect(compiler.getIndex(tower.a.c.d)).to.deep.equal(1);
+    expect(compiler.getIndex(tower.a.c.f)).to.deep.equal(2);
+    expect(compiler.getIndex(tower.a.e)).to.deep.equal(null);
+    expect(compiler.getIndex(tower.a.e.f)).to.deep.equal(3);
+
     expect(compiler.isLastLeafMatch([tower])).to.deep.equal(false);
     expect(compiler.isLastLeafMatch([tower.a])).to.deep.equal(false);
     expect(compiler.isLastLeafMatch([tower.a.b])).to.deep.equal(false);

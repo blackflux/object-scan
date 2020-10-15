@@ -37,4 +37,10 @@ describe('Testing simplify-needle-parsed.js', () => {
     const needle = new Set([[]]);
     expect(simplifyNeedleParsed(needle)).to.deep.equal(new Set([[]]));
   });
+
+  it('Testing correct merge order', () => {
+    const needle = new Set([[1], [2], [1]]);
+    const r = simplifyNeedleParsed(needle);
+    expect([...r]).to.deep.equal([2, 1]);
+  });
 });

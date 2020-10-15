@@ -1,8 +1,6 @@
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
-const {
-  defineProperty, findLast, escape, parseWildcard
-} = require('../../src/util/helper');
+const { defineProperty, escape, parseWildcard } = require('../../src/util/helper');
 
 describe('Testing Helper', () => {
   describe('Testing defineProperty', () => {
@@ -35,21 +33,6 @@ describe('Testing Helper', () => {
       defineProperty(target, key, value + 1, false);
       expect(target[key]).to.equal(value + 1);
       expect(target).to.deep.equal({});
-    });
-  });
-
-  describe('Testing findLast', () => {
-    let input;
-    beforeEach(() => {
-      input = [{ id: 1, value: 1 }, { id: 2, value: 1 }];
-    });
-
-    it('Testing no match is undefined', () => {
-      expect(findLast(input, (e) => e.value === 2)).to.equal(undefined);
-    });
-
-    it('Testing last match returned', () => {
-      expect(findLast(input, (e) => e.value === 1)).to.equal(input[1]);
     });
   });
 

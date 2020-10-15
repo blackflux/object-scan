@@ -1,6 +1,6 @@
 const assert = require('assert');
 const compiler = require('./util/compiler');
-const { findLast, toPath } = require('./util/helper');
+const { toPath } = require('./util/helper');
 
 const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
   if (wildcard === '**') {
@@ -119,7 +119,7 @@ const find = (haystack_, searches_, ctx) => {
       continue;
     }
 
-    if (compiler.isMatch(findLast(searches, (s) => compiler.isLeaf(s)))) {
+    if (compiler.isLastLeafMatch(searches)) {
       stack.push(true, searches, segment, depth);
     }
 

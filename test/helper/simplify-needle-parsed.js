@@ -1,3 +1,10 @@
+const append = (set, value) => {
+  if (set.has(value)) {
+    set.delete(value);
+  }
+  set.add(value);
+};
+
 const simplify = (arg) => {
   if (Array.isArray(arg)) {
     const result = [];
@@ -16,9 +23,9 @@ const simplify = (arg) => {
     arg.forEach((ele_) => {
       const ele = simplify(ele_);
       if (ele instanceof Set) {
-        ele.forEach((e) => result.add(e));
+        ele.forEach((e) => append(result, e));
       } else {
-        result.add(ele);
+        append(result, ele);
       }
     });
     if (result.size === 1) {

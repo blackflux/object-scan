@@ -2,7 +2,7 @@
 const parser = require('./parser');
 const iterator = require('./iterator');
 const traverser = require('./traverser');
-const { defineProperty, findLast, parseWildcard } = require('./helper');
+const { defineProperty, parseWildcard } = require('./helper');
 
 const LEAF = Symbol('leaf');
 const markLeaf = (input, match, readonly) => defineProperty(input, LEAF, match, readonly);
@@ -31,6 +31,11 @@ const addNeedle = (input, needle) => {
 const getNeedles = (input) => [...input[NEEDLES]];
 module.exports.getNeedles = getNeedles;
 
+const INDEX = Symbol('index');
+const setIndex = (input, index, readonly) => defineProperty(input, INDEX, index, readonly);
+const getIndex = (input) => (input[INDEX] === undefined ? null : input[INDEX]);
+module.exports.getIndex = getIndex;
+
 const WILDCARD_REGEX = Symbol('wildcard-regex');
 const setWildcardRegex = (input, wildcard) => defineProperty(input, WILDCARD_REGEX, parseWildcard(wildcard));
 const getWildcardRegex = (input) => input[WILDCARD_REGEX];
@@ -52,7 +57,18 @@ const getEntries = (input) => input[ENTRIES];
 module.exports.getEntries = getEntries;
 
 const extractNeedles = (searches) => Array.from(new Set(searches.map((e) => getNeedle(e)).filter((e) => e !== null)));
-module.exports.isLastLeafMatch = (searches) => isMatch(findLast(searches, (s) => isLeaf(s)));
+module.exports.isLastLeafMatch = (searches) => {
+  let maxLeafIndex = Number.MIN_SAFE_INTEGER;
+  let maxLeaf = null;
+  searches.forEach((s) => {
+    const index = getIndex(s);
+    if (index !== null && index > maxLeafIndex) {
+      maxLeafIndex = index;
+      maxLeaf = s;
+    }
+  });
+  return maxLeaf !== null && isMatch(maxLeaf);
+};
 module.exports.matchedBy = (searches) => extractNeedles(searches.filter((e) => isMatch(e)));
 module.exports.excludedBy = (searches) => extractNeedles(searches.filter((e) => !isMatch(e)));
 module.exports.traversedBy = (searches) => Array.from(new Set([].concat(...searches.map((e) => getNeedles(e)))));
@@ -88,7 +104,7 @@ const iterate = (tower, needle, { onAdd, onFin }) => {
   });
 };
 
-const applyNeedle = (tower, needle, strict) => {
+const applyNeedle = (tower, needle, strict, ctx) => {
   iterate(tower, needle, {
     onAdd: (cur, p, next) => {
       addNeedle(cur, needle);
@@ -114,6 +130,8 @@ const applyNeedle = (tower, needle, strict) => {
       }
       setNeedle(cur, needle, strict);
       markLeaf(cur, !excluded, strict);
+      setIndex(cur, ctx.index, strict);
+      ctx.index += 1;
       if (isRecursive(cur)) {
         setRecursionPos(cur, Object.keys(cur).length, strict);
       }
@@ -143,9 +161,10 @@ const finalizeTower = (tower) => {
 
 module.exports.compile = (needles, strict = true) => {
   const tower = {};
+  const ctx = { index: 0 };
   for (let idx = 0; idx < needles.length; idx += 1) {
     const needle = needles[idx];
-    applyNeedle(tower, needle, strict);
+    applyNeedle(tower, needle, strict, ctx);
   }
   finalizeTower(tower);
   return tower;

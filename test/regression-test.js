@@ -47,7 +47,12 @@ for (let count = 1; count <= TEST_COUNT; count += 1) {
   });
   if (!isEqual(signatureReleased, signatureLocal)) {
     log(`Mismatch for seed: ${rng.seed}`);
-    const diff = createHtmlDiff(rng.seed, signatureReleased, signatureLocal);
+    const diff = createHtmlDiff(rng.seed, signatureReleased, signatureLocal, {
+      haystack,
+      needles,
+      useArraySelector,
+      seed: rng.seed
+    });
     fs.smartWrite(path.join(__dirname, '..', 'debug', `${rng.seed}.html`), diff.split('\n'));
   }
 

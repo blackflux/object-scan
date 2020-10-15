@@ -1,16 +1,6 @@
 module.exports.defineProperty = (target, k, v, readonly = true) => Object
   .defineProperty(target, k, { value: v, writable: !readonly });
 
-module.exports.findLast = (array, fn) => {
-  for (let idx = array.length - 1; idx >= 0; idx -= 1) {
-    const item = array[idx];
-    if (fn(item)) {
-      return item;
-    }
-  }
-  return undefined;
-};
-
 const specialChars = /[?!,.*[\]{}\\]/g;
 const escape = (input) => input.replace(specialChars, '\\$&');
 module.exports.escape = escape;
