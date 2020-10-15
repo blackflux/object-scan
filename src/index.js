@@ -119,7 +119,7 @@ const find = (haystack_, searches_, ctx) => {
       continue;
     }
 
-    if (compiler.isMatch(findLast(searches, (s) => compiler.isLeaf(s)))) {
+    if (compiler.isLastLeafMatch(searches)) {
       stack.push(true, searches, segment, depth);
     }
 
