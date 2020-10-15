@@ -3,8 +3,11 @@ const { describe } = require('node-tdd');
 const pathToNeedlePath = require('../helper/path-to-needle-path');
 const needlePathsToNeedlesParsed = require('../helper/needle-paths-to-needles-parsed');
 const parsedNeedleToStringArray = require('../helper/parsed-needle-to-string-array');
+const generateDataset = require('../helper/generate-dataset');
+const callSignature = require('../helper/call-signature');
+const objectScan = require('../../src/index');
 
-describe('Testing needle-paths-to-needles-parsed.js', () => {
+describe('Testing needle-paths-to-needles-parsed.js', { timeout: 5000 }, () => {
   it('Testing single', () => {
     const needlePath = pathToNeedlePath(['name', 0, 'value', 16, 'property']);
     const r = needlePathsToNeedlesParsed([needlePath]);
@@ -196,5 +199,61 @@ describe('Testing needle-paths-to-needles-parsed.js', () => {
       'a.b.{c,k,l}.d.e',
       '{f.g,a.b}.h.i.j'
     ]);
+  });
+
+  it('Testing no merge across exclude', () => {
+    const needlePathA = pathToNeedlePath(['a', 'b']);
+    const needlePathB = pathToNeedlePath(['a', 'b']);
+    const needlePathC = pathToNeedlePath(['a', 'c']);
+    const needlePathD = pathToNeedlePath(['a', 'b']);
+    needlePathB[1].exclude = true;
+    needlePathC[1].exclude = true;
+    const r = needlePathsToNeedlesParsed([needlePathA, needlePathB, needlePathC, needlePathD]);
+    expect(parsedNeedleToStringArray(r)).to.deep.equal(['a.b', 'a.!{b,c}', 'a.b']);
+  });
+
+  it('Testing merge order (identical path)', () => {
+    const needlePathA = pathToNeedlePath(['a', 'b']);
+    const needlePathB = pathToNeedlePath(['a', 'c']);
+    const needlePathC = pathToNeedlePath(['a', 'b']);
+    const r = needlePathsToNeedlesParsed([needlePathA, needlePathB, needlePathC]);
+    expect(parsedNeedleToStringArray(r)).to.deep.equal(['a.{b,c}']);
+  });
+
+  it('Testing merge order (subset path)', () => {
+    const needlePathA = pathToNeedlePath(['a', 'b']);
+    const needlePathB = pathToNeedlePath(['a', 'c']);
+    const needlePathC = pathToNeedlePath(['a', 'b', 9]);
+    const r = needlePathsToNeedlesParsed([needlePathA, needlePathB, needlePathC]);
+    expect(parsedNeedleToStringArray(r)).to.deep.equal(['a.{b,b[9],c}']);
+  });
+
+  it('Testing correctness of needle merging', () => {
+    for (let idx = 0; idx < 50; idx += 1) {
+      const { rng, paths, haystack } = generateDataset();
+      const needlePaths = paths.map((p) => pathToNeedlePath(p, {
+        lenPercentage: rng() > 0.1 ? rng() : 1,
+        questionMark: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
+        partialStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
+        singleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
+        doubleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
+        exclude: rng() > 0.9,
+        shuffle: rng() > 0.9
+      }, rng));
+
+      const needles1 = needlePaths.reduce((p, c) => {
+        const parsed = needlePathsToNeedlesParsed([c]);
+        p.push(parsedNeedleToStringArray(parsed)[0]);
+        return p;
+      }, []);
+
+      const needlesParsed2 = needlePathsToNeedlesParsed(needlePaths);
+      const needles2 = parsedNeedleToStringArray(needlesParsed2);
+
+      const { result: result1 } = callSignature({ objectScan, haystack, needles: needles1 });
+      const { result: result2 } = callSignature({ objectScan, haystack, needles: needles2 });
+
+      expect(result1, `Seed: ${rng.seed}`).to.deep.equal(result2);
+    }
   });
 });

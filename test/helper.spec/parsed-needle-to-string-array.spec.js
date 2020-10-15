@@ -2,11 +2,7 @@ const expect = require('chai').expect;
 const { describe } = require('node-tdd');
 const generateParsedNeedle = require('../helper/generate-parsed-needle');
 const parsedNeedleToStringArray = require('../helper/parsed-needle-to-string-array');
-const generateDataset = require('../helper/generate-dataset');
-const pathToNeedlePath = require('../helper/path-to-needle-path');
-const needlePathsToNeedlesParsed = require('../helper/needle-paths-to-needles-parsed');
 const PRNG = require('../helper/prng');
-const compiler = require('../../src/util/compiler');
 
 describe('Testing parsed-needle-to-string-array.js', () => {
   it('Testing example', () => {
@@ -50,33 +46,5 @@ describe('Testing parsed-needle-to-string-array.js', () => {
     expect(parsedNeedleToStringArray(r)).to.deep.equal([
       'name[0].value.!{[16],[17],str}.property'
     ]);
-  });
-
-  it('Testing correctness of needle merging', () => {
-    for (let idx = 0; idx < 50; idx += 1) {
-      const { rng, paths } = generateDataset();
-      const needlePaths = paths.map((p) => pathToNeedlePath(p, {
-        lenPercentage: rng() > 0.1 ? rng() : 1,
-        questionMark: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
-        partialStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
-        singleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
-        doubleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
-        exclude: rng() > 0.9,
-        shuffle: rng() > 0.9
-      }));
-
-      const needles1 = needlePaths.reduce((p, c) => {
-        const parsed = needlePathsToNeedlesParsed([c]);
-        p.push(parsedNeedleToStringArray(parsed)[0]);
-        return p;
-      }, []);
-      const compiled1 = compiler.compile(needles1, false);
-
-      const needlesParsed2 = needlePathsToNeedlesParsed(needlePaths);
-      const needles2 = parsedNeedleToStringArray(needlesParsed2);
-      const compiled2 = compiler.compile(needles2, false);
-
-      expect(compiled1).to.deep.equal(compiled2);
-    }
   });
 });

@@ -1,6 +1,6 @@
 const assert = require('assert');
 const compiler = require('./util/compiler');
-const { findLast, toPath } = require('./util/helper');
+const { toPath } = require('./util/helper');
 
 const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
   if (wildcard === '**') {
@@ -119,7 +119,7 @@ const find = (haystack_, searches_, ctx) => {
       continue;
     }
 
-    if (compiler.isMatch(findLast(searches, (s) => compiler.isLeaf(s)))) {
+    if (compiler.isLastLeafMatch(searches)) {
       stack.push(true, searches, segment, depth);
     }
 
@@ -136,8 +136,7 @@ const find = (haystack_, searches_, ctx) => {
         const searchesOut = [];
         for (let sIdx = 0, sLen = searches.length; sIdx < sLen; sIdx += 1) {
           const search = searches[sIdx];
-          const recursionPos = compiler.isRecursive(search) ? compiler.getRecursionPos(search) : null;
-          if (recursionPos === 0) {
+          if (compiler.isRecursive(search)) {
             searchesOut.push(search);
           }
           const entries = compiler.getEntries(search);
@@ -145,9 +144,6 @@ const find = (haystack_, searches_, ctx) => {
             const entry = entries[eIdx];
             if (isWildcardMatch(entry[0], key, isArray, entry[1])) {
               searchesOut.push(entry[1]);
-            }
-            if (eIdx + 1 === recursionPos) {
-              searchesOut.push(search);
             }
           }
         }

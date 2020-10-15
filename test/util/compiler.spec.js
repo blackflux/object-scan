@@ -67,28 +67,6 @@ describe('Testing compiler', () => {
     });
   });
 
-  it('Testing recursion position', () => {
-    const input = ['!**.a', '**'];
-    const tower = compiler.compile(input);
-    expect(tower).to.deep.equal({ '**': { a: {} }, a: {} });
-    expect(compiler.isRecursive(tower)).to.equal(false);
-    expect(compiler.isRecursive(tower['**'])).to.equal(true);
-    expect(compiler.getRecursionPos(tower['**'])).to.equal(1);
-    expect(compiler.isRecursive(tower['**'].a)).to.equal(false);
-    expect(compiler.isRecursive(tower.a)).to.equal(false);
-  });
-
-  it('Testing recursion position for strict=false', () => {
-    const input = ['**', '**.b', '!**'];
-    const tower = compiler.compile(input, false);
-    expect(tower).to.deep.equal({ '**': { b: {} }, b: {} });
-    expect(compiler.isRecursive(tower)).to.equal(false);
-    expect(compiler.isRecursive(tower['**'])).to.equal(true);
-    expect(compiler.getRecursionPos(tower['**'])).to.equal(1);
-    expect(compiler.isRecursive(tower['**'].b)).to.equal(false);
-    expect(compiler.isRecursive(tower.b)).to.equal(false);
-  });
-
   it('Testing similar paths', () => {
     const input = ['a.b.c.d.e', 'a.b.c.d.f'];
     const tower = compiler.compile(input);
@@ -346,6 +324,17 @@ describe('Testing compiler', () => {
     expect(compiler.getWildcardRegex(tower.a.c.f)).to.deep.equal(/^f$/);
     expect(compiler.getWildcardRegex(tower.a.e)).to.deep.equal(/^e$/);
     expect(compiler.getWildcardRegex(tower.a.e.f)).to.deep.equal(/^f$/);
+
+    expect(compiler.getIndex(tower)).to.deep.equal(null);
+    expect(compiler.getIndex(tower.a)).to.deep.equal(null);
+    expect(compiler.getIndex(tower.a.b)).to.deep.equal(null);
+    expect(compiler.getIndex(tower.a.b.d)).to.deep.equal(0);
+    expect(compiler.getIndex(tower.a.b.d.g)).to.deep.equal(4);
+    expect(compiler.getIndex(tower.a.c)).to.deep.equal(null);
+    expect(compiler.getIndex(tower.a.c.d)).to.deep.equal(1);
+    expect(compiler.getIndex(tower.a.c.f)).to.deep.equal(2);
+    expect(compiler.getIndex(tower.a.e)).to.deep.equal(null);
+    expect(compiler.getIndex(tower.a.e.f)).to.deep.equal(3);
 
     expect(compiler.isLastLeafMatch([tower])).to.deep.equal(false);
     expect(compiler.isLastLeafMatch([tower.a])).to.deep.equal(false);

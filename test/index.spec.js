@@ -230,6 +230,18 @@ describe('Testing Find', () => {
       });
     });
 
+    describe('Testing Cross Exclusion Merging', () => {
+      const fixture = [{ a: 1 }];
+
+      it('Exclusion basic one', () => {
+        execute(fixture, ['[*]', '[0].a', '[0].!?', '[*].a'], ['[0].a', '[0]']);
+      });
+
+      it('Inclusion basic two', () => {
+        execute(fixture, ['[0].a', '[*]', '[0].!?', '[*].a'], ['[0].a', '[0]']);
+      });
+    });
+
     describe('Testing Misc Exclusions', () => {
       const fixture1 = { foo: '', bar: '', baz: '' };
       const fixture2 = {

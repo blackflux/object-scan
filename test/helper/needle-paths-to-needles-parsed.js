@@ -90,13 +90,28 @@ const applyDiff = (diff) => {
   return true;
 };
 
+const isExcludeRec = (p) => {
+  if (typeof p === 'string') {
+    return /^(\[?)!/.test(p);
+  }
+  if (Array.isArray(p)) {
+    return p.some((e) => isExcludeRec(e));
+  }
+  assert(p instanceof Set);
+  return [...p].some((e) => isExcludeRec(e));
+};
+
 const findBestDiff = (result) => {
   let diff = null;
   for (let i = 0; i < result.length; i += 1) {
     const a = result[i];
     if (Array.isArray(a)) {
+      const isExclude = isExcludeRec(a);
       for (let j = i + 1; j < result.length; j += 1) {
         const b = result[j];
+        if (isExclude !== isExcludeRec(b)) {
+          break;
+        }
         if (Array.isArray(b)) {
           const diffNew = computeDiff(a, b);
           if (diff === null || diffNew.weight < diff.weight) {
