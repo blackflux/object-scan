@@ -22,7 +22,7 @@
       "type": "breakFn",
       "key": "a.b",
       "isMatch": true,
-      "matchedBy": ["a.**.b"],
+      "matchedBy": ["!a.b", "a.b", "!a.**.b", "a.**.b"],
       "excludedBy": [],
       "traversedBy": ["!a.b", "a.b", "!a.**.b", "a.**.b"]
     },
@@ -46,7 +46,7 @@
       "type": "filterFn",
       "key": "a.b",
       "isMatch": true,
-      "matchedBy": ["a.**.b"],
+      "matchedBy": ["!a.b", "a.b", "!a.**.b", "a.**.b"],
       "excludedBy": [],
       "traversedBy": ["!a.b", "a.b", "!a.**.b", "a.**.b"]
     }
