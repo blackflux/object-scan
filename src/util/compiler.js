@@ -19,21 +19,49 @@ module.exports.hasMatches = hasMatches;
 const LEAF_NEEDLES = Symbol('leaf-needles');
 const addLeafNeedle = (input, needle) => {
   if (input[LEAF_NEEDLES] === undefined) {
-    defineProperty(input, LEAF_NEEDLES, new Set());
+    defineProperty(input, LEAF_NEEDLES, []);
   }
-  input[LEAF_NEEDLES].add(needle);
+  if (!input[LEAF_NEEDLES].includes(needle)) {
+    input[LEAF_NEEDLES].push(needle);
+  }
 };
-const getLeafNeedles = (input) => (input[LEAF_NEEDLES] === undefined ? [] : [...input[LEAF_NEEDLES]]);
+const getLeafNeedles = (input) => input[LEAF_NEEDLES] || [];
 module.exports.getLeafNeedles = getLeafNeedles;
+
+const LEAF_NEEDLES_EXCLUDE = Symbol('leaf-needles-exclude');
+const addLeafNeedleExclude = (input, needle) => {
+  if (input[LEAF_NEEDLES_EXCLUDE] === undefined) {
+    defineProperty(input, LEAF_NEEDLES_EXCLUDE, []);
+  }
+  if (!input[LEAF_NEEDLES_EXCLUDE].includes(needle)) {
+    input[LEAF_NEEDLES_EXCLUDE].push(needle);
+  }
+};
+const getLeafNeedlesExclude = (input) => input[LEAF_NEEDLES_EXCLUDE] || [];
+module.exports.getLeafNeedlesExclude = getLeafNeedlesExclude;
+
+const LEAF_NEEDLES_MATCH = Symbol('leaf-needles-match');
+const addLeafNeedleMatch = (input, needle) => {
+  if (input[LEAF_NEEDLES_MATCH] === undefined) {
+    defineProperty(input, LEAF_NEEDLES_MATCH, []);
+  }
+  if (!input[LEAF_NEEDLES_MATCH].includes(needle)) {
+    input[LEAF_NEEDLES_MATCH].push(needle);
+  }
+};
+const getLeafNeedlesMatch = (input) => input[LEAF_NEEDLES_MATCH] || [];
+module.exports.getLeafNeedlesMatch = getLeafNeedlesMatch;
 
 const NEEDLES = Symbol('needles');
 const addNeedle = (input, needle) => {
   if (input[NEEDLES] === undefined) {
-    defineProperty(input, NEEDLES, new Set());
+    defineProperty(input, NEEDLES, []);
   }
-  input[NEEDLES].add(needle);
+  if (!input[NEEDLES].includes(needle)) {
+    input[NEEDLES].push(needle);
+  }
 };
-const getNeedles = (input) => [...input[NEEDLES]];
+const getNeedles = (input) => input[NEEDLES];
 module.exports.getNeedles = getNeedles;
 
 const INDEX = Symbol('index');
@@ -56,13 +84,13 @@ const setEntries = (input, entries) => defineProperty(input, ENTRIES, entries);
 const getEntries = (input) => input[ENTRIES];
 module.exports.getEntries = getEntries;
 
-const extractNeedles = (searches) => {
-  const leafNeedles = new Set();
-  searches.forEach((s) => {
-    getLeafNeedles(s).forEach((n) => leafNeedles.add(n));
-  });
-  return [...leafNeedles];
-};
+module.exports.excludedBy = (searches) => Array
+  .from(new Set([].concat(...searches.map((e) => getLeafNeedlesExclude(e)))));
+module.exports.matchedBy = (searches) => Array
+  .from(new Set([].concat(...searches.map((e) => getLeafNeedlesMatch(e)))));
+module.exports.traversedBy = (searches) => Array
+  .from(new Set([].concat(...searches.map((e) => getNeedles(e)))));
+
 module.exports.isLastLeafMatch = (searches) => {
   let maxLeafIndex = Number.MIN_SAFE_INTEGER;
   let maxLeaf = null;
@@ -75,9 +103,6 @@ module.exports.isLastLeafMatch = (searches) => {
   });
   return maxLeaf !== null && isMatch(maxLeaf);
 };
-module.exports.matchedBy = (searches) => extractNeedles(searches.filter((e) => isMatch(e)));
-module.exports.excludedBy = (searches) => extractNeedles(searches.filter((e) => !isMatch(e)));
-module.exports.traversedBy = (searches) => Array.from(new Set([].concat(...searches.map((e) => getNeedles(e)))));
 
 const iterate = (tower, needle, { onAdd, onFin }) => {
   const tree = [parser.parse(needle)];
@@ -135,6 +160,11 @@ const applyNeedle = (tower, needle, strict, ctx) => {
         throw new Error(`Redundant Needle Target: "${cur[LEAF_NEEDLES].values().next().value}" vs "${needle}"`);
       }
       addLeafNeedle(cur, needle, strict);
+      if (excluded) {
+        addLeafNeedleExclude(cur, needle);
+      } else {
+        addLeafNeedleMatch(cur, needle);
+      }
       markLeaf(cur, !excluded, strict);
       setIndex(cur, ctx.index, strict);
       ctx.index += 1;
