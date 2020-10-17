@@ -22,8 +22,8 @@
       "type": "breakFn",
       "key": "a.b",
       "isMatch": true,
-      "matchedBy": ["!a.b", "a.b", "!a.**.b", "a.**.b"],
-      "excludedBy": [],
+      "matchedBy": ["a.b", "a.**.b"],
+      "excludedBy": ["!a.b", "!a.**.b"],
       "traversedBy": ["!a.b", "a.b", "!a.**.b", "a.**.b"]
     },
     {
@@ -46,8 +46,8 @@
       "type": "filterFn",
       "key": "a.b",
       "isMatch": true,
-      "matchedBy": ["!a.b", "a.b", "!a.**.b", "a.**.b"],
-      "excludedBy": [],
+      "matchedBy": ["a.b", "a.**.b"],
+      "excludedBy": ["!a.b", "!a.**.b"],
       "traversedBy": ["!a.b", "a.b", "!a.**.b", "a.**.b"]
     }
   ],
