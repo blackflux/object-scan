@@ -179,7 +179,7 @@ const finalizeTower = (tower) => {
   traverser.traverse(tower, (type, obj, depth) => {
     if (type === 'ENTER') {
       if (lastDepth < depth) {
-        matches[depth] = false;
+        matches.splice(depth);
       }
     } else {
       if (matches[depth + 1] === true || isMatch(obj)) {
