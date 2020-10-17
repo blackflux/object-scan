@@ -16,10 +16,15 @@ const setHasMatches = (input) => defineProperty(input, HAS_MATCHES, true);
 const hasMatches = (input) => input[HAS_MATCHES] === true;
 module.exports.hasMatches = hasMatches;
 
-const NEEDLE = Symbol('needle');
-const setNeedle = (input, needle, readonly) => defineProperty(input, NEEDLE, needle, readonly);
-const getNeedle = (input) => (input[NEEDLE] === undefined ? null : input[NEEDLE]);
-module.exports.getNeedle = getNeedle;
+const LEAF_NEEDLES = Symbol('leaf-needles');
+const addLeafNeedle = (input, needle) => {
+  if (input[LEAF_NEEDLES] === undefined) {
+    defineProperty(input, LEAF_NEEDLES, new Set());
+  }
+  input[LEAF_NEEDLES].add(needle);
+};
+const getLeafNeedles = (input) => (input[LEAF_NEEDLES] === undefined ? [] : [...input[LEAF_NEEDLES]]);
+module.exports.getLeafNeedles = getLeafNeedles;
 
 const NEEDLES = Symbol('needles');
 const addNeedle = (input, needle) => {
@@ -51,7 +56,13 @@ const setEntries = (input, entries) => defineProperty(input, ENTRIES, entries);
 const getEntries = (input) => input[ENTRIES];
 module.exports.getEntries = getEntries;
 
-const extractNeedles = (searches) => Array.from(new Set(searches.map((e) => getNeedle(e)).filter((e) => e !== null)));
+const extractNeedles = (searches) => {
+  const leafNeedles = new Set();
+  searches.forEach((s) => {
+    getLeafNeedles(s).forEach((n) => leafNeedles.add(n));
+  });
+  return [...leafNeedles];
+};
 module.exports.isLastLeafMatch = (searches) => {
   let maxLeafIndex = Number.MIN_SAFE_INTEGER;
   let maxLeaf = null;
@@ -120,10 +131,10 @@ const applyNeedle = (tower, needle, strict, ctx) => {
     },
     onFin: (cur, excluded) => {
       addNeedle(cur, needle);
-      if (strict && cur[NEEDLE] !== undefined) {
-        throw new Error(`Redundant Needle Target: "${cur[NEEDLE]}" vs "${needle}"`);
+      if (strict && cur[LEAF_NEEDLES] !== undefined) {
+        throw new Error(`Redundant Needle Target: "${cur[LEAF_NEEDLES].values().next().value}" vs "${needle}"`);
       }
-      setNeedle(cur, needle, strict);
+      addLeafNeedle(cur, needle, strict);
       markLeaf(cur, !excluded, strict);
       setIndex(cur, ctx.index, strict);
       ctx.index += 1;

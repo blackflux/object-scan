@@ -303,16 +303,16 @@ describe('Testing compiler', () => {
     expect(compiler.getNeedles(tower.a.e)).to.deep.equal(['a.{c,e}.f']);
     expect(compiler.getNeedles(tower.a.e.f)).to.deep.equal(['a.{c,e}.f']);
 
-    expect(compiler.getNeedle(tower)).to.deep.equal(null);
-    expect(compiler.getNeedle(tower.a)).to.deep.equal(null);
-    expect(compiler.getNeedle(tower.a.b)).to.deep.equal(null);
-    expect(compiler.getNeedle(tower.a.b.d)).to.deep.equal('a.{b,c}.d');
-    expect(compiler.getNeedle(tower.a.b.d.g)).to.deep.equal('!a.b.d.g');
-    expect(compiler.getNeedle(tower.a.c)).to.deep.equal(null);
-    expect(compiler.getNeedle(tower.a.c.d)).to.deep.equal('a.{b,c}.d');
-    expect(compiler.getNeedle(tower.a.c.f)).to.deep.equal('a.{c,e}.f');
-    expect(compiler.getNeedle(tower.a.e)).to.deep.equal(null);
-    expect(compiler.getNeedle(tower.a.e.f)).to.deep.equal('a.{c,e}.f');
+    expect(compiler.getLeafNeedles(tower)).to.deep.equal([]);
+    expect(compiler.getLeafNeedles(tower.a)).to.deep.equal([]);
+    expect(compiler.getLeafNeedles(tower.a.b)).to.deep.equal([]);
+    expect(compiler.getLeafNeedles(tower.a.b.d)).to.deep.equal(['a.{b,c}.d']);
+    expect(compiler.getLeafNeedles(tower.a.b.d.g)).to.deep.equal(['!a.b.d.g']);
+    expect(compiler.getLeafNeedles(tower.a.c)).to.deep.equal([]);
+    expect(compiler.getLeafNeedles(tower.a.c.d)).to.deep.equal(['a.{b,c}.d']);
+    expect(compiler.getLeafNeedles(tower.a.c.f)).to.deep.equal(['a.{c,e}.f']);
+    expect(compiler.getLeafNeedles(tower.a.e)).to.deep.equal([]);
+    expect(compiler.getLeafNeedles(tower.a.e.f)).to.deep.equal(['a.{c,e}.f']);
 
     expect(compiler.getWildcardRegex(tower)).to.deep.equal(undefined);
     expect(compiler.getWildcardRegex(tower.a)).to.deep.equal(/^a$/);
