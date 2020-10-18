@@ -138,7 +138,13 @@ const applyNeedle = (tower, needle, strict, ctx) => {
           if (isRec || isRegexRec) {
             markRecursive(child);
           }
-          setWildcardRegex(child, isRegexRec ? segment.slice(2) : segment);
+          if (isRegexRec) {
+            setWildcardRegex(child, segment.slice(2));
+          } else if (segment.startsWith('[') && segment.endsWith(']')) {
+            setWildcardRegex(child, segment.slice(1, -1));
+          } else {
+            setWildcardRegex(child, segment);
+          }
         }
         next(cur[segment]);
       }

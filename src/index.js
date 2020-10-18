@@ -2,7 +2,7 @@ const assert = require('assert');
 const compiler = require('./util/compiler');
 const { toPath } = require('./util/helper');
 
-const testWildcard = (key, isArray, search) => (isArray ? `[${key}]` : key)
+const testWildcard = (key, isArray, search) => (isArray ? String(key) : key)
   .match(compiler.getWildcardRegex(search));
 const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
   if (wildcard === '**') {
@@ -12,8 +12,7 @@ const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
     return true;
   }
   if (
-    isArray
-    && !(wildcard.startsWith('[') && wildcard.endsWith(']'))
+    (isArray !== (wildcard.startsWith('[') && wildcard.endsWith(']')))
     && !(wildcard.startsWith('**(') && wildcard.endsWith(')'))
   ) {
     return false;
