@@ -88,7 +88,7 @@ module.exports.isLastLeafMatch = (searches) => {
 const iterate = (tower, needle, { onAdd, onFin }) => {
   const tree = [parser.parse(needle)];
   const stack = [[[tower, null]]];
-  const pathSegments = [];
+  const segments = [];
   let excluded = false;
 
   iterator.iterate(tree, (type, p) => {
@@ -97,7 +97,7 @@ const iterate = (tower, needle, { onAdd, onFin }) => {
         excluded = false;
       }
       stack.pop();
-      pathSegments.pop();
+      segments.pop();
     } else if (type === 'ADD') {
       if (p.isExcluded()) {
         if (excluded) {
@@ -106,11 +106,11 @@ const iterate = (tower, needle, { onAdd, onFin }) => {
         excluded = true;
       }
       const toAdd = [];
-      const parentPathSegment = pathSegments[pathSegments.length - 1];
+      const segmentParent = segments[segments.length - 1];
       stack[stack.length - 1]
-        .forEach(([cur]) => onAdd(cur, p, parentPathSegment, (e) => toAdd.push([e, cur])));
+        .forEach(([cur]) => onAdd(cur, p, segmentParent, (e) => toAdd.push([e, cur])));
       stack.push(toAdd);
-      pathSegments.push(p);
+      segments.push(p);
     } else {
       stack[stack.length - 1]
         .filter(([cur]) => cur !== tower)
@@ -121,33 +121,33 @@ const iterate = (tower, needle, { onAdd, onFin }) => {
 
 const applyNeedle = (tower, needle, strict, ctx) => {
   iterate(tower, needle, {
-    onAdd: (cur, pathSegment, parentPathSegment, next) => {
+    onAdd: (cur, segment, segmentParent, next) => {
       addNeedle(cur, needle);
-      const isRec = String(pathSegment) === '**';
-      const isParentRec = String(parentPathSegment) === '**';
+      const isRec = String(segment) === '**';
+      const isParentRec = String(segmentParent) === '**';
       const recChain = isRec && isParentRec;
       if (recChain && strict) {
         throw new Error(`Redundant Recursion: "${needle}"`);
       }
       if (!recChain) {
-        if (cur[pathSegment] === undefined) {
+        if (cur[segment] === undefined) {
           const child = {};
           // eslint-disable-next-line no-param-reassign
-          cur[pathSegment] = child;
+          cur[segment] = child;
           if (isRec) {
             markRecursive(child);
           }
-          setWildcardRegex(child, pathSegment);
+          setWildcardRegex(child, segment);
         }
-        next(cur[pathSegment]);
+        next(cur[segment]);
       }
       if (isRec) {
         next(cur);
       }
     },
-    onFin: (cur, pathSegment, parent, excluded) => {
+    onFin: (cur, segment, parent, excluded) => {
       if (strict) {
-        const pStr = String(pathSegment);
+        const pStr = String(segment);
         if (pStr === '**') {
           const unnecessary = Object.keys(parent).filter((k) => !['**', ''].includes(k));
           if (unnecessary.length !== 0) {
