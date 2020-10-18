@@ -5,8 +5,16 @@ const specialChars = /[?!,.*[\](){}\\]/g;
 const escape = (input) => input.replace(specialChars, '\\$&');
 module.exports.escape = escape;
 
+const fullRegex = new RegExp([
+  /^/.source,
+  /(?=(?:\[.*]|\(.*\))$)/.source,
+  /\[?\((.*)\)]?/.source,
+  /$/.source
+].join(''), 'g');
+
 module.exports.parseWildcard = (input) => {
-  const match = /^(?:\[(?=.*]$))?\((?<match>.*)\)]?$/g.exec(input);
+  fullRegex.lastIndex = 0;
+  const match = fullRegex.exec(input);
   if (match) {
     const regexStr = match[1];
     try {
