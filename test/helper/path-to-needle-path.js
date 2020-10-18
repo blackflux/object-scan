@@ -1,5 +1,5 @@
 const Joi = require('joi-strict');
-const { escape } = require('../../src/util/helper');
+const { escape, escapeRegex } = require('../../src/util/helper');
 const sampleArray = require('./sample-array');
 const shuffleArray = require('./shuffle-array');
 
@@ -13,6 +13,7 @@ module.exports = (...kwargs) => {
     partialStar: 0,
     singleStar: 0,
     doubleStar: 0,
+    regex: 0,
     ...(kwargs[1] || {})
   };
   const rng = kwargs[2] || Math.random;
@@ -25,7 +26,8 @@ module.exports = (...kwargs) => {
     questionMark: Joi.number().integer().min(0),
     partialStar: Joi.number().integer().min(0),
     singleStar: Joi.number().integer().min(0),
-    doubleStar: Joi.number().integer().min(0)
+    doubleStar: Joi.number().integer().min(0),
+    regex: Joi.number().integer().min(0)
   }));
   Joi.assert(rng, Joi.function());
 
@@ -93,6 +95,23 @@ module.exports = (...kwargs) => {
       });
       posPrev = pos;
     }
+  }
+  // generate regex
+  if (params.regex !== 0) {
+    generateIndices(params.regex).forEach(([pos]) => {
+      result[pos].value = ['(', ...result[pos].value.map((char) => {
+        switch (char) {
+          case '?':
+            return '.';
+          case '*':
+            return '.*';
+          case '**':
+            return '.*';
+          default:
+            return char.length === 1 ? escapeRegex(char) : char;
+        }
+      }), ')'];
+    });
   }
   // crop the result length
   result.length = Math.round(result.length * params.lenPercentage);

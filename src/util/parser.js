@@ -76,8 +76,8 @@ const Result = (input) => {
         }
         const ele = input.slice(cursor, idx);
         if (inArray && !(
-          /^[?*\d]+$/g.test(ele)
-          || /^\(.*\)$/g.test(ele)
+          /^[?*\d]+$/.test(ele)
+          || (ele.startsWith('(') && ele.endsWith(')'))
         )) {
           throwError('Bad Array Selector', input, { selector: ele });
         }
@@ -185,9 +185,7 @@ module.exports.parse = (input) => {
           break;
       }
     }
-    if (bracketDepth === 0) {
-      escaped = char === '\\' ? !escaped : false;
-    }
+    escaped = char === '\\' ? !escaped : false;
   }
 
   if (bracketDepth !== 0) {

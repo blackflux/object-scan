@@ -5,6 +5,9 @@ const specialChars = /[?!,.*[\](){}\\]/g;
 const escape = (input) => input.replace(specialChars, '\\$&');
 module.exports.escape = escape;
 
+const escapeRegex = (char) => char.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+module.exports.escapeRegex = escapeRegex;
+
 const fullRegex = new RegExp([
   /^/.source,
   /(?=(?:\[.*]|\(.*\))$)/.source,
@@ -33,7 +36,7 @@ module.exports.parseWildcard = (input) => {
     } else if (!escaped && char === '?') {
       regex += '.';
     } else {
-      regex += char.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+      regex += escapeRegex(char);
       escaped = false;
     }
   }

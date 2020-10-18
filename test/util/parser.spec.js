@@ -114,6 +114,10 @@ describe('Testing Parser', () => {
     it('Testing Not Previously Opened', () => {
       checkError(')', 'Unexpected Parentheses: ), char 0');
     });
+
+    it('Testing Escaped Inside', () => {
+      expect(asString('(\\()')).to.deep.equal('"(\\()"');
+    });
   });
 
   describe('Invalid Escape', () => {
