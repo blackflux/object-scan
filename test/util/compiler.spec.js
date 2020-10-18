@@ -53,6 +53,11 @@ describe('Testing compiler', () => {
         .to.throw('Redundant Needle Target: "a.!b.*" vs "a.b.*"');
     });
 
+    it('Needle Target Invalidated', () => {
+      expect(() => compiler.compile(['a.b', 'a.!**']))
+        .to.throw('Needle Target Invalidated: "a.b" by "a.!**"');
+    });
+
     it('Testing redundant exclusion', () => {
       expect(() => compiler.compile(['!a.!b']))
         .to.throw('Redundant Exclusion: "!a.!b"');
@@ -167,7 +172,7 @@ describe('Testing compiler', () => {
       '*a',
       'a*'
     ];
-    const tower = compiler.compile(input);
+    const tower = compiler.compile(input, false);
     expect(tower).to.deep.equal({
       a: { b: {} },
       '**': { b: {} },
@@ -191,7 +196,7 @@ describe('Testing compiler', () => {
       '[*0]',
       '[0*]'
     ];
-    const tower = compiler.compile(input);
+    const tower = compiler.compile(input, false);
     expect(tower).to.deep.equal({
       '[0]': { '[1]': {} },
       '**': { '[1]': {} },

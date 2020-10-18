@@ -87,8 +87,8 @@ module.exports.isLastLeafMatch = (searches) => {
 
 const iterate = (tower, needle, { onAdd, onFin }) => {
   const tree = [parser.parse(needle)];
-  const stack = [[tower]];
-  const parents = [];
+  const stack = [[[tower, null]]];
+  const segments = [];
   let excluded = false;
 
   iterator.iterate(tree, (type, p) => {
@@ -97,7 +97,7 @@ const iterate = (tower, needle, { onAdd, onFin }) => {
         excluded = false;
       }
       stack.pop();
-      parents.pop();
+      segments.pop();
     } else if (type === 'ADD') {
       if (p.isExcluded()) {
         if (excluded) {
@@ -106,47 +106,55 @@ const iterate = (tower, needle, { onAdd, onFin }) => {
         excluded = true;
       }
       const toAdd = [];
-      const next = (e) => toAdd.push(e);
-      const parent = parents[parents.length - 1];
+      const segmentParent = segments[segments.length - 1];
       stack[stack.length - 1]
-        .forEach((cur) => onAdd(cur, p, parent, next));
+        .forEach(([cur]) => onAdd(cur, p, segmentParent, (e) => toAdd.push([e, cur])));
       stack.push(toAdd);
-      parents.push(p);
+      segments.push(p);
     } else {
       stack[stack.length - 1]
-        .filter((cur) => cur !== tower)
-        .forEach((cur) => onFin(cur, excluded));
+        .filter(([cur]) => cur !== tower)
+        .forEach(([cur, parent]) => onFin(cur, p[p.length - 1], parent, excluded));
     }
   });
 };
 
 const applyNeedle = (tower, needle, strict, ctx) => {
   iterate(tower, needle, {
-    onAdd: (cur, p, parent, next) => {
+    onAdd: (cur, segment, segmentParent, next) => {
       addNeedle(cur, needle);
-      const isRec = String(p) === '**';
-      const isParentRec = String(parent) === '**';
+      const isRec = String(segment) === '**';
+      const isParentRec = String(segmentParent) === '**';
       const recChain = isRec && isParentRec;
       if (recChain && strict) {
         throw new Error(`Redundant Recursion: "${needle}"`);
       }
       if (!recChain) {
-        if (cur[p] === undefined) {
+        if (cur[segment] === undefined) {
           const child = {};
           // eslint-disable-next-line no-param-reassign
-          cur[p] = child;
+          cur[segment] = child;
           if (isRec) {
             markRecursive(child);
           }
-          setWildcardRegex(child, p);
+          setWildcardRegex(child, segment);
         }
-        next(cur[p]);
+        next(cur[segment]);
       }
       if (isRec) {
         next(cur);
       }
     },
-    onFin: (cur, excluded) => {
+    onFin: (cur, segment, parent, excluded) => {
+      if (strict) {
+        const pStr = String(segment);
+        if (pStr === '**') {
+          const unnecessary = Object.keys(parent).filter((k) => !['**', ''].includes(k));
+          if (unnecessary.length !== 0) {
+            throw new Error(`Needle Target Invalidated: "${parent[unnecessary[0]][NEEDLES][0]}" by "${needle}"`);
+          }
+        }
+      }
       addNeedle(cur, needle);
       if (strict && cur[LEAF_NEEDLES] !== undefined) {
         throw new Error(`Redundant Needle Target: "${cur[LEAF_NEEDLES][0]}" vs "${needle}"`);

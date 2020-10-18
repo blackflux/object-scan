@@ -141,9 +141,10 @@ Note that the results still include the array selectors.
 Type: `boolean`<br>
 Default: `true`
 
-When set to `false`, no errors are thrown when:
-- the input contains redundant needles
-- a needle contains consecutive recursions
+When set to `true`, errors are thrown when:
+- a path is identical to a previous path
+- a path invalidates a previous path
+- a path contains consecutive recursions
 
 ## Examples
 

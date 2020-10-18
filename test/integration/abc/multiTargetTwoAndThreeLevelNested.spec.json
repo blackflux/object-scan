@@ -1,6 +1,7 @@
 {
   "needles": ["a.b.c", "a.*b.c", "a.b*.c", "a.*.c", "a.**.c", "a.**"],
   "options": {
+    "args": {"strict": false},
     "log": [
       "key",
       "value",
