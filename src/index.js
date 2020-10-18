@@ -12,8 +12,8 @@ const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
     return true;
   }
   if (
-    (isArray !== (wildcard.startsWith('[') && wildcard.endsWith(']')))
-    && !(wildcard.startsWith('**(') && wildcard.endsWith(')'))
+    isArray !== compiler.isArrayTarget(subSearch)
+    && !compiler.isRecursive(subSearch)
   ) {
     return false;
   }
