@@ -56,7 +56,7 @@ const getWildcardRegex = (input) => input[WILDCARD_REGEX];
 module.exports.getWildcardRegex = getWildcardRegex;
 
 const ARRAY_TARGET = Symbol('array-target');
-const setArrayTarget = (input) => defineProperty(input, ARRAY_TARGET, true);
+const markArrayTarget = (input) => defineProperty(input, ARRAY_TARGET, true);
 const isArrayTarget = (input) => input[ARRAY_TARGET] === true;
 module.exports.isArrayTarget = isArrayTarget;
 
@@ -147,7 +147,7 @@ const applyNeedle = (tower, needle, strict, ctx) => {
             setWildcardRegex(child, segment.slice(2));
           } else if (segment.startsWith('[') && segment.endsWith(']')) {
             setWildcardRegex(child, segment.slice(1, -1));
-            setArrayTarget(child);
+            markArrayTarget(child);
           } else {
             setWildcardRegex(child, segment);
           }
