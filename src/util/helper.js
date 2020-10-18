@@ -1,11 +1,20 @@
 module.exports.defineProperty = (target, k, v, readonly = true) => Object
   .defineProperty(target, k, { value: v, writable: !readonly });
 
-const specialChars = /[?!,.*[\]{}\\]/g;
+const specialChars = /[?!,.*[\](){}\\]/g;
 const escape = (input) => input.replace(specialChars, '\\$&');
 module.exports.escape = escape;
 
 module.exports.parseWildcard = (input) => {
+  const match = /^(?:\[(?=.*]$))?\((?<match>.*)\)]?$/g.exec(input);
+  if (match) {
+    const regexStr = match[1];
+    try {
+      return new RegExp(regexStr);
+    } catch (e) {
+      throw new Error(`Invalid Regex: "${regexStr}"`);
+    }
+  }
   let regex = '';
   let escaped = false;
   for (let idx = 0; idx < input.length; idx += 1) {

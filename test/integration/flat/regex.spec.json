@@ -1,0 +1,110 @@
+{
+  "needles": ["(^after.oon$)", "(te)", "(^(?!afternoon$).*)"],
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["(^after.oon$)", "(te)", "(^(?!afternoon$).*)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "afternoon",
+      "isMatch": true,
+      "matchedBy": ["(^after.oon$)", "(te)"],
+      "excludedBy": [],
+      "traversedBy": ["(^after.oon$)", "(te)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "afternoon",
+      "isMatch": true,
+      "matchedBy": ["(^after.oon$)", "(te)"],
+      "excludedBy": [],
+      "traversedBy": ["(^after.oon$)", "(te)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "dog",
+      "isMatch": true,
+      "matchedBy": ["(^(?!afternoon$).*)"],
+      "excludedBy": [],
+      "traversedBy": ["(^(?!afternoon$).*)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "dog",
+      "isMatch": true,
+      "matchedBy": ["(^(?!afternoon$).*)"],
+      "excludedBy": [],
+      "traversedBy": ["(^(?!afternoon$).*)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "waste",
+      "isMatch": true,
+      "matchedBy": ["(te)", "(^(?!afternoon$).*)"],
+      "excludedBy": [],
+      "traversedBy": ["(te)", "(^(?!afternoon$).*)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "waste",
+      "isMatch": true,
+      "matchedBy": ["(te)", "(^(?!afternoon$).*)"],
+      "excludedBy": [],
+      "traversedBy": ["(te)", "(^(?!afternoon$).*)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "perhaps",
+      "isMatch": true,
+      "matchedBy": ["(^(?!afternoon$).*)"],
+      "excludedBy": [],
+      "traversedBy": ["(^(?!afternoon$).*)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "perhaps",
+      "isMatch": true,
+      "matchedBy": ["(^(?!afternoon$).*)"],
+      "excludedBy": [],
+      "traversedBy": ["(^(?!afternoon$).*)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "t/y",
+      "isMatch": true,
+      "matchedBy": ["(^(?!afternoon$).*)"],
+      "excludedBy": [],
+      "traversedBy": ["(^(?!afternoon$).*)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "t/y",
+      "isMatch": true,
+      "matchedBy": ["(^(?!afternoon$).*)"],
+      "excludedBy": [],
+      "traversedBy": ["(^(?!afternoon$).*)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "cross",
+      "isMatch": true,
+      "matchedBy": ["(^(?!afternoon$).*)"],
+      "excludedBy": [],
+      "traversedBy": ["(^(?!afternoon$).*)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "cross",
+      "isMatch": true,
+      "matchedBy": ["(^(?!afternoon$).*)"],
+      "excludedBy": [],
+      "traversedBy": ["(^(?!afternoon$).*)"]
+    }
+  ],
+  "result": ["afternoon", "dog", "waste", "perhaps", "t/y", "cross"]
+}

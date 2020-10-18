@@ -78,5 +78,15 @@ describe('Testing Helper', () => {
       expect(result).to.deep.equal(/^pa!$/);
       expect(result.test('pa!')).to.equal(true);
     });
+
+    it('Testing simple regex', () => {
+      const result = parseWildcard('(a)');
+      expect(result).to.deep.equal(/a/);
+      expect(result.test('xax')).to.equal(true);
+    });
+
+    it('Testing invalid regex', () => {
+      expect(() => parseWildcard('(()')).to.throw('Invalid Regex: "("');
+    });
   });
 });

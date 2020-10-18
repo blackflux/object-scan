@@ -106,6 +106,22 @@ describe('Testing Parser', () => {
     });
   });
 
+  describe('Invalid Parentheses', () => {
+    it('Testing Not Terminated', () => {
+      checkError('(', 'Unterminated Parentheses: (');
+    });
+
+    it('Testing Not Previously Opened', () => {
+      checkError(')', 'Unexpected Parentheses: ), char 0');
+    });
+  });
+
+  describe('Invalid Escape', () => {
+    it('Testing Dangling', () => {
+      checkError('\\', 'Dangling Escape: \\, char 0');
+    });
+  });
+
   describe('Invalid Dot Selector', () => {
     it('Testing Starts with Dot', () => {
       checkError('.a', 'Bad Path Separator: .a, char 0');
