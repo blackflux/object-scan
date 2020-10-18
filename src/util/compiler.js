@@ -55,15 +55,15 @@ const setWildcardRegex = (input, wildcard) => defineProperty(input, WILDCARD_REG
 const getWildcardRegex = (input) => input[WILDCARD_REGEX];
 module.exports.getWildcardRegex = getWildcardRegex;
 
-const ARRAY_TARGET = Symbol('array-target');
-const markArrayTarget = (input) => defineProperty(input, ARRAY_TARGET, true);
-const isArrayTarget = (input) => input[ARRAY_TARGET] === true;
-module.exports.isArrayTarget = isArrayTarget;
-
 const RECURSIVE = Symbol('recursive');
 const markRecursive = (input) => defineProperty(input, RECURSIVE, true);
 const isRecursive = (input) => input[RECURSIVE] === true;
 module.exports.isRecursive = isRecursive;
+
+const ARRAY_TARGET = Symbol('array-target');
+const markArrayTarget = (input) => defineProperty(input, ARRAY_TARGET, true);
+const isArrayTarget = (input) => input[ARRAY_TARGET] === true;
+module.exports.isArrayTarget = isArrayTarget;
 
 const ENTRIES = Symbol('entries');
 const setEntries = (input, entries) => defineProperty(input, ENTRIES, entries);
