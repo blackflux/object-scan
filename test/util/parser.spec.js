@@ -106,13 +106,15 @@ describe('Testing Parser', () => {
     });
   });
 
-  describe('Invalid Parentheses', () => {
-    it('Testing Not Terminated', () => {
-      checkError('(', 'Unterminated Parentheses: (');
-    });
+  describe('Testing Parentheses', () => {
+    describe('Testing Parentheses Errors', () => {
+      it('Testing Not Terminated', () => {
+        checkError('(', 'Unterminated Parentheses: (');
+      });
 
-    it('Testing Not Previously Opened', () => {
-      checkError(')', 'Unexpected Parentheses: ), char 0');
+      it('Testing Not Previously Opened', () => {
+        checkError(')', 'Unexpected Parentheses: ), char 0');
+      });
     });
 
     it('Testing Escaped Inside', () => {
