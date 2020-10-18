@@ -9,9 +9,9 @@ describe('Testing compiler', () => {
         .to.throw('Redundant Needle Target: "{a,b}" vs "a"');
     });
 
-    it('Testing redundant self target (starstar)', () => {
+    it('Testing redundant recursion (starstar)', () => {
       expect(() => compiler.compile(['**.**']))
-        .to.throw('Redundant Needle Target: "**.**" vs "**.**"');
+        .to.throw('Redundant Recursion: "**.**"');
     });
 
     it('Mixed subsequent needle collision', () => {
@@ -235,8 +235,8 @@ describe('Testing compiler', () => {
   it('Testing matchedBy results are unique', () => {
     const input = ['**', '**.**'];
     const tower = compiler.compile(input, false);
-    expect(compiler.matchedBy([tower['**']['**'], tower['**']['**']]))
-      .to.deep.equal(['**.**']);
+    expect(compiler.matchedBy([tower['**'], tower['**']]))
+      .to.deep.equal(['**', '**.**']);
   });
 
   it('Testing traversing', () => {
