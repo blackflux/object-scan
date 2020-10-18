@@ -237,7 +237,7 @@ describe('Testing needle-paths-to-needles-parsed.js', { timeout: 5000 }, () => {
         partialStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
         singleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
         doubleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
-        regex: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
+        regex: rng() > 0.1 ? 0 : Math.floor(rng() * p.length) + 1,
         exclude: rng() > 0.9,
         shuffle: rng() > 0.9
       }, rng));
