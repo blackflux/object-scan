@@ -177,18 +177,18 @@ const finalizeTower = (tower) => {
   let lastDepth = -1;
 
   traverser.traverse(tower, (type, obj, depth) => {
-    if (type === 'ENTER') {
-      if (lastDepth < depth) {
-        matches.splice(depth);
-      }
-    } else {
-      if ((lastDepth === depth + 1 && matches[lastDepth] === true) || isMatch(obj)) {
+    if (type === 'EXIT') {
+      const isUp = lastDepth === depth + 1;
+      if ((isUp && matches[lastDepth] === true) || isMatch(obj)) {
         matches[depth] = true;
         setHasMatches(obj);
       }
+      if (isUp) {
+        matches[lastDepth] = false;
+      }
       setEntries(obj, Object.entries(obj).filter(([k]) => k !== ''));
+      lastDepth = depth;
     }
-    lastDepth = depth;
   });
 };
 
