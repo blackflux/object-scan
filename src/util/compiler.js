@@ -134,10 +134,11 @@ const applyNeedle = (tower, needle, strict, ctx) => {
           const child = {};
           // eslint-disable-next-line no-param-reassign
           cur[segment] = child;
-          if (isRec) {
+          const isRegexRec = segment.startsWith('**(') && segment.endsWith(')');
+          if (isRec || isRegexRec) {
             markRecursive(child);
           }
-          setWildcardRegex(child, segment);
+          setWildcardRegex(child, isRegexRec ? segment.slice(2) : segment);
         }
         next(cur[segment]);
       }

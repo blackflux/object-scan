@@ -182,7 +182,7 @@ describe('Testing path-to-needle-path.js', () => {
       const r = pathToNeedlePath(['abc'], { doubleStar: 1, regex: 2 }, rng);
       expect(r).to.deep.equal([
         { value: '(abc)', string: true, exclude: false },
-        { value: '(.*)', string: true, exclude: false }
+        { value: '**(.*)', string: true, exclude: false }
       ]);
     });
 

@@ -1,0 +1,100 @@
+{
+  "needles": ["**([o1])"],
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**([o1])"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store",
+      "isMatch": true,
+      "matchedBy": ["**([o1])"],
+      "excludedBy": [],
+      "traversedBy": ["**([o1])"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book",
+      "isMatch": true,
+      "matchedBy": ["**([o1])"],
+      "excludedBy": [],
+      "traversedBy": ["**([o1])"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[1]",
+      "isMatch": true,
+      "matchedBy": ["**([o1])"],
+      "excludedBy": [],
+      "traversedBy": ["**([o1])"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[1].author",
+      "isMatch": true,
+      "matchedBy": ["**([o1])"],
+      "excludedBy": [],
+      "traversedBy": ["**([o1])"]
+    },
+    {
+      "type": "filterFn",
+      "key": "store.book[1].author",
+      "isMatch": true,
+      "matchedBy": ["**([o1])"],
+      "excludedBy": [],
+      "traversedBy": ["**([o1])"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[1].category",
+      "isMatch": true,
+      "matchedBy": ["**([o1])"],
+      "excludedBy": [],
+      "traversedBy": ["**([o1])"]
+    },
+    {
+      "type": "filterFn",
+      "key": "store.book[1].category",
+      "isMatch": true,
+      "matchedBy": ["**([o1])"],
+      "excludedBy": [],
+      "traversedBy": ["**([o1])"]
+    },
+    {
+      "type": "filterFn",
+      "key": "store.book[1]",
+      "isMatch": true,
+      "matchedBy": ["**([o1])"],
+      "excludedBy": [],
+      "traversedBy": ["**([o1])"]
+    },
+    {
+      "type": "filterFn",
+      "key": "store.book",
+      "isMatch": true,
+      "matchedBy": ["**([o1])"],
+      "excludedBy": [],
+      "traversedBy": ["**([o1])"]
+    },
+    {
+      "type": "filterFn",
+      "key": "store",
+      "isMatch": true,
+      "matchedBy": ["**([o1])"],
+      "excludedBy": [],
+      "traversedBy": ["**([o1])"]
+    }
+  ],
+  "result": [
+    "store.book[1].author",
+    "store.book[1].category",
+    "store.book[1]",
+    "store.book",
+    "store"
+  ]
+}

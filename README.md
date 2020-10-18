@@ -34,8 +34,8 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 - Object and Array matching with e.g. `key.path` and `[1]`
 - Wildcard matching with `*` and `[*]`
 - Partial Wildcard matching with e.g. `mark*`, `m?rk`, `[*1]` or `[?1]`
-- Regex matching with parentheses, e.g. `(^fo+b)` or `[(^[34])]`
-- Arbitrary depth matching with `**`
+- Regex matching with parentheses, e.g. `(^fo+b)` or `[(^\[2\]$)]`
+- Arbitrary depth matching with `**`, and with regex `**(^fo+b)` or `**(^\[2\]$)`
 - Or-clause with e.g. `{a,b}` and `[{0,1}]`
 - Exclusion with e.g. `!key`
 - Full support for escaping

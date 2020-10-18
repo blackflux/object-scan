@@ -99,18 +99,20 @@ module.exports = (...kwargs) => {
   // generate regex
   if (params.regex !== 0) {
     generateIndices(params.regex).forEach(([pos]) => {
-      result[pos].value = ['(', ...result[pos].value.map((char) => {
-        switch (char) {
-          case '?':
-            return '.';
-          case '*':
-            return '.*';
-          case '**':
-            return '.*';
-          default:
-            return escapeRegex(char.slice(-1)[0]);
-        }
-      }), ')'];
+      if (result[pos].value.length === 1 && result[pos].value[0] === '**') {
+        result[pos].value[0] = '**(.*)';
+      } else {
+        result[pos].value = ['(', ...result[pos].value.map((char) => {
+          switch (char) {
+            case '?':
+              return '.';
+            case '*':
+              return '.*';
+            default:
+              return escapeRegex(char.slice(-1)[0]);
+          }
+        }), ')'];
+      }
     });
   }
   // crop the result length
