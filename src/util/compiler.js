@@ -182,7 +182,7 @@ const finalizeTower = (tower) => {
         matches.splice(depth);
       }
     } else {
-      if (matches[depth + 1] === true || isMatch(obj)) {
+      if ((lastDepth === depth + 1 && matches[lastDepth] === true) || isMatch(obj)) {
         matches[depth] = true;
         setHasMatches(obj);
       }
