@@ -10,10 +10,9 @@ const fullRegex = new RegExp([
   /(?=(?:\[.*]|\(.*\))$)/.source,
   /\[?\((.*)\)]?/.source,
   /$/.source
-].join(''), 'g');
+].join(''));
 
 module.exports.parseWildcard = (input) => {
-  fullRegex.lastIndex = 0;
   const match = fullRegex.exec(input);
   if (match) {
     const regexStr = match[1];
