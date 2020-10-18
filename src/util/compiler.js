@@ -88,7 +88,7 @@ module.exports.isLastLeafMatch = (searches) => {
 const iterate = (tower, needle, { onAdd, onFin }) => {
   const tree = [parser.parse(needle)];
   const stack = [[[tower, null]]];
-  const parents = [];
+  const pathSegments = [];
   let excluded = false;
 
   iterator.iterate(tree, (type, p) => {
@@ -97,7 +97,7 @@ const iterate = (tower, needle, { onAdd, onFin }) => {
         excluded = false;
       }
       stack.pop();
-      parents.pop();
+      pathSegments.pop();
     } else if (type === 'ADD') {
       if (p.isExcluded()) {
         if (excluded) {
@@ -106,11 +106,11 @@ const iterate = (tower, needle, { onAdd, onFin }) => {
         excluded = true;
       }
       const toAdd = [];
-      const parent = parents[parents.length - 1];
+      const parentPathSegment = pathSegments[pathSegments.length - 1];
       stack[stack.length - 1]
-        .forEach(([cur]) => onAdd(cur, p, parent, (e) => toAdd.push([e, cur])));
+        .forEach(([cur]) => onAdd(cur, p, parentPathSegment, (e) => toAdd.push([e, cur])));
       stack.push(toAdd);
-      parents.push(p);
+      pathSegments.push(p);
     } else {
       stack[stack.length - 1]
         .filter(([cur]) => cur !== tower)
@@ -121,33 +121,33 @@ const iterate = (tower, needle, { onAdd, onFin }) => {
 
 const applyNeedle = (tower, needle, strict, ctx) => {
   iterate(tower, needle, {
-    onAdd: (cur, p, parent, next) => {
+    onAdd: (cur, pathSegment, parentPathSegment, next) => {
       addNeedle(cur, needle);
-      const isRec = String(p) === '**';
-      const isParentRec = String(parent) === '**';
+      const isRec = String(pathSegment) === '**';
+      const isParentRec = String(parentPathSegment) === '**';
       const recChain = isRec && isParentRec;
       if (recChain && strict) {
         throw new Error(`Redundant Recursion: "${needle}"`);
       }
       if (!recChain) {
-        if (cur[p] === undefined) {
+        if (cur[pathSegment] === undefined) {
           const child = {};
           // eslint-disable-next-line no-param-reassign
-          cur[p] = child;
+          cur[pathSegment] = child;
           if (isRec) {
             markRecursive(child);
           }
-          setWildcardRegex(child, p);
+          setWildcardRegex(child, pathSegment);
         }
-        next(cur[p]);
+        next(cur[pathSegment]);
       }
       if (isRec) {
         next(cur);
       }
     },
-    onFin: (cur, p, parent, excluded) => {
+    onFin: (cur, pathSegment, parent, excluded) => {
       if (strict) {
-        const pStr = String(p);
+        const pStr = String(pathSegment);
         if (pStr === '**') {
           const unnecessary = Object.keys(parent).filter((k) => !['**', ''].includes(k));
           if (unnecessary.length !== 0) {
