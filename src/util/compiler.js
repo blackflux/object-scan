@@ -87,7 +87,7 @@ module.exports.isLastLeafMatch = (searches) => {
 
 const iterate = (tower, needle, { onAdd, onFin }) => {
   const tree = [parser.parse(needle)];
-  const stack = [[tower]];
+  const stack = [[[tower, null]]];
   const parents = [];
   let excluded = false;
 
@@ -106,16 +106,15 @@ const iterate = (tower, needle, { onAdd, onFin }) => {
         excluded = true;
       }
       const toAdd = [];
-      const next = (e) => toAdd.push(e);
       const parent = parents[parents.length - 1];
       stack[stack.length - 1]
-        .forEach((cur) => onAdd(cur, p, parent, next));
+        .forEach(([cur]) => onAdd(cur, p, parent, (e) => toAdd.push([e, cur])));
       stack.push(toAdd);
       parents.push(p);
     } else {
       stack[stack.length - 1]
-        .filter((cur) => cur !== tower)
-        .forEach((cur) => onFin(cur, excluded));
+        .filter(([cur]) => cur !== tower)
+        .forEach(([cur, parent]) => onFin(cur, p[p.length - 1], parent, excluded));
     }
   });
 };
@@ -146,7 +145,16 @@ const applyNeedle = (tower, needle, strict, ctx) => {
         next(cur);
       }
     },
-    onFin: (cur, excluded) => {
+    onFin: (cur, p, parent, excluded) => {
+      if (strict) {
+        const pStr = String(p);
+        if (pStr === '**') {
+          const unnecessary = Object.keys(parent).filter((k) => !['**', ''].includes(k));
+          if (unnecessary.length !== 0) {
+            throw new Error(`Previous Needle Invalidated: "${parent[unnecessary[0]][NEEDLES][0]}" by "${needle}"`);
+          }
+        }
+      }
       addNeedle(cur, needle);
       if (strict && cur[LEAF_NEEDLES] !== undefined) {
         throw new Error(`Redundant Needle Target: "${cur[LEAF_NEEDLES][0]}" vs "${needle}"`);

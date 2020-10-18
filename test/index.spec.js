@@ -162,7 +162,9 @@ describe('Testing Find', () => {
   });
 
   describe('Testing Exclusion', () => {
-    const execute = (input, needles, result) => expect(objectScan(needles)(input)).to.deep.equal(result);
+    const execute = (input, needles, result, strict = true) => expect(
+      objectScan(needles, { strict })(input)
+    ).to.deep.equal(result);
 
     describe('Testing Basic Exclusion', () => {
       const fixture = { a: { b: 'c', d: 'e' }, f: ['g', 'h'] };
@@ -188,7 +190,7 @@ describe('Testing Find', () => {
       });
 
       it('Testing star exclude, include', () => {
-        execute(fixture, ['!**.d', '**'], ['f[1]', 'f[0]', 'f', 'a.d', 'a.b', 'a']);
+        execute(fixture, ['!**.d', '**'], ['f[1]', 'f[0]', 'f', 'a.d', 'a.b', 'a'], false);
       });
 
       it('Testing star include, exclude', () => {
@@ -200,11 +202,11 @@ describe('Testing Find', () => {
       const fixture = { a: { b: { c: 'd' } } };
 
       it('Testing nested re-include', () => {
-        execute(fixture, ['a.b.c', 'a.!b.*', 'a.b.**'], ['a.b.c', 'a.b']);
+        execute(fixture, ['a.b.c', 'a.!b.*', 'a.b.**'], ['a.b.c', 'a.b'], false);
       });
 
       it('Testing nested re-exclude', () => {
-        execute(fixture, ['!a.b.c', 'a.b.*', '!a.b.**'], []);
+        execute(fixture, ['!a.b.c', 'a.b.*', '!a.b.**'], [], false);
       });
     });
 
