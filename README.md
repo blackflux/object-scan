@@ -143,6 +143,7 @@ Default: `true`
 
 When set to `false`, no errors are thrown when:
 - the input contains redundant needles
+- a needle contains consecutive recursions
 
 ## Examples
 
