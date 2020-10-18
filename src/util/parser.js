@@ -188,11 +188,11 @@ module.exports.parse = (input) => {
     escaped = char === '\\' ? !escaped : false;
   }
 
-  if (bracketDepth !== 0) {
-    throwError('Unterminated Parentheses', input);
-  }
   if (escaped !== false) {
     throwError('Dangling Escape', input, { char: inputLength - 1 });
+  }
+  if (bracketDepth !== 0) {
+    throwError('Unterminated Parentheses', input);
   }
 
   result.finishElement(inputLength, { err: 'Bad Terminator', fins: [']', '}'] });
