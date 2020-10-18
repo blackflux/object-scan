@@ -108,7 +108,7 @@ module.exports = (...kwargs) => {
           case '**':
             return '.*';
           default:
-            return char.length === 1 ? escapeRegex(char) : char;
+            return escapeRegex(char.slice(-1)[0]);
         }
       }), ')'];
     });
