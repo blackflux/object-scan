@@ -1,0 +1,78 @@
+{
+  "needles": ["after*oon", "cros*", "", "!wa*", "dog.**", "!t/y"],
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["after*oon", "cros*", "", "!wa*", "dog.**", "!t/y"]
+    },
+    {
+      "type": "breakFn",
+      "key": "afternoon",
+      "isMatch": true,
+      "matchedBy": ["after*oon"],
+      "excludedBy": [],
+      "traversedBy": ["after*oon"]
+    },
+    {
+      "type": "filterFn",
+      "key": "afternoon",
+      "isMatch": true,
+      "matchedBy": ["after*oon"],
+      "excludedBy": [],
+      "traversedBy": ["after*oon"]
+    },
+    {
+      "type": "breakFn",
+      "key": "dog",
+      "isMatch": true,
+      "matchedBy": ["dog.**"],
+      "excludedBy": [],
+      "traversedBy": ["dog.**"]
+    },
+    {
+      "type": "filterFn",
+      "key": "dog",
+      "isMatch": true,
+      "matchedBy": ["dog.**"],
+      "excludedBy": [],
+      "traversedBy": ["dog.**"]
+    },
+    {
+      "type": "breakFn",
+      "key": "cross",
+      "isMatch": true,
+      "matchedBy": ["cros*"],
+      "excludedBy": [],
+      "traversedBy": ["cros*"]
+    },
+    {
+      "type": "filterFn",
+      "key": "cross",
+      "isMatch": true,
+      "matchedBy": ["cros*"],
+      "excludedBy": [],
+      "traversedBy": ["cros*"]
+    },
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": true,
+      "matchedBy": [""],
+      "excludedBy": [],
+      "traversedBy": [""]
+    },
+    {
+      "type": "filterFn",
+      "key": "",
+      "isMatch": true,
+      "matchedBy": [""],
+      "excludedBy": [],
+      "traversedBy": [""]
+    }
+  ],
+  "result": ["afternoon", "dog", "cross", ""]
+}
