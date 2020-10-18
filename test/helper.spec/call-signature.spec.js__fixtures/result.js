@@ -682,6 +682,7 @@ module.exports = {
       isCircular: false
     }
   ],
+  warning: null,
   result: [
     'parent.children[1].property',
     'parent.children[1]',

@@ -151,7 +151,7 @@ const applyNeedle = (tower, needle, strict, ctx) => {
         if (pStr === '**') {
           const unnecessary = Object.keys(parent).filter((k) => !['**', ''].includes(k));
           if (unnecessary.length !== 0) {
-            throw new Error(`Previous Needle Invalidated: "${parent[unnecessary[0]][NEEDLES][0]}" by "${needle}"`);
+            throw new Error(`Needle Target Invalidated: "${parent[unnecessary[0]][NEEDLES][0]}" by "${needle}"`);
           }
         }
       }

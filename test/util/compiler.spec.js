@@ -53,9 +53,9 @@ describe('Testing compiler', () => {
         .to.throw('Redundant Needle Target: "a.!b.*" vs "a.b.*"');
     });
 
-    it('Previous Needle Invalidated', () => {
+    it('Needle Target Invalidated', () => {
       expect(() => compiler.compile(['a.b', 'a.!**']))
-        .to.throw('Previous Needle Invalidated: "a.b" by "a.!**"');
+        .to.throw('Needle Target Invalidated: "a.b" by "a.!**"');
     });
 
     it('Testing redundant exclusion', () => {
