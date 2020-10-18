@@ -36,11 +36,18 @@ module.exports = ({
     filterFn: cb('filterFn'),
     breakFn: cb('breakFn')
   })(haystack);
+  let warning = null;
+  try {
+    objectScan(needles);
+  } catch (e) {
+    warning = e.message;
+  }
   return {
     haystack,
     needles,
     useArraySelector,
     logs,
+    warning,
     result
   };
 };
