@@ -1,0 +1,30 @@
+{
+  "needles": ["!*,cross"],
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["!*,cross"]
+    },
+    {
+      "type": "breakFn",
+      "key": "cross",
+      "isMatch": true,
+      "matchedBy": ["!*,cross"],
+      "excludedBy": ["!*,cross"],
+      "traversedBy": ["!*,cross"]
+    },
+    {
+      "type": "filterFn",
+      "key": "cross",
+      "isMatch": true,
+      "matchedBy": ["!*,cross"],
+      "excludedBy": ["!*,cross"],
+      "traversedBy": ["!*,cross"]
+    }
+  ],
+  "result": ["cross"]
+}

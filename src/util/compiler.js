@@ -16,51 +16,32 @@ const setHasMatches = (input) => defineProperty(input, HAS_MATCHES, true);
 const hasMatches = (input) => input[HAS_MATCHES] === true;
 module.exports.hasMatches = hasMatches;
 
-const LEAF_NEEDLES = Symbol('leaf-needles');
-const addLeafNeedle = (input, needle) => {
-  if (input[LEAF_NEEDLES] === undefined) {
-    defineProperty(input, LEAF_NEEDLES, []);
+const merge = (input, symbol, value) => {
+  if (input[symbol] === undefined) {
+    defineProperty(input, symbol, []);
   }
-  if (!input[LEAF_NEEDLES].includes(needle)) {
-    input[LEAF_NEEDLES].push(needle);
+  if (!input[symbol].includes(value)) {
+    input[symbol].push(value);
   }
 };
+
+const LEAF_NEEDLES = Symbol('leaf-needles');
+const addLeafNeedle = (input, needle) => merge(input, LEAF_NEEDLES, needle);
 const getLeafNeedles = (input) => input[LEAF_NEEDLES] || [];
 module.exports.getLeafNeedles = getLeafNeedles;
 
 const LEAF_NEEDLES_EXCLUDE = Symbol('leaf-needles-exclude');
-const addLeafNeedleExclude = (input, needle) => {
-  if (input[LEAF_NEEDLES_EXCLUDE] === undefined) {
-    defineProperty(input, LEAF_NEEDLES_EXCLUDE, []);
-  }
-  if (!input[LEAF_NEEDLES_EXCLUDE].includes(needle)) {
-    input[LEAF_NEEDLES_EXCLUDE].push(needle);
-  }
-};
+const addLeafNeedleExclude = (input, needle) => merge(input, LEAF_NEEDLES_EXCLUDE, needle);
 const getLeafNeedlesExclude = (input) => input[LEAF_NEEDLES_EXCLUDE] || [];
 module.exports.getLeafNeedlesExclude = getLeafNeedlesExclude;
 
 const LEAF_NEEDLES_MATCH = Symbol('leaf-needles-match');
-const addLeafNeedleMatch = (input, needle) => {
-  if (input[LEAF_NEEDLES_MATCH] === undefined) {
-    defineProperty(input, LEAF_NEEDLES_MATCH, []);
-  }
-  if (!input[LEAF_NEEDLES_MATCH].includes(needle)) {
-    input[LEAF_NEEDLES_MATCH].push(needle);
-  }
-};
+const addLeafNeedleMatch = (input, needle) => merge(input, LEAF_NEEDLES_MATCH, needle);
 const getLeafNeedlesMatch = (input) => input[LEAF_NEEDLES_MATCH] || [];
 module.exports.getLeafNeedlesMatch = getLeafNeedlesMatch;
 
 const NEEDLES = Symbol('needles');
-const addNeedle = (input, needle) => {
-  if (input[NEEDLES] === undefined) {
-    defineProperty(input, NEEDLES, []);
-  }
-  if (!input[NEEDLES].includes(needle)) {
-    input[NEEDLES].push(needle);
-  }
-};
+const addNeedle = (input, needle) => merge(input, NEEDLES, needle);
 const getNeedles = (input) => input[NEEDLES];
 module.exports.getNeedles = getNeedles;
 
@@ -107,6 +88,7 @@ module.exports.isLastLeafMatch = (searches) => {
 const iterate = (tower, needle, { onAdd, onFin }) => {
   const tree = [parser.parse(needle)];
   const stack = [[tower]];
+  const parents = [];
   let excluded = false;
 
   iterator.iterate(tree, (type, p) => {
@@ -115,6 +97,7 @@ const iterate = (tower, needle, { onAdd, onFin }) => {
         excluded = false;
       }
       stack.pop();
+      parents.pop();
     } else if (type === 'ADD') {
       if (p.isExcluded()) {
         if (excluded) {
@@ -124,9 +107,11 @@ const iterate = (tower, needle, { onAdd, onFin }) => {
       }
       const toAdd = [];
       const next = (e) => toAdd.push(e);
+      const parent = parents[parents.length - 1];
       stack[stack.length - 1]
-        .forEach((cur) => onAdd(cur, p, next));
+        .forEach((cur) => onAdd(cur, p, parent, next));
       stack.push(toAdd);
+      parents.push(p);
     } else {
       stack[stack.length - 1]
         .filter((cur) => cur !== tower)
@@ -137,19 +122,26 @@ const iterate = (tower, needle, { onAdd, onFin }) => {
 
 const applyNeedle = (tower, needle, strict, ctx) => {
   iterate(tower, needle, {
-    onAdd: (cur, p, next) => {
+    onAdd: (cur, p, parent, next) => {
       addNeedle(cur, needle);
       const isRec = String(p) === '**';
-      if (cur[p] === undefined) {
-        const child = {};
-        // eslint-disable-next-line no-param-reassign
-        cur[p] = child;
-        if (isRec) {
-          markRecursive(child);
-        }
-        setWildcardRegex(child, p);
+      const isParentRec = String(parent) === '**';
+      const recChain = isRec && isParentRec;
+      if (recChain && strict) {
+        throw new Error(`Redundant Recursion: "${needle}"`);
       }
-      next(cur[p]);
+      if (!recChain) {
+        if (cur[p] === undefined) {
+          const child = {};
+          // eslint-disable-next-line no-param-reassign
+          cur[p] = child;
+          if (isRec) {
+            markRecursive(child);
+          }
+          setWildcardRegex(child, p);
+        }
+        next(cur[p]);
+      }
       if (isRec) {
         next(cur);
       }
@@ -157,7 +149,7 @@ const applyNeedle = (tower, needle, strict, ctx) => {
     onFin: (cur, excluded) => {
       addNeedle(cur, needle);
       if (strict && cur[LEAF_NEEDLES] !== undefined) {
-        throw new Error(`Redundant Needle Target: "${cur[LEAF_NEEDLES].values().next().value}" vs "${needle}"`);
+        throw new Error(`Redundant Needle Target: "${cur[LEAF_NEEDLES][0]}" vs "${needle}"`);
       }
       addLeafNeedle(cur, needle, strict);
       if (excluded) {
