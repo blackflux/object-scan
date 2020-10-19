@@ -2,7 +2,7 @@
 const parser = require('./parser');
 const iterator = require('./iterator');
 const traverser = require('./traverser');
-const { defineProperty, parseWildcard } = require('./helper');
+const { defineProperty, parseWildcard, asRegex } = require('./helper');
 
 const LEAF = Symbol('leaf');
 const markLeaf = (input, match, readonly) => defineProperty(input, LEAF, match, readonly);
@@ -51,7 +51,7 @@ const getIndex = (input) => (input[INDEX] === undefined ? null : input[INDEX]);
 module.exports.getIndex = getIndex;
 
 const WILDCARD_REGEX = Symbol('wildcard-regex');
-const setWildcardRegex = (input, wildcard) => defineProperty(input, WILDCARD_REGEX, parseWildcard(wildcard));
+const setWildcardRegex = (input, regex) => defineProperty(input, WILDCARD_REGEX, regex);
 const getWildcardRegex = (input) => input[WILDCARD_REGEX];
 module.exports.getWildcardRegex = getWildcardRegex;
 
@@ -88,6 +88,22 @@ module.exports.isLastLeafMatch = (searches) => {
     }
   });
   return maxLeaf !== null && isMatch(maxLeaf);
+};
+
+const compileRegex = (segment) => {
+  if (segment.startsWith('**(') && segment.endsWith(')')) {
+    return asRegex(segment.slice(3, -1));
+  }
+  if (segment.startsWith('[(') && segment.endsWith(')]')) {
+    return asRegex(segment.slice(2, -2));
+  }
+  if (segment.startsWith('(') && segment.endsWith(')')) {
+    return asRegex(segment.slice(1, -1));
+  }
+  if (segment.startsWith('[') && segment.endsWith(']')) {
+    return parseWildcard(segment.slice(1, -1));
+  }
+  return parseWildcard(segment);
 };
 
 const iterate = (tower, needle, { onAdd, onFin }) => {
@@ -143,13 +159,9 @@ const applyNeedle = (tower, needle, strict, ctx) => {
           if (isRec || isRegexRec) {
             markRecursive(child);
           }
-          if (isRegexRec) {
-            setWildcardRegex(child, segment.slice(2));
-          } else if (segment.startsWith('[') && segment.endsWith(']')) {
-            setWildcardRegex(child, segment.slice(1, -1));
+          setWildcardRegex(child, compileRegex(segment));
+          if (segment.startsWith('[') && segment.endsWith(']')) {
             markArrayTarget(child);
-          } else {
-            setWildcardRegex(child, segment);
           }
         }
         next(cur[segment]);

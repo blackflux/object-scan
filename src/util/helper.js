@@ -8,23 +8,16 @@ module.exports.escape = escape;
 const escapeRegex = (char) => char.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
 module.exports.escapeRegex = escapeRegex;
 
-const fullRegex = new RegExp([
-  /^/.source,
-  /(?=(?:\[.*]|\(.*\))$)/.source,
-  /\[?\((.*)\)]?/.source,
-  /$/.source
-].join(''));
+const asRegex = (regexStr) => {
+  try {
+    return new RegExp(regexStr);
+  } catch (e) {
+    throw new Error(`Invalid Regex: "${regexStr}"`);
+  }
+};
+module.exports.asRegex = asRegex;
 
 module.exports.parseWildcard = (input) => {
-  const match = fullRegex.exec(input);
-  if (match) {
-    const regexStr = match[1];
-    try {
-      return new RegExp(regexStr);
-    } catch (e) {
-      throw new Error(`Invalid Regex: "${regexStr}"`);
-    }
-  }
   let regex = '';
   let escaped = false;
   for (let idx = 0; idx < input.length; idx += 1) {
