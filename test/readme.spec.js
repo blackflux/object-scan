@@ -4,20 +4,44 @@ const path = require('path');
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
 
-const mkSpoiler = (titleCode, titleComment, code) => {
-  const head = [
+const mkSpoiler = (titleCode, titleComment, code) => [
+  [
     '<details>',
     '<summary> ',
     `<code>${titleCode}</code> `,
     `<em>(${titleComment})</em> `,
     '</summary>'
-  ].join('');
-  return [
-    head,
+  ].join(''),
+  '',
+  ...code,
+  '</details>'
+];
+
+const mkTemplate = ({
+  haystack, result, ctx, context, contextString
+}) => {
+  const code = [
+    '<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->',
+    '```js',
+    "const objectScan = require('object-scan');",
     '',
-    ...code,
-    '</details>'
+    `const haystack = ${haystack};`,
+    '',
+    `objectScan(${context.needles}, { ${ctx} })(haystack);`,
+    `// => ${util.inspect(result, { showHidden: false, depth: null })}`,
+    '```'
   ];
+
+  return [
+    '<!-- <example>',
+    contextString,
+    '-->',
+    ...(context.spoiler === 'false'
+      ? code
+      : mkSpoiler(context.needles, context.comment, code)),
+    '<!--',
+    '</example> -->'
+  ].join('\n');
 };
 
 const parseContent = (content) => {
@@ -53,33 +77,6 @@ const mkObjectScanCtx = (context) => Object.entries({
   .filter(([k, v]) => v !== undefined)
   .map(([k, v]) => `${k}: ${v}`)
   .join(', ');
-
-const mkTemplate = ({
-  haystack, result, ctx, context, contextString
-}) => {
-  const code = [
-    '<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->',
-    '```js',
-    "const objectScan = require('object-scan');",
-    '',
-    `const haystack = ${haystack};`,
-    '',
-    `objectScan(${context.needles}, { ${ctx} })(haystack);`,
-    `// => ${util.inspect(result, { showHidden: false, depth: null })}`,
-    '```'
-  ];
-
-  return [
-    '<!-- <example>',
-    contextString,
-    '-->',
-    ...(context.spoiler === 'false'
-      ? code
-      : mkSpoiler(context.needles, context.comment, code)),
-    '<!--',
-    '</example> -->'
-  ].join('\n');
-};
 
 describe('Testing Readme', { timeout: 5 * 60000 }, () => {
   it('Updating Readme Example', () => {

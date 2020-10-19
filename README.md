@@ -163,11 +163,47 @@ with some notable extensions.
 
 To match an Array path, rectangular brackets are used.<br>
 _Examples_:
-- `[2]` would match `[2]` in an array
+<!-- <example>
+haystack = [0, 1, 2, 3, 4]
+needles = ['[2]']
+comment = matches `[2]` in an array
+-->
+<details><summary> <code>['[2]']</code> <em>(matches `[2]` in an array)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = [0, 1, 2, 3, 4];
+
+objectScan(['[2]'], { joined: true })(haystack);
+// => [ '[2]' ]
+```
+</details>
+<!--
+</example> -->
 
 To match an Object path, the name of the path is used.<br>
 _Examples_:
-- `foo` would match the path `foo` in an object
+<!-- <example>
+haystack = { foo: 0, bar: 1}
+needles = ['foo']
+comment = matches the path `foo` in an object
+-->
+<details><summary> <code>['foo']</code> <em>(matches the path `foo` in an object)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { foo: 0, bar: 1};
+
+objectScan(['foo'], { joined: true })(haystack);
+// => [ 'foo' ]
+```
+</details>
+<!--
+</example> -->
 
 ### Wildcard
 
@@ -179,16 +215,116 @@ The following characters have special meaning when not escaped:
 - `?`: Match exactly one character
 - `\`: Escape the subsequent character
 
-_Examples_
-- `[1?]` would match `[10], [11], .., [18], [19]` in an array.
+_Examples_:
+<!-- <example>
+haystack = [...Array(30).keys()]
+needles = ['[1?]']
+comment = matches two digit keys starting with a one
+-->
+<details><summary> <code>['[1?]']</code> <em>(matches two digit keys starting with a one)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = [...Array(30).keys()];
+
+objectScan(['[1?]'], { joined: true })(haystack);
+// => [ '[19]',
+  '[18]',
+  '[17]',
+  '[16]',
+  '[15]',
+  '[14]',
+  '[13]',
+  '[12]',
+  '[11]',
+  '[10]' ]
+```
+</details>
+<!--
+</example> -->
 
 ### Regex
 
 Regex can be used with Array and Object selector by using parentheses.
 
 _Examples_:<br>
-- `(^foo)` would match all object paths starting with `foo`
-- `[(5)]` would match all array paths containing `5`
+<!-- <example>
+haystack = { foo: 0, foobar: 1, bar: 2 }
+needles = ['(^foo)']
+comment = match all object paths starting with `foo`
+-->
+<details><summary> <code>['(^foo)']</code> <em>(match all object paths starting with `foo`)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { foo: 0, foobar: 1, bar: 2 };
+
+objectScan(['(^foo)'], { joined: true })(haystack);
+// => [ 'foobar', 'foo' ]
+```
+</details>
+<!--
+</example> -->
+<!-- <example>
+haystack = [...Array(100).keys()]
+needles = ['[(5)]']
+comment = matches all array paths containing `5`
+-->
+<details><summary> <code>['[(5)]']</code> <em>(matches all array paths containing `5`)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = [...Array(100).keys()];
+
+objectScan(['[(5)]'], { joined: true })(haystack);
+// => [ '[95]',
+  '[85]',
+  '[75]',
+  '[65]',
+  '[59]',
+  '[58]',
+  '[57]',
+  '[56]',
+  '[55]',
+  '[54]',
+  '[53]',
+  '[52]',
+  '[51]',
+  '[50]',
+  '[45]',
+  '[35]',
+  '[25]',
+  '[15]',
+  '[5]' ]
+```
+</details>
+<!--
+</example> -->
+<!-- <example>
+haystack = ['a', 'b', 'c', 'd']
+needles = [`[(^[01]$)]`]
+comment = match first and second path in an array
+-->
+<details><summary> <code>[`[(^[01]$)]`]</code> <em>(match first and second path in an array)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = ['a', 'b', 'c', 'd'];
+
+objectScan([`[(^[01]$)]`], { joined: true })(haystack);
+// => [ '[1]', '[0]' ]
+```
+</details>
+<!--
+</example> -->
 
 ### Arbitrary Depth
 
@@ -199,7 +335,63 @@ There are two types of recursion matching:
 Recursions can be combined with a regex by appending the regex.
 
 _Examples_:
-- `++(1)` would recursively match all paths (Array and Object) that contain `1`.
+<!-- <example>
+haystack = { a: { b: 0, c: 0 } }
+needles = [`a.**`]
+comment = matches zero or more nestings under `a`
+-->
+<details><summary> <code>[`a.**`]</code> <em>(matches zero or more nestings under `a`)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { a: { b: 0, c: 0 } };
+
+objectScan([`a.**`], { joined: true })(haystack);
+// => [ 'a.c', 'a.b', 'a' ]
+```
+</details>
+<!--
+</example> -->
+<!-- <example>
+haystack = { a: { b: 0, c: 0 } }
+needles = [`a.++`]
+comment = matches one or more nestings under `a`
+-->
+<details><summary> <code>[`a.++`]</code> <em>(matches one or more nestings under `a`)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { a: { b: 0, c: 0 } };
+
+objectScan([`a.++`], { joined: true })(haystack);
+// => [ 'a.c', 'a.b' ]
+```
+</details>
+<!--
+</example> -->
+<!-- <example>
+haystack = { 1: { 1: ['a', 'b'] } }
+needles = [`**(1)`]
+comment = matches all paths containing `1`
+-->
+<details><summary> <code>[`**(1)`]</code> <em>(matches all paths containing `1`)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { 1: { 1: ['a', 'b'] } };
+
+objectScan([`**(1)`], { joined: true })(haystack);
+// => [ '1.1[1]', '1.1', '1' ]
+```
+</details>
+<!--
+</example> -->
 
 ### Or Clause
 
@@ -209,15 +401,50 @@ This makes it possible to target multiple paths in a single needle. It also
 makes it easier to reduce redundancy.
 
 _Examples_:
-- `[{0,1}]` would match the first and second path in an array
-- `[{0,1}]` behaves identical to `[(^[01]$)]`
+<!-- <example>
+haystack = ['a', 'b', 'c', 'd']
+needles = [`[{0,1}]`]
+comment = match first and second path in an array
+-->
+<details><summary> <code>[`[{0,1}]`]</code> <em>(match first and second path in an array)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = ['a', 'b', 'c', 'd'];
+
+objectScan([`[{0,1}]`], { joined: true })(haystack);
+// => [ '[1]', '[0]' ]
+```
+</details>
+<!--
+</example> -->
 
 ### Exclusion
 
 To exclude a path from being matched, use the exclamation mark.
 
 _Examples_:
-- `**,!**.a` matches all paths, except those where the last segment is `a`.
+<!-- <example>
+haystack = { a: 0, b: { a: 1, c: 2 } }
+needles = [`**,!**.a`]
+comment = matches all paths, except those where the last segment is `a`
+-->
+<details><summary> <code>[`**,!**.a`]</code> <em>(matches all paths, except those where the last segment is `a`)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { a: 0, b: { a: 1, c: 2 } };
+
+objectScan([`**,!**.a`], { joined: true })(haystack);
+// => [ 'b.c', 'b' ]
+```
+</details>
+<!--
+</example> -->
 
 ### Escaping
 
