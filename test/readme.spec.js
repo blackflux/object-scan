@@ -9,7 +9,7 @@ const mkSpoiler = (titleCode, titleComment, code) => {
     '<details>',
     '<summary> ',
     `<code>${titleCode}</code> `,
-    titleComment ? `<em>(${titleComment})</em> ` : '',
+    `<em>(${titleComment})</em> `,
     '</summary>'
   ].join('');
   return [
