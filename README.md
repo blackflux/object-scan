@@ -154,7 +154,7 @@ with some notable extensions.
 
 To match an Array path, rectangular brackets are used.<br>
 _Examples_:
-- `[2]` would match the third path in an array
+- `[2]` would match `[2]` in an array
 
 To match an Object path, the name of the path is used.<br>
 _Examples_:
@@ -171,7 +171,7 @@ The following characters have special meaning when not escaped:
 - `\`: Escape the subsequent character
 
 _Examples_
-- `[1?]` would match path ten to twenty in an array.
+- `[1?]` would match `[10], [11], .., [18], [19]` in an array.
 
 ### Regex
 
