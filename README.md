@@ -328,8 +328,9 @@ objectScan(['a.*.{c,f}'], { joined: false })(haystack);
 
 <!-- <example>
 needles = ['*.*[*]']
+comment = list filter
 -->
-<details><summary> <code>['*.*[*]']</code> </summary>
+<details><summary> <code>['*.*[*]']</code> <em>(list filter)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
@@ -346,8 +347,9 @@ objectScan(['*.*[*]'], { joined: true })(haystack);
 
 <!-- <example>
 needles = ['*[*]']
+comment = list filter (unmatched)
 -->
-<details><summary> <code>['*[*]']</code> </summary>
+<details><summary> <code>['*[*]']</code> <em>(list filter (unmatched))</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
@@ -364,8 +366,9 @@ objectScan(['*[*]'], { joined: true })(haystack);
 
 <!-- <example>
 needles = ['**']
+comment = star recursion
 -->
-<details><summary> <code>['**']</code> </summary>
+<details><summary> <code>['**']</code> <em>(star recursion)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
@@ -382,8 +385,9 @@ objectScan(['**'], { joined: true })(haystack);
 
 <!-- <example>
 needles = ['++']
+comment = plus recursion
 -->
-<details><summary> <code>['++']</code> </summary>
+<details><summary> <code>['++']</code> <em>(plus recursion)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
@@ -400,8 +404,9 @@ objectScan(['++'], { joined: true })(haystack);
 
 <!-- <example>
 needles = ['**.f']
+comment = star recursion ending to f
 -->
-<details><summary> <code>['**.f']</code> </summary>
+<details><summary> <code>['**.f']</code> <em>(star recursion ending to f)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
@@ -418,8 +423,9 @@ objectScan(['**.f'], { joined: true })(haystack);
 
 <!-- <example>
 needles = ['**[*]']
+comment = star recursion ending to array
 -->
-<details><summary> <code>['**[*]']</code> </summary>
+<details><summary> <code>['**[*]']</code> <em>(star recursion ending to array)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
@@ -436,8 +442,9 @@ objectScan(['**[*]'], { joined: true })(haystack);
 
 <!-- <example>
 needles = ['a.*,!a.e']
+comment = exclusion filter
 -->
-<details><summary> <code>['a.*,!a.e']</code> </summary>
+<details><summary> <code>['a.*,!a.e']</code> <em>(exclusion filter)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
@@ -454,8 +461,9 @@ objectScan(['a.*,!a.e'], { joined: true })(haystack);
 
 <!-- <example>
 needles = ['**.(^[bc]$)']
+comment = regex matching
 -->
-<details><summary> <code>['**.(^[bc]$)']</code> </summary>
+<details><summary> <code>['**.(^[bc]$)']</code> <em>(regex matching)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
@@ -473,6 +481,7 @@ objectScan(['**.(^[bc]$)'], { joined: true })(haystack);
 <!-- <example>
 needles = ['**']
 comment = filter function
+filterFn = ({ value }) => typeof value === 'string'
 -->
 <details><summary> <code>['**']</code> <em>(filter function)</em> </summary>
 
@@ -482,8 +491,8 @@ const objectScan = require('object-scan');
 
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
 
-objectScan(['**'], { joined: true })(haystack);
-// => [ 'k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b.c', 'a.b', 'a' ]
+objectScan(['**'], { joined: true, filterFn: ({ value }) => typeof value === 'string' })(haystack);
+// => [ 'k', 'a.h[1]', 'a.h[0]', 'a.e.f', 'a.b.c' ]
 ```
 </details>
 <!--
@@ -492,6 +501,7 @@ objectScan(['**'], { joined: true })(haystack);
 <!-- <example>
 needles = ['**']
 comment = break function
+breakFn = ({ key }) => key === 'a.b'
 -->
 <details><summary> <code>['**']</code> <em>(break function)</em> </summary>
 
@@ -501,8 +511,8 @@ const objectScan = require('object-scan');
 
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
 
-objectScan(['**'], { joined: true })(haystack);
-// => [ 'k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b.c', 'a.b', 'a' ]
+objectScan(['**'], { joined: true, breakFn: ({ key }) => key === 'a.b' })(haystack);
+// => [ 'k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b', 'a' ]
 ```
 </details>
 <!--

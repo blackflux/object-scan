@@ -22,7 +22,6 @@ const mkSpoiler = (titleCode, titleComment, code) => {
 
 const parseContent = (content) => {
   const lines = content.trim().split('\n');
-  lines.splice(lines.findIndex((e) => e.endsWith('-->')));
   const context = [
     'haystack',
     'needles',
