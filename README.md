@@ -201,7 +201,7 @@ makes it easier to reduce redundancy.
 
 _Examples_:
 - `[{0,1}]` would match the first and second path in an array
-- `[{0,1}]` behalves identical to `[(^[01]$)]`
+- `[{0,1}]` behaves identical to `[(^[01]$)]`
 
 ### Exclusion
 
