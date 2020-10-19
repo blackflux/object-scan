@@ -1,6 +1,6 @@
 const Joi = require('joi-strict');
 const { escape, escapeRegex } = require('../../src/util/helper');
-const sampleArray = require('./sample-array');
+const sampleArrayGrouped = require('./sample-array-grouped');
 const shuffleArray = require('./shuffle-array');
 
 module.exports = (...kwargs) => {
@@ -46,12 +46,7 @@ module.exports = (...kwargs) => {
   const generateIndices = (len, { total: total_ = undefined, unique = true } = {}) => {
     const total = total_ === undefined ? result.length : total_;
     const indices = [...Array(total).keys()];
-    const indicesSelected = sampleArray(indices, len, { rng, unique });
-    const indicesGrouped = indicesSelected.reduce((p, c) => Object.assign(p, { [c]: (p[c] || 0) + 1 }), {});
-    return Object
-      .entries(indicesGrouped)
-      .map(([k, v]) => [parseInt(k, 10), v])
-      .sort((a, b) => b[0] - a[0]);
+    return sampleArrayGrouped(indices, len, { rng, unique });
   };
 
   // generate partial question mark
