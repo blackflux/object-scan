@@ -13,7 +13,7 @@ module.exports = (count, rng = Math.random) => {
     const e = e_.split('');
     const noiseCount = Math.floor(e.length * (rng() ** noiseFactor)) + 1;
     const noiseChars = sampleArray(chars, noiseCount, { rng });
-    const noiseTargets = sampleArray([...Array(e.length).keys()], noiseCount, { rng, unique: true });
+    const noiseTargets = sampleArray(e.length, noiseCount, { rng, unique: true });
     noiseTargets.forEach((targetIdx, replacementIdx) => {
       e[targetIdx] = noiseChars[replacementIdx];
     });

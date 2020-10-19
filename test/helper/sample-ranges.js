@@ -12,10 +12,8 @@ module.exports = (...args) => {
     }).optional()
   ));
   const [length, count, { rng = Math.random, unique = true, alwaysReplace = false } = {}] = args;
-  const array = alwaysReplace
-    ? [...Array(length).keys()]
-    : [...Array(length + 1).keys()];
-  const indices = [...new Set(sampleArray(array, count, { rng, unique }))]
+  const arrayLength = alwaysReplace ? length : length + 1;
+  const indices = [...new Set(sampleArray(arrayLength, count, { rng, unique }))]
     .sort((a, b) => b - a);
 
   const result = [];

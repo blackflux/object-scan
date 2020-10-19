@@ -45,70 +45,75 @@ module.exports = (...kwargs) => {
     exclude: false
   }));
 
-  const generateIndices = (len, { unique = true } = {}) => {
-    return sampleArrayGrouped([...Array(result.length).keys()], len, { rng, unique });
-  };
-
   // generate partial question mark
   if (params.questionMark !== 0) {
-    generateIndices(params.questionMark, { unique: false }).forEach(([idx, count]) => {
-      const value = result[idx].value;
-      sampleArray([...Array(value.length).keys()], count, { rng, unique: true })
-        .forEach((i) => {
-          value[i] = '?';
-        });
-    });
+    sampleArrayGrouped(result.length, params.questionMark, { rng })
+      .forEach(([idx, count]) => {
+        const value = result[idx].value;
+        sampleArray(value.length, count, { rng, unique: true })
+          .forEach((i) => {
+            value[i] = '?';
+          });
+      });
   }
   // generate partial plus
   if (params.partialPlus !== 0) {
-    generateIndices(params.partialPlus, { unique: false }).forEach(([idx, count]) => {
-      const value = result[idx].value;
-      sampleRanges(value.length, count, { rng, alwaysReplace: true }).forEach(([pos, len]) => {
-        value.splice(pos, len, '+');
+    sampleArrayGrouped(result.length, params.partialPlus, { rng })
+      .forEach(([idx, count]) => {
+        const value = result[idx].value;
+        sampleRanges(value.length, count, { rng, alwaysReplace: true })
+          .forEach(([pos, len]) => {
+            value.splice(pos, len, '+');
+          });
       });
-    });
   }
   // generate partial star
   if (params.partialStar !== 0) {
-    generateIndices(params.partialStar, { unique: false }).forEach(([idx, count]) => {
-      const value = result[idx].value;
-      sampleRanges(value.length, count, { rng }).forEach(([pos, len]) => {
-        value.splice(pos, len, '*');
+    sampleArrayGrouped(result.length, params.partialStar, { rng })
+      .forEach(([idx, count]) => {
+        const value = result[idx].value;
+        sampleRanges(value.length, count, { rng })
+          .forEach(([pos, len]) => {
+            value.splice(pos, len, '*');
+          });
       });
-    });
   }
   // generate single star
   if (params.singleStar !== 0) {
-    generateIndices(params.singleStar).forEach(([pos]) => {
-      result[pos].value = ['*'];
-    });
+    sampleArray(result.length, params.singleStar, { rng, unique: true })
+      .forEach((pos) => {
+        result[pos].value = ['*'];
+      });
   }
   // generate double star
   if (params.doubleStar !== 0) {
-    sampleRanges(result.length, params.doubleStar, { rng }).forEach(([pos, len]) => {
-      result.splice(pos, len, { value: ['**'], string: true, exclude: false });
-    });
+    sampleRanges(result.length, params.doubleStar, { rng })
+      .forEach(([pos, len]) => {
+        const value = { value: ['**'], string: true, exclude: false };
+        result.splice(pos, len, value);
+      });
   }
   // generate regex
   if (params.regex !== 0) {
-    generateIndices(params.regex).forEach(([pos]) => {
-      if (result[pos].value.length === 1 && ['**', '++'].includes(result[pos].value[0])) {
-        result[pos].value[0] = `${result[pos].value[0]}(.*)`;
-      } else {
-        result[pos].value = ['(', ...result[pos].value.map((char) => {
-          switch (char) {
-            case '?':
-              return '.';
-            case '*':
-              return '.*';
-            case '+':
-              return '.+';
-            default:
-              return escapeRegex(char.slice(-1)[0]);
-          }
-        }), ')'];
-      }
-    });
+    sampleArray(result.length, params.regex, { rng, unique: true })
+      .forEach((pos) => {
+        if (result[pos].value.length === 1 && ['**', '++'].includes(result[pos].value[0])) {
+          result[pos].value[0] = `${result[pos].value[0]}(.*)`;
+        } else {
+          result[pos].value = ['(', ...result[pos].value.map((char) => {
+            switch (char) {
+              case '?':
+                return '.';
+              case '*':
+                return '.*';
+              case '+':
+                return '.+';
+              default:
+                return escapeRegex(char.slice(-1)[0]);
+            }
+          }), ')'];
+        }
+      });
   }
   // crop the result length
   result.length = Math.round(result.length * params.lenPercentage);

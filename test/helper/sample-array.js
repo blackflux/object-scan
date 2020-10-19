@@ -2,14 +2,18 @@ const Joi = require('joi-strict');
 
 module.exports = (...args) => {
   Joi.assert(args, Joi.array().ordered(
-    Joi.array().min(1),
+    Joi.alternatives(
+      Joi.array().min(1),
+      Joi.number().integer().min(1)
+    ),
     Joi.number().integer().min(0),
     Joi.object().keys({
       rng: Joi.function().optional(),
       unique: Joi.boolean().optional()
     }).optional()
   ));
-  const [arr, len, { rng = Math.random, unique = false } = {}] = args;
+  const [arr_, len, { rng = Math.random, unique = false } = {}] = args;
+  const arr = Array.isArray(arr_) ? arr_ : [...Array(arr_).keys()];
 
   const available = [];
   const result = [];
