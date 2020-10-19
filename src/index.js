@@ -2,6 +2,7 @@ const assert = require('assert');
 const compiler = require('./util/compiler');
 const { toPath } = require('./util/helper');
 
+const testWildcard = (key, search) => compiler.getWildcardRegex(search).test(key);
 const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
   if (wildcard === '**') {
     return true;
@@ -9,10 +10,13 @@ const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
   if (wildcard === (isArray ? '[*]' : '*')) {
     return true;
   }
-  if (isArray && !wildcard.match(/^\[.*]$/)) {
+  if (
+    isArray !== compiler.isArrayTarget(subSearch)
+    && !compiler.isRecursive(subSearch)
+  ) {
     return false;
   }
-  return (isArray ? `[${key}]` : key).match(compiler.getWildcardRegex(subSearch));
+  return testWildcard(key, subSearch);
 };
 
 const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);
@@ -136,7 +140,7 @@ const find = (haystack_, searches_, ctx) => {
         const searchesOut = [];
         for (let sIdx = 0, sLen = searches.length; sIdx < sLen; sIdx += 1) {
           const search = searches[sIdx];
-          if (compiler.isRecursive(search)) {
+          if (compiler.isRecursive(search) && testWildcard(key, search)) {
             searchesOut.push(search);
           }
           const entries = compiler.getEntries(search);

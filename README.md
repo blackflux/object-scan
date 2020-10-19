@@ -34,7 +34,8 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 - Object and Array matching with e.g. `key.path` and `[1]`
 - Wildcard matching with `*` and `[*]`
 - Partial Wildcard matching with e.g. `mark*`, `m?rk`, `[*1]` or `[?1]`
-- Arbitrary depth matching with `**`
+- Regex matching with e.g. `(^fo+b)` or `[(^2$)]`
+- Arbitrary depth matching with `**`, and with regex `**(^fo+b)` or `**(^2$)`
 - Or-clause with e.g. `{a,b}` and `[{0,1}]`
 - Exclusion with e.g. `!key`
 - Full support for escaping
@@ -201,6 +202,10 @@ objectScan(['**[*]'], { joined: true })(obj);
 objectScan(['a.*,!a.e'], { joined: true })(obj);
 // => ["a.h", "a.b"]
 
+// regex matching
+objectScan(['**.(^[bc]$)'], { joined: true })(obj);
+// => ["a.b.c", "a.b"]
+
 // value function
 objectScan(['**'], { filterFn: ({ value }) => typeof value === 'string', joined: true })(obj);
 // => ["k", "a.h[1]", "a.h[0]", "a.e.f", "a.b.c"]
@@ -217,7 +222,7 @@ Note that the empty string does not work with [_.get](https://lodash.com/docs/#g
 ## Special Characters
 
 The following characters are considered special and need to
-be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `,`, `.`, `!`, `?`, `*` and `\`.
+be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `(`, `)`, `,`, `.`, `!`, `?`, `*` and `\`.
 
 ## Internals
 

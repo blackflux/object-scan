@@ -14,9 +14,9 @@ describe('Testing generate-parsed-needle.js', { cryptoSeed: '04eb4846-3b0c-4168-
         ],
         new Set([
           '[13]',
-          new Set(['[8]', '%', new Set(['[4]', '&', '\'']), '('])
+          new Set(['[8]', '%', new Set(['[4]', '&', '\'']), '\\('])
         ]),
-        new Set([')'])
+        new Set(['\\)'])
       ])
     );
   });

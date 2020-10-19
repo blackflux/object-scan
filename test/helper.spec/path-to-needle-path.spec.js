@@ -166,6 +166,55 @@ describe('Testing path-to-needle-path.js', () => {
     });
   });
 
+  describe('Testing regex', () => {
+    it('Testing regex default', () => {
+      const r = pathToNeedlePath(needle, { regex: 5 }, rng);
+      expect(r).to.deep.equal([
+        { value: '(name)', string: true, exclude: false },
+        { value: '(0)', string: false, exclude: false },
+        { value: '(value)', string: true, exclude: false },
+        { value: '(16)', string: false, exclude: false },
+        { value: '(property)', string: true, exclude: false }
+      ]);
+    });
+
+    it('Testing regex double star', () => {
+      const r = pathToNeedlePath(['abc'], { doubleStar: 1, regex: 2 }, rng);
+      expect(r).to.deep.equal([
+        { value: '(abc)', string: true, exclude: false },
+        { value: '**(.*)', string: true, exclude: false }
+      ]);
+    });
+
+    it('Testing regex single star', () => {
+      const r = pathToNeedlePath(['abc'], { singleStar: 1, regex: 1 }, rng);
+      expect(r).to.deep.equal([
+        { value: '(.*)', string: true, exclude: false }
+      ]);
+    });
+
+    it('Testing regex partial star', () => {
+      const r = pathToNeedlePath(['abc'], { partialStar: 1, regex: 1 }, rng);
+      expect(r).to.deep.equal([
+        { value: '(a.*c)', string: true, exclude: false }
+      ]);
+    });
+
+    it('Testing regex question mark', () => {
+      const r = pathToNeedlePath(['abc'], { questionMark: 1, regex: 1 }, rng);
+      expect(r).to.deep.equal([
+        { value: '(a.c)', string: true, exclude: false }
+      ]);
+    });
+
+    it('Testing regex escaped char', () => {
+      const r = pathToNeedlePath(['a(b'], { regex: 1 }, rng);
+      expect(r).to.deep.equal([
+        { value: '(a\\(b)', string: true, exclude: false }
+      ]);
+    });
+  });
+
   it('Testing needle with special characters', () => {
     const r = pathToNeedlePath(['*force'], {}, rng);
     expect(r).to.deep.equal([

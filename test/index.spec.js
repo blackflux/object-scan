@@ -847,22 +847,23 @@ describe('Testing Find', () => {
   });
 
   it('Testing Readme Example', () => {
-    const input = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
-    expect(objectScan(['*'])(input)).to.deep.equal(['k', 'a']);
-    expect(objectScan(['a.*.{c,f}'])(input)).to.deep.equal(['a.e.f', 'a.b.c']);
-    expect(objectScan(['a.*.{c,f}'], { joined: false })(input)).to.deep.equal([['a', 'e', 'f'], ['a', 'b', 'c']]);
-    expect(objectScan(['a.*.f'])(input)).to.deep.equal(['a.e.f']);
-    expect(objectScan(['*.*.*'])(input)).to.deep.equal(['a.e.f', 'a.b.c']);
-    expect(objectScan(['**'])(input)).to
+    const obj = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
+    expect(objectScan(['*'])(obj)).to.deep.equal(['k', 'a']);
+    expect(objectScan(['a.*.{c,f}'])(obj)).to.deep.equal(['a.e.f', 'a.b.c']);
+    expect(objectScan(['a.*.{c,f}'], { joined: false })(obj)).to.deep.equal([['a', 'e', 'f'], ['a', 'b', 'c']]);
+    expect(objectScan(['a.*.f'])(obj)).to.deep.equal(['a.e.f']);
+    expect(objectScan(['*.*.*'])(obj)).to.deep.equal(['a.e.f', 'a.b.c']);
+    expect(objectScan(['**'])(obj)).to
       .deep.equal(['k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b.c', 'a.b', 'a']);
-    expect(objectScan(['**.f'])(input)).to.deep.equal(['a.e.f']);
-    expect(objectScan(['a.*,!a.e'])(input)).to.deep.equal(['a.h', 'a.b']);
-    expect(objectScan(['**'], { filterFn: ({ value }) => typeof value === 'string' })(input)).to
+    expect(objectScan(['**.f'])(obj)).to.deep.equal(['a.e.f']);
+    expect(objectScan(['a.*,!a.e'])(obj)).to.deep.equal(['a.h', 'a.b']);
+    expect(objectScan(['**.(^[bc]$)'], { joined: true })(obj)).to.deep.equal(['a.b.c', 'a.b']);
+    expect(objectScan(['**'], { filterFn: ({ value }) => typeof value === 'string' })(obj)).to
       .deep.equal(['k', 'a.h[1]', 'a.h[0]', 'a.e.f', 'a.b.c']);
-    expect(objectScan(['**'], { breakFn: ({ key }) => key === 'a.b' })(input)).to
+    expect(objectScan(['**'], { breakFn: ({ key }) => key === 'a.b' })(obj)).to
       .deep.equal(['k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b', 'a']);
-    expect(objectScan(['**[*]'])(input)).to.deep.equal(['a.h[1]', 'a.h[0]']);
-    expect(objectScan(['*.*[*]'])(input)).to.deep.equal(['a.h[1]', 'a.h[0]']);
-    expect(objectScan(['*[*]'])(input)).to.deep.equal([]);
+    expect(objectScan(['**[*]'])(obj)).to.deep.equal(['a.h[1]', 'a.h[0]']);
+    expect(objectScan(['*.*[*]'])(obj)).to.deep.equal(['a.h[1]', 'a.h[0]']);
+    expect(objectScan(['*[*]'])(obj)).to.deep.equal([]);
   });
 });

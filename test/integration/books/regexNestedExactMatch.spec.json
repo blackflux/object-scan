@@ -1,0 +1,238 @@
+{
+  "needles": ["**.**(^2$)"],
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.bicycle",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.bicycle.price",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.bicycle.color",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[3]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[3].price",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[3].isbn",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[3].title",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[3].author",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[3].category",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[2]",
+      "isMatch": true,
+      "matchedBy": ["**.**(^2$)"],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[2].price",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[2].isbn",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[2].title",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[2].author",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[2].category",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "store.book[2]",
+      "isMatch": true,
+      "matchedBy": ["**.**(^2$)"],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[1]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[1].price",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[1].title",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[1].author",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[1].category",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[0]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[0].price",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[0].title",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[0].author",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "store.book[0].category",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.**(^2$)"]
+    }
+  ],
+  "result": ["store.book[2]"]
+}
