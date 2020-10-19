@@ -45,4 +45,8 @@ describe('Testing sample-ranges.js', () => {
       '3'
     ]));
   });
+
+  it('Testing simple', () => {
+    expect(sampleRanges(1, 1, { alwaysReplace: true })).to.deep.equal([[0, 1]]);
+  });
 });
