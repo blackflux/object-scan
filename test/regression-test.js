@@ -35,6 +35,9 @@ for (let count = 1; count <= TEST_COUNT; count += 1) {
     })
   });
 
+  console.log(JSON.stringify(haystack));
+  console.log(JSON.stringify(needles));
+
   const signatureReleased = callSignature({
     objectScan: objectScanReleased,
     haystack,
