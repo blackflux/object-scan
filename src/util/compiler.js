@@ -91,6 +91,9 @@ module.exports.isLastLeafMatch = (searches) => {
 };
 
 const compileRegex = (segment) => {
+  if (String(segment) === '**') {
+    return asRegex('.*');
+  }
   if (segment.startsWith('**(') && segment.endsWith(')')) {
     return asRegex(segment.slice(3, -1));
   }
