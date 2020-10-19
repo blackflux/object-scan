@@ -1,6 +1,8 @@
 const Joi = require('joi-strict');
 const { escape, escapeRegex } = require('../../src/util/helper');
+const sampleArray = require('./sample-array');
 const sampleArrayGrouped = require('./sample-array-grouped');
+const sampleRanges = require('./sample-ranges');
 const shuffleArray = require('./shuffle-array');
 
 module.exports = (...kwargs) => {
@@ -43,47 +45,36 @@ module.exports = (...kwargs) => {
     exclude: false
   }));
 
-  const generateIndices = (len, { total: total_ = undefined, unique = true } = {}) => {
-    const total = total_ === undefined ? result.length : total_;
-    const indices = [...Array(total).keys()];
-    return sampleArrayGrouped(indices, len, { rng, unique });
+  const generateIndices = (len, { unique = true } = {}) => {
+    return sampleArrayGrouped([...Array(result.length).keys()], len, { rng, unique });
   };
 
   // generate partial question mark
   if (params.questionMark !== 0) {
     generateIndices(params.questionMark, { unique: false }).forEach(([idx, count]) => {
       const value = result[idx].value;
-      generateIndices(count, { total: value.length }).forEach(([i]) => {
-        value[i] = '?';
-      });
+      sampleArray([...Array(value.length).keys()], count, { rng, unique: true })
+        .forEach((i) => {
+          value[i] = '?';
+        });
     });
   }
   // generate partial plus
   if (params.partialPlus !== 0) {
     generateIndices(params.partialPlus, { unique: false }).forEach(([idx, count]) => {
       const value = result[idx].value;
-      const indices = generateIndices(count, { total: value.length });
-      let posPrev = value.length;
-      for (let i = 0; i < indices.length; i += 1) {
-        const [pos] = indices[i];
-        const deleteCount = Math.floor((posPrev - pos) * rng()) + 1;
-        value.splice(pos, deleteCount, '+');
-        posPrev = pos;
-      }
+      sampleRanges(value.length, count, { rng, alwaysReplace: true }).forEach(([pos, len]) => {
+        value.splice(pos, len, '+');
+      });
     });
   }
   // generate partial star
   if (params.partialStar !== 0) {
     generateIndices(params.partialStar, { unique: false }).forEach(([idx, count]) => {
       const value = result[idx].value;
-      const indices = generateIndices(count, { total: value.length + 1 });
-      let posPrev = value.length + 1;
-      for (let i = 0; i < indices.length; i += 1) {
-        const [pos] = indices[i];
-        const deleteCount = Math.floor((posPrev - pos + 1) * rng());
-        value.splice(pos, deleteCount, '*');
-        posPrev = pos;
-      }
+      sampleRanges(value.length, count, { rng }).forEach(([pos, len]) => {
+        value.splice(pos, len, '*');
+      });
     });
   }
   // generate single star
@@ -94,18 +85,9 @@ module.exports = (...kwargs) => {
   }
   // generate double star
   if (params.doubleStar !== 0) {
-    const indicesSelected = generateIndices(params.doubleStar, { total: result.length + 1 });
-    let posPrev = result.length + 1;
-    for (let idx = 0; idx < indicesSelected.length; idx += 1) {
-      const [pos] = indicesSelected[idx];
-      const deleteCount = Math.floor((posPrev - pos + 1) * rng());
-      result.splice(pos, deleteCount, {
-        value: ['**'],
-        string: true,
-        exclude: false
-      });
-      posPrev = pos;
-    }
+    sampleRanges(result.length, params.doubleStar, { rng }).forEach(([pos, len]) => {
+      result.splice(pos, len, { value: ['**'], string: true, exclude: false });
+    });
   }
   // generate regex
   if (params.regex !== 0) {

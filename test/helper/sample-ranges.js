@@ -11,7 +11,7 @@ module.exports = (...args) => {
       alwaysReplace: Joi.boolean().optional()
     }).optional()
   ));
-  const [length, count, { rng = Math.random, unique = false, alwaysReplace = false } = {}] = args;
+  const [length, count, { rng = Math.random, unique = true, alwaysReplace = false } = {}] = args;
   const array = alwaysReplace
     ? [...Array(length).keys()]
     : [...Array(length + 1).keys()];
