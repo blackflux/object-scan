@@ -19,13 +19,22 @@ Install with [npm](https://www.npmjs.com/):
 
 ## Usage
 
+<!-- <example>
+haystack = { a: { b: { c: 'd' }, e: { f: 'g' } } }
+needles = ['a.*.f']
+spoiler = false
+-->
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
 const objectScan = require('object-scan');
 
-objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
+const haystack = { a: { b: { c: 'd' }, e: { f: 'g' } } };
+
+objectScan(['a.*.f'], { joined: true })(haystack);
 // => [ 'a.e.f' ]
 ```
+<!--
+</example> -->
 
 ### Features
 
@@ -220,67 +229,284 @@ be escaped using `\`, if they should be matched in a key:<br>
 
 More extensive examples can be found in the tests.
 
+<!-- <example>
+haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' }
+needles = ['*']
+comment = top level keys
+-->
+<details><summary> <code>['*']</code> <em>(top level keys)</em> </summary>
+
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
 const objectScan = require('object-scan');
 
-const obj = {
-  a: {
-    b: {
-      c: 'd'
-    },
-    e: {
-      f: 'g'
-    },
-    h: ['i', 'j']
-  },
-  k: 'l'
-};
+const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
 
-// top level keys
-objectScan(['*'], { joined: true })(obj);
-// => ["k", "a"]
-
-// nested keys
-objectScan(['a.*.f'], { joined: true })(obj);
-// => ["a.e.f"]
-objectScan(['*.*.*'], { joined: true })(obj);
-// => ["a.e.f", "a.b.c"]
-
-// or filter
-objectScan(['a.*.{c,f}'], { joined: true })(obj);
-// => ["a.e.f", "a.b.c"]
-objectScan(['a.*.{c,f}'])(obj);
-// => [["a", "e", "f"], ["a", "b", "c"]]
-
-// list filter
-objectScan(['*.*[*]'], { joined: true })(obj);
-// => ["a.h[1]", "a.h[0]"]
-objectScan(['*[*]'], { joined: true })(obj);
-// => []
-
-// deep star filter
-objectScan(['**'], { joined: true })(obj);
-// => ["k", "a.h[1]", "a.h[0]", "a.h", "a.e.f", "a.e", "a.b.c", "a.b", "a"]
-objectScan(['**.f'], { joined: true })(obj);
-// => ["a.e.f"]
-objectScan(['**[*]'], { joined: true })(obj);
-// => ["a.h[1]", "a.h[0]"]
-
-// exclusion filter
-objectScan(['a.*,!a.e'], { joined: true })(obj);
-// => ["a.h", "a.b"]
-
-// regex matching
-objectScan(['**.(^[bc]$)'], { joined: true })(obj);
-// => ["a.b.c", "a.b"]
-
-// value function
-objectScan(['**'], { filterFn: ({ value }) => typeof value === 'string', joined: true })(obj);
-// => ["k", "a.h[1]", "a.h[0]", "a.e.f", "a.b.c"]
-objectScan(['**'], { breakFn: ({ key }) => key === 'a.b', joined: true })(obj);
-// => ["k", "a.h[1]", "a.h[0]", "a.h", "a.e.f", "a.e", "a.b", "a"]
+objectScan(['*'], { joined: true })(haystack);
+// => [ 'k', 'a' ]
 ```
+</details>
+<!--
+</example> -->
+
+<!-- <example>
+needles = ['a.*.f']
+comment = nested keys
+-->
+<details><summary> <code>['a.*.f']</code> <em>(nested keys)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
+
+objectScan(['a.*.f'], { joined: true })(haystack);
+// => [ 'a.e.f' ]
+```
+</details>
+<!--
+</example> -->
+
+<!-- <example>
+needles = ['*.*.*']
+comment = multiple nested keys
+-->
+<details><summary> <code>['*.*.*']</code> <em>(multiple nested keys)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
+
+objectScan(['*.*.*'], { joined: true })(haystack);
+// => [ 'a.e.f', 'a.b.c' ]
+```
+</details>
+<!--
+</example> -->
+
+<!-- <example>
+needles = ['a.*.{c,f}']
+comment = or filter
+-->
+<details><summary> <code>['a.*.{c,f}']</code> <em>(or filter)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
+
+objectScan(['a.*.{c,f}'], { joined: true })(haystack);
+// => [ 'a.e.f', 'a.b.c' ]
+```
+</details>
+<!--
+</example> -->
+
+<!-- <example>
+needles = ['a.*.{c,f}']
+comment = or filter, not joined
+joined = false
+-->
+<details><summary> <code>['a.*.{c,f}']</code> <em>(or filter, not joined)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
+
+objectScan(['a.*.{c,f}'], { joined: false })(haystack);
+// => [ [ 'a', 'e', 'f' ], [ 'a', 'b', 'c' ] ]
+```
+</details>
+<!--
+</example> -->
+
+<!-- <example>
+needles = ['*.*[*]']
+-->
+<details><summary> <code>['*.*[*]']</code> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
+
+objectScan(['*.*[*]'], { joined: true })(haystack);
+// => [ 'a.h[1]', 'a.h[0]' ]
+```
+</details>
+<!--
+</example> -->
+
+<!-- <example>
+needles = ['*[*]']
+-->
+<details><summary> <code>['*[*]']</code> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
+
+objectScan(['*[*]'], { joined: true })(haystack);
+// => []
+```
+</details>
+<!--
+</example> -->
+
+<!-- <example>
+needles = ['**']
+-->
+<details><summary> <code>['**']</code> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
+
+objectScan(['**'], { joined: true })(haystack);
+// => [ 'k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b.c', 'a.b', 'a' ]
+```
+</details>
+<!--
+</example> -->
+
+<!-- <example>
+needles = ['++']
+-->
+<details><summary> <code>['++']</code> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
+
+objectScan(['++'], { joined: true })(haystack);
+// => [ 'k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b.c', 'a.b', 'a' ]
+```
+</details>
+<!--
+</example> -->
+
+<!-- <example>
+needles = ['**.f']
+-->
+<details><summary> <code>['**.f']</code> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
+
+objectScan(['**.f'], { joined: true })(haystack);
+// => [ 'a.e.f' ]
+```
+</details>
+<!--
+</example> -->
+
+<!-- <example>
+needles = ['**[*]']
+-->
+<details><summary> <code>['**[*]']</code> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
+
+objectScan(['**[*]'], { joined: true })(haystack);
+// => [ 'a.h[1]', 'a.h[0]' ]
+```
+</details>
+<!--
+</example> -->
+
+<!-- <example>
+needles = ['a.*,!a.e']
+-->
+<details><summary> <code>['a.*,!a.e']</code> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
+
+objectScan(['a.*,!a.e'], { joined: true })(haystack);
+// => [ 'a.h', 'a.b' ]
+```
+</details>
+<!--
+</example> -->
+
+<!-- <example>
+needles = ['**.(^[bc]$)']
+-->
+<details><summary> <code>['**.(^[bc]$)']</code> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
+
+objectScan(['**.(^[bc]$)'], { joined: true })(haystack);
+// => [ 'a.b.c', 'a.b' ]
+```
+</details>
+<!--
+</example> -->
+
+<!-- <example>
+needles = ['**']
+comment = filter function
+-->
+<details><summary> <code>['**']</code> <em>(filter function)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
+
+objectScan(['**'], { joined: true })(haystack);
+// => [ 'k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b.c', 'a.b', 'a' ]
+```
+</details>
+<!--
+</example> -->
+
+<!-- <example>
+needles = ['**']
+comment = break function
+-->
+<details><summary> <code>['**']</code> <em>(break function)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
+
+objectScan(['**'], { joined: true })(haystack);
+// => [ 'k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b.c', 'a.b', 'a' ]
+```
+</details>
+<!--
+</example> -->
 
 ## Edge Cases
 
