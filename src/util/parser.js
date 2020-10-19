@@ -75,7 +75,10 @@ const Result = (input) => {
           throwError(err, input, { char: idx });
         }
         const ele = input.slice(cursor, idx);
-        if (inArray && !/^[?*\d]+$/g.test(ele)) {
+        if (inArray && !(
+          /^[?*+\d]+$/.test(ele)
+          || (ele.startsWith('(') && ele.endsWith(')'))
+        )) {
           throwError('Bad Array Selector', input, { selector: ele });
         }
         cResult.push(new CString(inArray ? `[${ele}]` : ele, excludeNext));
@@ -130,10 +133,26 @@ module.exports.parse = (input) => {
   const result = Result(input);
   const inputLength = input.length;
   let escaped = false;
+  let bracketDepth = 0;
 
   for (let idx = 0; idx < inputLength; idx += 1) {
     const char = input[idx];
     if (escaped === false) {
+      switch (char) {
+        case '(':
+          bracketDepth += 1;
+          break;
+        case ')':
+          if (bracketDepth === 0) {
+            throwError('Unexpected Parentheses', input, { char: idx });
+          }
+          bracketDepth -= 1;
+          break;
+        default:
+          break;
+      }
+    }
+    if (escaped === false && bracketDepth === 0) {
       switch (char) {
         case '.':
           result.finishElement(idx, { err: 'Bad Path Separator', fins: [']', '}'] });
@@ -167,6 +186,13 @@ module.exports.parse = (input) => {
       }
     }
     escaped = char === '\\' ? !escaped : false;
+  }
+
+  if (escaped !== false) {
+    throwError('Dangling Escape', input, { char: inputLength - 1 });
+  }
+  if (bracketDepth !== 0) {
+    throwError('Unterminated Parentheses', input);
   }
 
   result.finishElement(inputLength, { err: 'Bad Terminator', fins: [']', '}'] });

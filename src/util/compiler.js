@@ -2,7 +2,7 @@
 const parser = require('./parser');
 const iterator = require('./iterator');
 const traverser = require('./traverser');
-const { defineProperty, parseWildcard } = require('./helper');
+const { defineProperty, parseWildcard, asRegex } = require('./helper');
 
 const LEAF = Symbol('leaf');
 const markLeaf = (input, match, readonly) => defineProperty(input, LEAF, match, readonly);
@@ -51,7 +51,7 @@ const getIndex = (input) => (input[INDEX] === undefined ? null : input[INDEX]);
 module.exports.getIndex = getIndex;
 
 const WILDCARD_REGEX = Symbol('wildcard-regex');
-const setWildcardRegex = (input, wildcard) => defineProperty(input, WILDCARD_REGEX, parseWildcard(wildcard));
+const setWildcardRegex = (input, regex) => defineProperty(input, WILDCARD_REGEX, regex);
 const getWildcardRegex = (input) => input[WILDCARD_REGEX];
 module.exports.getWildcardRegex = getWildcardRegex;
 
@@ -59,6 +59,11 @@ const RECURSIVE = Symbol('recursive');
 const markRecursive = (input) => defineProperty(input, RECURSIVE, true);
 const isRecursive = (input) => input[RECURSIVE] === true;
 module.exports.isRecursive = isRecursive;
+
+const ARRAY_TARGET = Symbol('array-target');
+const markArrayTarget = (input) => defineProperty(input, ARRAY_TARGET, true);
+const isArrayTarget = (input) => input[ARRAY_TARGET] === true;
+module.exports.isArrayTarget = isArrayTarget;
 
 const ENTRIES = Symbol('entries');
 const setEntries = (input, entries) => defineProperty(input, ENTRIES, entries);
@@ -83,6 +88,25 @@ module.exports.isLastLeafMatch = (searches) => {
     }
   });
   return maxLeaf !== null && isMatch(maxLeaf);
+};
+
+const compileRegex = (segment) => {
+  if (['**', '++'].includes(String(segment))) {
+    return asRegex('.*');
+  }
+  if ((segment.startsWith('**(') || segment.startsWith('++(')) && segment.endsWith(')')) {
+    return asRegex(segment.slice(3, -1));
+  }
+  if (segment.startsWith('[(') && segment.endsWith(')]')) {
+    return asRegex(segment.slice(2, -2));
+  }
+  if (segment.startsWith('(') && segment.endsWith(')')) {
+    return asRegex(segment.slice(1, -1));
+  }
+  if (segment.startsWith('[') && segment.endsWith(']')) {
+    return parseWildcard(segment.slice(1, -1));
+  }
+  return parseWildcard(segment);
 };
 
 const iterate = (tower, needle, { onAdd, onFin }) => {
@@ -123,25 +147,28 @@ const applyNeedle = (tower, needle, strict, ctx) => {
   iterate(tower, needle, {
     onAdd: (cur, segment, segmentParent, next) => {
       addNeedle(cur, needle);
-      const isRec = String(segment) === '**';
-      const isParentRec = String(segmentParent) === '**';
-      const recChain = isRec && isParentRec;
-      if (recChain && strict) {
+      const isStarRec = String(segment) === '**' || (segment.startsWith('**(') && segment.endsWith(')'));
+      const isPlusRec = String(segment) === '++' || (segment.startsWith('++(') && segment.endsWith(')'));
+      const recChainPlain = String(segment) === '**' && String(segmentParent) === '**';
+      if (recChainPlain && strict) {
         throw new Error(`Redundant Recursion: "${needle}"`);
       }
-      if (!recChain) {
+      if (!recChainPlain) {
         if (cur[segment] === undefined) {
           const child = {};
           // eslint-disable-next-line no-param-reassign
           cur[segment] = child;
-          if (isRec) {
+          if (isStarRec || isPlusRec) {
             markRecursive(child);
           }
-          setWildcardRegex(child, segment);
+          setWildcardRegex(child, compileRegex(segment));
+          if (segment.startsWith('[') && segment.endsWith(']')) {
+            markArrayTarget(child);
+          }
         }
         next(cur[segment]);
       }
-      if (isRec) {
+      if (isStarRec) {
         next(cur);
       }
     },

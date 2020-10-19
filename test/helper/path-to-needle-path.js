@@ -1,5 +1,5 @@
 const Joi = require('joi-strict');
-const { escape } = require('../../src/util/helper');
+const { escape, escapeRegex } = require('../../src/util/helper');
 const sampleArray = require('./sample-array');
 const shuffleArray = require('./shuffle-array');
 
@@ -10,9 +10,11 @@ module.exports = (...kwargs) => {
     shuffle: false,
     lenPercentage: 1,
     questionMark: 0,
+    partialPlus: 0,
     partialStar: 0,
     singleStar: 0,
     doubleStar: 0,
+    regex: 0,
     ...(kwargs[1] || {})
   };
   const rng = kwargs[2] || Math.random;
@@ -23,9 +25,11 @@ module.exports = (...kwargs) => {
     shuffle: Joi.boolean(),
     lenPercentage: Joi.number().min(0).max(1),
     questionMark: Joi.number().integer().min(0),
+    partialPlus: Joi.number().integer().min(0),
     partialStar: Joi.number().integer().min(0),
     singleStar: Joi.number().integer().min(0),
-    doubleStar: Joi.number().integer().min(0)
+    doubleStar: Joi.number().integer().min(0),
+    regex: Joi.number().integer().min(0)
   }));
   Joi.assert(rng, Joi.function());
 
@@ -47,7 +51,7 @@ module.exports = (...kwargs) => {
     return Object
       .entries(indicesGrouped)
       .map(([k, v]) => [parseInt(k, 10), v])
-      .sort((a, b) => a[0] - b[0]);
+      .sort((a, b) => b[0] - a[0]);
   };
 
   // generate partial question mark
@@ -57,6 +61,20 @@ module.exports = (...kwargs) => {
       generateIndices(count, { total: value.length }).forEach(([i]) => {
         value[i] = '?';
       });
+    });
+  }
+  // generate partial plus
+  if (params.partialPlus !== 0) {
+    generateIndices(params.partialPlus, { unique: false }).forEach(([idx, count]) => {
+      const value = result[idx].value;
+      const indices = generateIndices(count, { total: value.length });
+      let posPrev = value.length;
+      for (let i = 0; i < indices.length; i += 1) {
+        const [pos] = indices[i];
+        const deleteCount = Math.floor((posPrev - pos) * rng()) + 1;
+        value.splice(pos, deleteCount, '+');
+        posPrev = pos;
+      }
     });
   }
   // generate partial star
@@ -93,6 +111,27 @@ module.exports = (...kwargs) => {
       });
       posPrev = pos;
     }
+  }
+  // generate regex
+  if (params.regex !== 0) {
+    generateIndices(params.regex).forEach(([pos]) => {
+      if (result[pos].value.length === 1 && ['**', '++'].includes(result[pos].value[0])) {
+        result[pos].value[0] = `${result[pos].value[0]}(.*)`;
+      } else {
+        result[pos].value = ['(', ...result[pos].value.map((char) => {
+          switch (char) {
+            case '?':
+              return '.';
+            case '*':
+              return '.*';
+            case '+':
+              return '.+';
+            default:
+              return escapeRegex(char.slice(-1)[0]);
+          }
+        }), ')'];
+      }
+    });
   }
   // crop the result length
   result.length = Math.round(result.length * params.lenPercentage);

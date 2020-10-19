@@ -1,6 +1,11 @@
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
-const { defineProperty, escape, parseWildcard } = require('../../src/util/helper');
+const {
+  defineProperty,
+  escape,
+  parseWildcard,
+  asRegex
+} = require('../../src/util/helper');
 
 describe('Testing Helper', () => {
   describe('Testing defineProperty', () => {
@@ -77,6 +82,18 @@ describe('Testing Helper', () => {
       const result = parseWildcard('pa\\!');
       expect(result).to.deep.equal(/^pa!$/);
       expect(result.test('pa!')).to.equal(true);
+    });
+  });
+
+  describe('Testing asRegex', () => {
+    it('Testing simple regex', () => {
+      const result = asRegex('a');
+      expect(result).to.deep.equal(/a/);
+      expect(result.test('xax')).to.equal(true);
+    });
+
+    it('Testing invalid regex', () => {
+      expect(() => asRegex('(')).to.throw('Invalid Regex: "("');
     });
   });
 });
