@@ -31,13 +31,11 @@ objectScan(['a.*.f'])({ a: { b: { c: 'd' }, e: { f: 'g' } } });
 
 - Input traversed exactly once during search
 - Dependency free, small in size and very performant
-- Object and Array matching with e.g. `key.path` and `[1]`
-- Wildcard matching with `*` and `[*]`
-- Partial Wildcard matching with e.g. `mark*`, `m?rk`, `[*1]` or `[?1]`
-- Regex matching with e.g. `(^fo+b)` or `[(^2$)]`
-- Arbitrary depth matching with `**`, and with regex `**(^fo+b)` or `**(^2$)`
-- Or-clause with e.g. `{a,b}` and `[{0,1}]`
-- Exclusion with e.g. `!key`
+- Separate Object and Array matching
+- Wildcard and Regex matching
+- Arbitrary depth matching
+- Or-clause Syntax
+- Exclusion Matching
 - Full support for escaping
 - Results returned in "delete-safe" order
 - Search syntax is checked for correctness
@@ -147,6 +145,77 @@ When set to `true`, errors are thrown when:
 - a path invalidates a previous path
 - a path contains consecutive recursions
 
+## Matching
+
+Matching is based on the Javascript Object / Array selector syntax
+with some notable extensions.
+
+### Array vs Object
+
+To match an Array path, rectangular brackets are used.<br>
+_Examples_:
+- `[2]` would match the second path in an array
+
+To match an Object path, the name of the path is used.<br>
+_Examples_:
+- `foo` would match the path `foo` in an object
+
+### Wildcard
+
+Wildcards can be used with Array and Object selector.
+
+The following characters have special meaning when not escaped:
+- `*`: Match zero or more character
+- `+`: Match one or more character
+- `?`: Match exactly one character
+- `\`: Escape the subsequent character
+
+_Examples_
+- `[1?]` would match path ten to twenty in an array.
+
+### Regex
+
+Regex can be used with Array and Object selector by using parentheses.
+
+_Examples_:<br>
+- `(^foo)` would match all object paths starting with `foo`
+- `[(5)]` would match all array paths containing `5`
+
+### Arbitrary Depth
+
+There are two types of recursion matching:
+- `**`: Matches zero or more nestings
+- `++`: Matches one or more nestings
+
+Recursions can be combined with a regex by appending the regex.
+
+_Examples_:
+- `++(1)` would recursively match all paths (Array and Object) that contain `1`.
+
+### Or Clause
+
+Can be used with Array and Object selector by using curley brackets.
+
+This makes it possible to target multiple paths in a single needle. It also
+makes it easier to reduce redundancy.
+
+_Examples_:
+- `[{0,1}]` would match the first and second path in an array
+- `[{0,1}]` behalves identical to `[(^[01]$)]`
+
+### Exclusion
+
+To exclude a path from being matched, use the exclamation mark.
+
+_Examples_:
+- `**,!**.a` matches all paths, except those where the last segment is `a`.
+
+### Escaping
+
+The following characters are considered special and need to
+be escaped using `\`, if they should be matched in a key:
+`[`, `]`, `{`, `}`, `(`, `)`, `,`, `.`, `!`, `?`, `*`, `+` and `\`.
+
 ## Examples
 
 More extensive examples can be found in the tests.
@@ -218,11 +287,6 @@ objectScan(['**'], { breakFn: ({ key }) => key === 'a.b', joined: true })(obj);
 The top level object(s) are matched by the empty needle `""`.
 Useful for matching objects nested in arrays by setting `useArraySelector` to `false`.
 Note that the empty string does not work with [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set).
-
-## Special Characters
-
-The following characters are considered special and need to
-be escaped if they should be matched in a key: `[`, `]`, `{`, `}`, `(`, `)`, `,`, `.`, `!`, `?`, `*` and `\`.
 
 ## Internals
 

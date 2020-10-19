@@ -14,6 +14,7 @@ const Tester = () => ({
       modifierParams: modify
         ? (p) => ({
           questionMark: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
+          partialPlus: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
           partialStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
           singleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
           doubleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1
