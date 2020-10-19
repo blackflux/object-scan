@@ -384,10 +384,10 @@ objectScan(['**'], { joined: true })(haystack);
 </example> -->
 
 <!-- <example>
-needles = ['++']
+needles = ['++.++']
 comment = plus recursion
 -->
-<details><summary> <code>['++']</code> <em>(plus recursion)</em> </summary>
+<details><summary> <code>['++.++']</code> <em>(plus recursion)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
@@ -395,8 +395,8 @@ const objectScan = require('object-scan');
 
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
 
-objectScan(['++'], { joined: true })(haystack);
-// => [ 'k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b.c', 'a.b', 'a' ]
+objectScan(['++.++'], { joined: true })(haystack);
+// => [ 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b.c', 'a.b' ]
 ```
 </details>
 <!--
