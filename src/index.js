@@ -2,8 +2,8 @@ const assert = require('assert');
 const compiler = require('./util/compiler');
 const { toPath } = require('./util/helper');
 
-const testWildcard = (key, isArray, search) => (isArray ? String(key) : key)
-  .match(compiler.getWildcardRegex(search));
+const testWildcard = (key, isArray, search) => compiler
+  .getWildcardRegex(search).test(isArray ? String(key) : key);
 const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
   if (wildcard === '**') {
     return true;
