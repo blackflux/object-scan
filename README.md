@@ -347,9 +347,9 @@ objectScan(['*.*[*]'], { joined: true })(haystack);
 
 <!-- <example>
 needles = ['*[*]']
-comment = list filter (unmatched)
+comment = list filter, unmatched
 -->
-<details><summary> <code>['*[*]']</code> <em>(list filter (unmatched))</em> </summary>
+<details><summary> <code>['*[*]']</code> <em>(list filter, unmatched)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
