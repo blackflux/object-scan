@@ -91,10 +91,10 @@ module.exports.isLastLeafMatch = (searches) => {
 };
 
 const compileRegex = (segment) => {
-  if (String(segment) === '**') {
+  if (['**', '++'].includes(String(segment))) {
     return asRegex('.*');
   }
-  if (segment.startsWith('**(') && segment.endsWith(')')) {
+  if ((segment.startsWith('**(') || segment.startsWith('++(')) && segment.endsWith(')')) {
     return asRegex(segment.slice(3, -1));
   }
   if (segment.startsWith('[(') && segment.endsWith(')]')) {
@@ -147,19 +147,18 @@ const applyNeedle = (tower, needle, strict, ctx) => {
   iterate(tower, needle, {
     onAdd: (cur, segment, segmentParent, next) => {
       addNeedle(cur, needle);
-      const isRec = String(segment) === '**';
-      const isParentRec = String(segmentParent) === '**';
-      const recChain = isRec && isParentRec;
-      if (recChain && strict) {
+      const isStarRec = String(segment) === '**' || (segment.startsWith('**(') && segment.endsWith(')'));
+      const isPlusRec = String(segment) === '++' || (segment.startsWith('++(') && segment.endsWith(')'));
+      const recChainPlain = String(segment) === '**' && String(segmentParent) === '**';
+      if (recChainPlain && strict) {
         throw new Error(`Redundant Recursion: "${needle}"`);
       }
-      if (!recChain) {
+      if (!recChainPlain) {
         if (cur[segment] === undefined) {
           const child = {};
           // eslint-disable-next-line no-param-reassign
           cur[segment] = child;
-          const isRegexRec = segment.startsWith('**(') && segment.endsWith(')');
-          if (isRec || isRegexRec) {
+          if (isStarRec || isPlusRec) {
             markRecursive(child);
           }
           setWildcardRegex(child, compileRegex(segment));
@@ -169,7 +168,7 @@ const applyNeedle = (tower, needle, strict, ctx) => {
         }
         next(cur[segment]);
       }
-      if (isRec) {
+      if (isStarRec) {
         next(cur);
       }
     },

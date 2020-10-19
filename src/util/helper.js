@@ -1,7 +1,7 @@
 module.exports.defineProperty = (target, k, v, readonly = true) => Object
   .defineProperty(target, k, { value: v, writable: !readonly });
 
-const specialChars = /[?!,.*[\](){}\\]/g;
+const specialChars = /[?!,.*+[\](){}\\]/g;
 const escape = (input) => input.replace(specialChars, '\\$&');
 module.exports.escape = escape;
 
@@ -26,6 +26,8 @@ module.exports.parseWildcard = (input) => {
       escaped = true;
     } else if (!escaped && char === '*') {
       regex += '.*';
+    } else if (!escaped && char === '+') {
+      regex += '.+';
     } else if (!escaped && char === '?') {
       regex += '.';
     } else {

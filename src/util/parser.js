@@ -76,7 +76,7 @@ const Result = (input) => {
         }
         const ele = input.slice(cursor, idx);
         if (inArray && !(
-          /^[?*\d]+$/.test(ele)
+          /^[?*+\d]+$/.test(ele)
           || (ele.startsWith('(') && ele.endsWith(')'))
         )) {
           throwError('Bad Array Selector', input, { selector: ele });
