@@ -28,7 +28,7 @@ const mkTemplate = ({
     `const haystack = ${haystack};`,
     '',
     `objectScan(${context.needles}, { ${ctx} })(haystack);`,
-    `// => ${util.inspect(result, { showHidden: false, depth: null })}`,
+    `// => ${util.inspect(result, { showHidden: false, depth: null, breakLength: Infinity })}`,
     '```'
   ];
 
