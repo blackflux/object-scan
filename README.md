@@ -213,7 +213,7 @@ _Examples_:
 ### Escaping
 
 The following characters are considered special and need to
-be escaped using `\`, if they should be matched in a key:
+be escaped using `\`, if they should be matched in a key:<br>
 `[`, `]`, `{`, `}`, `(`, `)`, `,`, `.`, `!`, `?`, `*`, `+` and `\`.
 
 ## Examples
