@@ -154,7 +154,7 @@ with some notable extensions.
 
 To match an Array path, rectangular brackets are used.<br>
 _Examples_:
-- `[2]` would match the second path in an array
+- `[2]` would match the third path in an array
 
 To match an Object path, the name of the path is used.<br>
 _Examples_:
