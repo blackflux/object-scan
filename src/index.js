@@ -181,6 +181,6 @@ module.exports = (needles, opts = {}) => {
   assert(typeof ctx.useArraySelector === 'boolean');
   assert(typeof ctx.strict === 'boolean');
 
-  const search = compiler.compile(needles, ctx.strict); // keep separate for performance
+  const search = compiler.compile(needles, ctx.strict, ctx.useArraySelector); // keep separate for performance
   return (haystack, context) => find(haystack, [search], { context, ...ctx });
 };

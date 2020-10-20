@@ -109,8 +109,7 @@ const compileRegex = (segment) => {
   return parseWildcard(segment);
 };
 
-const iterate = (tower, needle, { onAdd, onFin }) => {
-  const tree = [parser.parse(needle)];
+const iterate = (tower, needle, tree, { onAdd, onFin }) => {
   const stack = [[[tower, null]]];
   const segments = [];
   let excluded = false;
@@ -143,8 +142,8 @@ const iterate = (tower, needle, { onAdd, onFin }) => {
   });
 };
 
-const applyNeedle = (tower, needle, strict, ctx) => {
-  iterate(tower, needle, {
+const applyNeedle = (tower, needle, tree, strict, ctx) => {
+  iterate(tower, needle, tree, {
     onAdd: (cur, segment, segmentParent, next) => {
       addNeedle(cur, needle);
       const isStarRec = String(segment) === '**' || (segment.startsWith('**(') && segment.endsWith(')'));
@@ -219,12 +218,13 @@ const finalizeTower = (tower) => {
   });
 };
 
-module.exports.compile = (needles, strict = true) => {
+module.exports.compile = (needles, strict = true, useArraySelector = true) => {
   const tower = {};
   const ctx = { index: 0 };
   for (let idx = 0; idx < needles.length; idx += 1) {
     const needle = needles[idx];
-    applyNeedle(tower, needle, strict, ctx);
+    const tree = [parser.parse(needle, useArraySelector)];
+    applyNeedle(tower, needle, tree, strict, ctx);
   }
   finalizeTower(tower);
   return tower;
