@@ -10,7 +10,7 @@ const objectScan = require('object-scan');
 
 const haystack = {{&haystack}};
 
-objectScan({{&needles}}, { {{&ctx}} })(haystack);
+objectScan({{&needles}}{{&options}})(haystack{{context}});
 // => {{&result}}
 ```
 {{#spoiler}}</details>

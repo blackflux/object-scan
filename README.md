@@ -50,14 +50,6 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 - Search syntax is checked for correctness
 - Lots of tests to ensure correctness
 
-### Search Context
-
-A context can be passed into a search invocation as a second parameter. It is available in all callbacks
-and can be used to manage state across a search invocation without having to recompile the search.
-
-By default all matched keys are returned from a search invocation.
-However, when it is not undefined, the context is returned instead.
-
 ### Options
 
 Signature of all callbacks is
@@ -170,7 +162,7 @@ const objectScan = require('object-scan');
 
 const haystack = [0, 1, 2];
 
-objectScan(['[*]'], { joined: false })(haystack);
+objectScan(['[*]'])(haystack);
 // => [ [ 2 ], [ 1 ], [ 0 ] ]
 ```
 </details>
@@ -291,6 +283,40 @@ const haystack = [];
 
 objectScan(['**.!**'], { joined: true })(haystack);
 // => 'Error: Redundant Recursion: "**.!**"'
+```
+</details>
+<!--
+</example> -->
+
+### Search Context
+
+A context can be passed into a search invocation as a second parameter. It is available in all callbacks
+and can be used to manage state across a search invocation without having to recompile the search.
+
+By default all matched keys are returned from a search invocation.
+However, when it is not undefined, the context is returned instead.
+
+_Examples_:
+<!-- <example>
+haystack: { a: { b: { c: 0, d: 1}, e: 2 } }
+needles: ['**']
+context: []
+filterFn: ({ key, context }) => { context.push(key[key.length - 1]); }
+joined: false
+comment: output last segments only
+-->
+<details><summary> <code>['**']</code> <em>(output last segments only)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { a: { b: { c: 0, d: 1}, e: 2 } };
+
+objectScan(['**'], {
+  filterFn: ({ key, context }) => { context.push(key[key.length - 1]); }
+})(haystack, []);
+// => [ 'e', 'd', 'c', 'b', 'a' ]
 ```
 </details>
 <!--
@@ -661,7 +687,7 @@ const objectScan = require('object-scan');
 
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
 
-objectScan(['a.*.{c,f}'], { joined: false })(haystack);
+objectScan(['a.*.{c,f}'])(haystack);
 // => [ [ 'a', 'e', 'f' ], [ 'a', 'b', 'c' ] ]
 ```
 </details>
@@ -833,7 +859,10 @@ const objectScan = require('object-scan');
 
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
 
-objectScan(['**'], { joined: true, filterFn: ({ value }) => typeof value === 'string' })(haystack);
+objectScan(['**'], {
+  joined: true,
+  filterFn: ({ value }) => typeof value === 'string'
+})(haystack);
 // => [ 'k', 'a.h[1]', 'a.h[0]', 'a.e.f', 'a.b.c' ]
 ```
 </details>
@@ -853,7 +882,10 @@ const objectScan = require('object-scan');
 
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
 
-objectScan(['**'], { joined: true, breakFn: ({ key }) => key === 'a.b' })(haystack);
+objectScan(['**'], {
+  joined: true,
+  breakFn: ({ key }) => key === 'a.b'
+})(haystack);
 // => [ 'k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b', 'a' ]
 ```
 </details>

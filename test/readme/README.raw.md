@@ -39,14 +39,6 @@ spoiler: false
 - Search syntax is checked for correctness
 - Lots of tests to ensure correctness
 
-### Search Context
-
-A context can be passed into a search invocation as a second parameter. It is available in all callbacks
-and can be used to manage state across a search invocation without having to recompile the search.
-
-By default all matched keys are returned from a search invocation.
-However, when it is not undefined, the context is returned instead.
-
 ### Options
 
 Signature of all callbacks is
@@ -185,6 +177,24 @@ comment: invalidates previous
 haystack: []
 needles: ['**.!**']
 comment: consecutive recursion
+</example> -->
+
+### Search Context
+
+A context can be passed into a search invocation as a second parameter. It is available in all callbacks
+and can be used to manage state across a search invocation without having to recompile the search.
+
+By default all matched keys are returned from a search invocation.
+However, when it is not undefined, the context is returned instead.
+
+_Examples_:
+<!-- <example>
+haystack: { a: { b: { c: 0, d: 1}, e: 2 } }
+needles: ['**']
+context: []
+filterFn: ({ key, context }) => { context.push(key[key.length - 1]); }
+joined: false
+comment: output last segments only
 </example> -->
 
 ## Matching
