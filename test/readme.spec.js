@@ -60,7 +60,7 @@ const enrichTasks = (() => {
 
 const applyTasks = (() => {
   const render = (() => {
-    const templateFile = path.join(__dirname, 'helper', 'resources', 'readme-example.mustache');
+    const templateFile = path.join(__dirname, 'readme', 'example.mustache');
     const template = fs.smartRead(templateFile).join('\n');
     return (task) => {
       const { meta, ctx, haystack } = task;
@@ -96,12 +96,14 @@ const applyTasks = (() => {
 
 describe('Testing Readme', { timeout: 5 * 60000 }, () => {
   it('Updating Readme Example', () => {
-    const readmeFile = path.join(__dirname, '..', 'README.md');
-    const lines = fs.smartRead(readmeFile);
+    const inputFile = path.join(__dirname, 'readme', 'README.raw.md');
+    const outputFile = path.join(__dirname, '..', 'README.md');
+
+    const lines = fs.smartRead(inputFile);
     const tasks = findTasks(lines);
     enrichTasks(tasks, lines);
     applyTasks(lines, tasks);
-    const result = fs.smartWrite(readmeFile, lines);
+    const result = fs.smartWrite(outputFile, lines);
     expect(result).to.equal(false);
   });
 });
