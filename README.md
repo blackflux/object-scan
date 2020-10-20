@@ -20,9 +20,9 @@ Install with [npm](https://www.npmjs.com/):
 ## Usage
 
 <!-- <example>
-haystack = { a: { b: { c: 'd' }, e: { f: 'g' } } }
-needles = ['a.*.f']
-spoiler = false
+haystack: { a: { b: { c: 'd' }, e: { f: 'g' } } }
+needles: ['a.*.f']
+spoiler: false
 -->
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
@@ -164,9 +164,9 @@ with some notable extensions.
 To match an Array path, rectangular brackets are used.<br>
 _Examples_:
 <!-- <example>
-haystack = [0, 1, 2, 3, 4]
-needles = ['[2]']
-comment = matches `[2]` in an array
+haystack: [0, 1, 2, 3, 4]
+needles: ['[2]']
+comment: matches `[2]` in an array
 -->
 <details><summary> <code>['[2]']</code> <em>(matches `[2]` in an array)</em> </summary>
 
@@ -186,9 +186,9 @@ objectScan(['[2]'], { joined: true })(haystack);
 To match an Object path, the name of the path is used.<br>
 _Examples_:
 <!-- <example>
-haystack = { foo: 0, bar: 1 }
-needles = ['foo']
-comment = matches the path `foo` in an object
+haystack: { foo: 0, bar: 1 }
+needles: ['foo']
+comment: matches the path `foo` in an object
 -->
 <details><summary> <code>['foo']</code> <em>(matches the path `foo` in an object)</em> </summary>
 
@@ -217,9 +217,9 @@ The following characters have special meaning when not escaped:
 
 _Examples_:
 <!-- <example>
-haystack = [...Array(30).keys()]
-needles = ['[1?]']
-comment = matches two digit keys starting with a one
+haystack: [...Array(30).keys()]
+needles: ['[1?]']
+comment: matches two digit keys starting with a one
 -->
 <details><summary> <code>['[1?]']</code> <em>(matches two digit keys starting with a one)</em> </summary>
 
@@ -242,9 +242,9 @@ Regex can be used with Array and Object selector by using parentheses.
 
 _Examples_:<br>
 <!-- <example>
-haystack = { foo: 0, foobar: 1, bar: 2 }
-needles = ['(^foo)']
-comment = match all object paths starting with `foo`
+haystack: { foo: 0, foobar: 1, bar: 2 }
+needles: ['(^foo)']
+comment: match all object paths starting with `foo`
 -->
 <details><summary> <code>['(^foo)']</code> <em>(match all object paths starting with `foo`)</em> </summary>
 
@@ -261,9 +261,9 @@ objectScan(['(^foo)'], { joined: true })(haystack);
 <!--
 </example> -->
 <!-- <example>
-haystack = [...Array(20).keys()]
-needles = ['[(5)]']
-comment = matches all array paths containing `5`
+haystack: [...Array(20).keys()]
+needles: ['[(5)]']
+comment: matches all array paths containing `5`
 -->
 <details><summary> <code>['[(5)]']</code> <em>(matches all array paths containing `5`)</em> </summary>
 
@@ -280,9 +280,9 @@ objectScan(['[(5)]'], { joined: true })(haystack);
 <!--
 </example> -->
 <!-- <example>
-haystack = ['a', 'b', 'c', 'd']
-needles = ['[(^[01]$)]']
-comment = match first and second path in an array
+haystack: ['a', 'b', 'c', 'd']
+needles: ['[(^[01]$)]']
+comment: match first and second path in an array
 -->
 <details><summary> <code>['[(^[01]$)]']</code> <em>(match first and second path in an array)</em> </summary>
 
@@ -309,9 +309,9 @@ Recursions can be combined with a regex by appending the regex.
 
 _Examples_:
 <!-- <example>
-haystack = { a: { b: 0, c: 0 } }
-needles = ['a.**']
-comment = matches zero or more nestings under `a`
+haystack: { a: { b: 0, c: 0 } }
+needles: ['a.**']
+comment: matches zero or more nestings under `a`
 -->
 <details><summary> <code>['a.**']</code> <em>(matches zero or more nestings under `a`)</em> </summary>
 
@@ -328,9 +328,9 @@ objectScan(['a.**'], { joined: true })(haystack);
 <!--
 </example> -->
 <!-- <example>
-haystack = { a: { b: 0, c: 0 } }
-needles = ['a.++']
-comment = matches one or more nestings under `a`
+haystack: { a: { b: 0, c: 0 } }
+needles: ['a.++']
+comment: matches one or more nestings under `a`
 -->
 <details><summary> <code>['a.++']</code> <em>(matches one or more nestings under `a`)</em> </summary>
 
@@ -347,9 +347,9 @@ objectScan(['a.++'], { joined: true })(haystack);
 <!--
 </example> -->
 <!-- <example>
-haystack = { 1: { 1: ['a', 'b'] } }
-needles = ['**(1)']
-comment = matches all paths containing `1`
+haystack: { 1: { 1: ['a', 'b'] } }
+needles: ['**(1)']
+comment: matches all paths containing `1`
 -->
 <details><summary> <code>['**(1)']</code> <em>(matches all paths containing `1`)</em> </summary>
 
@@ -375,9 +375,9 @@ makes it easier to reduce redundancy.
 
 _Examples_:
 <!-- <example>
-haystack = ['a', 'b', 'c', 'd']
-needles = ['[{0,1}]']
-comment = match first and second path in an array
+haystack: ['a', 'b', 'c', 'd']
+needles: ['[{0,1}]']
+comment: match first and second path in an array
 -->
 <details><summary> <code>['[{0,1}]']</code> <em>(match first and second path in an array)</em> </summary>
 
@@ -400,9 +400,9 @@ To exclude a path from being matched, use the exclamation mark.
 
 _Examples_:
 <!-- <example>
-haystack = { a: 0, b: { a: 1, c: 2 } }
-needles = ['**,!**.a']
-comment = matches all paths, except those where the last segment is `a`
+haystack: { a: 0, b: { a: 1, c: 2 } }
+needles: ['**,!**.a']
+comment: matches all paths, except those where the last segment is `a`
 -->
 <details><summary> <code>['**,!**.a']</code> <em>(matches all paths, except those where the last segment is `a`)</em> </summary>
 
@@ -430,9 +430,9 @@ be escaped using `\`, if they should be matched in a key:<br>
 More extensive examples can be found in the tests.
 
 <!-- <example>
-haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' }
-needles = ['*']
-comment = top level keys
+haystack: { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' }
+needles: ['*']
+comment: top level keys
 -->
 <details><summary> <code>['*']</code> <em>(top level keys)</em> </summary>
 
@@ -450,8 +450,8 @@ objectScan(['*'], { joined: true })(haystack);
 </example> -->
 
 <!-- <example>
-needles = ['a.*.f']
-comment = nested keys
+needles: ['a.*.f']
+comment: nested keys
 -->
 <details><summary> <code>['a.*.f']</code> <em>(nested keys)</em> </summary>
 
@@ -469,8 +469,8 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 </example> -->
 
 <!-- <example>
-needles = ['*.*.*']
-comment = multiple nested keys
+needles: ['*.*.*']
+comment: multiple nested keys
 -->
 <details><summary> <code>['*.*.*']</code> <em>(multiple nested keys)</em> </summary>
 
@@ -488,8 +488,8 @@ objectScan(['*.*.*'], { joined: true })(haystack);
 </example> -->
 
 <!-- <example>
-needles = ['a.*.{c,f}']
-comment = or filter
+needles: ['a.*.{c,f}']
+comment: or filter
 -->
 <details><summary> <code>['a.*.{c,f}']</code> <em>(or filter)</em> </summary>
 
@@ -507,9 +507,9 @@ objectScan(['a.*.{c,f}'], { joined: true })(haystack);
 </example> -->
 
 <!-- <example>
-needles = ['a.*.{c,f}']
-comment = or filter, not joined
-joined = false
+needles: ['a.*.{c,f}']
+comment: or filter, not joined
+joined: false
 -->
 <details><summary> <code>['a.*.{c,f}']</code> <em>(or filter, not joined)</em> </summary>
 
@@ -527,8 +527,8 @@ objectScan(['a.*.{c,f}'], { joined: false })(haystack);
 </example> -->
 
 <!-- <example>
-needles = ['*.*[*]']
-comment = list filter
+needles: ['*.*[*]']
+comment: list filter
 -->
 <details><summary> <code>['*.*[*]']</code> <em>(list filter)</em> </summary>
 
@@ -546,8 +546,8 @@ objectScan(['*.*[*]'], { joined: true })(haystack);
 </example> -->
 
 <!-- <example>
-needles = ['*[*]']
-comment = list filter, unmatched
+needles: ['*[*]']
+comment: list filter, unmatched
 -->
 <details><summary> <code>['*[*]']</code> <em>(list filter, unmatched)</em> </summary>
 
@@ -565,8 +565,8 @@ objectScan(['*[*]'], { joined: true })(haystack);
 </example> -->
 
 <!-- <example>
-needles = ['**']
-comment = star recursion
+needles: ['**']
+comment: star recursion
 -->
 <details><summary> <code>['**']</code> <em>(star recursion)</em> </summary>
 
@@ -584,8 +584,8 @@ objectScan(['**'], { joined: true })(haystack);
 </example> -->
 
 <!-- <example>
-needles = ['++.++']
-comment = plus recursion
+needles: ['++.++']
+comment: plus recursion
 -->
 <details><summary> <code>['++.++']</code> <em>(plus recursion)</em> </summary>
 
@@ -603,8 +603,8 @@ objectScan(['++.++'], { joined: true })(haystack);
 </example> -->
 
 <!-- <example>
-needles = ['**.f']
-comment = star recursion ending to f
+needles: ['**.f']
+comment: star recursion ending to f
 -->
 <details><summary> <code>['**.f']</code> <em>(star recursion ending to f)</em> </summary>
 
@@ -622,8 +622,8 @@ objectScan(['**.f'], { joined: true })(haystack);
 </example> -->
 
 <!-- <example>
-needles = ['**[*]']
-comment = star recursion ending to array
+needles: ['**[*]']
+comment: star recursion ending to array
 -->
 <details><summary> <code>['**[*]']</code> <em>(star recursion ending to array)</em> </summary>
 
@@ -641,8 +641,8 @@ objectScan(['**[*]'], { joined: true })(haystack);
 </example> -->
 
 <!-- <example>
-needles = ['a.*,!a.e']
-comment = exclusion filter
+needles: ['a.*,!a.e']
+comment: exclusion filter
 -->
 <details><summary> <code>['a.*,!a.e']</code> <em>(exclusion filter)</em> </summary>
 
@@ -660,8 +660,8 @@ objectScan(['a.*,!a.e'], { joined: true })(haystack);
 </example> -->
 
 <!-- <example>
-needles = ['**.(^[bc]$)']
-comment = regex matching
+needles: ['**.(^[bc]$)']
+comment: regex matching
 -->
 <details><summary> <code>['**.(^[bc]$)']</code> <em>(regex matching)</em> </summary>
 
@@ -679,9 +679,9 @@ objectScan(['**.(^[bc]$)'], { joined: true })(haystack);
 </example> -->
 
 <!-- <example>
-needles = ['**']
-comment = filter function
-filterFn = ({ value }) => typeof value === 'string'
+needles: ['**']
+comment: filter function
+filterFn: ({ value }) => typeof value === 'string'
 -->
 <details><summary> <code>['**']</code> <em>(filter function)</em> </summary>
 
@@ -699,9 +699,9 @@ objectScan(['**'], { joined: true, filterFn: ({ value }) => typeof value === 'st
 </example> -->
 
 <!-- <example>
-needles = ['**']
-comment = break function
-breakFn = ({ key }) => key === 'a.b'
+needles: ['**']
+comment: break function
+breakFn: ({ key }) => key === 'a.b'
 -->
 <details><summary> <code>['**']</code> <em>(break function)</em> </summary>
 

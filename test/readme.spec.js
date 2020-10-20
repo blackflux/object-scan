@@ -16,10 +16,10 @@ const parseContent = (content) => {
     'filterFn',
     'breakFn'
   ].reduce((p, k) => {
-    const line = lines.find((l) => l.startsWith(`${k} =`));
+    const line = lines.find((l) => l.startsWith(`${k}:`));
     if (line !== undefined) {
       // eslint-disable-next-line no-param-reassign
-      p[k] = line.slice(k.length + 2).trim();
+      p[k] = line.slice(k.length + 1).trim();
     }
     return p;
   }, {});
