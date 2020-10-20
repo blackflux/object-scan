@@ -1,0 +1,18 @@
+<!-- <example>
+{{#context}}{{&key}} = {{&value}}
+{{/context}}
+-->
+{{#spoiler}}<details><summary> <code>{{&needles}}</code> {{#comment}}<em>({{&comment}})</em> {{/comment}}</summary>
+
+{{/spoiler}}<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = {{&haystack}};
+
+objectScan({{&needles}}, { {{&ctx}} })(haystack);
+// => {{&result}}
+```
+{{#spoiler}}</details>
+{{/spoiler}}<!--
+</example> -->

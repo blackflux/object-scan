@@ -2,56 +2,12 @@ const fs = require('smart-fs');
 const path = require('path');
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
-const stringifyObject = require('stringify-object');
-
-const mkSpoiler = (titleCode, titleComment, code) => [
-  [
-    '<details>',
-    '<summary> ',
-    `<code>${titleCode}</code> `,
-    `<em>(${titleComment})</em> `,
-    '</summary>'
-  ].join(''),
-  '',
-  ...code,
-  '</details>'
-];
-
-const pad = (e) => e.replace(/^\[(.+)]$/, '[ $1 ]');
-
-const mkTemplate = ({
-  haystack, result, ctx, context, contextString
-}) => {
-  const code = [
-    '<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->',
-    '```js',
-    "const objectScan = require('object-scan');",
-    '',
-    `const haystack = ${haystack};`,
-    '',
-    `objectScan(${context.needles}, { ${ctx} })(haystack);`,
-    `// => ${pad(stringifyObject(result, {
-      inlineCharacterLimit: Infinity,
-      transform: (obj, prop, originalResult) => pad(originalResult)
-    }))}`,
-    '```'
-  ];
-
-  return [
-    '<!-- <example>',
-    contextString,
-    '-->',
-    ...(context.spoiler === 'false'
-      ? code
-      : mkSpoiler(context.needles, context.comment, code)),
-    '<!--',
-    '</example> -->'
-  ].join('\n');
-};
+const Mustache = require('mustache');
+const stringify = require('./helper/stringify');
 
 const parseContent = (content) => {
   const lines = content.trim().split('\n');
-  const context = [
+  return [
     'haystack',
     'needles',
     'comment',
@@ -67,11 +23,6 @@ const parseContent = (content) => {
     }
     return p;
   }, {});
-  const contextString = Object.entries(context).map(([k, v]) => `${k} = ${v}`).join('\n');
-  return {
-    context,
-    contextString
-  };
 };
 
 const mkObjectScanCtx = (context) => Object.entries({
@@ -83,6 +34,8 @@ const mkObjectScanCtx = (context) => Object.entries({
   .map(([k, v]) => `${k}: ${v}`)
   .join(', ');
 
+const template = fs.smartRead(path.join(__dirname, 'helper', 'resources', 'readme-example.mustache')).join('\n');
+
 describe('Testing Readme', { timeout: 5 * 60000 }, () => {
   it('Updating Readme Example', () => {
     const exampleRegex = /<!-- <example>([\s\S]+?)<\/example> -->/g;
@@ -90,15 +43,21 @@ describe('Testing Readme', { timeout: 5 * 60000 }, () => {
     const contentOriginal = fs.smartRead(file).join('\n');
     let haystack = null;
     const contentUpdated = contentOriginal.replace(exampleRegex, (match, content) => {
-      const { context, contextString } = parseContent(content);
+      const context = parseContent(content);
       const ctx = mkObjectScanCtx(context);
       if (context.haystack) {
         haystack = context.haystack;
       }
       // eslint-disable-next-line no-eval
       const result = eval(`require('../src/index')(${context.needles}, { ${ctx} })(${haystack})`);
-      return mkTemplate({
-        haystack, result, ctx, context, contextString
+      return Mustache.render(template, {
+        context: Object.entries(context).map(([key, value]) => ({ key, value })),
+        spoiler: context.spoiler !== 'false',
+        comment: context.comment,
+        haystack,
+        needles: context.needles,
+        result: stringify(result),
+        ctx
       });
     });
     const result = fs.smartWrite(file, contentUpdated.split('\n'));
