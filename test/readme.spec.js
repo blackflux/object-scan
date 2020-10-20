@@ -18,27 +18,22 @@ const findTasks = (lines) => {
   return result;
 };
 
-const enrichTaskMeta = (tasks, lines) => {
-  tasks.forEach((task) => {
-    // eslint-disable-next-line no-param-reassign
-    task.metaEntries = [];
-    for (let j = task.start + 1; j < task.end; j += 1) {
+const enrichTasks = (() => {
+  let haystack;
+
+  const getMetaEntries = (start, end, lines) => {
+    const result = [];
+    for (let j = start + 1; j < end; j += 1) {
       const data = /^(?<key>[a-zA-Z0-9]+): (?<value>.*)$/.exec(lines[j]);
       if (!data) {
         break;
       }
-      task.metaEntries.push(data.groups);
+      result.push(data.groups);
     }
-    // eslint-disable-next-line no-param-reassign
-    task.meta = task.metaEntries
-      .reduce((obj, { key, value }) => Object.assign(obj, { [key]: value }), {});
-  });
-};
+    return result;
+  };
 
-const enrichTasks = (() => {
-  let haystack = null;
-
-  const mkObjectScanCtx = (meta) => Object.entries({
+  const getObjectScanCtx = (meta) => Object.entries({
     joined: meta.joined || true,
     filterFn: meta.filterFn,
     breakFn: meta.breakFn
@@ -47,48 +42,57 @@ const enrichTasks = (() => {
     .map(([k, v]) => `${k}: ${v}`)
     .join(', ');
 
-  const render = (() => {
-    const templateFile = path.join(__dirname, 'helper', 'resources', 'readme-example.mustache');
-    const template = fs.smartRead(templateFile).join('\n');
-    return (payload) => Mustache.render(template, payload);
-  })();
-
   return (tasks, lines) => {
-    tasks.forEach((task) => {
-      const { meta } = task;
-      const ctx = mkObjectScanCtx(meta);
-      if (meta.haystack) {
-        haystack = meta.haystack;
+    for (let idx = 0; idx < tasks.length; idx += 1) {
+      const task = tasks[idx];
+      task.metaEntries = getMetaEntries(task.start, task.end, lines);
+      task.meta = task.metaEntries
+        .reduce((obj, { key, value }) => Object.assign(obj, { [key]: value }), {});
+      task.ctx = getObjectScanCtx(task.meta);
+      if (task.meta.haystack) {
+        haystack = task.meta.haystack;
       }
-      // eslint-disable-next-line no-eval
-      const result = eval(`require('../src/index')(${meta.needles}, { ${ctx} })(${haystack})`);
-      const replacement = render({
-        meta: task.metaEntries,
-        spoiler: meta.spoiler !== 'false',
-        comment: meta.comment,
-        haystack,
-        needles: meta.needles,
-        result: stringify(result),
-        ctx
-      });
-      // eslint-disable-next-line no-param-reassign
-      task.replacement = replacement;
-    });
+      task.haystack = haystack;
+    }
   };
 })();
 
-const applyTasks = (tasks, lines) => {
-  tasks.reverse().forEach(({ start, end, replacement }) => {
-    lines.splice(start, end - start + 1, ...replacement.split('\n'));
-  });
-};
+const applyTasks = (() => {
+  const render = (() => {
+    const templateFile = path.join(__dirname, 'helper', 'resources', 'readme-example.mustache');
+    const template = fs.smartRead(templateFile).join('\n');
+    return (task) => {
+      const { meta, ctx, haystack } = task;
+      const { needles, comment } = meta;
+      // eslint-disable-next-line no-eval
+      const result = eval(`require('../src/index')(${needles}, { ${ctx} })(${haystack})`);
+      return Mustache.render(template, {
+        meta: task.metaEntries,
+        spoiler: meta.spoiler !== 'false',
+        comment,
+        haystack,
+        needles,
+        result: stringify(result),
+        ctx
+      });
+    };
+  })();
+
+  return (tasks, lines) => {
+    tasks
+      .sort(({ start: startA }, { start: startB }) => startB - startA)
+      .forEach((task) => {
+        const replacement = render(task);
+        lines.splice(task.start, task.end - task.start + 1, ...replacement.split('\n'));
+      });
+  };
+})();
 
 describe('Testing Readme', { timeout: 5 * 60000 }, () => {
   it('Updating Readme Example', () => {
     const readmeFile = path.join(__dirname, '..', 'README.md');
     const lines = fs.smartRead(readmeFile);
     const tasks = findTasks(lines);
-    enrichTaskMeta(tasks, lines);
     enrichTasks(tasks, lines);
     applyTasks(tasks, lines);
     const result = fs.smartWrite(readmeFile, lines);
