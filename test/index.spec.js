@@ -653,7 +653,7 @@ describe('Testing Find', () => {
       ]);
     });
 
-    it('Testing Error With List Selector', () => {
+    it('Testing Error With Array Selector', () => {
       expect(() => objectScan(['array3[*].item'], { useArraySelector: false }))
         .to.throw('Forbidden Array Selector: array3[*].item, char 6');
     });
