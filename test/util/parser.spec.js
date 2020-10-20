@@ -17,8 +17,8 @@ const asString = (() => {
   return (input) => asStringRec(parser.parse(input));
 })();
 
-const checkError = (input, msg) => {
-  expect(() => parser.parse(input)).to.throw(msg);
+const checkError = (input, msg, useArraySelector = true) => {
+  expect(() => parser.parse(input, useArraySelector)).to.throw(msg);
 };
 
 describe('Testing Parser', () => {
@@ -181,6 +181,10 @@ describe('Testing Parser', () => {
 
     it('Testing Array Escaped', () => {
       checkError('a\\[0]', 'Bad Array Terminator: a\\[0], char 4');
+    });
+
+    it('Testing Array Selector Used When Not Allowed', () => {
+      checkError('a[0]', 'Forbidden Array Selector: a[0], char 1', false);
     });
   });
 

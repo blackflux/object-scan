@@ -99,6 +99,23 @@ Invoked in same order as matches would appear in result.
 This method is conceptually similar to
 [Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
 
+_Examples_:
+<details><summary> <code>['**']</code> <em>(filter function)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { a: 0, b: 'bar' };
+
+objectScan(['**'], {
+  joined: true,
+  filterFn: ({ value }) => typeof value === 'string'
+})(haystack);
+// => [ 'b' ]
+```
+</details>
+
 #### breakFn
 
 Type: `function`<br>
@@ -109,6 +126,23 @@ the search. If `true` is returned, all keys nested under the current key are
 skipped in the search and from the final result.
 
 Note that `breakFn` is invoked before the corresponding `filterFn` might be invoked.
+
+_Examples_:
+<details><summary> <code>['**']</code> <em>(break function)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
+
+objectScan(['**'], {
+  joined: true,
+  breakFn: ({ key }) => key === 'a.b'
+})(haystack);
+// => [ 'a.f', 'a.d.e', 'a.d', 'a.b', 'a' ]
+```
+</details>
 
 #### joined
 
@@ -157,6 +191,21 @@ When set to `false`, no array selectors should be used in any needles and arrays
 Note that the results still include the array selectors.
 
 _Examples_:
+<details><summary> <code>['a', 'b.d']</code> <em>(automatic array traversal)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = [{ a: 0 }, { b: [{ c: 1 }, { d: 2 }] }];
+
+objectScan(['a', 'b.d'], {
+  joined: true,
+  useArraySelector: false
+})(haystack);
+// => [ '[1].b[1].d', '[0].a' ]
+```
+</details>
 <details><summary> <code>['']</code> <em>(select top level array elements)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -621,38 +670,6 @@ const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
 
 objectScan(['**.(^[bc]$)'], { joined: true })(haystack);
 // => [ 'a.b.c', 'a.b' ]
-```
-</details>
-
-<details><summary> <code>['**']</code> <em>(filter function)</em> </summary>
-
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
-```js
-const objectScan = require('object-scan');
-
-const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
-
-objectScan(['**'], {
-  joined: true,
-  filterFn: ({ value }) => typeof value === 'string'
-})(haystack);
-// => [ 'k', 'a.h[1]', 'a.h[0]', 'a.e.f', 'a.b.c' ]
-```
-</details>
-
-<details><summary> <code>['**']</code> <em>(break function)</em> </summary>
-
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
-```js
-const objectScan = require('object-scan');
-
-const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
-
-objectScan(['**'], {
-  joined: true,
-  breakFn: ({ key }) => key === 'a.b'
-})(haystack);
-// => [ 'k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b', 'a' ]
 ```
 </details>
 
