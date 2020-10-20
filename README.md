@@ -135,6 +135,48 @@ Setting this option to `true` will negatively impact performance.
 
 Note that [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set) fully support lists.
 
+_Examples_:
+<!-- <example>
+haystack: [0, 1, 2]
+needles: ['[*]']
+joined: true
+comment: joined
+-->
+<details><summary> <code>['[*]']</code> <em>(joined)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = [0, 1, 2];
+
+objectScan(['[*]'], { joined: true })(haystack);
+// => [ '[2]', '[1]', '[0]' ]
+```
+</details>
+<!--
+</example> -->
+<!-- <example>
+haystack: [0, 1, 2]
+needles: ['[*]']
+joined: false
+comment: not joined
+-->
+<details><summary> <code>['[*]']</code> <em>(not joined)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = [0, 1, 2];
+
+objectScan(['[*]'], { joined: false })(haystack);
+// => [ [ 2 ], [ 1 ], [ 0 ] ]
+```
+</details>
+<!--
+</example> -->
+
 #### useArraySelector
 
 Type: `boolean`<br>
@@ -143,6 +185,28 @@ Default: `true`
 When set to `false`, no array selectors should be used in any needles and arrays are automatically traversed.
 
 Note that the results still include the array selectors.
+
+_Examples_:
+<!-- <example>
+haystack: [{ a: 0 }, { b: 1 }]
+needles: ['']
+useArraySelector: false
+comment: select top level array elements
+-->
+<details><summary> <code>['']</code> <em>(select top level array elements)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = [{ a: 0 }, { b: 1 }];
+
+objectScan([''], { joined: true, useArraySelector: false })(haystack);
+// => [ '[1]', '[0]' ]
+```
+</details>
+<!--
+</example> -->
 
 #### strict
 
@@ -153,6 +217,84 @@ When set to `true`, errors are thrown when:
 - a path is identical to a previous path
 - a path invalidates a previous path
 - a path contains consecutive recursions
+
+_Examples_:
+<!-- <example>
+haystack: []
+needles: ['a.b', 'a.b']
+comment: identical
+-->
+<details><summary> <code>['a.b', 'a.b']</code> <em>(identical)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = [];
+
+objectScan(['a.b', 'a.b'], { joined: true })(haystack);
+// => 'Error: Redundant Needle Target: "a.b" vs "a.b"'
+```
+</details>
+<!--
+</example> -->
+<!-- <example>
+haystack: []
+needles: ['a.{b,b}']
+comment: identical, same needle
+-->
+<details><summary> <code>['a.{b,b}']</code> <em>(identical, same needle)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = [];
+
+objectScan(['a.{b,b}'], { joined: true })(haystack);
+// => 'Error: Redundant Needle Target: "a.{b,b}" vs "a.{b,b}"'
+```
+</details>
+<!--
+</example> -->
+<!-- <example>
+haystack: []
+needles: ['a.b', 'a.**']
+comment: invalidates previous
+-->
+<details><summary> <code>['a.b', 'a.**']</code> <em>(invalidates previous)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = [];
+
+objectScan(['a.b', 'a.**'], { joined: true })(haystack);
+// => 'Error: Needle Target Invalidated: "a.b" by "a.**"'
+```
+</details>
+<!--
+</example> -->
+<!-- <example>
+haystack: []
+needles: ['**.!**']
+comment: consecutive recursion
+-->
+<details><summary> <code>['**.!**']</code> <em>(consecutive recursion)</em> </summary>
+
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+```js
+const objectScan = require('object-scan');
+
+const haystack = [];
+
+objectScan(['**.!**'], { joined: true })(haystack);
+// => 'Error: Redundant Recursion: "**.!**"'
+```
+</details>
+<!--
+</example> -->
 
 ## Matching
 

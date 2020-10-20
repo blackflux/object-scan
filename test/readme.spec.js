@@ -36,7 +36,8 @@ const enrichTasks = (() => {
   const getObjectScanCtx = (meta) => Object.entries({
     joined: meta.joined || true,
     filterFn: meta.filterFn,
-    breakFn: meta.breakFn
+    breakFn: meta.breakFn,
+    useArraySelector: meta.useArraySelector
   })
     .filter(([k, v]) => v !== undefined)
     .map(([k, v]) => `${k}: ${v}`)
@@ -64,8 +65,13 @@ const applyTasks = (() => {
     return (task) => {
       const { meta, ctx, haystack } = task;
       const { needles, comment } = meta;
-      // eslint-disable-next-line no-eval
-      const result = eval(`require('../src/index')(${needles}, { ${ctx} })(${haystack})`);
+      let result;
+      try {
+        // eslint-disable-next-line no-eval
+        result = eval(`require('../src/index')(${needles}, { ${ctx} })(${haystack})`);
+      } catch (e) {
+        result = String(e);
+      }
       return Mustache.render(template, {
         meta: task.metaEntries,
         spoiler: meta.spoiler !== 'false',
