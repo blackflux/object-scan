@@ -29,10 +29,9 @@ const Renderer = () => {
 
   let haystack;
   return (match, content) => {
-    const metaEntries = content
+    const meta = content
       .split('\n')
-      .map((l) => /^(?<key>[a-zA-Z0-9]+): (?<value>.*)$/.exec(l).groups);
-    const meta = metaEntries
+      .map((l) => /^(?<key>[a-zA-Z0-9]+): (?<value>.*)$/.exec(l).groups)
       .reduce((obj, { key, value }) => Object.assign(obj, { [key]: value }), {});
     const options = getObjectScanOptions(meta);
     const context = meta.context ? `, ${meta.context}` : '';
@@ -48,7 +47,6 @@ const Renderer = () => {
       result = String(e);
     }
     return Mustache.render(template, {
-      meta: metaEntries,
       spoiler: meta.spoiler !== 'false',
       comment: meta.comment,
       haystack,
@@ -62,11 +60,11 @@ const Renderer = () => {
 
 describe('Testing Readme', { timeout: 5 * 60000 }, () => {
   it('Updating Readme Example', () => {
-    const inputFile = path.join(__dirname, 'readme', 'README.raw.md');
+    const inputFile = path.join(__dirname, 'readme', 'README.template.md');
     const outputFile = path.join(__dirname, '..', 'README.md');
     const input = fs.smartRead(inputFile).join('\n');
     const renderer = Renderer();
-    const output = input.replace(/<!-- <example>\n([\s\S]+?)\n<\/example> -->/g, renderer);
+    const output = input.replace(/<pre><example>\n([\s\S]+?)\n<\/example><\/pre>/g, renderer);
     const result = fs.smartWrite(outputFile, output.split('\n'));
     expect(result).to.equal(false);
   });
