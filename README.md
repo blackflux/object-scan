@@ -19,11 +19,6 @@ Install with [npm](https://www.npmjs.com/):
 
 ## Usage
 
-<!-- <example>
-haystack: { a: { b: { c: 'd' }, e: { f: 'g' } } }
-needles: ['a.*.f']
-spoiler: false
--->
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
 const objectScan = require('object-scan');
@@ -33,8 +28,7 @@ const haystack = { a: { b: { c: 'd' }, e: { f: 'g' } } };
 objectScan(['a.*.f'], { joined: true })(haystack);
 // => [ 'a.e.f' ]
 ```
-<!--
-</example> -->
+
 
 ### Features
 
@@ -128,12 +122,6 @@ Setting this option to `true` will negatively impact performance.
 Note that [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set) fully support lists.
 
 _Examples_:
-<!-- <example>
-haystack: [0, 1, 2]
-needles: ['[*]']
-joined: true
-comment: joined
--->
 <details><summary> <code>['[*]']</code> <em>(joined)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -146,14 +134,6 @@ objectScan(['[*]'], { joined: true })(haystack);
 // => [ '[2]', '[1]', '[0]' ]
 ```
 </details>
-<!--
-</example> -->
-<!-- <example>
-haystack: [0, 1, 2]
-needles: ['[*]']
-joined: false
-comment: not joined
--->
 <details><summary> <code>['[*]']</code> <em>(not joined)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -166,8 +146,6 @@ objectScan(['[*]'])(haystack);
 // => [ [ 2 ], [ 1 ], [ 0 ] ]
 ```
 </details>
-<!--
-</example> -->
 
 #### useArraySelector
 
@@ -179,12 +157,6 @@ When set to `false`, no array selectors should be used in any needles and arrays
 Note that the results still include the array selectors.
 
 _Examples_:
-<!-- <example>
-haystack: [{ a: 0 }, { b: 1 }]
-needles: ['']
-useArraySelector: false
-comment: select top level array elements
--->
 <details><summary> <code>['']</code> <em>(select top level array elements)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -200,8 +172,6 @@ objectScan([''], {
 // => [ '[1]', '[0]' ]
 ```
 </details>
-<!--
-</example> -->
 
 #### strict
 
@@ -214,11 +184,6 @@ When set to `true`, errors are thrown when:
 - a path contains consecutive recursions
 
 _Examples_:
-<!-- <example>
-haystack: []
-needles: ['a.b', 'a.b']
-comment: identical
--->
 <details><summary> <code>['a.b', 'a.b']</code> <em>(identical)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -231,13 +196,6 @@ objectScan(['a.b', 'a.b'], { joined: true })(haystack);
 // => 'Error: Redundant Needle Target: "a.b" vs "a.b"'
 ```
 </details>
-<!--
-</example> -->
-<!-- <example>
-haystack: []
-needles: ['a.{b,b}']
-comment: identical, same needle
--->
 <details><summary> <code>['a.{b,b}']</code> <em>(identical, same needle)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -250,13 +208,6 @@ objectScan(['a.{b,b}'], { joined: true })(haystack);
 // => 'Error: Redundant Needle Target: "a.{b,b}" vs "a.{b,b}"'
 ```
 </details>
-<!--
-</example> -->
-<!-- <example>
-haystack: []
-needles: ['a.b', 'a.**']
-comment: invalidates previous
--->
 <details><summary> <code>['a.b', 'a.**']</code> <em>(invalidates previous)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -269,13 +220,6 @@ objectScan(['a.b', 'a.**'], { joined: true })(haystack);
 // => 'Error: Needle Target Invalidated: "a.b" by "a.**"'
 ```
 </details>
-<!--
-</example> -->
-<!-- <example>
-haystack: []
-needles: ['**.!**']
-comment: consecutive recursion
--->
 <details><summary> <code>['**.!**']</code> <em>(consecutive recursion)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -288,8 +232,6 @@ objectScan(['**.!**'], { joined: true })(haystack);
 // => 'Error: Redundant Recursion: "**.!**"'
 ```
 </details>
-<!--
-</example> -->
 
 ### Search Context
 
@@ -300,14 +242,6 @@ By default all matched keys are returned from a search invocation.
 However, when it is not undefined, the context is returned instead.
 
 _Examples_:
-<!-- <example>
-haystack: { a: { b: { c: 0, d: 1 }, e: 2 } }
-needles: ['**']
-context: []
-filterFn: ({ key, context }) => { context.push(key[key.length - 1]); }
-joined: false
-comment: output last segments only
--->
 <details><summary> <code>['**']</code> <em>(output last segments only)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -322,8 +256,6 @@ objectScan(['**'], {
 // => [ 'e', 'd', 'c', 'b', 'a' ]
 ```
 </details>
-<!--
-</example> -->
 
 ## Matching
 
@@ -334,11 +266,6 @@ with some notable extensions.
 
 To match an Array path, rectangular brackets are used.<br>
 _Examples_:
-<!-- <example>
-haystack: [0, 1, 2, 3, 4]
-needles: ['[2]']
-comment: matches `[2]` in an array
--->
 <details><summary> <code>['[2]']</code> <em>(matches `[2]` in an array)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -351,16 +278,9 @@ objectScan(['[2]'], { joined: true })(haystack);
 // => [ '[2]' ]
 ```
 </details>
-<!--
-</example> -->
 
 To match an Object path, the name of the path is used.<br>
 _Examples_:
-<!-- <example>
-haystack: { foo: 0, bar: 1 }
-needles: ['foo']
-comment: matches the path `foo` in an object
--->
 <details><summary> <code>['foo']</code> <em>(matches the path `foo` in an object)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -373,8 +293,6 @@ objectScan(['foo'], { joined: true })(haystack);
 // => [ 'foo' ]
 ```
 </details>
-<!--
-</example> -->
 
 ### Wildcard
 
@@ -387,11 +305,6 @@ The following characters have special meaning when not escaped:
 - `\`: Escape the subsequent character
 
 _Examples_:
-<!-- <example>
-haystack: [...Array(30).keys()]
-needles: ['[1?]']
-comment: matches two digit keys starting with a one
--->
 <details><summary> <code>['[1?]']</code> <em>(matches two digit keys starting with a one)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -404,19 +317,12 @@ objectScan(['[1?]'], { joined: true })(haystack);
 // => [ '[19]', '[18]', '[17]', '[16]', '[15]', '[14]', '[13]', '[12]', '[11]', '[10]' ]
 ```
 </details>
-<!--
-</example> -->
 
 ### Regex
 
 Regex can be used with Array and Object selector by using parentheses.
 
 _Examples_:<br>
-<!-- <example>
-haystack: { foo: 0, foobar: 1, bar: 2 }
-needles: ['(^foo)']
-comment: match all object paths starting with `foo`
--->
 <details><summary> <code>['(^foo)']</code> <em>(match all object paths starting with `foo`)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -429,13 +335,6 @@ objectScan(['(^foo)'], { joined: true })(haystack);
 // => [ 'foobar', 'foo' ]
 ```
 </details>
-<!--
-</example> -->
-<!-- <example>
-haystack: [...Array(20).keys()]
-needles: ['[(5)]']
-comment: matches all array paths containing `5`
--->
 <details><summary> <code>['[(5)]']</code> <em>(matches all array paths containing `5`)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -448,13 +347,6 @@ objectScan(['[(5)]'], { joined: true })(haystack);
 // => [ '[15]', '[5]' ]
 ```
 </details>
-<!--
-</example> -->
-<!-- <example>
-haystack: ['a', 'b', 'c', 'd']
-needles: ['[(^[01]$)]']
-comment: match first and second path in an array
--->
 <details><summary> <code>['[(^[01]$)]']</code> <em>(match first and second path in an array)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -467,8 +359,6 @@ objectScan(['[(^[01]$)]'], { joined: true })(haystack);
 // => [ '[1]', '[0]' ]
 ```
 </details>
-<!--
-</example> -->
 
 ### Arbitrary Depth
 
@@ -479,11 +369,6 @@ There are two types of recursion matching:
 Recursions can be combined with a regex by appending the regex.
 
 _Examples_:
-<!-- <example>
-haystack: { a: { b: 0, c: 0 } }
-needles: ['a.**']
-comment: matches zero or more nestings under `a`
--->
 <details><summary> <code>['a.**']</code> <em>(matches zero or more nestings under `a`)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -496,13 +381,6 @@ objectScan(['a.**'], { joined: true })(haystack);
 // => [ 'a.c', 'a.b', 'a' ]
 ```
 </details>
-<!--
-</example> -->
-<!-- <example>
-haystack: { a: { b: 0, c: 0 } }
-needles: ['a.++']
-comment: matches one or more nestings under `a`
--->
 <details><summary> <code>['a.++']</code> <em>(matches one or more nestings under `a`)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -515,13 +393,6 @@ objectScan(['a.++'], { joined: true })(haystack);
 // => [ 'a.c', 'a.b' ]
 ```
 </details>
-<!--
-</example> -->
-<!-- <example>
-haystack: { 1: { 1: ['a', 'b'] } }
-needles: ['**(1)']
-comment: matches all paths containing `1`
--->
 <details><summary> <code>['**(1)']</code> <em>(matches all paths containing `1`)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -534,8 +405,6 @@ objectScan(['**(1)'], { joined: true })(haystack);
 // => [ '1.1[1]', '1.1', '1' ]
 ```
 </details>
-<!--
-</example> -->
 
 ### Or Clause
 
@@ -545,11 +414,6 @@ This makes it possible to target multiple paths in a single needle. It also
 makes it easier to reduce redundancy.
 
 _Examples_:
-<!-- <example>
-haystack: ['a', 'b', 'c', 'd']
-needles: ['[{0,1}]']
-comment: match first and second path in an array
--->
 <details><summary> <code>['[{0,1}]']</code> <em>(match first and second path in an array)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -562,19 +426,12 @@ objectScan(['[{0,1}]'], { joined: true })(haystack);
 // => [ '[1]', '[0]' ]
 ```
 </details>
-<!--
-</example> -->
 
 ### Exclusion
 
 To exclude a path from being matched, use the exclamation mark.
 
 _Examples_:
-<!-- <example>
-haystack: { a: 0, b: { a: 1, c: 2 } }
-needles: ['**,!**.a']
-comment: matches all paths, except those where the last segment is `a`
--->
 <details><summary> <code>['**,!**.a']</code> <em>(matches all paths, except those where the last segment is `a`)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -587,8 +444,6 @@ objectScan(['**,!**.a'], { joined: true })(haystack);
 // => [ 'b.c', 'b' ]
 ```
 </details>
-<!--
-</example> -->
 
 ### Escaping
 
@@ -600,11 +455,6 @@ be escaped using `\`, if they should be matched in a key:<br>
 
 More extensive examples can be found in the tests.
 
-<!-- <example>
-haystack: { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' }
-needles: ['*']
-comment: top level keys
--->
 <details><summary> <code>['*']</code> <em>(top level keys)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -617,13 +467,7 @@ objectScan(['*'], { joined: true })(haystack);
 // => [ 'k', 'a' ]
 ```
 </details>
-<!--
-</example> -->
 
-<!-- <example>
-needles: ['a.*.f']
-comment: nested keys
--->
 <details><summary> <code>['a.*.f']</code> <em>(nested keys)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -636,13 +480,7 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 // => [ 'a.e.f' ]
 ```
 </details>
-<!--
-</example> -->
 
-<!-- <example>
-needles: ['*.*.*']
-comment: multiple nested keys
--->
 <details><summary> <code>['*.*.*']</code> <em>(multiple nested keys)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -655,13 +493,7 @@ objectScan(['*.*.*'], { joined: true })(haystack);
 // => [ 'a.e.f', 'a.b.c' ]
 ```
 </details>
-<!--
-</example> -->
 
-<!-- <example>
-needles: ['a.*.{c,f}']
-comment: or filter
--->
 <details><summary> <code>['a.*.{c,f}']</code> <em>(or filter)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -674,14 +506,7 @@ objectScan(['a.*.{c,f}'], { joined: true })(haystack);
 // => [ 'a.e.f', 'a.b.c' ]
 ```
 </details>
-<!--
-</example> -->
 
-<!-- <example>
-needles: ['a.*.{c,f}']
-comment: or filter, not joined
-joined: false
--->
 <details><summary> <code>['a.*.{c,f}']</code> <em>(or filter, not joined)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -694,13 +519,7 @@ objectScan(['a.*.{c,f}'])(haystack);
 // => [ [ 'a', 'e', 'f' ], [ 'a', 'b', 'c' ] ]
 ```
 </details>
-<!--
-</example> -->
 
-<!-- <example>
-needles: ['*.*[*]']
-comment: list filter
--->
 <details><summary> <code>['*.*[*]']</code> <em>(list filter)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -713,13 +532,7 @@ objectScan(['*.*[*]'], { joined: true })(haystack);
 // => [ 'a.h[1]', 'a.h[0]' ]
 ```
 </details>
-<!--
-</example> -->
 
-<!-- <example>
-needles: ['*[*]']
-comment: list filter, unmatched
--->
 <details><summary> <code>['*[*]']</code> <em>(list filter, unmatched)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -732,13 +545,7 @@ objectScan(['*[*]'], { joined: true })(haystack);
 // => []
 ```
 </details>
-<!--
-</example> -->
 
-<!-- <example>
-needles: ['**']
-comment: star recursion
--->
 <details><summary> <code>['**']</code> <em>(star recursion)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -751,13 +558,7 @@ objectScan(['**'], { joined: true })(haystack);
 // => [ 'k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b.c', 'a.b', 'a' ]
 ```
 </details>
-<!--
-</example> -->
 
-<!-- <example>
-needles: ['++.++']
-comment: plus recursion
--->
 <details><summary> <code>['++.++']</code> <em>(plus recursion)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -770,13 +571,7 @@ objectScan(['++.++'], { joined: true })(haystack);
 // => [ 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b.c', 'a.b' ]
 ```
 </details>
-<!--
-</example> -->
 
-<!-- <example>
-needles: ['**.f']
-comment: star recursion ending to f
--->
 <details><summary> <code>['**.f']</code> <em>(star recursion ending to f)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -789,13 +584,7 @@ objectScan(['**.f'], { joined: true })(haystack);
 // => [ 'a.e.f' ]
 ```
 </details>
-<!--
-</example> -->
 
-<!-- <example>
-needles: ['**[*]']
-comment: star recursion ending to array
--->
 <details><summary> <code>['**[*]']</code> <em>(star recursion ending to array)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -808,13 +597,7 @@ objectScan(['**[*]'], { joined: true })(haystack);
 // => [ 'a.h[1]', 'a.h[0]' ]
 ```
 </details>
-<!--
-</example> -->
 
-<!-- <example>
-needles: ['a.*,!a.e']
-comment: exclusion filter
--->
 <details><summary> <code>['a.*,!a.e']</code> <em>(exclusion filter)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -827,13 +610,7 @@ objectScan(['a.*,!a.e'], { joined: true })(haystack);
 // => [ 'a.h', 'a.b' ]
 ```
 </details>
-<!--
-</example> -->
 
-<!-- <example>
-needles: ['**.(^[bc]$)']
-comment: regex matching
--->
 <details><summary> <code>['**.(^[bc]$)']</code> <em>(regex matching)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -846,14 +623,7 @@ objectScan(['**.(^[bc]$)'], { joined: true })(haystack);
 // => [ 'a.b.c', 'a.b' ]
 ```
 </details>
-<!--
-</example> -->
 
-<!-- <example>
-needles: ['**']
-comment: filter function
-filterFn: ({ value }) => typeof value === 'string'
--->
 <details><summary> <code>['**']</code> <em>(filter function)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -869,14 +639,7 @@ objectScan(['**'], {
 // => [ 'k', 'a.h[1]', 'a.h[0]', 'a.e.f', 'a.b.c' ]
 ```
 </details>
-<!--
-</example> -->
 
-<!-- <example>
-needles: ['**']
-comment: break function
-breakFn: ({ key }) => key === 'a.b'
--->
 <details><summary> <code>['**']</code> <em>(break function)</em> </summary>
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
@@ -892,8 +655,6 @@ objectScan(['**'], {
 // => [ 'k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b', 'a' ]
 ```
 </details>
-<!--
-</example> -->
 
 ## Edge Cases
 

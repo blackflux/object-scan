@@ -29,10 +29,9 @@ const Renderer = () => {
 
   let haystack;
   return (match, content) => {
-    const metaEntries = content
+    const meta = content
       .split('\n')
-      .map((l) => /^(?<key>[a-zA-Z0-9]+): (?<value>.*)$/.exec(l).groups);
-    const meta = metaEntries
+      .map((l) => /^(?<key>[a-zA-Z0-9]+): (?<value>.*)$/.exec(l).groups)
       .reduce((obj, { key, value }) => Object.assign(obj, { [key]: value }), {});
     const options = getObjectScanOptions(meta);
     const context = meta.context ? `, ${meta.context}` : '';
@@ -48,7 +47,6 @@ const Renderer = () => {
       result = String(e);
     }
     return Mustache.render(template, {
-      meta: metaEntries,
       spoiler: meta.spoiler !== 'false',
       comment: meta.comment,
       haystack,
