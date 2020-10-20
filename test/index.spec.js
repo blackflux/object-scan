@@ -498,11 +498,11 @@ describe('Testing Find', () => {
 
   describe('Testing useArraySelector + breakFn', () => {
     const input = { child: [{ id: 1 }] };
-    const pattern = ['child.id', 'child[0].id'];
 
     const execTest = (useArraySelector, breakFn) => {
       const result = [];
-      objectScan(pattern, {
+      const needles = useArraySelector ? ['child[0].id'] : ['child.id'];
+      objectScan(needles, {
         breakFn: ({ key }) => {
           result.push(key);
           return breakFn(key);
@@ -653,9 +653,9 @@ describe('Testing Find', () => {
       ]);
     });
 
-    it('Testing Items Not Returned With List Selector', () => {
-      const find = objectScan(['array3[*].item'], { useArraySelector: false });
-      expect(find(haystack)).to.deep.equal([]);
+    it('Testing Error With List Selector', () => {
+      expect(() => objectScan(['array3[*].item'], { useArraySelector: false }))
+        .to.throw('Forbidden Array Selector: array3[*].item, char 6');
     });
   });
 

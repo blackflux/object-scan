@@ -125,7 +125,7 @@ const Result = (input) => {
   };
 };
 
-module.exports.parse = (input) => {
+module.exports.parse = (input, useArraySelector = true) => {
   if (input === '') {
     return new CString('', false);
   }
@@ -158,6 +158,9 @@ module.exports.parse = (input) => {
           result.finishElement(idx, { err: 'Bad Path Separator', fins: [']', '}'] });
           break;
         case '[':
+          if (useArraySelector === false) {
+            throwError('Forbidden Array Selector', input, { char: idx });
+          }
           result.finishElement(idx, { err: 'Bad Array Start', fins: [null, '!', '{', ',', '}', ']'] });
           result.setInArray(true, idx);
           break;
