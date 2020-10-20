@@ -24,7 +24,6 @@ Install with [npm](https://www.npmjs.com/):
 const objectScan = require('object-scan');
 
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' } } };
-
 objectScan(['a.*.f'], { joined: true })(haystack);
 // => [ 'a.e.f' ]
 ```
@@ -102,12 +101,9 @@ This method is conceptually similar to
 _Examples_:
 <details><summary> <code>['**']</code> <em>(filter function)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { a: 0, b: 'bar' };
-
 objectScan(['**'], {
   joined: true,
   filterFn: ({ value }) => typeof value === 'string'
@@ -130,12 +126,9 @@ Note that `breakFn` is invoked before the corresponding `filterFn` might be invo
 _Examples_:
 <details><summary> <code>['**']</code> <em>(break function)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
-
 objectScan(['**'], {
   joined: true,
   breakFn: ({ key }) => key === 'a.b'
@@ -158,24 +151,18 @@ Note that [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/d
 _Examples_:
 <details><summary> <code>['[*]']</code> <em>(joined)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = [0, 1, 2];
-
 objectScan(['[*]'], { joined: true })(haystack);
 // => [ '[2]', '[1]', '[0]' ]
 ```
 </details>
 <details><summary> <code>['[*]']</code> <em>(not joined)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = [0, 1, 2];
-
 objectScan(['[*]'])(haystack);
 // => [ [ 2 ], [ 1 ], [ 0 ] ]
 ```
@@ -193,12 +180,9 @@ Note that the results still include the array selectors.
 _Examples_:
 <details><summary> <code>['a', 'b.d']</code> <em>(automatic array traversal)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = [{ a: 0 }, { b: [{ c: 1 }, { d: 2 }] }];
-
 objectScan(['a', 'b.d'], {
   joined: true,
   useArraySelector: false
@@ -208,12 +192,9 @@ objectScan(['a', 'b.d'], {
 </details>
 <details><summary> <code>['']</code> <em>(select top level array elements)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = [{ a: 0 }, { b: 1 }];
-
 objectScan([''], {
   joined: true,
   useArraySelector: false
@@ -235,48 +216,36 @@ When set to `true`, errors are thrown when:
 _Examples_:
 <details><summary> <code>['a.b', 'a.b']</code> <em>(identical)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = [];
-
 objectScan(['a.b', 'a.b'], { joined: true })(haystack);
 // => 'Error: Redundant Needle Target: "a.b" vs "a.b"'
 ```
 </details>
 <details><summary> <code>['a.{b,b}']</code> <em>(identical, same needle)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = [];
-
 objectScan(['a.{b,b}'], { joined: true })(haystack);
 // => 'Error: Redundant Needle Target: "a.{b,b}" vs "a.{b,b}"'
 ```
 </details>
 <details><summary> <code>['a.b', 'a.**']</code> <em>(invalidates previous)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = [];
-
 objectScan(['a.b', 'a.**'], { joined: true })(haystack);
 // => 'Error: Needle Target Invalidated: "a.b" by "a.**"'
 ```
 </details>
 <details><summary> <code>['**.!**']</code> <em>(consecutive recursion)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = [];
-
 objectScan(['**.!**'], { joined: true })(haystack);
 // => 'Error: Redundant Recursion: "**.!**"'
 ```
@@ -293,12 +262,9 @@ However, when it is not undefined, the context is returned instead.
 _Examples_:
 <details><summary> <code>['**']</code> <em>(output last segments only)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { a: { b: { c: 0, d: 1 }, e: 2 } };
-
 objectScan(['**'], {
   filterFn: ({ key, context }) => { context.push(key[key.length - 1]); }
 })(haystack, []);
@@ -317,12 +283,9 @@ To match an Array path, rectangular brackets are used.<br>
 _Examples_:
 <details><summary> <code>['[2]']</code> <em>(matches `[2]` in an array)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = [0, 1, 2, 3, 4];
-
 objectScan(['[2]'], { joined: true })(haystack);
 // => [ '[2]' ]
 ```
@@ -332,12 +295,9 @@ To match an Object path, the name of the path is used.<br>
 _Examples_:
 <details><summary> <code>['foo']</code> <em>(matches the path `foo` in an object)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { foo: 0, bar: 1 };
-
 objectScan(['foo'], { joined: true })(haystack);
 // => [ 'foo' ]
 ```
@@ -356,12 +316,9 @@ The following characters have special meaning when not escaped:
 _Examples_:
 <details><summary> <code>['[1?]']</code> <em>(matches two digit keys starting with a one)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = [...Array(30).keys()];
-
 objectScan(['[1?]'], { joined: true })(haystack);
 // => [ '[19]', '[18]', '[17]', '[16]', '[15]', '[14]', '[13]', '[12]', '[11]', '[10]' ]
 ```
@@ -374,36 +331,27 @@ Regex can be used with Array and Object selector by using parentheses.
 _Examples_:<br>
 <details><summary> <code>['(^foo)']</code> <em>(match all object paths starting with `foo`)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { foo: 0, foobar: 1, bar: 2 };
-
 objectScan(['(^foo)'], { joined: true })(haystack);
 // => [ 'foobar', 'foo' ]
 ```
 </details>
 <details><summary> <code>['[(5)]']</code> <em>(matches all array paths containing `5`)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = [...Array(20).keys()];
-
 objectScan(['[(5)]'], { joined: true })(haystack);
 // => [ '[15]', '[5]' ]
 ```
 </details>
 <details><summary> <code>['[(^[01]$)]']</code> <em>(match first and second path in an array)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = ['a', 'b', 'c', 'd'];
-
 objectScan(['[(^[01]$)]'], { joined: true })(haystack);
 // => [ '[1]', '[0]' ]
 ```
@@ -420,36 +368,27 @@ Recursions can be combined with a regex by appending the regex.
 _Examples_:
 <details><summary> <code>['a.**']</code> <em>(matches zero or more nestings under `a`)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { a: { b: 0, c: 0 } };
-
 objectScan(['a.**'], { joined: true })(haystack);
 // => [ 'a.c', 'a.b', 'a' ]
 ```
 </details>
 <details><summary> <code>['a.++']</code> <em>(matches one or more nestings under `a`)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { a: { b: 0, c: 0 } };
-
 objectScan(['a.++'], { joined: true })(haystack);
 // => [ 'a.c', 'a.b' ]
 ```
 </details>
 <details><summary> <code>['**(1)']</code> <em>(matches all paths containing `1`)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { 1: { 1: ['a', 'b'] } };
-
 objectScan(['**(1)'], { joined: true })(haystack);
 // => [ '1.1[1]', '1.1', '1' ]
 ```
@@ -465,12 +404,9 @@ makes it easier to reduce redundancy.
 _Examples_:
 <details><summary> <code>['[{0,1}]']</code> <em>(match first and second path in an array)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = ['a', 'b', 'c', 'd'];
-
 objectScan(['[{0,1}]'], { joined: true })(haystack);
 // => [ '[1]', '[0]' ]
 ```
@@ -483,12 +419,9 @@ To exclude a path from being matched, use the exclamation mark.
 _Examples_:
 <details><summary> <code>['**,!**.a']</code> <em>(matches all paths, except those where the last segment is `a`)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { a: 0, b: { a: 1, c: 2 } };
-
 objectScan(['**,!**.a'], { joined: true })(haystack);
 // => [ 'b.c', 'b' ]
 ```
@@ -506,12 +439,9 @@ More extensive examples can be found in the tests.
 
 <details><summary> <code>['*']</code> <em>(top level keys)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
-
 objectScan(['*'], { joined: true })(haystack);
 // => [ 'k', 'a' ]
 ```
@@ -519,12 +449,9 @@ objectScan(['*'], { joined: true })(haystack);
 
 <details><summary> <code>['a.*.f']</code> <em>(nested keys)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
-
 objectScan(['a.*.f'], { joined: true })(haystack);
 // => [ 'a.e.f' ]
 ```
@@ -532,12 +459,9 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 
 <details><summary> <code>['*.*.*']</code> <em>(multiple nested keys)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
-
 objectScan(['*.*.*'], { joined: true })(haystack);
 // => [ 'a.e.f', 'a.b.c' ]
 ```
@@ -545,12 +469,9 @@ objectScan(['*.*.*'], { joined: true })(haystack);
 
 <details><summary> <code>['a.*.{c,f}']</code> <em>(or filter)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
-
 objectScan(['a.*.{c,f}'], { joined: true })(haystack);
 // => [ 'a.e.f', 'a.b.c' ]
 ```
@@ -558,12 +479,9 @@ objectScan(['a.*.{c,f}'], { joined: true })(haystack);
 
 <details><summary> <code>['a.*.{c,f}']</code> <em>(or filter, not joined)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
-
 objectScan(['a.*.{c,f}'])(haystack);
 // => [ [ 'a', 'e', 'f' ], [ 'a', 'b', 'c' ] ]
 ```
@@ -571,12 +489,9 @@ objectScan(['a.*.{c,f}'])(haystack);
 
 <details><summary> <code>['*.*[*]']</code> <em>(list filter)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
-
 objectScan(['*.*[*]'], { joined: true })(haystack);
 // => [ 'a.h[1]', 'a.h[0]' ]
 ```
@@ -584,12 +499,9 @@ objectScan(['*.*[*]'], { joined: true })(haystack);
 
 <details><summary> <code>['*[*]']</code> <em>(list filter, unmatched)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
-
 objectScan(['*[*]'], { joined: true })(haystack);
 // => []
 ```
@@ -597,12 +509,9 @@ objectScan(['*[*]'], { joined: true })(haystack);
 
 <details><summary> <code>['**']</code> <em>(star recursion)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
-
 objectScan(['**'], { joined: true })(haystack);
 // => [ 'k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b.c', 'a.b', 'a' ]
 ```
@@ -610,12 +519,9 @@ objectScan(['**'], { joined: true })(haystack);
 
 <details><summary> <code>['++.++']</code> <em>(plus recursion)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
-
 objectScan(['++.++'], { joined: true })(haystack);
 // => [ 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b.c', 'a.b' ]
 ```
@@ -623,12 +529,9 @@ objectScan(['++.++'], { joined: true })(haystack);
 
 <details><summary> <code>['**.f']</code> <em>(star recursion ending to f)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
-
 objectScan(['**.f'], { joined: true })(haystack);
 // => [ 'a.e.f' ]
 ```
@@ -636,12 +539,9 @@ objectScan(['**.f'], { joined: true })(haystack);
 
 <details><summary> <code>['**[*]']</code> <em>(star recursion ending to array)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
-
 objectScan(['**[*]'], { joined: true })(haystack);
 // => [ 'a.h[1]', 'a.h[0]' ]
 ```
@@ -649,12 +549,9 @@ objectScan(['**[*]'], { joined: true })(haystack);
 
 <details><summary> <code>['a.*,!a.e']</code> <em>(exclusion filter)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
-
 objectScan(['a.*,!a.e'], { joined: true })(haystack);
 // => [ 'a.h', 'a.b' ]
 ```
@@ -662,12 +559,9 @@ objectScan(['a.*,!a.e'], { joined: true })(haystack);
 
 <details><summary> <code>['**.(^[bc]$)']</code> <em>(regex matching)</em> </summary>
 
-<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
 ```js
-const objectScan = require('object-scan');
-
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
-
 objectScan(['**.(^[bc]$)'], { joined: true })(haystack);
 // => [ 'a.b.c', 'a.b' ]
 ```
