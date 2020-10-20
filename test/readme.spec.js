@@ -6,14 +6,15 @@ const Mustache = require('mustache');
 const stringify = require('./helper/stringify');
 
 const getObjectScanOptions = (meta) => {
-  const multiline = meta.filterFn !== undefined || meta.breakFn !== undefined;
-  const result = Object.entries({
+  const entries = Object.entries({
     joined: meta.joined === 'false' ? undefined : true,
     filterFn: meta.filterFn,
     breakFn: meta.breakFn,
     useArraySelector: meta.useArraySelector
   })
-    .filter(([k, v]) => v !== undefined)
+    .filter(([k, v]) => v !== undefined);
+  const multiline = entries.length > 1 || meta.filterFn !== undefined || meta.breakFn !== undefined;
+  const result = entries
     .map(([k, v]) => `${k}: ${v}`)
     .join(multiline ? ',\n  ' : ', ');
   if (result === '') {

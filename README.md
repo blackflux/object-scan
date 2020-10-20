@@ -193,7 +193,10 @@ const objectScan = require('object-scan');
 
 const haystack = [{ a: 0 }, { b: 1 }];
 
-objectScan([''], { joined: true, useArraySelector: false })(haystack);
+objectScan([''], {
+  joined: true,
+  useArraySelector: false
+})(haystack);
 // => [ '[1]', '[0]' ]
 ```
 </details>
