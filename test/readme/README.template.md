@@ -19,11 +19,11 @@ Install with [npm](https://www.npmjs.com/):
 
 ## Usage
 
-<!-- <example>
+<pre><example>
 haystack: { a: { b: { c: 'd' }, e: { f: 'g' } } }
 needles: ['a.*.f']
 spoiler: false
-</example> -->
+</example></pre>
 
 ### Features
 
@@ -117,18 +117,18 @@ Setting this option to `true` will negatively impact performance.
 Note that [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set) fully support lists.
 
 _Examples_:
-<!-- <example>
+<pre><example>
 haystack: [0, 1, 2]
 needles: ['[*]']
 joined: true
 comment: joined
-</example> -->
-<!-- <example>
+</example></pre>
+<pre><example>
 haystack: [0, 1, 2]
 needles: ['[*]']
 joined: false
 comment: not joined
-</example> -->
+</example></pre>
 
 #### useArraySelector
 
@@ -140,12 +140,12 @@ When set to `false`, no array selectors should be used in any needles and arrays
 Note that the results still include the array selectors.
 
 _Examples_:
-<!-- <example>
+<pre><example>
 haystack: [{ a: 0 }, { b: 1 }]
 needles: ['']
 useArraySelector: false
 comment: select top level array elements
-</example> -->
+</example></pre>
 
 #### strict
 
@@ -158,26 +158,26 @@ When set to `true`, errors are thrown when:
 - a path contains consecutive recursions
 
 _Examples_:
-<!-- <example>
+<pre><example>
 haystack: []
 needles: ['a.b', 'a.b']
 comment: identical
-</example> -->
-<!-- <example>
+</example></pre>
+<pre><example>
 haystack: []
 needles: ['a.{b,b}']
 comment: identical, same needle
-</example> -->
-<!-- <example>
+</example></pre>
+<pre><example>
 haystack: []
 needles: ['a.b', 'a.**']
 comment: invalidates previous
-</example> -->
-<!-- <example>
+</example></pre>
+<pre><example>
 haystack: []
 needles: ['**.!**']
 comment: consecutive recursion
-</example> -->
+</example></pre>
 
 ### Search Context
 
@@ -188,14 +188,14 @@ By default all matched keys are returned from a search invocation.
 However, when it is not undefined, the context is returned instead.
 
 _Examples_:
-<!-- <example>
+<pre><example>
 haystack: { a: { b: { c: 0, d: 1 }, e: 2 } }
 needles: ['**']
 context: []
 filterFn: ({ key, context }) => { context.push(key[key.length - 1]); }
 joined: false
 comment: output last segments only
-</example> -->
+</example></pre>
 
 ## Matching
 
@@ -206,19 +206,19 @@ with some notable extensions.
 
 To match an Array path, rectangular brackets are used.<br>
 _Examples_:
-<!-- <example>
+<pre><example>
 haystack: [0, 1, 2, 3, 4]
 needles: ['[2]']
 comment: matches `[2]` in an array
-</example> -->
+</example></pre>
 
 To match an Object path, the name of the path is used.<br>
 _Examples_:
-<!-- <example>
+<pre><example>
 haystack: { foo: 0, bar: 1 }
 needles: ['foo']
 comment: matches the path `foo` in an object
-</example> -->
+</example></pre>
 
 ### Wildcard
 
@@ -231,32 +231,32 @@ The following characters have special meaning when not escaped:
 - `\`: Escape the subsequent character
 
 _Examples_:
-<!-- <example>
+<pre><example>
 haystack: [...Array(30).keys()]
 needles: ['[1?]']
 comment: matches two digit keys starting with a one
-</example> -->
+</example></pre>
 
 ### Regex
 
 Regex can be used with Array and Object selector by using parentheses.
 
 _Examples_:<br>
-<!-- <example>
+<pre><example>
 haystack: { foo: 0, foobar: 1, bar: 2 }
 needles: ['(^foo)']
 comment: match all object paths starting with `foo`
-</example> -->
-<!-- <example>
+</example></pre>
+<pre><example>
 haystack: [...Array(20).keys()]
 needles: ['[(5)]']
 comment: matches all array paths containing `5`
-</example> -->
-<!-- <example>
+</example></pre>
+<pre><example>
 haystack: ['a', 'b', 'c', 'd']
 needles: ['[(^[01]$)]']
 comment: match first and second path in an array
-</example> -->
+</example></pre>
 
 ### Arbitrary Depth
 
@@ -267,21 +267,21 @@ There are two types of recursion matching:
 Recursions can be combined with a regex by appending the regex.
 
 _Examples_:
-<!-- <example>
+<pre><example>
 haystack: { a: { b: 0, c: 0 } }
 needles: ['a.**']
 comment: matches zero or more nestings under `a`
-</example> -->
-<!-- <example>
+</example></pre>
+<pre><example>
 haystack: { a: { b: 0, c: 0 } }
 needles: ['a.++']
 comment: matches one or more nestings under `a`
-</example> -->
-<!-- <example>
+</example></pre>
+<pre><example>
 haystack: { 1: { 1: ['a', 'b'] } }
 needles: ['**(1)']
 comment: matches all paths containing `1`
-</example> -->
+</example></pre>
 
 ### Or Clause
 
@@ -291,22 +291,22 @@ This makes it possible to target multiple paths in a single needle. It also
 makes it easier to reduce redundancy.
 
 _Examples_:
-<!-- <example>
+<pre><example>
 haystack: ['a', 'b', 'c', 'd']
 needles: ['[{0,1}]']
 comment: match first and second path in an array
-</example> -->
+</example></pre>
 
 ### Exclusion
 
 To exclude a path from being matched, use the exclamation mark.
 
 _Examples_:
-<!-- <example>
+<pre><example>
 haystack: { a: 0, b: { a: 1, c: 2 } }
 needles: ['**,!**.a']
 comment: matches all paths, except those where the last segment is `a`
-</example> -->
+</example></pre>
 
 ### Escaping
 
@@ -318,84 +318,84 @@ be escaped using `\`, if they should be matched in a key:<br>
 
 More extensive examples can be found in the tests.
 
-<!-- <example>
+<pre><example>
 haystack: { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' }
 needles: ['*']
 comment: top level keys
-</example> -->
+</example></pre>
 
-<!-- <example>
+<pre><example>
 needles: ['a.*.f']
 comment: nested keys
-</example> -->
+</example></pre>
 
-<!-- <example>
+<pre><example>
 needles: ['*.*.*']
 comment: multiple nested keys
-</example> -->
+</example></pre>
 
-<!-- <example>
+<pre><example>
 needles: ['a.*.{c,f}']
 comment: or filter
-</example> -->
+</example></pre>
 
-<!-- <example>
+<pre><example>
 needles: ['a.*.{c,f}']
 comment: or filter, not joined
 joined: false
-</example> -->
+</example></pre>
 
-<!-- <example>
+<pre><example>
 needles: ['*.*[*]']
 comment: list filter
-</example> -->
+</example></pre>
 
-<!-- <example>
+<pre><example>
 needles: ['*[*]']
 comment: list filter, unmatched
-</example> -->
+</example></pre>
 
-<!-- <example>
+<pre><example>
 needles: ['**']
 comment: star recursion
-</example> -->
+</example></pre>
 
-<!-- <example>
+<pre><example>
 needles: ['++.++']
 comment: plus recursion
-</example> -->
+</example></pre>
 
-<!-- <example>
+<pre><example>
 needles: ['**.f']
 comment: star recursion ending to f
-</example> -->
+</example></pre>
 
-<!-- <example>
+<pre><example>
 needles: ['**[*]']
 comment: star recursion ending to array
-</example> -->
+</example></pre>
 
-<!-- <example>
+<pre><example>
 needles: ['a.*,!a.e']
 comment: exclusion filter
-</example> -->
+</example></pre>
 
-<!-- <example>
+<pre><example>
 needles: ['**.(^[bc]$)']
 comment: regex matching
-</example> -->
+</example></pre>
 
-<!-- <example>
+<pre><example>
 needles: ['**']
 comment: filter function
 filterFn: ({ value }) => typeof value === 'string'
-</example> -->
+</example></pre>
 
-<!-- <example>
+<pre><example>
 needles: ['**']
 comment: break function
 breakFn: ({ key }) => key === 'a.b'
-</example> -->
+</example></pre>
 
 ## Edge Cases
 
