@@ -78,7 +78,7 @@ const applyTasks = (() => {
     };
   })();
 
-  return (tasks, lines) => {
+  return (lines, tasks) => {
     tasks
       .sort(({ start: startA }, { start: startB }) => startB - startA)
       .forEach((task) => {
@@ -94,7 +94,7 @@ describe('Testing Readme', { timeout: 5 * 60000 }, () => {
     const lines = fs.smartRead(readmeFile);
     const tasks = findTasks(lines);
     enrichTasks(tasks, lines);
-    applyTasks(tasks, lines);
+    applyTasks(lines, tasks);
     const result = fs.smartWrite(readmeFile, lines);
     expect(result).to.equal(false);
   });
