@@ -111,16 +111,16 @@ describe('Testing path-to-needle-path.js', () => {
       expect(r).to.deep.equal([
         { value: 'name', string: true, exclude: false },
         { value: '0*', string: false, exclude: false },
-        { value: '***', string: true, exclude: false },
+        { value: '*v*l*e', string: true, exclude: false },
         { value: '16', string: false, exclude: false },
-        { value: 'prope*', string: true, exclude: false }
+        { value: 'prope*y', string: true, exclude: false }
       ]);
     });
 
     it('Testing multiple', () => {
       const r = pathToNeedlePath(['1234567890'], { partialStar: 3 }, rng);
       expect(r).to.deep.equal([
-        { value: '12345*6*7*', string: true, exclude: false }
+        { value: '12345*6*7*0', string: true, exclude: false }
       ]);
     });
 
@@ -163,6 +163,7 @@ describe('Testing path-to-needle-path.js', () => {
       expect(r).to.deep.equal([
         { value: 'name', string: true, exclude: false },
         { value: '**', string: true, exclude: false },
+        { value: 'value', string: true, exclude: false },
         { value: '16', string: false, exclude: false },
         { value: 'property', string: true, exclude: false },
         { value: '**', string: true, exclude: false }

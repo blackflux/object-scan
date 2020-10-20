@@ -1,6 +1,8 @@
 const Joi = require('joi-strict');
 const { escape, escapeRegex } = require('../../src/util/helper');
 const sampleArray = require('./sample-array');
+const sampleArrayGrouped = require('./sample-array-grouped');
+const sampleRanges = require('./sample-ranges');
 const shuffleArray = require('./shuffle-array');
 
 module.exports = (...kwargs) => {
@@ -43,95 +45,75 @@ module.exports = (...kwargs) => {
     exclude: false
   }));
 
-  const generateIndices = (len, { total: total_ = undefined, unique = true } = {}) => {
-    const total = total_ === undefined ? result.length : total_;
-    const indices = [...Array(total).keys()];
-    const indicesSelected = sampleArray(indices, len, { rng, unique });
-    const indicesGrouped = indicesSelected.reduce((p, c) => Object.assign(p, { [c]: (p[c] || 0) + 1 }), {});
-    return Object
-      .entries(indicesGrouped)
-      .map(([k, v]) => [parseInt(k, 10), v])
-      .sort((a, b) => b[0] - a[0]);
-  };
-
   // generate partial question mark
   if (params.questionMark !== 0) {
-    generateIndices(params.questionMark, { unique: false }).forEach(([idx, count]) => {
-      const value = result[idx].value;
-      generateIndices(count, { total: value.length }).forEach(([i]) => {
-        value[i] = '?';
+    sampleArrayGrouped(result.length, params.questionMark, { rng })
+      .forEach(([idx, count]) => {
+        const value = result[idx].value;
+        sampleArray(value.length, count, { rng, unique: true })
+          .forEach((i) => {
+            value[i] = '?';
+          });
       });
-    });
   }
   // generate partial plus
   if (params.partialPlus !== 0) {
-    generateIndices(params.partialPlus, { unique: false }).forEach(([idx, count]) => {
-      const value = result[idx].value;
-      const indices = generateIndices(count, { total: value.length });
-      let posPrev = value.length;
-      for (let i = 0; i < indices.length; i += 1) {
-        const [pos] = indices[i];
-        const deleteCount = Math.floor((posPrev - pos) * rng()) + 1;
-        value.splice(pos, deleteCount, '+');
-        posPrev = pos;
-      }
-    });
+    sampleArrayGrouped(result.length, params.partialPlus, { rng })
+      .forEach(([idx, count]) => {
+        const value = result[idx].value;
+        sampleRanges(value.length, count, { rng, alwaysReplace: true })
+          .forEach(([pos, len]) => {
+            value.splice(pos, len, '+');
+          });
+      });
   }
   // generate partial star
   if (params.partialStar !== 0) {
-    generateIndices(params.partialStar, { unique: false }).forEach(([idx, count]) => {
-      const value = result[idx].value;
-      const indices = generateIndices(count, { total: value.length + 1 });
-      let posPrev = value.length + 1;
-      for (let i = 0; i < indices.length; i += 1) {
-        const [pos] = indices[i];
-        const deleteCount = Math.floor((posPrev - pos + 1) * rng());
-        value.splice(pos, deleteCount, '*');
-        posPrev = pos;
-      }
-    });
+    sampleArrayGrouped(result.length, params.partialStar, { rng })
+      .forEach(([idx, count]) => {
+        const value = result[idx].value;
+        sampleRanges(value.length, count, { rng })
+          .forEach(([pos, len]) => {
+            value.splice(pos, len, '*');
+          });
+      });
   }
   // generate single star
   if (params.singleStar !== 0) {
-    generateIndices(params.singleStar).forEach(([pos]) => {
-      result[pos].value = ['*'];
-    });
+    sampleArray(result.length, params.singleStar, { rng, unique: true })
+      .forEach((pos) => {
+        result[pos].value = ['*'];
+      });
   }
   // generate double star
   if (params.doubleStar !== 0) {
-    const indicesSelected = generateIndices(params.doubleStar, { total: result.length + 1 });
-    let posPrev = result.length + 1;
-    for (let idx = 0; idx < indicesSelected.length; idx += 1) {
-      const [pos] = indicesSelected[idx];
-      const deleteCount = Math.floor((posPrev - pos + 1) * rng());
-      result.splice(pos, deleteCount, {
-        value: ['**'],
-        string: true,
-        exclude: false
+    sampleRanges(result.length, params.doubleStar, { rng })
+      .forEach(([pos, len]) => {
+        const value = { value: ['**'], string: true, exclude: false };
+        result.splice(pos, len, value);
       });
-      posPrev = pos;
-    }
   }
   // generate regex
   if (params.regex !== 0) {
-    generateIndices(params.regex).forEach(([pos]) => {
-      if (result[pos].value.length === 1 && ['**', '++'].includes(result[pos].value[0])) {
-        result[pos].value[0] = `${result[pos].value[0]}(.*)`;
-      } else {
-        result[pos].value = ['(', ...result[pos].value.map((char) => {
-          switch (char) {
-            case '?':
-              return '.';
-            case '*':
-              return '.*';
-            case '+':
-              return '.+';
-            default:
-              return escapeRegex(char.slice(-1)[0]);
-          }
-        }), ')'];
-      }
-    });
+    sampleArray(result.length, params.regex, { rng, unique: true })
+      .forEach((pos) => {
+        if (result[pos].value.length === 1 && ['**', '++'].includes(result[pos].value[0])) {
+          result[pos].value[0] = `${result[pos].value[0]}(.*)`;
+        } else {
+          result[pos].value = ['(', ...result[pos].value.map((char) => {
+            switch (char) {
+              case '?':
+                return '.';
+              case '*':
+                return '.*';
+              case '+':
+                return '.+';
+              default:
+                return escapeRegex(char.slice(-1)[0]);
+            }
+          }), ')'];
+        }
+      });
   }
   // crop the result length
   result.length = Math.round(result.length * params.lenPercentage);
