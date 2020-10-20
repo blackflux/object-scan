@@ -94,6 +94,14 @@ Invoked in same order as matches would appear in result.
 This method is conceptually similar to
 [Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
 
+_Examples_:
+<pre><example>
+haystack: { a: 0, b: 'bar' }
+needles: ['**']
+comment: filter function
+filterFn: ({ value }) => typeof value === 'string'
+</example></pre>
+
 #### breakFn
 
 Type: `function`<br>
@@ -104,6 +112,14 @@ the search. If `true` is returned, all keys nested under the current key are
 skipped in the search and from the final result.
 
 Note that `breakFn` is invoked before the corresponding `filterFn` might be invoked.
+
+_Examples_:
+<pre><example>
+haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
+needles: ['**']
+comment: break function
+breakFn: ({ key }) => key === 'a.b'
+</example></pre>
 
 #### joined
 
@@ -140,6 +156,12 @@ When set to `false`, no array selectors should be used in any needles and arrays
 Note that the results still include the array selectors.
 
 _Examples_:
+<pre><example>
+haystack: [{ a: 0 }, { b: [{ c: 1 }, { d: 2 }] }]
+needles: ['a', 'b.d']
+useArraySelector: false
+comment: automatic array traversal
+</example></pre>
 <pre><example>
 haystack: [{ a: 0 }, { b: 1 }]
 needles: ['']
@@ -383,18 +405,6 @@ comment: exclusion filter
 <pre><example>
 needles: ['**.(^[bc]$)']
 comment: regex matching
-</example></pre>
-
-<pre><example>
-needles: ['**']
-comment: filter function
-filterFn: ({ value }) => typeof value === 'string'
-</example></pre>
-
-<pre><example>
-needles: ['**']
-comment: break function
-breakFn: ({ key }) => key === 'a.b'
 </example></pre>
 
 ## Edge Cases
