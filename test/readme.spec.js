@@ -60,11 +60,11 @@ const Renderer = () => {
 
 describe('Testing Readme', { timeout: 5 * 60000 }, () => {
   it('Updating Readme Example', () => {
-    const inputFile = path.join(__dirname, 'readme', 'README.raw.md');
+    const inputFile = path.join(__dirname, 'readme', 'README.template.md');
     const outputFile = path.join(__dirname, '..', 'README.md');
     const input = fs.smartRead(inputFile).join('\n');
     const renderer = Renderer();
-    const output = input.replace(/<!-- <example>\n([\s\S]+?)\n<\/example> -->/g, renderer);
+    const output = input.replace(/<pre><example>\n([\s\S]+?)\n<\/example><\/pre>/g, renderer);
     const result = fs.smartWrite(outputFile, output.split('\n'));
     expect(result).to.equal(false);
   });
