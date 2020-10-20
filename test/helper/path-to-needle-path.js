@@ -15,6 +15,7 @@ module.exports = (...kwargs) => {
     partialPlus: 0,
     partialStar: 0,
     singleStar: 0,
+    doublePlus: 0,
     doubleStar: 0,
     regex: 0,
     ...(kwargs[1] || {})
@@ -30,6 +31,7 @@ module.exports = (...kwargs) => {
     partialPlus: Joi.number().integer().min(0),
     partialStar: Joi.number().integer().min(0),
     singleStar: Joi.number().integer().min(0),
+    doublePlus: Joi.number().integer().min(0),
     doubleStar: Joi.number().integer().min(0),
     regex: Joi.number().integer().min(0)
   }));
@@ -61,7 +63,7 @@ module.exports = (...kwargs) => {
     sampleArrayGrouped(result.length, params.partialPlus, { rng })
       .forEach(([idx, count]) => {
         const value = result[idx].value;
-        sampleRanges(value.length, count, { rng, alwaysReplace: true })
+        sampleRanges(value.length, count, { rng, unique: true, alwaysReplace: true })
           .forEach(([pos, len]) => {
             value.splice(pos, len, '+');
           });
@@ -72,7 +74,7 @@ module.exports = (...kwargs) => {
     sampleArrayGrouped(result.length, params.partialStar, { rng })
       .forEach(([idx, count]) => {
         const value = result[idx].value;
-        sampleRanges(value.length, count, { rng })
+        sampleRanges(value.length, count, { rng, unique: true })
           .forEach(([pos, len]) => {
             value.splice(pos, len, '*');
           });
@@ -85,9 +87,17 @@ module.exports = (...kwargs) => {
         result[pos].value = ['*'];
       });
   }
+  // generate double plus
+  if (params.doublePlus !== 0) {
+    sampleRanges(result.length, params.doublePlus, { rng, unique: true, alwaysReplace: true })
+      .forEach(([pos, len]) => {
+        const value = { value: ['++'], string: true, exclude: false };
+        result.splice(pos, len, value);
+      });
+  }
   // generate double star
   if (params.doubleStar !== 0) {
-    sampleRanges(result.length, params.doubleStar, { rng })
+    sampleRanges(result.length, params.doubleStar, { rng, unique: true })
       .forEach(([pos, len]) => {
         const value = { value: ['**'], string: true, exclude: false };
         result.splice(pos, len, value);

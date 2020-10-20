@@ -157,6 +157,26 @@ describe('Testing path-to-needle-path.js', () => {
     ]);
   });
 
+  describe('Testing double Plus', () => {
+    it('Testing default', () => {
+      const r = pathToNeedlePath(needle, { doublePlus: 2 }, rng);
+      expect(r).to.deep.equal([
+        { value: 'name', string: true, exclude: false },
+        { value: '++', string: true, exclude: false },
+        { value: 'value', string: true, exclude: false },
+        { value: '16', string: false, exclude: false },
+        { value: '++', string: true, exclude: false }
+      ]);
+    });
+
+    it('Testing replace', () => {
+      const r = pathToNeedlePath([0], { doublePlus: 1 }, PRNG('fc863e2a-f73e-4e49-b349-70b9ddb82f47'));
+      expect(r).to.deep.equal([
+        { value: '++', string: true, exclude: false }
+      ]);
+    });
+  });
+
   describe('Testing double Star', () => {
     it('Testing default', () => {
       const r = pathToNeedlePath(needle, { doubleStar: 2 }, rng);
@@ -203,6 +223,13 @@ describe('Testing path-to-needle-path.js', () => {
         { value: '(value)', string: true, exclude: false },
         { value: '(16)', string: false, exclude: false },
         { value: '(property)', string: true, exclude: false }
+      ]);
+    });
+
+    it('Testing regex double plus', () => {
+      const r = pathToNeedlePath(['abc'], { doublePlus: 1, regex: 1 }, rng);
+      expect(r).to.deep.equal([
+        { value: '++(.*)', string: true, exclude: false }
       ]);
     });
 
