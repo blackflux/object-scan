@@ -1,11 +1,14 @@
 {{#spoiler}}<details><summary> <code>{{&needles}}</code> {{#comment}}<em>({{&comment}})</em> {{/comment}}</summary>
 
-{{/spoiler}}<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
+<!-- eslint-disable no-undef -->
+```js
+{{/spoiler}}{{^spoiler}}
+<!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
 const objectScan = require('object-scan');
 
+{{/spoiler}}
 const haystack = {{&haystack}};
-
 objectScan({{&needles}}{{&options}})(haystack{{context}});
 // => {{&result}}
 ```
