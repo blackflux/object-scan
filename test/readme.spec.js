@@ -5,25 +5,12 @@ const { describe } = require('node-tdd');
 const Mustache = require('mustache');
 const stringify = require('./helper/stringify');
 
-const parseContent = (content) => {
-  const lines = content.trim().split('\n');
-  return [
-    'haystack',
-    'needles',
-    'comment',
-    'spoiler',
-    'joined',
-    'filterFn',
-    'breakFn'
-  ].reduce((p, k) => {
-    const line = lines.find((l) => l.startsWith(`${k}:`));
-    if (line !== undefined) {
-      // eslint-disable-next-line no-param-reassign
-      p[k] = line.slice(k.length + 1).trim();
-    }
-    return p;
-  }, {});
-};
+const parseContent = (content) => content
+  .split('\n')
+  .map((l) => l.trim())
+  .map((l) => /^(?<key>[a-zA-Z0-9]+): (?<value>.*)$/.exec(l))
+  .filter((e) => e !== null)
+  .map((e) => e.groups);
 
 const mkObjectScanCtx = (context) => Object.entries({
   joined: context.joined || true,
@@ -43,7 +30,9 @@ describe('Testing Readme', { timeout: 5 * 60000 }, () => {
     const contentOriginal = fs.smartRead(file).join('\n');
     let haystack = null;
     const contentUpdated = contentOriginal.replace(exampleRegex, (match, content) => {
-      const context = parseContent(content);
+      const contextList = parseContent(content);
+      const context = contextList
+        .reduce((obj, { key, value }) => Object.assign(obj, { [key]: value }), {});
       const ctx = mkObjectScanCtx(context);
       if (context.haystack) {
         haystack = context.haystack;
@@ -51,7 +40,7 @@ describe('Testing Readme', { timeout: 5 * 60000 }, () => {
       // eslint-disable-next-line no-eval
       const result = eval(`require('../src/index')(${context.needles}, { ${ctx} })(${haystack})`);
       return Mustache.render(template, {
-        context: Object.entries(context).map(([key, value]) => ({ key, value })),
+        context: contextList,
         spoiler: context.spoiler !== 'false',
         comment: context.comment,
         haystack,
