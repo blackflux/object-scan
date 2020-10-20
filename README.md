@@ -301,7 +301,7 @@ However, when it is not undefined, the context is returned instead.
 
 _Examples_:
 <!-- <example>
-haystack: { a: { b: { c: 0, d: 1}, e: 2 } }
+haystack: { a: { b: { c: 0, d: 1 }, e: 2 } }
 needles: ['**']
 context: []
 filterFn: ({ key, context }) => { context.push(key[key.length - 1]); }
@@ -314,7 +314,7 @@ comment: output last segments only
 ```js
 const objectScan = require('object-scan');
 
-const haystack = { a: { b: { c: 0, d: 1}, e: 2 } };
+const haystack = { a: { b: { c: 0, d: 1 }, e: 2 } };
 
 objectScan(['**'], {
   filterFn: ({ key, context }) => { context.push(key[key.length - 1]); }
