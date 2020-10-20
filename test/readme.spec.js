@@ -1,8 +1,8 @@
-const util = require('util');
 const fs = require('smart-fs');
 const path = require('path');
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
+const stringifyObject = require('stringify-object');
 
 const mkSpoiler = (titleCode, titleComment, code) => [
   [
@@ -17,6 +17,8 @@ const mkSpoiler = (titleCode, titleComment, code) => [
   '</details>'
 ];
 
+const pad = (e) => e.replace(/^\[(.+)]$/, '[ $1 ]');
+
 const mkTemplate = ({
   haystack, result, ctx, context, contextString
 }) => {
@@ -28,7 +30,10 @@ const mkTemplate = ({
     `const haystack = ${haystack};`,
     '',
     `objectScan(${context.needles}, { ${ctx} })(haystack);`,
-    `// => ${util.inspect(result, { showHidden: false, depth: null, breakLength: Infinity })}`,
+    `// => ${pad(stringifyObject(result, {
+      inlineCharacterLimit: Infinity,
+      transform: (obj, prop, originalResult) => pad(originalResult)
+    }))}`,
     '```'
   ];
 
