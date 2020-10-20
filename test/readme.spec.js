@@ -18,6 +18,23 @@ const findTasks = (lines) => {
   return result;
 };
 
+const enrichTaskMeta = (tasks, lines) => {
+  tasks.forEach((task) => {
+    // eslint-disable-next-line no-param-reassign
+    task.metaEntries = [];
+    for (let j = task.start + 1; j < task.end; j += 1) {
+      const data = /^(?<key>[a-zA-Z0-9]+): (?<value>.*)$/.exec(lines[j]);
+      if (!data) {
+        break;
+      }
+      task.metaEntries.push(data.groups);
+    }
+    // eslint-disable-next-line no-param-reassign
+    task.meta = task.metaEntries
+      .reduce((obj, { key, value }) => Object.assign(obj, { [key]: value }), {});
+  });
+};
+
 const enrichTasks = (() => {
   let haystack = null;
 
@@ -38,17 +55,7 @@ const enrichTasks = (() => {
 
   return (tasks, lines) => {
     tasks.forEach((task) => {
-      const { start, end } = task;
-      const metaEntries = [];
-      for (let j = start + 1; j < end; j += 1) {
-        const data = /^(?<key>[a-zA-Z0-9]+): (?<value>.*)$/.exec(lines[j]);
-        if (!data) {
-          break;
-        }
-        metaEntries.push(data.groups);
-      }
-      const meta = metaEntries
-        .reduce((obj, { key, value }) => Object.assign(obj, { [key]: value }), {});
+      const { meta } = task;
       const ctx = mkObjectScanCtx(meta);
       if (meta.haystack) {
         haystack = meta.haystack;
@@ -56,7 +63,7 @@ const enrichTasks = (() => {
       // eslint-disable-next-line no-eval
       const result = eval(`require('../src/index')(${meta.needles}, { ${ctx} })(${haystack})`);
       const replacement = render({
-        meta: metaEntries,
+        meta: task.metaEntries,
         spoiler: meta.spoiler !== 'false',
         comment: meta.comment,
         haystack,
@@ -81,6 +88,7 @@ describe('Testing Readme', { timeout: 5 * 60000 }, () => {
     const readmeFile = path.join(__dirname, '..', 'README.md');
     const lines = fs.smartRead(readmeFile);
     const tasks = findTasks(lines);
+    enrichTaskMeta(tasks, lines);
     enrichTasks(tasks, lines);
     applyTasks(tasks, lines);
     const result = fs.smartWrite(readmeFile, lines);
