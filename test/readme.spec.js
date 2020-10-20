@@ -5,36 +5,48 @@ const { describe } = require('node-tdd');
 const Mustache = require('mustache');
 const stringify = require('./helper/stringify');
 
-const extractContentMeta = (content) => content
-  .split('\n')
-  .map((l) => l.trim())
-  .map((l) => /^(?<key>[a-zA-Z0-9]+): (?<value>.*)$/.exec(l))
-  .filter((e) => e !== null)
-  .map((e) => e.groups);
+const findTasks = (lines) => {
+  const result = [];
+  lines.forEach((line, idx) => {
+    if (line.startsWith('<!-- <example>')) {
+      result.push({ start: idx });
+    }
+    if (line.startsWith('</example> -->')) {
+      result[result.length - 1].end = idx;
+    }
+  });
+  return result;
+};
 
-const mkObjectScanCtx = (meta) => Object.entries({
-  joined: meta.joined || true,
-  filterFn: meta.filterFn,
-  breakFn: meta.breakFn
-})
-  .filter(([k, v]) => v !== undefined)
-  .map(([k, v]) => `${k}: ${v}`)
-  .join(', ');
+const enrichTasks = (() => {
+  let haystack = null;
 
-const render = (() => {
-  const templateFile = path.join(__dirname, 'helper', 'resources', 'readme-example.mustache');
-  const template = fs.smartRead(templateFile).join('\n');
-  return (payload) => Mustache.render(template, payload);
-})();
+  const mkObjectScanCtx = (meta) => Object.entries({
+    joined: meta.joined || true,
+    filterFn: meta.filterFn,
+    breakFn: meta.breakFn
+  })
+    .filter(([k, v]) => v !== undefined)
+    .map(([k, v]) => `${k}: ${v}`)
+    .join(', ');
 
-describe('Testing Readme', { timeout: 5 * 60000 }, () => {
-  it('Updating Readme Example', () => {
-    const exampleRegex = /<!-- <example>([\s\S]+?)<\/example> -->/g;
-    const file = path.join(__dirname, '..', 'README.md');
-    const contentOriginal = fs.smartRead(file).join('\n');
-    let haystack = null;
-    const contentUpdated = contentOriginal.replace(exampleRegex, (match, content) => {
-      const metaEntries = extractContentMeta(content);
+  const render = (() => {
+    const templateFile = path.join(__dirname, 'helper', 'resources', 'readme-example.mustache');
+    const template = fs.smartRead(templateFile).join('\n');
+    return (payload) => Mustache.render(template, payload);
+  })();
+
+  return (tasks, lines) => {
+    tasks.forEach((task) => {
+      const { start, end } = task;
+      const metaEntries = [];
+      for (let j = start + 1; j < end; j += 1) {
+        const data = /^(?<key>[a-zA-Z0-9]+): (?<value>.*)$/.exec(lines[j]);
+        if (!data) {
+          break;
+        }
+        metaEntries.push(data.groups);
+      }
       const meta = metaEntries
         .reduce((obj, { key, value }) => Object.assign(obj, { [key]: value }), {});
       const ctx = mkObjectScanCtx(meta);
@@ -43,7 +55,7 @@ describe('Testing Readme', { timeout: 5 * 60000 }, () => {
       }
       // eslint-disable-next-line no-eval
       const result = eval(`require('../src/index')(${meta.needles}, { ${ctx} })(${haystack})`);
-      return render({
+      const replacement = render({
         meta: metaEntries,
         spoiler: meta.spoiler !== 'false',
         comment: meta.comment,
@@ -52,8 +64,26 @@ describe('Testing Readme', { timeout: 5 * 60000 }, () => {
         result: stringify(result),
         ctx
       });
+      // eslint-disable-next-line no-param-reassign
+      task.replacement = replacement;
     });
-    const result = fs.smartWrite(file, contentUpdated.split('\n'));
+  };
+})();
+
+const applyTasks = (tasks, lines) => {
+  tasks.reverse().forEach(({ start, end, replacement }) => {
+    lines.splice(start, end - start + 1, ...replacement.split('\n'));
+  });
+};
+
+describe('Testing Readme', { timeout: 5 * 60000 }, () => {
+  it('Updating Readme Example', () => {
+    const readmeFile = path.join(__dirname, '..', 'README.md');
+    const lines = fs.smartRead(readmeFile);
+    const tasks = findTasks(lines);
+    enrichTasks(tasks, lines);
+    applyTasks(tasks, lines);
+    const result = fs.smartWrite(readmeFile, lines);
     expect(result).to.equal(false);
   });
 });
