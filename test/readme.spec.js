@@ -5,23 +5,27 @@ const { describe } = require('node-tdd');
 const Mustache = require('mustache');
 const stringify = require('./helper/stringify');
 
-const parseContent = (content) => content
+const extractContentMeta = (content) => content
   .split('\n')
   .map((l) => l.trim())
   .map((l) => /^(?<key>[a-zA-Z0-9]+): (?<value>.*)$/.exec(l))
   .filter((e) => e !== null)
   .map((e) => e.groups);
 
-const mkObjectScanCtx = (context) => Object.entries({
-  joined: context.joined || true,
-  filterFn: context.filterFn,
-  breakFn: context.breakFn
+const mkObjectScanCtx = (meta) => Object.entries({
+  joined: meta.joined || true,
+  filterFn: meta.filterFn,
+  breakFn: meta.breakFn
 })
   .filter(([k, v]) => v !== undefined)
   .map(([k, v]) => `${k}: ${v}`)
   .join(', ');
 
-const template = fs.smartRead(path.join(__dirname, 'helper', 'resources', 'readme-example.mustache')).join('\n');
+const render = (() => {
+  const templateFile = path.join(__dirname, 'helper', 'resources', 'readme-example.mustache');
+  const template = fs.smartRead(templateFile).join('\n');
+  return (payload) => Mustache.render(template, payload);
+})();
 
 describe('Testing Readme', { timeout: 5 * 60000 }, () => {
   it('Updating Readme Example', () => {
@@ -30,21 +34,21 @@ describe('Testing Readme', { timeout: 5 * 60000 }, () => {
     const contentOriginal = fs.smartRead(file).join('\n');
     let haystack = null;
     const contentUpdated = contentOriginal.replace(exampleRegex, (match, content) => {
-      const contextList = parseContent(content);
-      const context = contextList
+      const metaEntries = extractContentMeta(content);
+      const meta = metaEntries
         .reduce((obj, { key, value }) => Object.assign(obj, { [key]: value }), {});
-      const ctx = mkObjectScanCtx(context);
-      if (context.haystack) {
-        haystack = context.haystack;
+      const ctx = mkObjectScanCtx(meta);
+      if (meta.haystack) {
+        haystack = meta.haystack;
       }
       // eslint-disable-next-line no-eval
-      const result = eval(`require('../src/index')(${context.needles}, { ${ctx} })(${haystack})`);
-      return Mustache.render(template, {
-        context: contextList,
-        spoiler: context.spoiler !== 'false',
-        comment: context.comment,
+      const result = eval(`require('../src/index')(${meta.needles}, { ${ctx} })(${haystack})`);
+      return render({
+        meta: metaEntries,
+        spoiler: meta.spoiler !== 'false',
+        comment: meta.comment,
         haystack,
-        needles: context.needles,
+        needles: meta.needles,
         result: stringify(result),
         ctx
       });
