@@ -720,6 +720,10 @@ describe('Testing Find', () => {
     ]);
   });
 
+  it('Ensure array does not match object key', () => {
+    expect(objectScan(['[1]'])({ 1: 'bar' })).to.deep.equal([]);
+  });
+
   describe('Testing Escaping', () => {
     it('Testing Escaped Char Matching', () => {
       ['?', '!', ',', '.', '*', '[', ']', '{', '}'].forEach((char) => {
