@@ -114,13 +114,22 @@ objectScan(['*'], { joined: true })(haystack);
 // => [ 'd', 'a' ]
 ```
 </details>
-<details><summary> <code>['[1?]']</code> <em>(matches two digit keys starting with a one)</em> </summary>
+<details><summary> <code>['[?5]']</code> <em>(two digit keys ending in five)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
 const haystack = [...Array(30).keys()];
-objectScan(['[1?]'], { joined: true })(haystack);
-// => [ '[19]', '[18]', '[17]', '[16]', '[15]', '[14]', '[13]', '[12]', '[11]', '[10]' ]
+objectScan(['[?5]'], { joined: true })(haystack);
+// => [ '[25]', '[15]' ]
+```
+</details>
+<details><summary> <code>['a.+.c']</code> <em>(nested keys)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: 0 }, d: { f: 0 } } };
+objectScan(['a.+.c'], { joined: true })(haystack);
+// => [ 'a.b.c' ]
 ```
 </details>
 

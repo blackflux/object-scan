@@ -92,8 +92,13 @@ comment: top level keys
 </example></pre>
 <pre><example>
 haystack: [...Array(30).keys()]
-needles: ['[1?]']
-comment: matches two digit keys starting with a one
+needles: ['[?5]']
+comment: two digit keys ending in five
+</example></pre>
+<pre><example>
+haystack: { a: { b: { c: 0 }, d: { f: 0 } } }
+needles: ['a.+.c']
+comment: nested keys
 </example></pre>
 
 ### Regex
