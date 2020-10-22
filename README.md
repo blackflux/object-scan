@@ -251,6 +251,17 @@ The following characters are considered special and need to
 be escaped using `\`, if they should be matched in a key:<br>
 `[`, `]`, `{`, `}`, `(`, `)`, `,`, `.`, `!`, `?`, `*`, `+` and `\`.
 
+_Examples:_
+<details><summary> <code>['\\[1\\]']</code> <em>(special object key)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { '[1]': 0 };
+objectScan(['\\\\[1\\\\]'], { joined: true })(haystack);
+// => [ '\\\\[1\\\\]' ]
+```
+</details>
+
 ## Options
 
 Signature of all callbacks is

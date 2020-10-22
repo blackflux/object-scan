@@ -183,6 +183,13 @@ The following characters are considered special and need to
 be escaped using `\`, if they should be matched in a key:<br>
 `[`, `]`, `{`, `}`, `(`, `)`, `,`, `.`, `!`, `?`, `*`, `+` and `\`.
 
+_Examples:_
+<pre><example>
+haystack: { '[1]': 0 }
+needles: ['\\[1\\]']
+comment: special object key
+</example></pre>
+
 ## Options
 
 Signature of all callbacks is
