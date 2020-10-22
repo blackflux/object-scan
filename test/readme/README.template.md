@@ -277,7 +277,17 @@ comment: matches all array paths containing `5`
 <pre><example>
 haystack: ['a', 'b', 'c', 'd']
 needles: ['[(^[01]$)]']
-comment: match first and second path in an array
+comment: match `[0]` and `[1]` path in an array
+</example></pre>
+<pre><example>
+haystack: ['a', 'b', 'c', 'd']
+needles: ['[(^[^01]$)]']
+comment: match other than `[0]` and `[1]` path in an array
+</example></pre>
+<pre><example>
+haystack: ['a', 'b', 'c', 'd']
+needles: ['[*]', '[!(^[01]$)]']
+comment: match all and exclude `[0]` and `[1]` path in an array
 </example></pre>
 
 ### Arbitrary Depth
