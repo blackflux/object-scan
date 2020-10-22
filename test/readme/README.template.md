@@ -9,7 +9,7 @@
 [![Semantic-Release](https://github.com/blackflux/js-gardener/blob/master/assets/icons/semver.svg)](https://github.com/semantic-release/semantic-release)
 [![Gardener](https://github.com/blackflux/js-gardener/blob/master/assets/badge.svg)](https://github.com/blackflux/js-gardener)
 
-Find keys in object hierarchies using wildcard and glob matching and callbacks.
+Find keys in object hierarchies using wildcard and regex matching and callbacks.
 
 ## Install
 
@@ -44,7 +44,7 @@ spoiler: false
 Matching is based on the [property accessor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors) syntax
 with some notable extensions.
 
-### Array vs Object
+### Array
 
 Rectangular brackets for array path matching.
 
@@ -59,6 +59,8 @@ haystack: { 0: 'a', 1: 'b', 2: 'c' }
 needles: ['[2]']
 comment: no match in object
 </example></pre>
+
+### Object
 
 Property name for object property matching.
 
@@ -76,13 +78,13 @@ comment: no match in array
 
 ### Wildcard
 
-Wildcards can be used with Array and Object selector.
-
 The following characters have special meaning when not escaped:
 - `*`: Match zero or more character
 - `+`: Match one or more character
 - `?`: Match exactly one character
 - `\`: Escape the subsequent character
+
+Wildcards can be used with Array and Object selector.
 
 _Examples_:
 <pre><example>
@@ -108,7 +110,9 @@ comment: escaped plus
 
 ### Regex
 
-Regex can be used with Array and Object selector by using parentheses.
+Regex are defined by using parentheses.
+
+Can be used with Array and Object selector.
 
 _Examples_:
 <pre><example>
@@ -139,7 +143,7 @@ comment: match all and exclude `[0]` and `[1]` path in an array
 
 ### Arbitrary Depth
 
-There are two types of recursion matching:
+There are two types of arbitrary depth matching:
 - `**`: Matches zero or more nestings
 - `++`: Matches one or more nestings
 
@@ -164,23 +168,33 @@ comment: matches all paths containing `1`
 
 ### Or Clause
 
-Can be used with Array and Object selector by using curley brackets.
+Or Clauses are defined by using curley brackets.
 
-This makes it possible to target multiple paths in a single needle. It also
-makes it easier to reduce redundancy.
+Can be used with Array and Object selector.
 
 _Examples_:
 <pre><example>
 haystack: ['a', 'b', 'c', 'd']
 needles: ['[{0,1}]']
-comment: match first and second path in an array
+comment: `[0]` and `[1]` in an array
+</example></pre>
+<pre><example>
+haystack: { a: { b: 0, c: 1 }, d: { e: 2, f: 3 } }
+needles: ['{a,d}.{b,f}']
+comment: `a.b`, `a.f`, `d.b` and `d.f` in object
 </example></pre>
 
 ### Exclusion
 
-To exclude a path from being matched, use the exclamation mark.
+To exclude a path, use exclamation mark.
 
 _Examples_:
+<pre><example>
+haystack: { a: 0, b: 1 }
+needles: ['{a,b},!a']
+comment: match only `b`
+strict: false
+</example></pre>
 <pre><example>
 haystack: { a: 0, b: { a: 1, c: 2 } }
 needles: ['**,!**.a']

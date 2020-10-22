@@ -9,7 +9,7 @@
 [![Semantic-Release](https://github.com/blackflux/js-gardener/blob/master/assets/icons/semver.svg)](https://github.com/semantic-release/semantic-release)
 [![Gardener](https://github.com/blackflux/js-gardener/blob/master/assets/badge.svg)](https://github.com/blackflux/js-gardener)
 
-Find keys in object hierarchies using wildcard and glob matching and callbacks.
+Find keys in object hierarchies using wildcard and regex matching and callbacks.
 
 ## Install
 
@@ -48,7 +48,7 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 Matching is based on the [property accessor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors) syntax
 with some notable extensions.
 
-### Array vs Object
+### Array
 
 Rectangular brackets for array path matching.
 
@@ -71,6 +71,8 @@ objectScan(['[2]'], { joined: true })(haystack);
 // => []
 ```
 </details>
+
+### Object
 
 Property name for object property matching.
 
@@ -96,13 +98,13 @@ objectScan(['1'], { joined: true })(haystack);
 
 ### Wildcard
 
-Wildcards can be used with Array and Object selector.
-
 The following characters have special meaning when not escaped:
 - `*`: Match zero or more character
 - `+`: Match one or more character
 - `?`: Match exactly one character
 - `\`: Escape the subsequent character
+
+Wildcards can be used with Array and Object selector.
 
 _Examples_:
 <details><summary> <code>['*']</code> <em>(top level keys)</em> </summary>
@@ -144,7 +146,9 @@ objectScan(['a.\\+.c'], { joined: true })(haystack);
 
 ### Regex
 
-Regex can be used with Array and Object selector by using parentheses.
+Regex are defined by using parentheses.
+
+Can be used with Array and Object selector.
 
 _Examples_:
 <details><summary> <code>['(^foo)']</code> <em>(match all object paths starting with `foo`)</em> </summary>
@@ -195,7 +199,7 @@ objectScan(['[*]', '[!(^[01]$)]'], { joined: true })(haystack);
 
 ### Arbitrary Depth
 
-There are two types of recursion matching:
+There are two types of arbitrary depth matching:
 - `**`: Matches zero or more nestings
 - `++`: Matches one or more nestings
 
@@ -232,13 +236,12 @@ objectScan(['**(1)'], { joined: true })(haystack);
 
 ### Or Clause
 
-Can be used with Array and Object selector by using curley brackets.
+Or Clauses are defined by using curley brackets.
 
-This makes it possible to target multiple paths in a single needle. It also
-makes it easier to reduce redundancy.
+Can be used with Array and Object selector.
 
 _Examples_:
-<details><summary> <code>['[{0,1}]']</code> <em>(match first and second path in an array)</em> </summary>
+<details><summary> <code>['[{0,1}]']</code> <em>(`[0]` and `[1]` in an array)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -247,12 +250,33 @@ objectScan(['[{0,1}]'], { joined: true })(haystack);
 // => [ '[1]', '[0]' ]
 ```
 </details>
+<details><summary> <code>['{a,d}.{b,f}']</code> <em>(`a.b`, `a.f`, `d.b` and `d.f` in object)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: 0, c: 1 }, d: { e: 2, f: 3 } };
+objectScan(['{a,d}.{b,f}'], { joined: true })(haystack);
+// => [ 'd.f', 'a.b' ]
+```
+</details>
 
 ### Exclusion
 
-To exclude a path from being matched, use the exclamation mark.
+To exclude a path, use exclamation mark.
 
 _Examples_:
+<details><summary> <code>['{a,b},!a']</code> <em>(match only `b`)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0, b: 1 };
+objectScan(['{a,b},!a'], {
+  joined: true,
+  strict: false
+})(haystack);
+// => [ 'b' ]
+```
+</details>
 <details><summary> <code>['**,!**.a']</code> <em>(matches all paths, except those where the last segment is `a`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
