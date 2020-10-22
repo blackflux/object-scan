@@ -724,6 +724,11 @@ describe('Testing Find', () => {
     expect(objectScan(['[1]'])({ 1: 'bar' })).to.deep.equal([]);
   });
 
+  it('Testing Excluded Regex', () => {
+    const find = objectScan(['*', '!(a)']);
+    expect(find(haystack)).to.deep.equal(['simple']);
+  });
+
   describe('Testing Escaping', () => {
     it('Testing Escaped Char Matching', () => {
       ['?', '!', ',', '.', '*', '[', ']', '{', '}'].forEach((char) => {
