@@ -46,7 +46,8 @@ with some notable extensions.
 
 ### Array vs Object
 
-To match an Array path, rectangular brackets are used.<br>
+To match an Array path, rectangular brackets are used.
+
 _Examples_:
 <pre><example>
 haystack: [0, 1, 2, 3, 4]
@@ -54,7 +55,8 @@ needles: ['[2]']
 comment: matches `[2]` in an array
 </example></pre>
 
-To match an Object path, the name of the path is used.<br>
+To match an Object path, the name of the path is used.
+
 _Examples_:
 <pre><example>
 haystack: { foo: 0, bar: 1 }
@@ -88,7 +90,7 @@ comment: matches two digit keys starting with a one
 
 Regex can be used with Array and Object selector by using parentheses.
 
-_Examples_:<br>
+_Examples_:
 <pre><example>
 haystack: { foo: 0, foobar: 1, bar: 2 }
 needles: ['(^foo)']

@@ -50,7 +50,8 @@ with some notable extensions.
 
 ### Array vs Object
 
-To match an Array path, rectangular brackets are used.<br>
+To match an Array path, rectangular brackets are used.
+
 _Examples_:
 <details><summary> <code>['[2]']</code> <em>(matches `[2]` in an array)</em> </summary>
 
@@ -62,7 +63,8 @@ objectScan(['[2]'], { joined: true })(haystack);
 ```
 </details>
 
-To match an Object path, the name of the path is used.<br>
+To match an Object path, the name of the path is used.
+
 _Examples_:
 <details><summary> <code>['foo']</code> <em>(matches the path `foo` in an object)</em> </summary>
 
@@ -108,7 +110,7 @@ objectScan(['[1?]'], { joined: true })(haystack);
 
 Regex can be used with Array and Object selector by using parentheses.
 
-_Examples_:<br>
+_Examples_:
 <details><summary> <code>['(^foo)']</code> <em>(match all object paths starting with `foo`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
