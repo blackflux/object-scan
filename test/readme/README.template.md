@@ -39,7 +39,139 @@ spoiler: false
 - Search syntax is checked for correctness
 - Lots of tests to ensure correctness
 
-### Options
+## Matching
+
+Matching is based on the [property accessor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors) syntax
+with some notable extensions.
+
+### Array vs Object
+
+To match an Array path, rectangular brackets are used.<br>
+_Examples_:
+<pre><example>
+haystack: [0, 1, 2, 3, 4]
+needles: ['[2]']
+comment: matches `[2]` in an array
+</example></pre>
+
+To match an Object path, the name of the path is used.<br>
+_Examples_:
+<pre><example>
+haystack: { foo: 0, bar: 1 }
+needles: ['foo']
+comment: matches the path `foo` in an object
+</example></pre>
+
+### Wildcard
+
+Wildcards can be used with Array and Object selector.
+
+The following characters have special meaning when not escaped:
+- `*`: Match zero or more character
+- `+`: Match one or more character
+- `?`: Match exactly one character
+- `\`: Escape the subsequent character
+
+_Examples_:
+<pre><example>
+haystack: { a: { b: 0, c: 1 }, d: 2 }
+needles: ['*']
+comment: top level keys
+</example></pre>
+<pre><example>
+haystack: [...Array(30).keys()]
+needles: ['[1?]']
+comment: matches two digit keys starting with a one
+</example></pre>
+
+### Regex
+
+Regex can be used with Array and Object selector by using parentheses.
+
+_Examples_:<br>
+<pre><example>
+haystack: { foo: 0, foobar: 1, bar: 2 }
+needles: ['(^foo)']
+comment: match all object paths starting with `foo`
+</example></pre>
+<pre><example>
+haystack: [...Array(20).keys()]
+needles: ['[(5)]']
+comment: matches all array paths containing `5`
+</example></pre>
+<pre><example>
+haystack: ['a', 'b', 'c', 'd']
+needles: ['[(^[01]$)]']
+comment: match `[0]` and `[1]` path in an array
+</example></pre>
+<pre><example>
+haystack: ['a', 'b', 'c', 'd']
+needles: ['[(^[^01]$)]']
+comment: match other than `[0]` and `[1]` path in an array
+</example></pre>
+<pre><example>
+haystack: ['a', 'b', 'c', 'd']
+needles: ['[*]', '[!(^[01]$)]']
+comment: match all and exclude `[0]` and `[1]` path in an array
+</example></pre>
+
+### Arbitrary Depth
+
+There are two types of recursion matching:
+- `**`: Matches zero or more nestings
+- `++`: Matches one or more nestings
+
+Recursions can be combined with a regex by appending the regex.
+
+_Examples_:
+<pre><example>
+haystack: { a: { b: 0, c: 0 } }
+needles: ['a.**']
+comment: matches zero or more nestings under `a`
+</example></pre>
+<pre><example>
+haystack: { a: { b: 0, c: 0 } }
+needles: ['a.++']
+comment: matches one or more nestings under `a`
+</example></pre>
+<pre><example>
+haystack: { 1: { 1: ['a', 'b'] } }
+needles: ['**(1)']
+comment: matches all paths containing `1`
+</example></pre>
+
+### Or Clause
+
+Can be used with Array and Object selector by using curley brackets.
+
+This makes it possible to target multiple paths in a single needle. It also
+makes it easier to reduce redundancy.
+
+_Examples_:
+<pre><example>
+haystack: ['a', 'b', 'c', 'd']
+needles: ['[{0,1}]']
+comment: match first and second path in an array
+</example></pre>
+
+### Exclusion
+
+To exclude a path from being matched, use the exclamation mark.
+
+_Examples_:
+<pre><example>
+haystack: { a: 0, b: { a: 1, c: 2 } }
+needles: ['**,!**.a']
+comment: matches all paths, except those where the last segment is `a`
+</example></pre>
+
+### Escaping
+
+The following characters are considered special and need to
+be escaped using `\`, if they should be matched in a key:<br>
+`[`, `]`, `{`, `}`, `(`, `)`, `,`, `.`, `!`, `?`, `*`, `+` and `\`.
+
+## Options
 
 Signature of all callbacks is
 
@@ -219,134 +351,12 @@ joined: false
 comment: output last segments only
 </example></pre>
 
-## Matching
-
-Matching is based on the Javascript Object / Array selector syntax
-with some notable extensions.
-
-### Array vs Object
-
-To match an Array path, rectangular brackets are used.<br>
-_Examples_:
-<pre><example>
-haystack: [0, 1, 2, 3, 4]
-needles: ['[2]']
-comment: matches `[2]` in an array
-</example></pre>
-
-To match an Object path, the name of the path is used.<br>
-_Examples_:
-<pre><example>
-haystack: { foo: 0, bar: 1 }
-needles: ['foo']
-comment: matches the path `foo` in an object
-</example></pre>
-
-### Wildcard
-
-Wildcards can be used with Array and Object selector.
-
-The following characters have special meaning when not escaped:
-- `*`: Match zero or more character
-- `+`: Match one or more character
-- `?`: Match exactly one character
-- `\`: Escape the subsequent character
-
-_Examples_:
-<pre><example>
-haystack: [...Array(30).keys()]
-needles: ['[1?]']
-comment: matches two digit keys starting with a one
-</example></pre>
-
-### Regex
-
-Regex can be used with Array and Object selector by using parentheses.
-
-_Examples_:<br>
-<pre><example>
-haystack: { foo: 0, foobar: 1, bar: 2 }
-needles: ['(^foo)']
-comment: match all object paths starting with `foo`
-</example></pre>
-<pre><example>
-haystack: [...Array(20).keys()]
-needles: ['[(5)]']
-comment: matches all array paths containing `5`
-</example></pre>
-<pre><example>
-haystack: ['a', 'b', 'c', 'd']
-needles: ['[(^[01]$)]']
-comment: match first and second path in an array
-</example></pre>
-
-### Arbitrary Depth
-
-There are two types of recursion matching:
-- `**`: Matches zero or more nestings
-- `++`: Matches one or more nestings
-
-Recursions can be combined with a regex by appending the regex.
-
-_Examples_:
-<pre><example>
-haystack: { a: { b: 0, c: 0 } }
-needles: ['a.**']
-comment: matches zero or more nestings under `a`
-</example></pre>
-<pre><example>
-haystack: { a: { b: 0, c: 0 } }
-needles: ['a.++']
-comment: matches one or more nestings under `a`
-</example></pre>
-<pre><example>
-haystack: { 1: { 1: ['a', 'b'] } }
-needles: ['**(1)']
-comment: matches all paths containing `1`
-</example></pre>
-
-### Or Clause
-
-Can be used with Array and Object selector by using curley brackets.
-
-This makes it possible to target multiple paths in a single needle. It also
-makes it easier to reduce redundancy.
-
-_Examples_:
-<pre><example>
-haystack: ['a', 'b', 'c', 'd']
-needles: ['[{0,1}]']
-comment: match first and second path in an array
-</example></pre>
-
-### Exclusion
-
-To exclude a path from being matched, use the exclamation mark.
-
-_Examples_:
-<pre><example>
-haystack: { a: 0, b: { a: 1, c: 2 } }
-needles: ['**,!**.a']
-comment: matches all paths, except those where the last segment is `a`
-</example></pre>
-
-### Escaping
-
-The following characters are considered special and need to
-be escaped using `\`, if they should be matched in a key:<br>
-`[`, `]`, `{`, `}`, `(`, `)`, `,`, `.`, `!`, `?`, `*`, `+` and `\`.
-
 ## Examples
 
 More extensive examples can be found in the tests.
 
 <pre><example>
 haystack: { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' }
-needles: ['*']
-comment: top level keys
-</example></pre>
-
-<pre><example>
 needles: ['a.*.f']
 comment: nested keys
 </example></pre>
