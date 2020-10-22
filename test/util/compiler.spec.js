@@ -78,6 +78,14 @@ describe('Testing compiler', () => {
     expect(tower).to.deep.equal({ a: { b: { c: { d: { e: {}, f: {} } } } } });
   });
 
+  it('Testing expensive path', () => {
+    const count = 10;
+    const input = '[{0,1}]'.repeat(count);
+    const tower = compiler.compile([input]);
+    const str = JSON.stringify(tower);
+    expect(str.endsWith(`{}}${'}'.repeat(count)}`));
+  });
+
   describe('Testing path component exclusion', () => {
     it('Testing forward exclusion inheritance in component path', () => {
       const input = ['{!a}.{b}'];
