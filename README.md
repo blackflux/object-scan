@@ -50,10 +50,10 @@ with some notable extensions.
 
 ### Array vs Object
 
-To match an Array path, rectangular brackets are used.
+Rectangular brackets for array path matching.
 
 _Examples_:
-<details><summary> <code>['[2]']</code> <em>(matches `[2]` in an array)</em> </summary>
+<details><summary> <code>['[2]']</code> <em>(matches `[2]` in array)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -62,17 +62,35 @@ objectScan(['[2]'], { joined: true })(haystack);
 // => [ '[2]' ]
 ```
 </details>
+<details><summary> <code>['[2]']</code> <em>(no match in object)</em> </summary>
 
-To match an Object path, the name of the path is used.
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { 0: 'a', 1: 'b', 2: 'c' };
+objectScan(['[2]'], { joined: true })(haystack);
+// => []
+```
+</details>
+
+Property name for object property matching.
 
 _Examples_:
-<details><summary> <code>['foo']</code> <em>(matches the path `foo` in an object)</em> </summary>
+<details><summary> <code>['foo']</code> <em>(matches `foo` in object)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
 const haystack = { foo: 0, bar: 1 };
 objectScan(['foo'], { joined: true })(haystack);
 // => [ 'foo' ]
+```
+</details>
+<details><summary> <code>['1']</code> <em>(no match in array)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = [0, 1, 2, 3, 4];
+objectScan(['1'], { joined: true })(haystack);
+// => []
 ```
 </details>
 

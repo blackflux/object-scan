@@ -46,22 +46,32 @@ with some notable extensions.
 
 ### Array vs Object
 
-To match an Array path, rectangular brackets are used.
+Rectangular brackets for array path matching.
 
 _Examples_:
 <pre><example>
 haystack: [0, 1, 2, 3, 4]
 needles: ['[2]']
-comment: matches `[2]` in an array
+comment: matches `[2]` in array
+</example></pre>
+<pre><example>
+haystack: { 0: 'a', 1: 'b', 2: 'c' }
+needles: ['[2]']
+comment: no match in object
 </example></pre>
 
-To match an Object path, the name of the path is used.
+Property name for object property matching.
 
 _Examples_:
 <pre><example>
 haystack: { foo: 0, bar: 1 }
 needles: ['foo']
-comment: matches the path `foo` in an object
+comment: matches `foo` in object
+</example></pre>
+<pre><example>
+haystack: [0, 1, 2, 3, 4]
+needles: ['1']
+comment: no match in array
 </example></pre>
 
 ### Wildcard
