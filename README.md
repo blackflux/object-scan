@@ -347,13 +347,31 @@ objectScan(['[(5)]'], { joined: true })(haystack);
 // => [ '[15]', '[5]' ]
 ```
 </details>
-<details><summary> <code>['[(^[01]$)]']</code> <em>(match first and second path in an array)</em> </summary>
+<details><summary> <code>['[(^[01]$)]']</code> <em>(match `[0]` and `[1]` path in an array)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
 const haystack = ['a', 'b', 'c', 'd'];
 objectScan(['[(^[01]$)]'], { joined: true })(haystack);
 // => [ '[1]', '[0]' ]
+```
+</details>
+<details><summary> <code>['[(^[^01]$)]']</code> <em>(match other than `[0]` and `[1]` path in an array)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = ['a', 'b', 'c', 'd'];
+objectScan(['[(^[^01]$)]'], { joined: true })(haystack);
+// => [ '[3]', '[2]' ]
+```
+</details>
+<details><summary> <code>['[*]', '[!(^[01]$)]']</code> <em>(match all and exclude `[0]` and `[1]` path in an array)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = ['a', 'b', 'c', 'd'];
+objectScan(['[*]', '[!(^[01]$)]'], { joined: true })(haystack);
+// => [ '[3]', '[2]' ]
 ```
 </details>
 
