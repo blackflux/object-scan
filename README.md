@@ -224,7 +224,7 @@ objectScan(['a.++'], { joined: true })(haystack);
 
 <!-- eslint-disable no-undef -->
 ```js
-const haystack = { 1: { 1: ['a', 'b'] } };
+const haystack = { 0: { 1: ['a', 'b'] }, 1: { 1: ['c', 'd'] } };
 objectScan(['**(1)'], { joined: true })(haystack);
 // => [ '1.1[1]', '1.1', '1' ]
 ```

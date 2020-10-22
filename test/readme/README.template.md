@@ -157,7 +157,7 @@ needles: ['a.++']
 comment: matches one or more nestings under `a`
 </example></pre>
 <pre><example>
-haystack: { 1: { 1: ['a', 'b'] } }
+haystack: { 0: { 1: ['a', 'b'] }, 1: { 1: ['c', 'd'] } }
 needles: ['**(1)']
 comment: matches all paths containing `1`
 </example></pre>
