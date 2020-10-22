@@ -43,7 +43,195 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 - Search syntax is checked for correctness
 - Lots of tests to ensure correctness
 
-### Options
+## Matching
+
+Matching is based on the [property accessor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors) syntax
+with some notable extensions.
+
+### Array vs Object
+
+To match an Array path, rectangular brackets are used.<br>
+_Examples_:
+<details><summary> <code>['[2]']</code> <em>(matches `[2]` in an array)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = [0, 1, 2, 3, 4];
+objectScan(['[2]'], { joined: true })(haystack);
+// => [ '[2]' ]
+```
+</details>
+
+To match an Object path, the name of the path is used.<br>
+_Examples_:
+<details><summary> <code>['foo']</code> <em>(matches the path `foo` in an object)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { foo: 0, bar: 1 };
+objectScan(['foo'], { joined: true })(haystack);
+// => [ 'foo' ]
+```
+</details>
+
+### Wildcard
+
+Wildcards can be used with Array and Object selector.
+
+The following characters have special meaning when not escaped:
+- `*`: Match zero or more character
+- `+`: Match one or more character
+- `?`: Match exactly one character
+- `\`: Escape the subsequent character
+
+_Examples_:
+<details><summary> <code>['*']</code> <em>(top level keys)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: 0, c: 1 }, d: 2 };
+objectScan(['*'], { joined: true })(haystack);
+// => [ 'd', 'a' ]
+```
+</details>
+<details><summary> <code>['[1?]']</code> <em>(matches two digit keys starting with a one)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = [...Array(30).keys()];
+objectScan(['[1?]'], { joined: true })(haystack);
+// => [ '[19]', '[18]', '[17]', '[16]', '[15]', '[14]', '[13]', '[12]', '[11]', '[10]' ]
+```
+</details>
+
+### Regex
+
+Regex can be used with Array and Object selector by using parentheses.
+
+_Examples_:<br>
+<details><summary> <code>['(^foo)']</code> <em>(match all object paths starting with `foo`)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { foo: 0, foobar: 1, bar: 2 };
+objectScan(['(^foo)'], { joined: true })(haystack);
+// => [ 'foobar', 'foo' ]
+```
+</details>
+<details><summary> <code>['[(5)]']</code> <em>(matches all array paths containing `5`)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = [...Array(20).keys()];
+objectScan(['[(5)]'], { joined: true })(haystack);
+// => [ '[15]', '[5]' ]
+```
+</details>
+<details><summary> <code>['[(^[01]$)]']</code> <em>(match `[0]` and `[1]` path in an array)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = ['a', 'b', 'c', 'd'];
+objectScan(['[(^[01]$)]'], { joined: true })(haystack);
+// => [ '[1]', '[0]' ]
+```
+</details>
+<details><summary> <code>['[(^[^01]$)]']</code> <em>(match other than `[0]` and `[1]` path in an array)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = ['a', 'b', 'c', 'd'];
+objectScan(['[(^[^01]$)]'], { joined: true })(haystack);
+// => [ '[3]', '[2]' ]
+```
+</details>
+<details><summary> <code>['[*]', '[!(^[01]$)]']</code> <em>(match all and exclude `[0]` and `[1]` path in an array)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = ['a', 'b', 'c', 'd'];
+objectScan(['[*]', '[!(^[01]$)]'], { joined: true })(haystack);
+// => [ '[3]', '[2]' ]
+```
+</details>
+
+### Arbitrary Depth
+
+There are two types of recursion matching:
+- `**`: Matches zero or more nestings
+- `++`: Matches one or more nestings
+
+Recursions can be combined with a regex by appending the regex.
+
+_Examples_:
+<details><summary> <code>['a.**']</code> <em>(matches zero or more nestings under `a`)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: 0, c: 0 } };
+objectScan(['a.**'], { joined: true })(haystack);
+// => [ 'a.c', 'a.b', 'a' ]
+```
+</details>
+<details><summary> <code>['a.++']</code> <em>(matches one or more nestings under `a`)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: 0, c: 0 } };
+objectScan(['a.++'], { joined: true })(haystack);
+// => [ 'a.c', 'a.b' ]
+```
+</details>
+<details><summary> <code>['**(1)']</code> <em>(matches all paths containing `1`)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { 1: { 1: ['a', 'b'] } };
+objectScan(['**(1)'], { joined: true })(haystack);
+// => [ '1.1[1]', '1.1', '1' ]
+```
+</details>
+
+### Or Clause
+
+Can be used with Array and Object selector by using curley brackets.
+
+This makes it possible to target multiple paths in a single needle. It also
+makes it easier to reduce redundancy.
+
+_Examples_:
+<details><summary> <code>['[{0,1}]']</code> <em>(match first and second path in an array)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = ['a', 'b', 'c', 'd'];
+objectScan(['[{0,1}]'], { joined: true })(haystack);
+// => [ '[1]', '[0]' ]
+```
+</details>
+
+### Exclusion
+
+To exclude a path from being matched, use the exclamation mark.
+
+_Examples_:
+<details><summary> <code>['**,!**.a']</code> <em>(matches all paths, except those where the last segment is `a`)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0, b: { a: 1, c: 2 } };
+objectScan(['**,!**.a'], { joined: true })(haystack);
+// => [ 'b.c', 'b' ]
+```
+</details>
+
+### Escaping
+
+The following characters are considered special and need to
+be escaped using `\`, if they should be matched in a key:<br>
+`[`, `]`, `{`, `}`, `(`, `)`, `,`, `.`, `!`, `?`, `*`, `+` and `\`.
+
+## Options
 
 Signature of all callbacks is
 
@@ -271,194 +459,6 @@ objectScan(['**'], {
 // => [ 'e', 'd', 'c', 'b', 'a' ]
 ```
 </details>
-
-## Matching
-
-Matching is based on the Javascript Object / Array selector syntax
-with some notable extensions.
-
-### Array vs Object
-
-To match an Array path, rectangular brackets are used.<br>
-_Examples_:
-<details><summary> <code>['[2]']</code> <em>(matches `[2]` in an array)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = [0, 1, 2, 3, 4];
-objectScan(['[2]'], { joined: true })(haystack);
-// => [ '[2]' ]
-```
-</details>
-
-To match an Object path, the name of the path is used.<br>
-_Examples_:
-<details><summary> <code>['foo']</code> <em>(matches the path `foo` in an object)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = { foo: 0, bar: 1 };
-objectScan(['foo'], { joined: true })(haystack);
-// => [ 'foo' ]
-```
-</details>
-
-### Wildcard
-
-Wildcards can be used with Array and Object selector.
-
-The following characters have special meaning when not escaped:
-- `*`: Match zero or more character
-- `+`: Match one or more character
-- `?`: Match exactly one character
-- `\`: Escape the subsequent character
-
-_Examples_:
-<details><summary> <code>['*']</code> <em>(top level keys)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = { a: { b: 0, c: 1 }, d: 2 };
-objectScan(['*'], { joined: true })(haystack);
-// => [ 'd', 'a' ]
-```
-</details>
-<details><summary> <code>['[1?]']</code> <em>(matches two digit keys starting with a one)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = [...Array(30).keys()];
-objectScan(['[1?]'], { joined: true })(haystack);
-// => [ '[19]', '[18]', '[17]', '[16]', '[15]', '[14]', '[13]', '[12]', '[11]', '[10]' ]
-```
-</details>
-
-### Regex
-
-Regex can be used with Array and Object selector by using parentheses.
-
-_Examples_:<br>
-<details><summary> <code>['(^foo)']</code> <em>(match all object paths starting with `foo`)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = { foo: 0, foobar: 1, bar: 2 };
-objectScan(['(^foo)'], { joined: true })(haystack);
-// => [ 'foobar', 'foo' ]
-```
-</details>
-<details><summary> <code>['[(5)]']</code> <em>(matches all array paths containing `5`)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = [...Array(20).keys()];
-objectScan(['[(5)]'], { joined: true })(haystack);
-// => [ '[15]', '[5]' ]
-```
-</details>
-<details><summary> <code>['[(^[01]$)]']</code> <em>(match `[0]` and `[1]` path in an array)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = ['a', 'b', 'c', 'd'];
-objectScan(['[(^[01]$)]'], { joined: true })(haystack);
-// => [ '[1]', '[0]' ]
-```
-</details>
-<details><summary> <code>['[(^[^01]$)]']</code> <em>(match other than `[0]` and `[1]` path in an array)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = ['a', 'b', 'c', 'd'];
-objectScan(['[(^[^01]$)]'], { joined: true })(haystack);
-// => [ '[3]', '[2]' ]
-```
-</details>
-<details><summary> <code>['[*]', '[!(^[01]$)]']</code> <em>(match all and exclude `[0]` and `[1]` path in an array)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = ['a', 'b', 'c', 'd'];
-objectScan(['[*]', '[!(^[01]$)]'], { joined: true })(haystack);
-// => [ '[3]', '[2]' ]
-```
-</details>
-
-### Arbitrary Depth
-
-There are two types of recursion matching:
-- `**`: Matches zero or more nestings
-- `++`: Matches one or more nestings
-
-Recursions can be combined with a regex by appending the regex.
-
-_Examples_:
-<details><summary> <code>['a.**']</code> <em>(matches zero or more nestings under `a`)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = { a: { b: 0, c: 0 } };
-objectScan(['a.**'], { joined: true })(haystack);
-// => [ 'a.c', 'a.b', 'a' ]
-```
-</details>
-<details><summary> <code>['a.++']</code> <em>(matches one or more nestings under `a`)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = { a: { b: 0, c: 0 } };
-objectScan(['a.++'], { joined: true })(haystack);
-// => [ 'a.c', 'a.b' ]
-```
-</details>
-<details><summary> <code>['**(1)']</code> <em>(matches all paths containing `1`)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = { 1: { 1: ['a', 'b'] } };
-objectScan(['**(1)'], { joined: true })(haystack);
-// => [ '1.1[1]', '1.1', '1' ]
-```
-</details>
-
-### Or Clause
-
-Can be used with Array and Object selector by using curley brackets.
-
-This makes it possible to target multiple paths in a single needle. It also
-makes it easier to reduce redundancy.
-
-_Examples_:
-<details><summary> <code>['[{0,1}]']</code> <em>(match first and second path in an array)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = ['a', 'b', 'c', 'd'];
-objectScan(['[{0,1}]'], { joined: true })(haystack);
-// => [ '[1]', '[0]' ]
-```
-</details>
-
-### Exclusion
-
-To exclude a path from being matched, use the exclamation mark.
-
-_Examples_:
-<details><summary> <code>['**,!**.a']</code> <em>(matches all paths, except those where the last segment is `a`)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = { a: 0, b: { a: 1, c: 2 } };
-objectScan(['**,!**.a'], { joined: true })(haystack);
-// => [ 'b.c', 'b' ]
-```
-</details>
-
-### Escaping
-
-The following characters are considered special and need to
-be escaped using `\`, if they should be matched in a key:<br>
-`[`, `]`, `{`, `}`, `(`, `)`, `,`, `.`, `!`, `?`, `*`, `+` and `\`.
 
 ## Examples
 
