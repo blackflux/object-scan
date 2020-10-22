@@ -314,6 +314,15 @@ The following characters have special meaning when not escaped:
 - `\`: Escape the subsequent character
 
 _Examples_:
+<details><summary> <code>['*']</code> <em>(top level keys)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: 0, c: 1 }, d: 2 };
+objectScan(['*'], { joined: true })(haystack);
+// => [ 'd', 'a' ]
+```
+</details>
 <details><summary> <code>['[1?]']</code> <em>(matches two digit keys starting with a one)</em> </summary>
 
 <!-- eslint-disable no-undef -->
@@ -454,16 +463,6 @@ be escaped using `\`, if they should be matched in a key:<br>
 ## Examples
 
 More extensive examples can be found in the tests.
-
-<details><summary> <code>['*']</code> <em>(top level keys)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
-objectScan(['*'], { joined: true })(haystack);
-// => [ 'k', 'a' ]
-```
-</details>
 
 <details><summary> <code>['a.*.f']</code> <em>(nested keys)</em> </summary>
 

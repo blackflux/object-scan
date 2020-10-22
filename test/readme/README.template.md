@@ -254,6 +254,11 @@ The following characters have special meaning when not escaped:
 
 _Examples_:
 <pre><example>
+haystack: { a: { b: 0, c: 1 }, d: 2 }
+needles: ['*']
+comment: top level keys
+</example></pre>
+<pre><example>
 haystack: [...Array(30).keys()]
 needles: ['[1?]']
 comment: matches two digit keys starting with a one
@@ -352,11 +357,6 @@ More extensive examples can be found in the tests.
 
 <pre><example>
 haystack: { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' }
-needles: ['*']
-comment: top level keys
-</example></pre>
-
-<pre><example>
 needles: ['a.*.f']
 comment: nested keys
 </example></pre>
