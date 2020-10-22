@@ -100,6 +100,11 @@ haystack: { a: { b: { c: 0 }, d: { f: 0 } } }
 needles: ['a.+.c']
 comment: nested keys
 </example></pre>
+<pre><example>
+haystack: { a: { b: { c: 0 }, '+': { c: 0 } } }
+needles: ['a.\\+.c']
+comment: escaped plus
+</example></pre>
 
 ### Regex
 

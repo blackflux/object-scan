@@ -132,6 +132,15 @@ objectScan(['a.+.c'], { joined: true })(haystack);
 // => [ 'a.b.c' ]
 ```
 </details>
+<details><summary> <code>['a.\\+.c']</code> <em>(escaped plus)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: 0 }, '+': { c: 0 } } };
+objectScan(['a.\\\\+.c'], { joined: true })(haystack);
+// => [ 'a.\\\\+.c' ]
+```
+</details>
 
 ### Regex
 
