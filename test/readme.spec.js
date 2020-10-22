@@ -54,7 +54,7 @@ const Renderer = () => {
       context,
       result: stringify(result).replace(/\\/g, '\\\\'),
       options
-    }).replace(/```(?:[\s\S]+)```/g, (m) => m.replace(/\\/g, '\\\\'));
+    });
   };
 };
 

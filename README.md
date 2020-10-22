@@ -137,8 +137,8 @@ objectScan(['a.+.c'], { joined: true })(haystack);
 <!-- eslint-disable no-undef -->
 ```js
 const haystack = { a: { b: { c: 0 }, '+': { c: 0 } } };
-objectScan(['a.\\\\+.c'], { joined: true })(haystack);
-// => [ 'a.\\\\+.c' ]
+objectScan(['a.\\+.c'], { joined: true })(haystack);
+// => [ 'a.\\+.c' ]
 ```
 </details>
 
@@ -275,8 +275,8 @@ _Examples:_
 <!-- eslint-disable no-undef -->
 ```js
 const haystack = { '[1]': 0 };
-objectScan(['\\\\[1\\\\]'], { joined: true })(haystack);
-// => [ '\\\\[1\\\\]' ]
+objectScan(['\\[1\\]'], { joined: true })(haystack);
+// => [ '\\[1\\]' ]
 ```
 </details>
 
