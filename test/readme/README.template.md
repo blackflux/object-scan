@@ -46,20 +46,32 @@ with some notable extensions.
 
 ### Array vs Object
 
-To match an Array path, rectangular brackets are used.<br>
+Rectangular brackets for array path matching.
+
 _Examples_:
 <pre><example>
 haystack: [0, 1, 2, 3, 4]
 needles: ['[2]']
-comment: matches `[2]` in an array
+comment: matches `[2]` in array
+</example></pre>
+<pre><example>
+haystack: { 0: 'a', 1: 'b', 2: 'c' }
+needles: ['[2]']
+comment: no match in object
 </example></pre>
 
-To match an Object path, the name of the path is used.<br>
+Property name for object property matching.
+
 _Examples_:
 <pre><example>
 haystack: { foo: 0, bar: 1 }
 needles: ['foo']
-comment: matches the path `foo` in an object
+comment: matches `foo` in object
+</example></pre>
+<pre><example>
+haystack: [0, 1, 2, 3, 4]
+needles: ['1']
+comment: no match in array
 </example></pre>
 
 ### Wildcard
@@ -80,15 +92,25 @@ comment: top level keys
 </example></pre>
 <pre><example>
 haystack: [...Array(30).keys()]
-needles: ['[1?]']
-comment: matches two digit keys starting with a one
+needles: ['[?5]']
+comment: two digit keys ending in five
+</example></pre>
+<pre><example>
+haystack: { a: { b: { c: 0 }, d: { f: 0 } } }
+needles: ['a.+.c']
+comment: nested keys
+</example></pre>
+<pre><example>
+haystack: { a: { b: { c: 0 }, '+': { c: 0 } } }
+needles: ['a.\\+.c']
+comment: escaped plus
 </example></pre>
 
 ### Regex
 
 Regex can be used with Array and Object selector by using parentheses.
 
-_Examples_:<br>
+_Examples_:
 <pre><example>
 haystack: { foo: 0, foobar: 1, bar: 2 }
 needles: ['(^foo)']
@@ -135,7 +157,7 @@ needles: ['a.++']
 comment: matches one or more nestings under `a`
 </example></pre>
 <pre><example>
-haystack: { 1: { 1: ['a', 'b'] } }
+haystack: { 0: { 1: ['a', 'b'] }, 1: { 1: ['c', 'd'] } }
 needles: ['**(1)']
 comment: matches all paths containing `1`
 </example></pre>
@@ -170,6 +192,13 @@ comment: matches all paths, except those where the last segment is `a`
 The following characters are considered special and need to
 be escaped using `\`, if they should be matched in a key:<br>
 `[`, `]`, `{`, `}`, `(`, `)`, `,`, `.`, `!`, `?`, `*`, `+` and `\`.
+
+_Examples:_
+<pre><example>
+haystack: { '[1]': 0 }
+needles: ['\\[1\\]']
+comment: special object key
+</example></pre>
 
 ## Options
 

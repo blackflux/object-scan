@@ -50,9 +50,10 @@ with some notable extensions.
 
 ### Array vs Object
 
-To match an Array path, rectangular brackets are used.<br>
+Rectangular brackets for array path matching.
+
 _Examples_:
-<details><summary> <code>['[2]']</code> <em>(matches `[2]` in an array)</em> </summary>
+<details><summary> <code>['[2]']</code> <em>(matches `[2]` in array)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -61,16 +62,35 @@ objectScan(['[2]'], { joined: true })(haystack);
 // => [ '[2]' ]
 ```
 </details>
+<details><summary> <code>['[2]']</code> <em>(no match in object)</em> </summary>
 
-To match an Object path, the name of the path is used.<br>
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { 0: 'a', 1: 'b', 2: 'c' };
+objectScan(['[2]'], { joined: true })(haystack);
+// => []
+```
+</details>
+
+Property name for object property matching.
+
 _Examples_:
-<details><summary> <code>['foo']</code> <em>(matches the path `foo` in an object)</em> </summary>
+<details><summary> <code>['foo']</code> <em>(matches `foo` in object)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
 const haystack = { foo: 0, bar: 1 };
 objectScan(['foo'], { joined: true })(haystack);
 // => [ 'foo' ]
+```
+</details>
+<details><summary> <code>['1']</code> <em>(no match in array)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = [0, 1, 2, 3, 4];
+objectScan(['1'], { joined: true })(haystack);
+// => []
 ```
 </details>
 
@@ -94,13 +114,31 @@ objectScan(['*'], { joined: true })(haystack);
 // => [ 'd', 'a' ]
 ```
 </details>
-<details><summary> <code>['[1?]']</code> <em>(matches two digit keys starting with a one)</em> </summary>
+<details><summary> <code>['[?5]']</code> <em>(two digit keys ending in five)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
 const haystack = [...Array(30).keys()];
-objectScan(['[1?]'], { joined: true })(haystack);
-// => [ '[19]', '[18]', '[17]', '[16]', '[15]', '[14]', '[13]', '[12]', '[11]', '[10]' ]
+objectScan(['[?5]'], { joined: true })(haystack);
+// => [ '[25]', '[15]' ]
+```
+</details>
+<details><summary> <code>['a.+.c']</code> <em>(nested keys)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: 0 }, d: { f: 0 } } };
+objectScan(['a.+.c'], { joined: true })(haystack);
+// => [ 'a.b.c' ]
+```
+</details>
+<details><summary> <code>['a.\\+.c']</code> <em>(escaped plus)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: 0 }, '+': { c: 0 } } };
+objectScan(['a.\\\\+.c'], { joined: true })(haystack);
+// => [ 'a.\\\\+.c' ]
 ```
 </details>
 
@@ -108,7 +146,7 @@ objectScan(['[1?]'], { joined: true })(haystack);
 
 Regex can be used with Array and Object selector by using parentheses.
 
-_Examples_:<br>
+_Examples_:
 <details><summary> <code>['(^foo)']</code> <em>(match all object paths starting with `foo`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
@@ -186,7 +224,7 @@ objectScan(['a.++'], { joined: true })(haystack);
 
 <!-- eslint-disable no-undef -->
 ```js
-const haystack = { 1: { 1: ['a', 'b'] } };
+const haystack = { 0: { 1: ['a', 'b'] }, 1: { 1: ['c', 'd'] } };
 objectScan(['**(1)'], { joined: true })(haystack);
 // => [ '1.1[1]', '1.1', '1' ]
 ```
@@ -230,6 +268,17 @@ objectScan(['**,!**.a'], { joined: true })(haystack);
 The following characters are considered special and need to
 be escaped using `\`, if they should be matched in a key:<br>
 `[`, `]`, `{`, `}`, `(`, `)`, `,`, `.`, `!`, `?`, `*`, `+` and `\`.
+
+_Examples:_
+<details><summary> <code>['\\[1\\]']</code> <em>(special object key)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { '[1]': 0 };
+objectScan(['\\\\[1\\\\]'], { joined: true })(haystack);
+// => [ '\\\\[1\\\\]' ]
+```
+</details>
 
 ## Options
 

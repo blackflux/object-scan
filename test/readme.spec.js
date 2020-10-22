@@ -52,9 +52,9 @@ const Renderer = () => {
       haystack,
       needles: meta.needles,
       context,
-      result: stringify(result),
+      result: stringify(result).replace(/\\/g, '\\\\'),
       options
-    });
+    }).replace(/```(?:[\s\S]+)```/g, (m) => m.replace(/\\/g, '\\\\'));
   };
 };
 
