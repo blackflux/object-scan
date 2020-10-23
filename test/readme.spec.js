@@ -10,6 +10,7 @@ const getObjectScanOptions = (meta) => {
     joined: meta.joined === 'false' ? undefined : true,
     filterFn: meta.filterFn,
     breakFn: meta.breakFn,
+    strict: meta.strict,
     useArraySelector: meta.useArraySelector
   })
     .filter(([k, v]) => v !== undefined);
