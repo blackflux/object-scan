@@ -29,7 +29,7 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 ```
 
 
-### Features
+## Features
 
 - Input traversed exactly once during search
 - Dependency free, small in size and very performant
@@ -53,7 +53,7 @@ with some notable extensions.
 Rectangular brackets for array path matching.
 
 _Examples_:
-<details><summary> <code>['[2]']</code> <em>(matches `[2]` in array)</em> </summary>
+<details><summary> <code>['[2]']</code> <em>(`[2]` in array)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -77,7 +77,7 @@ objectScan(['[2]'], { joined: true })(haystack);
 Property name for object property matching.
 
 _Examples_:
-<details><summary> <code>['foo']</code> <em>(matches `foo` in object)</em> </summary>
+<details><summary> <code>['foo']</code> <em>(`foo` in object)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -160,7 +160,7 @@ objectScan(['(^foo)'], { joined: true })(haystack);
 // => [ 'foobar', 'foo' ]
 ```
 </details>
-<details><summary> <code>['[(5)]']</code> <em>(matches all array paths containing `5`)</em> </summary>
+<details><summary> <code>['[(5)]']</code> <em>(matches all array paths containing `5` in array)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -169,7 +169,7 @@ objectScan(['[(5)]'], { joined: true })(haystack);
 // => [ '[15]', '[5]' ]
 ```
 </details>
-<details><summary> <code>['[(^[01]$)]']</code> <em>(match `[0]` and `[1]` path in an array)</em> </summary>
+<details><summary> <code>['[(^[01]$)]']</code> <em>(`[0]` and `[1]` in array)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -178,7 +178,7 @@ objectScan(['[(^[01]$)]'], { joined: true })(haystack);
 // => [ '[1]', '[0]' ]
 ```
 </details>
-<details><summary> <code>['[(^[^01]$)]']</code> <em>(match other than `[0]` and `[1]` path in an array)</em> </summary>
+<details><summary> <code>['[(^[^01]$)]']</code> <em>(other than `[0]` and `[1]` in array)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -187,7 +187,7 @@ objectScan(['[(^[^01]$)]'], { joined: true })(haystack);
 // => [ '[3]', '[2]' ]
 ```
 </details>
-<details><summary> <code>['[*]', '[!(^[01]$)]']</code> <em>(match all and exclude `[0]` and `[1]` path in an array)</em> </summary>
+<details><summary> <code>['[*]', '[!(^[01]$)]']</code> <em>(match all and exclude `[0]` and `[1]` in array)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js

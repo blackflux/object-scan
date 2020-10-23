@@ -52,7 +52,7 @@ _Examples_:
 <pre><example>
 haystack: [0, 1, 2, 3, 4]
 needles: ['[2]']
-comment: matches `[2]` in array
+comment: `[2]` in array
 </example></pre>
 <pre><example>
 haystack: { 0: 'a', 1: 'b', 2: 'c' }
@@ -68,7 +68,7 @@ _Examples_:
 <pre><example>
 haystack: { foo: 0, bar: 1 }
 needles: ['foo']
-comment: matches `foo` in object
+comment: `foo` in object
 </example></pre>
 <pre><example>
 haystack: [0, 1, 2, 3, 4]
