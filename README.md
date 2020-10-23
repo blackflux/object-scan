@@ -53,7 +53,7 @@ with some notable extensions.
 Rectangular brackets for array path matching.
 
 _Examples_:
-<details><summary> <code>['[2]']</code> <em>(`[2]` in array)</em> </summary>
+<details><summary> <code>['[2]']</code> <em>(exact in array)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -77,7 +77,7 @@ objectScan(['[2]'], { joined: true })(haystack);
 Property name for object property matching.
 
 _Examples_:
-<details><summary> <code>['foo']</code> <em>(`foo` in object)</em> </summary>
+<details><summary> <code>['foo']</code> <em>(exact in object)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -134,7 +134,7 @@ objectScan(['a.+.c'], { joined: true })(haystack);
 // => [ 'a.b.c' ]
 ```
 </details>
-<details><summary> <code>['a.\\+.c']</code> <em>(escaped plus)</em> </summary>
+<details><summary> <code>['a.\\+.c']</code> <em>(escaped)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
