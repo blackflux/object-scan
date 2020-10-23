@@ -25,7 +25,7 @@ needles: ['a.*.f']
 spoiler: false
 </example></pre>
 
-### Features
+## Features
 
 - Input traversed exactly once during search
 - Dependency free, small in size and very performant
@@ -123,22 +123,22 @@ comment: match all object paths starting with `foo`
 <pre><example>
 haystack: [...Array(20).keys()]
 needles: ['[(5)]']
-comment: matches all array paths containing `5`
+comment: matches all array paths containing `5` in array
 </example></pre>
 <pre><example>
 haystack: ['a', 'b', 'c', 'd']
 needles: ['[(^[01]$)]']
-comment: match `[0]` and `[1]` path in an array
+comment: `[0]` and `[1]` in array
 </example></pre>
 <pre><example>
 haystack: ['a', 'b', 'c', 'd']
 needles: ['[(^[^01]$)]']
-comment: match other than `[0]` and `[1]` path in an array
+comment: other than `[0]` and `[1]` in array
 </example></pre>
 <pre><example>
 haystack: ['a', 'b', 'c', 'd']
 needles: ['[*]', '[!(^[01]$)]']
-comment: match all and exclude `[0]` and `[1]` path in an array
+comment: match all and exclude `[0]` and `[1]` in array
 </example></pre>
 
 ### Arbitrary Depth
