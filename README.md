@@ -107,7 +107,7 @@ The following characters have special meaning when not escaped:
 Wildcards can be used with Array and Object selector.
 
 _Examples_:
-<details><summary> <code>['*']</code> <em>(top level keys)</em> </summary>
+<details><summary> <code>['*']</code> <em>(top level)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -116,7 +116,7 @@ objectScan(['*'], { joined: true })(haystack);
 // => [ 'd', 'a' ]
 ```
 </details>
-<details><summary> <code>['[?5]']</code> <em>(two digit keys ending in five)</em> </summary>
+<details><summary> <code>['[?5]']</code> <em>(two digit ending in five)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -125,7 +125,7 @@ objectScan(['[?5]'], { joined: true })(haystack);
 // => [ '[25]', '[15]' ]
 ```
 </details>
-<details><summary> <code>['a.+.c']</code> <em>(nested keys)</em> </summary>
+<details><summary> <code>['a.+.c']</code> <em>(nested)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -151,7 +151,7 @@ Regex are defined by using parentheses.
 Can be used with Array and Object selector.
 
 _Examples_:
-<details><summary> <code>['(^foo)']</code> <em>(match all object paths starting with `foo`)</em> </summary>
+<details><summary> <code>['(^foo)']</code> <em>(starting with `foo`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -160,7 +160,7 @@ objectScan(['(^foo)'], { joined: true })(haystack);
 // => [ 'foobar', 'foo' ]
 ```
 </details>
-<details><summary> <code>['[(5)]']</code> <em>(matches all array paths containing `5` in array)</em> </summary>
+<details><summary> <code>['[(5)]']</code> <em>(containing `5`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -169,7 +169,7 @@ objectScan(['[(5)]'], { joined: true })(haystack);
 // => [ '[15]', '[5]' ]
 ```
 </details>
-<details><summary> <code>['[(^[01]$)]']</code> <em>(`[0]` and `[1]` in array)</em> </summary>
+<details><summary> <code>['[(^[01]$)]']</code> <em>(`[0]` and `[1]`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -178,7 +178,7 @@ objectScan(['[(^[01]$)]'], { joined: true })(haystack);
 // => [ '[1]', '[0]' ]
 ```
 </details>
-<details><summary> <code>['[(^[^01]$)]']</code> <em>(other than `[0]` and `[1]` in array)</em> </summary>
+<details><summary> <code>['[(^[^01]$)]']</code> <em>(other than `[0]` and `[1]`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -187,7 +187,7 @@ objectScan(['[(^[^01]$)]'], { joined: true })(haystack);
 // => [ '[3]', '[2]' ]
 ```
 </details>
-<details><summary> <code>['[*]', '[!(^[01]$)]']</code> <em>(match all and exclude `[0]` and `[1]` in array)</em> </summary>
+<details><summary> <code>['[*]', '[!(^[01]$)]']</code> <em>(match all and exclude `[0]` and `[1]`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -206,7 +206,7 @@ There are two types of arbitrary depth matching:
 Recursions can be combined with a regex by appending the regex.
 
 _Examples_:
-<details><summary> <code>['a.**']</code> <em>(matches zero or more nestings under `a`)</em> </summary>
+<details><summary> <code>['a.**']</code> <em>(zero or more nestings under `a`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -215,7 +215,7 @@ objectScan(['a.**'], { joined: true })(haystack);
 // => [ 'a.c', 'a.b', 'a' ]
 ```
 </details>
-<details><summary> <code>['a.++']</code> <em>(matches one or more nestings under `a`)</em> </summary>
+<details><summary> <code>['a.++']</code> <em>(one or more nestings under `a`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -224,7 +224,7 @@ objectScan(['a.++'], { joined: true })(haystack);
 // => [ 'a.c', 'a.b' ]
 ```
 </details>
-<details><summary> <code>['**(1)']</code> <em>(matches all paths containing `1`)</em> </summary>
+<details><summary> <code>['**(1)']</code> <em>(all containing `1`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -241,7 +241,7 @@ Or Clauses are defined by using curley brackets.
 Can be used with Array and Object selector.
 
 _Examples_:
-<details><summary> <code>['[{0,1}]']</code> <em>(`[0]` and `[1]` in an array)</em> </summary>
+<details><summary> <code>['[{0,1}]']</code> <em>(`[0]` and `[1]`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -250,7 +250,7 @@ objectScan(['[{0,1}]'], { joined: true })(haystack);
 // => [ '[1]', '[0]' ]
 ```
 </details>
-<details><summary> <code>['{a,d}.{b,f}']</code> <em>(`a.b`, `a.f`, `d.b` and `d.f` in object)</em> </summary>
+<details><summary> <code>['{a,d}.{b,f}']</code> <em>(`a.b`, `a.f`, `d.b` and `d.f`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -265,7 +265,7 @@ objectScan(['{a,d}.{b,f}'], { joined: true })(haystack);
 To exclude a path, use exclamation mark.
 
 _Examples_:
-<details><summary> <code>['{a,b},!a']</code> <em>(match only `b`)</em> </summary>
+<details><summary> <code>['{a,b},!a']</code> <em>(only `b`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -277,7 +277,7 @@ objectScan(['{a,b},!a'], {
 // => [ 'b' ]
 ```
 </details>
-<details><summary> <code>['**,!**.a']</code> <em>(matches all paths, except those where the last segment is `a`)</em> </summary>
+<details><summary> <code>['**,!**.a']</code> <em>(all except ending in `a`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -451,7 +451,7 @@ objectScan(['a', 'b.d'], {
 // => [ '[1].b[1].d', '[0].a' ]
 ```
 </details>
-<details><summary> <code>['']</code> <em>(select top level array elements)</em> </summary>
+<details><summary> <code>['']</code> <em>(top level array matching)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -521,7 +521,7 @@ By default all matched keys are returned from a search invocation.
 However, when it is not undefined, the context is returned instead.
 
 _Examples_:
-<details><summary> <code>['**']</code> <em>(output last segments only)</em> </summary>
+<details><summary> <code>['**']</code> <em>(last segments only)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -537,7 +537,7 @@ objectScan(['**'], {
 
 More extensive examples can be found in the tests.
 
-<details><summary> <code>['a.*.f']</code> <em>(nested keys)</em> </summary>
+<details><summary> <code>['a.*.f']</code> <em>(nested)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -547,7 +547,7 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 ```
 </details>
 
-<details><summary> <code>['*.*.*']</code> <em>(multiple nested keys)</em> </summary>
+<details><summary> <code>['*.*.*']</code> <em>(multiple nested)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -617,7 +617,7 @@ objectScan(['++.++'], { joined: true })(haystack);
 ```
 </details>
 
-<details><summary> <code>['**.f']</code> <em>(star recursion ending to f)</em> </summary>
+<details><summary> <code>['**.f']</code> <em>(star recursion ending in f)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -627,7 +627,7 @@ objectScan(['**.f'], { joined: true })(haystack);
 ```
 </details>
 
-<details><summary> <code>['**[*]']</code> <em>(star recursion ending to array)</em> </summary>
+<details><summary> <code>['**[*]']</code> <em>(star recursion ending in array)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js

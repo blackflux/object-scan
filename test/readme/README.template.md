@@ -90,17 +90,17 @@ _Examples_:
 <pre><example>
 haystack: { a: { b: 0, c: 1 }, d: 2 }
 needles: ['*']
-comment: top level keys
+comment: top level
 </example></pre>
 <pre><example>
 haystack: [...Array(30).keys()]
 needles: ['[?5]']
-comment: two digit keys ending in five
+comment: two digit ending in five
 </example></pre>
 <pre><example>
 haystack: { a: { b: { c: 0 }, d: { f: 0 } } }
 needles: ['a.+.c']
-comment: nested keys
+comment: nested
 </example></pre>
 <pre><example>
 haystack: { a: { b: { c: 0 }, '+': { c: 0 } } }
@@ -118,27 +118,27 @@ _Examples_:
 <pre><example>
 haystack: { foo: 0, foobar: 1, bar: 2 }
 needles: ['(^foo)']
-comment: match all object paths starting with `foo`
+comment: starting with `foo`
 </example></pre>
 <pre><example>
 haystack: [...Array(20).keys()]
 needles: ['[(5)]']
-comment: matches all array paths containing `5` in array
+comment: containing `5`
 </example></pre>
 <pre><example>
 haystack: ['a', 'b', 'c', 'd']
 needles: ['[(^[01]$)]']
-comment: `[0]` and `[1]` in array
+comment: `[0]` and `[1]`
 </example></pre>
 <pre><example>
 haystack: ['a', 'b', 'c', 'd']
 needles: ['[(^[^01]$)]']
-comment: other than `[0]` and `[1]` in array
+comment: other than `[0]` and `[1]`
 </example></pre>
 <pre><example>
 haystack: ['a', 'b', 'c', 'd']
 needles: ['[*]', '[!(^[01]$)]']
-comment: match all and exclude `[0]` and `[1]` in array
+comment: match all and exclude `[0]` and `[1]`
 </example></pre>
 
 ### Arbitrary Depth
@@ -153,17 +153,17 @@ _Examples_:
 <pre><example>
 haystack: { a: { b: 0, c: 0 } }
 needles: ['a.**']
-comment: matches zero or more nestings under `a`
+comment: zero or more nestings under `a`
 </example></pre>
 <pre><example>
 haystack: { a: { b: 0, c: 0 } }
 needles: ['a.++']
-comment: matches one or more nestings under `a`
+comment: one or more nestings under `a`
 </example></pre>
 <pre><example>
 haystack: { 0: { 1: ['a', 'b'] }, 1: { 1: ['c', 'd'] } }
 needles: ['**(1)']
-comment: matches all paths containing `1`
+comment: all containing `1`
 </example></pre>
 
 ### Or Clause
@@ -176,12 +176,12 @@ _Examples_:
 <pre><example>
 haystack: ['a', 'b', 'c', 'd']
 needles: ['[{0,1}]']
-comment: `[0]` and `[1]` in an array
+comment: `[0]` and `[1]`
 </example></pre>
 <pre><example>
 haystack: { a: { b: 0, c: 1 }, d: { e: 2, f: 3 } }
 needles: ['{a,d}.{b,f}']
-comment: `a.b`, `a.f`, `d.b` and `d.f` in object
+comment: `a.b`, `a.f`, `d.b` and `d.f`
 </example></pre>
 
 ### Exclusion
@@ -192,13 +192,13 @@ _Examples_:
 <pre><example>
 haystack: { a: 0, b: 1 }
 needles: ['{a,b},!a']
-comment: match only `b`
+comment: only `b`
 strict: false
 </example></pre>
 <pre><example>
 haystack: { a: 0, b: { a: 1, c: 2 } }
 needles: ['**,!**.a']
-comment: matches all paths, except those where the last segment is `a`
+comment: all except ending in `a`
 </example></pre>
 
 ### Escaping
@@ -341,7 +341,7 @@ comment: automatic array traversal
 haystack: [{ a: 0 }, { b: 1 }]
 needles: ['']
 useArraySelector: false
-comment: select top level array elements
+comment: top level array matching
 </example></pre>
 
 #### strict
@@ -391,7 +391,7 @@ needles: ['**']
 context: []
 filterFn: ({ key, context }) => { context.push(key[key.length - 1]); }
 joined: false
-comment: output last segments only
+comment: last segments only
 </example></pre>
 
 ## Examples
@@ -401,12 +401,12 @@ More extensive examples can be found in the tests.
 <pre><example>
 haystack: { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' }
 needles: ['a.*.f']
-comment: nested keys
+comment: nested
 </example></pre>
 
 <pre><example>
 needles: ['*.*.*']
-comment: multiple nested keys
+comment: multiple nested
 </example></pre>
 
 <pre><example>
@@ -442,12 +442,12 @@ comment: plus recursion
 
 <pre><example>
 needles: ['**.f']
-comment: star recursion ending to f
+comment: star recursion ending in f
 </example></pre>
 
 <pre><example>
 needles: ['**[*]']
-comment: star recursion ending to array
+comment: star recursion ending in array
 </example></pre>
 
 <pre><example>
