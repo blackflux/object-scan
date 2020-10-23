@@ -52,7 +52,7 @@ _Examples_:
 <pre><example>
 haystack: [0, 1, 2, 3, 4]
 needles: ['[2]']
-comment: `[2]` in array
+comment: exact in array
 </example></pre>
 <pre><example>
 haystack: { 0: 'a', 1: 'b', 2: 'c' }
@@ -68,7 +68,7 @@ _Examples_:
 <pre><example>
 haystack: { foo: 0, bar: 1 }
 needles: ['foo']
-comment: `foo` in object
+comment: exact in object
 </example></pre>
 <pre><example>
 haystack: [0, 1, 2, 3, 4]
@@ -105,7 +105,7 @@ comment: nested
 <pre><example>
 haystack: { a: { b: { c: 0 }, '+': { c: 0 } } }
 needles: ['a.\\+.c']
-comment: escaped plus
+comment: escaped
 </example></pre>
 
 ### Regex
