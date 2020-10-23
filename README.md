@@ -9,7 +9,7 @@
 [![Semantic-Release](https://github.com/blackflux/js-gardener/blob/master/assets/icons/semver.svg)](https://github.com/semantic-release/semantic-release)
 [![Gardener](https://github.com/blackflux/js-gardener/blob/master/assets/badge.svg)](https://github.com/blackflux/js-gardener)
 
-Find keys in object hierarchies using wildcard and glob matching and callbacks.
+Find keys in object hierarchies using wildcard and regex matching and callbacks.
 
 ## Install
 
@@ -29,7 +29,7 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 ```
 
 
-### Features
+## Features
 
 - Input traversed exactly once during search
 - Dependency free, small in size and very performant
@@ -40,7 +40,7 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 - Exclusion Matching
 - Full support for escaping
 - Results returned in "delete-safe" order
-- Search syntax is checked for correctness
+- Search syntax checked for correctness
 - Lots of tests to ensure correctness
 
 ## Matching
@@ -48,12 +48,12 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 Matching is based on the [property accessor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors) syntax
 with some notable extensions.
 
-### Array vs Object
+### Array
 
 Rectangular brackets for array path matching.
 
 _Examples_:
-<details><summary> <code>['[2]']</code> <em>(matches `[2]` in array)</em> </summary>
+<details><summary> <code>['[2]']</code> <em>(exact in array)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -72,10 +72,12 @@ objectScan(['[2]'], { joined: true })(haystack);
 ```
 </details>
 
+### Object
+
 Property name for object property matching.
 
 _Examples_:
-<details><summary> <code>['foo']</code> <em>(matches `foo` in object)</em> </summary>
+<details><summary> <code>['foo']</code> <em>(exact in object)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -96,16 +98,16 @@ objectScan(['1'], { joined: true })(haystack);
 
 ### Wildcard
 
-Wildcards can be used with Array and Object selector.
-
 The following characters have special meaning when not escaped:
 - `*`: Match zero or more character
 - `+`: Match one or more character
 - `?`: Match exactly one character
 - `\`: Escape the subsequent character
 
+Wildcards can be used with Array and Object selector.
+
 _Examples_:
-<details><summary> <code>['*']</code> <em>(top level keys)</em> </summary>
+<details><summary> <code>['*']</code> <em>(top level)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -114,7 +116,7 @@ objectScan(['*'], { joined: true })(haystack);
 // => [ 'd', 'a' ]
 ```
 </details>
-<details><summary> <code>['[?5]']</code> <em>(two digit keys ending in five)</em> </summary>
+<details><summary> <code>['[?5]']</code> <em>(two digit ending in five)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -123,7 +125,7 @@ objectScan(['[?5]'], { joined: true })(haystack);
 // => [ '[25]', '[15]' ]
 ```
 </details>
-<details><summary> <code>['a.+.c']</code> <em>(nested keys)</em> </summary>
+<details><summary> <code>['a.+.c']</code> <em>(nested)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -132,7 +134,7 @@ objectScan(['a.+.c'], { joined: true })(haystack);
 // => [ 'a.b.c' ]
 ```
 </details>
-<details><summary> <code>['a.\\+.c']</code> <em>(escaped plus)</em> </summary>
+<details><summary> <code>['a.\\+.c']</code> <em>(escaped)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -144,10 +146,12 @@ objectScan(['a.\\+.c'], { joined: true })(haystack);
 
 ### Regex
 
-Regex can be used with Array and Object selector by using parentheses.
+Regex are defined by using parentheses.
+
+Can be used with Array and Object selector.
 
 _Examples_:
-<details><summary> <code>['(^foo)']</code> <em>(match all object paths starting with `foo`)</em> </summary>
+<details><summary> <code>['(^foo)']</code> <em>(starting with `foo`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -156,7 +160,7 @@ objectScan(['(^foo)'], { joined: true })(haystack);
 // => [ 'foobar', 'foo' ]
 ```
 </details>
-<details><summary> <code>['[(5)]']</code> <em>(matches all array paths containing `5`)</em> </summary>
+<details><summary> <code>['[(5)]']</code> <em>(containing `5`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -165,7 +169,7 @@ objectScan(['[(5)]'], { joined: true })(haystack);
 // => [ '[15]', '[5]' ]
 ```
 </details>
-<details><summary> <code>['[(^[01]$)]']</code> <em>(match `[0]` and `[1]` path in an array)</em> </summary>
+<details><summary> <code>['[(^[01]$)]']</code> <em>(`[0]` and `[1]`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -174,7 +178,7 @@ objectScan(['[(^[01]$)]'], { joined: true })(haystack);
 // => [ '[1]', '[0]' ]
 ```
 </details>
-<details><summary> <code>['[(^[^01]$)]']</code> <em>(match other than `[0]` and `[1]` path in an array)</em> </summary>
+<details><summary> <code>['[(^[^01]$)]']</code> <em>(other than `[0]` and `[1]`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -183,7 +187,7 @@ objectScan(['[(^[^01]$)]'], { joined: true })(haystack);
 // => [ '[3]', '[2]' ]
 ```
 </details>
-<details><summary> <code>['[*]', '[!(^[01]$)]']</code> <em>(match all and exclude `[0]` and `[1]` path in an array)</em> </summary>
+<details><summary> <code>['[*]', '[!(^[01]$)]']</code> <em>(match all and exclude `[0]` and `[1]`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -195,14 +199,14 @@ objectScan(['[*]', '[!(^[01]$)]'], { joined: true })(haystack);
 
 ### Arbitrary Depth
 
-There are two types of recursion matching:
+There are two types of arbitrary depth matching:
 - `**`: Matches zero or more nestings
 - `++`: Matches one or more nestings
 
 Recursions can be combined with a regex by appending the regex.
 
 _Examples_:
-<details><summary> <code>['a.**']</code> <em>(matches zero or more nestings under `a`)</em> </summary>
+<details><summary> <code>['a.**']</code> <em>(zero or more nestings under `a`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -211,7 +215,7 @@ objectScan(['a.**'], { joined: true })(haystack);
 // => [ 'a.c', 'a.b', 'a' ]
 ```
 </details>
-<details><summary> <code>['a.++']</code> <em>(matches one or more nestings under `a`)</em> </summary>
+<details><summary> <code>['a.++']</code> <em>(one or more nestings under `a`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -220,7 +224,7 @@ objectScan(['a.++'], { joined: true })(haystack);
 // => [ 'a.c', 'a.b' ]
 ```
 </details>
-<details><summary> <code>['**(1)']</code> <em>(matches all paths containing `1`)</em> </summary>
+<details><summary> <code>['**(1)']</code> <em>(all containing `1`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -232,13 +236,12 @@ objectScan(['**(1)'], { joined: true })(haystack);
 
 ### Or Clause
 
-Can be used with Array and Object selector by using curley brackets.
+Or Clauses are defined by using curley brackets.
 
-This makes it possible to target multiple paths in a single needle. It also
-makes it easier to reduce redundancy.
+Can be used with Array and Object selector.
 
 _Examples_:
-<details><summary> <code>['[{0,1}]']</code> <em>(match first and second path in an array)</em> </summary>
+<details><summary> <code>['[{0,1}]']</code> <em>(`[0]` and `[1]`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -247,13 +250,34 @@ objectScan(['[{0,1}]'], { joined: true })(haystack);
 // => [ '[1]', '[0]' ]
 ```
 </details>
+<details><summary> <code>['{a,d}.{b,f}']</code> <em>(`a.b`, `a.f`, `d.b` and `d.f`)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: 0, c: 1 }, d: { e: 2, f: 3 } };
+objectScan(['{a,d}.{b,f}'], { joined: true })(haystack);
+// => [ 'd.f', 'a.b' ]
+```
+</details>
 
 ### Exclusion
 
-To exclude a path from being matched, use the exclamation mark.
+To exclude a path, use exclamation mark.
 
 _Examples_:
-<details><summary> <code>['**,!**.a']</code> <em>(matches all paths, except those where the last segment is `a`)</em> </summary>
+<details><summary> <code>['{a,b},!a']</code> <em>(only `b`)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0, b: 1 };
+objectScan(['{a,b},!a'], {
+  joined: true,
+  strict: false
+})(haystack);
+// => [ 'b' ]
+```
+</details>
+<details><summary> <code>['**,!**.a']</code> <em>(all except ending in `a`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -427,7 +451,7 @@ objectScan(['a', 'b.d'], {
 // => [ '[1].b[1].d', '[0].a' ]
 ```
 </details>
-<details><summary> <code>['']</code> <em>(select top level array elements)</em> </summary>
+<details><summary> <code>['']</code> <em>(top level array matching)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -497,7 +521,7 @@ By default all matched keys are returned from a search invocation.
 However, when it is not undefined, the context is returned instead.
 
 _Examples_:
-<details><summary> <code>['**']</code> <em>(output last segments only)</em> </summary>
+<details><summary> <code>['**']</code> <em>(last segments only)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -513,7 +537,7 @@ objectScan(['**'], {
 
 More extensive examples can be found in the tests.
 
-<details><summary> <code>['a.*.f']</code> <em>(nested keys)</em> </summary>
+<details><summary> <code>['a.*.f']</code> <em>(nested)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -523,7 +547,7 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 ```
 </details>
 
-<details><summary> <code>['*.*.*']</code> <em>(multiple nested keys)</em> </summary>
+<details><summary> <code>['*.*.*']</code> <em>(multiple nested)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -593,7 +617,7 @@ objectScan(['++.++'], { joined: true })(haystack);
 ```
 </details>
 
-<details><summary> <code>['**.f']</code> <em>(star recursion ending to f)</em> </summary>
+<details><summary> <code>['**.f']</code> <em>(star recursion ending in f)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -603,7 +627,7 @@ objectScan(['**.f'], { joined: true })(haystack);
 ```
 </details>
 
-<details><summary> <code>['**[*]']</code> <em>(star recursion ending to array)</em> </summary>
+<details><summary> <code>['**[*]']</code> <em>(star recursion ending in array)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js

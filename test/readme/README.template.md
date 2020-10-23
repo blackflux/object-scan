@@ -9,7 +9,7 @@
 [![Semantic-Release](https://github.com/blackflux/js-gardener/blob/master/assets/icons/semver.svg)](https://github.com/semantic-release/semantic-release)
 [![Gardener](https://github.com/blackflux/js-gardener/blob/master/assets/badge.svg)](https://github.com/blackflux/js-gardener)
 
-Find keys in object hierarchies using wildcard and glob matching and callbacks.
+Find keys in object hierarchies using wildcard and regex matching and callbacks.
 
 ## Install
 
@@ -25,7 +25,7 @@ needles: ['a.*.f']
 spoiler: false
 </example></pre>
 
-### Features
+## Features
 
 - Input traversed exactly once during search
 - Dependency free, small in size and very performant
@@ -36,7 +36,7 @@ spoiler: false
 - Exclusion Matching
 - Full support for escaping
 - Results returned in "delete-safe" order
-- Search syntax is checked for correctness
+- Search syntax checked for correctness
 - Lots of tests to ensure correctness
 
 ## Matching
@@ -44,7 +44,7 @@ spoiler: false
 Matching is based on the [property accessor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors) syntax
 with some notable extensions.
 
-### Array vs Object
+### Array
 
 Rectangular brackets for array path matching.
 
@@ -52,7 +52,7 @@ _Examples_:
 <pre><example>
 haystack: [0, 1, 2, 3, 4]
 needles: ['[2]']
-comment: matches `[2]` in array
+comment: exact in array
 </example></pre>
 <pre><example>
 haystack: { 0: 'a', 1: 'b', 2: 'c' }
@@ -60,13 +60,15 @@ needles: ['[2]']
 comment: no match in object
 </example></pre>
 
+### Object
+
 Property name for object property matching.
 
 _Examples_:
 <pre><example>
 haystack: { foo: 0, bar: 1 }
 needles: ['foo']
-comment: matches `foo` in object
+comment: exact in object
 </example></pre>
 <pre><example>
 haystack: [0, 1, 2, 3, 4]
@@ -76,70 +78,72 @@ comment: no match in array
 
 ### Wildcard
 
-Wildcards can be used with Array and Object selector.
-
 The following characters have special meaning when not escaped:
 - `*`: Match zero or more character
 - `+`: Match one or more character
 - `?`: Match exactly one character
 - `\`: Escape the subsequent character
 
+Wildcards can be used with Array and Object selector.
+
 _Examples_:
 <pre><example>
 haystack: { a: { b: 0, c: 1 }, d: 2 }
 needles: ['*']
-comment: top level keys
+comment: top level
 </example></pre>
 <pre><example>
 haystack: [...Array(30).keys()]
 needles: ['[?5]']
-comment: two digit keys ending in five
+comment: two digit ending in five
 </example></pre>
 <pre><example>
 haystack: { a: { b: { c: 0 }, d: { f: 0 } } }
 needles: ['a.+.c']
-comment: nested keys
+comment: nested
 </example></pre>
 <pre><example>
 haystack: { a: { b: { c: 0 }, '+': { c: 0 } } }
 needles: ['a.\\+.c']
-comment: escaped plus
+comment: escaped
 </example></pre>
 
 ### Regex
 
-Regex can be used with Array and Object selector by using parentheses.
+Regex are defined by using parentheses.
+
+Can be used with Array and Object selector.
 
 _Examples_:
 <pre><example>
 haystack: { foo: 0, foobar: 1, bar: 2 }
 needles: ['(^foo)']
-comment: match all object paths starting with `foo`
+comment: starting with `foo`
 </example></pre>
 <pre><example>
 haystack: [...Array(20).keys()]
 needles: ['[(5)]']
-comment: matches all array paths containing `5`
+comment: containing `5`
 </example></pre>
 <pre><example>
 haystack: ['a', 'b', 'c', 'd']
 needles: ['[(^[01]$)]']
-comment: match `[0]` and `[1]` path in an array
+comment: `[0]` and `[1]`
 </example></pre>
 <pre><example>
 haystack: ['a', 'b', 'c', 'd']
 needles: ['[(^[^01]$)]']
-comment: match other than `[0]` and `[1]` path in an array
+comment: other than `[0]` and `[1]`
 </example></pre>
 <pre><example>
 haystack: ['a', 'b', 'c', 'd']
 needles: ['[*]', '[!(^[01]$)]']
-comment: match all and exclude `[0]` and `[1]` path in an array
+comment: match all and exclude `[0]` and `[1]`
 </example></pre>
 
 ### Arbitrary Depth
 
-There are two types of recursion matching:
+There are two types of arbitrary depth matching:
 - `**`: Matches zero or more nestings
 - `++`: Matches one or more nestings
 
@@ -149,42 +153,52 @@ _Examples_:
 <pre><example>
 haystack: { a: { b: 0, c: 0 } }
 needles: ['a.**']
-comment: matches zero or more nestings under `a`
+comment: zero or more nestings under `a`
 </example></pre>
 <pre><example>
 haystack: { a: { b: 0, c: 0 } }
 needles: ['a.++']
-comment: matches one or more nestings under `a`
+comment: one or more nestings under `a`
 </example></pre>
 <pre><example>
 haystack: { 0: { 1: ['a', 'b'] }, 1: { 1: ['c', 'd'] } }
 needles: ['**(1)']
-comment: matches all paths containing `1`
+comment: all containing `1`
 </example></pre>
 
 ### Or Clause
 
-Can be used with Array and Object selector by using curley brackets.
+Or Clauses are defined by using curley brackets.
 
-This makes it possible to target multiple paths in a single needle. It also
-makes it easier to reduce redundancy.
+Can be used with Array and Object selector.
 
 _Examples_:
 <pre><example>
 haystack: ['a', 'b', 'c', 'd']
 needles: ['[{0,1}]']
-comment: match first and second path in an array
+comment: `[0]` and `[1]`
+</example></pre>
+<pre><example>
+haystack: { a: { b: 0, c: 1 }, d: { e: 2, f: 3 } }
+needles: ['{a,d}.{b,f}']
+comment: `a.b`, `a.f`, `d.b` and `d.f`
 </example></pre>
 
 ### Exclusion
 
-To exclude a path from being matched, use the exclamation mark.
+To exclude a path, use exclamation mark.
 
 _Examples_:
 <pre><example>
+haystack: { a: 0, b: 1 }
+needles: ['{a,b},!a']
+comment: only `b`
+strict: false
+</example></pre>
+<pre><example>
 haystack: { a: 0, b: { a: 1, c: 2 } }
 needles: ['**,!**.a']
-comment: matches all paths, except those where the last segment is `a`
+comment: all except ending in `a`
 </example></pre>
 
 ### Escaping
@@ -327,7 +341,7 @@ comment: automatic array traversal
 haystack: [{ a: 0 }, { b: 1 }]
 needles: ['']
 useArraySelector: false
-comment: select top level array elements
+comment: top level array matching
 </example></pre>
 
 #### strict
@@ -377,7 +391,7 @@ needles: ['**']
 context: []
 filterFn: ({ key, context }) => { context.push(key[key.length - 1]); }
 joined: false
-comment: output last segments only
+comment: last segments only
 </example></pre>
 
 ## Examples
@@ -387,12 +401,12 @@ More extensive examples can be found in the tests.
 <pre><example>
 haystack: { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' }
 needles: ['a.*.f']
-comment: nested keys
+comment: nested
 </example></pre>
 
 <pre><example>
 needles: ['*.*.*']
-comment: multiple nested keys
+comment: multiple nested
 </example></pre>
 
 <pre><example>
@@ -428,12 +442,12 @@ comment: plus recursion
 
 <pre><example>
 needles: ['**.f']
-comment: star recursion ending to f
+comment: star recursion ending in f
 </example></pre>
 
 <pre><example>
 needles: ['**[*]']
-comment: star recursion ending to array
+comment: star recursion ending in array
 </example></pre>
 
 <pre><example>
