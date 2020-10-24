@@ -323,7 +323,7 @@ haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
 needles: ['*.*.*']
 joined: false
 rtn: 'context'
-comment: return context
+comment: return undefined context
 </example></pre>
 <pre><example>
 haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
