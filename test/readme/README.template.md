@@ -377,6 +377,43 @@ needles: ['**.!**']
 comment: consecutive recursion
 </example></pre>
 
+#### rtn
+
+Type: `string`<br>
+Allowed: [`context`, `keys`, `values`]<br>
+Default: _dynamic_
+
+Default to `keys` if no search context is provided and to `context` otherwise.
+
+When explicitly set:
+- `context`: search context is returned
+- `keys`: matched keys are returned
+- `values`: matched values are returned
+
+_Examples_:
+<pre><example>
+haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
+needles: ['*.*.*']
+joined: false
+rtn: 'values'
+comment: return values
+</example></pre>
+<pre><example>
+haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
+needles: ['*.*.*']
+joined: false
+rtn: 'context'
+comment: return context
+</example></pre>
+<pre><example>
+haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
+needles: ['*.*.*']
+joined: false
+rtn: 'keys'
+context: []
+comment: return keys with context passed
+</example></pre>
+
 ### Search Context
 
 A context can be passed into a search invocation as a second parameter. It is available in all callbacks

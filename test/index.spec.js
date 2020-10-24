@@ -147,6 +147,38 @@ describe('Testing Find', () => {
     });
   });
 
+  describe('Testing return', () => {
+    it('Testing values', () => {
+      const find = objectScan(['*.*.*'], { rtn: 'values' });
+      expect(find(haystack)).to.deep.equal(['d']);
+    });
+
+    it('Testing values with context', () => {
+      const find = objectScan(['*.*.*'], { rtn: 'values' });
+      expect(find(haystack, [])).to.deep.equal(['d']);
+    });
+
+    it('Testing keys', () => {
+      const find = objectScan(['*.*.*'], { rtn: 'keys' });
+      expect(find(haystack)).to.deep.equal(['grandparent1.parent.child']);
+    });
+
+    it('Testing keys with context', () => {
+      const find = objectScan(['*.*.*'], { rtn: 'keys' });
+      expect(find(haystack, [])).to.deep.equal(['grandparent1.parent.child']);
+    });
+
+    it('Testing context', () => {
+      const find = objectScan(['*.*.*'], { rtn: 'context' });
+      expect(find(haystack)).to.deep.equal(undefined);
+    });
+
+    it('Testing context with context', () => {
+      const find = objectScan(['*.*.*'], { rtn: 'context' });
+      expect(find(haystack, [])).to.deep.equal([]);
+    });
+  });
+
   describe('Testing greedy array matching', () => {
     const needles = ['*'];
     const input = { key: ['v1', 'v2'] };
