@@ -399,6 +399,48 @@ objectScan(['**'], {
 ```
 </details>
 
+#### rtn
+
+Type: `string`<br>
+Allowed: [`context`, `keys`, `values`]<br>
+Default: _dynamic_
+
+Default to `keys` if no search context is provided and to `context` otherwise.
+
+When explicitly set:
+- `context`: search context is returned
+- `keys`: matched keys are returned
+- `values`: matched values are returned
+
+_Examples_:
+<details><summary> <code>['*.*.*']</code> <em>(return values)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
+objectScan(['*.*.*'], { rtn: 'values' })(haystack);
+// => [ 1, 0 ]
+```
+</details>
+<details><summary> <code>['*.*.*']</code> <em>(return context)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
+objectScan(['*.*.*'], { rtn: 'context' })(haystack);
+// => undefined
+```
+</details>
+<details><summary> <code>['*.*.*']</code> <em>(return keys with context passed)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
+objectScan(['*.*.*'], { rtn: 'keys' })(haystack, []);
+// => [ [ 'a', 'd', 'e' ], [ 'a', 'b', 'c' ] ]
+```
+</details>
+
 #### joined
 
 Type: `boolean`<br>
@@ -510,48 +552,6 @@ objectScan(['a.b', 'a.**'], { joined: true })(haystack);
 const haystack = [];
 objectScan(['**.!**'], { joined: true })(haystack);
 // => 'Error: Redundant Recursion: "**.!**"'
-```
-</details>
-
-#### rtn
-
-Type: `string`<br>
-Allowed: [`context`, `keys`, `values`]<br>
-Default: _dynamic_
-
-Default to `keys` if no search context is provided and to `context` otherwise.
-
-When explicitly set:
-- `context`: search context is returned
-- `keys`: matched keys are returned
-- `values`: matched values are returned
-
-_Examples_:
-<details><summary> <code>['*.*.*']</code> <em>(return values)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
-objectScan(['*.*.*'], { rtn: 'values' })(haystack);
-// => [ 1, 0 ]
-```
-</details>
-<details><summary> <code>['*.*.*']</code> <em>(return context)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
-objectScan(['*.*.*'], { rtn: 'context' })(haystack);
-// => undefined
-```
-</details>
-<details><summary> <code>['*.*.*']</code> <em>(return keys with context passed)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
-objectScan(['*.*.*'], { rtn: 'keys' })(haystack, []);
-// => [ [ 'a', 'd', 'e' ], [ 'a', 'b', 'c' ] ]
 ```
 </details>
 
