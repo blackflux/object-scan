@@ -40,8 +40,9 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 - Exclusion Matching
 - Full support for escaping
 - Results returned in "delete-safe" order
-- Search syntax checked for correctness
-- Lots of tests to ensure correctness
+- Recursion free implementation
+- Search syntax validated
+- Lots of tests
 
 ## Matching
 
