@@ -402,7 +402,7 @@ objectScan(['**'], {
 #### rtn
 
 Type: `string`<br>
-Allowed: [`context`, `keys`, `values`, `entries`, `key`, `value`, `entry`]<br>
+Allowed: [`context`, `keys`, `values`, `entries`, `key`, `value`, `entry`, `bool`]<br>
 Default: _dynamic_
 
 Defaults to `keys` when search context is _undefined_ and to `context` otherwise.
@@ -412,9 +412,10 @@ When explicitly set:
 - `keys`: all matched keys are returned
 - `values`: all matched values are returned
 - `entries`: all matched entries are returned
-- `key`: first matched key is returned (aborts scan)
-- `value`: first matched value is returned (aborts scan)
-- `entry`: first matched entry is returned (aborts scan)
+- `key`: first matched key is returned (aborts scan) or _undefined_
+- `value`: first matched value is returned (aborts scan) or _undefined_
+- `entry`: first matched entry is returned (aborts scan) or _undefined_
+- `bool`: returns _true_ iff a match is found (aborts scan)
 
 _Examples_:
 <details><summary> <code>['*.*.*']</code> <em>(return values)</em> </summary>
@@ -451,6 +452,15 @@ objectScan(['*.*.*'], { rtn: 'context' })(haystack);
 const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
 objectScan(['*.*.*'], { rtn: 'keys' })(haystack, []);
 // => [ [ 'a', 'd', 'e' ], [ 'a', 'b', 'c' ] ]
+```
+</details>
+<details><summary> <code>['*.*.*']</code> <em>(checks for any match)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
+objectScan(['*.*.*'], { rtn: 'bool' })(haystack, []);
+// => true
 ```
 </details>
 

@@ -114,8 +114,10 @@ const find = (haystack_, searches_, ctx) => {
             case 'value':
               return haystack;
             case 'entry':
-            default:
               return [formatPath(path, ctx), haystack];
+            case 'bool':
+            default:
+              return true;
           }
         }
       }
@@ -173,7 +175,18 @@ const find = (haystack_, searches_, ctx) => {
     }
   } while (stack.length !== 0);
 
-  return ctx.rtn === 'context' ? ctx.context : result;
+  switch (ctx.rtn) {
+    case 'context':
+      return ctx.context;
+    case 'bool':
+      return false;
+    case 'key':
+    case 'value':
+    case 'entry':
+      return undefined;
+    default:
+      return result;
+  }
 };
 
 module.exports = (needles, opts = {}) => {
@@ -198,7 +211,7 @@ module.exports = (needles, opts = {}) => {
   assert(typeof ctx.joined === 'boolean');
   assert(typeof ctx.useArraySelector === 'boolean');
   assert(typeof ctx.strict === 'boolean');
-  assert([undefined, 'context', 'keys', 'values', 'entries', 'key', 'value', 'entry'].includes(opts.rtn));
+  assert([undefined, 'context', 'keys', 'values', 'entries', 'key', 'value', 'entry', 'bool'].includes(opts.rtn));
 
   const search = compiler.compile(needles, ctx.strict, ctx.useArraySelector); // keep separate for performance
   return (haystack, context) => find(haystack, [search], {
