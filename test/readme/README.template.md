@@ -219,11 +219,7 @@ comment: special object key
 
 Signature of all callbacks is
 
-    Fn({
-      key, value, parent, parents, isMatch, matchedBy, excludedBy, traversedBy, isCircular
-      getKey, getValue, getParent, getParents, getIsMatch, getMatchedBy, getExcludedBy, getTraversedBy, getIsCircular
-      context
-    })
+    Fn({ key, value, ... })
 
 where:
 
