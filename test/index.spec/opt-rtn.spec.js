@@ -12,6 +12,9 @@ describe('Testing rtn option', () => {
     };
   });
 
+  it('Testing context', () => execute('context', false, undefined));
+  it('Testing context with context', () => execute('context', true, []));
+
   it('Testing keys', () => execute('keys', false, [
     'array2.nested[2]', 'array2.nested[1]', 'array2.nested[0]'
   ]));
@@ -37,7 +40,4 @@ describe('Testing rtn option', () => {
 
   it('Testing entry', () => execute('entry', false, ['array2.nested[2]', 'c']));
   it('Testing entry with context', () => execute('entry', true, ['array2.nested[2]', 'c']));
-
-  it('Testing context', () => execute('context', false, undefined));
-  it('Testing context with context', () => execute('context', true, []));
 });
