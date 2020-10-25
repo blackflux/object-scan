@@ -99,7 +99,24 @@ const find = (haystack_, searches_, ctx) => {
     if (isResult) {
       if (ctx.filterFn === undefined || ctx.filterFn(kwargs) !== false) {
         if (result !== null) {
-          result.push(ctx.rtn === 'keys' ? formatPath(path, ctx) : haystack);
+          switch (ctx.rtn) {
+            case 'keys':
+              result.push(formatPath(path, ctx));
+              break;
+            case 'values':
+              result.push(haystack);
+              break;
+            case 'entries':
+              result.push([formatPath(path, ctx), haystack]);
+              break;
+            case 'key':
+              return formatPath(path, ctx);
+            case 'value':
+              return haystack;
+            case 'entry':
+            default:
+              return [formatPath(path, ctx), haystack];
+          }
         }
       }
       // eslint-disable-next-line no-continue
@@ -181,7 +198,7 @@ module.exports = (needles, opts = {}) => {
   assert(typeof ctx.joined === 'boolean');
   assert(typeof ctx.useArraySelector === 'boolean');
   assert(typeof ctx.strict === 'boolean');
-  assert([undefined, 'context', 'keys', 'values'].includes(opts.rtn));
+  assert([undefined, 'context', 'keys', 'values', 'entries', 'key', 'value', 'entry'].includes(opts.rtn));
 
   const search = compiler.compile(needles, ctx.strict, ctx.useArraySelector); // keep separate for performance
   return (haystack, context) => find(haystack, [search], {

@@ -402,15 +402,19 @@ objectScan(['**'], {
 #### rtn
 
 Type: `string`<br>
-Allowed: [`context`, `keys`, `values`]<br>
+Allowed: [`context`, `keys`, `values`, `entries`, `key`, `value`, `entry`]<br>
 Default: _dynamic_
 
 Default to `keys` if no search context is provided and to `context` otherwise.
 
 When explicitly set:
 - `context`: search context is returned
-- `keys`: matched keys are returned
-- `values`: matched values are returned
+- `keys`: all matched keys are returned
+- `values`: all matched values are returned
+- `entries`: all matched entries are returned
+- `key`: first matched key is returned (aborts scan)
+- `value`: first matched value is returned (aborts scan)
+- `entry`: first matched entry is returned (aborts scan)
 
 _Examples_:
 <details><summary> <code>['*.*.*']</code> <em>(return values)</em> </summary>
