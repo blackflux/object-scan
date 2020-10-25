@@ -405,7 +405,7 @@ Type: `string`<br>
 Allowed: [`context`, `keys`, `values`, `entries`, `key`, `value`, `entry`]<br>
 Default: _dynamic_
 
-Default to `keys` if no search context is provided and to `context` otherwise.
+Defaults to `keys` when search context is undefined and to `context` otherwise.
 
 When explicitly set:
 - `context`: search context is returned
