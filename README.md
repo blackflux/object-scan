@@ -319,6 +319,7 @@ where:
 
 - `key`: key that callback is invoked for (respects `joined` option).
 - `value`: value for key.
+- `entry`: entry consisting of [`key`, `value`].
 - `property`: current parent property.
 - `parent`: current parent.
 - `parents`: array of form `[parent, grandparent, ...]`.
@@ -329,6 +330,7 @@ where:
 - `isCircular`: true iff `value` contained in `parents`
 - `getKey`: function that returns `key`
 - `getValue`: function that returns `value`
+- `getEntry`: function that returns `entry`
 - `getProperty`: function that returns `property`
 - `getParent`: function that returns `parent`
 - `getParents`: function that returns `parents`
@@ -401,25 +403,58 @@ objectScan(['**'], {
 ```
 </details>
 
+#### abort
+
+Type: `boolean`<br>
+Default: `false`
+
+When set to `true` the scan immediately returns after the first match.
+
+_Examples_:
+<details><summary> <code>['*.*.*']</code> <em>(abort changes count)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
+objectScan(['*.*.*'], {
+  rtn: 'count',
+  abort: true
+})(haystack);
+// => 1
+```
+</details>
+<details><summary> <code>['*.*.*']</code> <em>(only return first property)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
+objectScan(['*.*.*'], {
+  rtn: 'property',
+  abort: true
+})(haystack);
+// => 'e'
+```
+</details>
+
 #### rtn
 
 Type: `string`<br>
 Default: _dynamic_
 
-Defaults to `keys` when search context is _undefined_ and to `context` otherwise.
+Defaults to `key` when search context is _undefined_ and to `context` otherwise.
 
 Can be explicitly set as:
 - `context`: search context is returned
-- `keys`: all matched keys are returned
-- `values`: all matched values are returned
-- `entries`: all matched entries are returned
-- `properties`: all matched properties are returned
-- `key`: first matched key is returned (aborts scan) or _undefined_
-- `value`: first matched value is returned (aborts scan) or _undefined_
-- `entry`: first matched entry is returned (aborts scan) or _undefined_
-- `property`: first matched property is returned (aborts scan) or _undefined_
-- `bool`: returns _true_ iff a match is found (aborts scan)
+- `key`: matched keys are returned
+- `value`: matched values are returned
+- `entry`: matched entries are returned
+- `property`: matched properties are returned
+- `parent`: matched parent are returned
+- `parents`: matched parents are returned
+- `bool`: returns _true_ iff a match is found
 - `count`: returns the match count
+
+When **abort** is set to `true` and the result would be a list, the first match or _undefined_ is returned.
 
 _Examples_:
 <details><summary> <code>['*.*.*']</code> <em>(return values)</em> </summary>
@@ -427,25 +462,25 @@ _Examples_:
 <!-- eslint-disable no-undef -->
 ```js
 const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
-objectScan(['*.*.*'], { rtn: 'values' })(haystack);
+objectScan(['*.*.*'], { rtn: 'value' })(haystack);
 // => [ 1, 0 ]
 ```
 </details>
-<details><summary> <code>['*.*.*']</code> <em>(first matched entry, aborts)</em> </summary>
+<details><summary> <code>['*.*.*']</code> <em>(return entries)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
 const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
 objectScan(['*.*.*'], { rtn: 'entry' })(haystack, []);
-// => [ [ 'a', 'd', 'e' ], 1 ]
+// => [ [ [ 'a', 'd', 'e' ], 1 ], [ [ 'a', 'b', 'c' ], 0 ] ]
 ```
 </details>
-<details><summary> <code>['*.*.*']</code> <em>(all properties)</em> </summary>
+<details><summary> <code>['*.*.*']</code> <em>(return properties)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
 const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
-objectScan(['*.*.*'], { rtn: 'properties' })(haystack, []);
+objectScan(['*.*.*'], { rtn: 'property' })(haystack, []);
 // => [ 'e', 'c' ]
 ```
 </details>
@@ -463,7 +498,7 @@ objectScan(['*.*.*'], { rtn: 'context' })(haystack);
 <!-- eslint-disable no-undef -->
 ```js
 const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
-objectScan(['*.*.*'], { rtn: 'keys' })(haystack, []);
+objectScan(['*.*.*'], { rtn: 'key' })(haystack, []);
 // => [ [ 'a', 'd', 'e' ], [ 'a', 'b', 'c' ] ]
 ```
 </details>
