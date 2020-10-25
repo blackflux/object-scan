@@ -351,7 +351,6 @@ haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
 needles: ['*.*.*']
 joined: false
 rtn: 'bool'
-context: []
 comment: checks for any match
 </example></pre>
 

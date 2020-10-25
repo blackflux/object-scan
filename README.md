@@ -459,7 +459,7 @@ objectScan(['*.*.*'], { rtn: 'keys' })(haystack, []);
 <!-- eslint-disable no-undef -->
 ```js
 const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
-objectScan(['*.*.*'], { rtn: 'bool' })(haystack, []);
+objectScan(['*.*.*'], { rtn: 'bool' })(haystack);
 // => true
 ```
 </details>
