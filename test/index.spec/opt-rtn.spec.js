@@ -7,10 +7,13 @@ const tests = {
   keys: { y: ['array2.nested[2]', 'array2.nested[1]', 'array2.nested[0]'], n: [] },
   values: { y: ['c', 'b', 'a'], n: [] },
   entries: { y: [['array2.nested[2]', 'c'], ['array2.nested[1]', 'b'], ['array2.nested[0]', 'a']], n: [] },
+  properties: { y: [2, 1, 0], n: [] },
   key: { y: 'array2.nested[2]', n: undefined },
   value: { y: 'c', n: undefined },
   entry: { y: ['array2.nested[2]', 'c'], n: undefined },
-  bool: { y: true, n: false }
+  property: { y: 2, n: undefined },
+  bool: { y: true, n: false },
+  count: { y: 3, n: 0 }
 };
 
 describe('Testing rtn option', () => {
