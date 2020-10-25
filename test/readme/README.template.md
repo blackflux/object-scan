@@ -326,6 +326,14 @@ comment: return values
 haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
 needles: ['*.*.*']
 joined: false
+rtn: 'entry'
+context: []
+comment: first matched entry, aborts
+</example></pre>
+<pre><example>
+haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
+needles: ['*.*.*']
+joined: false
 rtn: 'context'
 comment: return undefined context
 </example></pre>

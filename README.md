@@ -426,6 +426,15 @@ objectScan(['*.*.*'], { rtn: 'values' })(haystack);
 // => [ 1, 0 ]
 ```
 </details>
+<details><summary> <code>['*.*.*']</code> <em>(first matched entry, aborts)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
+objectScan(['*.*.*'], { rtn: 'entry' })(haystack, []);
+// => [ [ 'a', 'd', 'e' ], 1 ]
+```
+</details>
 <details><summary> <code>['*.*.*']</code> <em>(return undefined context)</em> </summary>
 
 <!-- eslint-disable no-undef -->
