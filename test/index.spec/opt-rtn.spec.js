@@ -17,7 +17,7 @@ describe('Testing rtn option', () => {
   // eslint-disable-next-line mocha/no-setup-in-describe
   Object.entries(tests).forEach(([rtn, opt]) => {
     [true, false].forEach((isMatch) => {
-      [true, false].forEach((withContext) => {
+      [false, true].forEach((withContext) => {
         it(`Testing ${rtn}${isMatch ? '' : ' (no match)'}${withContext ? ' with context' : ''}`, () => {
           const haystack = { array2: { nested: ['a', 'b', 'c'] } };
           const find = objectScan([isMatch ? '*.*[*]' : 'unmatched'], { joined: true, rtn });
