@@ -435,7 +435,7 @@ objectScan(['*.*.*'], { rtn: 'entry' })(haystack, []);
 // => [ [ 'a', 'd', 'e' ], 1 ]
 ```
 </details>
-<details><summary> <code>['*.*.*']</code> <em>(return undefined context)</em> </summary>
+<details><summary> <code>['*.*.*']</code> <em>(return not provided context)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
