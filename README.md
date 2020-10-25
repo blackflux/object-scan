@@ -399,6 +399,61 @@ objectScan(['**'], {
 ```
 </details>
 
+#### rtn
+
+Type: `string`<br>
+Allowed: [`context`, `keys`, `values`, `entries`, `key`, `value`, `entry`]<br>
+Default: _dynamic_
+
+Defaults to `keys` when search context is _undefined_ and to `context` otherwise.
+
+When explicitly set:
+- `context`: search context is returned
+- `keys`: all matched keys are returned
+- `values`: all matched values are returned
+- `entries`: all matched entries are returned
+- `key`: first matched key is returned (aborts scan)
+- `value`: first matched value is returned (aborts scan)
+- `entry`: first matched entry is returned (aborts scan)
+
+_Examples_:
+<details><summary> <code>['*.*.*']</code> <em>(return values)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
+objectScan(['*.*.*'], { rtn: 'values' })(haystack);
+// => [ 1, 0 ]
+```
+</details>
+<details><summary> <code>['*.*.*']</code> <em>(first matched entry, aborts)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
+objectScan(['*.*.*'], { rtn: 'entry' })(haystack, []);
+// => [ [ 'a', 'd', 'e' ], 1 ]
+```
+</details>
+<details><summary> <code>['*.*.*']</code> <em>(return not provided context)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
+objectScan(['*.*.*'], { rtn: 'context' })(haystack);
+// => undefined
+```
+</details>
+<details><summary> <code>['*.*.*']</code> <em>(return keys with context passed)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
+objectScan(['*.*.*'], { rtn: 'keys' })(haystack, []);
+// => [ [ 'a', 'd', 'e' ], [ 'a', 'b', 'c' ] ]
+```
+</details>
+
 #### joined
 
 Type: `boolean`<br>
@@ -519,7 +574,7 @@ A context can be passed into a search invocation as a second parameter. It is av
 and can be used to manage state across a search invocation without having to recompile the search.
 
 By default all matched keys are returned from a search invocation.
-However, when it is not undefined, the context is returned instead.
+However, when it is not _undefined_, the context is returned instead.
 
 _Examples_:
 <details><summary> <code>['**']</code> <em>(last segments only)</em> </summary>

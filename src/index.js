@@ -22,7 +22,7 @@ const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
 const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);
 
 const find = (haystack_, searches_, ctx) => {
-  const result = ctx.context === undefined ? [] : null;
+  const result = ctx.rtn === 'context' ? null : [];
 
   const stack = [false, searches_, null, 0];
   const path = [];
@@ -99,7 +99,24 @@ const find = (haystack_, searches_, ctx) => {
     if (isResult) {
       if (ctx.filterFn === undefined || ctx.filterFn(kwargs) !== false) {
         if (result !== null) {
-          result.push(formatPath(path, ctx));
+          switch (ctx.rtn) {
+            case 'keys':
+              result.push(formatPath(path, ctx));
+              break;
+            case 'values':
+              result.push(haystack);
+              break;
+            case 'entries':
+              result.push([formatPath(path, ctx), haystack]);
+              break;
+            case 'key':
+              return formatPath(path, ctx);
+            case 'value':
+              return haystack;
+            case 'entry':
+            default:
+              return [formatPath(path, ctx), haystack];
+          }
         }
       }
       // eslint-disable-next-line no-continue
@@ -156,7 +173,7 @@ const find = (haystack_, searches_, ctx) => {
     }
   } while (stack.length !== 0);
 
-  return result === null ? ctx.context : result;
+  return ctx.rtn === 'context' ? ctx.context : result;
 };
 
 module.exports = (needles, opts = {}) => {
@@ -172,15 +189,21 @@ module.exports = (needles, opts = {}) => {
     joined: false,
     useArraySelector: true,
     strict: true,
+    rtn: undefined,
     ...opts
   };
-  assert(Object.keys(ctx).length === 5, 'Unexpected Option provided!');
+  assert(Object.keys(ctx).length === 6, 'Unexpected Option provided!');
   assert(['function', 'undefined'].includes(typeof ctx.filterFn));
   assert(['function', 'undefined'].includes(typeof ctx.breakFn));
   assert(typeof ctx.joined === 'boolean');
   assert(typeof ctx.useArraySelector === 'boolean');
   assert(typeof ctx.strict === 'boolean');
+  assert([undefined, 'context', 'keys', 'values', 'entries', 'key', 'value', 'entry'].includes(opts.rtn));
 
   const search = compiler.compile(needles, ctx.strict, ctx.useArraySelector); // keep separate for performance
-  return (haystack, context) => find(haystack, [search], { context, ...ctx });
+  return (haystack, context) => find(haystack, [search], {
+    context,
+    ...ctx,
+    rtn: ctx.rtn || (context === undefined ? 'keys' : 'context')
+  });
 };
