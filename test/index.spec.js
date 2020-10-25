@@ -418,6 +418,14 @@ describe('Testing Find', () => {
     ]);
   });
 
+  it('Testing entries', () => {
+    objectScan(['**'], {
+      filterFn: ({ key, value, entry }) => {
+        expect([key, value]).to.deep.equal(entry);
+      }
+    })(haystack);
+  });
+
   describe('Testing sorting', () => {
     it('Testing array matches reversed', () => {
       const find = objectScan(['**'], { joined: false });
