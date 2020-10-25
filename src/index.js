@@ -43,6 +43,10 @@ const find = (haystack_, searches_, ctx) => {
     get value() {
       return kwargs.getValue();
     },
+    getEntry: () => [formatPath(path, ctx), haystack],
+    get entry() {
+      return kwargs.getEntry();
+    },
     getIsMatch: () => compiler.isLastLeafMatch(searches),
     get isMatch() {
       return kwargs.getIsMatch();
@@ -78,6 +82,49 @@ const find = (haystack_, searches_, ctx) => {
     context: ctx.context
   };
 
+  const onMatch = () => {
+    switch (ctx.rtn) {
+      case 'key':
+        result.push(kwargs.getKey());
+        break;
+      case 'value':
+        result.push(kwargs.getValue());
+        break;
+      case 'entry':
+        result.push(kwargs.getEntry());
+        break;
+      case 'property':
+        result.push(kwargs.getProperty());
+        break;
+      case 'parent':
+        result.push(kwargs.getParent());
+        break;
+      case 'parents':
+        result.push(kwargs.getParents());
+        break;
+      case 'bool':
+        result.length = 1;
+        break;
+      case 'count':
+      default:
+        result.length += 1;
+        break;
+    }
+  };
+
+  const finish = () => {
+    switch (ctx.rtn) {
+      case 'context':
+        return ctx.context;
+      case 'bool':
+        return result.length === 1;
+      case 'count':
+        return result.length;
+      default:
+        return ctx.abort ? result[0] : result;
+    }
+  };
+
   do {
     depth = stack.pop();
     segment = stack.pop();
@@ -103,33 +150,9 @@ const find = (haystack_, searches_, ctx) => {
     if (isResult) {
       if (ctx.filterFn === undefined || ctx.filterFn(kwargs) !== false) {
         if (result !== null) {
-          switch (ctx.rtn) {
-            case 'keys':
-              result.push(formatPath(path, ctx));
-              break;
-            case 'values':
-              result.push(haystack);
-              break;
-            case 'entries':
-              result.push([formatPath(path, ctx), haystack]);
-              break;
-            case 'properties':
-              result.push(path[path.length - 1]);
-              break;
-            case 'key':
-              return formatPath(path, ctx);
-            case 'value':
-              return haystack;
-            case 'entry':
-              return [formatPath(path, ctx), haystack];
-            case 'property':
-              return path[path.length - 1];
-            case 'bool':
-              return true;
-            case 'count':
-            default:
-              result.length += 1;
-              break;
+          onMatch();
+          if (ctx.abort) {
+            return finish();
           }
         }
       }
@@ -187,21 +210,7 @@ const find = (haystack_, searches_, ctx) => {
     }
   } while (stack.length !== 0);
 
-  switch (ctx.rtn) {
-    case 'context':
-      return ctx.context;
-    case 'key':
-    case 'value':
-    case 'entry':
-    case 'property':
-      return undefined;
-    case 'bool':
-      return false;
-    case 'count':
-      return result.length;
-    default:
-      return result;
-  }
+  return finish();
 };
 
 module.exports = (needles, opts = {}) => {
@@ -214,29 +223,31 @@ module.exports = (needles, opts = {}) => {
   const ctx = {
     filterFn: undefined,
     breakFn: undefined,
+    abort: false,
+    rtn: undefined,
     joined: false,
     useArraySelector: true,
     strict: true,
-    rtn: undefined,
     ...opts
   };
-  assert(Object.keys(ctx).length === 6, 'Unexpected Option provided!');
+  assert(Object.keys(ctx).length === 7, 'Unexpected Option provided!');
   assert(['function', 'undefined'].includes(typeof ctx.filterFn));
   assert(['function', 'undefined'].includes(typeof ctx.breakFn));
+  assert(typeof ctx.abort === 'boolean');
+  assert([
+    undefined, 'context',
+    'key', 'value', 'entry',
+    'property', 'parent', 'parents',
+    'bool', 'count'
+  ].includes(opts.rtn));
   assert(typeof ctx.joined === 'boolean');
   assert(typeof ctx.useArraySelector === 'boolean');
   assert(typeof ctx.strict === 'boolean');
-  assert([
-    undefined, 'context',
-    'keys', 'values', 'entries', 'properties',
-    'key', 'value', 'entry', 'property',
-    'bool', 'count'
-  ].includes(opts.rtn));
 
   const search = compiler.compile(needles, ctx.strict, ctx.useArraySelector); // keep separate for performance
   return (haystack, context) => find(haystack, [search], {
     context,
     ...ctx,
-    rtn: ctx.rtn || (context === undefined ? 'keys' : 'context')
+    rtn: ctx.rtn || (context === undefined ? 'key' : 'context')
   });
 };
