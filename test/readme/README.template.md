@@ -303,7 +303,7 @@ Type: `string`<br>
 Allowed: [`context`, `keys`, `values`, `entries`, `key`, `value`, `entry`]<br>
 Default: _dynamic_
 
-Defaults to `keys` when search context is undefined and to `context` otherwise.
+Defaults to `keys` when search context is _undefined_ and to `context` otherwise.
 
 When explicitly set:
 - `context`: search context is returned
@@ -432,7 +432,7 @@ A context can be passed into a search invocation as a second parameter. It is av
 and can be used to manage state across a search invocation without having to recompile the search.
 
 By default all matched keys are returned from a search invocation.
-However, when it is not undefined, the context is returned instead.
+However, when it is not _undefined_, the context is returned instead.
 
 _Examples_:
 <pre><example>
