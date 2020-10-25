@@ -229,6 +229,7 @@ where:
 
 - `key`: key that callback is invoked for (respects `joined` option).
 - `value`: value for key.
+- `property`: current parent property.
 - `parent`: current parent.
 - `parents`: array of form `[parent, grandparent, ...]`.
 - `isMatch`: true iff last targeting needle exists and is non-excluding.
@@ -238,6 +239,7 @@ where:
 - `isCircular`: true iff `value` contained in `parents`
 - `getKey`: function that returns `key`
 - `getValue`: function that returns `value`
+- `getProperty`: function that returns `property`
 - `getParent`: function that returns `parent`
 - `getParents`: function that returns `parents`
 - `getIsMatch`: function that returns `isMatch`
@@ -300,20 +302,22 @@ breakFn: ({ key }) => key === 'a.b'
 #### rtn
 
 Type: `string`<br>
-Allowed: [`context`, `keys`, `values`, `entries`, `key`, `value`, `entry`, `bool`]<br>
 Default: _dynamic_
 
 Defaults to `keys` when search context is _undefined_ and to `context` otherwise.
 
-When explicitly set:
+Can be explicitly set as:
 - `context`: search context is returned
 - `keys`: all matched keys are returned
 - `values`: all matched values are returned
 - `entries`: all matched entries are returned
+- `properties`: all matched properties are returned
 - `key`: first matched key is returned (aborts scan) or _undefined_
 - `value`: first matched value is returned (aborts scan) or _undefined_
 - `entry`: first matched entry is returned (aborts scan) or _undefined_
+- `property`: first matched property is returned (aborts scan) or _undefined_
 - `bool`: returns _true_ iff a match is found (aborts scan)
+- `count`: returns the match count
 
 _Examples_:
 <pre><example>
@@ -330,6 +334,14 @@ joined: false
 rtn: 'entry'
 context: []
 comment: first matched entry, aborts
+</example></pre>
+<pre><example>
+haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
+needles: ['*.*.*']
+joined: false
+rtn: 'properties'
+context: []
+comment: all properties
 </example></pre>
 <pre><example>
 haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
