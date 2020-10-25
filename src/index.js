@@ -59,6 +59,10 @@ const find = (haystack_, searches_, ctx) => {
     get traversedBy() {
       return kwargs.getTraversedBy();
     },
+    getProperty: () => path[path.length - 1],
+    get property() {
+      return kwargs.getProperty();
+    },
     getParent: () => parents[parents.length - 1],
     get parent() {
       return kwargs.getParent();
@@ -109,15 +113,23 @@ const find = (haystack_, searches_, ctx) => {
             case 'entries':
               result.push([formatPath(path, ctx), haystack]);
               break;
+            case 'properties':
+              result.push(path[path.length - 1]);
+              break;
             case 'key':
               return formatPath(path, ctx);
             case 'value':
               return haystack;
             case 'entry':
               return [formatPath(path, ctx), haystack];
+            case 'property':
+              return path[path.length - 1];
             case 'bool':
-            default:
               return true;
+            case 'count':
+            default:
+              result.length += 1;
+              break;
           }
         }
       }
@@ -178,12 +190,15 @@ const find = (haystack_, searches_, ctx) => {
   switch (ctx.rtn) {
     case 'context':
       return ctx.context;
-    case 'bool':
-      return false;
     case 'key':
     case 'value':
     case 'entry':
+    case 'property':
       return undefined;
+    case 'bool':
+      return false;
+    case 'count':
+      return result.length;
     default:
       return result;
   }
@@ -211,7 +226,12 @@ module.exports = (needles, opts = {}) => {
   assert(typeof ctx.joined === 'boolean');
   assert(typeof ctx.useArraySelector === 'boolean');
   assert(typeof ctx.strict === 'boolean');
-  assert([undefined, 'context', 'keys', 'values', 'entries', 'key', 'value', 'entry', 'bool'].includes(opts.rtn));
+  assert([
+    undefined, 'context',
+    'keys', 'values', 'entries', 'properties',
+    'key', 'value', 'entry', 'property',
+    'bool', 'count'
+  ].includes(opts.rtn));
 
   const search = compiler.compile(needles, ctx.strict, ctx.useArraySelector); // keep separate for performance
   return (haystack, context) => find(haystack, [search], {
