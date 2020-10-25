@@ -11,6 +11,7 @@ const getObjectScanOptions = (meta) => {
     filterFn: meta.filterFn,
     breakFn: meta.breakFn,
     strict: meta.strict,
+    rtn: meta.rtn,
     useArraySelector: meta.useArraySelector
   })
     .filter(([k, v]) => v !== undefined);

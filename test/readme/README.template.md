@@ -297,6 +297,55 @@ comment: break function
 breakFn: ({ key }) => key === 'a.b'
 </example></pre>
 
+#### rtn
+
+Type: `string`<br>
+Allowed: [`context`, `keys`, `values`, `entries`, `key`, `value`, `entry`]<br>
+Default: _dynamic_
+
+Defaults to `keys` when search context is _undefined_ and to `context` otherwise.
+
+When explicitly set:
+- `context`: search context is returned
+- `keys`: all matched keys are returned
+- `values`: all matched values are returned
+- `entries`: all matched entries are returned
+- `key`: first matched key is returned (aborts scan)
+- `value`: first matched value is returned (aborts scan)
+- `entry`: first matched entry is returned (aborts scan)
+
+_Examples_:
+<pre><example>
+haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
+needles: ['*.*.*']
+joined: false
+rtn: 'values'
+comment: return values
+</example></pre>
+<pre><example>
+haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
+needles: ['*.*.*']
+joined: false
+rtn: 'entry'
+context: []
+comment: first matched entry, aborts
+</example></pre>
+<pre><example>
+haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
+needles: ['*.*.*']
+joined: false
+rtn: 'context'
+comment: return not provided context
+</example></pre>
+<pre><example>
+haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
+needles: ['*.*.*']
+joined: false
+rtn: 'keys'
+context: []
+comment: return keys with context passed
+</example></pre>
+
 #### joined
 
 Type: `boolean`<br>
@@ -383,7 +432,7 @@ A context can be passed into a search invocation as a second parameter. It is av
 and can be used to manage state across a search invocation without having to recompile the search.
 
 By default all matched keys are returned from a search invocation.
-However, when it is not undefined, the context is returned instead.
+However, when it is not _undefined_, the context is returned instead.
 
 _Examples_:
 <pre><example>
