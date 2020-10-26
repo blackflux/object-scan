@@ -255,6 +255,13 @@ describe('Testing path-to-needle-path.js', () => {
       ]);
     });
 
+    it('Testing regex partial plus', () => {
+      const r = pathToNeedlePath(['abc'], { partialPlus: 1, regex: 1 }, rng);
+      expect(r).to.deep.equal([
+        { value: '(a.+c)', string: true, exclude: false }
+      ]);
+    });
+
     it('Testing regex question mark', () => {
       const r = pathToNeedlePath(['abc'], { questionMark: 1, regex: 1 }, rng);
       expect(r).to.deep.equal([
