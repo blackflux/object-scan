@@ -1,8 +1,10 @@
 const expect = require('chai').expect;
+const { v4: uuid } = require('uuid');
 const { describe } = require('node-tdd');
 const iterator = require('../../src/util/iterator');
 const parsedNeedleToStringArray = require('../helper/parsed-needle-to-string-array');
 const generateParsedNeedle = require('../helper/generate-parsed-needle');
+const PRNG = require('../helper/prng');
 
 describe('Testing iterator', () => {
   let recIterate;
@@ -30,7 +32,9 @@ describe('Testing iterator', () => {
 
   it('Mass Testing Iterate Correctness', () => {
     for (let idx = 0; idx < 1000; idx += 1) {
-      const data = [generateParsedNeedle()];
+      const seed = uuid();
+      const rng = PRNG(seed);
+      const data = [generateParsedNeedle({ rng })];
       const r1 = [];
       const r2 = [];
       recIterate(data, (...args) => r1.push(args));
