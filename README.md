@@ -46,8 +46,11 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 
 ## Matching
 
-Matching is based on the [property accessor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors) syntax
-with some notable extensions.
+A needle expression specifies one or more paths to an element (or a set of elements) in a JSON structure. Paths use the dot notation:
+
+```txt
+store.book[0].title
+```
 
 ### Array
 
@@ -63,12 +66,12 @@ objectScan(['[2]'], { joined: true })(haystack);
 // => [ '[2]' ]
 ```
 </details>
-<details><summary> <code>['[2]']</code> <em>(no match in object)</em> </summary>
+<details><summary> <code>['[1]']</code> <em>(no match in object)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
 const haystack = { 0: 'a', 1: 'b', 2: 'c' };
-objectScan(['[2]'], { joined: true })(haystack);
+objectScan(['[1]'], { joined: true })(haystack);
 // => []
 ```
 </details>
@@ -225,13 +228,13 @@ objectScan(['a.++'], { joined: true })(haystack);
 // => [ 'a.c', 'a.b' ]
 ```
 </details>
-<details><summary> <code>['**(1)']</code> <em>(all containing `1`)</em> </summary>
+<details><summary> <code>['**(1)']</code> <em>(all containing `1` at every level)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
-const haystack = { 0: { 1: ['a', 'b'] }, 1: { 1: ['c', 'd'] } };
+const haystack = { 0: { 1: ['a', 'b'] }, 1: { 1: ['c', 'd'] }, 510: 'e', foo: { 1: 'f' } };
 objectScan(['**(1)'], { joined: true })(haystack);
-// => [ '1.1[1]', '1.1', '1' ]
+// => [ '510', '1.1[1]', '1.1', '1' ]
 ```
 </details>
 
@@ -390,12 +393,12 @@ _Examples_:
 
 <!-- eslint-disable no-undef -->
 ```js
-const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
+const haystack = { a: { b: { c: 0 } } };
 objectScan(['**'], {
   joined: true,
   breakFn: ({ key }) => key === 'a.b'
 })(haystack);
-// => [ 'a.f', 'a.d.e', 'a.d', 'a.b', 'a' ]
+// => [ 'a.b', 'a' ]
 ```
 </details>
 
@@ -407,28 +410,28 @@ Default: `false`
 When set to `true` the scan immediately returns after the first match.
 
 _Examples_:
-<details><summary> <code>['*.*.*']</code> <em>(abort changes count)</em> </summary>
+<details><summary> <code>['[0]', '[1]']</code> <em>(abort changes count)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
-const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
-objectScan(['*.*.*'], {
+const haystack = ['a', 'b'];
+objectScan(['[0]', '[1]'], {
   rtn: 'count',
   abort: true
 })(haystack);
 // => 1
 ```
 </details>
-<details><summary> <code>['*.*.*']</code> <em>(only return first property)</em> </summary>
+<details><summary> <code>['a', 'b']</code> <em>(only return first property)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
-const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
-objectScan(['*.*.*'], {
+const haystack = { a: 0, b: 1 };
+objectScan(['a', 'b'], {
   rtn: 'property',
   abort: true
 })(haystack);
-// => 'e'
+// => 'b'
 ```
 </details>
 
@@ -453,58 +456,58 @@ Can be explicitly set as:
 When **abort** is set to `true` and the result would be a list, the first match or _undefined_ is returned.
 
 _Examples_:
-<details><summary> <code>['*.*.*']</code> <em>(return values)</em> </summary>
+<details><summary> <code>['[*]']</code> <em>(return values)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
-const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
-objectScan(['*.*.*'], { rtn: 'value' })(haystack);
-// => [ 1, 0 ]
+const haystack = ['a', 'b', 'c'];
+objectScan(['[*]'], { rtn: 'value' })(haystack);
+// => [ 'c', 'b', 'a' ]
 ```
 </details>
-<details><summary> <code>['*.*.*']</code> <em>(return entries)</em> </summary>
+<details><summary> <code>['foo[*]']</code> <em>(return entries)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
-const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
-objectScan(['*.*.*'], { rtn: 'entry' })(haystack, []);
-// => [ [ [ 'a', 'd', 'e' ], 1 ], [ [ 'a', 'b', 'c' ], 0 ] ]
+const haystack = { foo: ['bar'] };
+objectScan(['foo[*]'], { rtn: 'entry' })(haystack, []);
+// => [ [ [ 'foo', 0 ], 'bar' ] ]
 ```
 </details>
-<details><summary> <code>['*.*.*']</code> <em>(return properties)</em> </summary>
+<details><summary> <code>['a.b.c', 'a']</code> <em>(return properties)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
-const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
-objectScan(['*.*.*'], { rtn: 'property' })(haystack, []);
-// => [ 'e', 'c' ]
+const haystack = { a: { b: { c: 0 } } };
+objectScan(['a.b.c', 'a'], { rtn: 'property' })(haystack, []);
+// => [ 'c', 'a' ]
 ```
 </details>
-<details><summary> <code>['*.*.*']</code> <em>(return not provided context)</em> </summary>
+<details><summary> <code>['a.b', 'a.c']</code> <em>(checks for any match, full scan)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
-const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
-objectScan(['*.*.*'], { rtn: 'context' })(haystack);
+const haystack = { a: { b: 0, c: 1 } };
+objectScan(['a.b', 'a.c'], { rtn: 'bool' })(haystack);
+// => true
+```
+</details>
+<details><summary> <code>['**']</code> <em>(return not provided context)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0 };
+objectScan(['**'], { rtn: 'context' })(haystack);
 // => undefined
 ```
 </details>
-<details><summary> <code>['*.*.*']</code> <em>(return keys with context passed)</em> </summary>
+<details><summary> <code>['a.b.{c,d}']</code> <em>(return keys with context passed)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
-const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
-objectScan(['*.*.*'], { rtn: 'key' })(haystack, []);
-// => [ [ 'a', 'd', 'e' ], [ 'a', 'b', 'c' ] ]
-```
-</details>
-<details><summary> <code>['*.*.*']</code> <em>(checks for any match)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } };
-objectScan(['*.*.*'], { rtn: 'bool' })(haystack);
-// => true
+const haystack = { a: { b: { c: 0, d: 1 } } };
+objectScan(['a.b.{c,d}'], { rtn: 'key' })(haystack, []);
+// => [ [ 'a', 'b', 'd' ], [ 'a', 'b', 'c' ] ]
 ```
 </details>
 
@@ -520,22 +523,22 @@ Setting this option to `true` will negatively impact performance.
 Note that [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set) fully support lists.
 
 _Examples_:
-<details><summary> <code>['[*]']</code> <em>(joined)</em> </summary>
+<details><summary> <code>['[*]', '[*].foo']</code> <em>(joined)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
-const haystack = [0, 1, 2];
-objectScan(['[*]'], { joined: true })(haystack);
-// => [ '[2]', '[1]', '[0]' ]
+const haystack = [0, 1, { foo: 'bar' }];
+objectScan(['[*]', '[*].foo'], { joined: true })(haystack);
+// => [ '[2].foo', '[2]', '[1]', '[0]' ]
 ```
 </details>
-<details><summary> <code>['[*]']</code> <em>(not joined)</em> </summary>
+<details><summary> <code>['[*]', '[*].foo']</code> <em>(not joined)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
-const haystack = [0, 1, 2];
-objectScan(['[*]'])(haystack);
-// => [ [ 2 ], [ 1 ], [ 0 ] ]
+const haystack = [0, 1, { foo: 'bar' }];
+objectScan(['[*]', '[*].foo'])(haystack);
+// => [ [ 2, 'foo' ], [ 2 ], [ 1 ], [ 0 ] ]
 ```
 </details>
 
@@ -631,15 +634,16 @@ By default all matched keys are returned from a search invocation.
 However, when it is not _undefined_, the context is returned instead.
 
 _Examples_:
-<details><summary> <code>['**']</code> <em>(last segments only)</em> </summary>
+<details><summary> <code>['**.{c,d,e}']</code> <em>(sum values)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
-const haystack = { a: { b: { c: 0, d: 1 }, e: 2 } };
-objectScan(['**'], {
-  filterFn: ({ key, context }) => { context.push(key[key.length - 1]); }
-})(haystack, []);
-// => [ 'e', 'd', 'c', 'b', 'a' ]
+const haystack = { a: { b: { c: 2, d: 11 }, e: 7 } };;
+objectScan(['**.{c,d,e}'], {
+  joined: true,
+  filterFn: ({ value, context }) => { context.sum += value; }
+})(haystack, { sum: 0 });
+// => 'SyntaxError: missing ) after argument list'
 ```
 </details>
 
