@@ -358,7 +358,6 @@ haystack: { foo: ['bar'] }
 needles: ['foo[*]']
 joined: false
 rtn: 'entry'
-context: []
 comment: return entries
 </example></pre>
 <pre><example>
@@ -366,7 +365,6 @@ haystack: { a: { b: { c: 0 } } }
 needles: ['a.b.c', 'a']
 joined: false
 rtn: 'property'
-context: []
 comment: return properties
 </example></pre>
 <pre><example>

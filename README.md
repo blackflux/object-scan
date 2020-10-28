@@ -470,7 +470,7 @@ objectScan(['[*]'], { rtn: 'value' })(haystack);
 <!-- eslint-disable no-undef -->
 ```js
 const haystack = { foo: ['bar'] };
-objectScan(['foo[*]'], { rtn: 'entry' })(haystack, []);
+objectScan(['foo[*]'], { rtn: 'entry' })(haystack);
 // => [ [ [ 'foo', 0 ], 'bar' ] ]
 ```
 </details>
@@ -479,7 +479,7 @@ objectScan(['foo[*]'], { rtn: 'entry' })(haystack, []);
 <!-- eslint-disable no-undef -->
 ```js
 const haystack = { a: { b: { c: 0 } } };
-objectScan(['a.b.c', 'a'], { rtn: 'property' })(haystack, []);
+objectScan(['a.b.c', 'a'], { rtn: 'property' })(haystack);
 // => [ 'c', 'a' ]
 ```
 </details>
