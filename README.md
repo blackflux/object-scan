@@ -410,18 +410,6 @@ Default: `false`
 When set to `true` the scan immediately returns after the first match.
 
 _Examples_:
-<details><summary> <code>['[0]', '[1]']</code> <em>(abort changes count)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = ['a', 'b'];
-objectScan(['[0]', '[1]'], {
-  rtn: 'count',
-  abort: true
-})(haystack);
-// => 1
-```
-</details>
 <details><summary> <code>['a', 'b']</code> <em>(only return first property)</em> </summary>
 
 <!-- eslint-disable no-undef -->
@@ -432,6 +420,18 @@ objectScan(['a', 'b'], {
   abort: true
 })(haystack);
 // => 'b'
+```
+</details>
+<details><summary> <code>['[0]', '[1]']</code> <em>(abort changes count)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = ['a', 'b'];
+objectScan(['[0]', '[1]'], {
+  rtn: 'count',
+  abort: true
+})(haystack);
+// => 1
 ```
 </details>
 

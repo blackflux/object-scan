@@ -309,20 +309,20 @@ When set to `true` the scan immediately returns after the first match.
 
 _Examples_:
 <pre><example>
-haystack: ['a', 'b']
-needles: ['[0]', '[1]']
-joined: false
-rtn: 'count'
-abort: true
-comment: abort changes count
-</example></pre>
-<pre><example>
 haystack: { a: 0, b: 1 }
 needles: ['a', 'b']
 joined: false
 rtn: 'property'
 abort: true
 comment: only return first property
+</example></pre>
+<pre><example>
+haystack: ['a', 'b']
+needles: ['[0]', '[1]']
+joined: false
+rtn: 'count'
+abort: true
+comment: abort changes count
 </example></pre>
 
 #### rtn
