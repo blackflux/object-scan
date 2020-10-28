@@ -35,10 +35,10 @@ spoiler: false
 - Or-clause Syntax
 - Exclusion Matching
 - Full support for escaping
-- Results returned in "delete-safe" order
+- Traversal in "delete-safe" order
 - Recursion free implementation
 - Search syntax validated
-- Lots of tests
+- Lots of tests and examples
 
 ## Matching
 
@@ -309,20 +309,20 @@ When set to `true` the scan immediately returns after the first match.
 
 _Examples_:
 <pre><example>
-haystack: ['a', 'b']
-needles: ['[0]', '[1]']
-joined: false
-rtn: 'count'
-abort: true
-comment: abort changes count
-</example></pre>
-<pre><example>
 haystack: { a: 0, b: 1 }
 needles: ['a', 'b']
 joined: false
 rtn: 'property'
 abort: true
 comment: only return first property
+</example></pre>
+<pre><example>
+haystack: ['a', 'b']
+needles: ['[0]', '[1]']
+joined: false
+rtn: 'count'
+abort: true
+comment: abort changes count
 </example></pre>
 
 #### rtn
@@ -358,7 +358,6 @@ haystack: { foo: ['bar'] }
 needles: ['foo[*]']
 joined: false
 rtn: 'entry'
-context: []
 comment: return entries
 </example></pre>
 <pre><example>
@@ -366,7 +365,6 @@ haystack: { a: { b: { c: 0 } } }
 needles: ['a.b.c', 'a']
 joined: false
 rtn: 'property'
-context: []
 comment: return properties
 </example></pre>
 <pre><example>

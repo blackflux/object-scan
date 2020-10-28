@@ -39,10 +39,10 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 - Or-clause Syntax
 - Exclusion Matching
 - Full support for escaping
-- Results returned in "delete-safe" order
+- Traversal in "delete-safe" order
 - Recursion free implementation
 - Search syntax validated
-- Lots of tests
+- Lots of tests and examples
 
 ## Matching
 
@@ -410,18 +410,6 @@ Default: `false`
 When set to `true` the scan immediately returns after the first match.
 
 _Examples_:
-<details><summary> <code>['[0]', '[1]']</code> <em>(abort changes count)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = ['a', 'b'];
-objectScan(['[0]', '[1]'], {
-  rtn: 'count',
-  abort: true
-})(haystack);
-// => 1
-```
-</details>
 <details><summary> <code>['a', 'b']</code> <em>(only return first property)</em> </summary>
 
 <!-- eslint-disable no-undef -->
@@ -432,6 +420,18 @@ objectScan(['a', 'b'], {
   abort: true
 })(haystack);
 // => 'b'
+```
+</details>
+<details><summary> <code>['[0]', '[1]']</code> <em>(abort changes count)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = ['a', 'b'];
+objectScan(['[0]', '[1]'], {
+  rtn: 'count',
+  abort: true
+})(haystack);
+// => 1
 ```
 </details>
 
@@ -470,7 +470,7 @@ objectScan(['[*]'], { rtn: 'value' })(haystack);
 <!-- eslint-disable no-undef -->
 ```js
 const haystack = { foo: ['bar'] };
-objectScan(['foo[*]'], { rtn: 'entry' })(haystack, []);
+objectScan(['foo[*]'], { rtn: 'entry' })(haystack);
 // => [ [ [ 'foo', 0 ], 'bar' ] ]
 ```
 </details>
@@ -479,7 +479,7 @@ objectScan(['foo[*]'], { rtn: 'entry' })(haystack, []);
 <!-- eslint-disable no-undef -->
 ```js
 const haystack = { a: { b: { c: 0 } } };
-objectScan(['a.b.c', 'a'], { rtn: 'property' })(haystack, []);
+objectScan(['a.b.c', 'a'], { rtn: 'property' })(haystack);
 // => [ 'c', 'a' ]
 ```
 </details>
