@@ -9,7 +9,7 @@
 [![Semantic-Release](https://github.com/blackflux/js-gardener/blob/master/assets/icons/semver.svg)](https://github.com/semantic-release/semantic-release)
 [![Gardener](https://github.com/blackflux/js-gardener/blob/master/assets/badge.svg)](https://github.com/blackflux/js-gardener)
 
-Find keys in object hierarchies using wildcard and regex matching and callbacks.
+Traverse object hierarchies using matching and callbacks.
 
 ## Install
 
@@ -35,15 +35,18 @@ spoiler: false
 - Or-clause Syntax
 - Exclusion Matching
 - Full support for escaping
-- Results returned in "delete-safe" order
+- Traversal in "delete-safe" order
 - Recursion free implementation
 - Search syntax validated
-- Lots of tests
+- Lots of tests and examples
 
 ## Matching
 
-Matching is based on the [property accessor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors) syntax
-with some notable extensions.
+A needle expression specifies one or more paths to an element (or a set of elements) in a JSON structure. Paths use the dot notation:
+
+```txt
+store.book[0].title
+```
 
 ### Array
 
@@ -57,7 +60,7 @@ comment: exact in array
 </example></pre>
 <pre><example>
 haystack: { 0: 'a', 1: 'b', 2: 'c' }
-needles: ['[2]']
+needles: ['[1]']
 comment: no match in object
 </example></pre>
 
@@ -162,9 +165,9 @@ needles: ['a.++']
 comment: one or more nestings under `a`
 </example></pre>
 <pre><example>
-haystack: { 0: { 1: ['a', 'b'] }, 1: { 1: ['c', 'd'] } }
+haystack: { 1: { 1: ['c', 'd'] }, 510: 'e', foo: { 1: 'f' } }
 needles: ['**(1)']
-comment: all containing `1`
+comment: all containing `1` at every level
 </example></pre>
 
 ### Or Clause
@@ -291,7 +294,7 @@ Note that `breakFn` is invoked before the corresponding `filterFn` might be invo
 
 _Examples_:
 <pre><example>
-haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
+haystack: { a: { b: { c: 0 } } }
 needles: ['**']
 comment: break function
 breakFn: ({ key }) => key === 'a.b'
@@ -306,20 +309,20 @@ When set to `true` the scan immediately returns after the first match.
 
 _Examples_:
 <pre><example>
-haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
-needles: ['*.*.*']
-joined: false
-rtn: 'count'
-abort: true
-comment: abort changes count
-</example></pre>
-<pre><example>
-haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
-needles: ['*.*.*']
+haystack: { a: 0, b: 1 }
+needles: ['a', 'b']
 joined: false
 rtn: 'property'
 abort: true
 comment: only return first property
+</example></pre>
+<pre><example>
+haystack: ['a', 'b']
+needles: ['[0]', '[1]']
+joined: false
+rtn: 'count'
+abort: true
+comment: abort changes count
 </example></pre>
 
 #### rtn
@@ -344,49 +347,47 @@ When **abort** is set to `true` and the result would be a list, the first match 
 
 _Examples_:
 <pre><example>
-haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
-needles: ['*.*.*']
+haystack: ['a', 'b', 'c']
+needles: ['[*]']
 joined: false
 rtn: 'value'
 comment: return values
 </example></pre>
 <pre><example>
-haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
-needles: ['*.*.*']
+haystack: { foo: ['bar'] }
+needles: ['foo[*]']
 joined: false
 rtn: 'entry'
-context: []
 comment: return entries
 </example></pre>
 <pre><example>
-haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
-needles: ['*.*.*']
+haystack: { a: { b: { c: 0 } } }
+needles: ['a.b.c', 'a']
 joined: false
 rtn: 'property'
-context: []
 comment: return properties
 </example></pre>
 <pre><example>
-haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
-needles: ['*.*.*']
+haystack: { a: { b: 0, c: 1 } }
+needles: ['a.b', 'a.c']
+joined: false
+rtn: 'bool'
+comment: checks for any match, full scan
+</example></pre>
+<pre><example>
+haystack: { a: 0 }
+needles: ['**']
 joined: false
 rtn: 'context'
 comment: return not provided context
 </example></pre>
 <pre><example>
-haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
-needles: ['*.*.*']
+haystack: { a: { b: { c: 0, d: 1 } } }
+needles: ['a.b.{c,d}']
 joined: false
 rtn: 'key'
 context: []
 comment: return keys with context passed
-</example></pre>
-<pre><example>
-haystack: { a: { b: { c: 0 }, d: { e: 1 }, f: 2 } }
-needles: ['*.*.*']
-joined: false
-rtn: 'bool'
-comment: checks for any match
 </example></pre>
 
 #### joined
@@ -402,14 +403,14 @@ Note that [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/d
 
 _Examples_:
 <pre><example>
-haystack: [0, 1, 2]
-needles: ['[*]']
+haystack: [0, 1, { foo: 'bar' }]
+needles: ['[*]', '[*].foo']
 joined: true
 comment: joined
 </example></pre>
 <pre><example>
-haystack: [0, 1, 2]
-needles: ['[*]']
+haystack: [0, 1, { foo: 'bar' }]
+needles: ['[*]', '[*].foo']
 joined: false
 comment: not joined
 </example></pre>
@@ -479,12 +480,11 @@ However, when it is not _undefined_, the context is returned instead.
 
 _Examples_:
 <pre><example>
-haystack: { a: { b: { c: 0, d: 1 }, e: 2 } }
-needles: ['**']
-context: []
-filterFn: ({ key, context }) => { context.push(key[key.length - 1]); }
-joined: false
-comment: last segments only
+haystack: { a: { b: { c: 2, d: 11 }, e: 7 } }
+needles: ['**.{c,d,e}']
+context: { sum: 0 }
+filterFn: ({ value, context }) => { context.sum += value; }
+comment: sum values
 </example></pre>
 
 ## Examples
