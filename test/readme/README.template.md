@@ -165,7 +165,7 @@ needles: ['a.++']
 comment: one or more nestings under `a`
 </example></pre>
 <pre><example>
-haystack: { 0: { 1: ['a', 'b'] }, 1: { 1: ['c', 'd'] }, 510: 'e', foo: { 1: 'f' } }
+haystack: { 1: { 1: ['c', 'd'] }, 510: 'e', foo: { 1: 'f' } }
 needles: ['**(1)']
 comment: all containing `1` at every level
 </example></pre>
