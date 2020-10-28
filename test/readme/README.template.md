@@ -35,10 +35,10 @@ spoiler: false
 - Or-clause Syntax
 - Exclusion Matching
 - Full support for escaping
-- Results returned in "delete-safe" order
+- Traversal in "delete-safe" order
 - Recursion free implementation
 - Search syntax validated
-- Lots of tests
+- Lots of tests and examples
 
 ## Matching
 
