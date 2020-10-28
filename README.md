@@ -9,7 +9,7 @@
 [![Semantic-Release](https://github.com/blackflux/js-gardener/blob/master/assets/icons/semver.svg)](https://github.com/semantic-release/semantic-release)
 [![Gardener](https://github.com/blackflux/js-gardener/blob/master/assets/badge.svg)](https://github.com/blackflux/js-gardener)
 
-Find keys in object hierarchies using wildcard and regex matching and callbacks.
+Traverse object hierarchies using matching and callbacks.
 
 ## Install
 
