@@ -482,7 +482,7 @@ However, when it is not _undefined_, the context is returned instead.
 
 _Examples_:
 <pre><example>
-haystack: { a: { b: { c: 2, d: 11 }, e: 7 } };
+haystack: { a: { b: { c: 2, d: 11 }, e: 7 } }
 needles: ['**.{c,d,e}']
 context: { sum: 0 }
 filterFn: ({ value, context }) => { context.sum += value; }

@@ -638,12 +638,12 @@ _Examples_:
 
 <!-- eslint-disable no-undef -->
 ```js
-const haystack = { a: { b: { c: 2, d: 11 }, e: 7 } };;
+const haystack = { a: { b: { c: 2, d: 11 }, e: 7 } };
 objectScan(['**.{c,d,e}'], {
   joined: true,
   filterFn: ({ value, context }) => { context.sum += value; }
 })(haystack, { sum: 0 });
-// => 'SyntaxError: missing ) after argument list'
+// => { sum: 20 }
 ```
 </details>
 
