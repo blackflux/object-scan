@@ -1,9 +1,10 @@
 const assert = require('assert');
 const compiler = require('./util/compiler');
+const Result = require('./util/result');
 const { toPath } = require('./util/helper');
 
 const testWildcard = (key, search) => compiler.getWildcardRegex(search).test(key);
-const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
+const isWildcardMatch = (wildcard, key, isArray, search) => {
   if (wildcard === '**') {
     return true;
   }
@@ -11,19 +12,17 @@ const isWildcardMatch = (wildcard, key, isArray, subSearch) => {
     return true;
   }
   if (
-    isArray !== compiler.isArrayTarget(subSearch)
-    && !compiler.isRecursive(subSearch)
+    isArray !== compiler.isArrayTarget(search)
+    && !compiler.isRecursive(search)
   ) {
     return false;
   }
-  return testWildcard(key, subSearch);
+  return testWildcard(key, search);
 };
 
 const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);
 
 const find = (haystack_, searches_, ctx) => {
-  const result = ctx.rtn === 'context' ? null : [];
-
   const stack = [false, searches_, null, 0];
   const path = [];
   const parents = [];
@@ -82,48 +81,7 @@ const find = (haystack_, searches_, ctx) => {
     context: ctx.context
   };
 
-  const onMatch = () => {
-    switch (ctx.rtn) {
-      case 'key':
-        result.push(kwargs.getKey());
-        break;
-      case 'value':
-        result.push(kwargs.getValue());
-        break;
-      case 'entry':
-        result.push(kwargs.getEntry());
-        break;
-      case 'property':
-        result.push(kwargs.getProperty());
-        break;
-      case 'parent':
-        result.push(kwargs.getParent());
-        break;
-      case 'parents':
-        result.push(kwargs.getParents());
-        break;
-      case 'bool':
-        result.length = 1;
-        break;
-      case 'count':
-      default:
-        result.length += 1;
-        break;
-    }
-  };
-
-  const finish = () => {
-    switch (ctx.rtn) {
-      case 'context':
-        return ctx.context;
-      case 'bool':
-        return result.length === 1;
-      case 'count':
-        return result.length;
-      default:
-        return ctx.abort ? result[0] : result;
-    }
-  };
+  const result = Result(kwargs, ctx);
 
   do {
     depth = stack.pop();
@@ -149,11 +107,9 @@ const find = (haystack_, searches_, ctx) => {
 
     if (isResult) {
       if (ctx.filterFn === undefined || ctx.filterFn(kwargs) !== false) {
-        if (result !== null) {
-          onMatch();
-          if (ctx.abort) {
-            return finish();
-          }
+        result.onMatch();
+        if (ctx.abort) {
+          return result.finish();
         }
       }
       // eslint-disable-next-line no-continue
@@ -210,7 +166,7 @@ const find = (haystack_, searches_, ctx) => {
     }
   } while (stack.length !== 0);
 
-  return finish();
+  return result.finish();
 };
 
 module.exports = (needles, opts = {}) => {
