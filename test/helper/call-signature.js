@@ -36,9 +36,16 @@ module.exports = ({
     filterFn: cb('filterFn'),
     breakFn: cb('breakFn')
   })(haystack);
+
+  const scanner = objectScan(needles, { strict: false, useArraySelector });
+  const start = process.hrtime();
+  scanner(haystack);
+  const diff = process.hrtime(start);
+  const duration = diff[0] * 1e9 + diff[1];
+
   let warning = null;
   try {
-    objectScan(needles);
+    objectScan(needles, { useArraySelector });
   } catch (e) {
     warning = e.message;
   }
@@ -48,6 +55,7 @@ module.exports = ({
     useArraySelector,
     logs,
     warning,
+    duration,
     result
   };
 };
