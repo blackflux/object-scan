@@ -26,9 +26,28 @@ const Worker = () => {
   };
 };
 
+const Time = () => {
+  const data = {
+    compile: 0,
+    traverse: 0
+  };
+  return {
+    add: (duration) => {
+      Object.keys(data).forEach((k) => {
+        data[k] += duration[k];
+      });
+    },
+    get: (k) => data[k],
+    diff: (time) => Object.keys(data).map((k) => {
+      const percent = ((time.get(k) - data[k]) * 100.0) / data[k];
+      return `${k}: ${percent > 0 ? '+' : ''}${percent.toFixed(2)}%`;
+    }).join(', ')
+  };
+};
+
 const execute = async () => {
-  let timeReleased = 0;
-  let timeLocal = 0;
+  const timeReleased = Time();
+  const timeLocal = Time();
 
   const worker1 = Worker();
   const worker2 = Worker();
@@ -60,8 +79,8 @@ const execute = async () => {
       worker1({ ...kwargs, useLocal: true }),
       worker2({ ...kwargs, useLocal: false })
     ]);
-    timeLocal += signatureLocal.duration;
-    timeReleased += signatureReleased.duration;
+    timeLocal.add(signatureLocal.duration);
+    timeReleased.add(signatureReleased.duration);
     delete signatureLocal.duration;
     delete signatureReleased.duration;
 
@@ -77,8 +96,7 @@ const execute = async () => {
     }
 
     if ((count % 100) === 0) {
-      const percent = ((timeLocal - timeReleased) * 100.0) / timeReleased;
-      log(`Progress: ${count} / ${TEST_COUNT} (${percent > 0 ? '+' : ''}${percent.toFixed(2)}%)`);
+      log(`Progress: ${count} / ${TEST_COUNT} (${timeReleased.diff(timeLocal)})`);
     }
   }
 };
