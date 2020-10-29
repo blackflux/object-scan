@@ -37,11 +37,14 @@ module.exports = ({
     breakFn: cb('breakFn')
   })(haystack);
 
+  const startCompile = process.hrtime();
   const scanner = objectScan(needles, { strict: false, useArraySelector });
-  const start = process.hrtime();
+  const diffCompile = process.hrtime(startCompile);
+  const durationCompile = diffCompile[0] * 1e9 + diffCompile[1];
+  const startTraverse = process.hrtime();
   scanner(haystack);
-  const diff = process.hrtime(start);
-  const duration = diff[0] * 1e9 + diff[1];
+  const diffTraverse = process.hrtime(startTraverse);
+  const durationTraverse = diffTraverse[0] * 1e9 + diffTraverse[1];
 
   let warning = null;
   try {
@@ -55,7 +58,10 @@ module.exports = ({
     useArraySelector,
     logs,
     warning,
-    duration,
+    duration: {
+      compile: durationCompile,
+      traverse: durationTraverse
+    },
     result
   };
 };
