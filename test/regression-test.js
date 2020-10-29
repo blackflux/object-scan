@@ -3,8 +3,9 @@ const { fork } = require('child_process');
 const fs = require('smart-fs');
 const path = require('path');
 const isEqual = require('lodash.isequal');
-const { v4: uuid } = require('uuid');
 
+const generateDataset = require('./helper/generate-dataset');
+const generateNeedles = require('./helper/generate-needles');
 const createHtmlDiff = require('./helper/create-html-diff');
 
 const TEST_COUNT = 100000;
@@ -16,11 +17,11 @@ const Worker = () => {
   const compute = fork('./worker');
   let resolve;
   compute.on('message', (result) => resolve(result));
-  return async (seed, useLocal) => {
+  return async (kwargs) => {
     const result = new Promise((r) => {
       resolve = r;
     });
-    compute.send({ seed, useLocal });
+    compute.send(kwargs);
     return result;
   };
 };
@@ -33,27 +34,46 @@ const execute = async () => {
   const worker2 = Worker();
 
   for (let count = 1; count <= TEST_COUNT; count += 1) {
-    const seed = uuid();
+    const { rng, haystack, paths } = generateDataset();
+    const useArraySelector = rng() > 0.2;
+    const needles = generateNeedles({
+      rng,
+      paths,
+      useArraySelector,
+      modifierParams: (p) => ({
+        lenPercentage: rng() > 0.1 ? rng() : 1,
+        questionMark: rng() > 0.15 ? 0 : Math.floor(rng() * p.length) + 1,
+        partialPlus: rng() > 0.15 ? 0 : Math.floor(rng() * p.length) + 1,
+        partialStar: rng() > 0.15 ? 0 : Math.floor(rng() * p.length) + 1,
+        singleStar: rng() > 0.15 ? 0 : Math.floor(rng() * p.length) + 1,
+        doublePlus: rng() > 0.15 ? 0 : Math.floor(rng() * p.length) + 1,
+        doubleStar: rng() > 0.15 ? 0 : Math.floor(rng() * p.length) + 1,
+        regex: rng() > 0.1 ? 0 : Math.floor(rng() * p.length) + 1,
+        exclude: rng() > 0.9,
+        shuffle: rng() > 0.9
+      })
+    });
 
+    const kwargs = { haystack, needles, useArraySelector };
     // eslint-disable-next-line no-await-in-loop
-    const signatureLocal = await worker1(seed, true);
+    const [signatureLocal, signatureReleased] = await Promise.all([
+      worker1({ ...kwargs, useLocal: true }),
+      worker2({ ...kwargs, useLocal: false })
+    ]);
     timeLocal += signatureLocal.duration;
-    delete signatureLocal.duration;
-
-    // eslint-disable-next-line no-await-in-loop
-    const signatureReleased = await worker2(seed, false);
     timeReleased += signatureReleased.duration;
+    delete signatureLocal.duration;
     delete signatureReleased.duration;
 
     if (!isEqual(signatureReleased, signatureLocal)) {
-      log(`Mismatch for seed: ${seed}`);
-      const diff = createHtmlDiff(seed, signatureReleased, signatureLocal, {
-        haystack: signatureLocal.haystack,
-        needles: signatureLocal.needles,
-        useArraySelector: signatureLocal.useArraySelector,
-        seed
+      log(`Mismatch for seed: ${rng.seed}`);
+      const diff = createHtmlDiff(rng.seed, signatureReleased, signatureLocal, {
+        haystack,
+        needles,
+        useArraySelector,
+        seed: rng.seed
       });
-      fs.smartWrite(path.join(__dirname, '..', 'debug', `${seed}.html`), diff.split('\n'));
+      fs.smartWrite(path.join(__dirname, '..', 'debug', `${rng.seed}.html`), diff.split('\n'));
     }
 
     if ((count % 100) === 0) {
