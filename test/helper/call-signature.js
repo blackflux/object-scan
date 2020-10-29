@@ -29,13 +29,17 @@ module.exports = ({
       isCircular
     });
   };
-  const result = objectScan(needles, {
+  const scanner = objectScan(needles, {
     strict: false,
     joined: true,
     useArraySelector,
     filterFn: cb('filterFn'),
     breakFn: cb('breakFn')
-  })(haystack);
+  });
+  const start = process.hrtime();
+  const result = scanner(haystack);
+  const diff = process.hrtime(start);
+  const duration = diff[0] * 1e9 + diff[1];
   let warning = null;
   try {
     objectScan(needles);
@@ -48,6 +52,7 @@ module.exports = ({
     useArraySelector,
     logs,
     warning,
+    duration,
     result
   };
 };
