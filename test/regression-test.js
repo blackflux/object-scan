@@ -17,12 +17,17 @@ const Worker = () => {
   const compute = fork('./worker');
   let resolve;
   compute.on('message', (result) => resolve(result));
-  return async (kwargs) => {
-    const result = new Promise((r) => {
-      resolve = r;
-    });
-    compute.send(kwargs);
-    return result;
+  return {
+    exec: async (kwargs) => {
+      const result = new Promise((r) => {
+        resolve = r;
+      });
+      compute.send(kwargs);
+      return result;
+    },
+    exit: () => {
+      compute.send('exit');
+    }
   };
 };
 
@@ -76,8 +81,8 @@ const execute = async () => {
     const kwargs = { haystack, needles, useArraySelector };
     // eslint-disable-next-line no-await-in-loop
     const [signatureLocal, signatureReleased] = await Promise.all([
-      worker1({ ...kwargs, useLocal: true }),
-      worker2({ ...kwargs, useLocal: false })
+      worker1.exec({ ...kwargs, useLocal: true }),
+      worker2.exec({ ...kwargs, useLocal: false })
     ]);
     timeLocal.add(signatureLocal.duration);
     timeReleased.add(signatureReleased.duration);
@@ -99,5 +104,7 @@ const execute = async () => {
       log(`Progress: ${count} / ${TEST_COUNT} (${timeReleased.diff(timeLocal)})`);
     }
   }
+  worker1.exit();
+  worker2.exit();
 };
 execute();
