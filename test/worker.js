@@ -14,3 +14,7 @@ process.on('message', ({
   });
   process.send(result);
 });
+
+process.on('exit', () => {
+  process.exit(0);
+});

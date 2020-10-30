@@ -1,8 +1,9 @@
 /* compile needles to hierarchical map object */
 const parser = require('./parser');
-const iterator = require('./iterator');
-const traverser = require('./traverser');
-const { defineProperty, parseWildcard, asRegex } = require('./helper');
+const iterator = require('../generic/iterator');
+const traverser = require('../generic/traverser');
+const { defineProperty } = require('../generic/helper');
+const { compileRegex } = require('./wildcard');
 
 const LEAF = Symbol('leaf');
 const markLeaf = (input, match, readonly) => defineProperty(input, LEAF, match, readonly);
@@ -88,25 +89,6 @@ module.exports.isLastLeafMatch = (searches) => {
     }
   });
   return maxLeaf !== null && isMatch(maxLeaf);
-};
-
-const compileRegex = (segment) => {
-  if (['**', '++'].includes(String(segment))) {
-    return asRegex('.*');
-  }
-  if ((segment.startsWith('**(') || segment.startsWith('++(')) && segment.endsWith(')')) {
-    return asRegex(segment.slice(3, -1));
-  }
-  if (segment.startsWith('[(') && segment.endsWith(')]')) {
-    return asRegex(segment.slice(2, -2));
-  }
-  if (segment.startsWith('(') && segment.endsWith(')')) {
-    return asRegex(segment.slice(1, -1));
-  }
-  if (segment.startsWith('[') && segment.endsWith(']')) {
-    return parseWildcard(segment.slice(1, -1));
-  }
-  return parseWildcard(segment);
 };
 
 const iterate = (tower, needle, tree, { onAdd, onFin }) => {
