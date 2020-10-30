@@ -1,8 +1,8 @@
 /* compile needles to hierarchical map object */
 const parser = require('./parser');
-const iterator = require('./iterator');
-const traverser = require('./traverser');
-const { defineProperty } = require('./helper');
+const iterator = require('../generic/iterator');
+const traverser = require('../generic/traverser');
+const { defineProperty } = require('../generic/helper');
 const { compileRegex } = require('./wildcard');
 
 const LEAF = Symbol('leaf');

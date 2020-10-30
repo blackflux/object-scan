@@ -1,4 +1,4 @@
-const { escapeRegex, asRegex } = require('./helper');
+const { escapeRegex, asRegex } = require('../generic/helper');
 
 const parseWildcard = (input) => {
   let regex = '';

@@ -1,7 +1,7 @@
 const assert = require('assert');
-const compiler = require('./util/compiler');
-const Result = require('./util/result');
-const { toPath } = require('./util/helper');
+const compiler = require('./core/compiler');
+const Result = require('./core/result');
+const { toPath } = require('./generic/helper');
 
 const testWildcard = (key, search) => compiler.getWildcardRegex(search).test(key);
 const isWildcardMatch = (wildcard, key, isArray, search) => {

@@ -1,5 +1,5 @@
 const Joi = require('joi-strict');
-const { escape, escapeRegex } = require('../../src/util/helper');
+const { escape, escapeRegex } = require('../../src/generic/helper');
 const sampleArray = require('./sample-array');
 const sampleArrayGrouped = require('./sample-array-grouped');
 const sampleRanges = require('./sample-ranges');

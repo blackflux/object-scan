@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
-const { parseWildcard } = require('../../src/util/wildcard');
+const { parseWildcard } = require('../../src/core/wildcard');
 
 describe('Testing Helper', () => {
   describe('Testing parseWildcard', () => {

@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { defineProperty } = require('./helper');
+const { defineProperty } = require('../generic/helper');
 
 const IS_EXCLUDED = Symbol('is-excluded');
 const markExcluded = (input) => defineProperty(input, IS_EXCLUDED, true);

@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
-const { defineProperty, escape, asRegex } = require('../../src/util/helper');
+const { defineProperty, escape, asRegex } = require('../../src/generic/helper');
 
 describe('Testing Helper', () => {
   describe('Testing defineProperty', () => {
