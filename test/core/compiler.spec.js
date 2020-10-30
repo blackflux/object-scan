@@ -327,16 +327,16 @@ describe('Testing compiler', () => {
     expect(compiler.getLeafNeedles(tower.a.e)).to.deep.equal([]);
     expect(compiler.getLeafNeedles(tower.a.e.f)).to.deep.equal(['a.{c,e}.f']);
 
-    expect(compiler.getWildcardRegex(tower)).to.deep.equal(undefined);
-    expect(compiler.getWildcardRegex(tower.a)).to.deep.equal(/^a$/);
-    expect(compiler.getWildcardRegex(tower.a.b)).to.deep.equal(/^b$/);
-    expect(compiler.getWildcardRegex(tower.a.b.d)).to.deep.equal(/^d$/);
-    expect(compiler.getWildcardRegex(tower.a.b.d.g)).to.deep.equal(/^g$/);
-    expect(compiler.getWildcardRegex(tower.a.c)).to.deep.equal(/^c$/);
-    expect(compiler.getWildcardRegex(tower.a.c.d)).to.deep.equal(/^d$/);
-    expect(compiler.getWildcardRegex(tower.a.c.f)).to.deep.equal(/^f$/);
-    expect(compiler.getWildcardRegex(tower.a.e)).to.deep.equal(/^e$/);
-    expect(compiler.getWildcardRegex(tower.a.e.f)).to.deep.equal(/^f$/);
+    expect(compiler.getWildcard(tower).regex).to.deep.equal(/^.*$/);
+    expect(compiler.getWildcard(tower.a).regex).to.deep.equal(/^a$/);
+    expect(compiler.getWildcard(tower.a.b).regex).to.deep.equal(/^b$/);
+    expect(compiler.getWildcard(tower.a.b.d).regex).to.deep.equal(/^d$/);
+    expect(compiler.getWildcard(tower.a.b.d.g).regex).to.deep.equal(/^g$/);
+    expect(compiler.getWildcard(tower.a.c).regex).to.deep.equal(/^c$/);
+    expect(compiler.getWildcard(tower.a.c.d).regex).to.deep.equal(/^d$/);
+    expect(compiler.getWildcard(tower.a.c.f).regex).to.deep.equal(/^f$/);
+    expect(compiler.getWildcard(tower.a.e).regex).to.deep.equal(/^e$/);
+    expect(compiler.getWildcard(tower.a.e.f).regex).to.deep.equal(/^f$/);
 
     expect(compiler.getIndex(tower)).to.deep.equal(null);
     expect(compiler.getIndex(tower.a)).to.deep.equal(null);

@@ -12,7 +12,7 @@ const asString = (() => {
     if (input instanceof Set) {
       return `{${[...input].map((e) => asStringRec(e)).join(',')}}`;
     }
-    return `${input.isExcluded() ? '!' : ''}"${input}"`;
+    return `${input.excluded === true ? '!' : ''}"${input}"`;
   };
   return (input) => asStringRec(parser.parse(input));
 })();

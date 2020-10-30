@@ -3,7 +3,7 @@ const parser = require('./parser');
 const iterator = require('../generic/iterator');
 const traverser = require('../generic/traverser');
 const { defineProperty } = require('../generic/helper');
-const { compileRegex } = require('./wildcard');
+const { Wildcard } = require('./wildcard');
 
 const LEAF = Symbol('leaf');
 const markLeaf = (input, match, readonly) => defineProperty(input, LEAF, match, readonly);
@@ -51,25 +51,15 @@ const setIndex = (input, index, readonly) => defineProperty(input, INDEX, index,
 const getIndex = (input) => (input[INDEX] === undefined ? null : input[INDEX]);
 module.exports.getIndex = getIndex;
 
-const WILDCARD_REGEX = Symbol('wildcard-regex');
-const setWildcardRegex = (input, regex) => defineProperty(input, WILDCARD_REGEX, regex);
-const getWildcardRegex = (input) => input[WILDCARD_REGEX];
-module.exports.getWildcardRegex = getWildcardRegex;
+const WILDCARD = Symbol('wildcard');
+const setWildcard = (input, wildcard) => defineProperty(input, WILDCARD, wildcard);
+const getWildcard = (input) => input[WILDCARD];
+module.exports.getWildcard = getWildcard;
 
-const RECURSIVE = Symbol('recursive');
-const markRecursive = (input) => defineProperty(input, RECURSIVE, true);
-const isRecursive = (input) => input[RECURSIVE] === true;
-module.exports.isRecursive = isRecursive;
-
-const ARRAY_TARGET = Symbol('array-target');
-const markArrayTarget = (input) => defineProperty(input, ARRAY_TARGET, true);
-const isArrayTarget = (input) => input[ARRAY_TARGET] === true;
-module.exports.isArrayTarget = isArrayTarget;
-
-const ENTRIES = Symbol('entries');
-const setEntries = (input, entries) => defineProperty(input, ENTRIES, entries);
-const getEntries = (input) => input[ENTRIES];
-module.exports.getEntries = getEntries;
+const VALUES = Symbol('values');
+const setValues = (input, entries) => defineProperty(input, VALUES, entries);
+const getValues = (input) => input[VALUES];
+module.exports.getValues = getValues;
 
 module.exports.excludedBy = (searches) => Array
   .from(new Set([].concat(...searches.map((e) => getLeafNeedlesExclude(e)))));
@@ -93,70 +83,65 @@ module.exports.isLastLeafMatch = (searches) => {
 
 const iterate = (tower, needle, tree, { onAdd, onFin }) => {
   const stack = [[[tower, null]]];
-  const segments = [];
+  const wildcards = [];
   let excluded = false;
 
-  iterator.iterate(tree, (type, p) => {
+  iterator.iterate(tree, (type, wc) => {
     if (type === 'RM') {
-      if (p.isExcluded()) {
+      if (wc.excluded === true) {
         excluded = false;
       }
       stack.pop();
-      segments.pop();
+      wildcards.pop();
     } else if (type === 'ADD') {
-      if (p.isExcluded()) {
+      if (wc.excluded === true) {
         if (excluded) {
           throw new Error(`Redundant Exclusion: "${needle}"`);
         }
         excluded = true;
       }
       const toAdd = [];
-      const segmentParent = segments[segments.length - 1];
+      const wcParent = wildcards[wildcards.length - 1];
       stack[stack.length - 1]
-        .forEach(([cur]) => onAdd(cur, p, segmentParent, (e) => toAdd.push([e, cur])));
+        .forEach(([cur]) => onAdd(cur, wc, wcParent, (e) => toAdd.push([e, cur])));
       stack.push(toAdd);
-      segments.push(p);
+      wildcards.push(wc);
     } else {
       stack[stack.length - 1]
         .filter(([cur]) => cur !== tower)
-        .forEach(([cur, parent]) => onFin(cur, p[p.length - 1], parent, excluded));
+        .forEach(([cur, parent]) => onFin(cur, wc[wc.length - 1], parent, excluded));
     }
   });
 };
 
 const applyNeedle = (tower, needle, tree, strict, ctx) => {
   iterate(tower, needle, tree, {
-    onAdd: (cur, segment, segmentParent, next) => {
+    onAdd: (cur, wc, wcParent, next) => {
       addNeedle(cur, needle);
-      const isStarRec = String(segment) === '**' || (segment.startsWith('**(') && segment.endsWith(')'));
-      const isPlusRec = String(segment) === '++' || (segment.startsWith('++(') && segment.endsWith(')'));
-      const recChainPlain = String(segment) === '**' && String(segmentParent) === '**';
-      if (recChainPlain && strict) {
+      const redundantRecursion = (
+        wcParent !== undefined
+        && wc.isStarRec
+        && wc.value === wcParent.value
+      );
+      if (redundantRecursion && strict) {
         throw new Error(`Redundant Recursion: "${needle}"`);
       }
-      if (!recChainPlain) {
-        if (cur[segment] === undefined) {
+      if (!redundantRecursion) {
+        if (cur[wc] === undefined) {
           const child = {};
           // eslint-disable-next-line no-param-reassign
-          cur[segment] = child;
-          if (isStarRec || isPlusRec) {
-            markRecursive(child);
-          }
-          setWildcardRegex(child, compileRegex(segment));
-          if (segment.startsWith('[') && segment.endsWith(']')) {
-            markArrayTarget(child);
-          }
+          cur[wc] = child;
+          setWildcard(child, wc);
         }
-        next(cur[segment]);
+        next(cur[wc]);
       }
-      if (isStarRec) {
+      if (wc.isStarRec) {
         next(cur);
       }
     },
-    onFin: (cur, segment, parent, excluded) => {
+    onFin: (cur, wc, parent, excluded) => {
       if (strict) {
-        const pStr = String(segment);
-        if (pStr === '**') {
+        if (wc.isSimpleStarRec) {
           const unnecessary = Object.keys(parent).filter((k) => !['**', ''].includes(k));
           if (unnecessary.length !== 0) {
             throw new Error(`Needle Target Invalidated: "${parent[unnecessary[0]][NEEDLES][0]}" by "${needle}"`);
@@ -194,7 +179,7 @@ const finalizeTower = (tower) => {
       if (isUp) {
         matches[lastDepth] = false;
       }
-      setEntries(obj, Object.entries(obj).filter(([k]) => k !== ''));
+      setValues(obj, Object.entries(obj).filter(([k]) => k !== '').map((e) => e[1]));
       lastDepth = depth;
     }
   });
@@ -208,6 +193,7 @@ module.exports.compile = (needles, strict = true, useArraySelector = true) => {
     const tree = [parser.parse(needle, useArraySelector)];
     applyNeedle(tower, needle, tree, strict, ctx);
   }
+  setWildcard(tower, new Wildcard('*', false));
   finalizeTower(tower);
   return tower;
 };
