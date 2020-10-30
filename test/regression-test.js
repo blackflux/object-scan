@@ -14,7 +14,7 @@ const TEST_COUNT = 100000;
 const log = (...args) => console.log(...args);
 
 const Worker = () => {
-  const compute = fork('./worker');
+  const compute = fork(path.join(__dirname, 'worker.js'));
   let resolve;
   compute.on('message', (result) => resolve(result));
   return {
