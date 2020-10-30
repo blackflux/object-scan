@@ -48,9 +48,14 @@ class Wildcard extends String {
     this.excluded = excluded;
     this.regex = compileWildcard(value);
     this.isArrayTarget = value.startsWith('[') && value.endsWith(']');
-    this.isStarRec = value === '**' || (value.startsWith('**(') && value.endsWith(')'));
-    this.isPlusRec = value === '++' || (value.startsWith('++(') && value.endsWith(')'));
-    this.isRecursive = this.isStarRec || this.isPlusRec;
+    this.isSimpleStarRec = value === '**';
+    this.isSimplePlusRec = value === '++';
+    this.isSimpleRec = this.isSimpleStarRec || this.isSimplePlusRec;
+    this.isStarRec = this.isSimpleStarRec || (value.startsWith('**(') && value.endsWith(')'));
+    this.isPlusRec = this.isSimplePlusRec || (value.startsWith('++(') && value.endsWith(')'));
+    this.isRec = this.isStarRec || this.isPlusRec;
+    this.isAnyArrayTarget = value === '[*]';
+    this.isAnyObjTarget = value === '*';
   }
 
   anyMatch(key) {
@@ -58,18 +63,18 @@ class Wildcard extends String {
   }
 
   typeMatch(key, isArray) {
-    if (this.value === '**' || this.value === '++') {
+    if (this.isSimpleRec) {
       return true;
     }
-    if (isArray && this.value === '[*]') {
+    if (isArray && this.isAnyArrayTarget) {
       return true;
     }
-    if (!isArray && this.value === '*') {
+    if (!isArray && this.isAnyObjTarget) {
       return true;
     }
     if (
       isArray !== this.isArrayTarget
-      && !this.isRecursive
+      && !this.isRec
     ) {
       return false;
     }

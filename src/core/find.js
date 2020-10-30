@@ -134,7 +134,7 @@ module.exports = (haystack_, searches_, ctx) => {
         for (let sIdx = 0, sLen = searches.length; sIdx < sLen; sIdx += 1) {
           const search = searches[sIdx];
           const wildcard = compiler.getWildcard(search);
-          if (wildcard.isRecursive && wildcard.anyMatch(key)) {
+          if (wildcard.isRec && wildcard.anyMatch(key)) {
             searchesOut.push(search);
           }
           const values = compiler.getValues(search);
