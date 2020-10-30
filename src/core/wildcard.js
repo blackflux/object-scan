@@ -1,3 +1,4 @@
+const compiler = require('./compiler');
 const { escapeRegex, asRegex } = require('../generic/helper');
 
 const parseWildcard = (input) => {
@@ -41,3 +42,23 @@ module.exports.compileRegex = (wildcard) => {
   }
   return parseWildcard(wildcardStr);
 };
+
+const isRegexMatch = (key, search) => compiler.getWildcardRegex(search).test(key);
+module.exports.isRegexMatch = isRegexMatch;
+
+const isMatch = (wildcard, key, isArray, search) => {
+  if (['**', '++'].includes(wildcard)) {
+    return true;
+  }
+  if (wildcard === (isArray ? '[*]' : '*')) {
+    return true;
+  }
+  if (
+    isArray !== compiler.isArrayTarget(search)
+    && !compiler.isRecursive(search)
+  ) {
+    return false;
+  }
+  return isRegexMatch(key, search);
+};
+module.exports.isMatch = isMatch;

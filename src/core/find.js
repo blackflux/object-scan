@@ -1,24 +1,8 @@
 const assert = require('assert');
 const compiler = require('./compiler');
 const Result = require('./result');
+const { isMatch, isRegexMatch } = require('./wildcard');
 const { toPath } = require('../generic/helper');
-
-const testWildcard = (key, search) => compiler.getWildcardRegex(search).test(key);
-const isWildcardMatch = (wildcard, key, isArray, search) => {
-  if (['**', '++'].includes(wildcard)) {
-    return true;
-  }
-  if (wildcard === (isArray ? '[*]' : '*')) {
-    return true;
-  }
-  if (
-    isArray !== compiler.isArrayTarget(search)
-    && !compiler.isRecursive(search)
-  ) {
-    return false;
-  }
-  return testWildcard(key, search);
-};
 
 const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);
 
@@ -150,13 +134,13 @@ module.exports = (haystack_, searches_, ctx) => {
         const searchesOut = [];
         for (let sIdx = 0, sLen = searches.length; sIdx < sLen; sIdx += 1) {
           const search = searches[sIdx];
-          if (compiler.isRecursive(search) && testWildcard(key, search)) {
+          if (compiler.isRecursive(search) && isRegexMatch(key, search)) {
             searchesOut.push(search);
           }
           const entries = compiler.getEntries(search);
           for (let eIdx = 0, eLen = entries.length; eIdx < eLen; eIdx += 1) {
             const entry = entries[eIdx];
-            if (isWildcardMatch(entry[0], key, isArray, entry[1])) {
+            if (isMatch(entry[0], key, isArray, entry[1])) {
               searchesOut.push(entry[1]);
             }
           }
