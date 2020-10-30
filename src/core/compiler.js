@@ -121,7 +121,7 @@ const applyNeedle = (tower, needle, tree, strict, ctx) => {
       const redundantRecursion = (
         wcParent !== undefined
         && wc.isStarRec
-        && String(wc) === String(wcParent)
+        && wc.value === wcParent.value
       );
       if (redundantRecursion && strict) {
         throw new Error(`Redundant Recursion: "${needle}"`);
@@ -141,7 +141,7 @@ const applyNeedle = (tower, needle, tree, strict, ctx) => {
     },
     onFin: (cur, wc, parent, excluded) => {
       if (strict) {
-        if (String(wc) === '**') {
+        if (wc.value === '**') {
           const unnecessary = Object.keys(parent).filter((k) => !['**', ''].includes(k));
           if (unnecessary.length !== 0) {
             throw new Error(`Needle Target Invalidated: "${parent[unnecessary[0]][NEEDLES][0]}" by "${needle}"`);
