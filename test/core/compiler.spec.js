@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
-const compiler = require('../../src/util/compiler');
+const compiler = require('../../src/core/compiler');
 
 describe('Testing compiler', () => {
   describe('Testing Redundant Needle Target Errors', () => {

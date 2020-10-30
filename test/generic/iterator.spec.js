@@ -1,7 +1,7 @@
 const expect = require('chai').expect;
 const { v4: uuid } = require('uuid');
 const { describe } = require('node-tdd');
-const iterator = require('../../src/util/iterator');
+const iterator = require('../../src/generic/iterator');
 const parsedNeedleToStringArray = require('../helper/parsed-needle-to-string-array');
 const generateParsedNeedle = require('../helper/generate-parsed-needle');
 const PRNG = require('../helper/prng');

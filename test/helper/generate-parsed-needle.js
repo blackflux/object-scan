@@ -1,4 +1,4 @@
-const { escape } = require('../../src/util/helper');
+const { escape } = require('../../src/generic/helper');
 const CHARS = require('./resources/chars.json');
 
 const MAX_DEPTH = 4;

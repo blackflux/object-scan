@@ -1,5 +1,6 @@
 const assert = require('assert');
-const { defineProperty } = require('./helper');
+const { defineProperty } = require('../generic/helper');
+const { Wildcard } = require('./wildcard');
 
 const IS_EXCLUDED = Symbol('is-excluded');
 const markExcluded = (input) => defineProperty(input, IS_EXCLUDED, true);
@@ -16,17 +17,6 @@ const getSimple = (arrOrSet) => {
   }
   return arrOrSet.size === 1 ? arrOrSet.values().next().value : arrOrSet;
 };
-
-class CString extends String {
-  constructor(value, excluded) {
-    super(value);
-    this.excluded = excluded;
-  }
-
-  isExcluded() {
-    return this.excluded;
-  }
-}
 
 const Result = (input) => {
   let cResult = new Set();
@@ -81,7 +71,7 @@ const Result = (input) => {
         )) {
           throwError('Bad Array Selector', input, { selector: ele });
         }
-        cResult.push(new CString(inArray ? `[${ele}]` : ele, excludeNext));
+        cResult.push(new Wildcard(inArray ? `[${ele}]` : ele, excludeNext));
         excludeNext = false;
       }
       cursor = idx + 1;
@@ -127,7 +117,7 @@ const Result = (input) => {
 
 module.exports.parse = (input, useArraySelector = true) => {
   if (input === '') {
-    return new CString('', false);
+    return new Wildcard('', false);
   }
 
   const result = Result(input);
