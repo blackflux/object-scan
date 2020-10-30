@@ -44,6 +44,7 @@ const compileWildcard = (str) => {
 class Wildcard extends String {
   constructor(value, excluded) {
     super(value);
+    this.value = value;
     this.excluded = excluded;
     this.regex = compileWildcard(value);
     this.isArrayTarget = value.startsWith('[') && value.endsWith(']');
@@ -57,6 +58,15 @@ class Wildcard extends String {
   }
 
   typeMatch(key, isArray) {
+    if (this.value === '**' || this.value === '++') {
+      return true;
+    }
+    if (isArray && this.value === '[*]') {
+      return true;
+    }
+    if (!isArray && this.value === '*') {
+      return true;
+    }
     if (
       isArray !== this.isArrayTarget
       && !this.isRecursive
