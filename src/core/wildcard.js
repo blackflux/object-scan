@@ -1,6 +1,18 @@
 const compiler = require('./compiler');
 const { escapeRegex, asRegex } = require('../generic/helper');
 
+class Wildcard extends String {
+  constructor(value, excluded) {
+    super(value);
+    this.excluded = excluded;
+  }
+
+  isExcluded() {
+    return this.excluded;
+  }
+}
+module.exports.Wildcard = Wildcard;
+
 const parseWildcard = (input) => {
   let regex = '';
   let escaped = false;
