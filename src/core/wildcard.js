@@ -1,23 +1,10 @@
-const compiler = require('./compiler');
 const { escapeRegex, asRegex } = require('../generic/helper');
 
-class Wildcard extends String {
-  constructor(value, excluded) {
-    super(value);
-    this.excluded = excluded;
-  }
-
-  isExcluded() {
-    return this.excluded;
-  }
-}
-module.exports.Wildcard = Wildcard;
-
-const parseWildcard = (input) => {
+const parseWildcard = (str) => {
   let regex = '';
   let escaped = false;
-  for (let idx = 0; idx < input.length; idx += 1) {
-    const char = input[idx];
+  for (let idx = 0; idx < str.length; idx += 1) {
+    const char = str[idx];
     if (!escaped && char === '\\') {
       escaped = true;
     } else if (!escaped && char === '*') {
@@ -35,42 +22,49 @@ const parseWildcard = (input) => {
 };
 module.exports.parseWildcard = parseWildcard;
 
-module.exports.compileRegex = (wildcard) => {
-  const wildcardStr = String(wildcard);
-  if (['**', '++'].includes(wildcardStr)) {
+const compileWildcard = (str) => {
+  if (['**', '++'].includes(str)) {
     return asRegex('.*');
   }
-  if ((wildcardStr.startsWith('**(') || wildcardStr.startsWith('++(')) && wildcardStr.endsWith(')')) {
-    return asRegex(wildcardStr.slice(3, -1));
+  if ((str.startsWith('**(') || str.startsWith('++(')) && str.endsWith(')')) {
+    return asRegex(str.slice(3, -1));
   }
-  if (wildcardStr.startsWith('[(') && wildcardStr.endsWith(')]')) {
-    return asRegex(wildcardStr.slice(2, -2));
+  if (str.startsWith('[(') && str.endsWith(')]')) {
+    return asRegex(str.slice(2, -2));
   }
-  if (wildcardStr.startsWith('(') && wildcardStr.endsWith(')')) {
-    return asRegex(wildcardStr.slice(1, -1));
+  if (str.startsWith('(') && str.endsWith(')')) {
+    return asRegex(str.slice(1, -1));
   }
-  if (wildcardStr.startsWith('[') && wildcardStr.endsWith(']')) {
-    return parseWildcard(wildcardStr.slice(1, -1));
+  if (str.startsWith('[') && str.endsWith(']')) {
+    return parseWildcard(str.slice(1, -1));
   }
-  return parseWildcard(wildcardStr);
+  return parseWildcard(str);
 };
 
-const isRegexMatch = (key, search) => compiler.getWildcardRegex(search).test(key);
-module.exports.isRegexMatch = isRegexMatch;
+class Wildcard extends String {
+  constructor(value, excluded) {
+    super(value);
+    this.excluded = excluded;
+    this.regex = compileWildcard(value);
+    this.isArrayTarget = value.startsWith('[') && value.endsWith(']');
+    this.isStarRec = value === '**' || (value.startsWith('**(') && value.endsWith(')'));
+    this.isPlusRec = value === '++' || (value.startsWith('++(') && value.endsWith(')'));
+    this.isRecursive = this.isStarRec || this.isPlusRec;
+  }
 
-const isMatch = (wildcard, key, isArray, search) => {
-  if (['**', '++'].includes(wildcard)) {
-    return true;
+  anyMatch(key) {
+    return this.regex.test(key);
   }
-  if (wildcard === (isArray ? '[*]' : '*')) {
-    return true;
+
+  typeMatch(key, isArray) {
+    if (
+      isArray !== this.isArrayTarget
+      && !this.isRecursive
+    ) {
+      return false;
+    }
+    return this.anyMatch(key);
   }
-  if (
-    isArray !== compiler.isArrayTarget(search)
-    && !compiler.isRecursive(search)
-  ) {
-    return false;
-  }
-  return isRegexMatch(key, search);
-};
-module.exports.isMatch = isMatch;
+}
+
+module.exports.Wildcard = Wildcard;

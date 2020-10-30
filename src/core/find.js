@@ -1,7 +1,6 @@
 const assert = require('assert');
 const compiler = require('./compiler');
 const Result = require('./result');
-const { isMatch, isRegexMatch } = require('./wildcard');
 const { toPath } = require('../generic/helper');
 
 const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);
@@ -134,14 +133,15 @@ module.exports = (haystack_, searches_, ctx) => {
         const searchesOut = [];
         for (let sIdx = 0, sLen = searches.length; sIdx < sLen; sIdx += 1) {
           const search = searches[sIdx];
-          if (compiler.isRecursive(search) && isRegexMatch(key, search)) {
+          const wildcard = compiler.getWildcard(search);
+          if (wildcard.isRecursive && wildcard.anyMatch(key)) {
             searchesOut.push(search);
           }
-          const entries = compiler.getEntries(search);
-          for (let eIdx = 0, eLen = entries.length; eIdx < eLen; eIdx += 1) {
-            const entry = entries[eIdx];
-            if (isMatch(entry[0], key, isArray, entry[1])) {
-              searchesOut.push(entry[1]);
+          const values = compiler.getValues(search);
+          for (let eIdx = 0, eLen = values.length; eIdx < eLen; eIdx += 1) {
+            const value = values[eIdx];
+            if (compiler.getWildcard(value).typeMatch(key, isArray)) {
+              searchesOut.push(value);
             }
           }
         }
