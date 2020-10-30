@@ -59,6 +59,9 @@ class Wildcard extends String {
   }
 
   anyMatch(key) {
+    if (this.isSimpleRec) {
+      return true;
+    }
     return this.regex.test(key);
   }
 
@@ -78,7 +81,7 @@ class Wildcard extends String {
     ) {
       return false;
     }
-    return this.anyMatch(key);
+    return this.regex.test(key);
   }
 }
 
