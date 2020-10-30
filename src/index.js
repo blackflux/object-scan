@@ -5,7 +5,7 @@ const { toPath } = require('./util/helper');
 
 const testWildcard = (key, search) => compiler.getWildcardRegex(search).test(key);
 const isWildcardMatch = (wildcard, key, isArray, search) => {
-  if (wildcard === '**') {
+  if (['**', '++'].includes(wildcard)) {
     return true;
   }
   if (wildcard === (isArray ? '[*]' : '*')) {

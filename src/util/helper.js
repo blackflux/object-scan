@@ -17,26 +17,5 @@ const asRegex = (regexStr) => {
 };
 module.exports.asRegex = asRegex;
 
-module.exports.parseWildcard = (input) => {
-  let regex = '';
-  let escaped = false;
-  for (let idx = 0; idx < input.length; idx += 1) {
-    const char = input[idx];
-    if (!escaped && char === '\\') {
-      escaped = true;
-    } else if (!escaped && char === '*') {
-      regex += '.*';
-    } else if (!escaped && char === '+') {
-      regex += '.+';
-    } else if (!escaped && char === '?') {
-      regex += '.';
-    } else {
-      regex += escapeRegex(char);
-      escaped = false;
-    }
-  }
-  return new RegExp(`^${regex}$`);
-};
-
 module.exports.toPath = (input) => input
   .reduce((p, c) => `${p}${typeof c === 'number' ? `[${c}]` : `${p ? '.' : ''}${escape(c)}`}`, '');
