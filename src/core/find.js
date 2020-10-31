@@ -1,6 +1,6 @@
 const assert = require('assert');
 const compiler = require('./compiler');
-const Result = require('./result');
+const Result = require('./find-result');
 const { toPath } = require('../generic/helper');
 
 const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);
