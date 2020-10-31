@@ -51,8 +51,11 @@ class Wildcard extends String {
     this.isSimpleStarRec = value === '**';
     this.isSimplePlusRec = value === '++';
     this.isSimpleRec = this.isSimpleStarRec || this.isSimplePlusRec;
-    this.isStarRec = this.isSimpleStarRec || (value.startsWith('**(') && value.endsWith(')'));
-    this.isPlusRec = this.isSimplePlusRec || (value.startsWith('++(') && value.endsWith(')'));
+    this.isRegexStarRec = value.startsWith('**(') && value.endsWith(')');
+    this.isRegexPlusRec = value.startsWith('++(') && value.endsWith(')');
+    this.isRegexRec = this.isRegexStarRec || this.isRegexPlusRec;
+    this.isStarRec = this.isSimpleStarRec || this.isRegexStarRec;
+    this.isPlusRec = this.isSimplePlusRec || this.isRegexPlusRec;
     this.isRec = this.isStarRec || this.isPlusRec;
     this.isAnyArrayTarget = value === '[*]';
     this.isAnyObjTarget = value === '*';
