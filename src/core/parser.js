@@ -18,21 +18,6 @@ module.exports.parse = (input, useArraySelector = true) => {
 
   for (let idx = 0; idx < inputLength; idx += 1) {
     const char = input[idx];
-    if (escaped === false) {
-      switch (char) {
-        case '(':
-          bracketDepth += 1;
-          break;
-        case ')':
-          if (bracketDepth === 0) {
-            throwError('Unexpected Parentheses', input, { char: idx });
-          }
-          bracketDepth -= 1;
-          break;
-        default:
-          break;
-      }
-    }
     if (escaped === false && bracketDepth === 0) {
       switch (char) {
         case '.':
@@ -64,6 +49,21 @@ module.exports.parse = (input, useArraySelector = true) => {
         case '!':
           result.finishElement(idx, { err: 'Bad Exclusion', fins: [null, '.', ',', '{', '['], finReq: true });
           result.startExclusion(idx);
+          break;
+        default:
+          break;
+      }
+    }
+    if (escaped === false) {
+      switch (char) {
+        case '(':
+          bracketDepth += 1;
+          break;
+        case ')':
+          if (bracketDepth === 0) {
+            throwError('Unexpected Parentheses', input, { char: idx });
+          }
+          bracketDepth -= 1;
           break;
         default:
           break;
