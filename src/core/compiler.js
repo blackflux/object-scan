@@ -48,7 +48,7 @@ module.exports.getNeedles = getNeedles;
 
 const INDEX = Symbol('index');
 const setIndex = (input, index, readonly) => defineProperty(input, INDEX, index, readonly);
-const getIndex = (input) => (input[INDEX] === undefined ? null : input[INDEX]);
+const getIndex = (input) => input[INDEX];
 module.exports.getIndex = getIndex;
 
 const WILDCARD = Symbol('wildcard');
@@ -71,13 +71,14 @@ module.exports.traversedBy = (searches) => Array
 module.exports.isLastLeafMatch = (searches) => {
   let maxLeafIndex = Number.MIN_SAFE_INTEGER;
   let maxLeaf = null;
-  searches.forEach((s) => {
+  for (let idx = 0, len = searches.length; idx < len; idx += 1) {
+    const s = searches[idx];
     const index = getIndex(s);
-    if (index !== null && index > maxLeafIndex) {
+    if (index !== undefined && index > maxLeafIndex) {
       maxLeafIndex = index;
       maxLeaf = s;
     }
-  });
+  }
   return maxLeaf !== null && isMatch(maxLeaf);
 };
 
