@@ -3995,21 +3995,21 @@ joi-strict@1.2.6:
   dependencies:
     "@hapi/joi" "17.1.1"
 
-js-gardener@2.0.179:
-  version "2.0.179"
-  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.179.tgz#71984da24b1109564fe1cab6b3862fd5b51f0e73"
-  integrity sha512-+aoslIpT1CPGBjonVrTW9ibvLp8gGx03ZvZesoK71Y3ICDDGNjQZZ4JiAuxotd3T5lzKxCWDxYJWLX+xo5HxHg==
+js-gardener@2.0.180:
+  version "2.0.180"
+  resolved "https://registry.yarnpkg.com/js-gardener/-/js-gardener-2.0.180.tgz#51916b6c792ab6f84c9dffeb41731f689cf5d198"
+  integrity sha512-v30lxgngNnYwygpNvkAcWRorvBA7DVFR2vH3hy1oElQhA6UxWZsRD15xcVbaPSzS+Em+csqV2YMOoYF7/Na15A==
   dependencies:
     chalk "4.1.0"
     fancy-log "1.3.3"
     glob "7.1.6"
-    joi-strict "1.2.5"
+    joi-strict "1.2.6"
     js-yaml "3.14.0"
     lodash.difference "4.5.0"
     lodash.get "4.4.2"
-    mocha "8.2.0"
+    mocha "8.2.1"
     npm-check "5.9.2"
-    robo-config "3.10.1"
+    robo-config "3.10.2"
 
 js-tokens@^3.0.0:
   version "3.0.2"
@@ -4833,10 +4833,10 @@ mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@^0.5.5, mkdirp@~0.5.0:
   dependencies:
     minimist "^1.2.5"
 
-mocha@8.2.0:
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/mocha/-/mocha-8.2.0.tgz#f8aa79110b4b5a6580c65d4dd8083c425282624e"
-  integrity sha512-lEWEMq2LMfNJMKeuEwb5UELi+OgFDollXaytR5ggQcHpzG3NP/R7rvixAvF+9/lLsTWhWG+4yD2M70GsM06nxw==
+mocha@8.2.1:
+  version "8.2.1"
+  resolved "https://registry.yarnpkg.com/mocha/-/mocha-8.2.1.tgz#f2fa68817ed0e53343d989df65ccd358bc3a4b39"
+  integrity sha512-cuLBVfyFfFqbNR0uUKbDGXKGk+UDFe6aR4os78XIrMQpZl/nv7JYHcvP5MFIAb374b2zFXsdgEGwmzMtP0Xg8w==
   dependencies:
     "@ungap/promise-all-settled" "1.1.2"
     ansi-colors "4.1.1"
@@ -5452,10 +5452,10 @@ object-scan@13.1.6:
   resolved "https://registry.yarnpkg.com/object-scan/-/object-scan-13.1.6.tgz#7ca059e129ee653edadb4ea1fecb57996d998a3d"
   integrity sha512-11zDs+8YzbqrhsFEqsPfPS8MucHuph5bmu0HA6JL2BlDoauLe2yKFa7HrZG1rS/+vdQCBibivqA+nvE5hj5ahQ==
 
-object-scan@13.3.8:
-  version "13.3.8"
-  resolved "https://registry.yarnpkg.com/object-scan/-/object-scan-13.3.8.tgz#a354752cff057ec1cfde3a56a6522662735e8d59"
-  integrity sha512-2dDYo3736YbxOE8AFDeT5+kXjFs34wsqubyZp5rLaFwtzQ1oyiGp1e5yROWyxcRo29R1e3z69L/POcr47zZe/g==
+object-scan@13.3.9:
+  version "13.3.9"
+  resolved "https://registry.yarnpkg.com/object-scan/-/object-scan-13.3.9.tgz#c2000db1732f0cbafff8ec304f739f432f179ee0"
+  integrity sha512-Fj1x3aP1jUGtz/CQ8JTl6Is9zCkl6xnaK5PRdQk19YTkHfn/Wx8V2KiglJWx1ijjBUeiKDKK/RGnnJh9vucL4w==
 
 object-scan@13.6.5:
   version "13.6.5"
@@ -6619,10 +6619,10 @@ rimraf@^3.0.0:
   dependencies:
     glob "^7.1.3"
 
-robo-config@3.10.1:
-  version "3.10.1"
-  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.10.1.tgz#03303d388e4a5d572a6d35cc9c7833c7c181a3a7"
-  integrity sha512-qijOOgfR4WKSfdvQGe7ojCpV4PrIfHqONQGwTaQBgz5hAF/iDtq40Au6rA4SGZy3zHdbCC4NxYi18j23xdUr6Q==
+robo-config@3.10.2:
+  version "3.10.2"
+  resolved "https://registry.yarnpkg.com/robo-config/-/robo-config-3.10.2.tgz#5fcea169f9dc24a9b2e7a35a2b18583fa36f9a87"
+  integrity sha512-+imnbE2PoxZNaE3j7dT1udhsVU4kbbr4ib6u2jvEZmm+ca20qSx5cG6Pyx2wUjHLD7OEa6EyFoc5/yxfK0XMvQ==
   dependencies:
     app-root-path "3.0.0"
     deepmerge "4.2.2"
@@ -6632,7 +6632,7 @@ robo-config@3.10.1:
     lodash.get "4.4.2"
     mustache "4.0.1"
     object-deep-contain "1.0.27"
-    object-scan "13.3.8"
+    object-scan "13.3.9"
     object-treeify "1.1.28"
     smart-fs "1.12.0"
 
