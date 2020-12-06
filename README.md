@@ -773,9 +773,43 @@ objectScan(['**.(^[bc]$)'], { joined: true })(haystack);
 
 ## Edge Cases
 
-The top level object(s) are matched by the empty needle `""`.
-Useful for matching objects nested in arrays by setting `useArraySelector` to `false`.
-Note that the empty string does not work with [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set).
+Top level object(s) are matched by the empty needle `''`. This is useful for matching objects nested in arrays by setting `useArraySelector` to `false`.
+To match the actual empty string as a key, use `(^$)`.
+
+Note that the empty string does not work to match top level objects with
+[_.get](https://lodash.com/docs/#get) or [_.set](https://lodash.com/docs/#set).
+
+_Examples_:
+<details><summary> <code>['']</code> <em>(match top level objects in array)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = [{}, {}];
+objectScan([''], {
+  joined: true,
+  useArraySelector: false
+})(haystack);
+// => [ '[1]', '[0]' ]
+```
+</details>
+<details><summary> <code>['']</code> <em>(match top level object)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = {};
+objectScan([''], { joined: true })(haystack);
+// => [ '' ]
+```
+</details>
+<details><summary> <code>['**.(^$)']</code> <em>(match empty string keys)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { '': 0, a: { '': 1 } };
+objectScan(['**.(^$)'])(haystack);
+// => [ [ 'a', '' ], [ '' ] ]
+```
+</details>
 
 ## Internals
 
