@@ -555,9 +555,29 @@ comment: regex matching
 
 ## Edge Cases
 
-The top level object(s) are matched by the empty needle `""`.
-Useful for matching objects nested in arrays by setting `useArraySelector` to `false`.
-Note that the empty string does not work with [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set).
+Top level object(s) are matched by the empty needle `''`. This is useful for matching objects nested in arrays by setting `useArraySelector` to `false`.
+To match the actual empty string as a key, use `(^$)`.
+
+Note how the empty string works with [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set).
+
+_Examples_:
+<pre><example>
+haystack: [{}, {}]
+needles: ['']
+useArraySelector: false
+comment: match top level objects in array
+</example></pre>
+<pre><example>
+haystack: {}
+needles: ['']
+comment: match top level object
+</example></pre>
+<pre><example>
+haystack: { '': 0, a: { '': 1 } }
+needles: ['**.(^$)']
+joined: false
+comment: match empty string keys
+</example></pre>
 
 ## Internals
 
