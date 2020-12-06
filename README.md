@@ -776,7 +776,8 @@ objectScan(['**.(^[bc]$)'], { joined: true })(haystack);
 Top level object(s) are matched by the empty needle `''`. This is useful for matching objects nested in arrays by setting `useArraySelector` to `false`.
 To match the actual empty string as a key, use `(^$)`.
 
-Note how the empty string works with [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set).
+Note that the empty string does not work to match top level objects with
+[_.get](https://lodash.com/docs/#get) or [_.set](https://lodash.com/docs/#set).
 
 _Examples_:
 <details><summary> <code>['']</code> <em>(match top level objects in array)</em> </summary>
