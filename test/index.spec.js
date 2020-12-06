@@ -347,6 +347,11 @@ describe('Testing Find', () => {
     });
   });
 
+  it('Testing Empty Property', () => {
+    const find = objectScan(['a.(^$).b']);
+    expect(find({ a: { '': { b: 0 } } })).to.deep.equal(['a..b']);
+  });
+
   it('Testing null value', () => {
     const find = objectScan(['**'], { filterFn: ({ value }) => value === null });
     expect(find({ key: null })).to.deep.equal(['key']);
