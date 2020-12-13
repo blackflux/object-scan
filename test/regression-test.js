@@ -8,7 +8,7 @@ const generateDataset = require('./helper/generate-dataset');
 const generateNeedles = require('./helper/generate-needles');
 const createHtmlDiff = require('./helper/create-html-diff');
 
-const TEST_COUNT = 100000;
+const TEST_COUNT = 1000000;
 
 // eslint-disable-next-line no-console
 const log = (...args) => console.log(...args);
