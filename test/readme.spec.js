@@ -16,7 +16,7 @@ const getObjectScanOptions = (meta) => {
     useArraySelector: meta.useArraySelector
   })
     .filter(([k, v]) => v !== undefined);
-  const multiline = entries.length > 1 || meta.filterFn !== undefined || meta.breakFn !== undefined;
+  const multiline = entries.length > 1 || 'filterFn' in meta || 'breakFn' in meta;
   const result = entries
     .map(([k, v]) => `${k}: ${v}`)
     .join(multiline ? ',\n  ' : ', ');
