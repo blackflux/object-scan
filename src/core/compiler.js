@@ -7,7 +7,7 @@ const { Wildcard } = require('./wildcard');
 
 const LEAF = Symbol('leaf');
 const markLeaf = (input, match, readonly) => defineProperty(input, LEAF, match, readonly);
-const isLeaf = (input) => input[LEAF] !== undefined;
+const isLeaf = (input) => LEAF in input;
 const isMatch = (input) => input !== undefined && input[LEAF] === true;
 module.exports.isLeaf = isLeaf;
 module.exports.isMatch = isMatch;
@@ -150,7 +150,7 @@ const applyNeedle = (tower, needle, tree, strict, ctx) => {
         }
       }
       addNeedle(cur, needle);
-      if (strict && cur[LEAF_NEEDLES] !== undefined) {
+      if (strict && LEAF_NEEDLES in cur) {
         throw new Error(`Redundant Needle Target: "${cur[LEAF_NEEDLES][0]}" vs "${needle}"`);
       }
       addLeafNeedle(cur, needle, strict);
