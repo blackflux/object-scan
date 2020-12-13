@@ -120,7 +120,7 @@ module.exports = (haystack_, searches_, ctx) => {
       stack.push(true, searches, segment, depth);
     }
 
-    if (searches[0][''] !== undefined && path.find((p) => typeof p === 'string') === undefined) {
+    if ('' in searches[0] && path.every((p) => typeof p !== 'string')) {
       assert(searches.length === 1);
       stack.push(false, [searches[0]['']], segment, depth);
     }
