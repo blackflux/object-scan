@@ -22,7 +22,21 @@ const Tester = () => ({
         })
         : () => {}
     });
-    const matches = objectScan(needles, { useArraySelector, strict: !modify })(haystack);
+    const breakMatches = new Set();
+    const filterMatches = new Set();
+    const matches = objectScan(needles, {
+      useArraySelector,
+      strict: !modify,
+      breakFn: ({ isMatch, key }) => {
+        if (isMatch) {
+          breakMatches.add(key.join('.'));
+        }
+      },
+      filterFn: ({ key }) => {
+        filterMatches.add(key.join('.'));
+      }
+    })(haystack);
+    expect(breakMatches, `Seed: ${rng.seed}`).to.deep.equal(filterMatches);
     if (useArraySelector && !modify) {
       expect(matches, `Seed: ${rng.seed}`).to.deep.equal(paths);
     } else {
