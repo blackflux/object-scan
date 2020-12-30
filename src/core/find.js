@@ -104,13 +104,9 @@ module.exports = (haystack_, searches_, ctx) => {
       continue;
     }
 
-    const recurseHaystack = ctx.breakFn === undefined || ctx.breakFn(kwargs) !== true;
-
     if (ctx.useArraySelector === false && Array.isArray(haystack)) {
-      if (recurseHaystack) {
-        for (let idx = 0, len = haystack.length; idx < len; idx += 1) {
-          stack.push(false, searches, idx, depth + 1);
-        }
+      for (let idx = 0, len = haystack.length; idx < len; idx += 1) {
+        stack.push(false, searches, idx, depth + 1);
       }
       // eslint-disable-next-line no-continue
       continue;
@@ -125,7 +121,10 @@ module.exports = (haystack_, searches_, ctx) => {
       stack.push(false, [searches[0]['']], segment, depth);
     }
 
-    if (recurseHaystack && haystack instanceof Object) {
+    if (
+      (ctx.breakFn === undefined || ctx.breakFn(kwargs) !== true)
+      && haystack instanceof Object
+    ) {
       const isArray = Array.isArray(haystack);
       const keys = isArray ? haystack : Object.keys(haystack);
       for (let kIdx = 0, kLen = keys.length; kIdx < kLen; kIdx += 1) {
