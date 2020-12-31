@@ -1,0 +1,348 @@
+{
+  "needles": ["", "**(^children$)"],
+  "options": {"args": {"useArraySelector": false}},
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "[4]",
+      "isMatch": true,
+      "matchedBy": [""],
+      "excludedBy": [],
+      "traversedBy": [""]
+    },
+    {
+      "type": "breakFn",
+      "key": "[4].children[1]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "[4].children[1].children[0]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "[4].children[1].children[0]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "[4].children[1]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "[4].children[0]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "[4].children[0]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "[4]",
+      "isMatch": true,
+      "matchedBy": [""],
+      "excludedBy": [],
+      "traversedBy": [""]
+    },
+    {
+      "type": "breakFn",
+      "key": "[3]",
+      "isMatch": true,
+      "matchedBy": [""],
+      "excludedBy": [],
+      "traversedBy": [""]
+    },
+    {
+      "type": "breakFn",
+      "key": "[3].children[1]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "[3].children[1].children[0]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "[3].children[1].children[0]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "[3].children[1]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "[3].children[0]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "[3].children[0]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "[3]",
+      "isMatch": true,
+      "matchedBy": [""],
+      "excludedBy": [],
+      "traversedBy": [""]
+    },
+    {
+      "type": "breakFn",
+      "key": "[2]",
+      "isMatch": true,
+      "matchedBy": [""],
+      "excludedBy": [],
+      "traversedBy": [""]
+    },
+    {
+      "type": "breakFn",
+      "key": "[2].children[1]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "[2].children[1].children[0]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "[2].children[1].children[0]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "[2].children[1]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "[2].children[0]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "[2].children[0]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "[2]",
+      "isMatch": true,
+      "matchedBy": [""],
+      "excludedBy": [],
+      "traversedBy": [""]
+    },
+    {
+      "type": "breakFn",
+      "key": "[1]",
+      "isMatch": true,
+      "matchedBy": [""],
+      "excludedBy": [],
+      "traversedBy": [""]
+    },
+    {
+      "type": "breakFn",
+      "key": "[1].children[1]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "[1].children[1].children[0]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "[1].children[1].children[0]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "[1].children[1]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "[1].children[0]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "[1].children[0]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "[1]",
+      "isMatch": true,
+      "matchedBy": [""],
+      "excludedBy": [],
+      "traversedBy": [""]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0]",
+      "isMatch": true,
+      "matchedBy": [""],
+      "excludedBy": [],
+      "traversedBy": [""]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].children[1]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].children[1].children[0]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].children[1].children[0]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].children[1]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].children[0]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0].children[0]",
+      "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0]",
+      "isMatch": true,
+      "matchedBy": [""],
+      "excludedBy": [],
+      "traversedBy": [""]
+    }
+  ],
+  "result": [
+    "[4].children[1].children[0]",
+    "[4].children[1]",
+    "[4].children[0]",
+    "[4]",
+    "[3].children[1].children[0]",
+    "[3].children[1]",
+    "[3].children[0]",
+    "[3]",
+    "[2].children[1].children[0]",
+    "[2].children[1]",
+    "[2].children[0]",
+    "[2]",
+    "[1].children[1].children[0]",
+    "[1].children[1]",
+    "[1].children[0]",
+    "[1]",
+    "[0].children[1].children[0]",
+    "[0].children[1]",
+    "[0].children[0]",
+    "[0]"
+  ]
+}

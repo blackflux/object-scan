@@ -13,7 +13,7 @@ module.exports = (haystack_, searches_, ctx) => {
   let depth;
   let segment;
   let searches;
-  let isResult;
+  let isMatch;
   let haystack = haystack_;
 
   const kwargs = {
@@ -29,7 +29,7 @@ module.exports = (haystack_, searches_, ctx) => {
     get entry() {
       return kwargs.getEntry();
     },
-    getIsMatch: () => compiler.isLastLeafMatch(searches),
+    getIsMatch: () => isMatch,
     get isMatch() {
       return kwargs.getIsMatch();
     },
@@ -70,7 +70,7 @@ module.exports = (haystack_, searches_, ctx) => {
     depth = stack.pop();
     segment = stack.pop();
     searches = stack.pop();
-    isResult = stack.pop();
+    isMatch = stack.pop();
 
     const diff = path.length - depth;
     for (let idx = 0; idx < diff; idx += 1) {
@@ -88,7 +88,7 @@ module.exports = (haystack_, searches_, ctx) => {
       haystack = haystack_;
     }
 
-    if (isResult) {
+    if (isMatch) {
       if (ctx.filterFn === undefined || ctx.filterFn(kwargs) !== false) {
         result.onMatch();
         if (ctx.abort) {
@@ -112,13 +112,18 @@ module.exports = (haystack_, searches_, ctx) => {
       continue;
     }
 
+    const searchesIn = searches;
+
     if (compiler.isLastLeafMatch(searches)) {
       stack.push(true, searches, segment, depth);
+      isMatch = true;
     }
 
-    if ('' in searches[0] && path.every((p) => typeof p !== 'string')) {
+    if ('' in searches[0] && path.every((p) => Number.isInteger(p))) {
       assert(searches.length === 1);
-      stack.push(false, [searches[0]['']], segment, depth);
+      stack.push(true, [searches[0]['']], segment, depth);
+      isMatch = true;
+      searches = [searches[0]['']];
     }
 
     if (
@@ -130,8 +135,8 @@ module.exports = (haystack_, searches_, ctx) => {
       for (let kIdx = 0, kLen = keys.length; kIdx < kLen; kIdx += 1) {
         const key = isArray ? kIdx : keys[kIdx];
         const searchesOut = [];
-        for (let sIdx = 0, sLen = searches.length; sIdx < sLen; sIdx += 1) {
-          const search = searches[sIdx];
+        for (let sIdx = 0, sLen = searchesIn.length; sIdx < sLen; sIdx += 1) {
+          const search = searchesIn[sIdx];
           const wildcard = compiler.getWildcard(search);
           if (wildcard.isRec && wildcard.anyMatch(key)) {
             searchesOut.push(search);
