@@ -327,6 +327,7 @@ where:
 - `excludedBy`: all excluding needles targeting key.
 - `traversedBy`: all needles involved in traversing key.
 - `isCircular`: true iff `value` contained in `parents`
+- `isLeaf`: true iff `value` can not be traversed
 - `getKey`: function that returns `key`
 - `getValue`: function that returns `value`
 - `getEntry`: function that returns `entry`
@@ -338,6 +339,7 @@ where:
 - `getExcludedBy`: function that returns `excludedBy`
 - `getTraversedBy`: function that returns `traversedBy`
 - `getIsCircular`: function that returns `isCircular`
+- `getIsLeaf`: function that returns `isLeaf`
 - `context`: as passed into the search
 
 Notes on Performance:

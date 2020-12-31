@@ -61,6 +61,10 @@ module.exports = (haystack_, searches_, ctx) => {
     get isCircular() {
       return kwargs.getIsCircular();
     },
+    getIsLeaf: () => !(haystack instanceof Object),
+    get isLeaf() {
+      return kwargs.getIsLeaf();
+    },
     context: ctx.context
   };
 
