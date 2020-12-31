@@ -39,7 +39,8 @@ module.exports = {
       traversedBy: [
         '**'
       ],
-      isCircular: false
+      isCircular: false,
+      isLeaf: false
     },
     {
       cbName: 'breakFn',
@@ -88,7 +89,8 @@ module.exports = {
       traversedBy: [
         '**'
       ],
-      isCircular: false
+      isCircular: false,
+      isLeaf: false
     },
     {
       cbName: 'breakFn',
@@ -143,7 +145,8 @@ module.exports = {
       traversedBy: [
         '**'
       ],
-      isCircular: false
+      isCircular: false,
+      isLeaf: false
     },
     {
       cbName: 'breakFn',
@@ -199,7 +202,8 @@ module.exports = {
       traversedBy: [
         '**'
       ],
-      isCircular: false
+      isCircular: false,
+      isLeaf: false
     },
     {
       cbName: 'breakFn',
@@ -251,7 +255,8 @@ module.exports = {
       traversedBy: [
         '**'
       ],
-      isCircular: false
+      isCircular: false,
+      isLeaf: true
     },
     {
       cbName: 'filterFn',
@@ -303,7 +308,8 @@ module.exports = {
       traversedBy: [
         '**'
       ],
-      isCircular: false
+      isCircular: false,
+      isLeaf: true
     },
     {
       cbName: 'filterFn',
@@ -359,7 +365,8 @@ module.exports = {
       traversedBy: [
         '**'
       ],
-      isCircular: false
+      isCircular: false,
+      isLeaf: false
     },
     {
       cbName: 'breakFn',
@@ -415,7 +422,8 @@ module.exports = {
       traversedBy: [
         '**'
       ],
-      isCircular: false
+      isCircular: false,
+      isLeaf: false
     },
     {
       cbName: 'breakFn',
@@ -467,7 +475,8 @@ module.exports = {
       traversedBy: [
         '**'
       ],
-      isCircular: false
+      isCircular: false,
+      isLeaf: true
     },
     {
       cbName: 'filterFn',
@@ -519,7 +528,8 @@ module.exports = {
       traversedBy: [
         '**'
       ],
-      isCircular: false
+      isCircular: false,
+      isLeaf: true
     },
     {
       cbName: 'filterFn',
@@ -575,7 +585,8 @@ module.exports = {
       traversedBy: [
         '**'
       ],
-      isCircular: false
+      isCircular: false,
+      isLeaf: false
     },
     {
       cbName: 'filterFn',
@@ -630,7 +641,8 @@ module.exports = {
       traversedBy: [
         '**'
       ],
-      isCircular: false
+      isCircular: false,
+      isLeaf: false
     },
     {
       cbName: 'filterFn',
@@ -679,7 +691,8 @@ module.exports = {
       traversedBy: [
         '**'
       ],
-      isCircular: false
+      isCircular: false,
+      isLeaf: false
     }
   ],
   warning: null,
