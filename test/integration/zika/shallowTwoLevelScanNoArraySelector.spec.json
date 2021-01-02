@@ -102,6 +102,14 @@
     },
     {
       "type": "breakFn",
+      "key": "children",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["*.*"]
+    },
+    {
+      "type": "breakFn",
       "key": "children[1]",
       "isMatch": false,
       "matchedBy": [],
@@ -142,6 +150,14 @@
     },
     {
       "type": "breakFn",
+      "key": "children[1].children",
+      "isMatch": false,
+      "matchedBy": ["*.*"],
+      "excludedBy": [],
+      "traversedBy": ["*.*"]
+    },
+    {
+      "type": "breakFn",
       "key": "children[1].children[1]",
       "isMatch": true,
       "matchedBy": ["*.*"],
@@ -232,6 +248,14 @@
       "type": "filterFn",
       "key": "children[1].clade",
       "isMatch": true,
+      "matchedBy": ["*.*"],
+      "excludedBy": [],
+      "traversedBy": ["*.*"]
+    },
+    {
+      "type": "breakFn",
+      "key": "children[1].muts",
+      "isMatch": false,
       "matchedBy": ["*.*"],
       "excludedBy": [],
       "traversedBy": ["*.*"]
@@ -480,6 +504,14 @@
       "type": "filterFn",
       "key": "children[0].clade",
       "isMatch": true,
+      "matchedBy": ["*.*"],
+      "excludedBy": [],
+      "traversedBy": ["*.*"]
+    },
+    {
+      "type": "breakFn",
+      "key": "children[0].muts",
+      "isMatch": false,
       "matchedBy": ["*.*"],
       "excludedBy": [],
       "traversedBy": ["*.*"]

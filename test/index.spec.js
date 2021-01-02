@@ -526,11 +526,11 @@ describe('Testing Find', () => {
     };
 
     it('Testing useArraySelector = false, breakFn (BREAKING)', () => {
-      expect(execTest(false, (k) => k === 'child[0]')).to.deep.equal(['', 'child[0]']);
+      expect(execTest(false, (k) => k === 'child')).to.deep.equal(['', 'child']);
     });
 
     it('Testing useArraySelector = false, breakFn', () => {
-      expect(execTest(false, () => false)).to.deep.equal(['', 'child[0]', 'child[0].id']);
+      expect(execTest(false, () => false)).to.deep.equal(['', 'child', 'child[0]', 'child[0].id']);
     });
 
     it('Testing useArraySelector = true, breakFn (BREAKING)', () => {
@@ -552,6 +552,8 @@ describe('Testing Find', () => {
       });
       expect(result).to.deep.equal([
         ['breakFn', ''],
+        ['breakFn', 'tag'],
+        ['breakFn', 'tag[0]'],
         ['breakFn', 'tag[0][0]'],
         ['breakFn', 'tag[0][0].id'],
         ['filterFn', 'tag[0][0].id'],
