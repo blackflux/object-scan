@@ -4,6 +4,14 @@
   "log": [
     {
       "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["", "**(^children$)"]
+    },
+    {
+      "type": "breakFn",
       "key": "[4]",
       "isMatch": true,
       "matchedBy": [""],
@@ -12,8 +20,24 @@
     },
     {
       "type": "breakFn",
+      "key": "[4].children",
+      "isMatch": false,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "breakFn",
       "key": "[4].children[1]",
       "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "[4].children[1].children",
+      "isMatch": false,
       "matchedBy": ["**(^children$)"],
       "excludedBy": [],
       "traversedBy": ["**(^children$)"]
@@ -76,8 +100,24 @@
     },
     {
       "type": "breakFn",
+      "key": "[3].children",
+      "isMatch": false,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "breakFn",
       "key": "[3].children[1]",
       "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "[3].children[1].children",
+      "isMatch": false,
       "matchedBy": ["**(^children$)"],
       "excludedBy": [],
       "traversedBy": ["**(^children$)"]
@@ -140,8 +180,24 @@
     },
     {
       "type": "breakFn",
+      "key": "[2].children",
+      "isMatch": false,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "breakFn",
       "key": "[2].children[1]",
       "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "[2].children[1].children",
+      "isMatch": false,
       "matchedBy": ["**(^children$)"],
       "excludedBy": [],
       "traversedBy": ["**(^children$)"]
@@ -204,8 +260,24 @@
     },
     {
       "type": "breakFn",
+      "key": "[1].children",
+      "isMatch": false,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "breakFn",
       "key": "[1].children[1]",
       "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "[1].children[1].children",
+      "isMatch": false,
       "matchedBy": ["**(^children$)"],
       "excludedBy": [],
       "traversedBy": ["**(^children$)"]
@@ -268,8 +340,24 @@
     },
     {
       "type": "breakFn",
+      "key": "[0].children",
+      "isMatch": false,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "breakFn",
       "key": "[0].children[1]",
       "isMatch": true,
+      "matchedBy": ["**(^children$)"],
+      "excludedBy": [],
+      "traversedBy": ["**(^children$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "[0].children[1].children",
+      "isMatch": false,
       "matchedBy": ["**(^children$)"],
       "excludedBy": [],
       "traversedBy": ["**(^children$)"]

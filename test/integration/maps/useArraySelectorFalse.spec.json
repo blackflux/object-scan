@@ -262,6 +262,149 @@
     },
     {
       "type": "breakFn",
+      "key": "results",
+      "value": [
+        {
+          "address_components": [
+            {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
+            {
+              "long_name": "8703",
+              "short_name": "8703",
+              "types": ["street_number"]
+            },
+            {
+              "long_name": "North Owasso Expressway",
+              "short_name": "N Owasso Expy",
+              "types": ["route"]
+            },
+            {
+              "long_name": "Owasso",
+              "short_name": "Owasso",
+              "types": ["locality", "political"]
+            },
+            {
+              "long_name": "Tulsa County",
+              "short_name": "Tulsa County",
+              "types": ["administrative_area_level_2", "political"]
+            },
+            {
+              "long_name": "Oklahoma",
+              "short_name": "OK",
+              "types": ["administrative_area_level_1", "political"]
+            },
+            {
+              "long_name": "United States",
+              "short_name": "US",
+              "types": ["country", "political"]
+            },
+            {
+              "long_name": "74055",
+              "short_name": "74055",
+              "types": ["postal_code"]
+            }
+          ],
+          "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+          "geometry": {
+            "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+            "location_type": "ROOFTOP",
+            "viewport": {
+              "northeast": {
+                "lat": 36.28173748029151,
+                "lng": -95.84404781970848
+              },
+              "southwest": {"lat": 36.27903951970851, "lng": -95.8467457802915}
+            }
+          },
+          "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+          "plus_code": {
+            "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+            "global_code": "868675J3+5R"
+          },
+          "types": ["establishment", "point_of_interest"]
+        }
+      ],
+      "isMatch": false,
+      "matchedBy": ["**"],
+      "excludedBy": [],
+      "traversedBy": ["**"],
+      "parents": [
+        {
+          "results": [
+            {
+              "address_components": [
+                {
+                  "long_name": "130",
+                  "short_name": "130",
+                  "types": ["subpremise"]
+                },
+                {
+                  "long_name": "8703",
+                  "short_name": "8703",
+                  "types": ["street_number"]
+                },
+                {
+                  "long_name": "North Owasso Expressway",
+                  "short_name": "N Owasso Expy",
+                  "types": ["route"]
+                },
+                {
+                  "long_name": "Owasso",
+                  "short_name": "Owasso",
+                  "types": ["locality", "political"]
+                },
+                {
+                  "long_name": "Tulsa County",
+                  "short_name": "Tulsa County",
+                  "types": ["administrative_area_level_2", "political"]
+                },
+                {
+                  "long_name": "Oklahoma",
+                  "short_name": "OK",
+                  "types": ["administrative_area_level_1", "political"]
+                },
+                {
+                  "long_name": "United States",
+                  "short_name": "US",
+                  "types": ["country", "political"]
+                },
+                {
+                  "long_name": "74055",
+                  "short_name": "74055",
+                  "types": ["postal_code"]
+                }
+              ],
+              "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+              "geometry": {
+                "location": {
+                  "lat": 36.28038850000001,
+                  "lng": -95.84539679999999
+                },
+                "location_type": "ROOFTOP",
+                "viewport": {
+                  "northeast": {
+                    "lat": 36.28173748029151,
+                    "lng": -95.84404781970848
+                  },
+                  "southwest": {
+                    "lat": 36.27903951970851,
+                    "lng": -95.8467457802915
+                  }
+                }
+              },
+              "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+              "plus_code": {
+                "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+                "global_code": "868675J3+5R"
+              },
+              "types": ["establishment", "point_of_interest"]
+            }
+          ],
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "type": "breakFn",
       "key": "results[0]",
       "value": {
         "address_components": [
@@ -467,6 +610,215 @@
     },
     {
       "type": "breakFn",
+      "key": "results[0].types",
+      "value": ["establishment", "point_of_interest"],
+      "isMatch": false,
+      "matchedBy": ["**"],
+      "excludedBy": [],
+      "traversedBy": ["**"],
+      "parents": [
+        {
+          "address_components": [
+            {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
+            {
+              "long_name": "8703",
+              "short_name": "8703",
+              "types": ["street_number"]
+            },
+            {
+              "long_name": "North Owasso Expressway",
+              "short_name": "N Owasso Expy",
+              "types": ["route"]
+            },
+            {
+              "long_name": "Owasso",
+              "short_name": "Owasso",
+              "types": ["locality", "political"]
+            },
+            {
+              "long_name": "Tulsa County",
+              "short_name": "Tulsa County",
+              "types": ["administrative_area_level_2", "political"]
+            },
+            {
+              "long_name": "Oklahoma",
+              "short_name": "OK",
+              "types": ["administrative_area_level_1", "political"]
+            },
+            {
+              "long_name": "United States",
+              "short_name": "US",
+              "types": ["country", "political"]
+            },
+            {
+              "long_name": "74055",
+              "short_name": "74055",
+              "types": ["postal_code"]
+            }
+          ],
+          "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+          "geometry": {
+            "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+            "location_type": "ROOFTOP",
+            "viewport": {
+              "northeast": {
+                "lat": 36.28173748029151,
+                "lng": -95.84404781970848
+              },
+              "southwest": {"lat": 36.27903951970851, "lng": -95.8467457802915}
+            }
+          },
+          "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+          "plus_code": {
+            "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+            "global_code": "868675J3+5R"
+          },
+          "types": ["establishment", "point_of_interest"]
+        },
+        [
+          {
+            "address_components": [
+              {
+                "long_name": "130",
+                "short_name": "130",
+                "types": ["subpremise"]
+              },
+              {
+                "long_name": "8703",
+                "short_name": "8703",
+                "types": ["street_number"]
+              },
+              {
+                "long_name": "North Owasso Expressway",
+                "short_name": "N Owasso Expy",
+                "types": ["route"]
+              },
+              {
+                "long_name": "Owasso",
+                "short_name": "Owasso",
+                "types": ["locality", "political"]
+              },
+              {
+                "long_name": "Tulsa County",
+                "short_name": "Tulsa County",
+                "types": ["administrative_area_level_2", "political"]
+              },
+              {
+                "long_name": "Oklahoma",
+                "short_name": "OK",
+                "types": ["administrative_area_level_1", "political"]
+              },
+              {
+                "long_name": "United States",
+                "short_name": "US",
+                "types": ["country", "political"]
+              },
+              {
+                "long_name": "74055",
+                "short_name": "74055",
+                "types": ["postal_code"]
+              }
+            ],
+            "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+            "geometry": {
+              "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+              "location_type": "ROOFTOP",
+              "viewport": {
+                "northeast": {
+                  "lat": 36.28173748029151,
+                  "lng": -95.84404781970848
+                },
+                "southwest": {
+                  "lat": 36.27903951970851,
+                  "lng": -95.8467457802915
+                }
+              }
+            },
+            "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+            "plus_code": {
+              "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+              "global_code": "868675J3+5R"
+            },
+            "types": ["establishment", "point_of_interest"]
+          }
+        ],
+        {
+          "results": [
+            {
+              "address_components": [
+                {
+                  "long_name": "130",
+                  "short_name": "130",
+                  "types": ["subpremise"]
+                },
+                {
+                  "long_name": "8703",
+                  "short_name": "8703",
+                  "types": ["street_number"]
+                },
+                {
+                  "long_name": "North Owasso Expressway",
+                  "short_name": "N Owasso Expy",
+                  "types": ["route"]
+                },
+                {
+                  "long_name": "Owasso",
+                  "short_name": "Owasso",
+                  "types": ["locality", "political"]
+                },
+                {
+                  "long_name": "Tulsa County",
+                  "short_name": "Tulsa County",
+                  "types": ["administrative_area_level_2", "political"]
+                },
+                {
+                  "long_name": "Oklahoma",
+                  "short_name": "OK",
+                  "types": ["administrative_area_level_1", "political"]
+                },
+                {
+                  "long_name": "United States",
+                  "short_name": "US",
+                  "types": ["country", "political"]
+                },
+                {
+                  "long_name": "74055",
+                  "short_name": "74055",
+                  "types": ["postal_code"]
+                }
+              ],
+              "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+              "geometry": {
+                "location": {
+                  "lat": 36.28038850000001,
+                  "lng": -95.84539679999999
+                },
+                "location_type": "ROOFTOP",
+                "viewport": {
+                  "northeast": {
+                    "lat": 36.28173748029151,
+                    "lng": -95.84404781970848
+                  },
+                  "southwest": {
+                    "lat": 36.27903951970851,
+                    "lng": -95.8467457802915
+                  }
+                }
+              },
+              "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+              "plus_code": {
+                "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+                "global_code": "868675J3+5R"
+              },
+              "types": ["establishment", "point_of_interest"]
+            }
+          ],
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "type": "breakFn",
       "key": "results[0].types[1]",
       "value": "point_of_interest",
       "isMatch": true,
@@ -8485,6 +8837,244 @@
       "key": "results[0].formatted_address",
       "value": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
       "isMatch": true,
+      "matchedBy": ["**"],
+      "excludedBy": [],
+      "traversedBy": ["**"],
+      "parents": [
+        {
+          "address_components": [
+            {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
+            {
+              "long_name": "8703",
+              "short_name": "8703",
+              "types": ["street_number"]
+            },
+            {
+              "long_name": "North Owasso Expressway",
+              "short_name": "N Owasso Expy",
+              "types": ["route"]
+            },
+            {
+              "long_name": "Owasso",
+              "short_name": "Owasso",
+              "types": ["locality", "political"]
+            },
+            {
+              "long_name": "Tulsa County",
+              "short_name": "Tulsa County",
+              "types": ["administrative_area_level_2", "political"]
+            },
+            {
+              "long_name": "Oklahoma",
+              "short_name": "OK",
+              "types": ["administrative_area_level_1", "political"]
+            },
+            {
+              "long_name": "United States",
+              "short_name": "US",
+              "types": ["country", "political"]
+            },
+            {
+              "long_name": "74055",
+              "short_name": "74055",
+              "types": ["postal_code"]
+            }
+          ],
+          "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+          "geometry": {
+            "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+            "location_type": "ROOFTOP",
+            "viewport": {
+              "northeast": {
+                "lat": 36.28173748029151,
+                "lng": -95.84404781970848
+              },
+              "southwest": {"lat": 36.27903951970851, "lng": -95.8467457802915}
+            }
+          },
+          "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+          "plus_code": {
+            "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+            "global_code": "868675J3+5R"
+          },
+          "types": ["establishment", "point_of_interest"]
+        },
+        [
+          {
+            "address_components": [
+              {
+                "long_name": "130",
+                "short_name": "130",
+                "types": ["subpremise"]
+              },
+              {
+                "long_name": "8703",
+                "short_name": "8703",
+                "types": ["street_number"]
+              },
+              {
+                "long_name": "North Owasso Expressway",
+                "short_name": "N Owasso Expy",
+                "types": ["route"]
+              },
+              {
+                "long_name": "Owasso",
+                "short_name": "Owasso",
+                "types": ["locality", "political"]
+              },
+              {
+                "long_name": "Tulsa County",
+                "short_name": "Tulsa County",
+                "types": ["administrative_area_level_2", "political"]
+              },
+              {
+                "long_name": "Oklahoma",
+                "short_name": "OK",
+                "types": ["administrative_area_level_1", "political"]
+              },
+              {
+                "long_name": "United States",
+                "short_name": "US",
+                "types": ["country", "political"]
+              },
+              {
+                "long_name": "74055",
+                "short_name": "74055",
+                "types": ["postal_code"]
+              }
+            ],
+            "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+            "geometry": {
+              "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+              "location_type": "ROOFTOP",
+              "viewport": {
+                "northeast": {
+                  "lat": 36.28173748029151,
+                  "lng": -95.84404781970848
+                },
+                "southwest": {
+                  "lat": 36.27903951970851,
+                  "lng": -95.8467457802915
+                }
+              }
+            },
+            "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+            "plus_code": {
+              "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+              "global_code": "868675J3+5R"
+            },
+            "types": ["establishment", "point_of_interest"]
+          }
+        ],
+        {
+          "results": [
+            {
+              "address_components": [
+                {
+                  "long_name": "130",
+                  "short_name": "130",
+                  "types": ["subpremise"]
+                },
+                {
+                  "long_name": "8703",
+                  "short_name": "8703",
+                  "types": ["street_number"]
+                },
+                {
+                  "long_name": "North Owasso Expressway",
+                  "short_name": "N Owasso Expy",
+                  "types": ["route"]
+                },
+                {
+                  "long_name": "Owasso",
+                  "short_name": "Owasso",
+                  "types": ["locality", "political"]
+                },
+                {
+                  "long_name": "Tulsa County",
+                  "short_name": "Tulsa County",
+                  "types": ["administrative_area_level_2", "political"]
+                },
+                {
+                  "long_name": "Oklahoma",
+                  "short_name": "OK",
+                  "types": ["administrative_area_level_1", "political"]
+                },
+                {
+                  "long_name": "United States",
+                  "short_name": "US",
+                  "types": ["country", "political"]
+                },
+                {
+                  "long_name": "74055",
+                  "short_name": "74055",
+                  "types": ["postal_code"]
+                }
+              ],
+              "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+              "geometry": {
+                "location": {
+                  "lat": 36.28038850000001,
+                  "lng": -95.84539679999999
+                },
+                "location_type": "ROOFTOP",
+                "viewport": {
+                  "northeast": {
+                    "lat": 36.28173748029151,
+                    "lng": -95.84404781970848
+                  },
+                  "southwest": {
+                    "lat": 36.27903951970851,
+                    "lng": -95.8467457802915
+                  }
+                }
+              },
+              "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+              "plus_code": {
+                "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+                "global_code": "868675J3+5R"
+              },
+              "types": ["establishment", "point_of_interest"]
+            }
+          ],
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "results[0].address_components",
+      "value": [
+        {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
+        {"long_name": "8703", "short_name": "8703", "types": ["street_number"]},
+        {
+          "long_name": "North Owasso Expressway",
+          "short_name": "N Owasso Expy",
+          "types": ["route"]
+        },
+        {
+          "long_name": "Owasso",
+          "short_name": "Owasso",
+          "types": ["locality", "political"]
+        },
+        {
+          "long_name": "Tulsa County",
+          "short_name": "Tulsa County",
+          "types": ["administrative_area_level_2", "political"]
+        },
+        {
+          "long_name": "Oklahoma",
+          "short_name": "OK",
+          "types": ["administrative_area_level_1", "political"]
+        },
+        {
+          "long_name": "United States",
+          "short_name": "US",
+          "types": ["country", "political"]
+        },
+        {"long_name": "74055", "short_name": "74055", "types": ["postal_code"]}
+      ],
+      "isMatch": false,
       "matchedBy": ["**"],
       "excludedBy": [],
       "traversedBy": ["**"],
@@ -8702,6 +9292,254 @@
       "excludedBy": [],
       "traversedBy": ["**"],
       "parents": [
+        [
+          {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
+          {
+            "long_name": "8703",
+            "short_name": "8703",
+            "types": ["street_number"]
+          },
+          {
+            "long_name": "North Owasso Expressway",
+            "short_name": "N Owasso Expy",
+            "types": ["route"]
+          },
+          {
+            "long_name": "Owasso",
+            "short_name": "Owasso",
+            "types": ["locality", "political"]
+          },
+          {
+            "long_name": "Tulsa County",
+            "short_name": "Tulsa County",
+            "types": ["administrative_area_level_2", "political"]
+          },
+          {
+            "long_name": "Oklahoma",
+            "short_name": "OK",
+            "types": ["administrative_area_level_1", "political"]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": ["country", "political"]
+          },
+          {
+            "long_name": "74055",
+            "short_name": "74055",
+            "types": ["postal_code"]
+          }
+        ],
+        {
+          "address_components": [
+            {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
+            {
+              "long_name": "8703",
+              "short_name": "8703",
+              "types": ["street_number"]
+            },
+            {
+              "long_name": "North Owasso Expressway",
+              "short_name": "N Owasso Expy",
+              "types": ["route"]
+            },
+            {
+              "long_name": "Owasso",
+              "short_name": "Owasso",
+              "types": ["locality", "political"]
+            },
+            {
+              "long_name": "Tulsa County",
+              "short_name": "Tulsa County",
+              "types": ["administrative_area_level_2", "political"]
+            },
+            {
+              "long_name": "Oklahoma",
+              "short_name": "OK",
+              "types": ["administrative_area_level_1", "political"]
+            },
+            {
+              "long_name": "United States",
+              "short_name": "US",
+              "types": ["country", "political"]
+            },
+            {
+              "long_name": "74055",
+              "short_name": "74055",
+              "types": ["postal_code"]
+            }
+          ],
+          "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+          "geometry": {
+            "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+            "location_type": "ROOFTOP",
+            "viewport": {
+              "northeast": {
+                "lat": 36.28173748029151,
+                "lng": -95.84404781970848
+              },
+              "southwest": {"lat": 36.27903951970851, "lng": -95.8467457802915}
+            }
+          },
+          "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+          "plus_code": {
+            "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+            "global_code": "868675J3+5R"
+          },
+          "types": ["establishment", "point_of_interest"]
+        },
+        [
+          {
+            "address_components": [
+              {
+                "long_name": "130",
+                "short_name": "130",
+                "types": ["subpremise"]
+              },
+              {
+                "long_name": "8703",
+                "short_name": "8703",
+                "types": ["street_number"]
+              },
+              {
+                "long_name": "North Owasso Expressway",
+                "short_name": "N Owasso Expy",
+                "types": ["route"]
+              },
+              {
+                "long_name": "Owasso",
+                "short_name": "Owasso",
+                "types": ["locality", "political"]
+              },
+              {
+                "long_name": "Tulsa County",
+                "short_name": "Tulsa County",
+                "types": ["administrative_area_level_2", "political"]
+              },
+              {
+                "long_name": "Oklahoma",
+                "short_name": "OK",
+                "types": ["administrative_area_level_1", "political"]
+              },
+              {
+                "long_name": "United States",
+                "short_name": "US",
+                "types": ["country", "political"]
+              },
+              {
+                "long_name": "74055",
+                "short_name": "74055",
+                "types": ["postal_code"]
+              }
+            ],
+            "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+            "geometry": {
+              "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+              "location_type": "ROOFTOP",
+              "viewport": {
+                "northeast": {
+                  "lat": 36.28173748029151,
+                  "lng": -95.84404781970848
+                },
+                "southwest": {
+                  "lat": 36.27903951970851,
+                  "lng": -95.8467457802915
+                }
+              }
+            },
+            "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+            "plus_code": {
+              "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+              "global_code": "868675J3+5R"
+            },
+            "types": ["establishment", "point_of_interest"]
+          }
+        ],
+        {
+          "results": [
+            {
+              "address_components": [
+                {
+                  "long_name": "130",
+                  "short_name": "130",
+                  "types": ["subpremise"]
+                },
+                {
+                  "long_name": "8703",
+                  "short_name": "8703",
+                  "types": ["street_number"]
+                },
+                {
+                  "long_name": "North Owasso Expressway",
+                  "short_name": "N Owasso Expy",
+                  "types": ["route"]
+                },
+                {
+                  "long_name": "Owasso",
+                  "short_name": "Owasso",
+                  "types": ["locality", "political"]
+                },
+                {
+                  "long_name": "Tulsa County",
+                  "short_name": "Tulsa County",
+                  "types": ["administrative_area_level_2", "political"]
+                },
+                {
+                  "long_name": "Oklahoma",
+                  "short_name": "OK",
+                  "types": ["administrative_area_level_1", "political"]
+                },
+                {
+                  "long_name": "United States",
+                  "short_name": "US",
+                  "types": ["country", "political"]
+                },
+                {
+                  "long_name": "74055",
+                  "short_name": "74055",
+                  "types": ["postal_code"]
+                }
+              ],
+              "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+              "geometry": {
+                "location": {
+                  "lat": 36.28038850000001,
+                  "lng": -95.84539679999999
+                },
+                "location_type": "ROOFTOP",
+                "viewport": {
+                  "northeast": {
+                    "lat": 36.28173748029151,
+                    "lng": -95.84404781970848
+                  },
+                  "southwest": {
+                    "lat": 36.27903951970851,
+                    "lng": -95.8467457802915
+                  }
+                }
+              },
+              "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+              "plus_code": {
+                "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+                "global_code": "868675J3+5R"
+              },
+              "types": ["establishment", "point_of_interest"]
+            }
+          ],
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "results[0].address_components[7].types",
+      "value": ["postal_code"],
+      "isMatch": false,
+      "matchedBy": ["**"],
+      "excludedBy": [],
+      "traversedBy": ["**"],
+      "parents": [
+        {"long_name": "74055", "short_name": "74055", "types": ["postal_code"]},
         [
           {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
           {
@@ -10694,6 +11532,258 @@
       "excludedBy": [],
       "traversedBy": ["**"],
       "parents": [
+        [
+          {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
+          {
+            "long_name": "8703",
+            "short_name": "8703",
+            "types": ["street_number"]
+          },
+          {
+            "long_name": "North Owasso Expressway",
+            "short_name": "N Owasso Expy",
+            "types": ["route"]
+          },
+          {
+            "long_name": "Owasso",
+            "short_name": "Owasso",
+            "types": ["locality", "political"]
+          },
+          {
+            "long_name": "Tulsa County",
+            "short_name": "Tulsa County",
+            "types": ["administrative_area_level_2", "political"]
+          },
+          {
+            "long_name": "Oklahoma",
+            "short_name": "OK",
+            "types": ["administrative_area_level_1", "political"]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": ["country", "political"]
+          },
+          {
+            "long_name": "74055",
+            "short_name": "74055",
+            "types": ["postal_code"]
+          }
+        ],
+        {
+          "address_components": [
+            {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
+            {
+              "long_name": "8703",
+              "short_name": "8703",
+              "types": ["street_number"]
+            },
+            {
+              "long_name": "North Owasso Expressway",
+              "short_name": "N Owasso Expy",
+              "types": ["route"]
+            },
+            {
+              "long_name": "Owasso",
+              "short_name": "Owasso",
+              "types": ["locality", "political"]
+            },
+            {
+              "long_name": "Tulsa County",
+              "short_name": "Tulsa County",
+              "types": ["administrative_area_level_2", "political"]
+            },
+            {
+              "long_name": "Oklahoma",
+              "short_name": "OK",
+              "types": ["administrative_area_level_1", "political"]
+            },
+            {
+              "long_name": "United States",
+              "short_name": "US",
+              "types": ["country", "political"]
+            },
+            {
+              "long_name": "74055",
+              "short_name": "74055",
+              "types": ["postal_code"]
+            }
+          ],
+          "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+          "geometry": {
+            "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+            "location_type": "ROOFTOP",
+            "viewport": {
+              "northeast": {
+                "lat": 36.28173748029151,
+                "lng": -95.84404781970848
+              },
+              "southwest": {"lat": 36.27903951970851, "lng": -95.8467457802915}
+            }
+          },
+          "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+          "plus_code": {
+            "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+            "global_code": "868675J3+5R"
+          },
+          "types": ["establishment", "point_of_interest"]
+        },
+        [
+          {
+            "address_components": [
+              {
+                "long_name": "130",
+                "short_name": "130",
+                "types": ["subpremise"]
+              },
+              {
+                "long_name": "8703",
+                "short_name": "8703",
+                "types": ["street_number"]
+              },
+              {
+                "long_name": "North Owasso Expressway",
+                "short_name": "N Owasso Expy",
+                "types": ["route"]
+              },
+              {
+                "long_name": "Owasso",
+                "short_name": "Owasso",
+                "types": ["locality", "political"]
+              },
+              {
+                "long_name": "Tulsa County",
+                "short_name": "Tulsa County",
+                "types": ["administrative_area_level_2", "political"]
+              },
+              {
+                "long_name": "Oklahoma",
+                "short_name": "OK",
+                "types": ["administrative_area_level_1", "political"]
+              },
+              {
+                "long_name": "United States",
+                "short_name": "US",
+                "types": ["country", "political"]
+              },
+              {
+                "long_name": "74055",
+                "short_name": "74055",
+                "types": ["postal_code"]
+              }
+            ],
+            "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+            "geometry": {
+              "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+              "location_type": "ROOFTOP",
+              "viewport": {
+                "northeast": {
+                  "lat": 36.28173748029151,
+                  "lng": -95.84404781970848
+                },
+                "southwest": {
+                  "lat": 36.27903951970851,
+                  "lng": -95.8467457802915
+                }
+              }
+            },
+            "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+            "plus_code": {
+              "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+              "global_code": "868675J3+5R"
+            },
+            "types": ["establishment", "point_of_interest"]
+          }
+        ],
+        {
+          "results": [
+            {
+              "address_components": [
+                {
+                  "long_name": "130",
+                  "short_name": "130",
+                  "types": ["subpremise"]
+                },
+                {
+                  "long_name": "8703",
+                  "short_name": "8703",
+                  "types": ["street_number"]
+                },
+                {
+                  "long_name": "North Owasso Expressway",
+                  "short_name": "N Owasso Expy",
+                  "types": ["route"]
+                },
+                {
+                  "long_name": "Owasso",
+                  "short_name": "Owasso",
+                  "types": ["locality", "political"]
+                },
+                {
+                  "long_name": "Tulsa County",
+                  "short_name": "Tulsa County",
+                  "types": ["administrative_area_level_2", "political"]
+                },
+                {
+                  "long_name": "Oklahoma",
+                  "short_name": "OK",
+                  "types": ["administrative_area_level_1", "political"]
+                },
+                {
+                  "long_name": "United States",
+                  "short_name": "US",
+                  "types": ["country", "political"]
+                },
+                {
+                  "long_name": "74055",
+                  "short_name": "74055",
+                  "types": ["postal_code"]
+                }
+              ],
+              "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+              "geometry": {
+                "location": {
+                  "lat": 36.28038850000001,
+                  "lng": -95.84539679999999
+                },
+                "location_type": "ROOFTOP",
+                "viewport": {
+                  "northeast": {
+                    "lat": 36.28173748029151,
+                    "lng": -95.84404781970848
+                  },
+                  "southwest": {
+                    "lat": 36.27903951970851,
+                    "lng": -95.8467457802915
+                  }
+                }
+              },
+              "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+              "plus_code": {
+                "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+                "global_code": "868675J3+5R"
+              },
+              "types": ["establishment", "point_of_interest"]
+            }
+          ],
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "results[0].address_components[6].types",
+      "value": ["country", "political"],
+      "isMatch": false,
+      "matchedBy": ["**"],
+      "excludedBy": [],
+      "traversedBy": ["**"],
+      "parents": [
+        {
+          "long_name": "United States",
+          "short_name": "US",
+          "types": ["country", "political"]
+        },
         [
           {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
           {
@@ -13216,6 +14306,258 @@
       "excludedBy": [],
       "traversedBy": ["**"],
       "parents": [
+        [
+          {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
+          {
+            "long_name": "8703",
+            "short_name": "8703",
+            "types": ["street_number"]
+          },
+          {
+            "long_name": "North Owasso Expressway",
+            "short_name": "N Owasso Expy",
+            "types": ["route"]
+          },
+          {
+            "long_name": "Owasso",
+            "short_name": "Owasso",
+            "types": ["locality", "political"]
+          },
+          {
+            "long_name": "Tulsa County",
+            "short_name": "Tulsa County",
+            "types": ["administrative_area_level_2", "political"]
+          },
+          {
+            "long_name": "Oklahoma",
+            "short_name": "OK",
+            "types": ["administrative_area_level_1", "political"]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": ["country", "political"]
+          },
+          {
+            "long_name": "74055",
+            "short_name": "74055",
+            "types": ["postal_code"]
+          }
+        ],
+        {
+          "address_components": [
+            {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
+            {
+              "long_name": "8703",
+              "short_name": "8703",
+              "types": ["street_number"]
+            },
+            {
+              "long_name": "North Owasso Expressway",
+              "short_name": "N Owasso Expy",
+              "types": ["route"]
+            },
+            {
+              "long_name": "Owasso",
+              "short_name": "Owasso",
+              "types": ["locality", "political"]
+            },
+            {
+              "long_name": "Tulsa County",
+              "short_name": "Tulsa County",
+              "types": ["administrative_area_level_2", "political"]
+            },
+            {
+              "long_name": "Oklahoma",
+              "short_name": "OK",
+              "types": ["administrative_area_level_1", "political"]
+            },
+            {
+              "long_name": "United States",
+              "short_name": "US",
+              "types": ["country", "political"]
+            },
+            {
+              "long_name": "74055",
+              "short_name": "74055",
+              "types": ["postal_code"]
+            }
+          ],
+          "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+          "geometry": {
+            "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+            "location_type": "ROOFTOP",
+            "viewport": {
+              "northeast": {
+                "lat": 36.28173748029151,
+                "lng": -95.84404781970848
+              },
+              "southwest": {"lat": 36.27903951970851, "lng": -95.8467457802915}
+            }
+          },
+          "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+          "plus_code": {
+            "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+            "global_code": "868675J3+5R"
+          },
+          "types": ["establishment", "point_of_interest"]
+        },
+        [
+          {
+            "address_components": [
+              {
+                "long_name": "130",
+                "short_name": "130",
+                "types": ["subpremise"]
+              },
+              {
+                "long_name": "8703",
+                "short_name": "8703",
+                "types": ["street_number"]
+              },
+              {
+                "long_name": "North Owasso Expressway",
+                "short_name": "N Owasso Expy",
+                "types": ["route"]
+              },
+              {
+                "long_name": "Owasso",
+                "short_name": "Owasso",
+                "types": ["locality", "political"]
+              },
+              {
+                "long_name": "Tulsa County",
+                "short_name": "Tulsa County",
+                "types": ["administrative_area_level_2", "political"]
+              },
+              {
+                "long_name": "Oklahoma",
+                "short_name": "OK",
+                "types": ["administrative_area_level_1", "political"]
+              },
+              {
+                "long_name": "United States",
+                "short_name": "US",
+                "types": ["country", "political"]
+              },
+              {
+                "long_name": "74055",
+                "short_name": "74055",
+                "types": ["postal_code"]
+              }
+            ],
+            "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+            "geometry": {
+              "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+              "location_type": "ROOFTOP",
+              "viewport": {
+                "northeast": {
+                  "lat": 36.28173748029151,
+                  "lng": -95.84404781970848
+                },
+                "southwest": {
+                  "lat": 36.27903951970851,
+                  "lng": -95.8467457802915
+                }
+              }
+            },
+            "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+            "plus_code": {
+              "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+              "global_code": "868675J3+5R"
+            },
+            "types": ["establishment", "point_of_interest"]
+          }
+        ],
+        {
+          "results": [
+            {
+              "address_components": [
+                {
+                  "long_name": "130",
+                  "short_name": "130",
+                  "types": ["subpremise"]
+                },
+                {
+                  "long_name": "8703",
+                  "short_name": "8703",
+                  "types": ["street_number"]
+                },
+                {
+                  "long_name": "North Owasso Expressway",
+                  "short_name": "N Owasso Expy",
+                  "types": ["route"]
+                },
+                {
+                  "long_name": "Owasso",
+                  "short_name": "Owasso",
+                  "types": ["locality", "political"]
+                },
+                {
+                  "long_name": "Tulsa County",
+                  "short_name": "Tulsa County",
+                  "types": ["administrative_area_level_2", "political"]
+                },
+                {
+                  "long_name": "Oklahoma",
+                  "short_name": "OK",
+                  "types": ["administrative_area_level_1", "political"]
+                },
+                {
+                  "long_name": "United States",
+                  "short_name": "US",
+                  "types": ["country", "political"]
+                },
+                {
+                  "long_name": "74055",
+                  "short_name": "74055",
+                  "types": ["postal_code"]
+                }
+              ],
+              "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+              "geometry": {
+                "location": {
+                  "lat": 36.28038850000001,
+                  "lng": -95.84539679999999
+                },
+                "location_type": "ROOFTOP",
+                "viewport": {
+                  "northeast": {
+                    "lat": 36.28173748029151,
+                    "lng": -95.84404781970848
+                  },
+                  "southwest": {
+                    "lat": 36.27903951970851,
+                    "lng": -95.8467457802915
+                  }
+                }
+              },
+              "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+              "plus_code": {
+                "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+                "global_code": "868675J3+5R"
+              },
+              "types": ["establishment", "point_of_interest"]
+            }
+          ],
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "results[0].address_components[5].types",
+      "value": ["administrative_area_level_1", "political"],
+      "isMatch": false,
+      "matchedBy": ["**"],
+      "excludedBy": [],
+      "traversedBy": ["**"],
+      "parents": [
+        {
+          "long_name": "Oklahoma",
+          "short_name": "OK",
+          "types": ["administrative_area_level_1", "political"]
+        },
         [
           {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
           {
@@ -15738,6 +17080,258 @@
       "excludedBy": [],
       "traversedBy": ["**"],
       "parents": [
+        [
+          {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
+          {
+            "long_name": "8703",
+            "short_name": "8703",
+            "types": ["street_number"]
+          },
+          {
+            "long_name": "North Owasso Expressway",
+            "short_name": "N Owasso Expy",
+            "types": ["route"]
+          },
+          {
+            "long_name": "Owasso",
+            "short_name": "Owasso",
+            "types": ["locality", "political"]
+          },
+          {
+            "long_name": "Tulsa County",
+            "short_name": "Tulsa County",
+            "types": ["administrative_area_level_2", "political"]
+          },
+          {
+            "long_name": "Oklahoma",
+            "short_name": "OK",
+            "types": ["administrative_area_level_1", "political"]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": ["country", "political"]
+          },
+          {
+            "long_name": "74055",
+            "short_name": "74055",
+            "types": ["postal_code"]
+          }
+        ],
+        {
+          "address_components": [
+            {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
+            {
+              "long_name": "8703",
+              "short_name": "8703",
+              "types": ["street_number"]
+            },
+            {
+              "long_name": "North Owasso Expressway",
+              "short_name": "N Owasso Expy",
+              "types": ["route"]
+            },
+            {
+              "long_name": "Owasso",
+              "short_name": "Owasso",
+              "types": ["locality", "political"]
+            },
+            {
+              "long_name": "Tulsa County",
+              "short_name": "Tulsa County",
+              "types": ["administrative_area_level_2", "political"]
+            },
+            {
+              "long_name": "Oklahoma",
+              "short_name": "OK",
+              "types": ["administrative_area_level_1", "political"]
+            },
+            {
+              "long_name": "United States",
+              "short_name": "US",
+              "types": ["country", "political"]
+            },
+            {
+              "long_name": "74055",
+              "short_name": "74055",
+              "types": ["postal_code"]
+            }
+          ],
+          "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+          "geometry": {
+            "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+            "location_type": "ROOFTOP",
+            "viewport": {
+              "northeast": {
+                "lat": 36.28173748029151,
+                "lng": -95.84404781970848
+              },
+              "southwest": {"lat": 36.27903951970851, "lng": -95.8467457802915}
+            }
+          },
+          "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+          "plus_code": {
+            "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+            "global_code": "868675J3+5R"
+          },
+          "types": ["establishment", "point_of_interest"]
+        },
+        [
+          {
+            "address_components": [
+              {
+                "long_name": "130",
+                "short_name": "130",
+                "types": ["subpremise"]
+              },
+              {
+                "long_name": "8703",
+                "short_name": "8703",
+                "types": ["street_number"]
+              },
+              {
+                "long_name": "North Owasso Expressway",
+                "short_name": "N Owasso Expy",
+                "types": ["route"]
+              },
+              {
+                "long_name": "Owasso",
+                "short_name": "Owasso",
+                "types": ["locality", "political"]
+              },
+              {
+                "long_name": "Tulsa County",
+                "short_name": "Tulsa County",
+                "types": ["administrative_area_level_2", "political"]
+              },
+              {
+                "long_name": "Oklahoma",
+                "short_name": "OK",
+                "types": ["administrative_area_level_1", "political"]
+              },
+              {
+                "long_name": "United States",
+                "short_name": "US",
+                "types": ["country", "political"]
+              },
+              {
+                "long_name": "74055",
+                "short_name": "74055",
+                "types": ["postal_code"]
+              }
+            ],
+            "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+            "geometry": {
+              "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+              "location_type": "ROOFTOP",
+              "viewport": {
+                "northeast": {
+                  "lat": 36.28173748029151,
+                  "lng": -95.84404781970848
+                },
+                "southwest": {
+                  "lat": 36.27903951970851,
+                  "lng": -95.8467457802915
+                }
+              }
+            },
+            "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+            "plus_code": {
+              "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+              "global_code": "868675J3+5R"
+            },
+            "types": ["establishment", "point_of_interest"]
+          }
+        ],
+        {
+          "results": [
+            {
+              "address_components": [
+                {
+                  "long_name": "130",
+                  "short_name": "130",
+                  "types": ["subpremise"]
+                },
+                {
+                  "long_name": "8703",
+                  "short_name": "8703",
+                  "types": ["street_number"]
+                },
+                {
+                  "long_name": "North Owasso Expressway",
+                  "short_name": "N Owasso Expy",
+                  "types": ["route"]
+                },
+                {
+                  "long_name": "Owasso",
+                  "short_name": "Owasso",
+                  "types": ["locality", "political"]
+                },
+                {
+                  "long_name": "Tulsa County",
+                  "short_name": "Tulsa County",
+                  "types": ["administrative_area_level_2", "political"]
+                },
+                {
+                  "long_name": "Oklahoma",
+                  "short_name": "OK",
+                  "types": ["administrative_area_level_1", "political"]
+                },
+                {
+                  "long_name": "United States",
+                  "short_name": "US",
+                  "types": ["country", "political"]
+                },
+                {
+                  "long_name": "74055",
+                  "short_name": "74055",
+                  "types": ["postal_code"]
+                }
+              ],
+              "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+              "geometry": {
+                "location": {
+                  "lat": 36.28038850000001,
+                  "lng": -95.84539679999999
+                },
+                "location_type": "ROOFTOP",
+                "viewport": {
+                  "northeast": {
+                    "lat": 36.28173748029151,
+                    "lng": -95.84404781970848
+                  },
+                  "southwest": {
+                    "lat": 36.27903951970851,
+                    "lng": -95.8467457802915
+                  }
+                }
+              },
+              "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+              "plus_code": {
+                "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+                "global_code": "868675J3+5R"
+              },
+              "types": ["establishment", "point_of_interest"]
+            }
+          ],
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "results[0].address_components[4].types",
+      "value": ["administrative_area_level_2", "political"],
+      "isMatch": false,
+      "matchedBy": ["**"],
+      "excludedBy": [],
+      "traversedBy": ["**"],
+      "parents": [
+        {
+          "long_name": "Tulsa County",
+          "short_name": "Tulsa County",
+          "types": ["administrative_area_level_2", "political"]
+        },
         [
           {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
           {
@@ -18260,6 +19854,258 @@
       "excludedBy": [],
       "traversedBy": ["**"],
       "parents": [
+        [
+          {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
+          {
+            "long_name": "8703",
+            "short_name": "8703",
+            "types": ["street_number"]
+          },
+          {
+            "long_name": "North Owasso Expressway",
+            "short_name": "N Owasso Expy",
+            "types": ["route"]
+          },
+          {
+            "long_name": "Owasso",
+            "short_name": "Owasso",
+            "types": ["locality", "political"]
+          },
+          {
+            "long_name": "Tulsa County",
+            "short_name": "Tulsa County",
+            "types": ["administrative_area_level_2", "political"]
+          },
+          {
+            "long_name": "Oklahoma",
+            "short_name": "OK",
+            "types": ["administrative_area_level_1", "political"]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": ["country", "political"]
+          },
+          {
+            "long_name": "74055",
+            "short_name": "74055",
+            "types": ["postal_code"]
+          }
+        ],
+        {
+          "address_components": [
+            {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
+            {
+              "long_name": "8703",
+              "short_name": "8703",
+              "types": ["street_number"]
+            },
+            {
+              "long_name": "North Owasso Expressway",
+              "short_name": "N Owasso Expy",
+              "types": ["route"]
+            },
+            {
+              "long_name": "Owasso",
+              "short_name": "Owasso",
+              "types": ["locality", "political"]
+            },
+            {
+              "long_name": "Tulsa County",
+              "short_name": "Tulsa County",
+              "types": ["administrative_area_level_2", "political"]
+            },
+            {
+              "long_name": "Oklahoma",
+              "short_name": "OK",
+              "types": ["administrative_area_level_1", "political"]
+            },
+            {
+              "long_name": "United States",
+              "short_name": "US",
+              "types": ["country", "political"]
+            },
+            {
+              "long_name": "74055",
+              "short_name": "74055",
+              "types": ["postal_code"]
+            }
+          ],
+          "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+          "geometry": {
+            "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+            "location_type": "ROOFTOP",
+            "viewport": {
+              "northeast": {
+                "lat": 36.28173748029151,
+                "lng": -95.84404781970848
+              },
+              "southwest": {"lat": 36.27903951970851, "lng": -95.8467457802915}
+            }
+          },
+          "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+          "plus_code": {
+            "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+            "global_code": "868675J3+5R"
+          },
+          "types": ["establishment", "point_of_interest"]
+        },
+        [
+          {
+            "address_components": [
+              {
+                "long_name": "130",
+                "short_name": "130",
+                "types": ["subpremise"]
+              },
+              {
+                "long_name": "8703",
+                "short_name": "8703",
+                "types": ["street_number"]
+              },
+              {
+                "long_name": "North Owasso Expressway",
+                "short_name": "N Owasso Expy",
+                "types": ["route"]
+              },
+              {
+                "long_name": "Owasso",
+                "short_name": "Owasso",
+                "types": ["locality", "political"]
+              },
+              {
+                "long_name": "Tulsa County",
+                "short_name": "Tulsa County",
+                "types": ["administrative_area_level_2", "political"]
+              },
+              {
+                "long_name": "Oklahoma",
+                "short_name": "OK",
+                "types": ["administrative_area_level_1", "political"]
+              },
+              {
+                "long_name": "United States",
+                "short_name": "US",
+                "types": ["country", "political"]
+              },
+              {
+                "long_name": "74055",
+                "short_name": "74055",
+                "types": ["postal_code"]
+              }
+            ],
+            "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+            "geometry": {
+              "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+              "location_type": "ROOFTOP",
+              "viewport": {
+                "northeast": {
+                  "lat": 36.28173748029151,
+                  "lng": -95.84404781970848
+                },
+                "southwest": {
+                  "lat": 36.27903951970851,
+                  "lng": -95.8467457802915
+                }
+              }
+            },
+            "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+            "plus_code": {
+              "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+              "global_code": "868675J3+5R"
+            },
+            "types": ["establishment", "point_of_interest"]
+          }
+        ],
+        {
+          "results": [
+            {
+              "address_components": [
+                {
+                  "long_name": "130",
+                  "short_name": "130",
+                  "types": ["subpremise"]
+                },
+                {
+                  "long_name": "8703",
+                  "short_name": "8703",
+                  "types": ["street_number"]
+                },
+                {
+                  "long_name": "North Owasso Expressway",
+                  "short_name": "N Owasso Expy",
+                  "types": ["route"]
+                },
+                {
+                  "long_name": "Owasso",
+                  "short_name": "Owasso",
+                  "types": ["locality", "political"]
+                },
+                {
+                  "long_name": "Tulsa County",
+                  "short_name": "Tulsa County",
+                  "types": ["administrative_area_level_2", "political"]
+                },
+                {
+                  "long_name": "Oklahoma",
+                  "short_name": "OK",
+                  "types": ["administrative_area_level_1", "political"]
+                },
+                {
+                  "long_name": "United States",
+                  "short_name": "US",
+                  "types": ["country", "political"]
+                },
+                {
+                  "long_name": "74055",
+                  "short_name": "74055",
+                  "types": ["postal_code"]
+                }
+              ],
+              "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+              "geometry": {
+                "location": {
+                  "lat": 36.28038850000001,
+                  "lng": -95.84539679999999
+                },
+                "location_type": "ROOFTOP",
+                "viewport": {
+                  "northeast": {
+                    "lat": 36.28173748029151,
+                    "lng": -95.84404781970848
+                  },
+                  "southwest": {
+                    "lat": 36.27903951970851,
+                    "lng": -95.8467457802915
+                  }
+                }
+              },
+              "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+              "plus_code": {
+                "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+                "global_code": "868675J3+5R"
+              },
+              "types": ["establishment", "point_of_interest"]
+            }
+          ],
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "results[0].address_components[3].types",
+      "value": ["locality", "political"],
+      "isMatch": false,
+      "matchedBy": ["**"],
+      "excludedBy": [],
+      "traversedBy": ["**"],
+      "parents": [
+        {
+          "long_name": "Owasso",
+          "short_name": "Owasso",
+          "types": ["locality", "political"]
+        },
         [
           {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
           {
@@ -20782,6 +22628,258 @@
       "excludedBy": [],
       "traversedBy": ["**"],
       "parents": [
+        [
+          {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
+          {
+            "long_name": "8703",
+            "short_name": "8703",
+            "types": ["street_number"]
+          },
+          {
+            "long_name": "North Owasso Expressway",
+            "short_name": "N Owasso Expy",
+            "types": ["route"]
+          },
+          {
+            "long_name": "Owasso",
+            "short_name": "Owasso",
+            "types": ["locality", "political"]
+          },
+          {
+            "long_name": "Tulsa County",
+            "short_name": "Tulsa County",
+            "types": ["administrative_area_level_2", "political"]
+          },
+          {
+            "long_name": "Oklahoma",
+            "short_name": "OK",
+            "types": ["administrative_area_level_1", "political"]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": ["country", "political"]
+          },
+          {
+            "long_name": "74055",
+            "short_name": "74055",
+            "types": ["postal_code"]
+          }
+        ],
+        {
+          "address_components": [
+            {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
+            {
+              "long_name": "8703",
+              "short_name": "8703",
+              "types": ["street_number"]
+            },
+            {
+              "long_name": "North Owasso Expressway",
+              "short_name": "N Owasso Expy",
+              "types": ["route"]
+            },
+            {
+              "long_name": "Owasso",
+              "short_name": "Owasso",
+              "types": ["locality", "political"]
+            },
+            {
+              "long_name": "Tulsa County",
+              "short_name": "Tulsa County",
+              "types": ["administrative_area_level_2", "political"]
+            },
+            {
+              "long_name": "Oklahoma",
+              "short_name": "OK",
+              "types": ["administrative_area_level_1", "political"]
+            },
+            {
+              "long_name": "United States",
+              "short_name": "US",
+              "types": ["country", "political"]
+            },
+            {
+              "long_name": "74055",
+              "short_name": "74055",
+              "types": ["postal_code"]
+            }
+          ],
+          "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+          "geometry": {
+            "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+            "location_type": "ROOFTOP",
+            "viewport": {
+              "northeast": {
+                "lat": 36.28173748029151,
+                "lng": -95.84404781970848
+              },
+              "southwest": {"lat": 36.27903951970851, "lng": -95.8467457802915}
+            }
+          },
+          "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+          "plus_code": {
+            "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+            "global_code": "868675J3+5R"
+          },
+          "types": ["establishment", "point_of_interest"]
+        },
+        [
+          {
+            "address_components": [
+              {
+                "long_name": "130",
+                "short_name": "130",
+                "types": ["subpremise"]
+              },
+              {
+                "long_name": "8703",
+                "short_name": "8703",
+                "types": ["street_number"]
+              },
+              {
+                "long_name": "North Owasso Expressway",
+                "short_name": "N Owasso Expy",
+                "types": ["route"]
+              },
+              {
+                "long_name": "Owasso",
+                "short_name": "Owasso",
+                "types": ["locality", "political"]
+              },
+              {
+                "long_name": "Tulsa County",
+                "short_name": "Tulsa County",
+                "types": ["administrative_area_level_2", "political"]
+              },
+              {
+                "long_name": "Oklahoma",
+                "short_name": "OK",
+                "types": ["administrative_area_level_1", "political"]
+              },
+              {
+                "long_name": "United States",
+                "short_name": "US",
+                "types": ["country", "political"]
+              },
+              {
+                "long_name": "74055",
+                "short_name": "74055",
+                "types": ["postal_code"]
+              }
+            ],
+            "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+            "geometry": {
+              "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+              "location_type": "ROOFTOP",
+              "viewport": {
+                "northeast": {
+                  "lat": 36.28173748029151,
+                  "lng": -95.84404781970848
+                },
+                "southwest": {
+                  "lat": 36.27903951970851,
+                  "lng": -95.8467457802915
+                }
+              }
+            },
+            "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+            "plus_code": {
+              "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+              "global_code": "868675J3+5R"
+            },
+            "types": ["establishment", "point_of_interest"]
+          }
+        ],
+        {
+          "results": [
+            {
+              "address_components": [
+                {
+                  "long_name": "130",
+                  "short_name": "130",
+                  "types": ["subpremise"]
+                },
+                {
+                  "long_name": "8703",
+                  "short_name": "8703",
+                  "types": ["street_number"]
+                },
+                {
+                  "long_name": "North Owasso Expressway",
+                  "short_name": "N Owasso Expy",
+                  "types": ["route"]
+                },
+                {
+                  "long_name": "Owasso",
+                  "short_name": "Owasso",
+                  "types": ["locality", "political"]
+                },
+                {
+                  "long_name": "Tulsa County",
+                  "short_name": "Tulsa County",
+                  "types": ["administrative_area_level_2", "political"]
+                },
+                {
+                  "long_name": "Oklahoma",
+                  "short_name": "OK",
+                  "types": ["administrative_area_level_1", "political"]
+                },
+                {
+                  "long_name": "United States",
+                  "short_name": "US",
+                  "types": ["country", "political"]
+                },
+                {
+                  "long_name": "74055",
+                  "short_name": "74055",
+                  "types": ["postal_code"]
+                }
+              ],
+              "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+              "geometry": {
+                "location": {
+                  "lat": 36.28038850000001,
+                  "lng": -95.84539679999999
+                },
+                "location_type": "ROOFTOP",
+                "viewport": {
+                  "northeast": {
+                    "lat": 36.28173748029151,
+                    "lng": -95.84404781970848
+                  },
+                  "southwest": {
+                    "lat": 36.27903951970851,
+                    "lng": -95.8467457802915
+                  }
+                }
+              },
+              "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+              "plus_code": {
+                "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+                "global_code": "868675J3+5R"
+              },
+              "types": ["establishment", "point_of_interest"]
+            }
+          ],
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "results[0].address_components[2].types",
+      "value": ["route"],
+      "isMatch": false,
+      "matchedBy": ["**"],
+      "excludedBy": [],
+      "traversedBy": ["**"],
+      "parents": [
+        {
+          "long_name": "North Owasso Expressway",
+          "short_name": "N Owasso Expy",
+          "types": ["route"]
+        },
         [
           {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
           {
@@ -22798,6 +24896,254 @@
       "excludedBy": [],
       "traversedBy": ["**"],
       "parents": [
+        [
+          {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
+          {
+            "long_name": "8703",
+            "short_name": "8703",
+            "types": ["street_number"]
+          },
+          {
+            "long_name": "North Owasso Expressway",
+            "short_name": "N Owasso Expy",
+            "types": ["route"]
+          },
+          {
+            "long_name": "Owasso",
+            "short_name": "Owasso",
+            "types": ["locality", "political"]
+          },
+          {
+            "long_name": "Tulsa County",
+            "short_name": "Tulsa County",
+            "types": ["administrative_area_level_2", "political"]
+          },
+          {
+            "long_name": "Oklahoma",
+            "short_name": "OK",
+            "types": ["administrative_area_level_1", "political"]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": ["country", "political"]
+          },
+          {
+            "long_name": "74055",
+            "short_name": "74055",
+            "types": ["postal_code"]
+          }
+        ],
+        {
+          "address_components": [
+            {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
+            {
+              "long_name": "8703",
+              "short_name": "8703",
+              "types": ["street_number"]
+            },
+            {
+              "long_name": "North Owasso Expressway",
+              "short_name": "N Owasso Expy",
+              "types": ["route"]
+            },
+            {
+              "long_name": "Owasso",
+              "short_name": "Owasso",
+              "types": ["locality", "political"]
+            },
+            {
+              "long_name": "Tulsa County",
+              "short_name": "Tulsa County",
+              "types": ["administrative_area_level_2", "political"]
+            },
+            {
+              "long_name": "Oklahoma",
+              "short_name": "OK",
+              "types": ["administrative_area_level_1", "political"]
+            },
+            {
+              "long_name": "United States",
+              "short_name": "US",
+              "types": ["country", "political"]
+            },
+            {
+              "long_name": "74055",
+              "short_name": "74055",
+              "types": ["postal_code"]
+            }
+          ],
+          "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+          "geometry": {
+            "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+            "location_type": "ROOFTOP",
+            "viewport": {
+              "northeast": {
+                "lat": 36.28173748029151,
+                "lng": -95.84404781970848
+              },
+              "southwest": {"lat": 36.27903951970851, "lng": -95.8467457802915}
+            }
+          },
+          "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+          "plus_code": {
+            "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+            "global_code": "868675J3+5R"
+          },
+          "types": ["establishment", "point_of_interest"]
+        },
+        [
+          {
+            "address_components": [
+              {
+                "long_name": "130",
+                "short_name": "130",
+                "types": ["subpremise"]
+              },
+              {
+                "long_name": "8703",
+                "short_name": "8703",
+                "types": ["street_number"]
+              },
+              {
+                "long_name": "North Owasso Expressway",
+                "short_name": "N Owasso Expy",
+                "types": ["route"]
+              },
+              {
+                "long_name": "Owasso",
+                "short_name": "Owasso",
+                "types": ["locality", "political"]
+              },
+              {
+                "long_name": "Tulsa County",
+                "short_name": "Tulsa County",
+                "types": ["administrative_area_level_2", "political"]
+              },
+              {
+                "long_name": "Oklahoma",
+                "short_name": "OK",
+                "types": ["administrative_area_level_1", "political"]
+              },
+              {
+                "long_name": "United States",
+                "short_name": "US",
+                "types": ["country", "political"]
+              },
+              {
+                "long_name": "74055",
+                "short_name": "74055",
+                "types": ["postal_code"]
+              }
+            ],
+            "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+            "geometry": {
+              "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+              "location_type": "ROOFTOP",
+              "viewport": {
+                "northeast": {
+                  "lat": 36.28173748029151,
+                  "lng": -95.84404781970848
+                },
+                "southwest": {
+                  "lat": 36.27903951970851,
+                  "lng": -95.8467457802915
+                }
+              }
+            },
+            "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+            "plus_code": {
+              "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+              "global_code": "868675J3+5R"
+            },
+            "types": ["establishment", "point_of_interest"]
+          }
+        ],
+        {
+          "results": [
+            {
+              "address_components": [
+                {
+                  "long_name": "130",
+                  "short_name": "130",
+                  "types": ["subpremise"]
+                },
+                {
+                  "long_name": "8703",
+                  "short_name": "8703",
+                  "types": ["street_number"]
+                },
+                {
+                  "long_name": "North Owasso Expressway",
+                  "short_name": "N Owasso Expy",
+                  "types": ["route"]
+                },
+                {
+                  "long_name": "Owasso",
+                  "short_name": "Owasso",
+                  "types": ["locality", "political"]
+                },
+                {
+                  "long_name": "Tulsa County",
+                  "short_name": "Tulsa County",
+                  "types": ["administrative_area_level_2", "political"]
+                },
+                {
+                  "long_name": "Oklahoma",
+                  "short_name": "OK",
+                  "types": ["administrative_area_level_1", "political"]
+                },
+                {
+                  "long_name": "United States",
+                  "short_name": "US",
+                  "types": ["country", "political"]
+                },
+                {
+                  "long_name": "74055",
+                  "short_name": "74055",
+                  "types": ["postal_code"]
+                }
+              ],
+              "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+              "geometry": {
+                "location": {
+                  "lat": 36.28038850000001,
+                  "lng": -95.84539679999999
+                },
+                "location_type": "ROOFTOP",
+                "viewport": {
+                  "northeast": {
+                    "lat": 36.28173748029151,
+                    "lng": -95.84404781970848
+                  },
+                  "southwest": {
+                    "lat": 36.27903951970851,
+                    "lng": -95.8467457802915
+                  }
+                }
+              },
+              "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+              "plus_code": {
+                "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+                "global_code": "868675J3+5R"
+              },
+              "types": ["establishment", "point_of_interest"]
+            }
+          ],
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "results[0].address_components[1].types",
+      "value": ["street_number"],
+      "isMatch": false,
+      "matchedBy": ["**"],
+      "excludedBy": [],
+      "traversedBy": ["**"],
+      "parents": [
+        {"long_name": "8703", "short_name": "8703", "types": ["street_number"]},
         [
           {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
           {
@@ -24790,6 +27136,254 @@
       "excludedBy": [],
       "traversedBy": ["**"],
       "parents": [
+        [
+          {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
+          {
+            "long_name": "8703",
+            "short_name": "8703",
+            "types": ["street_number"]
+          },
+          {
+            "long_name": "North Owasso Expressway",
+            "short_name": "N Owasso Expy",
+            "types": ["route"]
+          },
+          {
+            "long_name": "Owasso",
+            "short_name": "Owasso",
+            "types": ["locality", "political"]
+          },
+          {
+            "long_name": "Tulsa County",
+            "short_name": "Tulsa County",
+            "types": ["administrative_area_level_2", "political"]
+          },
+          {
+            "long_name": "Oklahoma",
+            "short_name": "OK",
+            "types": ["administrative_area_level_1", "political"]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": ["country", "political"]
+          },
+          {
+            "long_name": "74055",
+            "short_name": "74055",
+            "types": ["postal_code"]
+          }
+        ],
+        {
+          "address_components": [
+            {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
+            {
+              "long_name": "8703",
+              "short_name": "8703",
+              "types": ["street_number"]
+            },
+            {
+              "long_name": "North Owasso Expressway",
+              "short_name": "N Owasso Expy",
+              "types": ["route"]
+            },
+            {
+              "long_name": "Owasso",
+              "short_name": "Owasso",
+              "types": ["locality", "political"]
+            },
+            {
+              "long_name": "Tulsa County",
+              "short_name": "Tulsa County",
+              "types": ["administrative_area_level_2", "political"]
+            },
+            {
+              "long_name": "Oklahoma",
+              "short_name": "OK",
+              "types": ["administrative_area_level_1", "political"]
+            },
+            {
+              "long_name": "United States",
+              "short_name": "US",
+              "types": ["country", "political"]
+            },
+            {
+              "long_name": "74055",
+              "short_name": "74055",
+              "types": ["postal_code"]
+            }
+          ],
+          "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+          "geometry": {
+            "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+            "location_type": "ROOFTOP",
+            "viewport": {
+              "northeast": {
+                "lat": 36.28173748029151,
+                "lng": -95.84404781970848
+              },
+              "southwest": {"lat": 36.27903951970851, "lng": -95.8467457802915}
+            }
+          },
+          "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+          "plus_code": {
+            "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+            "global_code": "868675J3+5R"
+          },
+          "types": ["establishment", "point_of_interest"]
+        },
+        [
+          {
+            "address_components": [
+              {
+                "long_name": "130",
+                "short_name": "130",
+                "types": ["subpremise"]
+              },
+              {
+                "long_name": "8703",
+                "short_name": "8703",
+                "types": ["street_number"]
+              },
+              {
+                "long_name": "North Owasso Expressway",
+                "short_name": "N Owasso Expy",
+                "types": ["route"]
+              },
+              {
+                "long_name": "Owasso",
+                "short_name": "Owasso",
+                "types": ["locality", "political"]
+              },
+              {
+                "long_name": "Tulsa County",
+                "short_name": "Tulsa County",
+                "types": ["administrative_area_level_2", "political"]
+              },
+              {
+                "long_name": "Oklahoma",
+                "short_name": "OK",
+                "types": ["administrative_area_level_1", "political"]
+              },
+              {
+                "long_name": "United States",
+                "short_name": "US",
+                "types": ["country", "political"]
+              },
+              {
+                "long_name": "74055",
+                "short_name": "74055",
+                "types": ["postal_code"]
+              }
+            ],
+            "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+            "geometry": {
+              "location": {"lat": 36.28038850000001, "lng": -95.84539679999999},
+              "location_type": "ROOFTOP",
+              "viewport": {
+                "northeast": {
+                  "lat": 36.28173748029151,
+                  "lng": -95.84404781970848
+                },
+                "southwest": {
+                  "lat": 36.27903951970851,
+                  "lng": -95.8467457802915
+                }
+              }
+            },
+            "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+            "plus_code": {
+              "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+              "global_code": "868675J3+5R"
+            },
+            "types": ["establishment", "point_of_interest"]
+          }
+        ],
+        {
+          "results": [
+            {
+              "address_components": [
+                {
+                  "long_name": "130",
+                  "short_name": "130",
+                  "types": ["subpremise"]
+                },
+                {
+                  "long_name": "8703",
+                  "short_name": "8703",
+                  "types": ["street_number"]
+                },
+                {
+                  "long_name": "North Owasso Expressway",
+                  "short_name": "N Owasso Expy",
+                  "types": ["route"]
+                },
+                {
+                  "long_name": "Owasso",
+                  "short_name": "Owasso",
+                  "types": ["locality", "political"]
+                },
+                {
+                  "long_name": "Tulsa County",
+                  "short_name": "Tulsa County",
+                  "types": ["administrative_area_level_2", "political"]
+                },
+                {
+                  "long_name": "Oklahoma",
+                  "short_name": "OK",
+                  "types": ["administrative_area_level_1", "political"]
+                },
+                {
+                  "long_name": "United States",
+                  "short_name": "US",
+                  "types": ["country", "political"]
+                },
+                {
+                  "long_name": "74055",
+                  "short_name": "74055",
+                  "types": ["postal_code"]
+                }
+              ],
+              "formatted_address": "8703 N Owasso Expy #130, Owasso, OK 74055, USA",
+              "geometry": {
+                "location": {
+                  "lat": 36.28038850000001,
+                  "lng": -95.84539679999999
+                },
+                "location_type": "ROOFTOP",
+                "viewport": {
+                  "northeast": {
+                    "lat": 36.28173748029151,
+                    "lng": -95.84404781970848
+                  },
+                  "southwest": {
+                    "lat": 36.27903951970851,
+                    "lng": -95.8467457802915
+                  }
+                }
+              },
+              "place_id": "ChIJFxYi1Y_wtocRpd7C_DtxySM",
+              "plus_code": {
+                "compound_code": "75J3+5R Owasso, Oklahoma, United States",
+                "global_code": "868675J3+5R"
+              },
+              "types": ["establishment", "point_of_interest"]
+            }
+          ],
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "type": "breakFn",
+      "key": "results[0].address_components[0].types",
+      "value": ["subpremise"],
+      "isMatch": false,
+      "matchedBy": ["**"],
+      "excludedBy": [],
+      "traversedBy": ["**"],
+      "parents": [
+        {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
         [
           {"long_name": "130", "short_name": "130", "types": ["subpremise"]},
           {
