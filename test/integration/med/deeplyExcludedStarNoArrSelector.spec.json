@@ -12,7 +12,23 @@
     },
     {
       "type": "breakFn",
+      "key": "problems",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.name", "!**.associatedDrug#*.name"]
+    },
+    {
+      "type": "breakFn",
       "key": "problems[0]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.name", "!**.associatedDrug#*.name"]
+    },
+    {
+      "type": "breakFn",
+      "key": "problems[0].Asthma",
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
@@ -28,7 +44,23 @@
     },
     {
       "type": "breakFn",
+      "key": "problems[0].Diabetes",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.name", "!**.associatedDrug#*.name"]
+    },
+    {
+      "type": "breakFn",
       "key": "problems[0].Diabetes[0]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.name", "!**.associatedDrug#*.name"]
+    },
+    {
+      "type": "breakFn",
+      "key": "problems[0].Diabetes[0].labs",
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
@@ -52,7 +84,23 @@
     },
     {
       "type": "breakFn",
+      "key": "problems[0].Diabetes[0].medications",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.name", "!**.associatedDrug#*.name"]
+    },
+    {
+      "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.name", "!**.associatedDrug#*.name"]
+    },
+    {
+      "type": "breakFn",
+      "key": "problems[0].Diabetes[0].medications[0].medicationsClasses",
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
@@ -68,7 +116,23 @@
     },
     {
       "type": "breakFn",
+      "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.name", "!**.associatedDrug#*.name"]
+    },
+    {
+      "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.name", "!**.associatedDrug#*.name"]
+    },
+    {
+      "type": "breakFn",
+      "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug#2",
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
@@ -104,6 +168,14 @@
       "isMatch": false,
       "matchedBy": ["**.name"],
       "excludedBy": ["!**.associatedDrug#*.name"],
+      "traversedBy": ["**.name", "!**.associatedDrug#*.name"]
+    },
+    {
+      "type": "breakFn",
+      "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className2[0].associatedDrug",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.name", "!**.associatedDrug#*.name"]
     },
     {
@@ -148,7 +220,23 @@
     },
     {
       "type": "breakFn",
+      "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.name", "!**.associatedDrug#*.name"]
+    },
+    {
+      "type": "breakFn",
       "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.name", "!**.associatedDrug#*.name"]
+    },
+    {
+      "type": "breakFn",
+      "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug#2",
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
@@ -184,6 +272,14 @@
       "isMatch": false,
       "matchedBy": ["**.name"],
       "excludedBy": ["!**.associatedDrug#*.name"],
+      "traversedBy": ["**.name", "!**.associatedDrug#*.name"]
+    },
+    {
+      "type": "breakFn",
+      "key": "problems[0].Diabetes[0].medications[0].medicationsClasses[0].className[0].associatedDrug",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
       "traversedBy": ["**.name", "!**.associatedDrug#*.name"]
     },
     {

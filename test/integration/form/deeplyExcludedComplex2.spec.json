@@ -12,6 +12,14 @@
     },
     {
       "type": "breakFn",
+      "key": "fieldset",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.label.plain", "!**.field.label.plain"]
+    },
+    {
+      "type": "breakFn",
       "key": "fieldset[1]",
       "isMatch": false,
       "matchedBy": [],
@@ -53,6 +61,14 @@
     {
       "type": "breakFn",
       "key": "fieldset[1].fieldset.fieldset.id",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.label.plain", "!**.field.label.plain"]
+    },
+    {
+      "type": "breakFn",
+      "key": "fieldset[1].fieldset.fieldset.field",
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
@@ -380,6 +396,14 @@
     },
     {
       "type": "breakFn",
+      "key": "fieldset[0].fieldset",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.label.plain", "!**.field.label.plain"]
+    },
+    {
+      "type": "breakFn",
       "key": "fieldset[0].fieldset[0]",
       "isMatch": false,
       "matchedBy": [],
@@ -389,6 +413,14 @@
     {
       "type": "breakFn",
       "key": "fieldset[0].fieldset[0].id",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**.label.plain", "!**.field.label.plain"]
+    },
+    {
+      "type": "breakFn",
+      "key": "fieldset[0].fieldset[0].field",
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
