@@ -5410,6 +5410,11 @@ object-align@1.0.15:
   resolved "https://registry.yarnpkg.com/object-align/-/object-align-1.0.15.tgz#0c0a376d7f33d7c8ac028640c5d5936d7ec54a0d"
   integrity sha512-UJruG3kzh6Oi0KAU6FVF0y6I4deAKoG1eaS4xCCYOwul3gX7XR2IcLzAWL91n45CiehUXPN/Ws/fPLTmyocE4g==
 
+object-align@1.0.16:
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/object-align/-/object-align-1.0.16.tgz#c8deaebe0fc3e1e4fccd0be742a3d1f08193c0ff"
+  integrity sha512-KrqNsqNIkOfEnrGyt6KQWTToZaRdhcpBPcjFuHBWUpbr9i/1aMYFea1CG6b8SHhxKBYRwBrIW/zhh0GBRN5DvQ==
+
 object-assign@^4.0.1, object-assign@^4.1.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
@@ -6869,6 +6874,20 @@ smart-fs@1.12.3:
     xml-js "1.6.11"
     yaml-boost "1.10.2"
 
+smart-fs@1.12.4:
+  version "1.12.4"
+  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.12.4.tgz#6a6f201dfcfd63bedc8cca39c1df30d4a11b4998"
+  integrity sha512-toY4P0yKZ9pFvTexg2ap9QopYMZMsrceENuw67FO5ZgRpsE3fIVPgox8t6+x5MQqkjjxxzEYv3rEsNQuf1fZMw==
+  dependencies:
+    fs-extra "9.0.1"
+    js-yaml "4.0.0"
+    json-stringify-pretty-compact "2.0.0"
+    lodash.clonedeep "4.5.0"
+    lodash.isequal "4.5.0"
+    object-align "1.0.16"
+    xml-js "1.6.11"
+    yaml-boost "1.10.3"
+
 snapdragon-node@^2.0.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/snapdragon-node/-/snapdragon-node-2.1.1.tgz#6c175f86ff14bdb0724563e8f3c1b021a286853b"
@@ -8107,6 +8126,16 @@ yaml-boost@1.10.2:
   integrity sha512-7WVZLELKtv2yc1LK683b+Tw7U9O6B9oNzmXnK0+yQ3DnTpwfe3cTQXduqRvipvrS7qsllFCZYt20Y5Mp5X0s9w==
   dependencies:
     js-yaml "3.14.0"
+    lodash.get "4.4.2"
+    lodash.mergewith "4.6.2"
+    lodash.set "4.3.2"
+
+yaml-boost@1.10.3:
+  version "1.10.3"
+  resolved "https://registry.yarnpkg.com/yaml-boost/-/yaml-boost-1.10.3.tgz#c9ec29a8906f26f7a5dfa13b9d96ac56bebe35ee"
+  integrity sha512-okXg39aOb1D/dqVOkJDsemGw+5pAGFb3WyyfJHLJct9tVZWwv5ORd+SkCwl6Ca6eKZEpYxkz1yrGyCy6/rb0Vw==
+  dependencies:
+    js-yaml "3.14.1"
     lodash.get "4.4.2"
     lodash.mergewith "4.6.2"
     lodash.set "4.3.2"
