@@ -410,7 +410,7 @@ Type: `boolean`<br>
 Default: `true`
 
 When set to `true`, the scan is performed in reverse order. This means `breakFn` is executed in _reverse post-order_ and
-`filterFn` in _reverse pre-order_. When `false` is set, `breakFn` is executed in _pre-order_ and `filterFn` in _post-order_.
+`filterFn` in _reverse pre-order_. Otherwise `breakFn` is executed in _pre-order_ and `filterFn` in _post-order_.
 
 When `reverse` is `true` the scan is _delete-safe_. I.e. `property` can be deleted / spliced from `parent` object / array in `filterFn`.
 
