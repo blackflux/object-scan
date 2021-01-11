@@ -302,6 +302,50 @@ comment: break function
 breakFn: ({ key }) => key === 'a.b'
 </example></pre>
 
+#### reverse
+
+Type: `boolean`<br>
+Default: `true`
+
+When set to `true`, the scan is performed in reverse order, which means the `breakFn` is executed in _reverse post-order and
+the `filterFn` in _reverse pre-order_. When set to `false` the `breakFn` is executed in _pre-order_ and the `filterFn` in _post-order_.
+
+A reverse scan is _delete-safe_, which means splice / delete can be used on the current parent array / object without further considerations.
+
+_Examples_:
+<pre><example>
+haystack: { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } }
+needles: ['**']
+context: []
+breakFn: ({ property, context }) => { context.push(property); }
+comment: breakFn, reverse true
+reverse: true
+</example></pre>
+<pre><example>
+haystack: { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } }
+needles: ['**']
+context: []
+filterFn: ({ property, context }) => { context.push(property); }
+comment: filterFn, reverse true
+reverse: true
+</example></pre>
+<pre><example>
+haystack: { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } }
+needles: ['**']
+context: []
+breakFn: ({ property, context }) => { context.push(property); }
+comment: breakFn, reverse false
+reverse: false
+</example></pre>
+<pre><example>
+haystack: { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } }
+needles: ['**']
+context: []
+filterFn: ({ property, context }) => { context.push(property); }
+comment: filterFn, reverse false
+reverse: false
+</example></pre>
+
 #### abort
 
 Type: `boolean`<br>
