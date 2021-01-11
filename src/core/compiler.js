@@ -180,7 +180,11 @@ const finalizeTower = (tower) => {
       if (isUp) {
         matches[lastDepth] = false;
       }
-      setValues(obj, Object.entries(obj).filter(([k]) => k !== '').map((e) => e[1]));
+      setValues(obj, Object
+        .entries(obj)
+        .filter(([k]) => k !== '')
+        .map((e) => e[1])
+        .reverse());
       lastDepth = depth;
     }
   });

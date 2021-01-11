@@ -137,25 +137,30 @@ module.exports = (haystack_, searches_, ctx) => {
       && haystack instanceof Object
     ) {
       const isArray = Array.isArray(haystack);
-      const keys = isArray ? haystack : Object.keys(haystack);
+      const keys = Object.keys(haystack);
+      if (!ctx.reverse) {
+        keys.reverse();
+      }
       for (let kIdx = 0, kLen = keys.length; kIdx < kLen; kIdx += 1) {
-        const key = isArray ? kIdx : keys[kIdx];
+        const key = keys[kIdx];
         const searchesOut = [];
-        for (let sIdx = 0, sLen = searchesIn.length; sIdx < sLen; sIdx += 1) {
+        for (let sIdx = 0, sLen = searchesIn.length; sIdx !== sLen; sIdx += 1) {
           const search = searchesIn[sIdx];
           const wildcard = compiler.getWildcard(search);
           if (wildcard.isRec && wildcard.anyMatch(key)) {
             searchesOut.push(search);
           }
           const values = compiler.getValues(search);
-          for (let eIdx = 0, eLen = values.length; eIdx < eLen; eIdx += 1) {
+          let eIdx = values.length;
+          // eslint-disable-next-line no-plusplus
+          while (eIdx--) {
             const value = values[eIdx];
             if (compiler.getWildcard(value).typeMatch(key, isArray)) {
               searchesOut.push(value);
             }
           }
         }
-        stack.push(false, searchesOut, key, depth + 1);
+        stack.push(false, searchesOut, isArray ? Number(key) : key, depth + 1);
       }
     }
   } while (stack.length !== 0);
