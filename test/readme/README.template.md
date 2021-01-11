@@ -320,6 +320,7 @@ context: []
 breakFn: ({ property, context }) => { context.push(property); }
 comment: breakFn, reverse true
 reverse: true
+joined: false
 </example></pre>
 <pre><example>
 haystack: { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } }
@@ -328,6 +329,7 @@ context: []
 filterFn: ({ property, context }) => { context.push(property); }
 comment: filterFn, reverse true
 reverse: true
+joined: false
 </example></pre>
 <pre><example>
 haystack: { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } }
@@ -336,6 +338,7 @@ context: []
 breakFn: ({ property, context }) => { context.push(property); }
 comment: breakFn, reverse false
 reverse: false
+joined: false
 </example></pre>
 <pre><example>
 haystack: { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } }
@@ -344,6 +347,7 @@ context: []
 filterFn: ({ property, context }) => { context.push(property); }
 comment: filterFn, reverse false
 reverse: false
+joined: false
 </example></pre>
 
 #### abort

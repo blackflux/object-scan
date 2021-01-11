@@ -421,7 +421,6 @@ _Examples_:
 ```js
 const haystack = { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } };
 objectScan(['**'], {
-  joined: true,
   breakFn: ({ property, context }) => { context.push(property); },
   reverse: true
 })(haystack, []);
@@ -434,7 +433,6 @@ objectScan(['**'], {
 ```js
 const haystack = { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } };
 objectScan(['**'], {
-  joined: true,
   filterFn: ({ property, context }) => { context.push(property); },
   reverse: true
 })(haystack, []);
@@ -447,7 +445,6 @@ objectScan(['**'], {
 ```js
 const haystack = { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } };
 objectScan(['**'], {
-  joined: true,
   breakFn: ({ property, context }) => { context.push(property); },
   reverse: false
 })(haystack, []);
@@ -460,7 +457,6 @@ objectScan(['**'], {
 ```js
 const haystack = { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } };
 objectScan(['**'], {
-  joined: true,
   filterFn: ({ property, context }) => { context.push(property); },
   reverse: false
 })(haystack, []);
