@@ -421,10 +421,10 @@ _Examples_:
 ```js
 const haystack = { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } };
 objectScan(['**'], {
-  breakFn: ({ property, context }) => { context.push(property); },
+  breakFn: ({ isMatch, property, context }) => { if (isMatch) { context.push(property); } },
   reverse: true
 })(haystack, []);
-// => [ undefined, 'f', 'g', 'i', 'h', 'b', 'd', 'e', 'c', 'a' ]
+// => [ 'f', 'g', 'i', 'h', 'b', 'd', 'e', 'c', 'a' ]
 ```
 </details>
 <details><summary> <code>['**']</code> <em>(filterFn, reverse true)</em> </summary>
@@ -445,10 +445,10 @@ objectScan(['**'], {
 ```js
 const haystack = { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } };
 objectScan(['**'], {
-  breakFn: ({ property, context }) => { context.push(property); },
+  breakFn: ({ isMatch, property, context }) => { if (isMatch) { context.push(property); } },
   reverse: false
 })(haystack, []);
-// => [ undefined, 'f', 'b', 'a', 'd', 'c', 'e', 'g', 'i', 'h' ]
+// => [ 'f', 'b', 'a', 'd', 'c', 'e', 'g', 'i', 'h' ]
 ```
 </details>
 <details><summary> <code>['**']</code> <em>(filterFn, reverse false)</em> </summary>

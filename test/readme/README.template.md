@@ -317,7 +317,7 @@ _Examples_:
 haystack: { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } }
 needles: ['**']
 context: []
-breakFn: ({ property, context }) => { context.push(property); }
+breakFn: ({ isMatch, property, context }) => { if (isMatch) { context.push(property); } }
 comment: breakFn, reverse true
 reverse: true
 joined: false
@@ -335,7 +335,7 @@ joined: false
 haystack: { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } }
 needles: ['**']
 context: []
-breakFn: ({ property, context }) => { context.push(property); }
+breakFn: ({ isMatch, property, context }) => { if (isMatch) { context.push(property); } }
 comment: breakFn, reverse false
 reverse: false
 joined: false
