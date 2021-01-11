@@ -12,6 +12,7 @@ module.exports = (needles, opts = {}) => {
   const ctx = {
     filterFn: undefined,
     breakFn: undefined,
+    reverse: true,
     abort: false,
     rtn: undefined,
     joined: false,
@@ -19,9 +20,10 @@ module.exports = (needles, opts = {}) => {
     strict: true,
     ...opts
   };
-  assert(Object.keys(ctx).length === 7, 'Unexpected Option provided!');
+  assert(Object.keys(ctx).length === 8, 'Unexpected Option provided!');
   assert(['function', 'undefined'].includes(typeof ctx.filterFn));
   assert(['function', 'undefined'].includes(typeof ctx.breakFn));
+  assert(typeof ctx.reverse === 'boolean');
   assert(typeof ctx.abort === 'boolean');
   assert([
     undefined, 'context',

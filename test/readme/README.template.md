@@ -302,6 +302,54 @@ comment: break function
 breakFn: ({ key }) => key === 'a.b'
 </example></pre>
 
+#### reverse
+
+Type: `boolean`<br>
+Default: `true`
+
+When set to `true`, the scan is performed in reverse order. This means `breakFn` is executed in _reverse post-order_ and
+`filterFn` in _reverse pre-order_. Otherwise `breakFn` is executed in _pre-order_ and `filterFn` in _post-order_.
+
+When `reverse` is `true` the scan is _delete-safe_. I.e. `property` can be deleted / spliced from `parent` object / array in `filterFn`.
+
+_Examples_:
+<pre><example>
+haystack: { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } }
+needles: ['**']
+context: []
+breakFn: ({ isMatch, property, context }) => { if (isMatch) { context.push(property); } }
+comment: breakFn, reverse true
+reverse: true
+joined: false
+</example></pre>
+<pre><example>
+haystack: { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } }
+needles: ['**']
+context: []
+filterFn: ({ property, context }) => { context.push(property); }
+comment: filterFn, reverse true
+reverse: true
+joined: false
+</example></pre>
+<pre><example>
+haystack: { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } }
+needles: ['**']
+context: []
+breakFn: ({ isMatch, property, context }) => { if (isMatch) { context.push(property); } }
+comment: breakFn, reverse false
+reverse: false
+joined: false
+</example></pre>
+<pre><example>
+haystack: { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } }
+needles: ['**']
+context: []
+filterFn: ({ property, context }) => { context.push(property); }
+comment: filterFn, reverse false
+reverse: false
+joined: false
+</example></pre>
+
 #### abort
 
 Type: `boolean`<br>

@@ -404,6 +404,66 @@ objectScan(['**'], {
 ```
 </details>
 
+#### reverse
+
+Type: `boolean`<br>
+Default: `true`
+
+When set to `true`, the scan is performed in reverse order. This means `breakFn` is executed in _reverse post-order_ and
+`filterFn` in _reverse pre-order_. Otherwise `breakFn` is executed in _pre-order_ and `filterFn` in _post-order_.
+
+When `reverse` is `true` the scan is _delete-safe_. I.e. `property` can be deleted / spliced from `parent` object / array in `filterFn`.
+
+_Examples_:
+<details><summary> <code>['**']</code> <em>(breakFn, reverse true)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } };
+objectScan(['**'], {
+  breakFn: ({ isMatch, property, context }) => { if (isMatch) { context.push(property); } },
+  reverse: true
+})(haystack, []);
+// => [ 'f', 'g', 'i', 'h', 'b', 'd', 'e', 'c', 'a' ]
+```
+</details>
+<details><summary> <code>['**']</code> <em>(filterFn, reverse true)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } };
+objectScan(['**'], {
+  filterFn: ({ property, context }) => { context.push(property); },
+  reverse: true
+})(haystack, []);
+// => [ 'h', 'i', 'g', 'e', 'c', 'd', 'a', 'b', 'f' ]
+```
+</details>
+<details><summary> <code>['**']</code> <em>(breakFn, reverse false)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } };
+objectScan(['**'], {
+  breakFn: ({ isMatch, property, context }) => { if (isMatch) { context.push(property); } },
+  reverse: false
+})(haystack, []);
+// => [ 'f', 'b', 'a', 'd', 'c', 'e', 'g', 'i', 'h' ]
+```
+</details>
+<details><summary> <code>['**']</code> <em>(filterFn, reverse false)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } };
+objectScan(['**'], {
+  filterFn: ({ property, context }) => { context.push(property); },
+  reverse: false
+})(haystack, []);
+// => [ 'a', 'c', 'e', 'd', 'b', 'h', 'i', 'g', 'f' ]
+```
+</details>
+
 #### abort
 
 Type: `boolean`<br>
