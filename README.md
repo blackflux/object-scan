@@ -409,7 +409,7 @@ objectScan(['**'], {
 Type: `boolean`<br>
 Default: `true`
 
-When set to `true`, the scan is performed in reverse order, which means the `breakFn` is executed in _reverse post-order and
+When set to `true`, the scan is performed in reverse order, which means the `breakFn` is executed in _reverse post-order_ and
 the `filterFn` in _reverse pre-order_. When set to `false` the `breakFn` is executed in _pre-order_ and the `filterFn` in _post-order_.
 
 A reverse scan is _delete-safe_, which means splice / delete can be used on the current parent array / object without further considerations.
