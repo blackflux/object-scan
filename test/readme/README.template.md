@@ -263,7 +263,7 @@ and should be accessed via [destructuring](https://developer.mozilla.org/en-US/d
 Type: `function`<br>
 Default: `undefined`
 
-If defined, this callback is invoked for every match. If `false`
+When defined, this callback is invoked for every match. If `false`
 is returned, the current key is excluded from the result.
 
 The return value of this callback has no effect when a search context is provided.
@@ -288,7 +288,7 @@ filterFn: ({ value }) => typeof value === 'string'
 Type: `function`<br>
 Default: `undefined`
 
-If defined, this callback is invoked for every key that is traversed by
+When defined, this callback is invoked for every key that is traversed by
 the search. If `true` is returned, all keys nested under the current key are
 skipped in the search and from the final result.
 
@@ -300,6 +300,24 @@ haystack: { a: { b: { c: 0 } } }
 needles: ['**']
 comment: break function
 breakFn: ({ key }) => key === 'a.b'
+</example></pre>
+
+#### compareFn
+
+Type: `function`<br>
+Default: `undefined`
+
+When defined, this function is used as a comparator to determine the traversal order of any `object` keys.
+
+This works together with the `reverse` option.
+
+_Examples_:
+<pre><example>
+haystack: { a: 0, c: 1, b: 2 }
+needles: ['**']
+compareFn: (k1, k2) => k1.localeCompare(k2)
+comment: simple sort
+reverse: false
 </example></pre>
 
 #### reverse
