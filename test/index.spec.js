@@ -913,4 +913,26 @@ describe('Testing Find', () => {
         filterFn: ['a', 'c', 'e', 'd', 'b', 'h', 'i', 'g', 'f']
       });
   });
+
+  it('Testing traversal order sorted', () => {
+    const breakFn = ({ property, context }) => {
+      context.breakFn.push(property);
+    };
+    const filterFn = ({ property, context }) => {
+      context.filterFn.push(property);
+    };
+    const compareFn = (a, b) => a.localeCompare(b);
+    const options = { breakFn, filterFn, compareFn };
+    const tree = { a: {}, c: {}, b: [{ d: {}, f: {}, e: {} }, { g: {}, h: {}, i: {} }] };
+    expect(objectScan(['**'], options)(tree, { filterFn: [], breakFn: [] }))
+      .to.deep.equal({
+        breakFn: [undefined, 'c', 'b', 1, 'i', 'h', 'g', 0, 'f', 'e', 'd', 'a'],
+        filterFn: ['c', 'i', 'h', 'g', 1, 'f', 'e', 'd', 0, 'b', 'a']
+      });
+    expect(objectScan(['**'], { ...options, reverse: false })(tree, { filterFn: [], breakFn: [] }))
+      .to.deep.equal({
+        breakFn: [undefined, 'a', 'b', 0, 'd', 'e', 'f', 1, 'g', 'h', 'i', 'c'],
+        filterFn: ['a', 'd', 'e', 'f', 0, 'g', 'h', 'i', 1, 'b', 'c']
+      });
+  });
 });
