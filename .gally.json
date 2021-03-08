@@ -23,9 +23,9 @@
         "strict": true,
         "contexts": [
           "ci/circleci: gally-create-pr",
+          "ci/circleci: test-node-v15",
           "ci/circleci: test-node-v14",
-          "ci/circleci: test-node-v12",
-          "ci/circleci: test-node-v10"
+          "ci/circleci: test-node-v12"
         ]
       },
       "enforce_admins": true,

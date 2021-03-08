@@ -3,30 +3,30 @@ workflows:
   node-multi-build:
     jobs:
       - gally-create-pr
+      - test-node-v15:
+          requires:
+            - gally-create-pr
       - test-node-v14:
           requires:
             - gally-create-pr
       - test-node-v12:
           requires:
             - gally-create-pr
-      - test-node-v10:
-          requires:
-            - gally-create-pr
       - gally-auto-approve:
           requires:
             - gally-create-pr
+            - test-node-v15
             - test-node-v14
             - test-node-v12
-            - test-node-v10
           filters:
             branches:
               only: /dependabot\/.*/
       - release:
           requires:
             - gally-create-pr
+            - test-node-v15
             - test-node-v14
             - test-node-v12
-            - test-node-v10
           filters:
             branches:
               only: master
@@ -34,46 +34,14 @@ version: 2
 jobs:
   gally-create-pr:
     docker:
-      - image: 'circleci/node:12'
+      - image: 'circleci/node:14'
     steps:
       - checkout
       - run: sudo yarn global add gally
       - run: ga promote $CIRCLE_BRANCH
-  test-node-v10:
-    docker:
-      - image: 'circleci/node:10'
-    steps:
-      - checkout
-      - run:
-          command: |
-            # sync submodules as checkout doesn't do this automatically
-            if [[ $(git config --file .gitmodules --get-regexp path) ]]; then
-              git submodule sync && git submodule update --init
-            fi
-      - run:
-          command: |
-            if [[ -n "${NPM_TOKEN}" ]]; then
-              echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-            fi
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - 'yarn-packages-{{ checksum "yarn.lock" }}'
-      - run:
-          name: Install Dependencies
-          command: yarn install --frozen-lockfile
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: 'yarn-packages-{{ checksum "yarn.lock" }}'
-          paths:
-            - ~/.cache/yarn
-      - run: yarn test
-      - run: >-
-          (git add . && git diff-index --quiet HEAD --) || (git status && exit
-          1);
   release:
     docker:
-      - image: 'circleci/node:12'
+      - image: 'circleci/node:14'
     steps:
       - checkout
       - run:
@@ -132,14 +100,9 @@ jobs:
       - run: >-
           (git add . && git diff-index --quiet HEAD --) || (git status && exit
           1);
-      - run:
-          command: |
-            if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
-              yarn run coveralls
-            fi
   gally-auto-approve:
     docker:
-      - image: 'circleci/node:12'
+      - image: 'circleci/node:14'
     steps:
       - run:
           name: Set PR number
@@ -159,6 +122,43 @@ jobs:
   test-node-v14:
     docker:
       - image: 'circleci/node:14'
+    steps:
+      - checkout
+      - run:
+          command: |
+            # sync submodules as checkout doesn't do this automatically
+            if [[ $(git config --file .gitmodules --get-regexp path) ]]; then
+              git submodule sync && git submodule update --init
+            fi
+      - run:
+          command: |
+            if [[ -n "${NPM_TOKEN}" ]]; then
+              echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+            fi
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - 'yarn-packages-{{ checksum "yarn.lock" }}'
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: 'yarn-packages-{{ checksum "yarn.lock" }}'
+          paths:
+            - ~/.cache/yarn
+      - run: yarn test
+      - run: >-
+          (git add . && git diff-index --quiet HEAD --) || (git status && exit
+          1);
+      - run:
+          command: |
+            if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
+              yarn run coveralls
+            fi
+  test-node-v15:
+    docker:
+      - image: 'circleci/node:15'
     steps:
       - checkout
       - run:
