@@ -5545,6 +5545,13 @@ object-lib@2.0.0:
   dependencies:
     object-scan "13.8.0"
 
+object-lib@2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/object-lib/-/object-lib-2.1.1.tgz#ecc3ff0c7431f58e225d5df1bd1394100df43c95"
+  integrity sha512-OM8xIEXFKGRlpe7XlxDQm93tNx/mF9M1SNOFBE0lV3Xtoz5KG7G/qY1LfQqJGYulWhRGmfuDXN64xDiJWGKEig==
+  dependencies:
+    object-scan "13.9.1"
+
 object-scan@13.8.0:
   version "13.8.0"
   resolved "https://registry.yarnpkg.com/object-scan/-/object-scan-13.8.0.tgz#70ec43620b76fbc580856beb5275ee28321f781c"
@@ -6978,6 +6985,20 @@ smart-fs@1.12.5:
     xml-js "1.6.11"
     yaml-boost "1.10.5"
 
+smart-fs@1.12.7:
+  version "1.12.7"
+  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.12.7.tgz#c45d6be985b29301db560e1399a0e92a09347004"
+  integrity sha512-T9kO3RFyR0bkM3i4xkkTt6JehQX6iONXJFSylci6IgUwnwrcSUbh1UwMjaQkNaBDrec4f2JovM36FHbiMCC2Qw==
+  dependencies:
+    fs-extra "9.1.0"
+    js-yaml "4.0.0"
+    json-stringify-pretty-compact "3.0.0"
+    lodash.clonedeep "4.5.0"
+    lodash.isequal "4.5.0"
+    object-lib "2.1.1"
+    xml-js "1.6.11"
+    yaml-boost "1.10.6"
+
 snapdragon-node@^2.0.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/snapdragon-node/-/snapdragon-node-2.1.1.tgz#6c175f86ff14bdb0724563e8f3c1b021a286853b"
@@ -8236,6 +8257,16 @@ yaml-boost@1.10.5:
   version "1.10.5"
   resolved "https://registry.yarnpkg.com/yaml-boost/-/yaml-boost-1.10.5.tgz#684d7352f1e600d84a1ff90dab03e34c9e465e9b"
   integrity sha512-fR6D5X8miG6SNs23UWtrzSKPsyNsEtQwKdi5C2pYeHgbJEIQPeHn78uCaxOGfwKZhIaHk/q+gKCQBCjH+lSvhA==
+  dependencies:
+    js-yaml "4.0.0"
+    lodash.get "4.4.2"
+    lodash.mergewith "4.6.2"
+    lodash.set "4.3.2"
+
+yaml-boost@1.10.6:
+  version "1.10.6"
+  resolved "https://registry.yarnpkg.com/yaml-boost/-/yaml-boost-1.10.6.tgz#27d8c262b0e6a40feb272de4874801ea687ba9b7"
+  integrity sha512-kyRFCJnzgXnoZvo6Rj1PGqUm/xLu7N8wYY87oOgfze0m0xo8BIeak/bgMkJlTdar8dGh+9vDx0h7PenB6iL43A==
   dependencies:
     js-yaml "4.0.0"
     lodash.get "4.4.2"
