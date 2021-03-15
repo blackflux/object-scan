@@ -350,12 +350,12 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@blackflux/eslint-plugin-rules@1.3.45":
-  version "1.3.45"
-  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.3.45.tgz#60b2995d249798a88e113220ae03d52aab7af618"
-  integrity sha512-JECDK6RIuK/zw8qQa4g/nd6YuLpc1nXXmdhZu7Hp9jIUIy6QQ3dB2XmNcJFhO6J9IPBPDaaO5RP96cJqhB/hoA==
+"@blackflux/eslint-plugin-rules@1.3.47":
+  version "1.3.47"
+  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.3.47.tgz#48dee969e172abcc6c275912b8546162bc47fd3b"
+  integrity sha512-wqYvewx3ItcqFwCa9j2Tx03K9dmQtkvzbrVwj0GzCDrQ99SR7K66f6IXObmr8QlRfVSauDP1+4HxZ1kHPi007Q==
   dependencies:
-    smart-fs "1.12.4"
+    smart-fs "1.12.6"
 
 "@blackflux/robo-config-plugin@5.0.0":
   version "5.0.0"
@@ -2928,16 +2928,6 @@ fromentries@^1.2.0:
   resolved "https://registry.yarnpkg.com/fromentries/-/fromentries-1.3.2.tgz#e4bca6808816bf8f93b52750f1127f5a6fd86e3a"
   integrity sha512-cHEpEQHUg0f8XdtZCc2ZAhrHzKzT0MrFUTcvx+hfxYu7rGMDc5SKoXFh+n4YigxsHXRzc6OrCshdR1bWH6HHyg==
 
-fs-extra@9.0.1:
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-9.0.1.tgz#910da0062437ba4c39fedd863f1675ccfefcb9fc"
-  integrity sha512-h2iAoN838FqAFJY2/qVpzFXy+EBxfVE220PalAqQLDVsFOHLJrZvut5puAbCdNv6WJk+B8ihI+k0c7JK5erwqQ==
-  dependencies:
-    at-least-node "^1.0.0"
-    graceful-fs "^4.2.0"
-    jsonfile "^6.0.1"
-    universalify "^1.0.0"
-
 fs-extra@9.1.0, fs-extra@^9.0.0:
   version "9.1.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-9.1.0.tgz#5954460c764a8da2094ba3554bf839e6b9a7c86d"
@@ -4150,20 +4140,20 @@ js-tokens@^4.0.0:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
-js-yaml@3.14.1, js-yaml@^3.13.0, js-yaml@^3.13.1, js-yaml@^3.4.2:
-  version "3.14.1"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.14.1.tgz#dae812fdb3825fa306609a8717383c50c36a0537"
-  integrity sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==
-  dependencies:
-    argparse "^1.0.7"
-    esprima "^4.0.0"
-
 js-yaml@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-4.0.0.tgz#f426bc0ff4b4051926cd588c71113183409a121f"
   integrity sha512-pqon0s+4ScYUvX30wxQi3PogGFAlUyH0awepWvwkj4jD4v+ova3RiYw8bmA6x2rDrEaj8i/oWKoRxpVNW+Re8Q==
   dependencies:
     argparse "^2.0.1"
+
+js-yaml@^3.13.0, js-yaml@^3.13.1, js-yaml@^3.4.2:
+  version "3.14.1"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.14.1.tgz#dae812fdb3825fa306609a8717383c50c36a0537"
+  integrity sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==
+  dependencies:
+    argparse "^1.0.7"
+    esprima "^4.0.0"
 
 jsbn@~0.1.0:
   version "0.1.1"
@@ -5563,11 +5553,6 @@ oauth-sign@~0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.9.0.tgz#47a7b016baa68b5fa0ecf3dee08a85c679ac6455"
   integrity sha512-fexhUFFPTGV8ybAtSIGbV6gOkSv8UtRbDBnAyLQw4QPKkgNlsH2ByPGtMUqdWkos6YCRmAqViwgZrJc/mRDzZQ==
-
-object-align@1.0.16:
-  version "1.0.16"
-  resolved "https://registry.yarnpkg.com/object-align/-/object-align-1.0.16.tgz#c8deaebe0fc3e1e4fccd0be742a3d1f08193c0ff"
-  integrity sha512-KrqNsqNIkOfEnrGyt6KQWTToZaRdhcpBPcjFuHBWUpbr9i/1aMYFea1CG6b8SHhxKBYRwBrIW/zhh0GBRN5DvQ==
 
 object-assign@^4.0.1, object-assign@^4.1.0:
   version "4.1.1"
@@ -7019,20 +7004,6 @@ smart-buffer@^4.1.0:
   resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-4.1.0.tgz#91605c25d91652f4661ea69ccf45f1b331ca21ba"
   integrity sha512-iVICrxOzCynf/SNaBQCw34eM9jROU/s5rzIhpOvzhzuYHfJR/DhZfDkXiZSgKXfgv26HT3Yni3AV/DGw0cGnnw==
 
-smart-fs@1.12.4:
-  version "1.12.4"
-  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.12.4.tgz#6a6f201dfcfd63bedc8cca39c1df30d4a11b4998"
-  integrity sha512-toY4P0yKZ9pFvTexg2ap9QopYMZMsrceENuw67FO5ZgRpsE3fIVPgox8t6+x5MQqkjjxxzEYv3rEsNQuf1fZMw==
-  dependencies:
-    fs-extra "9.0.1"
-    js-yaml "4.0.0"
-    json-stringify-pretty-compact "2.0.0"
-    lodash.clonedeep "4.5.0"
-    lodash.isequal "4.5.0"
-    object-align "1.0.16"
-    xml-js "1.6.11"
-    yaml-boost "1.10.3"
-
 smart-fs@1.12.5:
   version "1.12.5"
   resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.12.5.tgz#3e467ec99a307546247b8f808199ebd3b0a880cf"
@@ -7044,6 +7015,20 @@ smart-fs@1.12.5:
     lodash.clonedeep "4.5.0"
     lodash.isequal "4.5.0"
     object-lib "1.3.0"
+    xml-js "1.6.11"
+    yaml-boost "1.10.5"
+
+smart-fs@1.12.6:
+  version "1.12.6"
+  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-1.12.6.tgz#38339e37ab5b862e6696dbf4c7cae7abcc4386f1"
+  integrity sha512-7NZ3GbGWvTkGlWUAU1utxPnZFt6zXHW72L0AC/rgbFjvjrWcvhizhQFJBCPP5CB0Qu9ymU97QAKY8Ey7Ml54PQ==
+  dependencies:
+    fs-extra "9.1.0"
+    js-yaml "4.0.0"
+    json-stringify-pretty-compact "3.0.0"
+    lodash.clonedeep "4.5.0"
+    lodash.isequal "4.5.0"
+    object-lib "2.1.0"
     xml-js "1.6.11"
     yaml-boost "1.10.5"
 
@@ -7911,11 +7896,6 @@ universal-user-agent@^6.0.0:
   resolved "https://registry.yarnpkg.com/universal-user-agent/-/universal-user-agent-6.0.0.tgz#3381f8503b251c0d9cd21bc1de939ec9df5480ee"
   integrity sha512-isyNax3wXoKaulPDZWHQqbmIx1k2tb9fb3GGDBRxCscfYV2Ch7WxPArBsFEG8s/safwXTT7H4QGhaIkTp9447w==
 
-universalify@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/universalify/-/universalify-1.0.0.tgz#b61a1da173e8435b2fe3c67d29b9adf8594bd16d"
-  integrity sha512-rb6X1W158d7pRQBg5gkR8uPaSfiids68LTJQYOtEUhoJUWBdaQHsuT/EUduxXYxcrt4r5PJ4fuHW1MHT6p0qug==
-
 universalify@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-2.0.0.tgz#75a4984efedc4b08975c5aeb73f530d02df25717"
@@ -8309,16 +8289,6 @@ yallist@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-4.0.0.tgz#9bb92790d9c0effec63be73519e11a35019a3a72"
   integrity sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
-
-yaml-boost@1.10.3:
-  version "1.10.3"
-  resolved "https://registry.yarnpkg.com/yaml-boost/-/yaml-boost-1.10.3.tgz#c9ec29a8906f26f7a5dfa13b9d96ac56bebe35ee"
-  integrity sha512-okXg39aOb1D/dqVOkJDsemGw+5pAGFb3WyyfJHLJct9tVZWwv5ORd+SkCwl6Ca6eKZEpYxkz1yrGyCy6/rb0Vw==
-  dependencies:
-    js-yaml "3.14.1"
-    lodash.get "4.4.2"
-    lodash.mergewith "4.6.2"
-    lodash.set "4.3.2"
 
 yaml-boost@1.10.5:
   version "1.10.5"
