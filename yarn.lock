@@ -5545,6 +5545,13 @@ object-lib@2.1.2:
   dependencies:
     object-scan "14.0.0"
 
+object-lib@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/object-lib/-/object-lib-3.0.0.tgz#630e437ef876f57d0483e54b485894ab37aca23e"
+  integrity sha512-CIlney6fXVZDlFcvRJVG4Bfemb5yceKjuSpv85Frm+SynKFPLNQGlFCRxYNlCrWnlhKdCs4MUei8ZA/cESczBA==
+  dependencies:
+    object-scan "14.0.0"
+
 object-scan@13.9.1:
   version "13.9.1"
   resolved "https://registry.yarnpkg.com/object-scan/-/object-scan-13.9.1.tgz#03ab1be0d55e29471774945173a5fdcfcf5ebb35"
@@ -6978,17 +6985,17 @@ smart-fs@2.0.0:
     xml-js "1.6.11"
     yaml-boost "1.10.7"
 
-smart-fs@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-2.0.1.tgz#ab4cc9c4f7960557b742b327203ab65b448f57a8"
-  integrity sha512-546boWSVG4HPBNPVuoYWl7mi6bp0Xn8IqTJJv9e+qqArJNV5RUIhsIzFv05/bK8iNpFarEKK0M0+o0NUoIz/fQ==
+smart-fs@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/smart-fs/-/smart-fs-2.0.2.tgz#684814a9137efea10bc7d4ff437a2bad6cc9ac79"
+  integrity sha512-BQSuFSArvimIV6tEOMKTOu7ZVKq/SUcuuTO27cquPKzbA8fFZKOabZUq1JpMoh24SBfxXxncEwvmgZIwHZZLuA==
   dependencies:
     fs-extra "9.1.0"
     js-yaml "4.0.0"
     json-stringify-pretty-compact "3.0.0"
     lodash.clonedeep "4.5.0"
     lodash.isequal "4.5.0"
-    object-lib "2.1.2"
+    object-lib "3.0.0"
     xml-js "1.6.11"
     yaml-boost "2.0.0"
 
