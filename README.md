@@ -532,12 +532,19 @@ Defaults to `key` when search context is _undefined_ and to `context` otherwise.
 
 Can be explicitly set as:
 - `context`: search context is returned
-- `key`: matched keys are returned
-- `value`: matched values are returned
-- `entry`: matched entries are returned
-- `property`: matched properties are returned
-- `parent`: matched parent are returned
-- `parents`: matched parents are returned
+- `key`: as passed into `filterFn`
+- `value`: as passed into `filterFn`
+- `entry`: as passed into `filterFn`
+- `property`: as passed into `filterFn`
+- `parent`: as passed into `filterFn`
+- `parents`: as passed into `filterFn`
+- `isMatch`: as passed into `filterFn`
+- `matchedBy`: as passed into `filterFn`
+- `excludedBy`: as passed into `filterFn`
+- `traversedBy`: as passed into `filterFn`
+- `isCircular`: as passed into `filterFn`
+- `isLeaf`: as passed into `filterFn`
+- `depth`: as passed into `filterFn`
 - `bool`: returns _true_ iff a match is found
 - `count`: returns the match count
 

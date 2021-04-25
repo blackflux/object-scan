@@ -31,6 +31,8 @@ module.exports = (needles, opts = {}) => {
     undefined, 'context',
     'key', 'value', 'entry',
     'property', 'parent', 'parents',
+    'isMatch', 'matchedBy', 'excludedBy',
+    'traversedBy', 'isCircular', 'isLeaf', 'depth',
     'bool', 'count'
   ].includes(opts.rtn));
   assert(typeof ctx.joined === 'boolean');
