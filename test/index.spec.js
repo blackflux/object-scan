@@ -572,19 +572,19 @@ describe('Testing Find', () => {
     it('Testing traversedBy on filterFn', () => {
       const result = [];
       objectScan(['**', ''], {
-        filterFn: ({ key, isCircular }) => {
-          result.push([key, isCircular]);
+        filterFn: ({ key, depth, isCircular }) => {
+          result.push([key, depth, isCircular]);
         },
         breakFn: ({ key }) => key.length > 10
       })(input);
       expect(result).to.deep.equal([
-        ['a.b.a.b.a.b', true],
-        ['a.b.a.b.a', true],
-        ['a.b.a.b', true],
-        ['a.b.a', true],
-        ['a.b', true],
-        ['a', false],
-        ['', false]
+        ['a.b.a.b.a.b', 6, true],
+        ['a.b.a.b.a', 5, true],
+        ['a.b.a.b', 4, true],
+        ['a.b.a', 3, true],
+        ['a.b', 2, true],
+        ['a', 1, false],
+        ['', 0, false]
       ]);
     });
   });
@@ -615,6 +615,40 @@ describe('Testing Find', () => {
         '[*].*.child,[*].parent => [0].parent (true)',
         '[*].*.child => [0].parent.child (true)'
       ]);
+    });
+  });
+
+  describe('Testing rtn', () => {
+    const input = { f: { b: { a: null, d: { c: {}, e: {} } }, g: { i: { h: {} } } } };
+    // eslint-disable-next-line mocha/no-setup-in-describe
+    input.f.g = input;
+    const pattern = ['*.b.a', '!f.g', '*.g'];
+
+    // eslint-disable-next-line mocha/no-setup-in-describe
+    Object.entries({
+      context: undefined,
+      key: ['f.g', 'f.b.a'],
+      value: [input, null],
+      entry: [['f.g', input], ['f.b.a', null]],
+      property: ['g', 'a'],
+      // eslint-disable-next-line mocha/no-setup-in-describe
+      parent: [input.f, input.f.b],
+      // eslint-disable-next-line mocha/no-setup-in-describe
+      parents: [[input.f, input], [input.f.b, input.f, input]],
+      isMatch: [true, true],
+      matchedBy: [['*.g'], ['*.b.a']],
+      excludedBy: [['!f.g'], []],
+      traversedBy: [['*.g', '!f.g'], ['*.b.a']],
+      isCircular: [true, false],
+      isLeaf: [false, true],
+      depth: [2, 3],
+      bool: true,
+      count: 2
+    }).forEach(([rtn, expected]) => {
+      it(`Testing ${rtn}`, () => {
+        const r = objectScan(pattern, { rtn })(input);
+        expect(r).to.deep.equal(expected);
+      });
     });
   });
 

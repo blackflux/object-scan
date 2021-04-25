@@ -60,10 +60,12 @@ const execute = async () => {
   for (let count = 1; count <= TEST_COUNT; count += 1) {
     const { rng, haystack, paths } = generateDataset();
     const useArraySelector = rng() > 0.2;
+    const reverse = rng() > 0.5;
     const needles = generateNeedles({
       rng,
       paths,
       useArraySelector,
+      reverse,
       modifierParams: (p) => ({
         lenPercentage: rng() > 0.1 ? rng() : 1,
         questionMark: rng() > 0.15 ? 0 : Math.floor(rng() * p.length) + 1,
@@ -78,7 +80,9 @@ const execute = async () => {
       })
     });
 
-    const kwargs = { haystack, needles, useArraySelector };
+    const kwargs = {
+      haystack, needles, useArraySelector, reverse
+    };
     // eslint-disable-next-line no-await-in-loop
     const [signatureLocal, signatureReleased] = await Promise.all([
       worker1.exec({ ...kwargs, useLocal: true }),
@@ -95,6 +99,7 @@ const execute = async () => {
         haystack,
         needles,
         useArraySelector,
+        reverse,
         seed: rng.seed
       });
       fs.smartWrite(path.join(__dirname, '..', 'debug', `${rng.seed}.html`), diff.split('\n'));
