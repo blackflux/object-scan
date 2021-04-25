@@ -26,7 +26,9 @@ module.exports = (kwargs, ctx) => {
 
   const result = [];
   return {
-    onMatch: () => result.push(kwargs[ctx.rtn]),
+    onMatch: (Array.isArray(ctx.rtn)
+      ? () => result.push(ctx.rtn.map((rtn) => kwargs[rtn]))
+      : () => result.push(kwargs[ctx.rtn])),
     finish: () => (ctx.abort ? result[0] : result)
   };
 };

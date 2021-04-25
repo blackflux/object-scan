@@ -27,14 +27,25 @@ module.exports = (needles, opts = {}) => {
   assert(['function', 'undefined'].includes(typeof ctx.compareFn));
   assert(typeof ctx.reverse === 'boolean');
   assert(typeof ctx.abort === 'boolean');
-  assert([
-    undefined, 'context',
-    'key', 'value', 'entry',
-    'property', 'parent', 'parents',
-    'isMatch', 'matchedBy', 'excludedBy',
-    'traversedBy', 'isCircular', 'isLeaf', 'depth',
-    'bool', 'count'
-  ].includes(opts.rtn));
+  assert(
+    [
+      undefined, 'context',
+      'key', 'value', 'entry',
+      'property', 'parent', 'parents',
+      'isMatch', 'matchedBy', 'excludedBy',
+      'traversedBy', 'isCircular', 'isLeaf', 'depth',
+      'bool', 'count'
+    ].includes(opts.rtn)
+    || (
+      Array.isArray(opts.rtn)
+      && opts.rtn.every((e) => [
+        'key', 'value', 'entry',
+        'property', 'parent', 'parents',
+        'isMatch', 'matchedBy', 'excludedBy',
+        'traversedBy', 'isCircular', 'isLeaf', 'depth'
+      ].includes(e))
+    )
+  );
   assert(typeof ctx.joined === 'boolean');
   assert(typeof ctx.useArraySelector === 'boolean');
   assert(typeof ctx.strict === 'boolean');
