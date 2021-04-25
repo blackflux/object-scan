@@ -625,26 +625,27 @@ describe('Testing Find', () => {
     const pattern = ['*.b.a', '!f.g', '*.g'];
 
     // eslint-disable-next-line mocha/no-setup-in-describe
-    Object.entries({
-      context: undefined,
-      key: ['f.g', 'f.b.a'],
-      value: [input, null],
-      entry: [['f.g', input], ['f.b.a', null]],
-      property: ['g', 'a'],
+    [
+      ['context', undefined],
+      ['key', ['f.g', 'f.b.a']],
+      ['value', [input, null]],
+      ['entry', [['f.g', input], ['f.b.a', null]]],
+      [['property', 'value'], [['g', input], ['a', null]]],
+      ['property', ['g', 'a']],
       // eslint-disable-next-line mocha/no-setup-in-describe
-      parent: [input.f, input.f.b],
+      ['parent', [input.f, input.f.b]],
       // eslint-disable-next-line mocha/no-setup-in-describe
-      parents: [[input.f, input], [input.f.b, input.f, input]],
-      isMatch: [true, true],
-      matchedBy: [['*.g'], ['*.b.a']],
-      excludedBy: [['!f.g'], []],
-      traversedBy: [['*.g', '!f.g'], ['*.b.a']],
-      isCircular: [true, false],
-      isLeaf: [false, true],
-      depth: [2, 3],
-      bool: true,
-      count: 2
-    }).forEach(([rtn, expected]) => {
+      ['parents', [[input.f, input], [input.f.b, input.f, input]]],
+      ['isMatch', [true, true]],
+      ['matchedBy', [['*.g'], ['*.b.a']]],
+      ['excludedBy', [['!f.g'], []]],
+      ['traversedBy', [['*.g', '!f.g'], ['*.b.a']]],
+      ['isCircular', [true, false]],
+      ['isLeaf', [false, true]],
+      ['depth', [2, 3]],
+      ['bool', true],
+      ['count', 2]
+    ].forEach(([rtn, expected]) => {
       it(`Testing ${rtn}`, () => {
         const r = objectScan(pattern, { rtn })(input);
         expect(r).to.deep.equal(expected);

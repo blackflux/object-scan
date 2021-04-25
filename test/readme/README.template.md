@@ -397,12 +397,12 @@ comment: abort changes count
 
 #### rtn
 
-Type: `string`<br>
+Type: `string` or `array`<br>
 Default: _dynamic_
 
 Defaults to `key` when search context is _undefined_ and to `context` otherwise.
 
-Can be explicitly set as:
+Can be explicitly set as a `string`:
 - `context`: search context is returned
 - `key`: as passed into `filterFn`
 - `value`: as passed into `filterFn`
@@ -419,6 +419,9 @@ Can be explicitly set as:
 - `depth`: as passed into `filterFn`
 - `bool`: returns _true_ iff a match is found
 - `count`: returns the match count
+
+Or, when set as an `array`, can contain any of: `key`, `value`, `entry`, `property`, `parent`, `parents`, `isMatch`, `matchedBy`, `excludedBy`, `traversedBy`, `isCircular`, `isLeaf`, `depth`
+
 
 When **abort** is set to `true` and the result would be a list, the first match or _undefined_ is returned.
 
@@ -465,6 +468,14 @@ joined: false
 rtn: 'key'
 context: []
 comment: return keys with context passed
+</example></pre>
+<pre><example>
+haystack: { a: { b: { c: 0, d: 1 } } }
+needles: ['a.b.{c,d}']
+joined: false
+rtn: ['property', 'value']
+context: []
+comment: return custom array
 </example></pre>
 
 #### joined

@@ -525,12 +525,12 @@ objectScan(['[0]', '[1]'], {
 
 #### rtn
 
-Type: `string`<br>
+Type: `string` or `array`<br>
 Default: _dynamic_
 
 Defaults to `key` when search context is _undefined_ and to `context` otherwise.
 
-Can be explicitly set as:
+Can be explicitly set as a `string`:
 - `context`: search context is returned
 - `key`: as passed into `filterFn`
 - `value`: as passed into `filterFn`
@@ -547,6 +547,9 @@ Can be explicitly set as:
 - `depth`: as passed into `filterFn`
 - `bool`: returns _true_ iff a match is found
 - `count`: returns the match count
+
+Or, when set as an `array`, can contain any of: `key`, `value`, `entry`, `property`, `parent`, `parents`, `isMatch`, `matchedBy`, `excludedBy`, `traversedBy`, `isCircular`, `isLeaf`, `depth`
+
 
 When **abort** is set to `true` and the result would be a list, the first match or _undefined_ is returned.
 
@@ -603,6 +606,15 @@ objectScan(['**'], { rtn: 'context' })(haystack);
 const haystack = { a: { b: { c: 0, d: 1 } } };
 objectScan(['a.b.{c,d}'], { rtn: 'key' })(haystack, []);
 // => [ [ 'a', 'b', 'd' ], [ 'a', 'b', 'c' ] ]
+```
+</details>
+<details><summary> <code>['a.b.{c,d}']</code> <em>(return custom array)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: 0, d: 1 } } };
+objectScan(['a.b.{c,d}'], { rtn: ['property', 'value'] })(haystack, []);
+// => [ [ 'd', 1 ], [ 'c', 0 ] ]
 ```
 </details>
 
