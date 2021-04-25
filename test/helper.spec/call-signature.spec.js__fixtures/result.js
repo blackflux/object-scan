@@ -40,7 +40,8 @@ module.exports = {
         '**'
       ],
       isCircular: false,
-      isLeaf: false
+      isLeaf: false,
+      depth: 0
     },
     {
       cbName: 'breakFn',
@@ -90,7 +91,8 @@ module.exports = {
         '**'
       ],
       isCircular: false,
-      isLeaf: false
+      isLeaf: false,
+      depth: 1
     },
     {
       cbName: 'breakFn',
@@ -146,7 +148,8 @@ module.exports = {
         '**'
       ],
       isCircular: false,
-      isLeaf: false
+      isLeaf: false,
+      depth: 2
     },
     {
       cbName: 'breakFn',
@@ -203,7 +206,8 @@ module.exports = {
         '**'
       ],
       isCircular: false,
-      isLeaf: false
+      isLeaf: false,
+      depth: 3
     },
     {
       cbName: 'breakFn',
@@ -256,7 +260,8 @@ module.exports = {
         '**'
       ],
       isCircular: false,
-      isLeaf: true
+      isLeaf: true,
+      depth: 4
     },
     {
       cbName: 'filterFn',
@@ -309,7 +314,8 @@ module.exports = {
         '**'
       ],
       isCircular: false,
-      isLeaf: true
+      isLeaf: true,
+      depth: 4
     },
     {
       cbName: 'filterFn',
@@ -366,7 +372,8 @@ module.exports = {
         '**'
       ],
       isCircular: false,
-      isLeaf: false
+      isLeaf: false,
+      depth: 3
     },
     {
       cbName: 'breakFn',
@@ -423,7 +430,8 @@ module.exports = {
         '**'
       ],
       isCircular: false,
-      isLeaf: false
+      isLeaf: false,
+      depth: 3
     },
     {
       cbName: 'breakFn',
@@ -476,7 +484,8 @@ module.exports = {
         '**'
       ],
       isCircular: false,
-      isLeaf: true
+      isLeaf: true,
+      depth: 4
     },
     {
       cbName: 'filterFn',
@@ -529,7 +538,8 @@ module.exports = {
         '**'
       ],
       isCircular: false,
-      isLeaf: true
+      isLeaf: true,
+      depth: 4
     },
     {
       cbName: 'filterFn',
@@ -586,7 +596,8 @@ module.exports = {
         '**'
       ],
       isCircular: false,
-      isLeaf: false
+      isLeaf: false,
+      depth: 3
     },
     {
       cbName: 'filterFn',
@@ -642,7 +653,8 @@ module.exports = {
         '**'
       ],
       isCircular: false,
-      isLeaf: false
+      isLeaf: false,
+      depth: 2
     },
     {
       cbName: 'filterFn',
@@ -692,7 +704,8 @@ module.exports = {
         '**'
       ],
       isCircular: false,
-      isLeaf: false
+      isLeaf: false,
+      depth: 1
     }
   ],
   warning: null,

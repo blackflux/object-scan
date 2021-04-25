@@ -572,19 +572,19 @@ describe('Testing Find', () => {
     it('Testing traversedBy on filterFn', () => {
       const result = [];
       objectScan(['**', ''], {
-        filterFn: ({ key, isCircular }) => {
-          result.push([key, isCircular]);
+        filterFn: ({ key, depth, isCircular }) => {
+          result.push([key, depth, isCircular]);
         },
         breakFn: ({ key }) => key.length > 10
       })(input);
       expect(result).to.deep.equal([
-        ['a.b.a.b.a.b', true],
-        ['a.b.a.b.a', true],
-        ['a.b.a.b', true],
-        ['a.b.a', true],
-        ['a.b', true],
-        ['a', false],
-        ['', false]
+        ['a.b.a.b.a.b', 6, true],
+        ['a.b.a.b.a', 5, true],
+        ['a.b.a.b', 4, true],
+        ['a.b.a', 3, true],
+        ['a.b', 2, true],
+        ['a', 1, false],
+        ['', 0, false]
       ]);
     });
   });
