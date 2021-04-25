@@ -15,6 +15,7 @@ module.exports = {
     '**'
   ],
   useArraySelector: true,
+  reverse: true,
   logs: [
     {
       cbName: 'breakFn',
