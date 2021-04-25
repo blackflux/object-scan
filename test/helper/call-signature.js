@@ -15,7 +15,8 @@ module.exports = ({
     excludedBy,
     traversedBy,
     isCircular,
-    isLeaf
+    isLeaf,
+    depth
   }) => {
     logs.push({
       cbName,
@@ -28,7 +29,8 @@ module.exports = ({
       excludedBy,
       traversedBy,
       isCircular,
-      isLeaf
+      isLeaf,
+      depth
     });
   };
   const result = objectScan(needles, {

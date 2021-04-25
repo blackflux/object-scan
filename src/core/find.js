@@ -65,6 +65,10 @@ module.exports = (haystack_, searches_, ctx) => {
     get isLeaf() {
       return kwargs.getIsLeaf();
     },
+    getDepth: () => path.length,
+    get depth() {
+      return kwargs.getDepth();
+    },
     context: ctx.context
   };
 
