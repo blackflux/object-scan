@@ -62,6 +62,9 @@ class Wildcard extends String {
   }
 
   anyMatch(key) {
+    if (!this.isRec) {
+      return false;
+    }
     if (this.isSimpleRec) {
       return true;
     }
