@@ -12,7 +12,7 @@ const asString = (() => {
     if (input instanceof Set) {
       return `{${[...input].map((e) => asStringRec(e)).join(',')}}`;
     }
-    return `${input.excluded === true ? '!' : ''}"${input}"`;
+    return `${input.excluded === true ? '!' : ''}"${input.value}"`;
   };
   return (input) => asStringRec(parser.parse(input));
 })();
@@ -23,7 +23,9 @@ const checkError = (input, msg, useArraySelector = true) => {
 
 describe('Testing Parser', () => {
   it('Test Result Stabilizes', () => {
-    const parsedNeedleToString = (obj) => parsedNeedleToStringArray(obj).join(',');
+    const parsedNeedleToString = (obj) => parsedNeedleToStringArray(obj)
+      .map((e) => (e.value === undefined ? e : e.value))
+      .join(',');
     for (let idx = 0; idx < 1000; idx += 1) {
       const needle = parsedNeedleToString(generateParsedNeedle());
       const parsed = parser.parse(needle);

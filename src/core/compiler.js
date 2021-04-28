@@ -128,13 +128,13 @@ const applyNeedle = (tower, needle, tree, strict, ctx) => {
         throw new Error(`Redundant Recursion: "${needle}"`);
       }
       if (!redundantRecursion) {
-        if (cur[wc] === undefined) {
+        if (cur[wc.value] === undefined) {
           const child = {};
           // eslint-disable-next-line no-param-reassign
-          cur[wc] = child;
+          cur[wc.value] = child;
           setWildcard(child, wc);
         }
-        next(cur[wc]);
+        next(cur[wc.value]);
       }
       if (wc.isStarRec) {
         next(cur);
