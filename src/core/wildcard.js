@@ -41,9 +41,8 @@ const compileWildcard = (str) => {
   return parseWildcard(str);
 };
 
-class Wildcard extends String {
+class Wildcard {
   constructor(value, excluded) {
-    super(value);
     this.value = value;
     this.excluded = excluded;
     this.regex = compileWildcard(value);
@@ -62,6 +61,9 @@ class Wildcard extends String {
   }
 
   anyMatch(key) {
+    if (!this.isRec) {
+      return false;
+    }
     if (this.isSimpleRec) {
       return true;
     }
