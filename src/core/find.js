@@ -69,7 +69,7 @@ module.exports = (haystack_, searches_, ctx) => {
     get depth() {
       return kwargs.getDepth();
     },
-    /* getResult: <ref> */
+    /* getResult: <defined-below> */
     get result() {
       return kwargs.getResult();
     },
