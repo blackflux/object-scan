@@ -2,7 +2,7 @@ module.exports = (kwargs, ctx) => {
   if (ctx.rtn === 'context') {
     return {
       onMatch: () => {},
-      finish: () => ctx.context
+      get: () => ctx.context
     };
   }
   if (ctx.rtn === 'bool') {
@@ -11,7 +11,7 @@ module.exports = (kwargs, ctx) => {
       onMatch: () => {
         result = true;
       },
-      finish: () => result
+      get: () => result
     };
   }
   if (ctx.rtn === 'count') {
@@ -20,7 +20,7 @@ module.exports = (kwargs, ctx) => {
       onMatch: () => {
         result += 1;
       },
-      finish: () => result
+      get: () => result
     };
   }
 
@@ -29,6 +29,6 @@ module.exports = (kwargs, ctx) => {
     onMatch: (Array.isArray(ctx.rtn)
       ? () => result.push(ctx.rtn.map((rtn) => kwargs[rtn]))
       : () => result.push(kwargs[ctx.rtn])),
-    finish: () => (ctx.abort ? result[0] : result)
+    get: () => (ctx.abort ? result[0] : result)
   };
 };

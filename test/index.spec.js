@@ -618,6 +618,29 @@ describe('Testing Find', () => {
     });
   });
 
+  it('Testing result', () => {
+    const input = { f: { b: { a: null, d: { c: {}, e: {} } }, g: { i: { h: {} } } } };
+    const ctx = [];
+    const r = objectScan(['**'], {
+      rtn: 'count',
+      filterFn: ({ property, result, context }) => {
+        context.push([property, result]);
+      }
+    })(input, ctx);
+    expect(r).to.equal(9);
+    expect(ctx).to.deep.equal([
+      ['h', 0],
+      ['i', 1],
+      ['g', 2],
+      ['e', 3],
+      ['c', 4],
+      ['d', 5],
+      ['a', 6],
+      ['b', 7],
+      ['f', 8]
+    ]);
+  });
+
   describe('Testing rtn', () => {
     const input = { f: { b: { a: null, d: { c: {}, e: {} } }, g: { i: { h: {} } } } };
     // eslint-disable-next-line mocha/no-setup-in-describe
