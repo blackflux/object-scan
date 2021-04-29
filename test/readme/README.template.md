@@ -239,6 +239,7 @@ where:
 - `isCircular`: true iff `value` contained in `parents`
 - `isLeaf`: true iff `value` can not be traversed
 - `depth`: length of `key`
+- `result`: intermittent result as defined by `rtn`
 - `getKey`: function that returns `key`
 - `getValue`: function that returns `value`
 - `getEntry`: function that returns `entry`
@@ -252,6 +253,7 @@ where:
 - `getIsCircular`: function that returns `isCircular`
 - `getIsLeaf`: function that returns `isLeaf`
 - `getDepth`: function that returns `depth`
+- `getResult`: function that returns `result`
 - `context`: as passed into the search
 
 Notes on Performance:

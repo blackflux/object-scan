@@ -69,10 +69,15 @@ module.exports = (haystack_, searches_, ctx) => {
     get depth() {
       return kwargs.getDepth();
     },
+    getResult: undefined,
+    get result() {
+      return kwargs.getResult();
+    },
     context: ctx.context
   };
 
   const result = Result(kwargs, ctx);
+  kwargs.getResult = () => result.get();
 
   do {
     depth = stack.pop();
@@ -100,7 +105,7 @@ module.exports = (haystack_, searches_, ctx) => {
       if (ctx.filterFn === undefined || ctx.filterFn(kwargs) !== false) {
         result.onMatch();
         if (ctx.abort) {
-          return result.finish();
+          return result.get();
         }
       }
       // eslint-disable-next-line no-continue
@@ -171,5 +176,5 @@ module.exports = (haystack_, searches_, ctx) => {
     }
   } while (stack.length !== 0);
 
-  return result.finish();
+  return result.get();
 };
