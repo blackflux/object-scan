@@ -49,7 +49,7 @@ const Tester = () => {
       const breakNonMatchedKeys = [];
       const filterMatchedKeys = [];
 
-      const serialize = (kwargs) => JSON.stringify(kwargs);
+      const serialize = ({ result, ...kwargs }) => JSON.stringify(kwargs);
 
       objectScan(needles, {
         useArraySelector,
