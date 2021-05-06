@@ -9,7 +9,6 @@ describe('Testing useArraySelector + reverse', () => {
       useArraySelector: false,
       reverse: false
     })(haystack);
-    console.log(r);
     expect(r).to.deep.equal([[0], [1]]);
   });
 });
