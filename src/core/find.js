@@ -119,8 +119,16 @@ module.exports = (haystack_, searches_, ctx) => {
 
     if (ctx.useArraySelector === false && Array.isArray(haystack)) {
       if (ctx.breakFn === undefined || ctx.breakFn(kwargs) !== true) {
-        for (let idx = 0, len = haystack.length; idx < len; idx += 1) {
-          stack.push(false, searches, idx, depth + 1);
+        if (ctx.reverse) {
+          for (let idx = 0, len = haystack.length; idx < len; idx += 1) {
+            stack.push(false, searches, idx, depth + 1);
+          }
+        } else {
+          let idx = haystack.length;
+          // eslint-disable-next-line no-plusplus
+          while (idx--) {
+            stack.push(false, searches, idx, depth + 1);
+          }
         }
       }
       // eslint-disable-next-line no-continue
