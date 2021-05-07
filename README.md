@@ -424,7 +424,7 @@ _Examples_:
 const haystack = { a: 0 };
 objectScan(['**'], {
   joined: true,
-  beforeFn: (haystack, context) => [haystack, context],
+  beforeFn: (hs, context) => [hs, context],
   rtn: 'key'
 })(haystack, { b: 0 });
 // => [ '[1].b', '[1]', '[0].a', '[0]' ]

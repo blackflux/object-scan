@@ -320,7 +320,7 @@ haystack: { a: 0 }
 context: { b: 0 }
 needles: ['**']
 comment: combining haystack and context
-beforeFn: (haystack, context) => [haystack, context]
+beforeFn: (hs, context) => [hs, context]
 rtn: 'key'
 </example></pre>
 
