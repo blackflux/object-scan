@@ -10,6 +10,8 @@ const getObjectScanOptions = (meta) => {
     joined: meta.joined === 'false' ? undefined : true,
     filterFn: meta.filterFn,
     breakFn: meta.breakFn,
+    beforeFn: meta.beforeFn,
+    afterFn: meta.afterFn,
     strict: meta.strict,
     rtn: meta.rtn,
     compareFn: meta.compareFn,

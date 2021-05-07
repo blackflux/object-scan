@@ -408,6 +408,51 @@ objectScan(['**'], {
 ```
 </details>
 
+#### beforeFn
+
+Type: `function`<br>
+Default: `undefined`
+
+When defined, this function is called before traversal as `beforeFn(haystack, context)`
+and the return value is then traversed.
+
+_Examples_:
+<details><summary> <code>['**']</code> <em>(combining haystack and context)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0 };
+objectScan(['**'], {
+  joined: true,
+  beforeFn: (hs, context) => [hs, context],
+  rtn: 'key'
+})(haystack, { b: 0 });
+// => [ '[1].b', '[1]', '[0].a', '[0]' ]
+```
+</details>
+
+#### afterFn
+
+Type: `function`<br>
+Default: `undefined`
+
+When defined, this function is called after traversal as `afterFn(result, context)`
+and the return value is returned from the search invocation.
+
+_Examples_:
+<details><summary> <code>['**']</code> <em>(returning count plus context)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0 };
+objectScan(['**'], {
+  afterFn: (result, context) => result + context,
+  rtn: 'count'
+})(haystack, 5);
+// => 6
+```
+</details>
+
 #### compareFn
 
 Type: `function`<br>
