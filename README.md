@@ -446,7 +446,6 @@ _Examples_:
 ```js
 const haystack = { a: 0 };
 objectScan(['**'], {
-  joined: true,
   afterFn: (result, context) => result + context,
   rtn: 'count'
 })(haystack, 5);

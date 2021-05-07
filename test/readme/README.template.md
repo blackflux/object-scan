@@ -340,6 +340,7 @@ needles: ['**']
 comment: returning count plus context
 afterFn: (result, context) => result + context
 rtn: 'count'
+joined: false
 </example></pre>
 
 #### compareFn
