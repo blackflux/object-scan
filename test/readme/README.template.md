@@ -306,6 +306,42 @@ comment: break function
 breakFn: ({ key }) => key === 'a.b'
 </example></pre>
 
+#### beforeFn
+
+Type: `function`<br>
+Default: `undefined`
+
+When defined, this function is called before every execution as `beforeFn(haystack, context)`
+and the return value is then used as the new `haystack`.
+
+_Examples_:
+<pre><example>
+haystack: { a: 0 }
+context: { b: 0 }
+needles: ['**']
+comment: combining haystack and context
+beforeFn: (haystack, context) => [haystack, context]
+rtn: 'key'
+</example></pre>
+
+#### afterFn
+
+Type: `function`<br>
+Default: `undefined`
+
+When defined, this function is called after every execution as `afterFn(result, context)`
+and the return value is then returned as the new `result`.
+
+_Examples_:
+<pre><example>
+haystack: { a: 0 }
+context: 5
+needles: ['**']
+comment: returning count plus context
+afterFn: (result, context) => result + context
+rtn: 'count'
+</example></pre>
+
 #### compareFn
 
 Type: `function`<br>

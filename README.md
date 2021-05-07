@@ -408,6 +408,52 @@ objectScan(['**'], {
 ```
 </details>
 
+#### beforeFn
+
+Type: `function`<br>
+Default: `undefined`
+
+When defined, this function is called before every execution as `beforeFn(haystack, context)`
+and the return value is then used as the new `haystack`.
+
+_Examples_:
+<details><summary> <code>['**']</code> <em>(combining haystack and context)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0 };
+objectScan(['**'], {
+  joined: true,
+  beforeFn: (haystack, context) => [haystack, context],
+  rtn: 'key'
+})(haystack, { b: 0 });
+// => [ '[1].b', '[1]', '[0].a', '[0]' ]
+```
+</details>
+
+#### afterFn
+
+Type: `function`<br>
+Default: `undefined`
+
+When defined, this function is called after every execution as `afterFn(result, context)`
+and the return value is then returned as the new `result`.
+
+_Examples_:
+<details><summary> <code>['**']</code> <em>(returning count plus context)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0 };
+objectScan(['**'], {
+  joined: true,
+  afterFn: (result, context) => result + context,
+  rtn: 'count'
+})(haystack, 5);
+// => 6
+```
+</details>
+
 #### compareFn
 
 Type: `function`<br>
