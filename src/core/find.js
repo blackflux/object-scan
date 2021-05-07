@@ -106,7 +106,9 @@ module.exports = (haystack_, searches_, ctx) => {
       if (ctx.filterFn === undefined || ctx.filterFn(kwargs) !== false) {
         result.onMatch();
         if (ctx.abort) {
-          return ctx.afterFn === undefined ? result.get() : ctx.afterFn(result.get(), ctx.context);
+          stack.length = 0;
+          // eslint-disable-next-line no-continue
+          continue;
         }
       }
       // eslint-disable-next-line no-continue
