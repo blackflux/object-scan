@@ -6,6 +6,7 @@ const { toPath } = require('../generic/helper');
 const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);
 
 module.exports = (haystack_, searches_, ctx) => {
+  const root = ctx.beforeFn === undefined ? haystack_ : ctx.beforeFn(haystack_, ctx.context);
   const stack = [false, searches_, null, 0];
   const path = [];
   const parents = [];
@@ -14,7 +15,7 @@ module.exports = (haystack_, searches_, ctx) => {
   let segment;
   let searches;
   let isMatch;
-  let haystack = haystack_;
+  let haystack = root;
 
   const kwargs = {
     getKey: () => formatPath(path, ctx),
@@ -98,14 +99,16 @@ module.exports = (haystack_, searches_, ctx) => {
       path[path.length - 1] = segment;
       haystack = parents[parents.length - 1][segment];
     } else {
-      haystack = haystack_;
+      haystack = root;
     }
 
     if (isMatch) {
       if (ctx.filterFn === undefined || ctx.filterFn(kwargs) !== false) {
         result.onMatch();
         if (ctx.abort) {
-          return result.get();
+          stack.length = 0;
+          // eslint-disable-next-line no-continue
+          continue;
         }
       }
       // eslint-disable-next-line no-continue
@@ -184,5 +187,5 @@ module.exports = (haystack_, searches_, ctx) => {
     }
   } while (stack.length !== 0);
 
-  return result.get();
+  return ctx.afterFn === undefined ? result.get() : ctx.afterFn(result.get(), ctx.context);
 };
