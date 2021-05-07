@@ -311,8 +311,8 @@ breakFn: ({ key }) => key === 'a.b'
 Type: `function`<br>
 Default: `undefined`
 
-When defined, this function is called before every execution as `beforeFn(haystack, context)`
-and the return value is then used as the new `haystack`.
+When defined, this function is called before traversal as `beforeFn(haystack, context)`
+and the return value is then traversed.
 
 _Examples_:
 <pre><example>
@@ -329,8 +329,8 @@ rtn: 'key'
 Type: `function`<br>
 Default: `undefined`
 
-When defined, this function is called after every execution as `afterFn(result, context)`
-and the return value is then returned as the new `result`.
+When defined, this function is called after traversal as `afterFn(result, context)`
+and the return value is returned from the search invocation.
 
 _Examples_:
 <pre><example>
