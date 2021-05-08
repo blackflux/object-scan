@@ -129,7 +129,7 @@ module.exports = (haystack_, searches_, ctx) => {
         isMatch = true;
       }
 
-      if ('' in searches[0] && path.every((p) => Number.isInteger(p))) {
+      if ('' in searches[0]) {
         assert(searches.length === 1);
         stack.push(true, [searches[0]['']], segment, depth);
         isMatch = true;
