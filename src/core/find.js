@@ -127,9 +127,7 @@ module.exports = (haystack_, searches_, ctx) => {
       if (compiler.isLastLeafMatch(searches)) {
         stack.push(true, searches, segment, depth);
         isMatch = true;
-      }
-
-      if ('' in searches[0]) {
+      } else if ('' in searches[0]) {
         assert(searches.length === 1);
         stack.push(true, [searches[0]['']], segment, depth);
         isMatch = true;
