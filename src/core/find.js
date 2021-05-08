@@ -120,36 +120,21 @@ module.exports = (haystack_, searches_, ctx) => {
       continue;
     }
 
-    if (ctx.useArraySelector === false && Array.isArray(haystack)) {
-      if (ctx.breakFn === undefined || ctx.breakFn(kwargs) !== true) {
-        if (ctx.reverse) {
-          for (let idx = 0, len = haystack.length; idx < len; idx += 1) {
-            stack.push(false, searches, idx, depth + 1);
-          }
-        } else {
-          let idx = haystack.length;
-          // eslint-disable-next-line no-plusplus
-          while (idx--) {
-            stack.push(false, searches, idx, depth + 1);
-          }
-        }
-      }
-      // eslint-disable-next-line no-continue
-      continue;
-    }
-
+    const autoTraverseArray = ctx.useArraySelector === false && Array.isArray(haystack);
     const searchesIn = searches;
 
-    if (compiler.isLastLeafMatch(searches)) {
-      stack.push(true, searches, segment, depth);
-      isMatch = true;
-    }
+    if (!autoTraverseArray) {
+      if (compiler.isLastLeafMatch(searches)) {
+        stack.push(true, searches, segment, depth);
+        isMatch = true;
+      }
 
-    if ('' in searches[0] && path.every((p) => Number.isInteger(p))) {
-      assert(searches.length === 1);
-      stack.push(true, [searches[0]['']], segment, depth);
-      isMatch = true;
-      searches = [searches[0]['']];
+      if ('' in searches[0] && path.every((p) => Number.isInteger(p))) {
+        assert(searches.length === 1);
+        stack.push(true, [searches[0]['']], segment, depth);
+        isMatch = true;
+        searches = [searches[0]['']];
+      }
     }
 
     if (
@@ -167,18 +152,22 @@ module.exports = (haystack_, searches_, ctx) => {
       for (let kIdx = 0, kLen = keys.length; kIdx < kLen; kIdx += 1) {
         const key = keys[kIdx];
         const searchesOut = [];
-        for (let sIdx = 0, sLen = searchesIn.length; sIdx !== sLen; sIdx += 1) {
-          const search = searchesIn[sIdx];
-          if (compiler.getWildcard(search).anyMatch(key)) {
-            searchesOut.push(search);
-          }
-          const values = compiler.getValues(search);
-          let eIdx = values.length;
-          // eslint-disable-next-line no-plusplus
-          while (eIdx--) {
-            const value = values[eIdx];
-            if (compiler.getWildcard(value).typeMatch(key, isArray)) {
-              searchesOut.push(value);
+        if (autoTraverseArray) {
+          searchesOut.push(...searchesIn);
+        } else {
+          for (let sIdx = 0, sLen = searchesIn.length; sIdx !== sLen; sIdx += 1) {
+            const search = searchesIn[sIdx];
+            if (compiler.getWildcard(search).anyMatch(key)) {
+              searchesOut.push(search);
+            }
+            const values = compiler.getValues(search);
+            let eIdx = values.length;
+            // eslint-disable-next-line no-plusplus
+            while (eIdx--) {
+              const value = values[eIdx];
+              if (compiler.getWildcard(value).typeMatch(key, isArray)) {
+                searchesOut.push(value);
+              }
             }
           }
         }
