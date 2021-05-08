@@ -1,4 +1,3 @@
-const assert = require('assert');
 const compiler = require('./compiler');
 const Result = require('./find-result');
 const { toPath } = require('../generic/helper');
@@ -80,6 +79,10 @@ module.exports = (haystack_, searches_, ctx) => {
   const result = Result(kwargs, ctx);
   kwargs.getResult = () => result.get();
 
+  if ('' in searches_[0] && (ctx.useArraySelector || !Array.isArray(root))) {
+    stack[1] = [...stack[1], searches_[0]['']];
+  }
+
   do {
     depth = stack.pop();
     segment = stack.pop();
@@ -121,18 +124,10 @@ module.exports = (haystack_, searches_, ctx) => {
     }
 
     const autoTraverseArray = ctx.useArraySelector === false && Array.isArray(haystack);
-    const searchesIn = searches;
 
-    if (!autoTraverseArray) {
-      if (compiler.isLastLeafMatch(searches)) {
-        stack.push(true, searches, segment, depth);
-        isMatch = true;
-      } else if ('' in searches[0]) {
-        assert(searches.length === 1);
-        stack.push(true, [searches[0]['']], segment, depth);
-        isMatch = true;
-        searches = [searches[0]['']];
-      }
+    if (!autoTraverseArray && compiler.isLastLeafMatch(searches)) {
+      stack.push(true, searches, segment, depth);
+      isMatch = true;
     }
 
     if (
@@ -151,10 +146,13 @@ module.exports = (haystack_, searches_, ctx) => {
         const key = keys[kIdx];
         const searchesOut = [];
         if (autoTraverseArray) {
-          searchesOut.push(...searchesIn);
+          searchesOut.push(...searches);
+          if ('' in searches[0]) {
+            searchesOut.push(searches[0]['']);
+          }
         } else {
-          for (let sIdx = 0, sLen = searchesIn.length; sIdx !== sLen; sIdx += 1) {
-            const search = searchesIn[sIdx];
+          for (let sIdx = 0, sLen = searches.length; sIdx !== sLen; sIdx += 1) {
+            const search = searches[sIdx];
             if (compiler.getWildcard(search).anyMatch(key)) {
               searchesOut.push(search);
             }
