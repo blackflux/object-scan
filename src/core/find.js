@@ -6,7 +6,14 @@ const { toPath } = require('../generic/helper');
 const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);
 
 module.exports = (haystack_, searches_, ctx) => {
-  const root = ctx.beforeFn === undefined ? haystack_ : ctx.beforeFn(haystack_, ctx.context);
+  const state = {
+    haystack: haystack_,
+    context: ctx.context
+  };
+  if (ctx.beforeFn !== undefined) {
+    const r = ctx.beforeFn(state);
+    assert(r === undefined, 'beforeFn must not return');
+  }
   const stack = [false, searches_, null, 0];
   const path = [];
   const parents = [];
@@ -15,7 +22,7 @@ module.exports = (haystack_, searches_, ctx) => {
   let segment;
   let searches;
   let isMatch;
-  let haystack = root;
+  let haystack = state.haystack;
 
   const kwargs = {
     getKey: () => formatPath(path, ctx),
@@ -46,9 +53,17 @@ module.exports = (haystack_, searches_, ctx) => {
     get traversedBy() {
       return kwargs.getTraversedBy();
     },
+    getGproperty: () => path[path.length - 2],
+    get gproperty() {
+      return kwargs.getGproperty();
+    },
     getProperty: () => path[path.length - 1],
     get property() {
       return kwargs.getProperty();
+    },
+    getGparent: () => parents[parents.length - 2],
+    get gparent() {
+      return kwargs.getGparent();
     },
     getParent: () => parents[parents.length - 1],
     get parent() {
@@ -74,11 +89,15 @@ module.exports = (haystack_, searches_, ctx) => {
     get result() {
       return kwargs.getResult();
     },
-    context: ctx.context
+    context: state.context
   };
 
   const result = Result(kwargs, ctx);
   kwargs.getResult = () => result.get();
+
+  if ('' in searches_[0] && (ctx.useArraySelector || !Array.isArray(state.haystack))) {
+    stack[1] = [...stack[1], searches_[0]['']];
+  }
 
   do {
     depth = stack.pop();
@@ -99,7 +118,7 @@ module.exports = (haystack_, searches_, ctx) => {
       path[path.length - 1] = segment;
       haystack = parents[parents.length - 1][segment];
     } else {
-      haystack = root;
+      haystack = state.haystack;
     }
 
     if (isMatch) {
@@ -121,18 +140,10 @@ module.exports = (haystack_, searches_, ctx) => {
     }
 
     const autoTraverseArray = ctx.useArraySelector === false && Array.isArray(haystack);
-    const searchesIn = searches;
 
-    if (!autoTraverseArray) {
-      if (compiler.isLastLeafMatch(searches)) {
-        stack.push(true, searches, segment, depth);
-        isMatch = true;
-      } else if ('' in searches[0]) {
-        assert(searches.length === 1);
-        stack.push(true, [searches[0]['']], segment, depth);
-        isMatch = true;
-        searches = [searches[0]['']];
-      }
+    if (!autoTraverseArray && compiler.isLastLeafMatch(searches)) {
+      stack.push(true, searches, segment, depth);
+      isMatch = true;
     }
 
     if (
@@ -151,10 +162,13 @@ module.exports = (haystack_, searches_, ctx) => {
         const key = keys[kIdx];
         const searchesOut = [];
         if (autoTraverseArray) {
-          searchesOut.push(...searchesIn);
+          searchesOut.push(...searches);
+          if ('' in searches[0]) {
+            searchesOut.push(searches[0]['']);
+          }
         } else {
-          for (let sIdx = 0, sLen = searchesIn.length; sIdx !== sLen; sIdx += 1) {
-            const search = searchesIn[sIdx];
+          for (let sIdx = 0, sLen = searches.length; sIdx !== sLen; sIdx += 1) {
+            const search = searches[sIdx];
             if (compiler.getWildcard(search).anyMatch(key)) {
               searchesOut.push(search);
             }
@@ -174,5 +188,10 @@ module.exports = (haystack_, searches_, ctx) => {
     }
   } while (stack.length !== 0);
 
-  return ctx.afterFn === undefined ? result.get() : ctx.afterFn(result.get(), ctx.context);
+  state.result = result.get();
+  if (ctx.afterFn !== undefined) {
+    const r = ctx.afterFn(state);
+    assert(r === undefined, 'afterFn must not return');
+  }
+  return state.result;
 };

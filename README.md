@@ -320,7 +320,9 @@ where:
 - `value`: value for key.
 - `entry`: entry consisting of [`key`, `value`].
 - `property`: current parent property.
+- `gproperty`: current grandparent property.
 - `parent`: current parent.
+- `gparent`: current grandparent.
 - `parents`: array of form `[parent, grandparent, ...]`.
 - `isMatch`: true iff last targeting needle exists and is non-excluding.
 - `matchedBy`: all non-excluding needles targeting key.
@@ -334,7 +336,9 @@ where:
 - `getValue`: function that returns `value`
 - `getEntry`: function that returns `entry`
 - `getProperty`: function that returns `property`
+- `getGproperty`: function that returns `gproperty`
 - `getParent`: function that returns `parent`
+- `getGparent`: function that returns `gparent`
 - `getParents`: function that returns `parents`
 - `getIsMatch`: function that returns `isMatch`
 - `getMatchedBy`: function that returns `matchedBy`
@@ -413,8 +417,8 @@ objectScan(['**'], {
 Type: `function`<br>
 Default: `undefined`
 
-When defined, this function is called before traversal as `beforeFn(haystack, context)`
-and the return value is then traversed.
+When defined, this function is called before traversal as `beforeFn(state = { haystack, context })`
+and `state.haystack` is then traversed using `state.context`.
 
 _Examples_:
 <details><summary> <code>['**']</code> <em>(combining haystack and context)</em> </summary>
@@ -424,7 +428,7 @@ _Examples_:
 const haystack = { a: 0 };
 objectScan(['**'], {
   joined: true,
-  beforeFn: (hs, context) => [hs, context],
+  beforeFn: (state) => { /* eslint-disable no-param-reassign */ state.haystack = [state.haystack, state.context]; },
   rtn: 'key'
 })(haystack, { b: 0 });
 // => [ '[1].b', '[1]', '[0].a', '[0]' ]
@@ -436,8 +440,8 @@ objectScan(['**'], {
 Type: `function`<br>
 Default: `undefined`
 
-When defined, this function is called after traversal as `afterFn(result, context)`
-and the return value is returned from the search invocation.
+When defined, this function is called after traversal as `afterFn(state = { result, haystack, context })`
+and `state.result` is then returned from the search invocation.
 
 _Examples_:
 <details><summary> <code>['**']</code> <em>(returning count plus context)</em> </summary>
@@ -446,7 +450,7 @@ _Examples_:
 ```js
 const haystack = { a: 0 };
 objectScan(['**'], {
-  afterFn: (result, context) => result + context,
+  afterFn: (state) => { /* eslint-disable no-param-reassign */ state.result += state.context; },
   rtn: 'count'
 })(haystack, 5);
 // => 6
@@ -583,7 +587,9 @@ Can be explicitly set as a `string`:
 - `value`: as passed into `filterFn`
 - `entry`: as passed into `filterFn`
 - `property`: as passed into `filterFn`
+- `gproperty`: as passed into `filterFn`
 - `parent`: as passed into `filterFn`
+- `gparent`: as passed into `filterFn`
 - `parents`: as passed into `filterFn`
 - `isMatch`: as passed into `filterFn`
 - `matchedBy`: as passed into `filterFn`
@@ -595,7 +601,7 @@ Can be explicitly set as a `string`:
 - `bool`: returns _true_ iff a match is found
 - `count`: returns the match count
 
-Or, when set as an `array`, can contain any of: `key`, `value`, `entry`, `property`, `parent`, `parents`, `isMatch`, `matchedBy`, `excludedBy`, `traversedBy`, `isCircular`, `isLeaf`, `depth`
+Or, when set as an `array`, can contain any of the above except `context`, `bool` and `count`.
 
 
 When **abort** is set to `true` and the result would be a list, the first match or _undefined_ is returned.
