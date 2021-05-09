@@ -126,8 +126,6 @@ module.exports = (haystack_, searches_, ctx) => {
         result.onMatch();
         if (ctx.abort) {
           stack.length = 0;
-          // eslint-disable-next-line no-continue
-          continue;
         }
       }
       // eslint-disable-next-line no-continue
