@@ -1,3 +1,4 @@
+const assert = require('assert');
 const compiler = require('./compiler');
 const Result = require('./find-result');
 const { toPath } = require('../generic/helper');
@@ -5,7 +6,14 @@ const { toPath } = require('../generic/helper');
 const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);
 
 module.exports = (haystack_, searches_, ctx) => {
-  const root = ctx.beforeFn === undefined ? haystack_ : ctx.beforeFn(haystack_, ctx.context);
+  const state = {
+    haystack: haystack_,
+    context: ctx.context
+  };
+  if (ctx.beforeFn !== undefined) {
+    const r = ctx.beforeFn(state);
+    assert(r === undefined, 'beforeFn must not return');
+  }
   const stack = [false, searches_, null, 0];
   const path = [];
   const parents = [];
@@ -14,7 +22,7 @@ module.exports = (haystack_, searches_, ctx) => {
   let segment;
   let searches;
   let isMatch;
-  let haystack = root;
+  let haystack = state.haystack;
 
   const kwargs = {
     getKey: () => formatPath(path, ctx),
@@ -73,13 +81,13 @@ module.exports = (haystack_, searches_, ctx) => {
     get result() {
       return kwargs.getResult();
     },
-    context: ctx.context
+    context: state.context
   };
 
   const result = Result(kwargs, ctx);
   kwargs.getResult = () => result.get();
 
-  if ('' in searches_[0] && (ctx.useArraySelector || !Array.isArray(root))) {
+  if ('' in searches_[0] && (ctx.useArraySelector || !Array.isArray(state.haystack))) {
     stack[1] = [...stack[1], searches_[0]['']];
   }
 
@@ -102,7 +110,7 @@ module.exports = (haystack_, searches_, ctx) => {
       path[path.length - 1] = segment;
       haystack = parents[parents.length - 1][segment];
     } else {
-      haystack = root;
+      haystack = state.haystack;
     }
 
     if (isMatch) {
@@ -172,5 +180,10 @@ module.exports = (haystack_, searches_, ctx) => {
     }
   } while (stack.length !== 0);
 
-  return ctx.afterFn === undefined ? result.get() : ctx.afterFn(result.get(), ctx.context);
+  state.result = result.get();
+  if (ctx.afterFn !== undefined) {
+    const r = ctx.afterFn(state);
+    assert(r === undefined, 'afterFn must not return');
+  }
+  return state.result;
 };

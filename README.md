@@ -413,8 +413,8 @@ objectScan(['**'], {
 Type: `function`<br>
 Default: `undefined`
 
-When defined, this function is called before traversal as `beforeFn(haystack, context)`
-and the return value is then traversed.
+When defined, this function is called before traversal as `beforeFn(state = { haystack, context })`
+and `state.haystack` is then traversed using `state.context`.
 
 _Examples_:
 <details><summary> <code>['**']</code> <em>(combining haystack and context)</em> </summary>
@@ -424,7 +424,7 @@ _Examples_:
 const haystack = { a: 0 };
 objectScan(['**'], {
   joined: true,
-  beforeFn: (hs, context) => [hs, context],
+  beforeFn: (state) => { /* eslint-disable no-param-reassign */ state.haystack = [state.haystack, state.context]; },
   rtn: 'key'
 })(haystack, { b: 0 });
 // => [ '[1].b', '[1]', '[0].a', '[0]' ]
@@ -436,8 +436,8 @@ objectScan(['**'], {
 Type: `function`<br>
 Default: `undefined`
 
-When defined, this function is called after traversal as `afterFn(result, context)`
-and the return value is returned from the search invocation.
+When defined, this function is called after traversal as `afterFn(state = { result, haystack, context })`
+and `state.result` is then returned from the search invocation.
 
 _Examples_:
 <details><summary> <code>['**']</code> <em>(returning count plus context)</em> </summary>
@@ -446,7 +446,7 @@ _Examples_:
 ```js
 const haystack = { a: 0 };
 objectScan(['**'], {
-  afterFn: (result, context) => result + context,
+  afterFn: (state) => { /* eslint-disable no-param-reassign */ state.result += state.context; },
   rtn: 'count'
 })(haystack, 5);
 // => 6
