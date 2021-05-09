@@ -28,7 +28,7 @@
       "key": "[0]",
       "value": [[0]],
       "isMatch": false,
-      "matchedBy": [],
+      "matchedBy": ["**"],
       "excludedBy": [],
       "traversedBy": ["**"],
       "parents": [[[[0]]]]
@@ -38,7 +38,7 @@
       "key": "[0][0]",
       "value": [0],
       "isMatch": false,
-      "matchedBy": [],
+      "matchedBy": ["**"],
       "excludedBy": [],
       "traversedBy": ["**"],
       "parents": [[[0]], [[[0]]]]
@@ -47,12 +47,22 @@
       "type": "breakFn",
       "key": "[0][0][0]",
       "value": 0,
-      "isMatch": false,
-      "matchedBy": [],
+      "isMatch": true,
+      "matchedBy": ["**"],
+      "excludedBy": [],
+      "traversedBy": ["**"],
+      "parents": [[0], [[0]], [[[0]]]]
+    },
+    {
+      "type": "filterFn",
+      "key": "[0][0][0]",
+      "value": 0,
+      "isMatch": true,
+      "matchedBy": ["**"],
       "excludedBy": [],
       "traversedBy": ["**"],
       "parents": [[0], [[0]], [[[0]]]]
     }
   ],
-  "result": []
+  "result": ["[0][0][0]"]
 }
