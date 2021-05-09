@@ -712,6 +712,12 @@ needles: ['**.(^$)']
 joined: false
 comment: match empty string keys
 </example></pre>
+<pre><example>
+haystack: [0, [{ a: 1 }, 2]]
+needles: ['**(^a$)']
+useArraySelector: false
+comment: star recursion matches roots
+</example></pre>
 
 ## Internals
 
