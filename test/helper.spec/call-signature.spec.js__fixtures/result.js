@@ -32,7 +32,10 @@ module.exports = {
           ]
         }
       },
+      property: undefined,
+      gproperty: undefined,
       parent: undefined,
+      gparent: undefined,
       parents: [],
       isMatch: false,
       matchedBy: [],
@@ -58,6 +61,8 @@ module.exports = {
           }
         ]
       },
+      property: 'parent',
+      gproperty: undefined,
       parent: {
         parent: {
           children: [
@@ -70,6 +75,7 @@ module.exports = {
           ]
         }
       },
+      gparent: undefined,
       parents: [
         {
           parent: {
@@ -108,6 +114,8 @@ module.exports = {
           property: 'B'
         }
       ],
+      property: 'children',
+      gproperty: 'parent',
       parent: {
         children: [
           {
@@ -117,6 +125,18 @@ module.exports = {
             property: 'B'
           }
         ]
+      },
+      gparent: {
+        parent: {
+          children: [
+            {
+              property: 'A'
+            },
+            {
+              property: 'B'
+            }
+          ]
+        }
       },
       parents: [
         {
@@ -161,6 +181,8 @@ module.exports = {
       value: {
         property: 'B'
       },
+      property: 1,
+      gproperty: 'children',
       parent: [
         {
           property: 'A'
@@ -169,6 +191,16 @@ module.exports = {
           property: 'B'
         }
       ],
+      gparent: {
+        children: [
+          {
+            property: 'A'
+          },
+          {
+            property: 'B'
+          }
+        ]
+      },
       parents: [
         [
           {
@@ -218,9 +250,19 @@ module.exports = {
       cbName: 'breakFn',
       key: 'parent.children[1].property',
       value: 'B',
+      property: 'property',
+      gproperty: 1,
       parent: {
         property: 'B'
       },
+      gparent: [
+        {
+          property: 'A'
+        },
+        {
+          property: 'B'
+        }
+      ],
       parents: [
         {
           property: 'B'
@@ -273,9 +315,19 @@ module.exports = {
       cbName: 'filterFn',
       key: 'parent.children[1].property',
       value: 'B',
+      property: 'property',
+      gproperty: 1,
       parent: {
         property: 'B'
       },
+      gparent: [
+        {
+          property: 'A'
+        },
+        {
+          property: 'B'
+        }
+      ],
       parents: [
         {
           property: 'B'
@@ -330,6 +382,8 @@ module.exports = {
       value: {
         property: 'B'
       },
+      property: 1,
+      gproperty: 'children',
       parent: [
         {
           property: 'A'
@@ -338,6 +392,16 @@ module.exports = {
           property: 'B'
         }
       ],
+      gparent: {
+        children: [
+          {
+            property: 'A'
+          },
+          {
+            property: 'B'
+          }
+        ]
+      },
       parents: [
         [
           {
@@ -391,6 +455,8 @@ module.exports = {
       value: {
         property: 'A'
       },
+      property: 0,
+      gproperty: 'children',
       parent: [
         {
           property: 'A'
@@ -399,6 +465,16 @@ module.exports = {
           property: 'B'
         }
       ],
+      gparent: {
+        children: [
+          {
+            property: 'A'
+          },
+          {
+            property: 'B'
+          }
+        ]
+      },
       parents: [
         [
           {
@@ -451,9 +527,19 @@ module.exports = {
       cbName: 'breakFn',
       key: 'parent.children[0].property',
       value: 'A',
+      property: 'property',
+      gproperty: 0,
       parent: {
         property: 'A'
       },
+      gparent: [
+        {
+          property: 'A'
+        },
+        {
+          property: 'B'
+        }
+      ],
       parents: [
         {
           property: 'A'
@@ -509,9 +595,19 @@ module.exports = {
       cbName: 'filterFn',
       key: 'parent.children[0].property',
       value: 'A',
+      property: 'property',
+      gproperty: 0,
       parent: {
         property: 'A'
       },
+      gparent: [
+        {
+          property: 'A'
+        },
+        {
+          property: 'B'
+        }
+      ],
       parents: [
         {
           property: 'A'
@@ -569,6 +665,8 @@ module.exports = {
       value: {
         property: 'A'
       },
+      property: 0,
+      gproperty: 'children',
       parent: [
         {
           property: 'A'
@@ -577,6 +675,16 @@ module.exports = {
           property: 'B'
         }
       ],
+      gparent: {
+        children: [
+          {
+            property: 'A'
+          },
+          {
+            property: 'B'
+          }
+        ]
+      },
       parents: [
         [
           {
@@ -637,6 +745,8 @@ module.exports = {
           property: 'B'
         }
       ],
+      property: 'children',
+      gproperty: 'parent',
       parent: {
         children: [
           {
@@ -646,6 +756,18 @@ module.exports = {
             property: 'B'
           }
         ]
+      },
+      gparent: {
+        parent: {
+          children: [
+            {
+              property: 'A'
+            },
+            {
+              property: 'B'
+            }
+          ]
+        }
       },
       parents: [
         {
@@ -702,6 +824,8 @@ module.exports = {
           }
         ]
       },
+      property: 'parent',
+      gproperty: undefined,
       parent: {
         parent: {
           children: [
@@ -714,6 +838,7 @@ module.exports = {
           ]
         }
       },
+      gparent: undefined,
       parents: [
         {
           parent: {
