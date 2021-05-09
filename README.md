@@ -970,6 +970,18 @@ objectScan(['**.(^$)'])(haystack);
 // => [ [ 'a', '' ], [ '' ] ]
 ```
 </details>
+<details><summary> <code>['**(^a$)']</code> <em>(star recursion matches roots)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = [0, [{ a: 1 }, 2]];
+objectScan(['**(^a$)'], {
+  joined: true,
+  useArraySelector: false
+})(haystack);
+// => [ '[1][1]', '[1][0].a', '[1][0]', '[0]' ]
+```
+</details>
 
 ## Internals
 
