@@ -161,8 +161,13 @@ module.exports = (haystack_, searches_, ctx) => {
         const searchesOut = [];
         if (autoTraverseArray) {
           searchesOut.push(...searches);
-          if ('' in searches[0]) {
-            searchesOut.push(searches[0]['']);
+          if (path.length === 0) {
+            if ('' in searches[0]) {
+              searchesOut.push(searches[0]['']);
+            }
+            searchesOut.push(...compiler
+              .getValues(searches[0])
+              .filter((v) => compiler.getWildcard(v).isStarRec));
           }
         } else {
           for (let sIdx = 0, sLen = searches.length; sIdx !== sLen; sIdx += 1) {
