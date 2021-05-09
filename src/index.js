@@ -35,7 +35,7 @@ module.exports = (needles, opts = {}) => {
     [
       undefined, 'context',
       'key', 'value', 'entry',
-      'property', 'parent', 'parents',
+      'property', 'gproperty', 'parent', 'gparent', 'parents',
       'isMatch', 'matchedBy', 'excludedBy',
       'traversedBy', 'isCircular', 'isLeaf', 'depth',
       'bool', 'count'
@@ -44,7 +44,7 @@ module.exports = (needles, opts = {}) => {
       Array.isArray(opts.rtn)
       && opts.rtn.every((e) => [
         'key', 'value', 'entry',
-        'property', 'parent', 'parents',
+        'property', 'gproperty', 'parent', 'gparent', 'parents',
         'isMatch', 'matchedBy', 'excludedBy',
         'traversedBy', 'isCircular', 'isLeaf', 'depth'
       ].includes(e))

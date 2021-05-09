@@ -53,9 +53,17 @@ module.exports = (haystack_, searches_, ctx) => {
     get traversedBy() {
       return kwargs.getTraversedBy();
     },
+    getGproperty: () => path[path.length - 2],
+    get gproperty() {
+      return kwargs.getGproperty();
+    },
     getProperty: () => path[path.length - 1],
     get property() {
       return kwargs.getProperty();
+    },
+    getGparent: () => parents[parents.length - 2],
+    get gparent() {
+      return kwargs.getGparent();
     },
     getParent: () => parents[parents.length - 1],
     get parent() {

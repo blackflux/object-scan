@@ -230,7 +230,9 @@ where:
 - `value`: value for key.
 - `entry`: entry consisting of [`key`, `value`].
 - `property`: current parent property.
+- `gproperty`: current grandparent property.
 - `parent`: current parent.
+- `gparent`: current grandparent.
 - `parents`: array of form `[parent, grandparent, ...]`.
 - `isMatch`: true iff last targeting needle exists and is non-excluding.
 - `matchedBy`: all non-excluding needles targeting key.
@@ -244,7 +246,9 @@ where:
 - `getValue`: function that returns `value`
 - `getEntry`: function that returns `entry`
 - `getProperty`: function that returns `property`
+- `getGproperty`: function that returns `gproperty`
 - `getParent`: function that returns `parent`
+- `getGparent`: function that returns `gparent`
 - `getParents`: function that returns `parents`
 - `getIsMatch`: function that returns `isMatch`
 - `getMatchedBy`: function that returns `matchedBy`
@@ -447,7 +451,9 @@ Can be explicitly set as a `string`:
 - `value`: as passed into `filterFn`
 - `entry`: as passed into `filterFn`
 - `property`: as passed into `filterFn`
+- `gproperty`: as passed into `filterFn`
 - `parent`: as passed into `filterFn`
+- `gparent`: as passed into `filterFn`
 - `parents`: as passed into `filterFn`
 - `isMatch`: as passed into `filterFn`
 - `matchedBy`: as passed into `filterFn`
@@ -459,7 +465,7 @@ Can be explicitly set as a `string`:
 - `bool`: returns _true_ iff a match is found
 - `count`: returns the match count
 
-Or, when set as an `array`, can contain any of: `key`, `value`, `entry`, `property`, `parent`, `parents`, `isMatch`, `matchedBy`, `excludedBy`, `traversedBy`, `isCircular`, `isLeaf`, `depth`
+Or, when set as an `array`, can contain any of the above except `context`, `bool` or `count`.
 
 
 When **abort** is set to `true` and the result would be a list, the first match or _undefined_ is returned.
