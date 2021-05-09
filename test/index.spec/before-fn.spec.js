@@ -6,13 +6,16 @@ describe('Testing beforeFn', () => {
   it('Testing basic usage', () => {
     const r = objectScan(['**'], {
       rtn: 'key',
-      beforeFn: (haystack, context) => [haystack, context]
+      beforeFn: (state) => {
+        // eslint-disable-next-line no-param-reassign
+        state.haystack = { ...state };
+      }
     })({ haystack: true }, { context: true });
     expect(r).to.deep.equal([
-      [1, 'context'],
-      [1],
-      [0, 'haystack'],
-      [0]
+      ['context', 'context'],
+      ['context'],
+      ['haystack', 'haystack'],
+      ['haystack']
     ]);
   });
 });

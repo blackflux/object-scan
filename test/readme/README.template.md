@@ -311,8 +311,8 @@ breakFn: ({ key }) => key === 'a.b'
 Type: `function`<br>
 Default: `undefined`
 
-When defined, this function is called before traversal as `beforeFn(haystack, context)`
-and the return value is then traversed.
+When defined, this function is called before traversal as `beforeFn(state = { haystack, context })`
+and `state.haystack` is then traversed using `state.context`.
 
 _Examples_:
 <pre><example>
@@ -320,7 +320,7 @@ haystack: { a: 0 }
 context: { b: 0 }
 needles: ['**']
 comment: combining haystack and context
-beforeFn: (hs, context) => [hs, context]
+beforeFn: (state) => { /* eslint-disable no-param-reassign */ state.haystack = [state.haystack, state.context]; }
 rtn: 'key'
 </example></pre>
 
@@ -329,8 +329,8 @@ rtn: 'key'
 Type: `function`<br>
 Default: `undefined`
 
-When defined, this function is called after traversal as `afterFn(result, context)`
-and the return value is returned from the search invocation.
+When defined, this function is called after traversal as `afterFn(state = { result, haystack, context })`
+and `state.result` is then returned from the search invocation.
 
 _Examples_:
 <pre><example>
@@ -338,7 +338,7 @@ haystack: { a: 0 }
 context: 5
 needles: ['**']
 comment: returning count plus context
-afterFn: (result, context) => result + context
+afterFn: (state) => { /* eslint-disable no-param-reassign */ state.result += state.context; }
 rtn: 'count'
 joined: false
 </example></pre>
