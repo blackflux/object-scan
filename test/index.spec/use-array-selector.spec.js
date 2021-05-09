@@ -63,5 +63,24 @@ describe('Testing useArraySelector', () => {
     it('Testing root match negated by star recursion root match', () => {
       tester([0, 1], ['', '!**'], []);
     });
+
+    it('Testing symmetry', () => {
+      const logs = [];
+      objectScan(['**'], {
+        useArraySelector: false,
+        joined: true,
+        filterFn: ({ key }) => {
+          logs.push(`filter: ${key}`);
+        },
+        breakFn: ({ key }) => {
+          logs.push(`breakFn: ${key}`);
+        }
+      })([0]);
+      expect(logs).to.deep.equal([
+        'breakFn: ',
+        'breakFn: [0]',
+        'filter: [0]'
+      ]);
+    });
   });
 });
