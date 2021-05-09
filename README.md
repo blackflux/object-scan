@@ -601,7 +601,7 @@ Can be explicitly set as a `string`:
 - `bool`: returns _true_ iff a match is found
 - `count`: returns the match count
 
-Or, when set as an `array`, can contain any of the above except `context`, `bool` or `count`.
+Or, when set as an `array`, can contain any of the above except `context`, `bool` and `count`.
 
 
 When **abort** is set to `true` and the result would be a list, the first match or _undefined_ is returned.
