@@ -2,7 +2,7 @@ module.exports = (kwargs, ctx) => {
   if (ctx.rtn === 'context') {
     return {
       onMatch: () => {},
-      get: () => ctx.context
+      get: () => kwargs.context
     };
   }
   if (ctx.rtn === 'bool') {
