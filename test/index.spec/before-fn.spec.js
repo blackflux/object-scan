@@ -18,4 +18,16 @@ describe('Testing beforeFn', () => {
       ['haystack']
     ]);
   });
+
+  it('Testing overwritten context returned', () => {
+    const r = objectScan(['**'], {
+      rtn: 'context',
+      beforeFn: (state) => {
+        expect(state.context).to.equal(undefined);
+        // eslint-disable-next-line no-param-reassign
+        state.context = { a: 1 };
+      }
+    })({ haystack: true });
+    expect(r).to.deep.equal({ a: 1 });
+  });
 });
