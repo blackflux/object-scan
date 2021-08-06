@@ -424,8 +424,8 @@ in the order determined by the `compareFn` and `reverse` option.
 When set to `true`, all targeted keys are traversed and matched
 in the order determined by the corresponding needles.
 
-Works together with and on top of `compareFn` and `reverse` option,
-i.e. when a needle matches multiple keys, the ordering "falls back" to the above.
+When a needle targets multiple keys, the ordering "falls back"
+to using the default ordering of `compareFn` and `reverse`.
 
 _Examples_:
 <pre><example>
