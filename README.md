@@ -549,10 +549,10 @@ Default: `false`
 When set to `false`, all targeted keys are traversed and matched
 in the order determined by the `compareFn` and `reverse` option.
 
-When set to `true`, first any targeted, unmatched keys are traversed
-in the order determined by the `compareFn` and `reverse` option.
-Then any matched keys are traversed and matched
-in the order defined by the corresponding needles.
+When set to `true`, all targeted keys are traversed and matched
+in the order determined by the corresponding needles.
+
+Works together with and on top of `compareFn` and `reverse` option.
 
 _Examples_:
 <details><summary> <code>['c', 'a', 'b']</code> <em>(order by needle)</em> </summary>
@@ -593,7 +593,7 @@ objectScan(['b', '*'], {
 // => [ 'b', 'a', 'c' ]
 ```
 </details>
-<details><summary> <code>['a', 'b.c', 'd']</code> <em>(not matched is traversed first)</em> </summary>
+<details><summary> <code>['a', 'b.c', 'd']</code> <em>(nested match)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -602,7 +602,7 @@ objectScan(['a', 'b.c', 'd'], {
   joined: true,
   orderByNeedles: true
 })(haystack);
-// => [ 'b.c', 'a', 'd' ]
+// => [ 'a', 'b.c', 'd' ]
 ```
 </details>
 

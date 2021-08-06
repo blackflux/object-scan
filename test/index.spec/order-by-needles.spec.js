@@ -34,8 +34,8 @@ describe('Testing orderByNeedles', () => {
     expect(r).to.deep.equal(['[2]', '[0]', '[1]', '[3]', '[4]']);
   });
 
-  it('Testing nested not matched, traversed first', () => {
-    const r = exec(['c.d', 'a', 'b', 'f', 'e'], {
+  it('Testing nested matched where expected', () => {
+    const r = exec(['a', 'b', 'c.d', 'f', 'e'], {
       a: 0,
       b: 1,
       c: { d: 2 },
@@ -43,7 +43,7 @@ describe('Testing orderByNeedles', () => {
       f: 5
     });
     expect(r).to.deep.equal([
-      'c.d', 'a', 'b', 'f', 'e'
+      'a', 'b', 'c.d', 'f', 'e'
     ]);
   });
 
@@ -73,5 +73,10 @@ describe('Testing orderByNeedles', () => {
       '[0].l[1]', '[0].l[0]',
       '[0].o[1]', '[0].o[0]'
     ]);
+  });
+
+  it('Testing matching empty needle last', () => {
+    const r = exec(['b', '', 'a'], { a: 0, b: 1 });
+    expect(r).to.deep.equal(['b', 'a', '']);
   });
 });

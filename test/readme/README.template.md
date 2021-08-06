@@ -421,10 +421,10 @@ Default: `false`
 When set to `false`, all targeted keys are traversed and matched
 in the order determined by the `compareFn` and `reverse` option.
 
-When set to `true`, first any targeted, unmatched keys are traversed
-in the order determined by the `compareFn` and `reverse` option.
-Then any matched keys are traversed and matched
-in the order defined by the corresponding needles.
+When set to `true`, all targeted keys are traversed and matched
+in the order determined by the corresponding needles.
+
+Works together with and on top of `compareFn` and `reverse` option.
 
 _Examples_:
 <pre><example>
@@ -451,7 +451,7 @@ comment: not reverse
 haystack: { a: 0, b: { c: 1 }, d: 2 }
 needles: ['a', 'b.c', 'd']
 orderByNeedles: true
-comment: not matched is traversed first
+comment: nested match
 </example></pre>
 
 #### abort

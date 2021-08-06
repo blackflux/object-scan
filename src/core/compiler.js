@@ -51,6 +51,11 @@ const setIndex = (input, index, readonly) => defineProperty(input, INDEX, index,
 const getIndex = (input) => input[INDEX];
 module.exports.getIndex = getIndex;
 
+const ORDER = Symbol('order');
+const setOrder = (input, order) => defineProperty(input, ORDER, order, true);
+const getOrder = (input) => input[ORDER];
+module.exports.getOrder = getOrder;
+
 const WILDCARD = Symbol('wildcard');
 const setWildcard = (input, wildcard) => defineProperty(input, WILDCARD, wildcard);
 const getWildcard = (input) => input[WILDCARD];
@@ -128,10 +133,11 @@ const applyNeedle = (tower, needle, tree, strict, ctx) => {
         throw new Error(`Redundant Recursion: "${needle}"`);
       }
       if (!redundantRecursion) {
-        if (cur[wc.value] === undefined) {
+        if (!(wc.value in cur)) {
           const child = {};
           // eslint-disable-next-line no-param-reassign
           cur[wc.value] = child;
+          setOrder(child, ctx.index);
           setWildcard(child, wc);
         }
         next(cur[wc.value]);
