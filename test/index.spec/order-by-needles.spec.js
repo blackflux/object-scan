@@ -79,4 +79,11 @@ describe('Testing orderByNeedles', () => {
     const r = exec(['b', '', 'a'], { a: 0, b: 1 });
     expect(r).to.deep.equal(['b', 'a', '']);
   });
+
+  it('Testing edge case ordering', () => {
+    const r = exec(['b.c', 'a', 'b', 'd'], { a: 0, b: { c: 1 }, d: 2 });
+    expect(r).to.deep.equal([
+      'b.c', 'b', 'a', 'd'
+    ]);
+  });
 });
