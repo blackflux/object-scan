@@ -52,13 +52,18 @@ describe('Testing orderByNeedles', () => {
     expect(r).to.deep.equal(['a', 'b']);
   });
 
-  it('Testing b matched by star', () => {
-    const r = exec(['**', '*', 'a'], { a: 0, b: 1 });
+  it('Testing all matched by star', () => {
+    const r = exec(['*', 'a'], { a: 0, b: 1 });
     expect(r).to.deep.equal(['b', 'a']);
   });
 
-  it('Testing b matched by starstar', () => {
+  it('Testing all matched by starstar', () => {
     const r = exec(['**', 'a'], { a: 0, b: 1 });
+    expect(r).to.deep.equal(['b', 'a']);
+  });
+
+  it('Testing all matched by starstar and star', () => {
+    const r = exec(['**', '*', 'a'], { a: 0, b: 1 });
     expect(r).to.deep.equal(['b', 'a']);
   });
 
