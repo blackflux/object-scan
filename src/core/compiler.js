@@ -61,10 +61,10 @@ const setValues = (input, entries) => defineProperty(input, VALUES, entries);
 const getValues = (input) => input[VALUES];
 module.exports.getValues = getValues;
 
-module.exports.excludedBy = (searches) => Array
-  .from(new Set([].concat(...searches.map((e) => getLeafNeedlesExclude(e)))));
 module.exports.matchedBy = (searches) => Array
   .from(new Set([].concat(...searches.map((e) => getLeafNeedlesMatch(e)))));
+module.exports.excludedBy = (searches) => Array
+  .from(new Set([].concat(...searches.map((e) => getLeafNeedlesExclude(e)))));
 module.exports.traversedBy = (searches) => Array
   .from(new Set([].concat(...searches.map((e) => getNeedles(e)))));
 
