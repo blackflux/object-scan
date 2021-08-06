@@ -551,9 +551,9 @@ in the order determined by the `compareFn` and `reverse` option.
 
 When set to `true`, all targeted keys are traversed and matched
 in the order determined by the corresponding needles.
-When a needle matches multiple keys, the ordering "falls back" to the above.
 
-Works together with and on top of `compareFn` and `reverse` option.
+Works together with and on top of `compareFn` and `reverse` option,
+i.e. when a needle matches multiple keys, the ordering "falls back" to the above.
 
 _Examples_:
 <details><summary> <code>['c', 'a', 'b']</code> <em>(order by needle)</em> </summary>
