@@ -2,6 +2,7 @@ const assert = require('assert');
 const compiler = require('./compiler');
 const Result = require('./find-result');
 const { toPath } = require('../generic/helper');
+const { getIndex } = require('./compiler');
 
 const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);
 
@@ -186,7 +187,19 @@ module.exports = (haystack_, searches_, ctx) => {
             }
           }
         }
-        stack.push(false, searchesOut, isArray ? Number(key) : key, depth + 1);
+        if (ctx.orderByNeedles) {
+          searchesOut.index = Buffer.from(searchesOut
+            .map((e) => getIndex(e))
+            .filter((e) => e !== undefined)
+            .sort());
+          let insertIdx = stack.length - kIdx * 4;
+          while (insertIdx < stack.length && Buffer.compare(searchesOut.index, stack[insertIdx + 1].index) !== 1) {
+            insertIdx += 4;
+          }
+          stack.splice(insertIdx, 0, false, searchesOut, isArray ? Number(key) : key, depth + 1);
+        } else {
+          stack.push(false, searchesOut, isArray ? Number(key) : key, depth + 1);
+        }
       }
     }
   } while (stack.length !== 0);

@@ -1,0 +1,77 @@
+const expect = require('chai').expect;
+const { describe } = require('node-tdd');
+const objectScan = require('../../src/index');
+
+const exec = (needles, obj, opts = {}) => objectScan(needles, {
+  orderByNeedles: true,
+  joined: true,
+  ...opts
+})(obj);
+
+describe('Testing orderByNeedles', () => {
+  it('Testing basic usage (object)', () => {
+    const r = exec(['c', 'a', 'b'], { a: 1, b: 2, c: 3 });
+    expect(r).to.deep.equal(['c', 'a', 'b']);
+  });
+
+  it('Testing basic usage (reverse, object)', () => {
+    const r = exec(['c', '*'], { a: 1, b: 2, c: 3 });
+    expect(r).to.deep.equal(['c', 'b', 'a']);
+  });
+
+  it('Testing basic usage (not reverse, object)', () => {
+    const r = exec(['c', '*'], { a: 1, b: 2, c: 3 }, { reverse: false });
+    expect(r).to.deep.equal(['c', 'a', 'b']);
+  });
+
+  it('Testing basic usage (array)', () => {
+    const r = exec(['[2]', '[*]'], [0, 1, 2, 3, 4]);
+    expect(r).to.deep.equal(['[2]', '[4]', '[3]', '[1]', '[0]']);
+  });
+
+  it('Testing basic usage (not reverse, array)', () => {
+    const r = exec(['[2]', '[*]'], [0, 1, 2, 3, 4], { reverse: false });
+    expect(r).to.deep.equal(['[2]', '[0]', '[1]', '[3]', '[4]']);
+  });
+
+  it('Testing nested not matched, traversed first', () => {
+    const r = exec(['c.d', 'a', 'b', 'f', 'e'], {
+      a: 0,
+      b: 1,
+      c: { d: 2 },
+      e: 4,
+      f: 5
+    });
+    expect(r).to.deep.equal([
+      'c.d', 'a', 'b', 'f', 'e'
+    ]);
+  });
+
+  it('Testing multiple matches', () => {
+    const r = exec(['**', '*', 'a', 'b'], { a: 0, b: 1 });
+    expect(r).to.deep.equal(['a', 'b']);
+  });
+
+  it('Testing b matched by star', () => {
+    const r = exec(['**', '*', 'a'], { a: 0, b: 1 });
+    expect(r).to.deep.equal(['b', 'a']);
+  });
+
+  it('Testing b matched by starstar', () => {
+    const r = exec(['**', 'a'], { a: 0, b: 1 });
+    expect(r).to.deep.equal(['b', 'a']);
+  });
+
+  it('Testing multiple nesting', () => {
+    const r = exec(['l', 'o'], [{
+      l: [{ id: 0 }, { id: 1 }],
+      o: [{ id: 0 }, { id: 1 }]
+    }], {
+      useArraySelector: false
+    });
+    expect(r).to.deep.equal([
+      '[0].l[1]', '[0].l[0]',
+      '[0].o[1]', '[0].o[0]'
+    ]);
+  });
+});

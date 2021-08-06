@@ -413,6 +413,46 @@ reverse: false
 joined: false
 </example></pre>
 
+#### orderByNeedles
+
+Type: `boolean`<br>
+Default: `false`
+
+When set to `false`, all targeted keys are traversed and matched in the input order.
+
+When set to `true`, any targeted, unmatched keys are traversed in the input order and
+then any matched keys are traversed and matched in the order defined by the corresponding needles.
+
+This option works together with and on top of `compareFn` and `reverse`.
+
+_Examples_:
+<pre><example>
+haystack: { a: 0, b: 1, c: 1 }
+needles: ['c', 'a', 'b']
+orderByNeedles: true
+comment: order by needle
+</example></pre>
+<pre><example>
+haystack: { a: 0, b: 1, c: 1 }
+needles: ['b', '*']
+orderByNeedles: true
+reverse: true
+comment: reverse
+</example></pre>
+<pre><example>
+haystack: { a: 0, b: 1, c: 1 }
+needles: ['b', '*']
+orderByNeedles: true
+reverse: false
+comment: not reverse
+</example></pre>
+<pre><example>
+haystack: { a: 0, b: { c: 1 }, d: 2 }
+needles: ['a', 'b.c', 'd']
+orderByNeedles: true
+comment: not matched is traversed first
+</example></pre>
+
 #### abort
 
 Type: `boolean`<br>

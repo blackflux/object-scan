@@ -541,6 +541,70 @@ objectScan(['**'], {
 ```
 </details>
 
+#### orderByNeedles
+
+Type: `boolean`<br>
+Default: `false`
+
+When set to `false`, all targeted keys are traversed and matched in the input order.
+
+When set to `true`, any targeted, unmatched keys are traversed in the input order and
+then any matched keys are traversed and matched in the order defined by the corresponding needles.
+
+This option works together with and on top of `compareFn` and `reverse`.
+
+_Examples_:
+<details><summary> <code>['c', 'a', 'b']</code> <em>(order by needle)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0, b: 1, c: 1 };
+objectScan(['c', 'a', 'b'], {
+  joined: true,
+  orderByNeedles: true
+})(haystack);
+// => [ 'c', 'a', 'b' ]
+```
+</details>
+<details><summary> <code>['b', '*']</code> <em>(reverse)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0, b: 1, c: 1 };
+objectScan(['b', '*'], {
+  joined: true,
+  reverse: true,
+  orderByNeedles: true
+})(haystack);
+// => [ 'b', 'c', 'a' ]
+```
+</details>
+<details><summary> <code>['b', '*']</code> <em>(not reverse)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0, b: 1, c: 1 };
+objectScan(['b', '*'], {
+  joined: true,
+  reverse: false,
+  orderByNeedles: true
+})(haystack);
+// => [ 'b', 'a', 'c' ]
+```
+</details>
+<details><summary> <code>['a', 'b.c', 'd']</code> <em>(not matched is traversed first)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0, b: { c: 1 }, d: 2 };
+objectScan(['a', 'b.c', 'd'], {
+  joined: true,
+  orderByNeedles: true
+})(haystack);
+// => [ 'b.c', 'a', 'd' ]
+```
+</details>
+
 #### abort
 
 Type: `boolean`<br>
