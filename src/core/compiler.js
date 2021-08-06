@@ -52,7 +52,7 @@ const getIndex = (input) => input[INDEX];
 module.exports.getIndex = getIndex;
 
 const ORDER = Symbol('order');
-const setOrder = (input, order) => defineProperty(input, ORDER, order, true);
+const setOrder = (input, order) => defineProperty(input, ORDER, order);
 const getOrder = (input) => input[ORDER];
 module.exports.getOrder = getOrder;
 
