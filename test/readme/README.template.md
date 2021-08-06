@@ -419,10 +419,12 @@ Type: `boolean`<br>
 Default: `false`
 
 When set to `false`, all targeted keys are traversed and matched
-in the order determined by `compareFn` and `reverse`.
+in the order determined by the `compareFn` and `reverse` option.
 
-When set to `true`, any targeted, unmatched keys are traversed in the order determined by `compareFn` and `reverse`.
-Then any matched keys are traversed and matched in the order defined by the corresponding needles.
+When set to `true`, first any targeted, unmatched keys are traversed
+in the order determined by the `compareFn` and `reverse` option.
+Then any matched keys are traversed and matched
+in the order defined by the corresponding needles.
 
 _Examples_:
 <pre><example>
