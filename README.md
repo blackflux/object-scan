@@ -550,10 +550,11 @@ When set to `false`, all targeted keys are traversed and matched
 in the order determined by the `compareFn` and `reverse` option.
 
 When set to `true`, all targeted keys are traversed and matched
-in the order determined by the corresponding needles.
+in the order determined by the corresponding needles,
+falling back to the above ordering.
 
-When the order can't be determined by the needles
-it "falls back" to using the default ordering of `compareFn` and `reverse`.
+Note that his option does not change the traversal order,
+which is always "leaf to root"
 
 _Examples_:
 <details><summary> <code>['c', 'a', 'b']</code> <em>(order by needle)</em> </summary>
