@@ -606,6 +606,18 @@ objectScan(['a', 'b.c', 'd'], {
 // => [ 'a', 'b.c', 'd' ]
 ```
 </details>
+<details><summary> <code>['b', 'a', 'b.c', 'd']</code> <em>(matches traverse first)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0, b: { c: 1 }, d: 2 };
+objectScan(['b', 'a', 'b.c', 'd'], {
+  joined: true,
+  orderByNeedles: true
+})(haystack);
+// => [ 'b.c', 'b', 'a', 'd' ]
+```
+</details>
 
 #### abort
 

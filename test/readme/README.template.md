@@ -454,6 +454,12 @@ needles: ['a', 'b.c', 'd']
 orderByNeedles: true
 comment: nested match
 </example></pre>
+<pre><example>
+haystack: { a: 0, b: { c: 1 }, d: 2 }
+needles: ['b', 'a', 'b.c', 'd']
+orderByNeedles: true
+comment: matches traverse first
+</example></pre>
 
 #### abort
 
