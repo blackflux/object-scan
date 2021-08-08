@@ -1,6 +1,7 @@
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
 const objectScan = require('../../src/index');
+const generateDataset = require('../helper/generate-dataset');
 
 const exec = (needles, obj, opts = {}) => objectScan(needles, {
   orderByNeedles: true,
@@ -90,5 +91,14 @@ describe('Testing orderByNeedles', () => {
     expect(r).to.deep.equal([
       'b.c', 'b', 'a', 'd'
     ]);
+  });
+
+  it('Testing starstar order consistent', () => {
+    for (let idx = 0; idx < 20; idx += 1) {
+      const { haystack } = generateDataset();
+      const r1 = objectScan(['**'])(haystack);
+      const r2 = objectScan(['**'], { orderByNeedles: true })(haystack);
+      expect(r1).to.deep.equal(r2);
+    }
   });
 });
