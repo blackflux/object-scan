@@ -568,7 +568,7 @@ objectScan(['c', 'a', 'b'], {
 // => [ 'c', 'a', 'b' ]
 ```
 </details>
-<details><summary> <code>['b', '*']</code> <em>(reverse)</em> </summary>
+<details><summary> <code>['b', '*']</code> <em>(fallback reverse)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -581,7 +581,7 @@ objectScan(['b', '*'], {
 // => [ 'b', 'c', 'a' ]
 ```
 </details>
-<details><summary> <code>['b', '*']</code> <em>(not reverse)</em> </summary>
+<details><summary> <code>['b', '*']</code> <em>(fallback not reverse)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js

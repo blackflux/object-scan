@@ -439,14 +439,14 @@ haystack: { a: 0, b: 1, c: 1 }
 needles: ['b', '*']
 orderByNeedles: true
 reverse: true
-comment: reverse
+comment: fallback reverse
 </example></pre>
 <pre><example>
 haystack: { a: 0, b: 1, c: 1 }
 needles: ['b', '*']
 orderByNeedles: true
 reverse: false
-comment: not reverse
+comment: fallback not reverse
 </example></pre>
 <pre><example>
 haystack: { a: 0, b: { c: 1 }, d: 2 }
