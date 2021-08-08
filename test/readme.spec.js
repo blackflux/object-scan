@@ -16,6 +16,7 @@ const getObjectScanOptions = (meta) => {
     rtn: meta.rtn,
     compareFn: meta.compareFn,
     reverse: meta.reverse,
+    orderByNeedles: meta.orderByNeedles,
     abort: meta.abort,
     useArraySelector: meta.useArraySelector
   })
