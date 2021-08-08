@@ -3,7 +3,8 @@ module.exports = ({
   haystack,
   needles,
   useArraySelector = true,
-  reverse = true
+  reverse = true,
+  orderByNeedles = false
 }) => {
   const logs = [];
   const cb = (cbName) => ({
@@ -47,12 +48,18 @@ module.exports = ({
     joined: true,
     useArraySelector,
     reverse,
+    orderByNeedles,
     filterFn: cb('filterFn'),
     breakFn: cb('breakFn')
   })(haystack);
 
   const startCompile = process.hrtime();
-  const scanner = objectScan(needles, { strict: false, useArraySelector, reverse });
+  const scanner = objectScan(needles, {
+    strict: false,
+    useArraySelector,
+    reverse,
+    orderByNeedles
+  });
   const diffCompile = process.hrtime(startCompile);
   const durationCompile = diffCompile[0] * 1e9 + diffCompile[1];
   const startTraverse = process.hrtime();
@@ -62,7 +69,11 @@ module.exports = ({
 
   let warning = null;
   try {
-    objectScan(needles, { useArraySelector, reverse });
+    objectScan(needles, {
+      useArraySelector,
+      reverse,
+      orderByNeedles
+    });
   } catch (e) {
     warning = e.message;
   }
@@ -71,6 +82,7 @@ module.exports = ({
     needles,
     useArraySelector,
     reverse,
+    orderByNeedles,
     logs,
     warning,
     duration: {

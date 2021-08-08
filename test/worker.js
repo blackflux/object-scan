@@ -4,14 +4,20 @@ const objectScanLocal = require('../src/index');
 const callSignature = require('./helper/call-signature');
 
 process.on('message', ({
-  haystack, needles, useArraySelector, reverse, useLocal
+  haystack,
+  needles,
+  useArraySelector,
+  reverse,
+  orderByNeedles,
+  useLocal
 }) => {
   const result = callSignature({
     objectScan: useLocal ? objectScanLocal : objectScanReleased,
     haystack,
     needles,
+    useArraySelector,
     reverse,
-    useArraySelector
+    orderByNeedles
   });
   process.send(result);
 });

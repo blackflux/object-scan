@@ -16,6 +16,7 @@ module.exports = {
   ],
   useArraySelector: true,
   reverse: true,
+  orderByNeedles: false,
   logs: [
     {
       cbName: 'breakFn',
