@@ -5,6 +5,8 @@ const traverser = require('../generic/traverser');
 const { defineProperty } = require('../generic/helper');
 const { Wildcard } = require('./wildcard');
 
+const COUNTER = Symbol('counter');
+
 const LEAF = Symbol('leaf');
 const markLeaf = (input, match, readonly) => defineProperty(input, LEAF, match, readonly);
 const isLeaf = (input) => LEAF in input;
@@ -51,6 +53,11 @@ const setIndex = (input, index, readonly) => defineProperty(input, INDEX, index,
 const getIndex = (input) => input[INDEX];
 module.exports.getIndex = getIndex;
 
+const ORDER = Symbol('order');
+const setOrder = (input, order) => defineProperty(input, ORDER, order);
+const getOrder = (input) => input[ORDER];
+module.exports.getOrder = getOrder;
+
 const WILDCARD = Symbol('wildcard');
 const setWildcard = (input, wildcard) => defineProperty(input, WILDCARD, wildcard);
 const getWildcard = (input) => input[WILDCARD];
@@ -61,10 +68,10 @@ const setValues = (input, entries) => defineProperty(input, VALUES, entries);
 const getValues = (input) => input[VALUES];
 module.exports.getValues = getValues;
 
-module.exports.excludedBy = (searches) => Array
-  .from(new Set([].concat(...searches.map((e) => getLeafNeedlesExclude(e)))));
 module.exports.matchedBy = (searches) => Array
   .from(new Set([].concat(...searches.map((e) => getLeafNeedlesMatch(e)))));
+module.exports.excludedBy = (searches) => Array
+  .from(new Set([].concat(...searches.map((e) => getLeafNeedlesExclude(e)))));
 module.exports.traversedBy = (searches) => Array
   .from(new Set([].concat(...searches.map((e) => getNeedles(e)))));
 
@@ -115,7 +122,7 @@ const iterate = (tower, needle, tree, { onAdd, onFin }) => {
   });
 };
 
-const applyNeedle = (tower, needle, tree, strict, ctx) => {
+const applyNeedle = (tower, needle, tree, ctx) => {
   iterate(tower, needle, tree, {
     onAdd: (cur, wc, wcParent, next) => {
       addNeedle(cur, needle);
@@ -124,14 +131,17 @@ const applyNeedle = (tower, needle, tree, strict, ctx) => {
         && wc.isStarRec
         && wc.value === wcParent.value
       );
-      if (redundantRecursion && strict) {
+      if (redundantRecursion && ctx.strict) {
         throw new Error(`Redundant Recursion: "${needle}"`);
       }
       if (!redundantRecursion) {
-        if (cur[wc.value] === undefined) {
+        if (!(wc.value in cur)) {
           const child = {};
           // eslint-disable-next-line no-param-reassign
           cur[wc.value] = child;
+          if (ctx.orderByNeedles) {
+            setOrder(child, ctx[COUNTER]);
+          }
           setWildcard(child, wc);
         }
         next(cur[wc.value]);
@@ -141,7 +151,7 @@ const applyNeedle = (tower, needle, tree, strict, ctx) => {
       }
     },
     onFin: (cur, wc, parent, excluded) => {
-      if (strict) {
+      if (ctx.strict) {
         if (wc.isSimpleStarRec) {
           const unnecessary = Object.keys(parent).filter((k) => !['**', ''].includes(k));
           if (unnecessary.length !== 0) {
@@ -150,18 +160,18 @@ const applyNeedle = (tower, needle, tree, strict, ctx) => {
         }
       }
       addNeedle(cur, needle);
-      if (strict && LEAF_NEEDLES in cur) {
+      if (ctx.strict && LEAF_NEEDLES in cur) {
         throw new Error(`Redundant Needle Target: "${cur[LEAF_NEEDLES][0]}" vs "${needle}"`);
       }
-      addLeafNeedle(cur, needle, strict);
+      addLeafNeedle(cur, needle, ctx.strict);
       if (excluded) {
         addLeafNeedleExclude(cur, needle);
       } else {
         addLeafNeedleMatch(cur, needle);
       }
-      markLeaf(cur, !excluded, strict);
-      setIndex(cur, ctx.index, strict);
-      ctx.index += 1;
+      markLeaf(cur, !excluded, ctx.strict);
+      setIndex(cur, ctx[COUNTER], ctx.strict);
+      ctx[COUNTER] += 1;
     }
   });
 };
@@ -186,13 +196,13 @@ const finalizeTower = (tower) => {
   });
 };
 
-module.exports.compile = (needles, strict = true, useArraySelector = true) => {
+module.exports.compile = (needles, ctx) => {
   const tower = {};
-  const ctx = { index: 0 };
+  ctx[COUNTER] = 0;
   for (let idx = 0; idx < needles.length; idx += 1) {
     const needle = needles[idx];
-    const tree = [parser.parse(needle, useArraySelector)];
-    applyNeedle(tower, needle, tree, strict, ctx);
+    const tree = [parser.parse(needle, ctx)];
+    applyNeedle(tower, needle, tree, ctx);
   }
   setWildcard(tower, new Wildcard('*', false));
   finalizeTower(tower);

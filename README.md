@@ -541,6 +541,84 @@ objectScan(['**'], {
 ```
 </details>
 
+#### orderByNeedles
+
+Type: `boolean`<br>
+Default: `false`
+
+When set to `false`, all targeted keys are traversed and matched
+in the order determined by the `compareFn` and `reverse` option.
+
+When set to `true`, all targeted keys are traversed and matched
+in the order determined by the corresponding needles,
+falling back to the above ordering.
+
+Note that this option is constraint by the depth-first search approach.
+
+_Examples_:
+<details><summary> <code>['c', 'a', 'b']</code> <em>(order by needle)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0, b: 1, c: 1 };
+objectScan(['c', 'a', 'b'], {
+  joined: true,
+  orderByNeedles: true
+})(haystack);
+// => [ 'c', 'a', 'b' ]
+```
+</details>
+<details><summary> <code>['b', '*']</code> <em>(fallback reverse)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0, b: 1, c: 1 };
+objectScan(['b', '*'], {
+  joined: true,
+  reverse: true,
+  orderByNeedles: true
+})(haystack);
+// => [ 'b', 'c', 'a' ]
+```
+</details>
+<details><summary> <code>['b', '*']</code> <em>(fallback not reverse)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0, b: 1, c: 1 };
+objectScan(['b', '*'], {
+  joined: true,
+  reverse: false,
+  orderByNeedles: true
+})(haystack);
+// => [ 'b', 'a', 'c' ]
+```
+</details>
+<details><summary> <code>['a', 'b.c', 'd']</code> <em>(nested match)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0, b: { c: 1 }, d: 2 };
+objectScan(['a', 'b.c', 'd'], {
+  joined: true,
+  orderByNeedles: true
+})(haystack);
+// => [ 'a', 'b.c', 'd' ]
+```
+</details>
+<details><summary> <code>['b', 'a', 'b.c', 'd']</code> <em>(matches traverse first)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0, b: { c: 1 }, d: 2 };
+objectScan(['b', 'a', 'b.c', 'd'], {
+  joined: true,
+  orderByNeedles: true
+})(haystack);
+// => [ 'b.c', 'b', 'a', 'd' ]
+```
+</details>
+
 #### abort
 
 Type: `boolean`<br>
