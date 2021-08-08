@@ -553,8 +553,7 @@ When set to `true`, all targeted keys are traversed and matched
 in the order determined by the corresponding needles,
 falling back to the above ordering.
 
-Note that his option does not change the traversal order,
-which is always "leaf to root"
+Note that this option is constraint by the depth-first search approach.
 
 _Examples_:
 <details><summary> <code>['c', 'a', 'b']</code> <em>(order by needle)</em> </summary>
