@@ -6,7 +6,7 @@ const throwError = (msg, input, context = {}) => {
     .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
 };
 
-module.exports.parse = (input, useArraySelector = true) => {
+module.exports.parse = (input, ctx) => {
   if (input === '') {
     return new Wildcard('', false);
   }
@@ -24,7 +24,7 @@ module.exports.parse = (input, useArraySelector = true) => {
           result.finishElement(idx, { err: 'Bad Path Separator', fins: [']', '}'] });
           break;
         case '[':
-          if (useArraySelector === false) {
+          if (!ctx.useArraySelector) {
             throwError('Forbidden Array Selector', input, { char: idx });
           }
           result.finishElement(idx, { err: 'Bad Array Start', fins: [null, '!', '{', ',', '}', ']'] });

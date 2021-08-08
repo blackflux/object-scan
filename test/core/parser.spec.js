@@ -1,8 +1,11 @@
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
 const parser = require('../../src/core/parser');
+const Context = require('../../src/core/context');
 const generateParsedNeedle = require('../helper/generate-parsed-needle');
 const parsedNeedleToStringArray = require('../helper/parsed-needle-to-string-array');
+
+const parse = (input, ctx = {}) => parser.parse(input, Context(ctx));
 
 const asString = (() => {
   const asStringRec = (input) => {
@@ -14,11 +17,11 @@ const asString = (() => {
     }
     return `${input.excluded === true ? '!' : ''}"${input.value}"`;
   };
-  return (input) => asStringRec(parser.parse(input));
+  return (input) => asStringRec(parse(input));
 })();
 
 const checkError = (input, msg, useArraySelector = true) => {
-  expect(() => parser.parse(input, useArraySelector)).to.throw(msg);
+  expect(() => parse(input, { useArraySelector })).to.throw(msg);
 };
 
 describe('Testing Parser', () => {
@@ -28,9 +31,9 @@ describe('Testing Parser', () => {
       .join(',');
     for (let idx = 0; idx < 1000; idx += 1) {
       const needle = parsedNeedleToString(generateParsedNeedle());
-      const parsed = parser.parse(needle);
+      const parsed = parse(needle);
       const needleOptimized = parsedNeedleToString(parsed);
-      const parsedOptimized = parser.parse(needleOptimized);
+      const parsedOptimized = parse(needleOptimized);
       expect(needleOptimized).to.deep.equal(parsedNeedleToString(parsedOptimized));
     }
   });
