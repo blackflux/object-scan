@@ -43,23 +43,21 @@ module.exports = ({
       result: [...result]
     });
   };
-  const result = objectScan(needles, {
-    strict: false,
-    joined: true,
+  const kwargs = {
     useArraySelector,
     reverse,
-    orderByNeedles,
+    orderByNeedles
+  };
+  const result = objectScan(needles, {
+    ...kwargs,
+    strict: false,
+    joined: true,
     filterFn: cb('filterFn'),
     breakFn: cb('breakFn')
   })(haystack);
 
   const startCompile = process.hrtime();
-  const scanner = objectScan(needles, {
-    strict: false,
-    useArraySelector,
-    reverse,
-    orderByNeedles
-  });
+  const scanner = objectScan(needles, { ...kwargs, strict: false });
   const diffCompile = process.hrtime(startCompile);
   const durationCompile = diffCompile[0] * 1e9 + diffCompile[1];
   const startTraverse = process.hrtime();
@@ -69,11 +67,7 @@ module.exports = ({
 
   let warning = null;
   try {
-    objectScan(needles, {
-      useArraySelector,
-      reverse,
-      orderByNeedles
-    });
+    objectScan(needles, kwargs);
   } catch (e) {
     warning = e.message;
   }
