@@ -14,8 +14,11 @@ module.exports = {
   needles: [
     '**'
   ],
-  useArraySelector: true,
-  reverse: true,
+  kwargs: {
+    useArraySelector: true,
+    reverse: true,
+    orderByNeedles: false
+  },
   logs: [
     {
       cbName: 'breakFn',
