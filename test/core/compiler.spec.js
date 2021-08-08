@@ -1,87 +1,90 @@
 const expect = require('chai').expect;
 const { describe } = require('node-tdd');
+const Context = require('../../src/core/context');
 const compiler = require('../../src/core/compiler');
+
+const compile = (needles, ctx = {}) => compiler.compile(needles, Context(ctx));
 
 describe('Testing compiler', () => {
   describe('Testing Redundant Needle Target Errors', () => {
     it('Testing redundant needle target', () => {
-      expect(() => compiler.compile(['{a,b}', 'a']))
+      expect(() => compile(['{a,b}', 'a']))
         .to.throw('Redundant Needle Target: "{a,b}" vs "a"');
     });
 
     it('Testing redundant recursion (starstar)', () => {
-      expect(() => compiler.compile(['**.**']))
+      expect(() => compile(['**.**']))
         .to.throw('Redundant Recursion: "**.**"');
     });
 
     it('Mixed subsequent needle collision', () => {
-      expect(() => compiler.compile(['bar', '!foo', 'foo']))
+      expect(() => compile(['bar', '!foo', 'foo']))
         .to.throw('Redundant Needle Target: "!foo" vs "foo"');
-      expect(() => compiler.compile(['bar', 'foo', '!foo']))
+      expect(() => compile(['bar', 'foo', '!foo']))
         .to.throw('Redundant Needle Target: "foo" vs "!foo"');
     });
 
     it('Mixed spaced needle collision', () => {
-      expect(() => compiler.compile(['!foo', 'bar', 'foo']))
+      expect(() => compile(['!foo', 'bar', 'foo']))
         .to.throw('Redundant Needle Target: "!foo" vs "foo"');
-      expect(() => compiler.compile(['foo', 'bar', '!foo']))
+      expect(() => compile(['foo', 'bar', '!foo']))
         .to.throw('Redundant Needle Target: "foo" vs "!foo"');
     });
 
     it('Inclusion, subsequent needle collision', () => {
-      expect(() => compiler.compile(['once', 'once', '!o*']))
+      expect(() => compile(['once', 'once', '!o*']))
         .to.throw('Redundant Needle Target: "once" vs "once"');
     });
 
     it('Inclusion, spaced needle collision', () => {
-      expect(() => compiler.compile(['once', '!o*', 'once']))
+      expect(() => compile(['once', '!o*', 'once']))
         .to.throw('Redundant Needle Target: "once" vs "once"');
     });
 
     it('Exclusion, subsequent needle collision', () => {
-      expect(() => compiler.compile(['!once', '!once', 'o*']))
+      expect(() => compile(['!once', '!once', 'o*']))
         .to.throw('Redundant Needle Target: "!once" vs "!once"');
     });
 
     it('Exclusion, spaced needle collision', () => {
-      expect(() => compiler.compile(['!once', 'o*', '!once']))
+      expect(() => compile(['!once', 'o*', '!once']))
         .to.throw('Redundant Needle Target: "!once" vs "!once"');
     });
 
     it('Nested Exclusion Target collision', () => {
-      expect(() => compiler.compile(['a.b.c', 'a.!b.*', 'a.b.*']))
+      expect(() => compile(['a.b.c', 'a.!b.*', 'a.b.*']))
         .to.throw('Redundant Needle Target: "a.!b.*" vs "a.b.*"');
     });
 
     it('Needle Target Invalidated', () => {
-      expect(() => compiler.compile(['a.b', 'a.!**']))
+      expect(() => compile(['a.b', 'a.!**']))
         .to.throw('Needle Target Invalidated: "a.b" by "a.!**"');
     });
 
     it('Testing redundant exclusion', () => {
-      expect(() => compiler.compile(['!a.!b']))
+      expect(() => compile(['!a.!b']))
         .to.throw('Redundant Exclusion: "!a.!b"');
-      expect(() => compiler.compile(['{!a}.{!b}']))
+      expect(() => compile(['{!a}.{!b}']))
         .to.throw('Redundant Exclusion: "{!a}.{!b}"');
-      expect(() => compiler.compile(['{!a,c}.{!b,d}']))
+      expect(() => compile(['{!a,c}.{!b,d}']))
         .to.throw('Redundant Exclusion: "{!a,c}.{!b,d}"');
-      expect(() => compiler.compile(['[{!0,1}][{!2,3}]']))
+      expect(() => compile(['[{!0,1}][{!2,3}]']))
         .to.throw('Redundant Exclusion: "[{!0,1}][{!2,3}]"');
-      expect(() => compiler.compile(['!{[1][2],*,{a,b},{a.!b}}']))
+      expect(() => compile(['!{[1][2],*,{a,b},{a.!b}}']))
         .to.throw('Redundant Exclusion: "!{[1][2],*,{a,b},{a.!b}}"');
     });
   });
 
   it('Testing similar paths', () => {
     const input = ['a.b.c.d.e', 'a.b.c.d.f'];
-    const tower = compiler.compile(input);
+    const tower = compile(input);
     expect(tower).to.deep.equal({ a: { b: { c: { d: { e: {}, f: {} } } } } });
   });
 
   it('Testing expensive path', () => {
     const count = 10;
     const input = '[{0,1}]'.repeat(count);
-    const tower = compiler.compile([input]);
+    const tower = compile([input]);
     const str = JSON.stringify(tower);
     expect(str.endsWith(`{}}${'}'.repeat(count)}`));
   });
@@ -89,7 +92,7 @@ describe('Testing compiler', () => {
   describe('Testing path component exclusion', () => {
     it('Testing forward exclusion inheritance in component path', () => {
       const input = ['{!a}.{b}'];
-      const tower = compiler.compile(input);
+      const tower = compile(input);
       expect(tower).to.deep.equal({ a: { b: {} } });
       expect(compiler.hasMatches(tower)).to.equal(false);
       expect(compiler.hasMatches(tower.a)).to.equal(false);
@@ -98,7 +101,7 @@ describe('Testing compiler', () => {
 
     it('Testing no backward exclusion inheritance in component path', () => {
       const input = ['{a}.{!b}'];
-      const tower = compiler.compile(input);
+      const tower = compile(input);
       expect(tower).to.deep.equal({ a: { b: {} } });
       expect(compiler.hasMatches(tower)).to.equal(false);
       expect(compiler.hasMatches(tower.a)).to.equal(false);
@@ -108,7 +111,7 @@ describe('Testing compiler', () => {
 
   it('Testing similar paths exclusion', () => {
     const input = ['a.b.c.d.e', '!a.b.c.d.f'];
-    const tower = compiler.compile(input);
+    const tower = compile(input);
     expect(tower).to.deep.equal({ a: { b: { c: { d: { e: {}, f: {} } } } } });
     expect(compiler.hasMatches(tower)).to.equal(true);
     expect(compiler.hasMatches(tower.a)).to.equal(true);
@@ -121,7 +124,7 @@ describe('Testing compiler', () => {
 
   it('Testing top level exclusion', () => {
     const input = ['!a'];
-    const tower = compiler.compile(input);
+    const tower = compile(input);
     expect(tower).to.deep.equal({ a: {} });
     expect(compiler.hasMatches(tower)).to.equal(false);
     expect(compiler.hasMatches(tower.a)).to.equal(false);
@@ -129,7 +132,7 @@ describe('Testing compiler', () => {
 
   it('Testing Or Paths', () => {
     const input = ['{a,b.c}'];
-    const tower = compiler.compile(input);
+    const tower = compile(input);
     expect(tower).to.deep.equal({
       a: {},
       b: {
@@ -140,7 +143,7 @@ describe('Testing compiler', () => {
 
   it('Testing Top Level Or', () => {
     const input = ['a,b'];
-    const tower = compiler.compile(input);
+    const tower = compile(input);
     expect(tower).to.deep.equal({
       a: {},
       b: {}
@@ -149,7 +152,7 @@ describe('Testing compiler', () => {
 
   it('Testing Nested Or', () => {
     const input = ['{a,{b,c}}'];
-    const tower = compiler.compile(input);
+    const tower = compile(input);
     expect(tower).to.deep.equal({
       a: {},
       b: {},
@@ -159,7 +162,7 @@ describe('Testing compiler', () => {
 
   it('Testing Nested Or in List', () => {
     const input = ['[{1,{0,2}}]'];
-    const tower = compiler.compile(input);
+    const tower = compile(input);
     expect(tower).to.deep.equal({
       '[0]': {},
       '[1]': {},
@@ -180,7 +183,7 @@ describe('Testing compiler', () => {
       '*a',
       'a*'
     ];
-    const tower = compiler.compile(input, false);
+    const tower = compile(input, { strict: false });
     expect(tower).to.deep.equal({
       a: { b: {} },
       '**': { b: {} },
@@ -204,7 +207,7 @@ describe('Testing compiler', () => {
       '[*0]',
       '[0*]'
     ];
-    const tower = compiler.compile(input, false);
+    const tower = compile(input, { strict: false });
     expect(tower).to.deep.equal({
       '[0]': { '[1]': {} },
       '**': { '[1]': {} },
@@ -217,7 +220,7 @@ describe('Testing compiler', () => {
 
   it('Testing Complex Path', () => {
     const input = ['a[1].{hello.you,there[1].*,{a.b}}[{1}],a[2],a[1].*'];
-    const tower = compiler.compile(input);
+    const tower = compile(input);
     expect(tower).to.deep.equal({
       a: {
         '[1]': {
@@ -247,14 +250,14 @@ describe('Testing compiler', () => {
 
   it('Testing matchedBy results are unique', () => {
     const input = ['**', '**.**'];
-    const tower = compiler.compile(input, false);
+    const tower = compile(input, { strict: false });
     expect(compiler.matchedBy([tower['**'], tower['**']]))
       .to.deep.equal(['**', '**.**']);
   });
 
   it('Testing traversing', () => {
     const input = ['a.{b,c}.d', 'a.{c,e}.f', '!a.b.d.g'];
-    const tower = compiler.compile(input);
+    const tower = compile(input);
     expect(tower).to.deep.equal({
       a: {
         b: {
