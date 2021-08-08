@@ -102,11 +102,7 @@ const execute = async () => {
     if (!isEqual(signatureReleased, signatureLocal)) {
       log(`Mismatch for seed: ${rng.seed}`);
       const diff = createHtmlDiff(rng.seed, signatureReleased, signatureLocal, {
-        haystack,
-        needles,
-        useArraySelector,
-        reverse,
-        orderByNeedles,
+        kwargs,
         seed: rng.seed
       });
       fs.smartWrite(path.join(__dirname, '..', 'debug', `${rng.seed}.html`), diff.split('\n'));

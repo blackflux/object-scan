@@ -74,9 +74,7 @@ module.exports = ({
   return {
     haystack,
     needles,
-    useArraySelector,
-    reverse,
-    orderByNeedles,
+    kwargs,
     logs,
     warning,
     duration: {
