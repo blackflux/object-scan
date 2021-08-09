@@ -944,7 +944,7 @@ describe('Testing Find', () => {
     const filterFn = ({ property, context }) => {
       context.filterFn.push(property);
     };
-    const compareFn = (a, b) => a.localeCompare(b);
+    const compareFn = () => (a, b) => a.localeCompare(b);
     const options = { breakFn, filterFn, compareFn };
     const tree = { a: {}, c: {}, b: [{ d: {}, f: {}, e: {} }, { g: {}, h: {}, i: {} }] };
     expect(objectScan(['**'], options)(tree, { filterFn: [], breakFn: [] }))
