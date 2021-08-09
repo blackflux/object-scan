@@ -152,7 +152,7 @@ module.exports = (haystack_, searches_, ctx) => {
       const isArray = Array.isArray(haystack);
       const keys = Object.keys(haystack);
       if (!isArray && ctx.compareFn) {
-        keys.sort(ctx.compareFn);
+        keys.sort(ctx.compareFn(kwargs));
       }
       if (!ctx.reverse) {
         keys.reverse();
