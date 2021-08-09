@@ -479,7 +479,7 @@ objectScan(['**'], {
   compareFn: () => (k1, k2) => k1.localeCompare(k2),
   reverse: false
 })(haystack);
-// => 'TypeError: k1.localeCompare is not a function'
+// => [ 'a', 'b', 'c' ]
 ```
 </details>
 
