@@ -61,11 +61,13 @@ const execute = async () => {
     const { rng, haystack, paths } = generateDataset();
     const useArraySelector = rng() > 0.2;
     const reverse = rng() > 0.5;
+    const orderByNeedles = rng() > 0.9;
     const needles = generateNeedles({
       rng,
       paths,
       useArraySelector,
       reverse,
+      orderByNeedles,
       modifierParams: (p) => ({
         lenPercentage: rng() > 0.1 ? rng() : 1,
         questionMark: rng() > 0.15 ? 0 : Math.floor(rng() * p.length) + 1,
@@ -81,7 +83,11 @@ const execute = async () => {
     });
 
     const kwargs = {
-      haystack, needles, useArraySelector, reverse
+      haystack,
+      needles,
+      useArraySelector,
+      reverse,
+      orderByNeedles
     };
     // eslint-disable-next-line no-await-in-loop
     const [signatureLocal, signatureReleased] = await Promise.all([
@@ -96,10 +102,7 @@ const execute = async () => {
     if (!isEqual(signatureReleased, signatureLocal)) {
       log(`Mismatch for seed: ${rng.seed}`);
       const diff = createHtmlDiff(rng.seed, signatureReleased, signatureLocal, {
-        haystack,
-        needles,
-        useArraySelector,
-        reverse,
+        kwargs,
         seed: rng.seed
       });
       fs.smartWrite(path.join(__dirname, '..', 'debug', `${rng.seed}.html`), diff.split('\n'));
