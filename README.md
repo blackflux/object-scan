@@ -462,7 +462,9 @@ objectScan(['**'], {
 Type: `function`<br>
 Default: `undefined`
 
-When defined, this function is used as a comparator to determine the traversal order of any `object` keys.
+This function has the same signature as the callback functions. When defined it is expected to return a `function` or `undefined`.
+
+The returned value is used as a comparator to determine the traversal order of any `object` keys.
 
 This works together with the `reverse` option.
 
@@ -474,7 +476,7 @@ _Examples_:
 const haystack = { a: 0, c: 1, b: 2 };
 objectScan(['**'], {
   joined: true,
-  compareFn: (k1, k2) => k1.localeCompare(k2),
+  compareFn: () => (k1, k2) => k1.localeCompare(k2),
   reverse: false
 })(haystack);
 // => [ 'a', 'b', 'c' ]
