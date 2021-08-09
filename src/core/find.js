@@ -189,11 +189,12 @@ module.exports = (haystack_, searches_, ctx) => {
         }
         if (ctx.orderByNeedles) {
           searchesOut.index = Buffer.from(searchesOut.map((e) => getOrder(e)).sort());
-          let insertIdx = stack.length - kIdx * 4;
-          while (insertIdx < stack.length && Buffer.compare(searchesOut.index, stack[insertIdx + 1].index) !== 1) {
-            insertIdx += 4;
+          let checkIdx = stack.length - 3;
+          const checkIdxMin = checkIdx - kIdx * 4;
+          while (checkIdx !== checkIdxMin && Buffer.compare(searchesOut.index, stack[checkIdx].index) === 1) {
+            checkIdx -= 4;
           }
-          stack.splice(insertIdx, 0, false, searchesOut, isArray ? Number(key) : key, depth + 1);
+          stack.splice(checkIdx + 3, 0, false, searchesOut, isArray ? Number(key) : key, depth + 1);
         } else {
           stack.push(false, searchesOut, isArray ? Number(key) : key, depth + 1);
         }
