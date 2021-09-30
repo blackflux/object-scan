@@ -580,7 +580,6 @@ needles: ['**']
 joined: false
 rtn: ({ value }) => value + 1
 filterFn: ({ isLeaf }) => isLeaf
-context: []
 comment: return value plus one
 </example></pre>
 

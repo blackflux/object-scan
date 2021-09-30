@@ -760,7 +760,7 @@ const haystack = { a: { b: { c: 0, d: 1 } } };
 objectScan(['**'], {
   filterFn: ({ isLeaf }) => isLeaf,
   rtn: ({ value }) => value + 1
-})(haystack, []);
+})(haystack);
 // => [ 2, 1 ]
 ```
 </details>
