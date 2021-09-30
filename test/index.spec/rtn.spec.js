@@ -15,6 +15,7 @@ describe('Testing rtn', () => {
     ['value', [input, null]],
     ['entry', [[['f', 'g'], input], [['f', 'b', 'a'], null]]],
     [['property', 'value'], [['g', input], ['a', null]]],
+    [({ property }) => property === 'g', [true, false]],
     ['property', ['g', 'a']],
     ['gproperty', ['f', 'b']],
     // eslint-disable-next-line mocha/no-setup-in-describe
