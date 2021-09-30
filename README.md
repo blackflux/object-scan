@@ -686,7 +686,7 @@ When set to `array`, can contain any of the above except `context`, `bool` and `
 When set to `function`, called with _callback_ signature for every match. Returned value is added to the result.
 
 When **abort** is set to `true` and _rtn_ is not `context`, `bool` or `count`,
-the first entry or the result or _undefined_ is returned.
+the first entry of the result or _undefined_ is returned.
 
 _Examples_:
 <details><summary> <code>['[*]']</code> <em>(return values)</em> </summary>
