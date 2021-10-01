@@ -490,7 +490,7 @@ comment: abort changes count
 
 #### rtn
 
-Type: `string` or `array`<br>
+Type: `string` or `array` or `function`<br>
 Default: _dynamic_
 
 Defaults to `key` when search context is _undefined_ and to `context` otherwise.
@@ -515,10 +515,12 @@ Can be explicitly set as a `string`:
 - `bool`: returns _true_ iff a match is found
 - `count`: returns the match count
 
-Or, when set as an `array`, can contain any of the above except `context`, `bool` and `count`.
+When set to `array`, can contain any of the above except `context`, `bool` and `count`.
 
+When set to `function`, called with _callback_ signature for every match. Returned value is added to the result.
 
-When **abort** is set to `true` and the result would be a list, the first match or _undefined_ is returned.
+When **abort** is set to `true` and _rtn_ is not `context`, `bool` or `count`,
+the first entry of the result or _undefined_ is returned.
 
 _Examples_:
 <pre><example>
@@ -571,6 +573,14 @@ joined: false
 rtn: ['property', 'value']
 context: []
 comment: return custom array
+</example></pre>
+<pre><example>
+haystack: { a: { b: { c: 0, d: 1 } } }
+needles: ['**']
+joined: false
+rtn: ({ value }) => value + 1
+filterFn: ({ isLeaf }) => isLeaf
+comment: return value plus one
 </example></pre>
 
 #### joined

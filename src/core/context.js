@@ -27,7 +27,11 @@ module.exports = (opts) => {
   assert(typeof ctx.orderByNeedles === 'boolean');
   assert(typeof ctx.abort === 'boolean');
   assert(
-    [
+    (
+      typeof ctx.rtn === 'function'
+      && ctx.rtn.length === 1
+    )
+    || [
       undefined, 'context',
       'key', 'value', 'entry',
       'property', 'gproperty', 'parent', 'gparent', 'parents',
