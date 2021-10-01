@@ -26,9 +26,15 @@ module.exports = (kwargs, ctx) => {
 
   const result = [];
   return {
-    onMatch: (Array.isArray(ctx.rtn)
-      ? () => result.push(ctx.rtn.map((rtn) => kwargs[rtn]))
-      : () => result.push(kwargs[ctx.rtn])),
+    onMatch: (() => {
+      if (typeof ctx.rtn === 'function') {
+        return () => result.push(ctx.rtn(kwargs));
+      }
+      if (Array.isArray(ctx.rtn)) {
+        return () => result.push(ctx.rtn.map((rtn) => kwargs[rtn]));
+      }
+      return () => result.push(kwargs[ctx.rtn]);
+    })(),
     get: () => (ctx.abort ? result[0] : result)
   };
 };
