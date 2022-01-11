@@ -1,4 +1,4 @@
-module.exports = (kwargs, ctx) => {
+export default (kwargs, ctx) => {
   if (ctx.rtn === 'context') {
     return {
       onMatch: () => {},

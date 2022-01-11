@@ -1,9 +1,9 @@
-const fs = require('smart-fs');
-const path = require('path');
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const Mustache = require('mustache');
-const stringify = require('./helper/stringify');
+import fs from 'smart-fs';
+import path from 'path';
+import { describe } from 'node-tdd';
+import Mustache from 'mustache';
+import { expect } from 'chai';
+import stringify from './helper/stringify';
 
 const getObjectScanOptions = (meta) => {
   const entries = Object.entries({

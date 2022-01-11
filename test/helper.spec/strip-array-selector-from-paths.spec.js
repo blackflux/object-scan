@@ -1,6 +1,6 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const stripArraySelectorFromPaths = require('../helper/strip-array-selector-from-paths');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import stripArraySelectorFromPaths from '../helper/strip-array-selector-from-paths';
 
 describe('Testing strip-array-selector-from-paths.js', () => {
   it('Testing example', () => {

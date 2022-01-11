@@ -1,7 +1,7 @@
-const objectScanReleased = require('object-scan');
-const objectScanLocal = require('../src/index');
+import objectScanReleased from 'object-scan';
+import objectScanLocal from '../src/index';
 
-const callSignature = require('./helper/call-signature');
+import callSignature from './helper/call-signature';
 
 process.on('message', ({
   haystack,

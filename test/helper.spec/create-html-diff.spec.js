@@ -1,11 +1,11 @@
-const expect = require('chai').expect;
-const fs = require('smart-fs');
-const path = require('path');
-const { describe } = require('node-tdd');
-const createHtmlDiff = require('../helper/create-html-diff');
+import fs from 'smart-fs';
+import path from 'path';
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import createHtmlDiff from '../helper/create-html-diff';
 
 describe('Testing create-html-diff.js', () => {
-  it('Testing example', ({ fixture }) => {
+  it('Testing example', () => {
     const r = createHtmlDiff('name', { a: 1 }, { a: 1, b: 2 });
     expect(fs.smartWrite(
       path.join(`${__filename}__fixtures`, 'example.html'),
@@ -13,7 +13,7 @@ describe('Testing create-html-diff.js', () => {
     )).to.equal(false);
   });
 
-  it('Testing example with meta', ({ fixture }) => {
+  it('Testing example with meta', () => {
     const r = createHtmlDiff('name', { a: 1 }, { a: 1, b: 2 }, {
       bool: true,
       data: { value: 1 }

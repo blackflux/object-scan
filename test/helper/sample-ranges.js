@@ -1,7 +1,7 @@
-const Joi = require('joi-strict');
-const sampleArray = require('./sample-array');
+import Joi from 'joi-strict';
+import sampleArray from './sample-array';
 
-module.exports = (...args) => {
+export default (...args) => {
   Joi.assert(args, Joi.array().ordered(
     Joi.number().integer().min(0),
     Joi.number().integer().min(0),

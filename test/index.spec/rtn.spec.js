@@ -1,6 +1,6 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const objectScan = require('../../src/index');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import objectScan from '../../src/index';
 
 describe('Testing rtn', () => {
   const input = { f: { b: { a: null, d: { c: {}, e: {} } }, g: { i: { h: {} } } } };

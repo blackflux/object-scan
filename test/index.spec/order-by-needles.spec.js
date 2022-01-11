@@ -1,7 +1,7 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const objectScan = require('../../src/index');
-const generateDataset = require('../helper/generate-dataset');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import objectScan from '../../src/index';
+import generateDataset from '../helper/generate-dataset';
 
 const exec = (needles, obj, opts = {}) => objectScan(needles, {
   orderByNeedles: true,

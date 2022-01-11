@@ -1,6 +1,6 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const stringify = require('../helper/stringify');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import stringify from '../helper/stringify';
 
 describe('Testing stringify.js', () => {
   it('Testing array', () => {

@@ -1,11 +1,11 @@
-const Joi = require('joi-strict');
-const { escape, escapeRegex } = require('../../src/generic/helper');
-const sampleArray = require('./sample-array');
-const sampleArrayGrouped = require('./sample-array-grouped');
-const sampleRanges = require('./sample-ranges');
-const shuffleArray = require('./shuffle-array');
+import Joi from 'joi-strict';
+import { escape, escapeRegex } from '../../src/generic/helper';
+import sampleArray from './sample-array';
+import sampleArrayGrouped from './sample-array-grouped';
+import sampleRanges from './sample-ranges';
+import shuffleArray from './shuffle-array';
 
-module.exports = (...kwargs) => {
+export default (...kwargs) => {
   const needle = kwargs[0];
   const params = {
     exclude: false,

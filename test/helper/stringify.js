@@ -1,9 +1,9 @@
-const stringifyObject = require('stringify-object');
+import stringifyObject from 'stringify-object';
 
 const pad = (e) => e
   .replace(/^([[{])(.+)([}\]])$/, '$1 $2 $3');
 
-module.exports = (input) => pad(stringifyObject(input, {
+export default (input) => pad(stringifyObject(input, {
   inlineCharacterLimit: Infinity,
   transform: (obj, prop, originalResult) => pad(originalResult)
 }));

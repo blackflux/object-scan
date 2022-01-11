@@ -1,12 +1,12 @@
-const { Wildcard } = require('./wildcard');
-const Result = require('./parser-result');
+import { Wildcard } from './wildcard';
+import Result from './parser-result';
 
 const throwError = (msg, input, context = {}) => {
   throw new Error(Object.entries(context)
     .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
 };
 
-module.exports.parse = (input, ctx) => {
+const parse = (input, ctx) => {
   if (input === '') {
     return new Wildcard('', false);
   }
@@ -82,3 +82,4 @@ module.exports.parse = (input, ctx) => {
   result.finishElement(inputLength, { err: 'Bad Terminator', fins: [']', '}'] });
   return result.finalizeResult();
 };
+export default { parse };

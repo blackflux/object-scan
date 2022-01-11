@@ -1,7 +1,7 @@
-const sampleArray = require('./sample-array');
-const CHARS = require('./resources/chars.json');
+import sampleArray from './sample-array';
+import CHARS from './resources/chars.json';
 
-module.exports = ({ rng, keys = CHARS }) => {
+export default ({ rng, keys = CHARS }) => {
   const arrayProb = rng();
   const maxLeaves = Math.ceil(rng() * 20);
   const maxDepth = Math.ceil(rng() * 10);

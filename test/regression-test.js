@@ -1,12 +1,12 @@
-const { fork } = require('child_process');
+import { fork } from 'child_process';
 
-const fs = require('smart-fs');
-const path = require('path');
-const isEqual = require('lodash.isequal');
+import fs from 'smart-fs';
+import path from 'path';
+import isEqual from 'lodash.isequal';
 
-const generateDataset = require('./helper/generate-dataset');
-const generateNeedles = require('./helper/generate-needles');
-const createHtmlDiff = require('./helper/create-html-diff');
+import generateDataset from './helper/generate-dataset';
+import generateNeedles from './helper/generate-needles';
+import createHtmlDiff from './helper/create-html-diff';
 
 const TEST_COUNT = 1000000;
 

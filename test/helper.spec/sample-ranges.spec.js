@@ -1,7 +1,7 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const sampleRanges = require('../helper/sample-ranges');
-const PRNG = require('../helper/prng');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import sampleRanges from '../helper/sample-ranges';
+import PRNG from '../helper/prng';
 
 describe('Testing sample-ranges.js', () => {
   let execute;

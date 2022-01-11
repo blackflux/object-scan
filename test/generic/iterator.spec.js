@@ -1,10 +1,12 @@
-const expect = require('chai').expect;
-const { v4: uuid } = require('uuid');
-const { describe } = require('node-tdd');
-const iterator = require('../../src/generic/iterator');
-const parsedNeedleToStringArray = require('../helper/parsed-needle-to-string-array');
-const generateParsedNeedle = require('../helper/generate-parsed-needle');
-const PRNG = require('../helper/prng');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import { v4 } from 'uuid';
+import iterator from '../../src/generic/iterator';
+import parsedNeedleToStringArray from '../helper/parsed-needle-to-string-array';
+import generateParsedNeedle from '../helper/generate-parsed-needle';
+import PRNG from '../helper/prng';
+
+const uuid = v4;
 
 describe('Testing iterator', () => {
   let recIterate;

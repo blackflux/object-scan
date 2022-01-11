@@ -1,9 +1,9 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const parser = require('../../src/core/parser');
-const Context = require('../../src/core/context');
-const generateParsedNeedle = require('../helper/generate-parsed-needle');
-const parsedNeedleToStringArray = require('../helper/parsed-needle-to-string-array');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import parser from '../../src/core/parser';
+import Context from '../../src/core/context';
+import generateParsedNeedle from '../helper/generate-parsed-needle';
+import parsedNeedleToStringArray from '../helper/parsed-needle-to-string-array';
 
 const parse = (input, ctx = {}) => parser.parse(input, Context(ctx));
 

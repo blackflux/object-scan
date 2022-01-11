@@ -1,6 +1,6 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const generateSearchTree = require('../helper/generate-search-tree');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import generateSearchTree from '../helper/generate-search-tree';
 
 describe('Testing generate-search-tree.js', { cryptoSeed: '7075fb6c-d873-4675-99b9-817ca113a78e' }, () => {
   it('Testing example', () => {

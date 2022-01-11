@@ -1,12 +1,15 @@
-const assert = require('assert');
-const compiler = require('./compiler');
-const Result = require('./find-result');
-const { toPath } = require('../generic/helper');
-const { getOrder } = require('./compiler');
+import assert from 'assert';
+import {
+  getWildcard, excludedBy, traversedBy,
+  hasMatches, matchedBy, isLastLeafMatch,
+  getValues, getOrder
+} from './compiler';
+import Result from './find-result';
+import { toPath } from '../generic/helper';
 
 const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);
 
-module.exports = (haystack_, searches_, ctx) => {
+export default (haystack_, searches_, ctx) => {
   const state = {
     haystack: haystack_,
     context: ctx.context
@@ -42,15 +45,15 @@ module.exports = (haystack_, searches_, ctx) => {
     get isMatch() {
       return kwargs.getIsMatch();
     },
-    getMatchedBy: () => compiler.matchedBy(searches),
+    getMatchedBy: () => matchedBy(searches),
     get matchedBy() {
       return kwargs.getMatchedBy();
     },
-    getExcludedBy: () => compiler.excludedBy(searches),
+    getExcludedBy: () => excludedBy(searches),
     get excludedBy() {
       return kwargs.getExcludedBy();
     },
-    getTraversedBy: () => compiler.traversedBy(searches),
+    getTraversedBy: () => traversedBy(searches),
     get traversedBy() {
       return kwargs.getTraversedBy();
     },
@@ -133,14 +136,14 @@ module.exports = (haystack_, searches_, ctx) => {
       continue;
     }
 
-    if (!searches.some((s) => compiler.hasMatches(s))) {
+    if (!searches.some((s) => hasMatches(s))) {
       // eslint-disable-next-line no-continue
       continue;
     }
 
     const autoTraverseArray = ctx.useArraySelector === false && Array.isArray(haystack);
 
-    if (!autoTraverseArray && compiler.isLastLeafMatch(searches)) {
+    if (!autoTraverseArray && isLastLeafMatch(searches)) {
       stack.push(true, searches, segment, depth);
       isMatch = true;
     }
@@ -166,22 +169,21 @@ module.exports = (haystack_, searches_, ctx) => {
             if ('' in searches[0]) {
               searchesOut.push(searches[0]['']);
             }
-            searchesOut.push(...compiler
-              .getValues(searches[0])
-              .filter((v) => compiler.getWildcard(v).isStarRec));
+            searchesOut.push(...getValues(searches[0])
+              .filter((v) => getWildcard(v).isStarRec));
           }
         } else {
           for (let sIdx = 0, sLen = searches.length; sIdx !== sLen; sIdx += 1) {
             const search = searches[sIdx];
-            if (compiler.getWildcard(search).anyMatch(key)) {
+            if (getWildcard(search).anyMatch(key)) {
               searchesOut.push(search);
             }
-            const values = compiler.getValues(search);
+            const values = getValues(search);
             let eIdx = values.length;
             // eslint-disable-next-line no-plusplus
             while (eIdx--) {
               const value = values[eIdx];
-              if (compiler.getWildcard(value).typeMatch(key, isArray)) {
+              if (getWildcard(value).typeMatch(key, isArray)) {
                 searchesOut.push(value);
               }
             }

@@ -1,11 +1,11 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const pathToNeedlePath = require('../helper/path-to-needle-path');
-const needlePathsToNeedlesParsed = require('../helper/needle-paths-to-needles-parsed');
-const parsedNeedleToStringArray = require('../helper/parsed-needle-to-string-array');
-const generateDataset = require('../helper/generate-dataset');
-const callSignature = require('../helper/call-signature');
-const objectScan = require('../../src/index');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import pathToNeedlePath from '../helper/path-to-needle-path';
+import needlePathsToNeedlesParsed from '../helper/needle-paths-to-needles-parsed';
+import parsedNeedleToStringArray from '../helper/parsed-needle-to-string-array';
+import generateDataset from '../helper/generate-dataset';
+import callSignature from '../helper/call-signature';
+import objectScan from '../../src/index';
 
 describe('Testing needle-paths-to-needles-parsed.js', { timeout: 5000 }, () => {
   it('Testing single', () => {

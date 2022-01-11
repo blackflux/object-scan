@@ -1,9 +1,9 @@
-const assert = require('assert');
-const compiler = require('./core/compiler');
-const find = require('./core/find');
-const Context = require('./core/context');
+import assert from 'assert';
+import { compile } from './core/compiler';
+import find from './core/find';
+import Context from './core/context';
 
-module.exports = (needles, opts = {}) => {
+export default (needles, opts = {}) => {
   assert(Array.isArray(needles));
   assert(opts instanceof Object && !Array.isArray(opts));
   if (needles.length === 0) {
@@ -11,7 +11,7 @@ module.exports = (needles, opts = {}) => {
   }
 
   const ctx = Context(opts);
-  const search = compiler.compile(needles, ctx); // keep separate for performance
+  const search = compile(needles, ctx); // keep separate for performance
   return (haystack, context) => find(haystack, [search], {
     context,
     ...ctx,

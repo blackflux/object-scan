@@ -1,23 +1,20 @@
 /* compile needles to hierarchical map object */
-const parser = require('./parser');
-const iterator = require('../generic/iterator');
-const traverser = require('../generic/traverser');
-const { defineProperty } = require('../generic/helper');
-const { Wildcard } = require('./wildcard');
+import parser from './parser';
+import iterator from '../generic/iterator';
+import traverser from '../generic/traverser';
+import { defineProperty } from '../generic/helper';
+import { Wildcard } from './wildcard';
 
 const COUNTER = Symbol('counter');
 
 const LEAF = Symbol('leaf');
 const markLeaf = (input, match, readonly) => defineProperty(input, LEAF, match, readonly);
-const isLeaf = (input) => LEAF in input;
-const isMatch = (input) => input !== undefined && input[LEAF] === true;
-module.exports.isLeaf = isLeaf;
-module.exports.isMatch = isMatch;
+export const isLeaf = (input) => LEAF in input;
+export const isMatch = (input) => input !== undefined && input[LEAF] === true;
 
 const HAS_MATCHES = Symbol('has-matches');
 const setHasMatches = (input) => defineProperty(input, HAS_MATCHES, true);
-const hasMatches = (input) => input[HAS_MATCHES] === true;
-module.exports.hasMatches = hasMatches;
+export const hasMatches = (input) => input[HAS_MATCHES] === true;
 
 const merge = (input, symbol, value) => {
   if (input[symbol] === undefined) {
@@ -30,52 +27,44 @@ const merge = (input, symbol, value) => {
 
 const LEAF_NEEDLES = Symbol('leaf-needles');
 const addLeafNeedle = (input, needle) => merge(input, LEAF_NEEDLES, needle);
-const getLeafNeedles = (input) => input[LEAF_NEEDLES] || [];
-module.exports.getLeafNeedles = getLeafNeedles;
+export const getLeafNeedles = (input) => input[LEAF_NEEDLES] || [];
 
 const LEAF_NEEDLES_EXCLUDE = Symbol('leaf-needles-exclude');
 const addLeafNeedleExclude = (input, needle) => merge(input, LEAF_NEEDLES_EXCLUDE, needle);
-const getLeafNeedlesExclude = (input) => input[LEAF_NEEDLES_EXCLUDE] || [];
-module.exports.getLeafNeedlesExclude = getLeafNeedlesExclude;
+export const getLeafNeedlesExclude = (input) => input[LEAF_NEEDLES_EXCLUDE] || [];
 
 const LEAF_NEEDLES_MATCH = Symbol('leaf-needles-match');
 const addLeafNeedleMatch = (input, needle) => merge(input, LEAF_NEEDLES_MATCH, needle);
-const getLeafNeedlesMatch = (input) => input[LEAF_NEEDLES_MATCH] || [];
-module.exports.getLeafNeedlesMatch = getLeafNeedlesMatch;
+export const getLeafNeedlesMatch = (input) => input[LEAF_NEEDLES_MATCH] || [];
 
 const NEEDLES = Symbol('needles');
 const addNeedle = (input, needle) => merge(input, NEEDLES, needle);
-const getNeedles = (input) => input[NEEDLES];
-module.exports.getNeedles = getNeedles;
+export const getNeedles = (input) => input[NEEDLES];
 
 const INDEX = Symbol('index');
 const setIndex = (input, index, readonly) => defineProperty(input, INDEX, index, readonly);
-const getIndex = (input) => input[INDEX];
-module.exports.getIndex = getIndex;
+export const getIndex = (input) => input[INDEX];
 
 const ORDER = Symbol('order');
 const setOrder = (input, order) => defineProperty(input, ORDER, order);
-const getOrder = (input) => input[ORDER];
-module.exports.getOrder = getOrder;
+export const getOrder = (input) => input[ORDER];
 
 const WILDCARD = Symbol('wildcard');
 const setWildcard = (input, wildcard) => defineProperty(input, WILDCARD, wildcard);
-const getWildcard = (input) => input[WILDCARD];
-module.exports.getWildcard = getWildcard;
+export const getWildcard = (input) => input[WILDCARD];
 
 const VALUES = Symbol('values');
 const setValues = (input, entries) => defineProperty(input, VALUES, entries);
-const getValues = (input) => input[VALUES];
-module.exports.getValues = getValues;
+export const getValues = (input) => input[VALUES];
 
-module.exports.matchedBy = (searches) => Array
+export const matchedBy = (searches) => Array
   .from(new Set([].concat(...searches.map((e) => getLeafNeedlesMatch(e)))));
-module.exports.excludedBy = (searches) => Array
+export const excludedBy = (searches) => Array
   .from(new Set([].concat(...searches.map((e) => getLeafNeedlesExclude(e)))));
-module.exports.traversedBy = (searches) => Array
+export const traversedBy = (searches) => Array
   .from(new Set([].concat(...searches.map((e) => getNeedles(e)))));
 
-module.exports.isLastLeafMatch = (searches) => {
+export const isLastLeafMatch = (searches) => {
   let maxLeafIndex = Number.MIN_SAFE_INTEGER;
   let maxLeaf = null;
   for (let idx = 0, len = searches.length; idx < len; idx += 1) {
@@ -196,7 +185,7 @@ const finalizeTower = (tower) => {
   });
 };
 
-module.exports.compile = (needles, ctx) => {
+export const compile = (needles, ctx) => {
   const tower = {};
   ctx[COUNTER] = 0;
   for (let idx = 0; idx < needles.length; idx += 1) {

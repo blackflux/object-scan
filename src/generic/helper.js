@@ -1,13 +1,12 @@
-module.exports.defineProperty = (target, k, v, readonly = true) => Object
+export const defineProperty = (target, k, v, readonly = true) => Object
   .defineProperty(target, k, { value: v, writable: !readonly });
 
 const specialChars = /[?!,.*+[\](){}\\]/g;
-const escape = (input) => input.replace(specialChars, '\\$&');
-module.exports.escape = escape;
+export const escape = (input) => input.replace(specialChars, '\\$&');
 
-module.exports.escapeRegex = (char) => char.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+export const escapeRegex = (char) => char.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
 
-module.exports.asRegex = (regexStr) => {
+export const asRegex = (regexStr) => {
   try {
     return new RegExp(regexStr);
   } catch (e) {
@@ -15,5 +14,5 @@ module.exports.asRegex = (regexStr) => {
   }
 };
 
-module.exports.toPath = (input) => input
+export const toPath = (input) => input
   .reduce((p, c) => `${p}${typeof c === 'number' ? `[${c}]` : `${p ? '.' : ''}${escape(c)}`}`, '');

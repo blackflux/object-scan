@@ -56,4 +56,4 @@ const iterate = (tree, cb) => {
     }
   }
 };
-module.exports.iterate = iterate;
+export default { iterate };

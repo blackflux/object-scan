@@ -39,4 +39,4 @@ const simplify = (arg) => {
   return arg;
 };
 
-module.exports = simplify;
+export default simplify;

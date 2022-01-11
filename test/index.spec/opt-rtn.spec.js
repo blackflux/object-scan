@@ -1,6 +1,6 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const objectScan = require('../../src/index');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import objectScan from '../../src/index';
 
 const tests = {
   context: {

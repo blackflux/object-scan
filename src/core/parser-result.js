@@ -1,6 +1,6 @@
-const assert = require('assert');
-const { defineProperty } = require('../generic/helper');
-const { Wildcard } = require('./wildcard');
+import assert from 'assert';
+import { defineProperty } from '../generic/helper';
+import { Wildcard } from './wildcard';
 
 const IS_EXCLUDED = Symbol('is-excluded');
 const markExcluded = (input) => defineProperty(input, IS_EXCLUDED, true);
@@ -18,7 +18,7 @@ const getSimple = (arrOrSet) => {
   return arrOrSet.size === 1 ? arrOrSet.values().next().value : arrOrSet;
 };
 
-module.exports = (input) => {
+export default (input) => {
   let cResult = new Set();
   let inArray = false;
   let excludeNext = false;

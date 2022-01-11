@@ -1,5 +1,5 @@
-const { escape } = require('../../src/generic/helper');
-const CHARS = require('./resources/chars.json');
+import { escape } from '../../src/generic/helper';
+import CHARS from './resources/chars.json';
 
 const MAX_DEPTH = 4;
 const MAX_WIDTH = 4;
@@ -19,7 +19,7 @@ const generateParsedNeedle = (depth, ctx) => {
   }
   return result;
 };
-module.exports = ({
+export default ({
   rng = Math.random,
   keys = CHARS
 } = {}) => generateParsedNeedle(0, { index: 0, rng, keys });

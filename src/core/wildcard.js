@@ -1,6 +1,6 @@
-const { escapeRegex, asRegex } = require('../generic/helper');
+import { escapeRegex, asRegex } from '../generic/helper';
 
-const parseWildcard = (str) => {
+export const parseWildcard = (str) => {
   let regex = '';
   let escaped = false;
   for (let idx = 0; idx < str.length; idx += 1) {
@@ -20,7 +20,6 @@ const parseWildcard = (str) => {
   }
   return new RegExp(`^${regex}$`);
 };
-module.exports.parseWildcard = parseWildcard;
 
 const compileWildcard = (str) => {
   if (['**', '++'].includes(str)) {
@@ -41,7 +40,7 @@ const compileWildcard = (str) => {
   return parseWildcard(str);
 };
 
-class Wildcard {
+export class Wildcard {
   constructor(value, excluded) {
     this.value = value;
     this.excluded = excluded;
@@ -89,5 +88,3 @@ class Wildcard {
     return this.regex.test(key);
   }
 }
-
-module.exports.Wildcard = Wildcard;

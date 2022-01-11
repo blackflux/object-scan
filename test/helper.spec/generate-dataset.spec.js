@@ -1,8 +1,8 @@
-const expect = require('chai').expect;
-const fs = require('smart-fs');
-const path = require('path');
-const { describe } = require('node-tdd');
-const generateDataset = require('../helper/generate-dataset');
+import fs from 'smart-fs';
+import path from 'path';
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import generateDataset from '../helper/generate-dataset';
 
 describe('Testing generate-dataset.js', () => {
   it('Testing seed consistency', () => {

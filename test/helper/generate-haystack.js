@@ -1,4 +1,4 @@
-const assert = require('assert');
+import assert from 'assert';
 
 const generateHaystackRec = (params, depth) => {
   const {
@@ -26,4 +26,4 @@ const generateHaystackRec = (params, depth) => {
     .filter((v) => v !== undefined);
 };
 
-module.exports = (generator) => generateHaystackRec({ generator, count: 0 }, 0);
+export default (generator) => generateHaystackRec({ generator, count: 0 }, 0);

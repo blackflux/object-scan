@@ -1,4 +1,4 @@
-const CHARS = require('./resources/chars.json');
+import CHARS from './resources/chars.json';
 
 const MAX_DEPTH = 7;
 const MAX_WIDTH = 7;
@@ -14,4 +14,4 @@ const generateSearchTree = (depth, ctx) => {
   }
   return result;
 };
-module.exports = (keys = CHARS) => generateSearchTree(0, { index: 0, keys });
+export default (keys = CHARS) => generateSearchTree(0, { index: 0, keys });

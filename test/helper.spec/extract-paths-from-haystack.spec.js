@@ -1,6 +1,6 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const extractPathsFromHaystack = require('../helper/extract-paths-from-haystack');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import extractPathsFromHaystack from '../helper/extract-paths-from-haystack';
 
 describe('Testing extract-paths-from-haystack.js', () => {
   it('Testing with useArraySelector', () => {

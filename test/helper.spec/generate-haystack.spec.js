@@ -1,10 +1,10 @@
-const expect = require('chai').expect;
-const fs = require('smart-fs');
-const path = require('path');
-const { describe } = require('node-tdd');
-const PRNG = require('../helper/prng');
-const generateHaystack = require('../helper/generate-haystack');
-const haystackGenerator = require('../helper/haystack-generator');
+import fs from 'smart-fs';
+import path from 'path';
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import PRNG from '../helper/prng';
+import generateHaystack from '../helper/generate-haystack';
+import haystackGenerator from '../helper/haystack-generator';
 
 describe('Testing generate-haystack.js', () => {
   it('Testing example', () => {

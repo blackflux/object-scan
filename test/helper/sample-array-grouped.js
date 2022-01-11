@@ -1,6 +1,6 @@
-const sampleArray = require('./sample-array');
+import sampleArray from './sample-array';
 
-module.exports = (...args) => {
+export default (...args) => {
   const indicesGrouped = {};
   sampleArray(...args).forEach((idx) => {
     if (indicesGrouped[idx] === undefined) {

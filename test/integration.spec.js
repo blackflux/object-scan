@@ -1,9 +1,9 @@
-const fs = require('fs');
-const path = require('path');
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const stringify = require('json-stringify-pretty-compact');
-const objectScan = require('../src/index');
+import fs from 'fs';
+import path from 'path';
+import { describe } from 'node-tdd';
+import stringify from 'json-stringify-pretty-compact';
+import { expect } from 'chai';
+import objectScan from '../src/index';
 
 const getEntries = (source) => fs.readdirSync(source)
   .map((name) => [name, path.join(source, name)]);

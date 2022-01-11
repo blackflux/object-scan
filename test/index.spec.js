@@ -1,6 +1,6 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const objectScanOriginal = require('../src/index');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import objectScanOriginal from '../src/index';
 
 const objectScan = (needles, opts) => objectScanOriginal(
   needles,
