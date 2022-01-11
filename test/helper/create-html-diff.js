@@ -3,9 +3,7 @@ import path from 'path';
 import { createPatch } from 'diff';
 import { html } from 'diff2html';
 
-const template = fs.readFileSync(path.join(
-  __dirname, 'resources', 'diff-template.mustache'
-)).toString('utf8');
+const template = fs.readFileSync(path.join(__dirname, 'resources', 'diff-template.mustache')).toString('utf8');
 
 export default (name, log1, log2, meta = null) => {
   const str1 = JSON.stringify(log1, null, 2);
