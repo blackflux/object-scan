@@ -50,7 +50,7 @@ const Renderer = () => {
     let result;
     try {
       // eslint-disable-next-line no-eval
-      result = eval(`require('../src/index')(${meta.needles}${options})(${haystack}${context})`);
+      result = eval(`require('../src/index').default(${meta.needles}${options})(${haystack}${context})`);
     } catch (e) {
       result = String(e);
     }

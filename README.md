@@ -25,7 +25,7 @@ import objectScan from 'object-scan';
 
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' } } };
 objectScan(['a.*.f'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'a.e.f' ]
 ```
 
 
@@ -63,7 +63,7 @@ _Examples_:
 ```js
 const haystack = [0, 1, 2, 3, 4];
 objectScan(['[2]'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ '[2]' ]
 ```
 </details>
 <details><summary> <code>['[1]']</code> <em>(no match in object)</em> </summary>
@@ -72,7 +72,7 @@ objectScan(['[2]'], { joined: true })(haystack);
 ```js
 const haystack = { 0: 'a', 1: 'b', 2: 'c' };
 objectScan(['[1]'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => []
 ```
 </details>
 
@@ -87,7 +87,7 @@ _Examples_:
 ```js
 const haystack = { foo: 0, bar: 1 };
 objectScan(['foo'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'foo' ]
 ```
 </details>
 <details><summary> <code>['1']</code> <em>(no match in array)</em> </summary>
@@ -96,7 +96,7 @@ objectScan(['foo'], { joined: true })(haystack);
 ```js
 const haystack = [0, 1, 2, 3, 4];
 objectScan(['1'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => []
 ```
 </details>
 
@@ -117,7 +117,7 @@ _Examples_:
 ```js
 const haystack = { a: { b: 0, c: 1 }, d: 2 };
 objectScan(['*'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'd', 'a' ]
 ```
 </details>
 <details><summary> <code>['[?5]']</code> <em>(two digit ending in five)</em> </summary>
@@ -126,7 +126,7 @@ objectScan(['*'], { joined: true })(haystack);
 ```js
 const haystack = [...Array(30).keys()];
 objectScan(['[?5]'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ '[25]', '[15]' ]
 ```
 </details>
 <details><summary> <code>['a.+.c']</code> <em>(nested)</em> </summary>
@@ -135,7 +135,7 @@ objectScan(['[?5]'], { joined: true })(haystack);
 ```js
 const haystack = { a: { b: { c: 0 }, d: { f: 0 } } };
 objectScan(['a.+.c'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'a.b.c' ]
 ```
 </details>
 <details><summary> <code>['a.\\+.c']</code> <em>(escaped)</em> </summary>
@@ -144,7 +144,7 @@ objectScan(['a.+.c'], { joined: true })(haystack);
 ```js
 const haystack = { a: { b: { c: 0 }, '+': { c: 0 } } };
 objectScan(['a.\\+.c'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'a.\\+.c' ]
 ```
 </details>
 
@@ -161,7 +161,7 @@ _Examples_:
 ```js
 const haystack = { foo: 0, foobar: 1, bar: 2 };
 objectScan(['(^foo)'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'foobar', 'foo' ]
 ```
 </details>
 <details><summary> <code>['[(5)]']</code> <em>(containing `5`)</em> </summary>
@@ -170,7 +170,7 @@ objectScan(['(^foo)'], { joined: true })(haystack);
 ```js
 const haystack = [...Array(20).keys()];
 objectScan(['[(5)]'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ '[15]', '[5]' ]
 ```
 </details>
 <details><summary> <code>['[(^[01]$)]']</code> <em>(`[0]` and `[1]`)</em> </summary>
@@ -179,7 +179,7 @@ objectScan(['[(5)]'], { joined: true })(haystack);
 ```js
 const haystack = ['a', 'b', 'c', 'd'];
 objectScan(['[(^[01]$)]'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ '[1]', '[0]' ]
 ```
 </details>
 <details><summary> <code>['[(^[^01]$)]']</code> <em>(other than `[0]` and `[1]`)</em> </summary>
@@ -188,7 +188,7 @@ objectScan(['[(^[01]$)]'], { joined: true })(haystack);
 ```js
 const haystack = ['a', 'b', 'c', 'd'];
 objectScan(['[(^[^01]$)]'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ '[3]', '[2]' ]
 ```
 </details>
 <details><summary> <code>['[*]', '[!(^[01]$)]']</code> <em>(match all and exclude `[0]` and `[1]`)</em> </summary>
@@ -197,7 +197,7 @@ objectScan(['[(^[^01]$)]'], { joined: true })(haystack);
 ```js
 const haystack = ['a', 'b', 'c', 'd'];
 objectScan(['[*]', '[!(^[01]$)]'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ '[3]', '[2]' ]
 ```
 </details>
 
@@ -216,7 +216,7 @@ _Examples_:
 ```js
 const haystack = { a: { b: 0, c: 0 } };
 objectScan(['a.**'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'a.c', 'a.b', 'a' ]
 ```
 </details>
 <details><summary> <code>['a.++']</code> <em>(one or more nestings under `a`)</em> </summary>
@@ -225,7 +225,7 @@ objectScan(['a.**'], { joined: true })(haystack);
 ```js
 const haystack = { a: { b: 0, c: 0 } };
 objectScan(['a.++'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'a.c', 'a.b' ]
 ```
 </details>
 <details><summary> <code>['**(1)']</code> <em>(all containing `1` at every level)</em> </summary>
@@ -234,7 +234,7 @@ objectScan(['a.++'], { joined: true })(haystack);
 ```js
 const haystack = { 1: { 1: ['c', 'd'] }, 510: 'e', foo: { 1: 'f' } };
 objectScan(['**(1)'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ '510', '1.1[1]', '1.1', '1' ]
 ```
 </details>
 
@@ -251,7 +251,7 @@ _Examples_:
 ```js
 const haystack = ['a', 'b', 'c', 'd'];
 objectScan(['[{0,1}]'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ '[1]', '[0]' ]
 ```
 </details>
 <details><summary> <code>['{a,d}.{b,f}']</code> <em>(`a.b`, `a.f`, `d.b` and `d.f`)</em> </summary>
@@ -260,7 +260,7 @@ objectScan(['[{0,1}]'], { joined: true })(haystack);
 ```js
 const haystack = { a: { b: 0, c: 1 }, d: { e: 2, f: 3 } };
 objectScan(['{a,d}.{b,f}'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'd.f', 'a.b' ]
 ```
 </details>
 
@@ -278,7 +278,7 @@ objectScan(['{a,b},!a'], {
   joined: true,
   strict: false
 })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'b' ]
 ```
 </details>
 <details><summary> <code>['**,!**.a']</code> <em>(all except ending in `a`)</em> </summary>
@@ -287,7 +287,7 @@ objectScan(['{a,b},!a'], {
 ```js
 const haystack = { a: 0, b: { a: 1, c: 2 } };
 objectScan(['**,!**.a'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'b.c', 'b' ]
 ```
 </details>
 
@@ -304,7 +304,7 @@ _Examples:_
 ```js
 const haystack = { '[1]': 0 };
 objectScan(['\\[1\\]'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ '\\[1\\]' ]
 ```
 </details>
 
@@ -383,7 +383,7 @@ objectScan(['**'], {
   joined: true,
   filterFn: ({ value }) => typeof value === 'string'
 })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'b' ]
 ```
 </details>
 
@@ -408,7 +408,7 @@ objectScan(['**'], {
   joined: true,
   breakFn: ({ key }) => key === 'a.b'
 })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'a.b', 'a' ]
 ```
 </details>
 
@@ -431,7 +431,7 @@ objectScan(['**'], {
   beforeFn: (state) => { /* eslint-disable no-param-reassign */ state.haystack = [state.haystack, state.context]; },
   rtn: 'key'
 })(haystack, { b: 0 });
-// => 'TypeError: require(...) is not a function'
+// => [ '[1].b', '[1]', '[0].a', '[0]' ]
 ```
 </details>
 
@@ -453,7 +453,7 @@ objectScan(['**'], {
   afterFn: (state) => { /* eslint-disable no-param-reassign */ state.result += state.context; },
   rtn: 'count'
 })(haystack, 5);
-// => 'TypeError: require(...) is not a function'
+// => 6
 ```
 </details>
 
@@ -479,7 +479,7 @@ objectScan(['**'], {
   compareFn: () => (k1, k2) => k1.localeCompare(k2),
   reverse: false
 })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'a', 'b', 'c' ]
 ```
 </details>
 
@@ -503,7 +503,7 @@ objectScan(['**'], {
   breakFn: ({ isMatch, property, context }) => { if (isMatch) { context.push(property); } },
   reverse: true
 })(haystack, []);
-// => 'TypeError: require(...) is not a function'
+// => [ 'f', 'g', 'i', 'h', 'b', 'd', 'e', 'c', 'a' ]
 ```
 </details>
 <details><summary> <code>['**']</code> <em>(filterFn, reverse true)</em> </summary>
@@ -515,7 +515,7 @@ objectScan(['**'], {
   filterFn: ({ property, context }) => { context.push(property); },
   reverse: true
 })(haystack, []);
-// => 'TypeError: require(...) is not a function'
+// => [ 'h', 'i', 'g', 'e', 'c', 'd', 'a', 'b', 'f' ]
 ```
 </details>
 <details><summary> <code>['**']</code> <em>(breakFn, reverse false)</em> </summary>
@@ -527,7 +527,7 @@ objectScan(['**'], {
   breakFn: ({ isMatch, property, context }) => { if (isMatch) { context.push(property); } },
   reverse: false
 })(haystack, []);
-// => 'TypeError: require(...) is not a function'
+// => [ 'f', 'b', 'a', 'd', 'c', 'e', 'g', 'i', 'h' ]
 ```
 </details>
 <details><summary> <code>['**']</code> <em>(filterFn, reverse false)</em> </summary>
@@ -539,7 +539,7 @@ objectScan(['**'], {
   filterFn: ({ property, context }) => { context.push(property); },
   reverse: false
 })(haystack, []);
-// => 'TypeError: require(...) is not a function'
+// => [ 'a', 'c', 'e', 'd', 'b', 'h', 'i', 'g', 'f' ]
 ```
 </details>
 
@@ -567,7 +567,7 @@ objectScan(['c', 'a', 'b'], {
   joined: true,
   orderByNeedles: true
 })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'c', 'a', 'b' ]
 ```
 </details>
 <details><summary> <code>['b', '*']</code> <em>(fallback reverse)</em> </summary>
@@ -580,7 +580,7 @@ objectScan(['b', '*'], {
   reverse: true,
   orderByNeedles: true
 })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'b', 'c', 'a' ]
 ```
 </details>
 <details><summary> <code>['b', '*']</code> <em>(fallback not reverse)</em> </summary>
@@ -593,7 +593,7 @@ objectScan(['b', '*'], {
   reverse: false,
   orderByNeedles: true
 })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'b', 'a', 'c' ]
 ```
 </details>
 <details><summary> <code>['a', 'b.c', 'd']</code> <em>(nested match)</em> </summary>
@@ -605,7 +605,7 @@ objectScan(['a', 'b.c', 'd'], {
   joined: true,
   orderByNeedles: true
 })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'a', 'b.c', 'd' ]
 ```
 </details>
 <details><summary> <code>['b', 'a', 'b.c', 'd']</code> <em>(matches traverse first)</em> </summary>
@@ -617,7 +617,7 @@ objectScan(['b', 'a', 'b.c', 'd'], {
   joined: true,
   orderByNeedles: true
 })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'b.c', 'b', 'a', 'd' ]
 ```
 </details>
 
@@ -638,7 +638,7 @@ objectScan(['a', 'b'], {
   rtn: 'property',
   abort: true
 })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => 'b'
 ```
 </details>
 <details><summary> <code>['[0]', '[1]']</code> <em>(abort changes count)</em> </summary>
@@ -650,7 +650,7 @@ objectScan(['[0]', '[1]'], {
   rtn: 'count',
   abort: true
 })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => 1
 ```
 </details>
 
@@ -695,7 +695,7 @@ _Examples_:
 ```js
 const haystack = ['a', 'b', 'c'];
 objectScan(['[*]'], { rtn: 'value' })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'c', 'b', 'a' ]
 ```
 </details>
 <details><summary> <code>['foo[*]']</code> <em>(return entries)</em> </summary>
@@ -704,7 +704,7 @@ objectScan(['[*]'], { rtn: 'value' })(haystack);
 ```js
 const haystack = { foo: ['bar'] };
 objectScan(['foo[*]'], { rtn: 'entry' })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ [ [ 'foo', 0 ], 'bar' ] ]
 ```
 </details>
 <details><summary> <code>['a.b.c', 'a']</code> <em>(return properties)</em> </summary>
@@ -713,7 +713,7 @@ objectScan(['foo[*]'], { rtn: 'entry' })(haystack);
 ```js
 const haystack = { a: { b: { c: 0 } } };
 objectScan(['a.b.c', 'a'], { rtn: 'property' })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'c', 'a' ]
 ```
 </details>
 <details><summary> <code>['a.b', 'a.c']</code> <em>(checks for any match, full scan)</em> </summary>
@@ -722,7 +722,7 @@ objectScan(['a.b.c', 'a'], { rtn: 'property' })(haystack);
 ```js
 const haystack = { a: { b: 0, c: 1 } };
 objectScan(['a.b', 'a.c'], { rtn: 'bool' })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => true
 ```
 </details>
 <details><summary> <code>['**']</code> <em>(return not provided context)</em> </summary>
@@ -731,7 +731,7 @@ objectScan(['a.b', 'a.c'], { rtn: 'bool' })(haystack);
 ```js
 const haystack = { a: 0 };
 objectScan(['**'], { rtn: 'context' })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => undefined
 ```
 </details>
 <details><summary> <code>['a.b.{c,d}']</code> <em>(return keys with context passed)</em> </summary>
@@ -740,7 +740,7 @@ objectScan(['**'], { rtn: 'context' })(haystack);
 ```js
 const haystack = { a: { b: { c: 0, d: 1 } } };
 objectScan(['a.b.{c,d}'], { rtn: 'key' })(haystack, []);
-// => 'TypeError: require(...) is not a function'
+// => [ [ 'a', 'b', 'd' ], [ 'a', 'b', 'c' ] ]
 ```
 </details>
 <details><summary> <code>['a.b.{c,d}']</code> <em>(return custom array)</em> </summary>
@@ -749,7 +749,7 @@ objectScan(['a.b.{c,d}'], { rtn: 'key' })(haystack, []);
 ```js
 const haystack = { a: { b: { c: 0, d: 1 } } };
 objectScan(['a.b.{c,d}'], { rtn: ['property', 'value'] })(haystack, []);
-// => 'TypeError: require(...) is not a function'
+// => [ [ 'd', 1 ], [ 'c', 0 ] ]
 ```
 </details>
 <details><summary> <code>['**']</code> <em>(return value plus one)</em> </summary>
@@ -761,7 +761,7 @@ objectScan(['**'], {
   filterFn: ({ isLeaf }) => isLeaf,
   rtn: ({ value }) => value + 1
 })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 2, 1 ]
 ```
 </details>
 
@@ -783,7 +783,7 @@ _Examples_:
 ```js
 const haystack = [0, 1, { foo: 'bar' }];
 objectScan(['[*]', '[*].foo'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ '[2].foo', '[2]', '[1]', '[0]' ]
 ```
 </details>
 <details><summary> <code>['[*]', '[*].foo']</code> <em>(not joined)</em> </summary>
@@ -792,7 +792,7 @@ objectScan(['[*]', '[*].foo'], { joined: true })(haystack);
 ```js
 const haystack = [0, 1, { foo: 'bar' }];
 objectScan(['[*]', '[*].foo'])(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ [ 2, 'foo' ], [ 2 ], [ 1 ], [ 0 ] ]
 ```
 </details>
 
@@ -815,7 +815,7 @@ objectScan(['a', 'b.d'], {
   joined: true,
   useArraySelector: false
 })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ '[1].b[1].d', '[0].a' ]
 ```
 </details>
 <details><summary> <code>['']</code> <em>(top level array matching)</em> </summary>
@@ -827,7 +827,7 @@ objectScan([''], {
   joined: true,
   useArraySelector: false
 })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ '[1]', '[0]' ]
 ```
 </details>
 
@@ -848,7 +848,7 @@ _Examples_:
 ```js
 const haystack = [];
 objectScan(['a.b', 'a.b'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => 'Error: Redundant Needle Target: "a.b" vs "a.b"'
 ```
 </details>
 <details><summary> <code>['a.{b,b}']</code> <em>(identical, same needle)</em> </summary>
@@ -857,7 +857,7 @@ objectScan(['a.b', 'a.b'], { joined: true })(haystack);
 ```js
 const haystack = [];
 objectScan(['a.{b,b}'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => 'Error: Redundant Needle Target: "a.{b,b}" vs "a.{b,b}"'
 ```
 </details>
 <details><summary> <code>['a.b', 'a.**']</code> <em>(invalidates previous)</em> </summary>
@@ -866,7 +866,7 @@ objectScan(['a.{b,b}'], { joined: true })(haystack);
 ```js
 const haystack = [];
 objectScan(['a.b', 'a.**'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => 'Error: Needle Target Invalidated: "a.b" by "a.**"'
 ```
 </details>
 <details><summary> <code>['**.!**']</code> <em>(consecutive recursion)</em> </summary>
@@ -875,7 +875,7 @@ objectScan(['a.b', 'a.**'], { joined: true })(haystack);
 ```js
 const haystack = [];
 objectScan(['**.!**'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => 'Error: Redundant Recursion: "**.!**"'
 ```
 </details>
 
@@ -897,7 +897,7 @@ objectScan(['**.{c,d,e}'], {
   joined: true,
   filterFn: ({ value, context }) => { context.sum += value; }
 })(haystack, { sum: 0 });
-// => 'TypeError: require(...) is not a function'
+// => { sum: 20 }
 ```
 </details>
 
@@ -911,7 +911,7 @@ More extensive examples can be found in the tests.
 ```js
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
 objectScan(['a.*.f'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'a.e.f' ]
 ```
 </details>
 
@@ -921,7 +921,7 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 ```js
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
 objectScan(['*.*.*'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'a.e.f', 'a.b.c' ]
 ```
 </details>
 
@@ -931,7 +931,7 @@ objectScan(['*.*.*'], { joined: true })(haystack);
 ```js
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
 objectScan(['a.*.{c,f}'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'a.e.f', 'a.b.c' ]
 ```
 </details>
 
@@ -941,7 +941,7 @@ objectScan(['a.*.{c,f}'], { joined: true })(haystack);
 ```js
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
 objectScan(['a.*.{c,f}'])(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ [ 'a', 'e', 'f' ], [ 'a', 'b', 'c' ] ]
 ```
 </details>
 
@@ -951,7 +951,7 @@ objectScan(['a.*.{c,f}'])(haystack);
 ```js
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
 objectScan(['*.*[*]'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'a.h[1]', 'a.h[0]' ]
 ```
 </details>
 
@@ -961,7 +961,7 @@ objectScan(['*.*[*]'], { joined: true })(haystack);
 ```js
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
 objectScan(['*[*]'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => []
 ```
 </details>
 
@@ -971,7 +971,7 @@ objectScan(['*[*]'], { joined: true })(haystack);
 ```js
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
 objectScan(['**'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'k', 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b.c', 'a.b', 'a' ]
 ```
 </details>
 
@@ -981,7 +981,7 @@ objectScan(['**'], { joined: true })(haystack);
 ```js
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
 objectScan(['++.++'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'a.h[1]', 'a.h[0]', 'a.h', 'a.e.f', 'a.e', 'a.b.c', 'a.b' ]
 ```
 </details>
 
@@ -991,7 +991,7 @@ objectScan(['++.++'], { joined: true })(haystack);
 ```js
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
 objectScan(['**.f'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'a.e.f' ]
 ```
 </details>
 
@@ -1001,7 +1001,7 @@ objectScan(['**.f'], { joined: true })(haystack);
 ```js
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
 objectScan(['**[*]'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'a.h[1]', 'a.h[0]' ]
 ```
 </details>
 
@@ -1011,7 +1011,7 @@ objectScan(['**[*]'], { joined: true })(haystack);
 ```js
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
 objectScan(['a.*,!a.e'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'a.h', 'a.b' ]
 ```
 </details>
 
@@ -1021,7 +1021,7 @@ objectScan(['a.*,!a.e'], { joined: true })(haystack);
 ```js
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' };
 objectScan(['**.(^[bc]$)'], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ 'a.b.c', 'a.b' ]
 ```
 </details>
 
@@ -1043,7 +1043,7 @@ objectScan([''], {
   joined: true,
   useArraySelector: false
 })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ '[1]', '[0]' ]
 ```
 </details>
 <details><summary> <code>['']</code> <em>(match top level object)</em> </summary>
@@ -1052,7 +1052,7 @@ objectScan([''], {
 ```js
 const haystack = {};
 objectScan([''], { joined: true })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ '' ]
 ```
 </details>
 <details><summary> <code>['**.(^$)']</code> <em>(match empty string keys)</em> </summary>
@@ -1061,7 +1061,7 @@ objectScan([''], { joined: true })(haystack);
 ```js
 const haystack = { '': 0, a: { '': 1 } };
 objectScan(['**.(^$)'])(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ [ 'a', '' ], [ '' ] ]
 ```
 </details>
 <details><summary> <code>['**(^a$)']</code> <em>(star recursion matches roots)</em> </summary>
@@ -1073,7 +1073,7 @@ objectScan(['**(^a$)'], {
   joined: true,
   useArraySelector: false
 })(haystack);
-// => 'TypeError: require(...) is not a function'
+// => [ '[1][1]', '[1][0].a', '[1][0]', '[0]' ]
 ```
 </details>
 
