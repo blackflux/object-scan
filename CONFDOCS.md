@@ -13,7 +13,7 @@ Documents configuration tasks managed by [robo-config](https://github.com/blackf
       - <a name="blackfluxrobo-config-plugin-task-idx-ref-structtemplate-index-test">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-structtemplate-index-test">`struct/template-index-test`</a>
       - <a name="blackfluxrobo-config-plugin-task-idx-ref-structtemplate-index">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-structtemplate-index">`struct/template-index`</a>
       - <a name="blackfluxrobo-config-plugin-task-idx-ref-structtemplate-eslintrc">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-structtemplate-eslintrc">`struct/template-eslintrc`</a>
-      - <a name="blackfluxrobo-config-plugin-task-idx-ref-structtemplate-babelrc">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-structtemplate-babelrc">`struct/template-babelrc`</a>
+      - <a name="blackfluxrobo-config-plugin-task-idx-ref-structtemplate-babel-config">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-structtemplate-babel-config">`struct/template-babel-config`</a>
   - <a name="blackfluxrobo-config-plugin-task-idx-ref-semantic-releasenpm-default">:open_file_folder:</a> <a href="#blackfluxrobo-config-plugin-task-ref-semantic-releasenpm-default">`semantic-release/#npm-default`</a>
     - <a name="blackfluxrobo-config-plugin-task-idx-ref-semantic-releasecommit-conventions">:clipboard:</a> <a href="#blackfluxrobo-config-plugin-task-ref-semantic-releasecommit-conventions">`semantic-release/commit-conventions`</a>
   - <a name="blackfluxrobo-config-plugin-task-idx-ref-packagenpm-default">:open_file_folder:</a> <a href="#blackfluxrobo-config-plugin-task-ref-packagenpm-default">`package/#npm-default`</a>
@@ -69,7 +69,7 @@ Manage various configuration files for an open source npm package on github.
 <code>│&nbsp;&nbsp;└─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-dependabotconfigyml">config.yml</a></code><br/>
 <code>├─&nbsp;.idea</code><br/>
 <code>│&nbsp;&nbsp;└─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-ideaprojectnameiml">${projectName}.iml</a></code><br/>
-<code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-babelrc">.babelrc</a></code><br/>
+<code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-babelconfigjson">babel.config.json</a></code><br/>
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-editorconfig">.editorconfig</a></code><br/>
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-eslintrcjson">.eslintrc.json</a></code><br/>
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-gallyjson">.gally.json</a></code><br/>
@@ -140,7 +140,7 @@ Manage basic project structure for npm package on github.
       <td align="left" valign="top">
         <ul>
 <code>project</code><br/>
-<code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-babelrc">.babelrc</a></code><br/>
+<code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-babelconfigjson">babel.config.json</a></code><br/>
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-eslintrcjson">.eslintrc.json</a></code><br/>
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-gardenerjs">gardener.js</a></code><br/>
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-mocharcyml">.mocharc.yml</a></code><br/>
@@ -215,7 +215,7 @@ Manage basic project structure for npm package on github.
       <td align="left" valign="top">
         <ul>
 <code>project</code><br/>
-<code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-babelrc">.babelrc</a></code><br/>
+<code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-babelconfigjson">babel.config.json</a></code><br/>
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-eslintrcjson">.eslintrc.json</a></code><br/>
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-mocharcyml">.mocharc.yml</a></code><br/>
 <code>├─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-readmemd">README.md</a></code><br/>
@@ -389,9 +389,9 @@ _Updating <a href="#blackfluxrobo-config-plugin-target-ref-eslintrcjson">.eslint
   </tbody>
 </table>
 
-###### :clipboard: <a name="blackfluxrobo-config-plugin-task-ref-structtemplate-babelrc">struct/template-babelrc</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-structtemplate-babelrc">`index`</a>)
+###### :clipboard: <a name="blackfluxrobo-config-plugin-task-ref-structtemplate-babel-config">struct/template-babel-config</a> (<a href="#blackfluxrobo-config-plugin-task-idx-ref-structtemplate-babel-config">`index`</a>)
 
-_Updating <a href="#blackfluxrobo-config-plugin-target-ref-babelrc">.babelrc</a> using <a href="#blackfluxrobo-config-plugin-strat-ref-merge-deep">merge-deep</a>._
+_Updating <a href="#blackfluxrobo-config-plugin-target-ref-babelconfigjson">babel.config.json</a> using <a href="#blackfluxrobo-config-plugin-strat-ref-merge-deep">merge-deep</a>._
 
 - Create configuration file for babel.
 
@@ -406,7 +406,7 @@ _Updating <a href="#blackfluxrobo-config-plugin-target-ref-babelrc">.babelrc</a>
       <td align="left" valign="top">
         <ul>
 <code>project</code><br/>
-<code>└─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-babelrc">.babelrc</a></code><br/>
+<code>└─&nbsp;<a href="#blackfluxrobo-config-plugin-target-ref-babelconfigjson">babel.config.json</a></code><br/>
         </ul>
       </td>
       <td align="left" valign="top">
@@ -1697,7 +1697,7 @@ Main file for the project. Exposes functionality for libraries.
 
 *Configuration file for eslint.*
 
-### <a name="blackfluxrobo-config-plugin-target-ref-babelrc">.babelrc</a> ([`link`](https://babeljs.io/docs/en/configuration#babelrc)) 
+### <a name="blackfluxrobo-config-plugin-target-ref-babelconfigjson">babel.config.json</a> ([`link`](https://babeljs.io/docs/en/configuration)) 
 
 :small_red_triangle: <a href="#blackfluxrobo-config-plugin-req-ref-babel">babel</a>
 
