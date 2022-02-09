@@ -41,8 +41,9 @@ describe('Integration Testing', () => {
                 .reduce((p, c) => Object.assign(p, { [c]: logFn(c, log, options.log) }), {}))
             };
             const result = objectScan(fileContent.needles, opts)(dirInput);
-            if (fileContent.result === undefined) { // makes it very convenient to record new tests
-              /* c8 ignore next */
+            /* c8 ignore next 3 */
+            if (fileContent.result === undefined) {
+              // makes it very convenient to record new tests
               fs.writeFileSync(filePath, stringify({ ...fileContent, log, result }));
             } else {
               expect(fileContent.result).to.deep.equal(result);
