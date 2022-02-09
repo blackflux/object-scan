@@ -1,9 +1,9 @@
 /* compile needles to hierarchical map object */
-import parser from './parser';
-import iterator from '../generic/iterator';
-import traverser from '../generic/traverser';
-import { defineProperty } from '../generic/helper';
-import { Wildcard } from './wildcard';
+import parser from './parser.js';
+import iterator from '../generic/iterator.js';
+import traverser from '../generic/traverser.js';
+import { defineProperty } from '../generic/helper.js';
+import { Wildcard } from './wildcard.js';
 
 const COUNTER = Symbol('counter');
 

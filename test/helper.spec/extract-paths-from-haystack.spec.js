@@ -1,6 +1,6 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import extractPathsFromHaystack from '../helper/extract-paths-from-haystack';
+import extractPathsFromHaystack from '../helper/extract-paths-from-haystack.js';
 
 describe('Testing extract-paths-from-haystack.js', () => {
   it('Testing with useArraySelector', () => {

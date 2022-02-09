@@ -1,7 +1,7 @@
 import assert from 'assert';
-import { compile } from './core/compiler';
-import find from './core/find';
-import Context from './core/context';
+import { compile } from './core/compiler.js';
+import find from './core/find.js';
+import Context from './core/context.js';
 
 export default (needles, opts = {}) => {
   assert(Array.isArray(needles));

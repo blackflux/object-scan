@@ -1,7 +1,7 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import traverser from '../../src/generic/traverser';
-import generateSearchTree from '../helper/generate-search-tree';
+import traverser from '../../src/generic/traverser.js';
+import generateSearchTree from '../helper/generate-search-tree.js';
 
 describe('Testing traverser', () => {
   let recTraverse;

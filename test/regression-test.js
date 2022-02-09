@@ -1,20 +1,25 @@
 import { fork } from 'child_process';
 
 import fs from 'smart-fs';
-import path from 'path';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 import isEqual from 'lodash.isequal';
 
-import generateDataset from './helper/generate-dataset';
-import generateNeedles from './helper/generate-needles';
-import createHtmlDiff from './helper/create-html-diff';
+import generateDataset from './helper/generate-dataset.js';
+import generateNeedles from './helper/generate-needles.js';
+import createHtmlDiff from './helper/create-html-diff.js';
 
 const TEST_COUNT = 1000000;
 
 // eslint-disable-next-line no-console
 const log = (...args) => console.log(...args);
 
-const Worker = () => {
-  const compute = fork(path.join(__dirname, 'worker.js'));
+const Worker = async () => {
+  const compute = fork(join(dirname(fileURLToPath(import.meta.url)), 'worker.js'));
+  await new Promise((resolve) => {
+    // waiting for worker to be ready
+    compute.on('message', () => resolve());
+  });
   let resolve;
   compute.on('message', (result) => resolve(result));
   return {
@@ -54,8 +59,8 @@ const execute = async () => {
   const timeReleased = Time();
   const timeLocal = Time();
 
-  const worker1 = Worker();
-  const worker2 = Worker();
+  const worker1 = await Worker();
+  const worker2 = await Worker();
 
   for (let count = 1; count <= TEST_COUNT; count += 1) {
     const { rng, haystack, paths } = generateDataset();
@@ -105,7 +110,10 @@ const execute = async () => {
         kwargs,
         seed: rng.seed
       });
-      fs.smartWrite(path.join(__dirname, '..', 'debug', `${rng.seed}.html`), diff.split('\n'));
+      fs.smartWrite(
+        join(dirname(fileURLToPath(import.meta.url)), '..', 'debug', `${rng.seed}.html`),
+        diff.split('\n')
+      );
     }
 
     if ((count % 100) === 0) {

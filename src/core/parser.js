@@ -1,5 +1,5 @@
-import { Wildcard } from './wildcard';
-import Result from './parser-result';
+import { Wildcard } from './wildcard.js';
+import Result from './parser-result.js';
 
 const throwError = (msg, input, context = {}) => {
   throw new Error(Object.entries(context)

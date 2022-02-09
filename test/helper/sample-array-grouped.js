@@ -1,4 +1,4 @@
-import sampleArray from './sample-array';
+import sampleArray from './sample-array.js';
 
 export default (...args) => {
   const indicesGrouped = {};

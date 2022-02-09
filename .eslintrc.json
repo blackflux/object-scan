@@ -37,7 +37,8 @@
     "@blackflux/rules/prevent-typeof-object": 1,
     "mocha/no-mocha-arrows": 0,
     "mocha/no-hooks-for-single-case": 0,
-    "import/no-useless-path-segments": [2, {"commonjs": true}]
+    "import/no-useless-path-segments": [2, {"commonjs": true}],
+    "import/extensions": [2, "always"]
   },
   "env": {"es6": true, "node": true, "mocha": true},
   "globals": {},

@@ -1,4 +1,4 @@
-import { escapeRegex, asRegex } from '../generic/helper';
+import { escapeRegex, asRegex } from '../generic/helper.js';
 
 export const parseWildcard = (str) => {
   let regex = '';

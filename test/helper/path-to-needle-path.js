@@ -1,9 +1,9 @@
 import Joi from 'joi-strict';
-import { escape, escapeRegex } from '../../src/generic/helper';
-import sampleArray from './sample-array';
-import sampleArrayGrouped from './sample-array-grouped';
-import sampleRanges from './sample-ranges';
-import shuffleArray from './shuffle-array';
+import { escape, escapeRegex } from '../../src/generic/helper.js';
+import sampleArray from './sample-array.js';
+import sampleArrayGrouped from './sample-array-grouped.js';
+import sampleRanges from './sample-ranges.js';
+import shuffleArray from './shuffle-array.js';
 
 export default (...kwargs) => {
   const needle = kwargs[0];

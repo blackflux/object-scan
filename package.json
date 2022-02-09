@@ -1,5 +1,6 @@
 {
   "name": "object-scan",
+  "type": "module",
   "version": "0.0.0-development",
   "description": "Traverse object hierarchies using matching and callbacks.",
   "main": "lib/index.js",
@@ -7,11 +8,11 @@
     "clean": "rm -rf lib",
     "build": "cp -rf ./src ./lib",
     "build-clean": "yarn run clean && yarn run build",
-    "test-simple": "nyc mocha \"./test/**/*.spec.js\"",
+    "test-simple": "c8 mocha \"./test/**/*.spec.js\"",
     "test": "yarn run clean && yarn run gardener && yarn run test-simple",
     "coveralls": "node ./node_modules/coveralls/bin/coveralls.js < ./coverage/lcov.info",
     "semantic-release": "yarn run build-clean && npx semantic-release",
-    "gardener": "node gardener",
+    "gardener": "node gardener.js",
     "docker": "docker run --net host -u`id -u`:`id -g` -v $(pwd):/user/project -v ~/.aws:/user/.aws -v ~/.npmrc:/user/.npmrc -w /user/project -it --entrypoint /bin/bash",
     "t": "yarn test",
     "ts": "yarn run test-simple",
@@ -53,8 +54,9 @@
     "@babel/preset-env": "7.16.8",
     "@babel/register": "7.16.9",
     "@blackflux/eslint-plugin-rules": "2.0.4",
-    "@blackflux/robo-config-plugin": "5.3.26",
+    "@blackflux/robo-config-plugin": "6.0.0",
     "babel-plugin-istanbul": "6.1.1",
+    "c8": "7.11.0",
     "chai": "4.3.4",
     "coveralls": "3.1.1",
     "diff": "5.0.0",
@@ -71,45 +73,10 @@
     "lodash.isequal": "4.5.0",
     "mustache": "4.2.0",
     "node-tdd": "3.3.1",
-    "nyc": "15.1.0",
     "object-scan": "17.1.0",
     "smart-fs": "2.0.3",
     "stringify-object": "3.3.0",
     "uuid": "8.3.2"
-  },
-  "nyc": {
-    "tempDir": "./coverage/.nyc_output",
-    "report-dir": "./coverage",
-    "check-coverage": true,
-    "per-file": false,
-    "lines": 100,
-    "statements": 100,
-    "functions": 100,
-    "branches": 100,
-    "include": [
-      "**/*.js"
-    ],
-    "reporter": [
-      "lcov",
-      "text-summary"
-    ],
-    "require": [
-      "@babel/register"
-    ],
-    "extension": [],
-    "cache": true,
-    "all": true,
-    "babel": true,
-    "exclude": [
-      "gardener.js",
-      "node_modules/*",
-      "coverage/*",
-      "lib/*",
-      "test/regression-test.js",
-      "test/worker.js"
-    ],
-    "sourceMap": false,
-    "instrument": false
   },
   "licenses": [
     {

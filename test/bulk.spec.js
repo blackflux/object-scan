@@ -1,8 +1,8 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import generateDataset from './helper/generate-dataset';
-import generateNeedles from './helper/generate-needles';
-import objectScan from '../src/index';
+import generateDataset from './helper/generate-dataset.js';
+import generateNeedles from './helper/generate-needles.js';
+import objectScan from '../src/index.js';
 
 const Tester = () => {
   const generateTestSet = ({ useArraySelector, modify }) => {

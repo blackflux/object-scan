@@ -1,6 +1,6 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import stringify from '../helper/stringify';
+import stringify from '../helper/stringify.js';
 
 describe('Testing stringify.js', () => {
   it('Testing array', () => {

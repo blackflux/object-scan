@@ -1,7 +1,7 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import sampleRanges from '../helper/sample-ranges';
-import PRNG from '../helper/prng';
+import sampleRanges from '../helper/sample-ranges.js';
+import PRNG from '../helper/prng.js';
 
 describe('Testing sample-ranges.js', () => {
   let execute;

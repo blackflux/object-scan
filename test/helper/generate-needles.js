@@ -1,8 +1,8 @@
-import shuffleArray from './shuffle-array';
-import needlePathsToNeedlesParsed from './needle-paths-to-needles-parsed';
-import pathToNeedlePath from './path-to-needle-path';
-import parsedNeedleToStringArray from './parsed-needle-to-string-array';
-import stripArraySelectorFromPaths from './strip-array-selector-from-paths';
+import shuffleArray from './shuffle-array.js';
+import needlePathsToNeedlesParsed from './needle-paths-to-needles-parsed.js';
+import pathToNeedlePath from './path-to-needle-path.js';
+import parsedNeedleToStringArray from './parsed-needle-to-string-array.js';
+import stripArraySelectorFromPaths from './strip-array-selector-from-paths.js';
 
 export default ({
   rng, paths, useArraySelector, modifierParams

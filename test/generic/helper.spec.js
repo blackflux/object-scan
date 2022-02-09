@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe } from 'node-tdd';
-import { defineProperty, escape, asRegex } from '../../src/generic/helper';
+import { defineProperty, escape, asRegex } from '../../src/generic/helper.js';
 
 describe('Testing Helper', () => {
   describe('Testing defineProperty', () => {

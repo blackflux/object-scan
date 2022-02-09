@@ -1,9 +1,9 @@
 import { v4 } from 'uuid';
-import PRNG from './prng';
-import haystackGenerator from './haystack-generator';
-import generateKeys from './generate-keys';
-import generateHaystack from './generate-haystack';
-import extractPathsFromHaystack from './extract-paths-from-haystack';
+import PRNG from './prng.js';
+import haystackGenerator from './haystack-generator.js';
+import generateKeys from './generate-keys.js';
+import generateHaystack from './generate-haystack.js';
+import extractPathsFromHaystack from './extract-paths-from-haystack.js';
 
 const uuid = v4;
 

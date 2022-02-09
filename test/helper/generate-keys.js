@@ -1,6 +1,6 @@
-import sampleArray from './sample-array';
-import words from './resources/words.json';
-import chars from './resources/chars.json';
+import sampleArray from './sample-array.js';
+import words from './resources/words.js';
+import chars from './resources/chars.js';
 
 export default (count, rng = Math.random) => {
   const result = sampleArray(words, count, { rng });

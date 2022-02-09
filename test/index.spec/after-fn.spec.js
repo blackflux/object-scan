@@ -1,6 +1,6 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import objectScan from '../../src/index';
+import objectScan from '../../src/index.js';
 
 describe('Testing afterFn', () => {
   it('Testing basic usage', () => {

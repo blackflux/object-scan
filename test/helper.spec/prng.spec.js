@@ -1,6 +1,6 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import PRNG from '../helper/prng';
+import PRNG from '../helper/prng.js';
 
 describe('Testing prng.js', () => {
   it('Testing random stable', () => {

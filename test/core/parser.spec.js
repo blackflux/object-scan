@@ -1,9 +1,9 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import parser from '../../src/core/parser';
-import Context from '../../src/core/context';
-import generateParsedNeedle from '../helper/generate-parsed-needle';
-import parsedNeedleToStringArray from '../helper/parsed-needle-to-string-array';
+import parser from '../../src/core/parser.js';
+import Context from '../../src/core/context.js';
+import generateParsedNeedle from '../helper/generate-parsed-needle.js';
+import parsedNeedleToStringArray from '../helper/parsed-needle-to-string-array.js';
 
 const parse = (input, ctx = {}) => parser.parse(input, Context(ctx));
 

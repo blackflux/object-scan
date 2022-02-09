@@ -1,5 +1,5 @@
-import { escape } from '../../src/generic/helper';
-import CHARS from './resources/chars.json';
+import { escape } from '../../src/generic/helper.js';
+import CHARS from './resources/chars.js';
 
 const MAX_DEPTH = 4;
 const MAX_WIDTH = 4;

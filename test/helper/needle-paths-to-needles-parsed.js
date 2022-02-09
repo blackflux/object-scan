@@ -1,6 +1,6 @@
 import assert from 'assert';
-import findLastIndex from './find-last-index';
-import simplifyNeedleParsed from './simplify-needle-parsed';
+import findLastIndex from './find-last-index.js';
+import simplifyNeedleParsed from './simplify-needle-parsed.js';
 
 const normalizePath = (p) => p.map((e) => [
   e.string ? '' : '[',

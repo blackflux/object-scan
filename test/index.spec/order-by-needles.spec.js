@@ -1,7 +1,7 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import objectScan from '../../src/index';
-import generateDataset from '../helper/generate-dataset';
+import objectScan from '../../src/index.js';
+import generateDataset from '../helper/generate-dataset.js';
 
 const exec = (needles, obj, opts = {}) => objectScan(needles, {
   orderByNeedles: true,

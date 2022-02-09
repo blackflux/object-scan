@@ -1,11 +1,11 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import Context from '../../src/core/context';
+import Context from '../../src/core/context.js';
 import {
   getWildcard, compile, excludedBy, traversedBy,
   hasMatches, getNeedles, matchedBy, isLeaf,
   isMatch, isLastLeafMatch, getIndex, getLeafNeedles
-} from '../../src/core/compiler';
+} from '../../src/core/compiler.js';
 
 const c = (needles, ctx = {}) => compile(needles, Context(ctx));
 

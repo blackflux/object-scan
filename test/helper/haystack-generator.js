@@ -1,5 +1,5 @@
-import sampleArray from './sample-array';
-import CHARS from './resources/chars.json';
+import sampleArray from './sample-array.js';
+import CHARS from './resources/chars.js';
 
 export default ({ rng, keys = CHARS }) => {
   const arrayProb = rng();

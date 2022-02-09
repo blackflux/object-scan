@@ -1,10 +1,10 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
 import { v4 } from 'uuid';
-import iterator from '../../src/generic/iterator';
-import parsedNeedleToStringArray from '../helper/parsed-needle-to-string-array';
-import generateParsedNeedle from '../helper/generate-parsed-needle';
-import PRNG from '../helper/prng';
+import iterator from '../../src/generic/iterator.js';
+import parsedNeedleToStringArray from '../helper/parsed-needle-to-string-array.js';
+import generateParsedNeedle from '../helper/generate-parsed-needle.js';
+import PRNG from '../helper/prng.js';
 
 const uuid = v4;
 

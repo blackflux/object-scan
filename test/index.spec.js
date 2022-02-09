@@ -1,6 +1,6 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import objectScanOriginal from '../src/index';
+import objectScanOriginal from '../src/index.js';
 
 const objectScan = (needles, opts) => objectScanOriginal(
   needles,

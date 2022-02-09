@@ -1,6 +1,6 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import analyzeHaystack from '../helper/analyze-haystack';
+import analyzeHaystack from '../helper/analyze-haystack.js';
 
 describe('Testing analyze-haystack.js', () => {
   it('Testing basic', () => {

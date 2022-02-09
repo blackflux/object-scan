@@ -1,6 +1,6 @@
 import assert from 'assert';
-import { defineProperty } from '../generic/helper';
-import { Wildcard } from './wildcard';
+import { defineProperty } from '../generic/helper.js';
+import { Wildcard } from './wildcard.js';
 
 const IS_EXCLUDED = Symbol('is-excluded');
 const markExcluded = (input) => defineProperty(input, IS_EXCLUDED, true);

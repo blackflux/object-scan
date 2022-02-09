@@ -1,11 +1,11 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import pathToNeedlePath from '../helper/path-to-needle-path';
-import needlePathsToNeedlesParsed from '../helper/needle-paths-to-needles-parsed';
-import parsedNeedleToStringArray from '../helper/parsed-needle-to-string-array';
-import generateDataset from '../helper/generate-dataset';
-import callSignature from '../helper/call-signature';
-import objectScan from '../../src/index';
+import pathToNeedlePath from '../helper/path-to-needle-path.js';
+import needlePathsToNeedlesParsed from '../helper/needle-paths-to-needles-parsed.js';
+import parsedNeedleToStringArray from '../helper/parsed-needle-to-string-array.js';
+import generateDataset from '../helper/generate-dataset.js';
+import callSignature from '../helper/call-signature.js';
+import objectScan from '../../src/index.js';
 
 describe('Testing needle-paths-to-needles-parsed.js', { timeout: 5000 }, () => {
   it('Testing single', () => {

@@ -1,4 +1,4 @@
-import CHARS from './resources/chars.json';
+import CHARS from './resources/chars.js';
 
 const MAX_DEPTH = 7;
 const MAX_WIDTH = 7;

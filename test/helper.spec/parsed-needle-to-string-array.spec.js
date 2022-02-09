@@ -1,8 +1,8 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import generateParsedNeedle from '../helper/generate-parsed-needle';
-import parsedNeedleToStringArray from '../helper/parsed-needle-to-string-array';
-import PRNG from '../helper/prng';
+import generateParsedNeedle from '../helper/generate-parsed-needle.js';
+import parsedNeedleToStringArray from '../helper/parsed-needle-to-string-array.js';
+import PRNG from '../helper/prng.js';
 
 describe('Testing parsed-needle-to-string-array.js', () => {
   it('Testing example', () => {

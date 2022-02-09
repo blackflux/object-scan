@@ -1,7 +1,7 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import sampleArray from '../helper/sample-array';
-import PRNG from '../helper/prng';
+import sampleArray from '../helper/sample-array.js';
+import PRNG from '../helper/prng.js';
 
 describe('Testing sample-array.js', () => {
   it('Testing example', () => {

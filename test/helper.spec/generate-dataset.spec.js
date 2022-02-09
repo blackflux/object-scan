@@ -1,8 +1,9 @@
 import fs from 'smart-fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import generateDataset from '../helper/generate-dataset';
+import generateDataset from '../helper/generate-dataset.js';
 
 describe('Testing generate-dataset.js', () => {
   it('Testing seed consistency', () => {
@@ -11,7 +12,7 @@ describe('Testing generate-dataset.js', () => {
       rng, haystack, paths
     } = generateDataset(seed);
     expect(rng.seed).to.deep.equal(seed);
-    const filename = path.join(`${__filename}__resources`, 'seed-consistency.json');
+    const filename = path.join(`${fileURLToPath(import.meta.url)}__resources`, 'seed-consistency.json');
     const result = fs.smartWrite(filename, { haystack, paths });
     expect(result).to.equal(false);
   });

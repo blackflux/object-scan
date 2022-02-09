@@ -1,7 +1,7 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import pathToNeedlePath from '../helper/path-to-needle-path';
-import PRNG from '../helper/prng';
+import pathToNeedlePath from '../helper/path-to-needle-path.js';
+import PRNG from '../helper/prng.js';
 
 describe('Testing path-to-needle-path.js', () => {
   let rng;

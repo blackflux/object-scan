@@ -1,6 +1,6 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import findLastIndex from '../helper/find-last-index';
+import findLastIndex from '../helper/find-last-index.js';
 
 describe('Testing find-last-index.js', () => {
   it('Testing not found', () => {

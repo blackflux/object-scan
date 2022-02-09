@@ -1,6 +1,6 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import stripArraySelectorFromPaths from '../helper/strip-array-selector-from-paths';
+import stripArraySelectorFromPaths from '../helper/strip-array-selector-from-paths.js';
 
 describe('Testing strip-array-selector-from-paths.js', () => {
   it('Testing example', () => {

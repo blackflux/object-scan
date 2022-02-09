@@ -1,5 +1,5 @@
 import Joi from 'joi-strict';
-import sampleArray from './sample-array';
+import sampleArray from './sample-array.js';
 
 export default (...args) => {
   Joi.assert(args, Joi.array().ordered(
