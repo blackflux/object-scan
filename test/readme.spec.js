@@ -60,27 +60,28 @@ const Renderer = () => {
     if (meta.haystack) {
       haystack = meta.haystack;
     }
-    const h = haystack;
+    const kwargs = {
+      spoiler: meta.spoiler !== 'false',
+      comment: meta.comment,
+      haystack,
+      needles: meta.needles,
+      context,
+      result: null,
+      options
+    };
 
     let result;
     try {
       const p1 = `${meta.needles}${options}`;
-      const p2 = `${h}${context}`;
+      const p2 = `${haystack}${context}`;
       const c = `import('../src/index.js').then((idx) => idx.default(${p1})(${p2}));`;
       // eslint-disable-next-line no-eval
       result = await eval(c);
     } catch (e) {
       result = String(e);
     }
-    return Mustache.render(template, {
-      spoiler: meta.spoiler !== 'false',
-      comment: meta.comment,
-      haystack: h,
-      needles: meta.needles,
-      context,
-      result: stringify(result).replace(/\\/g, '\\\\'),
-      options
-    });
+    kwargs.result = stringify(result).replace(/\\/g, '\\\\');
+    return Mustache.render(template, kwargs);
   };
 };
 
