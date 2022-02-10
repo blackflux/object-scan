@@ -41,6 +41,7 @@ describe('Integration Testing', () => {
                 .reduce((p, c) => Object.assign(p, { [c]: logFn(c, log, options.log) }), {}))
             };
             const result = objectScan(fileContent.needles, opts)(dirInput);
+            // eslint-disable-next-line @blackflux/rules/c8-prevent-ignore
             /* c8 ignore next 3 */
             if (fileContent.result === undefined) {
               // makes it very convenient to record new tests
