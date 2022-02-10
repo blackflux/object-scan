@@ -1,6 +1,6 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const findLastIndex = require('../helper/find-last-index');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import findLastIndex from '../helper/find-last-index.js';
 
 describe('Testing find-last-index.js', () => {
   it('Testing not found', () => {

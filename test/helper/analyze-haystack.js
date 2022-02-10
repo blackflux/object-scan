@@ -16,7 +16,7 @@ const findDepth = (obj, depth, ctx) => {
   return depth;
 };
 
-module.exports = (obj) => {
+export default (obj) => {
   const ctx = {
     leaves: 0,
     nodes: 0,

@@ -1,8 +1,8 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const generateDataset = require('./helper/generate-dataset');
-const generateNeedles = require('./helper/generate-needles');
-const objectScan = require('../src/index');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import generateDataset from './helper/generate-dataset.js';
+import generateNeedles from './helper/generate-needles.js';
+import objectScan from '../src/index.js';
 
 const Tester = () => {
   const generateTestSet = ({ useArraySelector, modify }) => {

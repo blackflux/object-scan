@@ -1,7 +1,7 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const PRNG = require('../helper/prng');
-const shuffleArray = require('../helper/shuffle-array');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import PRNG from '../helper/prng.js';
+import shuffleArray from '../helper/shuffle-array.js';
 
 describe('Testing shuffle-array.js', { cryptoSeed: '477f1b9e-ab84-4770-b7c1-b4a7fb162979' }, () => {
   it('Testing example', () => {

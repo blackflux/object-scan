@@ -1,20 +1,21 @@
-const fs = require('fs');
-const path = require('path');
-const jsdiff = require('diff');
-const Diff2html = require('diff2html');
+import fs from 'fs';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+import { createPatch } from 'diff';
+import { html } from 'diff2html';
 
-const template = fs.readFileSync(path.join(
-  __dirname, 'resources', 'diff-template.mustache'
-)).toString('utf8');
+const template = fs.readFileSync(
+  join(dirname(fileURLToPath(import.meta.url)), 'resources', 'diff-template.mustache')
+).toString('utf8');
 
-module.exports = (name, log1, log2, meta = null) => {
+export default (name, log1, log2, meta = null) => {
   const str1 = JSON.stringify(log1, null, 2);
   const str2 = JSON.stringify(log2, null, 2);
 
   const filename = `${name}.html`;
-  const diff = jsdiff.createPatch(filename, str1, str2, null, null, { context: 100 });
+  const diff = createPatch(filename, str1, str2, null, null, { context: 100 });
 
-  const diffHtml = Diff2html.html(diff, {
+  const diffHtml = html(diff, {
     drawFileList: false,
     outputFormat: 'side-by-side',
     maxLineSizeInBlockForComparison: 100000,

@@ -5,7 +5,7 @@ const pathsEqual = (p1, p2) => {
   return p1.every((k, idx) => k === p2[idx]);
 };
 
-module.exports = (paths) => {
+export default (paths) => {
   const result = [];
   paths
     .map((p) => p.filter((k) => !Number.isInteger(k)))

@@ -1,9 +1,10 @@
-const fs = require('smart-fs');
-const path = require('path');
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const Mustache = require('mustache');
-const stringify = require('./helper/stringify');
+import fs from 'smart-fs';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+import { describe } from 'node-tdd';
+import Mustache from 'mustache';
+import { expect } from 'chai';
+import stringify from './helper/stringify.js';
 
 const getObjectScanOptions = (meta) => {
   const entries = Object.entries({
@@ -31,12 +32,25 @@ const getObjectScanOptions = (meta) => {
   return multiline ? `, {\n  ${result}\n}` : `, { ${result} }`;
 };
 
+const replaceAsync = async (str, regex, asyncFn) => {
+  const tasks = [];
+  str.replace(regex, (match, ...args) => {
+    tasks.push(() => asyncFn(match, ...args));
+  });
+  const data = [];
+  for (let i = 0; i < tasks.length; i += 1) {
+    // eslint-disable-next-line no-await-in-loop
+    data.push(await tasks[i]());
+  }
+  return str.replace(regex, () => data.shift());
+};
+
 const Renderer = () => {
-  const templateFile = path.join(__dirname, 'readme', 'example.mustache');
+  const templateFile = join(dirname(fileURLToPath(import.meta.url)), 'readme', 'example.mustache');
   const template = fs.smartRead(templateFile).join('\n');
 
   let haystack;
-  return (match, content) => {
+  return async (match, content) => {
     const meta = content
       .split('\n')
       .map((l) => /^(?<key>[a-zA-Z0-9]+): (?<value>.*)$/.exec(l).groups)
@@ -46,33 +60,38 @@ const Renderer = () => {
     if (meta.haystack) {
       haystack = meta.haystack;
     }
-
-    let result;
-    try {
-      // eslint-disable-next-line no-eval
-      result = eval(`require('../src/index')(${meta.needles}${options})(${haystack}${context})`);
-    } catch (e) {
-      result = String(e);
-    }
-    return Mustache.render(template, {
+    const kwargs = {
       spoiler: meta.spoiler !== 'false',
       comment: meta.comment,
       haystack,
       needles: meta.needles,
       context,
-      result: stringify(result).replace(/\\/g, '\\\\'),
+      result: null,
       options
-    });
+    };
+
+    let result;
+    try {
+      const p1 = `${meta.needles}${options}`;
+      const p2 = `${haystack}${context}`;
+      const c = `import('../src/index.js').then((idx) => idx.default(${p1})(${p2}));`;
+      // eslint-disable-next-line no-eval
+      result = await eval(c);
+    } catch (e) {
+      result = String(e);
+    }
+    kwargs.result = stringify(result).replace(/\\/g, '\\\\');
+    return Mustache.render(template, kwargs);
   };
 };
 
 describe('Testing Readme', { timeout: 5 * 60000 }, () => {
-  it('Updating Readme Example', () => {
-    const inputFile = path.join(__dirname, 'readme', 'README.template.md');
-    const outputFile = path.join(__dirname, '..', 'README.md');
+  it('Updating Readme Example', async () => {
+    const inputFile = join(dirname(fileURLToPath(import.meta.url)), 'readme', 'README.template.md');
+    const outputFile = join(dirname(fileURLToPath(import.meta.url)), '..', 'README.md');
     const input = fs.smartRead(inputFile).join('\n');
     const renderer = Renderer();
-    const output = input.replace(/<pre><example>\n([\s\S]+?)\n<\/example><\/pre>/g, renderer);
+    const output = await replaceAsync(input, /<pre><example>\n([\s\S]+?)\n<\/example><\/pre>/g, renderer);
     const result = fs.smartWrite(outputFile, output.split('\n'));
     expect(result).to.equal(false);
   });

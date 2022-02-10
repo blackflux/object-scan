@@ -1,6 +1,6 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const PRNG = require('../helper/prng');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import PRNG from '../helper/prng.js';
 
 describe('Testing prng.js', () => {
   it('Testing random stable', () => {

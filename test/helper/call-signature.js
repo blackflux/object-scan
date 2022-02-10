@@ -1,4 +1,4 @@
-module.exports = ({
+export default ({
   objectScan,
   haystack,
   needles,

@@ -1,7 +1,7 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const sampleArrayGrouped = require('../helper/sample-array-grouped');
-const PRNG = require('../helper/prng');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import sampleArrayGrouped from '../helper/sample-array-grouped.js';
+import PRNG from '../helper/prng.js';
 
 describe('Testing sample-array-grouped.js', () => {
   it('Testing example', () => {

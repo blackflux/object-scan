@@ -1,6 +1,6 @@
-const assert = require('assert');
-const findLastIndex = require('./find-last-index');
-const simplifyNeedleParsed = require('./simplify-needle-parsed');
+import assert from 'assert';
+import findLastIndex from './find-last-index.js';
+import simplifyNeedleParsed from './simplify-needle-parsed.js';
 
 const normalizePath = (p) => p.map((e) => [
   e.string ? '' : '[',
@@ -148,4 +148,4 @@ const recurse = (obj_) => {
   return obj;
 };
 
-module.exports = (paths) => recurse(new Set(paths.map((p) => normalizePath(p))));
+export default (paths) => recurse(new Set(paths.map((p) => normalizePath(p))));

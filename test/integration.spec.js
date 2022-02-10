@@ -1,12 +1,13 @@
-const fs = require('fs');
-const path = require('path');
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const stringify = require('json-stringify-pretty-compact');
-const objectScan = require('../src/index');
+import fs from 'smart-fs';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+import { describe } from 'node-tdd';
+import stringify from 'json-stringify-pretty-compact';
+import { expect } from 'chai';
+import objectScan from '../src/index.js';
 
 const getEntries = (source) => fs.readdirSync(source)
-  .map((name) => [name, path.join(source, name)]);
+  .map((name) => [name, join(source, name)]);
 const getDirectories = (source) => getEntries(source)
   .filter(([f, p]) => fs.lstatSync(p).isDirectory());
 const getFiles = (source) => getEntries(source)
@@ -23,14 +24,12 @@ const logFn = (type, log, paramsToLog) => (kwargs) => {
 
 describe('Integration Testing', () => {
   // eslint-disable-next-line mocha/no-setup-in-describe
-  getDirectories(path.join(__dirname, 'integration'))
-    // eslint-disable-next-line import/no-dynamic-require,global-require
-    .map(([dirName, dirPath]) => [dirName, dirPath, require(`${dirPath}.json`)])
+  getDirectories(join(dirname(fileURLToPath(import.meta.url)), 'integration'))
+    .map(([dirName, dirPath]) => [dirName, dirPath, fs.smartRead(`${dirPath}.json`)])
     .forEach(([dirName, dirPath, dirInput]) => {
       getFiles(dirPath)
         .filter(([fileName, filePath]) => fileName.endsWith('.spec.json'))
-        // eslint-disable-next-line import/no-dynamic-require,global-require
-        .map(([fileName, filePath]) => [fileName, filePath, require(filePath)])
+        .map(([fileName, filePath]) => [fileName, filePath, fs.smartRead(filePath)])
         .forEach(([fileName, filePath, fileContent]) => {
           it(`Testing ${dirName}/${fileName}`, () => {
             const options = fileContent.options || {};
@@ -42,9 +41,10 @@ describe('Integration Testing', () => {
                 .reduce((p, c) => Object.assign(p, { [c]: logFn(c, log, options.log) }), {}))
             };
             const result = objectScan(fileContent.needles, opts)(dirInput);
-            // eslint-disable-next-line @blackflux/rules/istanbul-prevent-ignore
-            /* istanbul ignore if */
-            if (fileContent.result === undefined) { // makes it very convenient to record new tests
+            // eslint-disable-next-line @blackflux/rules/c8-prevent-ignore
+            /* c8 ignore next 3 */
+            if (fileContent.result === undefined) {
+              // makes it very convenient to record new tests
               fs.writeFileSync(filePath, stringify({ ...fileContent, log, result }));
             } else {
               expect(fileContent.result).to.deep.equal(result);
