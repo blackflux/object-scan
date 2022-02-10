@@ -1,6 +1,6 @@
-const assert = require('assert');
+import assert from 'assert';
 
-module.exports = (opts) => {
+export default (opts) => {
   const ctx = {
     filterFn: undefined,
     breakFn: undefined,

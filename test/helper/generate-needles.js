@@ -1,10 +1,10 @@
-const shuffleArray = require('./shuffle-array');
-const needlePathsToNeedlesParsed = require('./needle-paths-to-needles-parsed');
-const pathToNeedlePath = require('./path-to-needle-path');
-const parsedNeedleToStringArray = require('./parsed-needle-to-string-array');
-const stripArraySelectorFromPaths = require('./strip-array-selector-from-paths');
+import shuffleArray from './shuffle-array.js';
+import needlePathsToNeedlesParsed from './needle-paths-to-needles-parsed.js';
+import pathToNeedlePath from './path-to-needle-path.js';
+import parsedNeedleToStringArray from './parsed-needle-to-string-array.js';
+import stripArraySelectorFromPaths from './strip-array-selector-from-paths.js';
 
-module.exports = ({
+export default ({
   rng, paths, useArraySelector, modifierParams
 }) => {
   const needles = useArraySelector ? paths : stripArraySelectorFromPaths(paths);

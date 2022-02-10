@@ -1,6 +1,6 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const { parseWildcard } = require('../../src/core/wildcard');
+import { expect } from 'chai';
+import { describe } from 'node-tdd';
+import { parseWildcard } from '../../src/core/wildcard.js';
 
 describe('Testing Helper', () => {
   describe('Testing parseWildcard', () => {

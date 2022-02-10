@@ -1,7 +1,7 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const traverser = require('../../src/generic/traverser');
-const generateSearchTree = require('../helper/generate-search-tree');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import traverser from '../../src/generic/traverser.js';
+import generateSearchTree from '../helper/generate-search-tree.js';
 
 describe('Testing traverser', () => {
   let recTraverse;

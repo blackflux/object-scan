@@ -1,8 +1,8 @@
-const sampleArray = require('./sample-array');
-const words = require('./resources/words.json');
-const chars = require('./resources/chars.json');
+import sampleArray from './sample-array.js';
+import words from './resources/words.js';
+import chars from './resources/chars.js';
 
-module.exports = (count, rng = Math.random) => {
+export default (count, rng = Math.random) => {
   const result = sampleArray(words, count, { rng });
   const noiseProb = rng();
   const noiseFactor = Math.floor(rng() * 10) + 1;

@@ -1,6 +1,6 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const analyzeHaystack = require('../helper/analyze-haystack');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import analyzeHaystack from '../helper/analyze-haystack.js';
 
 describe('Testing analyze-haystack.js', () => {
   it('Testing basic', () => {

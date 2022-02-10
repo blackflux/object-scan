@@ -30,7 +30,7 @@ function sfc32(a, b, c, d) {
   };
 }
 
-module.exports = (str) => {
+export default (str) => {
   const seed = xmur3(str);
   const rng = sfc32(seed(), seed(), seed(), seed());
   rng.seed = str;

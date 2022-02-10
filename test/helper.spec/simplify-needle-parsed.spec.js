@@ -1,6 +1,6 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const simplifyNeedleParsed = require('../helper/simplify-needle-parsed');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import simplifyNeedleParsed from '../helper/simplify-needle-parsed.js';
 
 describe('Testing simplify-needle-parsed.js', () => {
   it('Testing nested set', () => {

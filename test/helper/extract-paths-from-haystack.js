@@ -17,4 +17,4 @@ const extractPathsRec = (haystack, path = []) => {
   return result;
 };
 
-module.exports = (haystack) => extractPathsRec(haystack).reverse();
+export default (haystack) => extractPathsRec(haystack).reverse();

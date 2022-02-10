@@ -1,7 +1,7 @@
-const expect = require('chai').expect;
-const { describe } = require('node-tdd');
-const pathToNeedlePath = require('../helper/path-to-needle-path');
-const PRNG = require('../helper/prng');
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import pathToNeedlePath from '../helper/path-to-needle-path.js';
+import PRNG from '../helper/prng.js';
 
 describe('Testing path-to-needle-path.js', () => {
   let rng;

@@ -1,10 +1,11 @@
-const expect = require('chai').expect;
-const fs = require('smart-fs');
-const path = require('path');
-const { describe } = require('node-tdd');
-const PRNG = require('../helper/prng');
-const generateHaystack = require('../helper/generate-haystack');
-const haystackGenerator = require('../helper/haystack-generator');
+import fs from 'smart-fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { describe } from 'node-tdd';
+import { expect } from 'chai';
+import PRNG from '../helper/prng.js';
+import generateHaystack from '../helper/generate-haystack.js';
+import haystackGenerator from '../helper/haystack-generator.js';
 
 describe('Testing generate-haystack.js', () => {
   it('Testing example', () => {
@@ -12,7 +13,7 @@ describe('Testing generate-haystack.js', () => {
     const generator = haystackGenerator({ rng });
     const haystack = generateHaystack(generator);
 
-    const filename = path.join(`${__filename}__resources`, 'example-haystack.json');
+    const filename = path.join(`${fileURLToPath(import.meta.url)}__resources`, 'example-haystack.json');
     const result = fs.smartWrite(filename, haystack);
     expect(result).to.equal(false);
   });

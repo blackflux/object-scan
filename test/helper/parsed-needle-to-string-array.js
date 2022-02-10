@@ -40,4 +40,4 @@ const parsedNeedleToStringArray = (obj, depth = 0) => {
   return depth === 0 ? [obj] : obj;
 };
 
-module.exports = (obj) => parsedNeedleToStringArray(obj);
+export default (obj) => parsedNeedleToStringArray(obj);

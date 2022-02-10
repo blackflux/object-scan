@@ -9,7 +9,7 @@ workflows:
       - test-node-v14:
           requires:
             - gally-create-pr
-      - test-node-v12:
+      - test-node-v17:
           requires:
             - gally-create-pr
       - gally-auto-approve:
@@ -17,7 +17,7 @@ workflows:
             - gally-create-pr
             - test-node-v16
             - test-node-v14
-            - test-node-v12
+            - test-node-v17
           filters:
             branches:
               only: /dependabot\/.*/
@@ -26,7 +26,7 @@ workflows:
             - gally-create-pr
             - test-node-v16
             - test-node-v14
-            - test-node-v12
+            - test-node-v17
           filters:
             branches:
               only: master
@@ -67,39 +67,8 @@ jobs:
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
+      - run: yarn global add semantic-release
       - run: yarn run semantic-release
-  test-node-v12:
-    docker:
-      - image: circleci/node:12
-    steps:
-      - checkout
-      - run:
-          command: |
-            # sync submodules as checkout doesn't do this automatically
-            if [[ $(git config --file .gitmodules --get-regexp path) ]]; then
-              git submodule sync && git submodule update --init
-            fi
-      - run:
-          command: |
-            if [[ -n "${NPM_TOKEN}" ]]; then
-              echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-            fi
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn install --frozen-lockfile
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-      - run: yarn test
-      - run: >-
-          (git add . && git diff-index --quiet HEAD --) || (git status && exit
-          1);
   gally-auto-approve:
     docker:
       - image: circleci/node:14
@@ -159,6 +128,38 @@ jobs:
   test-node-v16:
     docker:
       - image: circleci/node:16
+    steps:
+      - checkout
+      - run:
+          command: |
+            # sync submodules as checkout doesn't do this automatically
+            if [[ $(git config --file .gitmodules --get-regexp path) ]]; then
+              git submodule sync && git submodule update --init
+            fi
+      - run:
+          command: |
+            if [[ -n "${NPM_TOKEN}" ]]; then
+              echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+            fi
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run: yarn test
+      - run: >-
+          (git add . && git diff-index --quiet HEAD --) || (git status && exit
+          1);
+  test-node-v17:
+    docker:
+      - image: circleci/node:17
     steps:
       - checkout
       - run:

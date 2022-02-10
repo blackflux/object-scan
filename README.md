@@ -21,7 +21,7 @@ Install with [npm](https://www.npmjs.com/):
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
-const objectScan = require('object-scan');
+import objectScan from 'object-scan';
 
 const haystack = { a: { b: { c: 'd' }, e: { f: 'g' } } };
 objectScan(['a.*.f'], { joined: true })(haystack);

@@ -1,4 +1,4 @@
-module.exports.traverse = (obj, cb) => {
+const traverse = (obj, cb) => {
   const stack = [obj];
   const counts = [1];
   let depth = 0;
@@ -31,3 +31,4 @@ module.exports.traverse = (obj, cb) => {
     }
   }
 };
+export default { traverse };

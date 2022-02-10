@@ -1,6 +1,6 @@
-const Joi = require('joi-strict');
+import Joi from 'joi-strict';
 
-module.exports = (...args) => {
+export default (...args) => {
   Joi.assert(args, Joi.array().ordered(
     Joi.alternatives(
       Joi.array().min(1),
