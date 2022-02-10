@@ -1,12 +1,10 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import { v4 } from 'uuid';
+import { v4 as uuid } from 'uuid';
 import iterator from '../../src/generic/iterator.js';
 import parsedNeedleToStringArray from '../helper/parsed-needle-to-string-array.js';
 import generateParsedNeedle from '../helper/generate-parsed-needle.js';
 import PRNG from '../helper/prng.js';
-
-const uuid = v4;
 
 describe('Testing iterator', () => {
   let recIterate;
