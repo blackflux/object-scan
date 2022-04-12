@@ -1,10 +1,9 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
 import gardener from 'js-gardener';
-
-import { fileURLToPath } from 'url';
+import fs from 'smart-fs';
 import process from 'process';
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+if (process.argv[1] === fs.filename(import.meta.url)) {
   gardener({
     skip: []
   }).catch(() => process.exit(1));
