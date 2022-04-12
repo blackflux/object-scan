@@ -80,7 +80,7 @@ const Renderer = () => {
     } catch (e) {
       result = String(e);
     }
-    kwargs.result = stringify(result).replace(/\\/g, '\\\\');
+    kwargs.result = stringify(result);
     return Mustache.render(template, kwargs);
   };
 };
