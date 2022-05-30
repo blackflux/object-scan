@@ -210,11 +210,11 @@ describe('Testing Parser', () => {
       checkError('{1,2,}', 'Bad Group Terminator: {1,2,}, char 5');
     });
 
-    it('Testing Group Stars After Element', () => {
+    it('Testing Group Starts After Element', () => {
       checkError('\\.{2,3}', 'Bad Group Start: \\.{2,3}, char 2');
     });
 
-    it('Testing Group Stars After Group', () => {
+    it('Testing Group Starts After Group', () => {
       checkError('{1,2}{2,3}', 'Bad Group Start: {1,2}{2,3}, char 5');
     });
   });
