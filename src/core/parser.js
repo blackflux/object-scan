@@ -22,33 +22,33 @@ const parse = (input, ctx) => {
       if (bracketDepth === 0) {
         switch (char) {
           case '.':
-            result.finishElement(idx, { err: 'Bad Path Separator', fins: [']', '}'] });
+            result.finishElement(idx, 'Bad Path Separator', [']', '}']);
             break;
           case '[':
             if (!ctx.useArraySelector) {
               throwError('Forbidden Array Selector', input, { char: idx });
             }
-            result.finishElement(idx, { err: 'Bad Array Start', fins: [null, '!', '{', ',', '}', ']'] });
+            result.finishElement(idx, 'Bad Array Start', [null, '!', '{', ',', '}', ']']);
             result.setInArray(true, idx);
             break;
           case ']':
-            result.finishElement(idx, { err: 'Bad Array Terminator', fins: ['}'] });
+            result.finishElement(idx, 'Bad Array Terminator', ['}']);
             result.setInArray(false, idx);
             break;
           case '{':
-            result.finishElement(idx, { err: 'Bad Group Start', fins: [null, '!', '.', '[', '{', ','], finReq: true });
+            result.finishElement(idx, 'Bad Group Start', [null, '!', '.', '[', '{', ','], { finReq: true });
             result.startGroup();
             break;
           case ',':
-            result.finishElement(idx, { err: 'Bad Group Separator', fins: [']', '}'] });
+            result.finishElement(idx, 'Bad Group Separator', [']', '}']);
             result.newGroupElement();
             break;
           case '}':
-            result.finishElement(idx, { err: 'Bad Group Terminator', fins: [']', '}'] });
+            result.finishElement(idx, 'Bad Group Terminator', [']', '}']);
             result.finishGroup(idx);
             break;
           case '!':
-            result.finishElement(idx, { err: 'Bad Exclusion', fins: [null, '.', ',', '{', '['], finReq: true });
+            result.finishElement(idx, 'Bad Exclusion', [null, '.', ',', '{', '['], { finReq: true });
             result.startExclusion(idx);
             break;
           default:
@@ -79,7 +79,7 @@ const parse = (input, ctx) => {
     throwError('Unterminated Parentheses', input);
   }
 
-  result.finishElement(inputLength, { err: 'Bad Terminator', fins: [']', '}'] });
+  result.finishElement(inputLength, 'Bad Terminator', [']', '}']);
   return result.finalizeResult();
 };
 export default { parse };

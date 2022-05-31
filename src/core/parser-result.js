@@ -55,7 +55,7 @@ export default (input) => {
       }
       inArray = flag;
     },
-    finishElement: (idx, { err, fins, finReq = false }) => {
+    finishElement: (idx, err, fins, { finReq = false } = {}) => {
       const isFinished = cursor === idx;
       if (isFinished) {
         if (!fins.includes(input[idx - 1] || null)) {
