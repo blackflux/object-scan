@@ -140,12 +140,10 @@ const applyNeedle = (tower, needle, tree, ctx) => {
       }
     },
     onFin: (cur, wc, parent, excluded) => {
-      if (ctx.strict) {
-        if (wc.isSimpleStarRec) {
-          const unnecessary = Object.keys(parent).filter((k) => !['**', ''].includes(k));
-          if (unnecessary.length !== 0) {
-            throw new Error(`Needle Target Invalidated: "${parent[unnecessary[0]][NEEDLES][0]}" by "${needle}"`);
-          }
+      if (ctx.strict && wc.isSimpleStarRec) {
+        const unnecessary = Object.keys(parent).filter((k) => !['**', ''].includes(k));
+        if (unnecessary.length !== 0) {
+          throw new Error(`Needle Target Invalidated: "${parent[unnecessary[0]][NEEDLES][0]}" by "${needle}"`);
         }
       }
       addNeedle(cur, needle);
