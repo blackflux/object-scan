@@ -12,9 +12,9 @@ const markLeaf = (input, match, readonly) => defineProperty(input, LEAF, match, 
 export const isLeaf = (input) => LEAF in input;
 export const isMatch = (input) => input !== undefined && input[LEAF] === true;
 
-const REFS = Symbol('refs');
-const setRefs = (input, refs) => defineProperty(input, REFS, refs);
-export const getRefs = (input) => input[REFS];
+const ROOTS = Symbol('roots');
+const setRoots = (input, roots) => defineProperty(input, ROOTS, roots);
+export const getRoots = (input) => input[ROOTS];
 
 const HAS_MATCHES = Symbol('has-matches');
 const setHasMatches = (input) => defineProperty(input, HAS_MATCHES, true);
@@ -167,7 +167,7 @@ const applyNeedle = (tower, needle, tree, ctx) => {
   });
 };
 
-const finalizeTower = (tower) => {
+const finalizeTower = (tower, ctx) => {
   const matches = [];
   let lastDepth = -1;
 
@@ -186,12 +186,14 @@ const finalizeTower = (tower) => {
     }
   });
 
-  const refs = [];
-  if ('' in tower) {
-    refs.push(tower['']);
+  if (ctx.useArraySelector === false) {
+    const roots = [];
+    if ('' in tower) {
+      roots.push(tower['']);
+    }
+    roots.push(...getValues(tower).filter((e) => getWildcard(e).isStarRec));
+    setRoots(tower, roots);
   }
-  refs.push(...getValues(tower).filter((e) => getWildcard(e).isStarRec));
-  setRefs(tower, refs);
 };
 
 export const compile = (needles, ctx) => {
@@ -203,6 +205,6 @@ export const compile = (needles, ctx) => {
     applyNeedle(tower, needle, tree, ctx);
   }
   setWildcard(tower, new Wildcard('*', false));
-  finalizeTower(tower);
+  finalizeTower(tower, ctx);
   return tower;
 };
