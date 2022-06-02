@@ -2,7 +2,7 @@ import assert from 'assert';
 import {
   getWildcard, excludedBy, traversedBy,
   hasMatches, matchedBy, isLastLeafMatch,
-  getValues, getOrder
+  getValues, getOrder, getRefs
 } from './compiler.js';
 import Result from './find-result.js';
 import { toPath } from '../generic/helper.js';
@@ -166,11 +166,7 @@ export default (haystack_, searches_, ctx) => {
         if (autoTraverseArray) {
           searchesOut.push(...searches);
           if (path.length === 0) {
-            if ('' in searches[0]) {
-              searchesOut.push(searches[0]['']);
-            }
-            searchesOut.push(...getValues(searches[0])
-              .filter((v) => getWildcard(v).isStarRec));
+            searchesOut.push(...getRefs(searches[0]));
           }
         } else {
           for (let sIdx = 0, sLen = searches.length; sIdx !== sLen; sIdx += 1) {

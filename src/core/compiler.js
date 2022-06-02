@@ -12,6 +12,10 @@ const markLeaf = (input, match, readonly) => defineProperty(input, LEAF, match, 
 export const isLeaf = (input) => LEAF in input;
 export const isMatch = (input) => input !== undefined && input[LEAF] === true;
 
+const REFS = Symbol('refs');
+const setRefs = (input, refs) => defineProperty(input, REFS, refs);
+export const getRefs = (input) => input[REFS];
+
 const HAS_MATCHES = Symbol('has-matches');
 const setHasMatches = (input) => defineProperty(input, HAS_MATCHES, true);
 export const hasMatches = (input) => input[HAS_MATCHES] === true;
@@ -181,6 +185,13 @@ const finalizeTower = (tower) => {
       lastDepth = depth;
     }
   });
+
+  const refs = [];
+  if ('' in tower) {
+    refs.push(tower['']);
+  }
+  refs.push(...getValues(tower).filter((e) => getWildcard(e).isStarRec));
+  setRefs(tower, refs);
 };
 
 export const compile = (needles, ctx) => {
