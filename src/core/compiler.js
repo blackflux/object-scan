@@ -137,7 +137,7 @@ const applyNeedle = (tower, needle, tree, ctx) => {
           refs[wc] = cur;
         } else {
           addRef(cur, v);
-          if (!seen.has(wc) && wc.startsWith('**:')) {
+          if (wc.startsWith('**:') && !seen.has(wc)) {
             seen.add(wc);
             next(v);
           }

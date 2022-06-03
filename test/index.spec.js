@@ -971,7 +971,7 @@ describe('Testing Find', () => {
       input.n = [input, input, input, input];
       input.nn = [];
       input.nn.push(input.nn, input.nn, input.nn, input.nn);
-      t = (needle) => objectScan([needle], {
+      t = (...needles) => objectScan(needles, {
         breakFn: ({ depth }) => depth > 10
       })(input);
     });
@@ -1098,6 +1098,11 @@ describe('Testing Find', () => {
       expect(r).to.contain('a.b.a');
       expect(r).to.contain('b.a.a');
       expect(r).to.not.contain('a.b');
+    });
+
+    it('Testing redundant needle target', () => {
+      expect(() => t('**{a,b}.a', '**{c,d}.a'))
+        .to.throw('Redundant Needle Target: "**{a,b}.a" vs "**{c,d}.a"');
     });
 
     it('Testing complex nesting (top level simple)', () => {
