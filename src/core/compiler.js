@@ -127,16 +127,16 @@ const iterate = (tower, needle, tree, { onAdd, onFin }) => {
 };
 
 const applyNeedle = (tower, needle, tree, ctx) => {
-  const refs = new Map();
+  const refs = {};
   iterate(tower, needle, tree, {
     onAdd: (cur, wc, wcParent, next) => {
-      if (typeof wc === 'symbol') {
-        const v = refs.get(wc);
+      if (typeof wc === 'string') {
+        const v = refs[wc];
         if (v === undefined) {
-          refs.set(wc, cur);
+          refs[wc] = cur;
         } else {
           addRef(cur, v);
-          if (wc.toString().startsWith('Symbol(**:')) {
+          if (wc.startsWith('**:')) {
             // todo: causes problems with strict mode
             next(v);
           }

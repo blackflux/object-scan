@@ -79,9 +79,8 @@ export default (input) => {
         }
         cResult.push(
           group
-            // todo: convert to string (????)
             // eslint-disable-next-line no-plusplus
-            ? Symbol(`${ele}:${++cId}`)
+            ? `${ele}:${++cId}`
             : new Wildcard(inArray ? `[${ele}]` : ele, excludeNext)
         );
         excludeNext = false;
@@ -113,9 +112,9 @@ export default (input) => {
       finishChild();
       finishChild();
       assert(Array.isArray(cResult));
-      const symbolMaybe = cResult[cResult.length - 2];
-      if (typeof symbolMaybe === 'symbol') {
-        cResult.push(symbolMaybe);
+      const stringMaybe = cResult[cResult.length - 2];
+      if (typeof stringMaybe === 'string') {
+        cResult.push(stringMaybe);
       }
     },
     finalizeResult: () => {

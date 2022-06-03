@@ -15,8 +15,8 @@ const asString = (() => {
     if (input instanceof Set) {
       return `{${[...input].map((e) => asStringRec(e)).join(',')}}`;
     }
-    if (typeof input === 'symbol') {
-      return `<${input.toString().slice(7, -1)}>`;
+    if (typeof input === 'string') {
+      return `<${input}>`;
     }
     return `${input.excluded === true ? '!' : ''}"${input.value}"`;
   };
