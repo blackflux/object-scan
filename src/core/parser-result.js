@@ -55,12 +55,14 @@ export default (input) => {
       }
       inArray = flag;
     },
-    finishElement: (idx, { err, fins, finReq = false }) => {
+    finishElement: (idx, err, fins, { finReq = false } = {}) => {
       const isFinished = cursor === idx;
-      if (isFinished && !fins.includes(input[idx - 1] || null)) {
-        throwError(err, input, { char: idx });
-      }
-      if (!isFinished) {
+      if (isFinished) {
+        if (!fins.includes(input[idx - 1] || null)) {
+          throwError(err, input, { char: idx });
+        }
+        cursor += 1;
+      } else {
         if (finReq) {
           throwError(err, input, { char: idx });
         }
@@ -73,8 +75,8 @@ export default (input) => {
         }
         cResult.push(new Wildcard(inArray ? `[${ele}]` : ele, excludeNext));
         excludeNext = false;
+        cursor = idx + 1;
       }
-      cursor = idx + 1;
     },
     startExclusion: (idx) => {
       if (excludeNext !== false) {
