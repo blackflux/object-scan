@@ -1030,7 +1030,7 @@ describe('Testing Find', () => {
     });
 
     it('Testing single or group with postfix', () => {
-      // todo: this should be leaf to root (!!!)
+      // todo: the order should be leaf to root (!!!)
       expect(t('**{a}.b')).to.deep.equal([
         'b',
         'a.b',
