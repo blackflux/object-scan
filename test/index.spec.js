@@ -1085,5 +1085,9 @@ describe('Testing Find', () => {
         'nn[1][0][0][1][2][3][0][1][2][3]'
       ]);
     });
+
+    it('Testing empty group throws error', () => {
+      expect(() => t('**{}')).to.throw('Bad Group Terminator: **{}, char 3');
+    });
   });
 });
