@@ -1089,6 +1089,17 @@ describe('Testing Find', () => {
       ]);
     });
 
+    it('Testing simple postfix', () => {
+      const r = t('**{a,b}.a');
+      expect(r.length).to.equal(2047);
+      expect(r).to.contain('a');
+      expect(r).to.contain('a.a');
+      expect(r).to.contain('b.a');
+      expect(r).to.contain('a.b.a');
+      expect(r).to.contain('b.a.a');
+      expect(r).to.not.contain('a.b');
+    });
+
     it('Testing complex nesting (top level simple)', () => {
       expect(t('a.b.c.d.**{a.++{b.c}.d,d.c}')).to.deep.equal([
         'a.b.c.d.d.c.d.c.d.c',

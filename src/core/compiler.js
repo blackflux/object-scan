@@ -128,6 +128,7 @@ const iterate = (tower, needle, tree, { onAdd, onFin }) => {
 
 const applyNeedle = (tower, needle, tree, ctx) => {
   const refs = {};
+  const seen = new Set();
   iterate(tower, needle, tree, {
     onAdd: (cur, wc, wcParent, next) => {
       if (typeof wc === 'string') {
@@ -136,8 +137,8 @@ const applyNeedle = (tower, needle, tree, ctx) => {
           refs[wc] = cur;
         } else {
           addRef(cur, v);
-          if (wc.startsWith('**:')) {
-            // todo: causes problems with strict mode
+          if (!seen.has(wc) && wc.startsWith('**:')) {
+            seen.add(wc);
             next(v);
           }
         }
