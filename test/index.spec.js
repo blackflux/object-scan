@@ -1170,5 +1170,38 @@ describe('Testing Find', () => {
     it('Testing empty group throws error', () => {
       expect(() => t('**{}')).to.throw('Bad Group Terminator: **{}, char 3');
     });
+
+    it('Testing redundant group nested', () => {
+      expect(t('{a.b.c.d,c.d.b.a}.**{c,d}.{a.b.c.d.a,d.c.b.a.d}')).to.deep.equal([
+        'c.d.b.a.d.d.d.c.b.a.d',
+        'c.d.b.a.d.d.c.b.a.d',
+        'c.d.b.a.d.d.a.b.c.d.a',
+        'c.d.b.a.d.c.d.c.b.a.d',
+        'c.d.b.a.d.c.b.a.d',
+        'c.d.b.a.d.c.a.b.c.d.a',
+        'c.d.b.a.d.a.b.c.d.a',
+        'c.d.b.a.c.d.d.c.b.a.d',
+        'c.d.b.a.c.d.c.b.a.d',
+        'c.d.b.a.c.d.a.b.c.d.a',
+        'c.d.b.a.c.c.d.c.b.a.d',
+        'c.d.b.a.c.c.a.b.c.d.a',
+        'c.d.b.a.c.a.b.c.d.a',
+        'c.d.b.a.a.b.c.d.a',
+        'a.b.c.d.d.d.d.c.b.a.d',
+        'a.b.c.d.d.d.c.b.a.d',
+        'a.b.c.d.d.d.a.b.c.d.a',
+        'a.b.c.d.d.c.d.c.b.a.d',
+        'a.b.c.d.d.c.b.a.d',
+        'a.b.c.d.d.c.a.b.c.d.a',
+        'a.b.c.d.d.a.b.c.d.a',
+        'a.b.c.d.c.d.d.c.b.a.d',
+        'a.b.c.d.c.d.c.b.a.d',
+        'a.b.c.d.c.d.a.b.c.d.a',
+        'a.b.c.d.c.c.d.c.b.a.d',
+        'a.b.c.d.c.c.a.b.c.d.a',
+        'a.b.c.d.c.a.b.c.d.a',
+        'a.b.c.d.a.b.c.d.a'
+      ]);
+    });
   });
 });
