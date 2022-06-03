@@ -1013,6 +1013,39 @@ describe('Testing Find', () => {
       ]);
     });
 
+    it('Testing single or group with prefix', () => {
+      expect(t('b.**{a}')).to.deep.equal([
+        'b.a.a.a.a.a.a.a.a.a.a',
+        'b.a.a.a.a.a.a.a.a.a',
+        'b.a.a.a.a.a.a.a.a',
+        'b.a.a.a.a.a.a.a',
+        'b.a.a.a.a.a.a',
+        'b.a.a.a.a.a',
+        'b.a.a.a.a',
+        'b.a.a.a',
+        'b.a.a',
+        'b.a',
+        'b'
+      ]);
+    });
+
+    it('Testing single or group with postfix', () => {
+      // todo: this should be leaf to root (!!!)
+      expect(t('**{a}.b')).to.deep.equal([
+        'b',
+        'a.b',
+        'a.a.b',
+        'a.a.a.b',
+        'a.a.a.a.b',
+        'a.a.a.a.a.b',
+        'a.a.a.a.a.a.b',
+        'a.a.a.a.a.a.a.b',
+        'a.a.a.a.a.a.a.a.b',
+        'a.a.a.a.a.a.a.a.a.b',
+        'a.a.a.a.a.a.a.a.a.a.b'
+      ]);
+    });
+
     it('Testing redundant needle does not error', () => {
       expect(t('a.b.c.d.**{a.b.c.d,a.b.c}')).to.deep.equal([
         'a.b.c.d.a.b.c.d.a.b.c',
