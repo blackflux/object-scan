@@ -4,7 +4,8 @@ import Context from '../../src/core/context.js';
 import {
   getWildcard, compile, excludedBy, traversedBy,
   hasMatches, getNeedles, matchedBy, isLeaf,
-  isMatch, isLastLeafMatch, getIndex, getLeafNeedles
+  isMatch, isLastLeafMatch, getIndex, getLeafNeedles,
+  getValues
 } from '../../src/core/compiler.js';
 
 const c = (needles, ctx = {}) => compile(needles, Context(ctx));
@@ -399,5 +400,17 @@ describe('Testing compiler', () => {
     expect(traversedBy([tower.a.c.f])).to.deep.equal(['a.{c,e}.f']);
     expect(traversedBy([tower.a.e])).to.deep.equal(['a.{c,e}.f']);
     expect(traversedBy([tower.a.e.f])).to.deep.equal(['a.{c,e}.f']);
+  });
+
+  describe('Testing multi step recursion', () => {
+    it('Testing basic two step (star)', () => {
+      const input = ['**{a.b}.a'];
+      const tower = c(input);
+      expect(tower).to.deep.equal({ a: { b: { a: {} } } });
+      expect(getValues(tower)).to.deep.equal([tower.a]);
+      expect(getValues(tower.a)).to.deep.equal([tower.a.b]);
+      expect(getValues(tower.a.b)).to.deep.equal([tower.a.b.a, tower.a]);
+      expect(getValues(tower.a.b.a)).to.deep.equal([]);
+    });
   });
 });

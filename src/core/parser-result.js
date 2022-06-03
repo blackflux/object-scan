@@ -23,6 +23,7 @@ export default (input) => {
   let inArray = false;
   let excludeNext = false;
   let cursor = 0;
+  let cId = 0;
 
   // group related
   const parentStack = [];
@@ -55,7 +56,7 @@ export default (input) => {
       }
       inArray = flag;
     },
-    finishElement: (idx, err, fins, { finReq = false } = {}) => {
+    finishElement: (idx, err, fins, { finReq = false, group = false } = {}) => {
       const isFinished = cursor === idx;
       if (isFinished) {
         if (!fins.includes(input[idx - 1] || null)) {
@@ -67,13 +68,22 @@ export default (input) => {
           throwError(err, input, { char: idx });
         }
         const ele = input.slice(cursor, idx);
+        if (group && !['**', '++'].includes(ele)) {
+          throwError('Bad Group Start', input, { char: idx });
+        }
         if (inArray && !(
           /^[?*+\d]+$/.test(ele)
           || (ele.startsWith('(') && ele.endsWith(')'))
         )) {
           throwError('Bad Array Selector', input, { selector: ele });
         }
-        cResult.push(new Wildcard(inArray ? `[${ele}]` : ele, excludeNext));
+        cResult.push(
+          group
+            // todo: convert to string (????)
+            // eslint-disable-next-line no-plusplus
+            ? Symbol(`${ele}:${++cId}`)
+            : new Wildcard(inArray ? `[${ele}]` : ele, excludeNext)
+        );
         excludeNext = false;
         cursor = idx + 1;
       }
@@ -102,6 +112,11 @@ export default (input) => {
       }
       finishChild();
       finishChild();
+      assert(Array.isArray(cResult));
+      const symbolMaybe = cResult[cResult.length - 2];
+      if (typeof symbolMaybe === 'symbol') {
+        cResult.push(symbolMaybe);
+      }
     },
     finalizeResult: () => {
       finishChild();

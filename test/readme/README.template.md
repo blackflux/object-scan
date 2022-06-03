@@ -188,6 +188,14 @@ needles: ['{a,d}.{b,f}']
 comment: `a.b`, `a.f`, `d.b` and `d.f`
 </example></pre>
 
+### Nested Path
+
+There are two types of nested path matching:
+- `**{...}`: Matches path zero or more times
+- `++{...}`: Matches path one or more times
+
+// todo: fill in details here with examples
+
 ### Exclusion
 
 To exclude a path, use exclamation mark.

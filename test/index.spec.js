@@ -958,4 +958,132 @@ describe('Testing Find', () => {
         filterFn: ['a', 'd', 'e', 'f', 0, 'g', 'h', 'i', 1, 'b', 'c']
       });
   });
+
+  // todo: lots and lots more tests !!!!
+  describe('Testing star group matching', () => {
+    const input = {};
+    let t;
+    before(() => {
+      input.a = input;
+      input.b = input;
+      input.c = input;
+      input.d = input;
+      input.n = [input, input, input, input];
+      input.nn = [];
+      input.nn.push(input.nn, input.nn, input.nn, input.nn);
+      t = (needle) => objectScan([needle], {
+        breakFn: ({ depth }) => depth > 10
+      })(input);
+    });
+
+    it('Testing basic nesting', () => {
+      expect(t('**{a.b.c.d}')).to.deep.equal(['a.b.c.d.a.b.c.d', 'a.b.c.d']);
+      expect(t('++{a.b.c.d}')).to.deep.equal(['a.b.c.d.a.b.c.d', 'a.b.c.d']);
+    });
+
+    it('Testing zero vs one nesting', () => {
+      expect(t('a.**{a.b.c.d}.a')).to.deep.equal(['a.a.b.c.d.a.b.c.d.a', 'a.a.b.c.d.a', 'a.a']);
+      expect(t('a.++{a.b.c.d}.a')).to.deep.equal(['a.a.b.c.d.a.b.c.d.a', 'a.a.b.c.d.a']);
+    });
+
+    it('Testing or group is mixed in matching', () => {
+      expect(t('**{a.b.c.d,d.c.b.a}')).to.deep.equal([
+        'd.c.b.a.d.c.b.a',
+        'd.c.b.a.a.b.c.d',
+        'd.c.b.a',
+        'a.b.c.d.d.c.b.a',
+        'a.b.c.d.a.b.c.d',
+        'a.b.c.d'
+      ]);
+    });
+
+    it('Testing single or group', () => {
+      expect(t('**{a}')).to.deep.equal([
+        'a.a.a.a.a.a.a.a.a.a.a',
+        'a.a.a.a.a.a.a.a.a.a',
+        'a.a.a.a.a.a.a.a.a',
+        'a.a.a.a.a.a.a.a',
+        'a.a.a.a.a.a.a',
+        'a.a.a.a.a.a',
+        'a.a.a.a.a',
+        'a.a.a.a',
+        'a.a.a',
+        'a.a',
+        'a'
+      ]);
+    });
+
+    it('Testing redundant needle does not error', () => {
+      expect(t('a.b.c.d.**{a.b.c.d,a.b.c}')).to.deep.equal([
+        'a.b.c.d.a.b.c.d.a.b.c',
+        'a.b.c.d.a.b.c.d',
+        'a.b.c.d.a.b.c.a.b.c.d',
+        'a.b.c.d.a.b.c.a.b.c',
+        'a.b.c.d.a.b.c',
+        'a.b.c.d'
+      ]);
+    });
+
+    it('Testing complex nesting (top level simple)', () => {
+      expect(t('a.b.c.d.**{a.++{b.c}.d,d.c}')).to.deep.equal([
+        'a.b.c.d.d.c.d.c.d.c',
+        'a.b.c.d.d.c.d.c',
+        'a.b.c.d.d.c.a.b.c.d',
+        'a.b.c.d.d.c',
+        'a.b.c.d.a.b.c.d.d.c',
+        'a.b.c.d.a.b.c.d',
+        'a.b.c.d.a.b.c.b.c.d',
+        'a.b.c.d'
+      ]);
+    });
+
+    it('Testing double nested', () => {
+      expect(t('**{++{a.b.c.d},n}')).to.deep.equal([
+        'n',
+        'a.b.c.d.n',
+        'a.b.c.d.a.b.c.d.n',
+        'a.b.c.d.a.b.c.d',
+        'a.b.c.d'
+      ]);
+    });
+
+    it('Testing complex nesting (top level)', () => {
+      expect(t('**{a.b.c.++{b.c}.d,a.b.c.d}')).to.deep.equal([
+        'a.b.c.d.a.b.c.d',
+        'a.b.c.d.a.b.c.b.c.d',
+        'a.b.c.d',
+        'a.b.c.b.c.d.a.b.c.d',
+        'a.b.c.b.c.d',
+        'a.b.c.b.c.b.c.d',
+        'a.b.c.b.c.b.c.b.c.d'
+      ]);
+    });
+
+    it('Testing nested arrays with keys', () => {
+      expect(t('**{n[{1,2}].n[0].n[*]}')).to.deep.equal([
+        'n[2].n[0].n[3]',
+        'n[2].n[0].n[2]',
+        'n[2].n[0].n[1]',
+        'n[2].n[0].n[0]',
+        'n[1].n[0].n[3]',
+        'n[1].n[0].n[2]',
+        'n[1].n[0].n[1]',
+        'n[1].n[0].n[0]'
+      ]);
+    });
+
+    it('Testing nested arrays without keys', () => {
+      expect(t('nn.**{[{1,2}][0][*]}[1][2][3][0][1][2][3]')).to.deep.equal([
+        'nn[2][0][3][1][2][3][0][1][2][3]',
+        'nn[2][0][2][1][2][3][0][1][2][3]',
+        'nn[2][0][1][1][2][3][0][1][2][3]',
+        'nn[2][0][0][1][2][3][0][1][2][3]',
+        'nn[1][2][3][0][1][2][3]',
+        'nn[1][0][3][1][2][3][0][1][2][3]',
+        'nn[1][0][2][1][2][3][0][1][2][3]',
+        'nn[1][0][1][1][2][3][0][1][2][3]',
+        'nn[1][0][0][1][2][3][0][1][2][3]'
+      ]);
+    });
+  });
 });

@@ -11,6 +11,7 @@ const Tester = () => {
       rng,
       paths,
       useArraySelector,
+      // todo: add group modifier with star in here (!!!)
       modifierParams: modify
         ? (p) => ({
           questionMark: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,

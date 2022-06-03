@@ -16,6 +16,17 @@ const ROOTS = Symbol('roots');
 const setRoots = (input, roots) => defineProperty(input, ROOTS, roots);
 export const getRoots = (input) => input[ROOTS];
 
+const REFS = Symbol('refs');
+const addRef = (input, ref) => {
+  const v = input[REFS];
+  if (v === undefined) {
+    defineProperty(input, REFS, [ref]);
+  } else {
+    v.push(ref);
+  }
+};
+export const getRefs = (input) => input[REFS] || [];
+
 const HAS_MATCHES = Symbol('has-matches');
 const setHasMatches = (input) => defineProperty(input, HAS_MATCHES, true);
 export const hasMatches = (input) => input[HAS_MATCHES] === true;
@@ -116,8 +127,23 @@ const iterate = (tower, needle, tree, { onAdd, onFin }) => {
 };
 
 const applyNeedle = (tower, needle, tree, ctx) => {
+  const refs = new Map();
   iterate(tower, needle, tree, {
     onAdd: (cur, wc, wcParent, next) => {
+      if (typeof wc === 'symbol') {
+        const v = refs.get(wc);
+        if (v === undefined) {
+          refs.set(wc, cur);
+        } else {
+          addRef(cur, v);
+          if (wc.toString().startsWith('Symbol(**:')) {
+            // todo: causes problems with strict mode
+            next(v);
+          }
+        }
+        next(cur);
+        return;
+      }
       addNeedle(cur, needle);
       const redundantRecursion = (
         wcParent !== undefined
@@ -181,7 +207,11 @@ const finalizeTower = (tower, ctx) => {
       if (isUp) {
         matches[lastDepth] = false;
       }
-      setValues(obj, Object.values(obj).reverse());
+      const values = Object.values(obj).reverse();
+      getRefs(obj).forEach((r) => {
+        values.push(...Object.values(r));
+      });
+      setValues(obj, values);
       lastDepth = depth;
     }
   });
