@@ -1057,6 +1057,38 @@ describe('Testing Find', () => {
       ]);
     });
 
+    it('Testing long prefix and postfix with or group', () => {
+      expect(t('a.b.**{a.b.c.d,d.c.b.a}.a.b')).to.deep.equal([
+        'a.b.d.c.b.a.a.b',
+        'a.b.a.b.c.d.a.b',
+        'a.b.a.b'
+      ]);
+    });
+
+    it('Testing long prefix with or group', () => {
+      expect(t('a.b.**{a.b.c.d,d.c.b.a}')).to.deep.equal([
+        'a.b.d.c.b.a.d.c.b.a',
+        'a.b.d.c.b.a.a.b.c.d',
+        'a.b.d.c.b.a',
+        'a.b.a.b.c.d.d.c.b.a',
+        'a.b.a.b.c.d.a.b.c.d',
+        'a.b.a.b.c.d',
+        'a.b'
+      ]);
+    });
+
+    it('Testing long postfix with or group', () => {
+      expect(t('**{a.b.c.d,d.c.b.a}.a.b')).to.deep.equal([
+        'd.c.b.a.d.c.b.a.a.b',
+        'd.c.b.a.a.b.c.d.a.b',
+        'd.c.b.a.a.b',
+        'a.b.c.d.d.c.b.a.a.b',
+        'a.b.c.d.a.b.c.d.a.b',
+        'a.b.c.d.a.b',
+        'a.b'
+      ]);
+    });
+
     it('Testing complex nesting (top level simple)', () => {
       expect(t('a.b.c.d.**{a.++{b.c}.d,d.c}')).to.deep.equal([
         'a.b.c.d.d.c.d.c.d.c',
