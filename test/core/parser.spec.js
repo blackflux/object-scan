@@ -1,5 +1,6 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
+import { Ref } from '../../src/core/ref.js';
 import parser from '../../src/core/parser.js';
 import Context from '../../src/core/context.js';
 import generateParsedNeedle from '../helper/generate-parsed-needle.js';
@@ -15,8 +16,8 @@ const asString = (() => {
     if (input instanceof Set) {
       return `{${[...input].map((e) => asStringRec(e)).join(',')}}`;
     }
-    if (typeof input === 'string') {
-      return `<${input}>`;
+    if (input instanceof Ref) {
+      return input;
     }
     return `${input.excluded === true ? '!' : ''}"${input.value}"`;
   };
@@ -285,23 +286,23 @@ describe('Testing Parser', () => {
 
     describe('Testing multi step recursion', () => {
       it('Testing basic two step (star)', () => {
-        expect(asString('**{a.b}')).to.equal('[<**:1>,["a","b"],<**:1>]');
+        expect(asString('**{a.b}')).to.equal('[<**:1:{>,["a","b"],<}:1:**>]');
       });
 
       it('Testing basic two step (star and array)', () => {
-        expect(asString('**{[0][1]}')).to.equal('[<**:1>,["[0]","[1]"],<**:1>]');
+        expect(asString('**{[0][1]}')).to.equal('[<**:1:{>,["[0]","[1]"],<}:1:**>]');
       });
 
       it('Testing basic two step (star and mixed in group)', () => {
-        expect(asString('**{[0].a,[1].b}')).to.equal('[<**:1>,{["[0]","a"],["[1]","b"]},<**:1>]');
+        expect(asString('**{[0].a,[1].b}')).to.equal('[<**:1:{>,{["[0]","a"],["[1]","b"]},<}:1:**>]');
       });
 
       it('Testing basic two step (plus)', () => {
-        expect(asString('++{a.b}')).to.equal('[<++:1>,["a","b"],<++:1>]');
+        expect(asString('++{a.b}')).to.equal('[<++:1:{>,["a","b"],<}:1:++>]');
       });
 
       it('Testing or group', () => {
-        expect(asString('**{a.b,c.d}')).to.equal('[<**:1>,{["a","b"],["c","d"]},<**:1>]');
+        expect(asString('**{a.b,c.d}')).to.equal('[<**:1:{>,{["a","b"],["c","d"]},<}:1:**>]');
       });
 
       it('Testing star chain is not multi step recursion', () => {
@@ -309,7 +310,7 @@ describe('Testing Parser', () => {
       });
 
       it('Testing complex', () => {
-        expect(asString('**{a.**.b}')).to.equal('[<**:1>,["a","**","b"],<**:1>]');
+        expect(asString('**{a.**.b}')).to.equal('[<**:1:{>,["a","**","b"],<}:1:**>]');
       });
 
       it('Testing bad group start', () => {
@@ -318,17 +319,26 @@ describe('Testing Parser', () => {
 
       it('Testing multiple nested groups', () => {
         expect(asString('{{**{a},{b}},**{{c},{d}}}'))
-          .to.equal('{[<**:1>,"a",<**:1>],"b",[<**:2>,{"c","d"},<**:2>]}');
+          .to.equal('{[<**:1:{>,"a",<}:1:**>],"b",[<**:2:{>,{"c","d"},<}:2:**>]}');
       });
 
       it('Testing nested group inside nested group', () => {
         expect(asString('**{a.b,c.**{d.e}.f}'))
-          .to.equal('[<**:1>,{["a","b"],["c",<**:2>,["d","e"],<**:2>,"f"]},<**:1>]');
+          .to.equal('[<**:1:{>,{["a","b"],["c",<**:2:{>,["d","e"],<}:2:**>,"f"]},<}:1:**>]');
       });
 
       it('Testing mixed groups', () => {
         expect(asString('nn.**{[{1,2}][0][*]}.a'))
-          .to.equal('["nn",<**:1>,[{"[1]","[2]"},"[0]","[*]"],<**:1>,"a"]');
+          .to.equal('["nn",<**:1:{>,[{"[1]","[2]"},"[0]","[*]"],<}:1:**>,"a"]');
+      });
+
+      it('Testing redundant group nested', () => {
+        expect(asString('{a.b.c.d,c.d.b.a}.**{c,d}.{a.b.c.d.a,d.c.b.a.d}'))
+          .to.equal(
+            '[{["a","b","c","d"],["c","d","b","a"]},'
+          + '<**:1:{>,{"c","d"},<}:1:**>,'
+          + '{["a","b","c","d","a"],["d","c","b","a","d"]}]'
+          );
       });
     });
   });

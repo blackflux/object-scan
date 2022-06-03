@@ -1,6 +1,7 @@
 import assert from 'assert';
 import { defineProperty } from '../generic/helper.js';
 import { Wildcard } from './wildcard.js';
+import { Ref } from './ref.js';
 
 const IS_EXCLUDED = Symbol('is-excluded');
 const markExcluded = (input) => defineProperty(input, IS_EXCLUDED, true);
@@ -80,7 +81,7 @@ export default (input) => {
         cResult.push(
           group
             // eslint-disable-next-line no-plusplus
-            ? `${ele}:${++cId}`
+            ? new Ref(ele, ++cId)
             : new Wildcard(inArray ? `[${ele}]` : ele, excludeNext)
         );
         excludeNext = false;
@@ -112,9 +113,9 @@ export default (input) => {
       finishChild();
       finishChild();
       assert(Array.isArray(cResult));
-      const stringMaybe = cResult[cResult.length - 2];
-      if (typeof stringMaybe === 'string') {
-        cResult.push(stringMaybe);
+      const refMaybe = cResult[cResult.length - 2];
+      if (refMaybe instanceof Ref && refMaybe.left === true) {
+        cResult.push(new Ref(refMaybe));
       }
     },
     finalizeResult: () => {

@@ -4,6 +4,7 @@ import iterator from '../generic/iterator.js';
 import traverser from '../generic/traverser.js';
 import { defineProperty } from '../generic/helper.js';
 import { Wildcard } from './wildcard.js';
+import { Ref } from './ref.js';
 
 const COUNTER = Symbol('counter');
 
@@ -127,18 +128,17 @@ const iterate = (tower, needle, tree, { onAdd, onFin }) => {
 };
 
 const applyNeedle = (tower, needle, tree, ctx) => {
-  const refs = {};
-  const seen = new Set();
   iterate(tower, needle, tree, {
     onAdd: (cur, wc, wcParent, next) => {
-      if (typeof wc === 'string') {
-        const v = refs[wc];
-        if (v === undefined) {
-          refs[wc] = cur;
+      if (wc instanceof Ref) {
+        if (wc.left === true) {
+          wc.setNode(cur);
+          wc.setMarked(false);
         } else {
+          const v = wc.node;
           addRef(cur, v);
-          if (wc.startsWith('**:') && !seen.has(wc)) {
-            seen.add(wc);
+          if (wc.type === '**' && !wc.marked) {
+            wc.setMarked(true);
             next(v);
           }
         }
