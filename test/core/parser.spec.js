@@ -347,6 +347,11 @@ describe('Testing Parser', () => {
           + '{["a","b","c","d","a"],["d","c","b","a","d"]}]'
           );
       });
+
+      it('Testing single or group with postfix', () => {
+        expect(asString('**{a}.b'))
+          .to.equal('[<**:1:{>,"a",<}:1:**>,"b"]');
+      });
     });
   });
 });
