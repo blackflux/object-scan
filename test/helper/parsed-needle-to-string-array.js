@@ -49,6 +49,7 @@ const parsedNeedleToStringArray = (obj, params, rng, depth = 0) => {
   return depth === 0 ? [obj] : obj;
 };
 
+// todo: unit test for params and rng
 export default (obj, params_ = {}, rng = null) => {
   const params = {
     doublePlusGroup: 0,
