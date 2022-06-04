@@ -76,6 +76,9 @@ const Tester = () => {
 
       expect(breakMatchedKeys.sort(), `Seed: ${rng.seed}`).to.deep.equal(filterMatchedKeys.sort());
       expect(!breakNonMatchedKeys.some((e) => filterMatchedKeys.includes(e)), `Seed: ${rng.seed}`).to.equal(true);
+
+      // todo: add check to ensure needles are always returned "upwards"
+      // ...
     }
   };
 };
