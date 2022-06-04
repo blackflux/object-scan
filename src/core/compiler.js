@@ -133,12 +133,12 @@ const applyNeedle = (tower, needle, tree, ctx) => {
       if (wc instanceof Ref) {
         if (wc.left === true) {
           wc.setNode(cur);
-          wc.setMarked(false);
+          wc.setCompleted(false);
         } else {
           const v = wc.node;
           addRef(cur, v);
-          if (wc.type === '**' && !wc.marked) {
-            wc.setMarked(true);
+          if (wc.type === '**' && !wc.completed) {
+            wc.setCompleted(true);
             next(v);
           }
         }

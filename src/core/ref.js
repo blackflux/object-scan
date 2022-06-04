@@ -14,7 +14,7 @@ export class Ref {
       this.link = null;
     }
     this.node = null;
-    this.marked = false;
+    this.completed = false;
   }
 
   setNode(node) {
@@ -22,9 +22,9 @@ export class Ref {
     this.link.node = node;
   }
 
-  setMarked(state) {
-    this.marked = state;
-    this.link.marked = state;
+  setCompleted(state) {
+    this.completed = state;
+    this.link.completed = state;
   }
 
   toString() {
