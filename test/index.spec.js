@@ -1046,6 +1046,22 @@ describe('Testing Find', () => {
       ]);
     });
 
+    it('Testing single or group with prefix and postfix', () => {
+      // todo: the order should be leaf to root (!!!)
+      expect(t('a.**{b}.c')).to.deep.equal([
+        'a.c',
+        'a.b.c',
+        'a.b.b.c',
+        'a.b.b.b.c',
+        'a.b.b.b.b.c',
+        'a.b.b.b.b.b.c',
+        'a.b.b.b.b.b.b.c',
+        'a.b.b.b.b.b.b.b.c',
+        'a.b.b.b.b.b.b.b.b.c',
+        'a.b.b.b.b.b.b.b.b.b.c'
+      ]);
+    });
+
     it('Testing redundant needle does not error', () => {
       expect(t('a.b.c.d.**{a.b.c.d,a.b.c}')).to.deep.equal([
         'a.b.c.d.a.b.c.d.a.b.c',
