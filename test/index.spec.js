@@ -959,7 +959,6 @@ describe('Testing Find', () => {
       });
   });
 
-  // todo: lots and lots more tests !!!!
   describe('Testing star group matching', () => {
     const input = {};
     let t;
@@ -1030,7 +1029,6 @@ describe('Testing Find', () => {
     });
 
     it('Testing single or group with postfix', () => {
-      // todo: the order should be leaf to root (!!!)
       expect(t('**{a}.b')).to.deep.equal([
         'b',
         'a.b',
@@ -1047,7 +1045,6 @@ describe('Testing Find', () => {
     });
 
     it('Testing star recursion with postfix', () => {
-      // todo: the order should be leaf to root (!!!)
       expect(t('**(^a$).b')).to.deep.equal([
         'b',
         'a.b',
@@ -1064,7 +1061,6 @@ describe('Testing Find', () => {
     });
 
     it('Testing single or group with prefix and postfix', () => {
-      // todo: the order should be leaf to root (!!!)
       expect(t('a.**{b}.c')).to.deep.equal([
         'a.c',
         'a.b.c',
