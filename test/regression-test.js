@@ -73,7 +73,7 @@ const execute = async () => {
       useArraySelector,
       reverse,
       orderByNeedles,
-      modifierParams: (p) => ({
+      pathModifierParams: (p) => ({
         lenPercentage: rng() > 0.1 ? rng() : 1,
         questionMark: rng() > 0.15 ? 0 : Math.floor(rng() * p.length) + 1,
         partialPlus: rng() > 0.15 ? 0 : Math.floor(rng() * p.length) + 1,
@@ -84,6 +84,11 @@ const execute = async () => {
         regex: rng() > 0.1 ? 0 : Math.floor(rng() * p.length) + 1,
         exclude: rng() > 0.9,
         shuffle: rng() > 0.9
+      }),
+      groupModifierParams: () => ({
+        // todo: uncomment
+        doublePlusGroup: 0, // rng() > 0.2 ? 0 : rng(),
+        doubleStarGroup: 0 // rng() > 0.2 ? 0 : rng()
       })
     });
 

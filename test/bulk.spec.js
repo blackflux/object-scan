@@ -11,8 +11,7 @@ const Tester = () => {
       rng,
       paths,
       useArraySelector,
-      // todo: add group modifier with star in here (!!!)
-      modifierParams: modify
+      pathModifierParams: modify
         ? (p) => ({
           questionMark: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
           partialPlus: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
@@ -20,6 +19,12 @@ const Tester = () => {
           singleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
           doublePlus: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1,
           doubleStar: rng() > 0.2 ? 0 : Math.floor(rng() * p.length) + 1
+        })
+        : () => {},
+      groupModifierParams: modify
+        ? () => ({
+          doublePlusGroup: rng() > 0.2 ? 0 : rng(),
+          doubleStarGroup: rng() > 0.2 ? 0 : rng()
         })
         : () => {}
     });

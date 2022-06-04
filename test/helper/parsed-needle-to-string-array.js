@@ -1,9 +1,11 @@
-const parsedNeedleToStringArray = (obj, depth = 0) => {
+import Joi from 'joi-strict';
+
+const parsedNeedleToStringArray = (obj, params, rng, depth = 0) => {
   const isArray = Array.isArray(obj);
   const isSet = obj instanceof Set;
   if (isArray || isSet) {
     const r = (isArray ? obj : [...obj])
-      .map((e) => parsedNeedleToStringArray(e, depth + 1));
+      .map((e) => parsedNeedleToStringArray(e, params, rng, depth + 1));
     const len = r.length;
     if (len === 0) {
       return depth === 0 ? [] : '';
@@ -30,9 +32,16 @@ const parsedNeedleToStringArray = (obj, depth = 0) => {
       return [str];
     }
     const asBlank = isArray || len === 1;
+    const groupType = asBlank || rng === null || params.doubleStarGroup === 0 || params.doublePlusGroup === 0
+      ? ''
+      : (() => {
+        const type = rng() > 0.5 ? '**' : '++';
+        const set = rng() < (type === '**' ? params.doubleStarGroup : params.doublePlusGroup);
+        return set ? type : '';
+      })();
     return [
       pullExcludeOut ? '!' : '',
-      asBlank ? '' : '{',
+      asBlank ? '' : `${groupType}{`,
       str,
       asBlank ? '' : '}'
     ].join('');
@@ -40,4 +49,15 @@ const parsedNeedleToStringArray = (obj, depth = 0) => {
   return depth === 0 ? [obj] : obj;
 };
 
-export default (obj) => parsedNeedleToStringArray(obj);
+export default (obj, params_ = {}, rng = null) => {
+  const params = {
+    doublePlusGroup: 0,
+    doubleStarGroup: 0,
+    ...params_
+  };
+  Joi.assert(params, Joi.object().keys({
+    doublePlusGroup: Joi.number().min(0).max(1),
+    doubleStarGroup: Joi.number().min(0).max(1)
+  }));
+  return parsedNeedleToStringArray(obj, params, rng);
+};
