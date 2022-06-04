@@ -13,6 +13,7 @@ export class Ref {
       this.left = true;
       this.link = null;
     }
+    this.isStarRec = this.type === '**';
     this.node = null;
     this.completed = false;
   }

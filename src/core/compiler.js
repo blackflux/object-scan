@@ -137,7 +137,7 @@ const applyNeedle = (tower, needle, tree, ctx) => {
         } else {
           const v = wc.node;
           addRef(cur, v);
-          if (wc.type === '**' && !wc.completed) {
+          if (wc.isStarRec && !wc.completed) {
             wc.setCompleted(true);
             next(v);
           }
