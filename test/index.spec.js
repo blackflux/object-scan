@@ -1046,6 +1046,23 @@ describe('Testing Find', () => {
       ]);
     });
 
+    it('Testing star recursion with postfix', () => {
+      // todo: the order should be leaf to root (!!!)
+      expect(t('**(^a$).b')).to.deep.equal([
+        'b',
+        'a.b',
+        'a.a.b',
+        'a.a.a.b',
+        'a.a.a.a.b',
+        'a.a.a.a.a.b',
+        'a.a.a.a.a.a.b',
+        'a.a.a.a.a.a.a.b',
+        'a.a.a.a.a.a.a.a.b',
+        'a.a.a.a.a.a.a.a.a.b',
+        'a.a.a.a.a.a.a.a.a.a.b'
+      ]);
+    });
+
     it('Testing single or group with prefix and postfix', () => {
       // todo: the order should be leaf to root (!!!)
       expect(t('a.**{b}.c')).to.deep.equal([
