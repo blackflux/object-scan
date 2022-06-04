@@ -17,7 +17,14 @@ const asString = (() => {
       return `{${[...input].map((e) => asStringRec(e)).join(',')}}`;
     }
     if (input instanceof Ref) {
-      return input;
+      return `<${[
+        input.left ? '' : '}',
+        input.left ? input.type : input.id,
+        input.left ? input.id : input.type,
+        input.left ? '{' : ''
+      ]
+        .filter((e) => !!e)
+        .join(':')}>`;
     }
     return `${input.excluded === true ? '!' : ''}"${input.value}"`;
   };

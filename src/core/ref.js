@@ -27,15 +27,4 @@ export class Ref {
     this.completed = state;
     this.link.completed = state;
   }
-
-  toString() {
-    return `<${[
-      this.left ? '' : '}',
-      this.left ? this.type : this.id,
-      this.left ? this.id : this.type,
-      this.left ? '{' : ''
-    ]
-      .filter((e) => !!e)
-      .join(':')}>`;
-  }
 }
