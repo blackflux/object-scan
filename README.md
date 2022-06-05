@@ -270,8 +270,8 @@ To match a nested path recursively,
 combine arbitrary depth matching with an or-clause.
 
 There are two types of nested path matching:
-- `**{...}`: Matches path zero or more times
-- `++{...}`: Matches path one or more times
+- `**{...}`: Matches path(s) in group zero or more times
+- `++{...}`: Matches path(s) in group one or more times
 
 _Examples_:
 <details><summary> <code>['++{[0][1]}']</code> <em>(`cyclic path`)</em> </summary>
