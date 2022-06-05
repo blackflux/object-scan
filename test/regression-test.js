@@ -87,6 +87,7 @@ const execute = async () => {
       }),
       groupModifierParams: () => ({
         // todo: uncomment
+        anyRecGroup: 0, // rng() > 0.2 ? 0 : rng(),
         doublePlusGroup: 0, // rng() > 0.2 ? 0 : rng(),
         doubleStarGroup: 0 // rng() > 0.2 ? 0 : rng()
       })

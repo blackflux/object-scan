@@ -68,10 +68,11 @@ describe('Testing parsed-needle-to-string-array.js', () => {
     expect(parsedNeedleToStringArray(
       r,
       {
+        anyRecGroup: 0.3,
         doubleStarGroup: 0.5,
         doublePlusGroup: 0.5
       },
       rng
-    )).to.deep.equal(['a.b.c.**{d,e,f}.**{g,h}.i.**{h}.{j,k}.++{l,m}.++{n,o}.**{p,q}.{r,s}.{t,v}.{w,x}.z']);
+    )).to.deep.equal(['a.b.c.{d,e,f}.{g,h}.++{i}.++{h}.++{j,k}.**{l,m}.**{n,o}.**{p,q}.**{r,s}.{t,v}.**{w,x}.z']);
   });
 });

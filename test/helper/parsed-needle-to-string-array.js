@@ -38,17 +38,18 @@ const parsedNeedleToStringArray = (obj, params, rng, depth = 0) => {
     }
 
     const groupType = (() => {
-      if (rng === null) {
+      if (
+        rng === null
+        || (params.doubleStarGroup === 0 && params.doublePlusGroup === 0)
+      ) {
         return '';
       }
-      const rn = rng() * 2;
-      if (rn < params.doubleStarGroup) {
-        return '**';
+      if (!(params.anyRecGroup < rng())) {
+        return '';
       }
-      if (rn < params.doubleStarGroup + params.doublePlusGroup) {
-        return '++';
-      }
-      return '';
+      const sumP = params.doubleStarGroup + params.doublePlusGroup;
+      const rnN = rng() * sumP;
+      return params.doubleStarGroup < rnN ? '**' : '++';
     })();
     const asBlank = groupType === '' && len === 1;
 
@@ -64,11 +65,13 @@ const parsedNeedleToStringArray = (obj, params, rng, depth = 0) => {
 
 export default (obj, params_ = {}, rng = null) => {
   const params = {
+    anyRecGroup: 0,
     doublePlusGroup: 0,
     doubleStarGroup: 0,
     ...params_
   };
   Joi.assert(params, Joi.object().keys({
+    anyRecGroup: Joi.number().min(0).max(1),
     doublePlusGroup: Joi.number().min(0).max(1),
     doubleStarGroup: Joi.number().min(0).max(1)
   }));
