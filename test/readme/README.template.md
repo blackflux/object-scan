@@ -218,6 +218,16 @@ haystack: { a: [0, { b: 1 }], c: { d: 2 } }
 needles: ['**{*}']
 comment: `traverse only object`
 </example></pre>
+<pre><example>
+haystack: { a: { b: { c: 0 } } }
+needles: ['a.**{b.c}']
+comment: `zero or more times`
+</example></pre>
+<pre><example>
+haystack: { a: { b: { c: 0 } } }
+needles: ['a.++{b.c}']
+comment: `one or more times`
+</example></pre>
 
 ### Exclusion
 
