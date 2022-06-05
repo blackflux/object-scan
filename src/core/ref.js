@@ -1,15 +1,13 @@
 export class Ref {
-  constructor(typeOrRef, id) {
+  constructor(typeOrRef) {
     if (typeOrRef instanceof Ref) {
       this.type = typeOrRef.type;
-      this.id = typeOrRef.id;
       this.left = false;
       this.link = typeOrRef;
       // eslint-disable-next-line no-param-reassign
       typeOrRef.link = this;
     } else {
       this.type = typeOrRef;
-      this.id = id;
       this.left = true;
       this.link = null;
     }

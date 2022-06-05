@@ -24,7 +24,6 @@ export default (input) => {
   let inArray = false;
   let excludeNext = false;
   let cursor = 0;
-  let cId = 0;
 
   // group related
   const parentStack = [];
@@ -80,8 +79,7 @@ export default (input) => {
         }
         cResult.push(
           group
-            // eslint-disable-next-line no-plusplus
-            ? new Ref(ele, ++cId)
+            ? new Ref(ele)
             : new Wildcard(inArray ? `[${ele}]` : ele, excludeNext)
         );
         excludeNext = false;

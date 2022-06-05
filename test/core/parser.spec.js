@@ -9,18 +9,24 @@ import parsedNeedleToStringArray from '../helper/parsed-needle-to-string-array.j
 const parse = (input, ctx = {}) => parser.parse(input, Context(ctx));
 
 const asString = (() => {
-  const asStringRec = (input) => {
+  const asStringRec = (input, ctx) => {
     if (Array.isArray(input)) {
-      return `[${input.map((e) => asStringRec(e)).join(',')}]`;
+      return `[${input.map((e) => asStringRec(e, ctx)).join(',')}]`;
     }
     if (input instanceof Set) {
-      return `{${[...input].map((e) => asStringRec(e)).join(',')}}`;
+      return `{${[...input].map((e) => asStringRec(e, ctx)).join(',')}}`;
     }
     if (input instanceof Ref) {
+      let refId = ctx.refs.get(input) || ctx.refs.get(input.link);
+      if (refId === undefined) {
+        refId = ctx.counter;
+        ctx.counter += 1;
+        ctx.refs.set(input, refId);
+      }
       return `<${[
         input.left ? '' : '}',
-        input.left ? input.type : input.id,
-        input.left ? input.id : input.type,
+        input.left ? input.type : refId,
+        input.left ? refId : input.type,
         input.left ? '{' : ''
       ]
         .filter((e) => !!e)
@@ -28,7 +34,13 @@ const asString = (() => {
     }
     return `${input.excluded === true ? '!' : ''}"${input.value}"`;
   };
-  return (input) => asStringRec(parse(input));
+  return (input) => {
+    const ctx = {
+      refs: new Map(),
+      counter: 1
+    };
+    return asStringRec(parse(input), ctx);
+  };
 })();
 
 const checkError = (input, msg, useArraySelector = true) => {
