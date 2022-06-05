@@ -1300,6 +1300,17 @@ describe('Testing Find', () => {
       ]);
     });
 
+    it('Basic two nested groups', () => {
+      expect(t('**{a.a.a.a}', '**{b.b.b.b}')).to.deep.equal([
+        'b.b.b.b.b.b.b.b',
+        'b.b.b.b.a.a.a.a',
+        'b.b.b.b',
+        'a.a.a.a.b.b.b.b',
+        'a.a.a.a.a.a.a.a',
+        'a.a.a.a'
+      ]);
+    });
+
     it('Basic multiple recursive star regex', () => {
       expect(t('**(^a$)', '**(^b$)')).to.deep.equal([
         'b.b.b.b.b.b.b.b.b.b.b',
