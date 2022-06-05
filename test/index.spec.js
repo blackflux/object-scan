@@ -923,18 +923,18 @@ describe('Testing Find', () => {
     const tree = { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } };
     expect(objectScan(['**'], options)(tree, { filterFn: [], breakFn: [] }))
       .to.deep.equal({
-        // Post-order reverse
-        breakFn: [undefined, 'f', 'g', 'i', 'h', 'b', 'd', 'e', 'c', 'a'],
-        // Pre-order reverse
-        filterFn: ['h', 'i', 'g', 'e', 'c', 'd', 'a', 'b', 'f']
-      });
+      // Post-order reverse
+      breakFn: [undefined, 'f', 'g', 'i', 'h', 'b', 'd', 'e', 'c', 'a'],
+      // Pre-order reverse
+      filterFn: ['h', 'i', 'g', 'e', 'c', 'd', 'a', 'b', 'f']
+    });
     expect(objectScan(['**'], { ...options, reverse: false })(tree, { filterFn: [], breakFn: [] }))
       .to.deep.equal({
-        // Pre-order
-        breakFn: [undefined, 'f', 'b', 'a', 'd', 'c', 'e', 'g', 'i', 'h'],
-        // Post-order
-        filterFn: ['a', 'c', 'e', 'd', 'b', 'h', 'i', 'g', 'f']
-      });
+      // Pre-order
+      breakFn: [undefined, 'f', 'b', 'a', 'd', 'c', 'e', 'g', 'i', 'h'],
+      // Post-order
+      filterFn: ['a', 'c', 'e', 'd', 'b', 'h', 'i', 'g', 'f']
+    });
   });
 
   it('Testing traversal order sorted', () => {
@@ -949,14 +949,14 @@ describe('Testing Find', () => {
     const tree = { a: {}, c: {}, b: [{ d: {}, f: {}, e: {} }, { g: {}, h: {}, i: {} }] };
     expect(objectScan(['**'], options)(tree, { filterFn: [], breakFn: [] }))
       .to.deep.equal({
-        breakFn: [undefined, 'c', 'b', 1, 'i', 'h', 'g', 0, 'f', 'e', 'd', 'a'],
-        filterFn: ['c', 'i', 'h', 'g', 1, 'f', 'e', 'd', 0, 'b', 'a']
-      });
+      breakFn: [undefined, 'c', 'b', 1, 'i', 'h', 'g', 0, 'f', 'e', 'd', 'a'],
+      filterFn: ['c', 'i', 'h', 'g', 1, 'f', 'e', 'd', 0, 'b', 'a']
+    });
     expect(objectScan(['**'], { ...options, reverse: false })(tree, { filterFn: [], breakFn: [] }))
       .to.deep.equal({
-        breakFn: [undefined, 'a', 'b', 0, 'd', 'e', 'f', 1, 'g', 'h', 'i', 'c'],
-        filterFn: ['a', 'd', 'e', 'f', 0, 'g', 'h', 'i', 1, 'b', 'c']
-      });
+      breakFn: [undefined, 'a', 'b', 0, 'd', 'e', 'f', 1, 'g', 'h', 'i', 'c'],
+      filterFn: ['a', 'd', 'e', 'f', 0, 'g', 'h', 'i', 1, 'b', 'c']
+    });
   });
 
   describe('Testing star group matching', () => {
@@ -1231,6 +1231,16 @@ describe('Testing Find', () => {
         'a.b.c.d.c.a.b.c.d.a',
         'a.b.c.d.a.b.c.d.a'
       ]);
+    });
+
+    it('Deeply nested recursion', () => {
+      const data = [[[[[[[[[[1]]]]]]]]]];
+      const needles = ['++{++{**}}.++'];
+      const r = objectScan(needles, {
+        rtn: 'matchedBy',
+        filterFn: ({ isLeaf }) => isLeaf
+      })(data);
+      expect(r).to.deep.equal([['++{++{**}}.++']]);
     });
   });
 });
