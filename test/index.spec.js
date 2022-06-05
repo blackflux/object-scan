@@ -1245,9 +1245,24 @@ describe('Testing Find', () => {
 
     it('Nested Path with exclude', () => {
       expect(t('**{a.b},!**{a.b.a.b}')).to.deep.equal([
-        'a.b.a.b.a.b.a.b.a.b',
-        'a.b.a.b.a.b',
         'a.b'
+      ]);
+    });
+
+    it('Nested Path with double exclude', () => {
+      expect(t('**{a},!**{a.a}')).to.deep.equal([
+        'a'
+      ]);
+    });
+
+    it('Basic or logic', () => {
+      expect(t('**{a.b.c}', '{a.b.c.d}')).to.deep.equal([
+        'a.b.c.d',
+        'a.b.c.a.b.c.d',
+        'a.b.c.a.b.c.a.b.c.d',
+        'a.b.c.a.b.c.a.b.c',
+        'a.b.c.a.b.c',
+        'a.b.c'
       ]);
     });
   });

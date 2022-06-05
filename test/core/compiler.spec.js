@@ -414,5 +414,17 @@ describe('Testing compiler', () => {
       expect(getValues(tower.a.b)).to.deep.equal([tower.a.b.a, tower.a]);
       expect(getValues(tower.a.b.a)).to.deep.equal([]);
     });
+
+    it('Testing with exclude', () => {
+      const input = ['**{a}', '!**{a.a}'];
+      const tower = c(input);
+      expect(tower).to.deep.equal({ a: { a: {} } });
+      expect(getValues(tower)).to.deep.equal([tower.a]);
+      expect(getValues(tower.a)).to.deep.equal([tower.a.a, tower.a]);
+      expect(getValues(tower.a.a)).to.deep.equal([tower.a]);
+      expect(excludedBy([tower])).to.deep.equal([]);
+      expect(excludedBy([tower.a])).to.deep.equal([]);
+      expect(excludedBy([tower.a.a])).to.deep.equal(['!**{a.a}']);
+    });
   });
 });
