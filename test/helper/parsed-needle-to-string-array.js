@@ -38,16 +38,17 @@ const parsedNeedleToStringArray = (obj, params, rng, depth = 0) => {
     }
 
     const groupType = (() => {
-      if (
-        rng === null
-        || (params.doubleStarGroup === 0 && params.doublePlusGroup === 0)
-      ) {
+      if (rng === null) {
         return '';
       }
-      // todo: improve randomness calculation
-      const type = rng() > 0.5 ? '**' : '++';
-      const set = rng() < (type === '**' ? params.doubleStarGroup : params.doublePlusGroup);
-      return set ? type : '';
+      const rn = rng() * 2;
+      if (rn < params.doubleStarGroup) {
+        return '**';
+      }
+      if (rn < params.doubleStarGroup + params.doublePlusGroup) {
+        return '++';
+      }
+      return '';
     })();
     const asBlank = groupType === '' && len === 1;
 
