@@ -209,9 +209,7 @@ const finalizeTower = (tower, ctx) => {
         matches[lastDepth] = false;
       }
       const values = Object.values(obj).reverse();
-      getRefs(obj).forEach((r) => {
-        values.push(...Object.values(r));
-      });
+      values.push(...getRefs(obj).flatMap((r) => Object.values(r)));
       setValues(obj, values);
       lastDepth = depth;
     }
