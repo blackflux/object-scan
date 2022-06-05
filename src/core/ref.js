@@ -14,13 +14,13 @@ export class Ref {
       this.link = null;
     }
     this.isStarRec = this.type === '**';
-    this.node = null;
+    this.pointer = null;
     this.completed = false;
   }
 
-  setNode(node) {
-    this.node = node;
-    this.link.node = node;
+  setPointer(pointer) {
+    this.pointer = pointer;
+    this.link.pointer = pointer;
   }
 
   setCompleted(state) {
