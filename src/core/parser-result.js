@@ -77,12 +77,12 @@ export default (input) => {
         )) {
           throwError('Bad Array Selector', input, { selector: ele });
         }
-        cResult.push(
-          group
-            ? new Ref(ele)
-            : new Wildcard(inArray ? `[${ele}]` : ele, excludeNext)
-        );
-        excludeNext = false;
+        if (group) {
+          cResult.push(new Ref(ele));
+        } else {
+          cResult.push(new Wildcard(inArray ? `[${ele}]` : ele, excludeNext));
+          excludeNext = false;
+        }
         cursor = idx + 1;
       }
     },

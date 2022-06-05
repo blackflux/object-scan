@@ -364,6 +364,11 @@ describe('Testing Parser', () => {
         expect(asString('**{a}.b'))
           .to.equal('[<**:1:{>,"a",<}:1:**>,"b"]');
       });
+
+      it('Testing exclusion', () => {
+        expect(asString('**{a.b},!**{a.b.a.b,c.d.c.d}'))
+          .to.equal('{[<**:1:{>,["a","b"],<}:1:**>],[<**:2:{>,{[!"a","b","a","b"],[!"c","d","c","d"]},<}:2:**>]}');
+      });
     });
   });
 });

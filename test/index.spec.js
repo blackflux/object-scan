@@ -1242,5 +1242,13 @@ describe('Testing Find', () => {
       })(data);
       expect(r).to.deep.equal([['++{++{**}}.++']]);
     });
+
+    it('Nested Path with exclude', () => {
+      expect(t('**{a.b},!**{a.b.a.b}')).to.deep.equal([
+        'a.b.a.b.a.b.a.b.a.b',
+        'a.b.a.b.a.b',
+        'a.b'
+      ]);
+    });
   });
 });
