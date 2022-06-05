@@ -219,12 +219,12 @@ needles: ['**{*}']
 comment: `traverse only object`
 </example></pre>
 <pre><example>
-haystack: { a: { b: { c: 0 } } }
+haystack: { a: { b: { c: { b: { c: 0 } } } } }
 needles: ['a.**{b.c}']
 comment: `zero or more times`
 </example></pre>
 <pre><example>
-haystack: { a: { b: { c: 0 } } }
+haystack: { a: { b: { c: { b: { c: 0 } } } } }
 needles: ['a.++{b.c}']
 comment: `one or more times`
 </example></pre>

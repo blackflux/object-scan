@@ -314,18 +314,18 @@ objectScan(['**{*}'], { joined: true })(haystack);
 
 <!-- eslint-disable no-undef -->
 ```js
-const haystack = { a: { b: { c: 0 } } };
+const haystack = { a: { b: { c: { b: { c: 0 } } } } };
 objectScan(['a.**{b.c}'], { joined: true })(haystack);
-// => [ 'a.b.c', 'a' ]
+// => [ 'a.b.c.b.c', 'a.b.c', 'a' ]
 ```
 </details>
 <details><summary> <code>['a.++{b.c}']</code> <em>(`one or more times`)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
-const haystack = { a: { b: { c: 0 } } };
+const haystack = { a: { b: { c: { b: { c: 0 } } } } };
 objectScan(['a.++{b.c}'], { joined: true })(haystack);
-// => [ 'a.b.c' ]
+// => [ 'a.b.c.b.c', 'a.b.c' ]
 ```
 </details>
 
