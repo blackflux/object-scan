@@ -1243,20 +1243,43 @@ describe('Testing Find', () => {
       expect(r).to.deep.equal([['++{++{**}}.++']]);
     });
 
-    it('Nested Path with exclude', () => {
+    it('Nested Path with exclude starstar', () => {
       expect(t('**{a.b},!**{a.b.a.b}')).to.deep.equal([
         'a.b'
       ]);
     });
 
-    it('Nested Path with double exclude', () => {
+    it('Nested Path with exclude plusplus', () => {
+      expect(t('++{a.b},!++{a.b.a.b}')).to.deep.equal([
+        'a.b'
+      ]);
+    });
+
+    it('Nested Path with double exclude starstar', () => {
       expect(t('**{a},!**{a.a}')).to.deep.equal([
         'a'
       ]);
     });
 
-    it('Basic or logic', () => {
+    it('Nested Path with double exclude plusplus', () => {
+      expect(t('++{a},!++{a.a}')).to.deep.equal([
+        'a'
+      ]);
+    });
+
+    it('Basic or logic starstar', () => {
       expect(t('**{a.b.c}', '{a.b.c.d}')).to.deep.equal([
+        'a.b.c.d',
+        'a.b.c.a.b.c.d',
+        'a.b.c.a.b.c.a.b.c.d',
+        'a.b.c.a.b.c.a.b.c',
+        'a.b.c.a.b.c',
+        'a.b.c'
+      ]);
+    });
+
+    it('Basic or logic plusplus', () => {
+      expect(t('++{a.b.c}', '{a.b.c.d}')).to.deep.equal([
         'a.b.c.d',
         'a.b.c.a.b.c.d',
         'a.b.c.a.b.c.a.b.c.d',
