@@ -1276,5 +1276,32 @@ describe('Testing Find', () => {
         'a'
       ]);
     });
+
+    it('Basic multiple recursive star regex', () => {
+      expect(t('**(^a$)', '**(^b$)')).to.deep.equal([
+        'b.b.b.b.b.b.b.b.b.b.b',
+        'b.b.b.b.b.b.b.b.b.b',
+        'b.b.b.b.b.b.b.b.b',
+        'b.b.b.b.b.b.b.b',
+        'b.b.b.b.b.b.b',
+        'b.b.b.b.b.b',
+        'b.b.b.b.b',
+        'b.b.b.b',
+        'b.b.b',
+        'b.b',
+        'b',
+        'a.a.a.a.a.a.a.a.a.a.a',
+        'a.a.a.a.a.a.a.a.a.a',
+        'a.a.a.a.a.a.a.a.a',
+        'a.a.a.a.a.a.a.a',
+        'a.a.a.a.a.a.a',
+        'a.a.a.a.a.a',
+        'a.a.a.a.a',
+        'a.a.a.a',
+        'a.a.a',
+        'a.a',
+        'a'
+      ]);
+    });
   });
 });
