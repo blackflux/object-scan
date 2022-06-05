@@ -1,4 +1,6 @@
 export class Ref {
+  excluded = false;
+
   constructor(typeOrRef) {
     if (typeOrRef instanceof Ref) {
       this.type = typeOrRef.type;
