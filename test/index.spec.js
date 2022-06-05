@@ -959,7 +959,7 @@ describe('Testing Find', () => {
       });
   });
 
-  describe('Testing star group matching', () => {
+  describe('Testing recursive group matching', () => {
     const input = {};
     let t;
     before(() => {
