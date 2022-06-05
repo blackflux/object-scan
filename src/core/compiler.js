@@ -122,7 +122,7 @@ const iterate = (tower, needle, tree, { onAdd, onFin }) => {
     } else {
       stack[stack.length - 1]
         .filter(([cur]) => cur !== tower)
-        .forEach(([cur, parent]) => onFin(cur, wc[wc.length - 1], parent, excluded));
+        .forEach(([cur, parent]) => onFin(cur, parent, wc[wc.length - 1], excluded));
     }
   });
 };
@@ -170,7 +170,7 @@ const applyNeedle = (tower, needle, tree, ctx) => {
         next(cur);
       }
     },
-    onFin: (cur, wc, parent, excluded) => {
+    onFin: (cur, parent, wc, excluded) => {
       if (ctx.strict && wc.isSimpleStarRec) {
         const unnecessary = Object.keys(parent).filter((k) => !['**', ''].includes(k));
         if (unnecessary.length !== 0) {
