@@ -365,9 +365,14 @@ describe('Testing Parser', () => {
           .to.equal('[<**:1:{>,"a",<}:1:**>,"b"]');
       });
 
-      it('Testing exclusion', () => {
+      it('Testing exclusion outside nested group', () => {
         expect(asString('**{a.b},!**{a.b.a.b,c.d.c.d}'))
           .to.equal('{[<**:1:{>,["a","b"],<}:1:**>],[<**:2:{>,{[!"a","b","a","b"],[!"c","d","c","d"]},<}:2:**>]}');
+      });
+
+      it('Testing exclusion inside nested group', () => {
+        expect(asString('**{a.b},**{a.b.a.b,!c.d.c.d}'))
+          .to.equal('{[<**:1:{>,["a","b"],<}:1:**>],[<**:2:{>,{["a","b","a","b"],[!"c","d","c","d"]},<}:2:**>]}');
       });
     });
   });

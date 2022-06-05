@@ -77,6 +77,8 @@ describe('Testing compiler', () => {
         .to.throw('Redundant Exclusion: "[{!0,1}][{!2,3}]"');
       expect(() => c(['!{[1][2],*,{a,b},{a.!b}}']))
         .to.throw('Redundant Exclusion: "!{[1][2],*,{a,b},{a.!b}}"');
+      expect(() => c(['!**{a,!b}']))
+        .to.throw('Redundant Exclusion: !**{a,!b}, char 6');
     });
   });
 
