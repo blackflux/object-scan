@@ -31,16 +31,28 @@ const parsedNeedleToStringArray = (obj, params, rng, depth = 0) => {
     if (depth === 0) {
       return [str];
     }
-    const asBlank = isArray || len === 1;
-    const groupType = asBlank || rng === null || params.doubleStarGroup === 0 || params.doublePlusGroup === 0
-      ? ''
-      : (() => {
-        const type = rng() > 0.5 ? '**' : '++';
-        const set = rng() < (type === '**' ? params.doubleStarGroup : params.doublePlusGroup);
-        return set ? type : '';
-      })();
+
+    const prefix = pullExcludeOut ? '!' : '';
+    if (isArray) {
+      return `${prefix}${str}`;
+    }
+
+    const groupType = (() => {
+      if (
+        rng === null
+        || (params.doubleStarGroup === 0 && params.doublePlusGroup === 0)
+      ) {
+        return '';
+      }
+      // todo: improve randomness calculation
+      const type = rng() > 0.5 ? '**' : '++';
+      const set = rng() < (type === '**' ? params.doubleStarGroup : params.doublePlusGroup);
+      return set ? type : '';
+    })();
+    const asBlank = groupType === '' && len === 1;
+
     return [
-      pullExcludeOut ? '!' : '',
+      prefix,
       asBlank ? '' : `${groupType}{`,
       str,
       asBlank ? '' : '}'
@@ -49,7 +61,6 @@ const parsedNeedleToStringArray = (obj, params, rng, depth = 0) => {
   return depth === 0 ? [obj] : obj;
 };
 
-// todo: unit test for params and rng
 export default (obj, params_ = {}, rng = null) => {
   const params = {
     doublePlusGroup: 0,
