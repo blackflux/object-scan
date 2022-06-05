@@ -1265,5 +1265,16 @@ describe('Testing Find', () => {
         'a.b.c'
       ]);
     });
+
+    it('Basic rec star and exclusion', () => {
+      expect(t('**(^a$)', '!**{a.a}')).to.deep.equal([
+        'a.a.a.a.a.a.a.a.a.a.a',
+        'a.a.a.a.a.a.a.a.a',
+        'a.a.a.a.a.a.a',
+        'a.a.a.a.a',
+        'a.a.a',
+        'a'
+      ]);
+    });
   });
 });
