@@ -17,17 +17,11 @@ export class Ref {
     this.target = null;
     this.isStarRec = this.type === '**';
     this.pointer = null;
-    this.completed = false;
   }
 
   setPointer(pointer) {
     this.pointer = pointer;
     this.link.pointer = pointer;
-  }
-
-  setCompleted(state) {
-    this.completed = state;
-    this.link.completed = state;
   }
 
   setNode(node) {
