@@ -1446,7 +1446,6 @@ describe('Testing Find', () => {
     });
 
     it('Testing starstar in recursive group matches skip', () => {
-      // todo: this should include "a.a.a.a.a.a.a.a.a.a"
       expect(t('a.a.a.a.a.a.a.a.a.a.++{**}')).to.deep.equal([
         'a.a.a.a.a.a.a.a.a.a.nn',
         'a.a.a.a.a.a.a.a.a.a.n',
@@ -1455,6 +1454,16 @@ describe('Testing Find', () => {
         'a.a.a.a.a.a.a.a.a.a.b',
         'a.a.a.a.a.a.a.a.a.a.a'
       ]);
+    });
+
+    it('Testing rec plus group containing starstar', () => {
+      const r = objectScan(['a.++{**}'])({ a: { b: { c: 0 } } });
+      expect(r).to.deep.equal(['a.b.c', 'a.b']);
+    });
+
+    it('Testing rec star group containing starstar', () => {
+      const r = objectScan(['a.**{**}'])({ a: { b: { c: 0 } } });
+      expect(r).to.deep.equal(['a.b.c', 'a.b', 'a']);
     });
   });
 });

@@ -24,7 +24,7 @@ const Tester = () => {
       groupModifierParams: modify
         ? () => ({
           anyRecGroup: rng() > 0.2 ? 0 : rng(),
-          doublePlusGroup: rng() > 0.2 ? 0 : rng(),
+          doublePlusGroup: 0,
           doubleStarGroup: rng() > 0.2 ? 0 : rng()
         })
         : () => {}
