@@ -139,14 +139,12 @@ const applyNeedle = (tower, needle, tree, ctx) => {
           addRef(cur, wc.node);
           next(wc.node);
         } else {
-          if (wcParent instanceof Ref) {
-            addRef(wcParent.target, wc.node);
-            wc.setTarget(wcParent.target);
-          } else {
-            const target = parent[wcParent.value];
-            addRef(target, wc.node);
-            wc.setTarget(target);
-          }
+          wc.setTarget(
+            wcParent instanceof Ref
+              ? wcParent.target
+              : parent[wcParent.value]
+          );
+          addRef(wc.target, wc.node);
           if (wc.pointer !== null) {
             next(wc.pointer);
             wc.setPointer(null);
