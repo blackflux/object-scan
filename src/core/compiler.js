@@ -222,7 +222,8 @@ const finalizeTower = (tower, ctx) => {
       lastDepth = depth;
     }
   };
-  traverser.traverse(tower, onTraverse, (obj) => [...Object.values(obj), ...getRefs(obj)]);
+  const getValuesAndRefs = (obj) => [...Object.values(obj), ...getRefs(obj)];
+  traverser.traverse(tower, onTraverse, getValuesAndRefs);
 
   if (ctx.useArraySelector === false) {
     const roots = [];
