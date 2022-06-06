@@ -132,7 +132,9 @@ const applyNeedle = (tower, needle, tree, ctx) => {
     onAdd: (cur, parent, wc, wcParent, next) => {
       if (wc instanceof Ref) {
         if (wc.left === true) {
-          wc.setPointer(cur);
+          if (wc.isStarRec) {
+            wc.setPointer(cur);
+          }
           wc.setNode({});
           addRef(cur, wc.node);
           next(wc.node);
@@ -146,9 +148,7 @@ const applyNeedle = (tower, needle, tree, ctx) => {
             wc.setTarget(target);
           }
           if (wc.pointer !== null) {
-            if (wc.isStarRec) {
-              next(wc.pointer);
-            }
+            next(wc.pointer);
             wc.setPointer(null);
           }
           next(cur);
