@@ -4,9 +4,9 @@ import generateDataset from './helper/generate-dataset.js';
 import generateNeedles from './helper/generate-needles.js';
 import objectScan from '../src/index.js';
 
-const Tester = () => {
+const Tester = (seed = null) => {
   const generateTestSet = ({ useArraySelector, modify }) => {
-    const { rng, haystack, paths } = generateDataset();
+    const { rng, haystack, paths } = generateDataset(seed);
     const needles = generateNeedles({
       rng,
       paths,
