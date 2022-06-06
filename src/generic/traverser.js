@@ -10,7 +10,7 @@ const traverse = (obj, cb, getValues = Object.values) => {
       const cur = stack[stack.length - 1];
       cb('ENTER', cur, depth);
 
-      const values = getValues(cur).filter((v) => !stack.includes(v));
+      const values = getValues(cur).filter((v) => stack.lastIndexOf(v) === -1);
       if (values.length !== 0) {
         stack.push(...values);
         depth += 1;
