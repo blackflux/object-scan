@@ -116,7 +116,7 @@ const iterate = (tower, needle, tree, { onAdd, onFin }) => {
       const toAdd = [];
       const wcParent = wildcards[wildcards.length - 1];
       stack[stack.length - 1]
-        .forEach(([cur]) => onAdd(cur, wc, wcParent, (e) => toAdd.push([e, cur])));
+        .forEach(([cur, parent]) => onAdd(cur, parent, wc, wcParent, (e) => toAdd.push([e, cur])));
       stack.push(toAdd);
       wildcards.push(wc);
     } else {
@@ -129,20 +129,31 @@ const iterate = (tower, needle, tree, { onAdd, onFin }) => {
 
 const applyNeedle = (tower, needle, tree, ctx) => {
   iterate(tower, needle, tree, {
-    onAdd: (cur, wc, wcParent, next) => {
+    onAdd: (cur, parent, wc, wcParent, next) => {
       if (wc instanceof Ref) {
         if (wc.left === true) {
           wc.setPointer(cur);
           wc.setCompleted(false);
+          wc.setNode({});
+          addRef(cur, wc.node);
+          next(wc.node);
         } else {
-          const p = wc.pointer;
-          addRef(cur, p);
-          if (wc.isStarRec && !wc.completed) {
-            wc.setCompleted(true);
-            next(p);
+          if (wcParent instanceof Ref) {
+            addRef(wcParent.target, wc.node);
+            wc.setTarget(wcParent.target);
+          } else {
+            const target = parent[wcParent.value];
+            addRef(target, wc.node);
+            wc.setTarget(target);
           }
+          if (!wc.completed) {
+            if (wc.isStarRec) {
+              next(wc.pointer);
+            }
+            wc.setCompleted(true);
+          }
+          next(cur);
         }
-        next(cur);
         return;
       }
       addNeedle(cur, needle);
@@ -199,7 +210,7 @@ const finalizeTower = (tower, ctx) => {
   let lastDepth = -1;
 
   traverser.traverse(tower, (type, obj, depth) => {
-    if (type === 'EXIT') {
+    if (!(VALUES in obj) && type === 'EXIT') {
       const isUp = lastDepth === depth + 1;
       if ((isUp && matches[lastDepth] === true) || isMatch(obj)) {
         matches[depth] = true;
@@ -209,11 +220,11 @@ const finalizeTower = (tower, ctx) => {
         matches[lastDepth] = false;
       }
       const values = Object.values(obj).reverse();
-      values.push(...getRefs(obj).flatMap((r) => Object.values(r)));
+      values.push(...getRefs(obj).flatMap((r) => getValues(r) || Object.values(r)));
       setValues(obj, values);
       lastDepth = depth;
     }
-  });
+  }, (obj) => [...Object.values(obj), ...getRefs(obj)]);
 
   if (ctx.useArraySelector === false) {
     const roots = [];

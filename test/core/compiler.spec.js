@@ -408,23 +408,28 @@ describe('Testing compiler', () => {
     it('Testing basic two step (star)', () => {
       const input = ['**{a.b}.a'];
       const tower = c(input);
-      expect(tower).to.deep.equal({ a: { b: { a: {} } } });
-      expect(getValues(tower)).to.deep.equal([tower.a]);
-      expect(getValues(tower.a)).to.deep.equal([tower.a.b]);
-      expect(getValues(tower.a.b)).to.deep.equal([tower.a.b.a, tower.a]);
-      expect(getValues(tower.a.b.a)).to.deep.equal([]);
+      expect(tower).to.deep.equal({ a: {} });
+
+      const towerValues = getValues(tower);
+      expect(towerValues).to.deep.equal([tower.a, { b: { a: {} } }]);
+      expect(getValues(tower.a)).to.deep.equal([]);
+
+      expect(getValues(towerValues[0])).to.deep.equal([]);
+      expect(getValues(towerValues[1])).to.deep.equal([{ a: {} }]);
+      expect(getValues(towerValues[1].b)).to.deep.equal([{}, towerValues[1]]);
+      expect(getValues(towerValues[1].b.a)).to.deep.equal([]);
     });
 
     it('Testing with exclude', () => {
       const input = ['**{a}', '!**{a.a}'];
       const tower = c(input);
-      expect(tower).to.deep.equal({ a: { a: {} } });
-      expect(getValues(tower)).to.deep.equal([tower.a]);
-      expect(getValues(tower.a)).to.deep.equal([tower.a.a, tower.a]);
-      expect(getValues(tower.a.a)).to.deep.equal([tower.a]);
-      expect(excludedBy([tower])).to.deep.equal([]);
-      expect(excludedBy([tower.a])).to.deep.equal([]);
-      expect(excludedBy([tower.a.a])).to.deep.equal(['!**{a.a}']);
+      expect(tower).to.deep.equal({});
+
+      const towerValues = getValues(tower);
+      expect(towerValues).to.deep.equal([{}, { a: {} }]);
+      expect(getValues(towerValues[0])).to.deep.equal([{}]);
+      expect(getValues(towerValues[1])).to.deep.equal([{}]);
+      expect(getValues(towerValues[1].a)).to.deep.equal([{ a: {} }]);
     });
   });
 });

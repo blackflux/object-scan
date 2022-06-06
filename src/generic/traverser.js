@@ -1,4 +1,4 @@
-const traverse = (obj, cb) => {
+const traverse = (obj, cb, getValues = Object.values) => {
   const stack = [obj];
   const counts = [1];
   let depth = 0;
@@ -10,7 +10,7 @@ const traverse = (obj, cb) => {
       const cur = stack[stack.length - 1];
       cb('ENTER', cur, depth);
 
-      const values = Object.values(cur);
+      const values = getValues(cur).filter((v) => !stack.includes(v));
       if (values.length !== 0) {
         stack.push(...values);
         depth += 1;

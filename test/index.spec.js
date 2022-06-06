@@ -1245,24 +1245,38 @@ describe('Testing Find', () => {
 
     it('Nested Path with exclude starstar', () => {
       expect(t('**{a.b},!**{a.b.a.b}')).to.deep.equal([
+        'a.b.a.b.a.b.a.b.a.b',
+        'a.b.a.b.a.b',
         'a.b'
       ]);
     });
 
     it('Nested Path with exclude plusplus', () => {
       expect(t('++{a.b},!++{a.b.a.b}')).to.deep.equal([
+        'a.b.a.b.a.b.a.b.a.b',
+        'a.b.a.b.a.b',
         'a.b'
       ]);
     });
 
     it('Nested Path with double exclude starstar', () => {
       expect(t('**{a},!**{a.a}')).to.deep.equal([
+        'a.a.a.a.a.a.a.a.a.a.a',
+        'a.a.a.a.a.a.a.a.a',
+        'a.a.a.a.a.a.a',
+        'a.a.a.a.a',
+        'a.a.a',
         'a'
       ]);
     });
 
     it('Nested Path with double exclude plusplus', () => {
       expect(t('++{a},!++{a.a}')).to.deep.equal([
+        'a.a.a.a.a.a.a.a.a.a.a',
+        'a.a.a.a.a.a.a.a.a',
+        'a.a.a.a.a.a.a',
+        'a.a.a.a.a',
+        'a.a.a',
         'a'
       ]);
     });
@@ -1270,8 +1284,6 @@ describe('Testing Find', () => {
     it('Basic or logic starstar', () => {
       expect(t('**{a.b.c}', '{a.b.c.d}')).to.deep.equal([
         'a.b.c.d',
-        'a.b.c.a.b.c.d',
-        'a.b.c.a.b.c.a.b.c.d',
         'a.b.c.a.b.c.a.b.c',
         'a.b.c.a.b.c',
         'a.b.c'
@@ -1281,8 +1293,6 @@ describe('Testing Find', () => {
     it('Basic or logic plusplus', () => {
       expect(t('++{a.b.c}', '{a.b.c.d}')).to.deep.equal([
         'a.b.c.d',
-        'a.b.c.a.b.c.d',
-        'a.b.c.a.b.c.a.b.c.d',
         'a.b.c.a.b.c.a.b.c',
         'a.b.c.a.b.c',
         'a.b.c'
@@ -1303,11 +1313,108 @@ describe('Testing Find', () => {
     it('Basic two nested groups', () => {
       expect(t('**{a.a.a.a}', '**{b.b.b.b}')).to.deep.equal([
         'b.b.b.b.b.b.b.b',
-        'b.b.b.b.a.a.a.a',
         'b.b.b.b',
-        'a.a.a.a.b.b.b.b',
         'a.a.a.a.a.a.a.a',
         'a.a.a.a'
+      ]);
+    });
+
+    it('Nested group, single element', () => {
+      expect(t('++{++{++{a}}}')).to.deep.equal([
+        'a.a.a.a.a.a.a.a.a.a.a',
+        'a.a.a.a.a.a.a.a.a.a',
+        'a.a.a.a.a.a.a.a.a',
+        'a.a.a.a.a.a.a.a',
+        'a.a.a.a.a.a.a',
+        'a.a.a.a.a.a',
+        'a.a.a.a.a',
+        'a.a.a.a',
+        'a.a.a',
+        'a.a',
+        'a'
+      ]);
+    });
+
+    it('Nested group, single element, prefix', () => {
+      expect(t('b.++{++{++{a}}}')).to.deep.equal([
+        'b.a.a.a.a.a.a.a.a.a.a',
+        'b.a.a.a.a.a.a.a.a.a',
+        'b.a.a.a.a.a.a.a.a',
+        'b.a.a.a.a.a.a.a',
+        'b.a.a.a.a.a.a',
+        'b.a.a.a.a.a',
+        'b.a.a.a.a',
+        'b.a.a.a',
+        'b.a.a',
+        'b.a'
+      ]);
+    });
+
+    it('Nested group, single element, prefix and postfix', () => {
+      expect(t('b.++{++{++{a}}}.c')).to.deep.equal([
+        'b.a.c',
+        'b.a.a.c',
+        'b.a.a.a.c',
+        'b.a.a.a.a.c',
+        'b.a.a.a.a.a.c',
+        'b.a.a.a.a.a.a.c',
+        'b.a.a.a.a.a.a.a.c',
+        'b.a.a.a.a.a.a.a.a.c',
+        'b.a.a.a.a.a.a.a.a.a.c'
+      ]);
+    });
+
+    it('Nested group, single element, postfix', () => {
+      expect(t('++{++{++{a}}}.c')).to.deep.equal([
+        'a.c',
+        'a.a.c',
+        'a.a.a.c',
+        'a.a.a.a.c',
+        'a.a.a.a.a.c',
+        'a.a.a.a.a.a.c',
+        'a.a.a.a.a.a.a.c',
+        'a.a.a.a.a.a.a.a.c',
+        'a.a.a.a.a.a.a.a.a.c',
+        'a.a.a.a.a.a.a.a.a.a.c'
+      ]);
+    });
+
+    it('Nested group, two element', () => {
+      expect(t('++{++{++{a.a}}}')).to.deep.equal([
+        'a.a.a.a.a.a.a.a.a.a',
+        'a.a.a.a.a.a.a.a',
+        'a.a.a.a.a.a',
+        'a.a.a.a',
+        'a.a'
+      ]);
+    });
+
+    it('Nested group, two element, prefix', () => {
+      expect(t('b.++{++{++{a.a}}}')).to.deep.equal([
+        'b.a.a.a.a.a.a.a.a.a.a',
+        'b.a.a.a.a.a.a.a.a',
+        'b.a.a.a.a.a.a',
+        'b.a.a.a.a',
+        'b.a.a'
+      ]);
+    });
+
+    it('Nested group, two element, prefix and postfix', () => {
+      expect(t('b.++{++{++{a.a}}}.c')).to.deep.equal([
+        'b.a.a.c',
+        'b.a.a.a.a.c',
+        'b.a.a.a.a.a.a.c',
+        'b.a.a.a.a.a.a.a.a.c'
+      ]);
+    });
+
+    it('Nested group, two element, postfix', () => {
+      expect(t('++{++{++{a.a}}}.c')).to.deep.equal([
+        'a.a.c',
+        'a.a.a.a.c',
+        'a.a.a.a.a.a.c',
+        'a.a.a.a.a.a.a.a.c',
+        'a.a.a.a.a.a.a.a.a.a.c'
       ]);
     });
 
