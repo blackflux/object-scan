@@ -49,7 +49,7 @@ const parsedNeedleToStringArray = (obj, params, rng, depth = 0) => {
       }
       const sumP = params.doubleStarGroup + params.doublePlusGroup;
       const rnN = rng() * sumP;
-      return params.doubleStarGroup < rnN ? '**' : '++';
+      return params.doublePlusGroup < rnN ? '**' : '++';
     })();
     const asBlank = groupType === '' && len === 1;
 
