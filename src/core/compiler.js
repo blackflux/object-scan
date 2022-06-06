@@ -206,7 +206,7 @@ const finalizeTower = (tower, ctx) => {
   const matches = [];
   let lastDepth = -1;
 
-  traverser.traverse(tower, (type, obj, depth) => {
+  const onTraverse = (type, obj, depth) => {
     if (!(VALUES in obj) && type === 'EXIT') {
       const isUp = lastDepth === depth + 1;
       if ((isUp && matches[lastDepth] === true) || isMatch(obj)) {
@@ -221,7 +221,8 @@ const finalizeTower = (tower, ctx) => {
       setValues(obj, values);
       lastDepth = depth;
     }
-  }, (obj) => [...Object.values(obj), ...getRefs(obj)]);
+  };
+  traverser.traverse(tower, onTraverse, (obj) => [...Object.values(obj), ...getRefs(obj)]);
 
   if (ctx.useArraySelector === false) {
     const roots = [];
