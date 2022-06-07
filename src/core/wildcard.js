@@ -59,7 +59,7 @@ export class Wildcard {
     this.isAnyObjTarget = value === '*';
   }
 
-  anyMatch(key) {
+  recMatch(key) {
     if (!this.isRec) {
       return false;
     }
