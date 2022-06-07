@@ -110,7 +110,7 @@ const iterate = (tower, needle, tree, { onAdd, onFin }) => {
     } else {
       stack[stack.length - 1]
         .filter(([cur]) => cur !== tower)
-        .forEach(([cur, parent]) => onFin(cur, wc[wc.length - 1], parent, excluded));
+        .forEach(([cur, parent]) => onFin(cur, parent, wc[wc.length - 1], excluded));
     }
   });
 };
