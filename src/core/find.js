@@ -171,7 +171,7 @@ export default (haystack_, searches_, ctx) => {
         } else {
           for (let sIdx = 0, sLen = searches.length; sIdx !== sLen; sIdx += 1) {
             const search = searches[sIdx];
-            if (getWildcard(search).anyMatch(key)) {
+            if (getWildcard(search).recMatch(key)) {
               searchesOut.push(search);
             }
             const values = getValues(search);
