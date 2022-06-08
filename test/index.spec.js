@@ -1485,5 +1485,22 @@ describe('Testing Find', () => {
         'a'
       ]);
     });
+
+    it('Testing second needle does not pollute rec group postfix', () => {
+      const r = objectScan(['a.**{b,c}.a', 'a.b.d'], {
+        strict: false,
+        breakFn: ({ depth }) => depth > 3
+      })(input);
+      expect(r).to.deep.equal([
+        'a.c.c.a',
+        'a.c.b.a',
+        'a.c.a',
+        'a.b.d',
+        'a.b.c.a',
+        'a.b.b.a',
+        'a.b.a',
+        'a.a'
+      ]);
+    });
   });
 });
