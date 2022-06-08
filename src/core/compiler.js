@@ -12,6 +12,10 @@ const markLeaf = (input, match, readonly) => defineProperty(input, LEAF, match, 
 export const isLeaf = (input) => LEAF in input;
 export const isMatch = (input) => input !== undefined && input[LEAF] === true;
 
+const ROOTS = Symbol('roots');
+const setRoots = (input, roots) => defineProperty(input, ROOTS, roots);
+export const getRoots = (input) => input[ROOTS];
+
 const HAS_MATCHES = Symbol('has-matches');
 const setHasMatches = (input) => defineProperty(input, HAS_MATCHES, true);
 export const hasMatches = (input) => input[HAS_MATCHES] === true;
@@ -58,11 +62,11 @@ const setValues = (input, entries) => defineProperty(input, VALUES, entries);
 export const getValues = (input) => input[VALUES];
 
 export const matchedBy = (searches) => Array
-  .from(new Set([].concat(...searches.map((e) => getLeafNeedlesMatch(e)))));
+  .from(new Set(searches.flatMap((e) => getLeafNeedlesMatch(e))));
 export const excludedBy = (searches) => Array
-  .from(new Set([].concat(...searches.map((e) => getLeafNeedlesExclude(e)))));
+  .from(new Set(searches.flatMap((e) => getLeafNeedlesExclude(e))));
 export const traversedBy = (searches) => Array
-  .from(new Set([].concat(...searches.map((e) => getNeedles(e)))));
+  .from(new Set(searches.flatMap((e) => getNeedles(e))));
 
 export const isLastLeafMatch = (searches) => {
   let maxLeafIndex = Number.MIN_SAFE_INTEGER;
@@ -106,7 +110,7 @@ const iterate = (tower, needle, tree, { onAdd, onFin }) => {
     } else {
       stack[stack.length - 1]
         .filter(([cur]) => cur !== tower)
-        .forEach(([cur, parent]) => onFin(cur, wc[wc.length - 1], parent, excluded));
+        .forEach(([cur, parent]) => onFin(cur, parent, wc[wc.length - 1], excluded));
     }
   });
 };
@@ -139,13 +143,11 @@ const applyNeedle = (tower, needle, tree, ctx) => {
         next(cur);
       }
     },
-    onFin: (cur, wc, parent, excluded) => {
-      if (ctx.strict) {
-        if (wc.isSimpleStarRec) {
-          const unnecessary = Object.keys(parent).filter((k) => !['**', ''].includes(k));
-          if (unnecessary.length !== 0) {
-            throw new Error(`Needle Target Invalidated: "${parent[unnecessary[0]][NEEDLES][0]}" by "${needle}"`);
-          }
+    onFin: (cur, parent, wc, excluded) => {
+      if (ctx.strict && wc.isSimpleStarRec) {
+        const unnecessary = Object.keys(parent).filter((k) => !['**', ''].includes(k));
+        if (unnecessary.length !== 0) {
+          throw new Error(`Needle Target Invalidated: "${parent[unnecessary[0]][NEEDLES][0]}" by "${needle}"`);
         }
       }
       addNeedle(cur, needle);
@@ -165,7 +167,7 @@ const applyNeedle = (tower, needle, tree, ctx) => {
   });
 };
 
-const finalizeTower = (tower) => {
+const finalizeTower = (tower, ctx) => {
   const matches = [];
   let lastDepth = -1;
 
@@ -183,6 +185,15 @@ const finalizeTower = (tower) => {
       lastDepth = depth;
     }
   });
+
+  if (ctx.useArraySelector === false) {
+    const roots = [];
+    if ('' in tower) {
+      roots.push(tower['']);
+    }
+    roots.push(...getValues(tower).filter((e) => getWildcard(e).isStarRec));
+    setRoots(tower, roots);
+  }
 };
 
 export const compile = (needles, ctx) => {
@@ -194,6 +205,6 @@ export const compile = (needles, ctx) => {
     applyNeedle(tower, needle, tree, ctx);
   }
   setWildcard(tower, new Wildcard('*', false));
-  finalizeTower(tower);
+  finalizeTower(tower, ctx);
   return tower;
 };
