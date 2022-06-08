@@ -1472,5 +1472,18 @@ describe('Testing Find', () => {
       ])({});
       expect(r).to.deep.equal([]);
     });
+
+    it('Testing Wildcard target used for recursion', () => {
+      const r = objectScan(
+        ['a.**{b.**.**}'],
+        { strict: false }
+      )({ a: { b: { c: { d: 0 } } } });
+      expect(r).to.deep.equal([
+        'a.b.c.d',
+        'a.b.c',
+        'a.b',
+        'a'
+      ]);
+    });
   });
 });
