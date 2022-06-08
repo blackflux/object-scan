@@ -179,6 +179,11 @@ describe('Testing recursive group matching', () => {
       .to.throw('Redundant Needle Target: "**{a,b}.a" vs "**{c,d}.a"');
   });
 
+  it('Testing escaped nested group', () => {
+    expect(() => t('a.\\**{b.c}.d'))
+      .to.throw('Bad Group Start: a.\\**{b.c}.d, char 5');
+  });
+
   it('Testing complex nesting (top level simple)', () => {
     expect(t('a.b.c.d.**{a.++{b.c}.d,d.c}')).to.deep.equal([
       'a.b.c.d.d.c.d.c.d.c',
