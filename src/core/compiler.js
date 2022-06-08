@@ -17,16 +17,16 @@ const ROOTS = Symbol('roots');
 const setRoots = (input, roots) => defineProperty(input, ROOTS, roots);
 export const getRoots = (input) => input[ROOTS];
 
-const REFS = Symbol('refs');
-const addRef = (input, ref) => {
-  const v = input[REFS];
+const LINKS = Symbol('links');
+const addLink = (input, link) => {
+  const v = input[LINKS];
   if (v === undefined) {
-    defineProperty(input, REFS, [ref]);
+    defineProperty(input, LINKS, [link]);
   } else {
-    v.push(ref);
+    v.push(link);
   }
 };
-export const getRefs = (input) => input[REFS] || [];
+export const getLinks = (input) => input[LINKS] || [];
 
 const HAS_MATCHES = Symbol('has-matches');
 const setHasMatches = (input) => defineProperty(input, HAS_MATCHES, true);
@@ -136,12 +136,12 @@ const applyNeedle = (tower, needle, tree, ctx) => {
             wc.setPointer(cur);
           }
           wc.setNode({});
-          addRef(cur, wc.node);
+          addLink(cur, wc.node);
           next(wc.node);
         } else {
           // eslint-disable-next-line no-param-reassign
           wc.target = wcParent.target || parent[wcParent.value];
-          addRef(wc.target, wc.node);
+          addLink(wc.target, wc.node);
           if (wc.pointer !== null) {
             next(wc.pointer);
             wc.setPointer(null);
@@ -218,14 +218,14 @@ const finalizeTower = (tower, ctx) => {
         matches[lastDepth] = false;
       }
       const values = Object.values(obj).reverse();
-      values.push(...getRefs(obj).flatMap((r) => getValues(r) || Object.values(r)));
+      values.push(...getLinks(obj).flatMap((r) => getValues(r) || Object.values(r)));
       setValues(obj, values);
       lastDepth = depth;
     }
     return ctn;
   };
-  const getValuesAndRefs = (obj) => [...Object.values(obj), ...getRefs(obj)];
-  traverser.traverse(tower, onTraverse, getValuesAndRefs);
+  const getValuesAndLinks = (obj) => [...Object.values(obj), ...getLinks(obj)];
+  traverser.traverse(tower, onTraverse, getValuesAndLinks);
 
   if (ctx.useArraySelector === false) {
     const roots = [];
