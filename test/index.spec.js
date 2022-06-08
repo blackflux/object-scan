@@ -1465,5 +1465,12 @@ describe('Testing Find', () => {
       const r = objectScan(['a.**{**}'])({ a: { b: { c: 0 } } });
       expect(r).to.deep.equal(['a.b.c', 'a.b', 'a']);
     });
+
+    it('Testing large recursive needle', () => {
+      const r = objectScan([
+        '**.**{[0].**[0].**[0].**{**[0].again.**.frighten[0].**.nativf.**.parallel.**.for.**}}'
+      ])({});
+      expect(r).to.deep.equal([]);
+    });
   });
 });

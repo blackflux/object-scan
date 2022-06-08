@@ -14,7 +14,6 @@ export class Ref {
       this.link = null;
     }
     this.node = null;
-    this.target = null;
     this.isStarRec = this.type === '**';
     this.pointer = null;
   }
@@ -27,10 +26,5 @@ export class Ref {
   setNode(node) {
     this.node = node;
     this.link.node = node;
-  }
-
-  setTarget(target) {
-    this.target = target;
-    this.link.target = target;
   }
 }

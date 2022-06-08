@@ -139,11 +139,8 @@ const applyNeedle = (tower, needle, tree, ctx) => {
           addRef(cur, wc.node);
           next(wc.node);
         } else {
-          wc.setTarget(
-            wcParent instanceof Ref
-              ? wcParent.target
-              : parent[wcParent.value]
-          );
+          // eslint-disable-next-line no-param-reassign
+          wc.target = wcParent.target || parent[wcParent.value];
           addRef(wc.target, wc.node);
           if (wc.pointer !== null) {
             next(wc.pointer);
@@ -173,6 +170,9 @@ const applyNeedle = (tower, needle, tree, ctx) => {
           setWildcard(child, wc);
         }
         next(cur[wc.value]);
+      } else {
+        // eslint-disable-next-line no-param-reassign
+        wc.target = cur;
       }
       if (wc.isStarRec) {
         next(cur);
@@ -207,7 +207,8 @@ const finalizeTower = (tower, ctx) => {
   let lastDepth = -1;
 
   const onTraverse = (type, obj, depth) => {
-    if (!(VALUES in obj) && type === 'EXIT') {
+    const ctn = !(VALUES in obj);
+    if (ctn && type === 'EXIT') {
       const isUp = lastDepth === depth + 1;
       if ((isUp && matches[lastDepth] === true) || isMatch(obj)) {
         matches[depth] = true;
@@ -221,6 +222,7 @@ const finalizeTower = (tower, ctx) => {
       setValues(obj, values);
       lastDepth = depth;
     }
+    return ctn;
   };
   const getValuesAndRefs = (obj) => [...Object.values(obj), ...getRefs(obj)];
   traverser.traverse(tower, onTraverse, getValuesAndRefs);

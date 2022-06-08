@@ -8,13 +8,16 @@ const traverse = (obj, cb, getValues = Object.values) => {
   while (stack.length !== 0) {
     if (inc === true) {
       const cur = stack[stack.length - 1];
-      cb('ENTER', cur, depth);
-
-      const values = getValues(cur).filter((v) => stack.lastIndexOf(v) === -1);
-      if (values.length !== 0) {
-        stack.push(...values);
-        depth += 1;
-        counts[depth] = values.length;
+      const ctn = cb('ENTER', cur, depth);
+      if (ctn) {
+        const values = getValues(cur).filter((v) => stack.lastIndexOf(v) === -1);
+        if (values.length !== 0) {
+          stack.push(...values);
+          depth += 1;
+          counts[depth] = values.length;
+        } else {
+          inc = false;
+        }
       } else {
         inc = false;
       }
