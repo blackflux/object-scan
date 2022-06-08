@@ -923,14 +923,14 @@ describe('Testing Find', () => {
     const tree = { f: { b: { a: {}, d: { c: {}, e: {} } }, g: { i: { h: {} } } } };
     expect(objectScan(['**'], options)(tree, { filterFn: [], breakFn: [] }))
       .to.deep.equal({
-      // Post-order reverse
+        // Post-order reverse
         breakFn: [undefined, 'f', 'g', 'i', 'h', 'b', 'd', 'e', 'c', 'a'],
         // Pre-order reverse
         filterFn: ['h', 'i', 'g', 'e', 'c', 'd', 'a', 'b', 'f']
       });
     expect(objectScan(['**'], { ...options, reverse: false })(tree, { filterFn: [], breakFn: [] }))
       .to.deep.equal({
-      // Pre-order
+        // Pre-order
         breakFn: [undefined, 'f', 'b', 'a', 'd', 'c', 'e', 'g', 'i', 'h'],
         // Post-order
         filterFn: ['a', 'c', 'e', 'd', 'b', 'h', 'i', 'g', 'f']
