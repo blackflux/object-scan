@@ -165,7 +165,7 @@ export default (haystack_, searches_, ctx) => {
         const searchesOut = [];
         if (autoTraverseArray) {
           searchesOut.push(...searches);
-          if (path.length === 0) {
+          if (depth === 0) {
             searchesOut.push(...getRoots(searches[0]));
           }
         } else {
