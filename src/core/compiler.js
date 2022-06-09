@@ -5,8 +5,6 @@ import traverser from '../generic/traverser.js';
 import { defineProperty } from '../generic/helper.js';
 import { Wildcard } from './wildcard.js';
 
-const COUNTER = Symbol('counter');
-
 const LEAF = Symbol('leaf');
 const markLeaf = (input, match, readonly) => defineProperty(input, LEAF, match, readonly);
 export const isLeaf = (input) => LEAF in input;
@@ -133,7 +131,7 @@ const applyNeedle = (tower, needle, tree, ctx) => {
           // eslint-disable-next-line no-param-reassign
           cur[wc.value] = child;
           if (ctx.orderByNeedles) {
-            setOrder(child, ctx[COUNTER]);
+            setOrder(child, ctx.counter);
           }
           setWildcard(child, wc);
         }
@@ -161,8 +159,8 @@ const applyNeedle = (tower, needle, tree, ctx) => {
         addLeafNeedleMatch(cur, needle);
       }
       markLeaf(cur, !excluded, ctx.strict);
-      setIndex(cur, ctx[COUNTER], ctx.strict);
-      ctx[COUNTER] += 1;
+      setIndex(cur, ctx.counter, ctx.strict);
+      ctx.counter += 1;
     }
   });
 };
@@ -198,7 +196,7 @@ const finalizeTower = (tower, ctx) => {
 
 export const compile = (needles, ctx) => {
   const tower = {};
-  ctx[COUNTER] = 0;
+  ctx.counter = 0;
   for (let idx = 0; idx < needles.length; idx += 1) {
     const needle = needles[idx];
     const tree = [parser.parse(needle, ctx)];
