@@ -519,8 +519,21 @@ describe('Testing recursive group matching', () => {
   it('Testing large recursive needle', () => {
     const r = objectScan([
       '**.**{[0].**[0].**[0].**{**[0].again.**.frighten[0].**.nativf.**.parallel.**.for.**}}'
-    ])({});
-    expect(r).to.deep.equal([]);
+    ])([[[[{
+      again: {
+        frighten: [{
+          nativf: {
+            parallel: {
+              for: 0
+            }
+          }
+        }]
+      }
+    }]]]]);
+    expect(r).to.deep.equal([
+      '[0][0][0][0].again.frighten[0].nativf.parallel.for',
+      '[0][0][0]'
+    ]);
   });
 
   it('Testing Wildcard target used for recursion', () => {
