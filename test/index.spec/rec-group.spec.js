@@ -527,10 +527,12 @@ describe('Testing recursive group matching', () => {
     const r = objectScan(
       ['a.**{b.**.**}'],
       { strict: false }
-    )({ a: { b: { c: { d: 0 } } } });
+    )({ a: { b: { b: { b: 0 }, c: { d: 1 } } } });
     expect(r).to.deep.equal([
       'a.b.c.d',
       'a.b.c',
+      'a.b.b.b',
+      'a.b.b',
       'a.b',
       'a'
     ]);
