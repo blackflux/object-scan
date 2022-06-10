@@ -114,8 +114,6 @@ const iterate = (tower, needle, tree, { onAdd, onFin }) => {
 };
 
 const applyNeedle = (tower, needle, tree, ctx) => {
-  ctx.stack.push(null, tower, false);
-
   iterate(tower, needle, tree, {
     onAdd: (cur, parent, wc, wcParent, next) => {
       if (wc instanceof Ref) {
@@ -200,16 +198,14 @@ const finalizeTower = (tower, ctx) => {
     const child = stack.pop();
     const parent = stack.pop();
 
-    if (parent !== null) {
-      if (!(VALUES in parent)) {
-        setValues(parent, []);
-      }
-      if (child !== null) {
-        if (link) {
-          links.push(parent, child);
-        } else {
-          parent[VALUES].push(child);
-        }
+    if (!(VALUES in parent)) {
+      setValues(parent, []);
+    }
+    if (child !== null) {
+      if (link) {
+        links.push(parent, child);
+      } else {
+        parent[VALUES].push(child);
       }
     }
 
@@ -217,7 +213,7 @@ const finalizeTower = (tower, ctx) => {
       if (isMatch(child)) {
         setHasMatches(child);
       }
-      if (parent !== null && hasMatches(child) && !hasMatches(parent)) {
+      if (hasMatches(child) && !hasMatches(parent)) {
         setHasMatches(parent);
       }
     }
