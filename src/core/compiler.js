@@ -226,7 +226,8 @@ const finalizeTower = (tower, ctx) => {
   for (let idx = 0, len = links.length; idx < len; idx += 2) {
     const parent = links[idx];
     const child = links[idx + 1];
-    parent[VALUES].push(...getValues(child));
+    const values = parent[VALUES];
+    values.push(...getValues(child).filter((v) => !values.includes(v)));
   }
 
   if (ctx.useArraySelector === false) {
