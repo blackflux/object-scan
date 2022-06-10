@@ -57,7 +57,7 @@ export const getWildcard = (input) => input[WILDCARD];
 
 const VALUES = Symbol('values');
 const setValues = (input, entries) => defineProperty(input, VALUES, entries);
-export const getValues = (input) => input[VALUES] || [];
+export const getValues = (input) => input[VALUES];
 
 export const matchedBy = (searches) => Array
   .from(new Set(searches.flatMap((e) => getLeafNeedlesMatch(e))));
@@ -197,13 +197,11 @@ const finalizeTower = (tower, ctx) => {
     const child = stack.pop();
     const parent = stack.pop();
 
-    if (!(VALUES in parent)) {
-      setValues(parent, []);
+    if (!(VALUES in child)) {
+      setValues(child, Object.values(child).reverse());
     }
     if (link) {
       links.push(parent, child);
-    } else {
-      parent[VALUES].push(child);
     }
     if (isMatch(child)) {
       setHasMatches(child);
@@ -212,6 +210,7 @@ const finalizeTower = (tower, ctx) => {
       setHasMatches(parent);
     }
   }
+  setValues(tower, Object.values(tower).reverse());
 
   for (let idx = 0, len = links.length; idx < len; idx += 2) {
     const parent = links[idx];
