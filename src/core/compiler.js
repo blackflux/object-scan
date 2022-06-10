@@ -57,7 +57,7 @@ export const getWildcard = (input) => input[WILDCARD];
 
 const VALUES = Symbol('values');
 const setValues = (input, entries) => defineProperty(input, VALUES, entries);
-export const getValues = (input) => input[VALUES];
+export const getValues = (input) => input[VALUES] || [];
 
 export const matchedBy = (searches) => Array
   .from(new Set(searches.flatMap((e) => getLeafNeedlesMatch(e))));
@@ -184,7 +184,6 @@ const applyNeedle = (tower, needle, tree, ctx) => {
       }
       markLeaf(cur, !excluded, ctx.strict);
       setIndex(cur, ctx.counter, ctx.strict);
-      ctx.stack.push(cur, null, false);
       ctx.counter += 1;
     }
   });
@@ -201,21 +200,16 @@ const finalizeTower = (tower, ctx) => {
     if (!(VALUES in parent)) {
       setValues(parent, []);
     }
-    if (child !== null) {
-      if (link) {
-        links.push(parent, child);
-      } else {
-        parent[VALUES].push(child);
-      }
+    if (link) {
+      links.push(parent, child);
+    } else {
+      parent[VALUES].push(child);
     }
-
-    if (child !== null) {
-      if (isMatch(child)) {
-        setHasMatches(child);
-      }
-      if (hasMatches(child) && !hasMatches(parent)) {
-        setHasMatches(parent);
-      }
+    if (isMatch(child)) {
+      setHasMatches(child);
+    }
+    if (hasMatches(child) && !hasMatches(parent)) {
+      setHasMatches(parent);
     }
   }
 
