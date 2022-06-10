@@ -1,12 +1,9 @@
 /* compile needles to hierarchical map object */
 import parser from './parser.js';
 import iterator from '../generic/iterator.js';
-import traverser from '../generic/traverser.js';
 import { defineProperty } from '../generic/helper.js';
 import { Wildcard } from './wildcard.js';
 import { Ref } from './ref.js';
-
-const COUNTER = Symbol('counter');
 
 const LEAF = Symbol('leaf');
 const markLeaf = (input, match, readonly) => defineProperty(input, LEAF, match, readonly);
@@ -16,17 +13,6 @@ export const isMatch = (input) => input !== undefined && input[LEAF] === true;
 const ROOTS = Symbol('roots');
 const setRoots = (input, roots) => defineProperty(input, ROOTS, roots);
 export const getRoots = (input) => input[ROOTS];
-
-const LINKS = Symbol('links');
-const addLink = (input, link) => {
-  const v = input[LINKS];
-  if (v === undefined) {
-    defineProperty(input, LINKS, [link]);
-  } else {
-    v.push(link);
-  }
-};
-export const getLinks = (input) => input[LINKS] || [];
 
 const HAS_MATCHES = Symbol('has-matches');
 const setHasMatches = (input) => defineProperty(input, HAS_MATCHES, true);
@@ -128,6 +114,8 @@ const iterate = (tower, needle, tree, { onAdd, onFin }) => {
 };
 
 const applyNeedle = (tower, needle, tree, ctx) => {
+  ctx.stack.push(null, tower, false);
+
   iterate(tower, needle, tree, {
     onAdd: (cur, parent, wc, wcParent, next) => {
       if (wc instanceof Ref) {
@@ -136,12 +124,12 @@ const applyNeedle = (tower, needle, tree, ctx) => {
             wc.setPointer(cur);
           }
           wc.setNode({});
-          addLink(cur, wc.node);
+          ctx.stack.push(cur, wc.node, true);
           next(wc.node);
         } else {
           // eslint-disable-next-line no-param-reassign
           wc.target = wcParent.target || parent[wcParent.value];
-          addLink(wc.target, wc.node);
+          ctx.stack.push(wc.target, wc.node, true);
           if (wc.pointer !== null) {
             next(wc.pointer);
             wc.setPointer(null);
@@ -164,8 +152,9 @@ const applyNeedle = (tower, needle, tree, ctx) => {
           const child = {};
           // eslint-disable-next-line no-param-reassign
           cur[wc.value] = child;
+          ctx.stack.push(cur, child, false);
           if (ctx.orderByNeedles) {
-            setOrder(child, ctx[COUNTER]);
+            setOrder(child, ctx.counter);
           }
           setWildcard(child, wc);
         }
@@ -196,36 +185,49 @@ const applyNeedle = (tower, needle, tree, ctx) => {
         addLeafNeedleMatch(cur, needle);
       }
       markLeaf(cur, !excluded, ctx.strict);
-      setIndex(cur, ctx[COUNTER], ctx.strict);
-      ctx[COUNTER] += 1;
+      setIndex(cur, ctx.counter, ctx.strict);
+      ctx.stack.push(cur, null, false);
+      ctx.counter += 1;
     }
   });
 };
 
 const finalizeTower = (tower, ctx) => {
-  const matches = [];
-  let lastDepth = -1;
+  const { stack } = ctx;
+  const links = [];
+  while (stack.length !== 0) {
+    const link = stack.pop();
+    const child = stack.pop();
+    const parent = stack.pop();
 
-  const onTraverse = (type, obj, depth) => {
-    const ctn = !(VALUES in obj);
-    if (ctn && type === 'EXIT') {
-      const isUp = lastDepth === depth + 1;
-      if ((isUp && matches[lastDepth] === true) || isMatch(obj)) {
-        matches[depth] = true;
-        setHasMatches(obj);
+    if (parent !== null) {
+      if (!(VALUES in parent)) {
+        setValues(parent, []);
       }
-      if (isUp) {
-        matches[lastDepth] = false;
+      if (child !== null) {
+        if (link) {
+          links.push(parent, child);
+        } else {
+          parent[VALUES].push(child);
+        }
       }
-      const values = Object.values(obj).reverse();
-      values.push(...getLinks(obj).flatMap((r) => getValues(r) || Object.values(r)));
-      setValues(obj, values);
-      lastDepth = depth;
     }
-    return ctn;
-  };
-  const getValuesAndLinks = (obj) => [...Object.values(obj), ...getLinks(obj)];
-  traverser.traverse(tower, onTraverse, getValuesAndLinks);
+
+    if (child !== null) {
+      if (isMatch(child)) {
+        setHasMatches(child);
+      }
+      if (parent !== null && hasMatches(child) && !hasMatches(parent)) {
+        setHasMatches(parent);
+      }
+    }
+  }
+
+  for (let idx = 0, len = links.length; idx < len; idx += 2) {
+    const parent = links[idx];
+    const child = links[idx + 1];
+    parent[VALUES].push(...getValues(child));
+  }
 
   if (ctx.useArraySelector === false) {
     const roots = [];
@@ -239,7 +241,8 @@ const finalizeTower = (tower, ctx) => {
 
 export const compile = (needles, ctx) => {
   const tower = {};
-  ctx[COUNTER] = 0;
+  ctx.counter = 0;
+  ctx.stack = [];
   for (let idx = 0; idx < needles.length; idx += 1) {
     const needle = needles[idx];
     const tree = [parser.parse(needle, ctx)];

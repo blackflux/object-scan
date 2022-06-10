@@ -426,10 +426,10 @@ describe('Testing compiler', () => {
       expect(tower).to.deep.equal({});
 
       const towerValues = getValues(tower);
-      expect(towerValues).to.deep.equal([{}, { a: {} }]);
+      expect(towerValues).to.deep.equal([{ a: {} }, {}]);
       expect(getValues(towerValues[0])).to.deep.equal([{}]);
+      expect(getValues(towerValues[0].a)).to.deep.equal([{ a: {} }]);
       expect(getValues(towerValues[1])).to.deep.equal([{}]);
-      expect(getValues(towerValues[1].a)).to.deep.equal([{ a: {} }]);
     });
   });
 });
