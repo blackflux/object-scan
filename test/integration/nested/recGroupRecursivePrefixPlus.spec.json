@@ -1,0 +1,78 @@
+{
+  "needles": ["b.++{++{++{a.a}}}"],
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["b.++{++{++{a.a}}}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["b.++{++{++{a.a}}}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.a",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["b.++{++{++{a.a}}}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.a.a",
+      "isMatch": true,
+      "matchedBy": ["b.++{++{++{a.a}}}"],
+      "excludedBy": [],
+      "traversedBy": ["b.++{++{++{a.a}}}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.a.a.a",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["b.++{++{++{a.a}}}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.a.a.a.a",
+      "isMatch": true,
+      "matchedBy": ["b.++{++{++{a.a}}}"],
+      "excludedBy": [],
+      "traversedBy": ["b.++{++{++{a.a}}}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.a.a.a.a.a",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["b.++{++{++{a.a}}}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "b.a.a.a.a",
+      "isMatch": true,
+      "matchedBy": ["b.++{++{++{a.a}}}"],
+      "excludedBy": [],
+      "traversedBy": ["b.++{++{++{a.a}}}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "b.a.a",
+      "isMatch": true,
+      "matchedBy": ["b.++{++{++{a.a}}}"],
+      "excludedBy": [],
+      "traversedBy": ["b.++{++{++{a.a}}}"]
+    }
+  ],
+  "result": ["b.a.a.a.a", "b.a.a"]
+}

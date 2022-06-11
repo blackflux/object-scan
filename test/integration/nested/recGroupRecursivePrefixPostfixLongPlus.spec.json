@@ -1,0 +1,86 @@
+{
+  "needles": ["b.c.++{++{++{a.a}}}.d.b"],
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{++{++{a.a}}}.d.b"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{++{++{a.a}}}.d.b"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.c",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{++{++{a.a}}}.d.b"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.c.a",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{++{++{a.a}}}.d.b"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.c.a.a",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{++{++{a.a}}}.d.b"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.c.a.a.d",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{++{++{a.a}}}.d.b"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.c.a.a.d.b",
+      "isMatch": true,
+      "matchedBy": ["b.c.++{++{++{a.a}}}.d.b"],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{++{++{a.a}}}.d.b"]
+    },
+    {
+      "type": "filterFn",
+      "key": "b.c.a.a.d.b",
+      "isMatch": true,
+      "matchedBy": ["b.c.++{++{++{a.a}}}.d.b"],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{++{++{a.a}}}.d.b"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.c.a.a.a",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{++{++{a.a}}}.d.b"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.c.a.a.a.a",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{++{++{a.a}}}.d.b"]
+    }
+  ],
+  "result": ["b.c.a.a.d.b"]
+}
