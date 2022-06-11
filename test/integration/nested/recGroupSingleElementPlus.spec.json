@@ -1,0 +1,110 @@
+{
+  "needles": ["++{a}"],
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["++{a}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a",
+      "isMatch": true,
+      "matchedBy": ["++{a}"],
+      "excludedBy": [],
+      "traversedBy": ["++{a}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.a",
+      "isMatch": true,
+      "matchedBy": ["++{a}"],
+      "excludedBy": [],
+      "traversedBy": ["++{a}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.a.a",
+      "isMatch": true,
+      "matchedBy": ["++{a}"],
+      "excludedBy": [],
+      "traversedBy": ["++{a}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.a.a.a",
+      "isMatch": true,
+      "matchedBy": ["++{a}"],
+      "excludedBy": [],
+      "traversedBy": ["++{a}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.a.a.a.a",
+      "isMatch": true,
+      "matchedBy": ["++{a}"],
+      "excludedBy": [],
+      "traversedBy": ["++{a}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.a.a.a.a.a",
+      "isMatch": true,
+      "matchedBy": ["++{a}"],
+      "excludedBy": [],
+      "traversedBy": ["++{a}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "a.a.a.a.a.a",
+      "isMatch": true,
+      "matchedBy": ["++{a}"],
+      "excludedBy": [],
+      "traversedBy": ["++{a}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "a.a.a.a.a",
+      "isMatch": true,
+      "matchedBy": ["++{a}"],
+      "excludedBy": [],
+      "traversedBy": ["++{a}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "a.a.a.a",
+      "isMatch": true,
+      "matchedBy": ["++{a}"],
+      "excludedBy": [],
+      "traversedBy": ["++{a}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "a.a.a",
+      "isMatch": true,
+      "matchedBy": ["++{a}"],
+      "excludedBy": [],
+      "traversedBy": ["++{a}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "a.a",
+      "isMatch": true,
+      "matchedBy": ["++{a}"],
+      "excludedBy": [],
+      "traversedBy": ["++{a}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "a",
+      "isMatch": true,
+      "matchedBy": ["++{a}"],
+      "excludedBy": [],
+      "traversedBy": ["++{a}"]
+    }
+  ],
+  "result": ["a.a.a.a.a.a", "a.a.a.a.a", "a.a.a.a", "a.a.a", "a.a", "a"]
+}
