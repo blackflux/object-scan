@@ -18,12 +18,12 @@ const HAS_MATCHES = Symbol('has-matches');
 const setHasMatches = (input) => defineProperty(input, HAS_MATCHES, true);
 export const hasMatches = (input) => input[HAS_MATCHES] === true;
 
-const merge = (input, symbol, value) => {
-  if (input[symbol] === undefined) {
-    defineProperty(input, symbol, []);
-  }
-  if (!input[symbol].includes(value)) {
-    input[symbol].push(value);
+const merge = (input, symbol, ...values) => {
+  const target = input[symbol];
+  if (target === undefined) {
+    defineProperty(input, symbol, values);
+  } else {
+    target.push(...values.filter((v) => !target.includes(v)));
   }
 };
 
@@ -57,6 +57,7 @@ export const getWildcard = (input) => input[WILDCARD];
 
 const VALUES = Symbol('values');
 const setValues = (input, entries) => defineProperty(input, VALUES, entries);
+const addValues = (input, ...values) => merge(input, VALUES, ...values);
 export const getValues = (input) => input[VALUES];
 
 export const matchedBy = (searches) => Array
@@ -212,8 +213,7 @@ const finalizeTower = (tower, ctx) => {
   for (let idx = 0, len = links.length; idx < len; idx += 2) {
     const parent = links[idx];
     const child = links[idx + 1];
-    const values = getValues(parent);
-    values.push(...getValues(child).filter((v) => !values.includes(v)));
+    addValues(parent, ...getValues(child));
   }
 
   if (ctx.useArraySelector === false) {
