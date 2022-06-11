@@ -124,7 +124,7 @@ const applyNeedle = (tower, needle, tree, ctx) => {
           next(wc.node);
         } else {
           // eslint-disable-next-line no-param-reassign
-          wc.target = wcParent.target || parent[wcParent.value];
+          wc.target = 'target' in wcParent ? wcParent.target : parent[wcParent.value];
           ctx.stack.push(wc.target, wc.node, true);
           if (wc.pointer !== null) {
             next(wc.pointer);
