@@ -1,5 +1,5 @@
 {
-  "needles": ["**{a.b.c.d}"],
+  "needles": ["**{a.b.c}"],
   "log": [
     {
       "type": "breakFn",
@@ -7,7 +7,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**{a.b.c.d}"]
+      "traversedBy": ["**{a.b.c}"]
     },
     {
       "type": "breakFn",
@@ -15,7 +15,7 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**{a.b.c.d}"]
+      "traversedBy": ["**{a.b.c}"]
     },
     {
       "type": "breakFn",
@@ -23,48 +23,56 @@
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**{a.b.c.d}"]
+      "traversedBy": ["**{a.b.c}"]
     },
     {
       "type": "breakFn",
       "key": "a.b.c",
-      "isMatch": false,
-      "matchedBy": [],
-      "excludedBy": [],
-      "traversedBy": ["**{a.b.c.d}"]
-    },
-    {
-      "type": "breakFn",
-      "key": "a.b.c.d",
       "isMatch": true,
-      "matchedBy": ["**{a.b.c.d}"],
+      "matchedBy": ["**{a.b.c}"],
       "excludedBy": [],
-      "traversedBy": ["**{a.b.c.d}"]
+      "traversedBy": ["**{a.b.c}"]
     },
     {
       "type": "breakFn",
-      "key": "a.b.c.d.a",
+      "key": "a.b.c.a",
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**{a.b.c.d}"]
+      "traversedBy": ["**{a.b.c}"]
     },
     {
       "type": "breakFn",
-      "key": "a.b.c.d.a.b",
+      "key": "a.b.c.a.b",
       "isMatch": false,
       "matchedBy": [],
       "excludedBy": [],
-      "traversedBy": ["**{a.b.c.d}"]
+      "traversedBy": ["**{a.b.c}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.b.c.a.b.c",
+      "isMatch": true,
+      "matchedBy": ["**{a.b.c}"],
+      "excludedBy": [],
+      "traversedBy": ["**{a.b.c}"]
     },
     {
       "type": "filterFn",
-      "key": "a.b.c.d",
+      "key": "a.b.c.a.b.c",
       "isMatch": true,
-      "matchedBy": ["**{a.b.c.d}"],
+      "matchedBy": ["**{a.b.c}"],
       "excludedBy": [],
-      "traversedBy": ["**{a.b.c.d}"]
+      "traversedBy": ["**{a.b.c}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "a.b.c",
+      "isMatch": true,
+      "matchedBy": ["**{a.b.c}"],
+      "excludedBy": [],
+      "traversedBy": ["**{a.b.c}"]
     }
   ],
-  "result": ["a.b.c.d"]
+  "result": ["a.b.c.a.b.c", "a.b.c"]
 }
