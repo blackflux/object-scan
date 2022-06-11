@@ -151,7 +151,7 @@ There are two types of arbitrary depth matching:
 - `**`: Matches zero or more nestings
 - `++`: Matches one or more nestings
 
-Recursions can be combined with a regex / group by appending the regex / group.
+Recursions can be combined with a regex or a group by appending the regex or group.
 
 _Examples_:
 <pre><example>
