@@ -2,11 +2,11 @@ export class Ref {
   excluded = false;
 
   constructor(type, link = null) {
-    this.type = type;
     this.left = link === null;
     this.link = link === null ? new Ref(type, this) : link;
-    this.node = null;
+    this.type = type;
     this.isStarRec = this.type === '**';
+    this.node = null;
     this.pointer = null;
   }
 
