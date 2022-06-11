@@ -1,0 +1,94 @@
+{
+  "needles": ["b.c.++{a}"],
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{a}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{a}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.c",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{a}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.c.a",
+      "isMatch": true,
+      "matchedBy": ["b.c.++{a}"],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{a}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.c.a.a",
+      "isMatch": true,
+      "matchedBy": ["b.c.++{a}"],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{a}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.c.a.a.a",
+      "isMatch": true,
+      "matchedBy": ["b.c.++{a}"],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{a}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.c.a.a.a.a",
+      "isMatch": true,
+      "matchedBy": ["b.c.++{a}"],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{a}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "b.c.a.a.a.a",
+      "isMatch": true,
+      "matchedBy": ["b.c.++{a}"],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{a}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "b.c.a.a.a",
+      "isMatch": true,
+      "matchedBy": ["b.c.++{a}"],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{a}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "b.c.a.a",
+      "isMatch": true,
+      "matchedBy": ["b.c.++{a}"],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{a}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "b.c.a",
+      "isMatch": true,
+      "matchedBy": ["b.c.++{a}"],
+      "excludedBy": [],
+      "traversedBy": ["b.c.++{a}"]
+    }
+  ],
+  "result": ["b.c.a.a.a.a", "b.c.a.a.a", "b.c.a.a", "b.c.a"]
+}

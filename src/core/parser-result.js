@@ -1,6 +1,7 @@
 import assert from 'assert';
 import { defineProperty } from '../generic/helper.js';
 import { Wildcard } from './wildcard.js';
+import { Ref } from './ref.js';
 
 const IS_EXCLUDED = Symbol('is-excluded');
 const markExcluded = (input) => defineProperty(input, IS_EXCLUDED, true);
@@ -55,7 +56,7 @@ export default (input) => {
       }
       inArray = flag;
     },
-    finishElement: (idx, err, fins, { finReq = false } = {}) => {
+    finishElement: (idx, err, fins, { finReq = false, group = false } = {}) => {
       const isFinished = cursor === idx;
       if (isFinished) {
         if (!fins.includes(input[idx - 1] || null)) {
@@ -67,14 +68,21 @@ export default (input) => {
           throwError(err, input, { char: idx });
         }
         const ele = input.slice(cursor, idx);
+        if (group && !['**', '++'].includes(ele)) {
+          throwError('Bad Group Start', input, { char: idx });
+        }
         if (inArray && !(
           /^[?*+\d]+$/.test(ele)
           || (ele.startsWith('(') && ele.endsWith(')'))
         )) {
           throwError('Bad Array Selector', input, { selector: ele });
         }
-        cResult.push(new Wildcard(inArray ? `[${ele}]` : ele, excludeNext));
-        excludeNext = false;
+        if (group) {
+          cResult.push(new Ref(ele));
+        } else {
+          cResult.push(new Wildcard(inArray ? `[${ele}]` : ele, excludeNext));
+          excludeNext = false;
+        }
         cursor = idx + 1;
       }
     },
@@ -102,6 +110,11 @@ export default (input) => {
       }
       finishChild();
       finishChild();
+      assert(Array.isArray(cResult));
+      const refMaybe = cResult[cResult.length - 2];
+      if (refMaybe instanceof Ref && refMaybe.left === true) {
+        cResult.push(refMaybe.link);
+      }
     },
     finalizeResult: () => {
       finishChild();

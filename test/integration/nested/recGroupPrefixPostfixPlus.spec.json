@@ -1,0 +1,78 @@
+{
+  "needles": ["a.++{a.b}.a"],
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["a.++{a.b}.a"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["a.++{a.b}.a"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.a",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["a.++{a.b}.a"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.a.b",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["a.++{a.b}.a"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.a.b.a",
+      "isMatch": true,
+      "matchedBy": ["a.++{a.b}.a"],
+      "excludedBy": [],
+      "traversedBy": ["a.++{a.b}.a"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.a.b.a.b",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["a.++{a.b}.a"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.a.b.a.b.a",
+      "isMatch": true,
+      "matchedBy": ["a.++{a.b}.a"],
+      "excludedBy": [],
+      "traversedBy": ["a.++{a.b}.a"]
+    },
+    {
+      "type": "filterFn",
+      "key": "a.a.b.a.b.a",
+      "isMatch": true,
+      "matchedBy": ["a.++{a.b}.a"],
+      "excludedBy": [],
+      "traversedBy": ["a.++{a.b}.a"]
+    },
+    {
+      "type": "filterFn",
+      "key": "a.a.b.a",
+      "isMatch": true,
+      "matchedBy": ["a.++{a.b}.a"],
+      "excludedBy": [],
+      "traversedBy": ["a.++{a.b}.a"]
+    }
+  ],
+  "result": ["a.a.b.a.b.a", "a.a.b.a"]
+}

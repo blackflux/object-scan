@@ -5,11 +5,15 @@ import parsedNeedleToStringArray from './parsed-needle-to-string-array.js';
 import stripArraySelectorFromPaths from './strip-array-selector-from-paths.js';
 
 export default ({
-  rng, paths, useArraySelector, modifierParams
+  rng,
+  paths,
+  useArraySelector,
+  pathModifierParams,
+  groupModifierParams
 }) => {
   const needles = useArraySelector ? paths : stripArraySelectorFromPaths(paths);
   const needlesShuffled = shuffleArray(needles, rng);
-  const needlePaths = needlesShuffled.map((p) => pathToNeedlePath(p, modifierParams(p), rng));
+  const needlePaths = needlesShuffled.map((p) => pathToNeedlePath(p, pathModifierParams(p), rng));
   const needlesParsed = needlePathsToNeedlesParsed(needlePaths);
-  return parsedNeedleToStringArray(needlesParsed);
+  return parsedNeedleToStringArray(needlesParsed, groupModifierParams(), rng);
 };

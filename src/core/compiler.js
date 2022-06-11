@@ -3,6 +3,7 @@ import parser from './parser.js';
 import iterator from '../generic/iterator.js';
 import { defineProperty } from '../generic/helper.js';
 import { Wildcard } from './wildcard.js';
+import { Ref } from './ref.js';
 
 const LEAF = Symbol('leaf');
 const markLeaf = (input, match, readonly) => defineProperty(input, LEAF, match, readonly);
@@ -56,6 +57,7 @@ export const getWildcard = (input) => input[WILDCARD];
 
 const VALUES = Symbol('values');
 const setValues = (input, entries) => defineProperty(input, VALUES, entries);
+const addValues = (input, values) => merge(input, VALUES, ...values);
 export const getValues = (input) => input[VALUES];
 
 export const matchedBy = (searches) => Array
@@ -99,7 +101,7 @@ const iterate = (tower, needle, tree, { onAdd, onFin }) => {
       const toAdd = [];
       const wcParent = stack[stack.length - 2];
       stack[stack.length - 1]
-        .forEach(([cur]) => onAdd(cur, wc, wcParent, (e) => toAdd.push([e, cur])));
+        .forEach(([cur, parent]) => onAdd(cur, parent, wc, wcParent, (e) => toAdd.push([e, cur])));
       stack.push(wc, toAdd);
     } else {
       stack[stack.length - 1]
@@ -111,8 +113,28 @@ const iterate = (tower, needle, tree, { onAdd, onFin }) => {
 
 const applyNeedle = (tower, needle, tree, ctx) => {
   iterate(tower, needle, tree, {
-    onAdd: (cur, wc, wcParent, next) => {
+    onAdd: (cur, parent, wc, wcParent, next) => {
       addNeedle(cur, needle);
+      if (wc instanceof Ref) {
+        if (wc.left === true) {
+          if (wc.isStarRec) {
+            wc.setPointer(cur);
+          }
+          wc.setNode({});
+          ctx.stack.push(cur, wc.node, true);
+          next(wc.node);
+        } else {
+          // eslint-disable-next-line no-param-reassign
+          wc.target = 'target' in wcParent ? wcParent.target : parent[wcParent.value];
+          ctx.stack.push(wc.target, wc.node, true);
+          if (wc.pointer !== null) {
+            next(wc.pointer);
+            wc.setPointer(null);
+          }
+          next(cur);
+        }
+        return;
+      }
       const redundantRecursion = (
         wcParent !== undefined
         && wc.isStarRec
@@ -126,13 +148,16 @@ const applyNeedle = (tower, needle, tree, ctx) => {
           const child = {};
           // eslint-disable-next-line no-param-reassign
           cur[wc.value] = child;
-          ctx.stack.push(cur, child);
+          ctx.stack.push(cur, child, false);
           if (ctx.orderByNeedles) {
             setOrder(child, ctx.counter);
           }
           setWildcard(child, wc);
         }
         next(cur[wc.value]);
+      } else {
+        // eslint-disable-next-line no-param-reassign
+        wc.target = cur;
       }
       if (wc.isStarRec) {
         next(cur);
@@ -164,12 +189,18 @@ const applyNeedle = (tower, needle, tree, ctx) => {
 
 const finalizeTower = (tower, ctx) => {
   const { stack } = ctx;
-
+  const links = [];
   while (stack.length !== 0) {
+    const link = stack.pop();
     const child = stack.pop();
     const parent = stack.pop();
 
-    setValues(child, Object.values(child).reverse());
+    if (!(VALUES in child)) {
+      setValues(child, Object.values(child).reverse());
+    }
+    if (link) {
+      links.push(parent, child);
+    }
     if (isMatch(child)) {
       setHasMatches(child);
     }
@@ -178,6 +209,12 @@ const finalizeTower = (tower, ctx) => {
     }
   }
   setValues(tower, Object.values(tower).reverse());
+
+  for (let idx = 0, len = links.length; idx < len; idx += 2) {
+    const parent = links[idx];
+    const child = links[idx + 1];
+    addValues(parent, getValues(child));
+  }
 
   if (ctx.useArraySelector === false) {
     const roots = [];

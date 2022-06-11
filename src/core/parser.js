@@ -36,7 +36,7 @@ const parse = (input, ctx) => {
             result.setInArray(false, idx);
             break;
           case '{':
-            result.finishElement(idx, 'Bad Group Start', [null, '!', '.', '[', '{', ','], { finReq: true });
+            result.finishElement(idx, 'Bad Group Start', [null, '!', '.', '[', '{', ','], { group: true });
             result.startGroup();
             break;
           case ',':
