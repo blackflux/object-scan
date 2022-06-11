@@ -81,7 +81,6 @@ export const isLastLeafMatch = (searches) => {
 
 const iterate = (tower, needle, tree, { onAdd, onFin }) => {
   const stack = [[[tower, null]]];
-  const wildcards = [];
   let excluded = false;
 
   iterator.iterate(tree, (type, wc) => {
@@ -89,8 +88,7 @@ const iterate = (tower, needle, tree, { onAdd, onFin }) => {
       if (wc.excluded === true) {
         excluded = false;
       }
-      stack.pop();
-      wildcards.pop();
+      stack.length -= 2;
     } else if (type === 'ADD') {
       if (wc.excluded === true) {
         if (excluded) {
@@ -99,11 +97,10 @@ const iterate = (tower, needle, tree, { onAdd, onFin }) => {
         excluded = true;
       }
       const toAdd = [];
-      const wcParent = wildcards[wildcards.length - 1];
+      const wcParent = stack[stack.length - 2];
       stack[stack.length - 1]
         .forEach(([cur]) => onAdd(cur, wc, wcParent, (e) => toAdd.push([e, cur])));
-      stack.push(toAdd);
-      wildcards.push(wc);
+      stack.push(wc, toAdd);
     } else {
       stack[stack.length - 1]
         .filter(([cur]) => cur !== tower)
