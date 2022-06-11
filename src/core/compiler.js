@@ -1,7 +1,6 @@
 /* compile needles to hierarchical map object */
 import parser from './parser.js';
 import iterator from '../generic/iterator.js';
-import traverser from '../generic/traverser.js';
 import { defineProperty } from '../generic/helper.js';
 import { Wildcard } from './wildcard.js';
 
@@ -130,6 +129,7 @@ const applyNeedle = (tower, needle, tree, ctx) => {
           const child = {};
           // eslint-disable-next-line no-param-reassign
           cur[wc.value] = child;
+          ctx.stack.push(cur, child);
           if (ctx.orderByNeedles) {
             setOrder(child, ctx.counter);
           }
@@ -166,23 +166,21 @@ const applyNeedle = (tower, needle, tree, ctx) => {
 };
 
 const finalizeTower = (tower, ctx) => {
-  const matches = [];
-  let lastDepth = -1;
+  const { stack } = ctx;
 
-  traverser.traverse(tower, (type, obj, depth) => {
-    if (type === 'EXIT') {
-      const isUp = lastDepth === depth + 1;
-      if ((isUp && matches[lastDepth] === true) || isMatch(obj)) {
-        matches[depth] = true;
-        setHasMatches(obj);
-      }
-      if (isUp) {
-        matches[lastDepth] = false;
-      }
-      setValues(obj, Object.values(obj).reverse());
-      lastDepth = depth;
+  while (stack.length !== 0) {
+    const child = stack.pop();
+    const parent = stack.pop();
+
+    setValues(child, Object.values(child).reverse());
+    if (isMatch(child)) {
+      setHasMatches(child);
     }
-  });
+    if (hasMatches(child) && !hasMatches(parent)) {
+      setHasMatches(parent);
+    }
+  }
+  setValues(tower, Object.values(tower).reverse());
 
   if (ctx.useArraySelector === false) {
     const roots = [];
@@ -197,6 +195,7 @@ const finalizeTower = (tower, ctx) => {
 export const compile = (needles, ctx) => {
   const tower = {};
   ctx.counter = 0;
+  ctx.stack = [];
   for (let idx = 0; idx < needles.length; idx += 1) {
     const needle = needles[idx];
     const tree = [parser.parse(needle, ctx)];
