@@ -1,21 +1,19 @@
 export class Ref {
   excluded = false;
 
-  constructor(typeOrRef) {
-    if (typeOrRef instanceof Ref) {
-      this.type = typeOrRef.type;
-      this.left = false;
-      this.link = typeOrRef;
-      // eslint-disable-next-line no-param-reassign
-      typeOrRef.link = this;
-    } else {
-      this.type = typeOrRef;
-      this.left = true;
-      this.link = null;
-    }
+  constructor(type, link = null) {
+    this.type = type;
+    this.left = link === null;
+    this.link = link;
     this.node = null;
     this.isStarRec = this.type === '**';
     this.pointer = null;
+  }
+
+  close() {
+    const ref = new Ref(this.type, this);
+    this.link = ref;
+    return ref;
   }
 
   setPointer(pointer) {
