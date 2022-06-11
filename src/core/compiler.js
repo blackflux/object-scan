@@ -57,7 +57,7 @@ export const getWildcard = (input) => input[WILDCARD];
 
 const VALUES = Symbol('values');
 const setValues = (input, entries) => defineProperty(input, VALUES, entries);
-const addValues = (input, ...values) => merge(input, VALUES, ...values);
+const addValues = (input, values) => merge(input, VALUES, ...values);
 export const getValues = (input) => input[VALUES];
 
 export const matchedBy = (searches) => Array
@@ -213,7 +213,7 @@ const finalizeTower = (tower, ctx) => {
   for (let idx = 0, len = links.length; idx < len; idx += 2) {
     const parent = links[idx];
     const child = links[idx + 1];
-    addValues(parent, ...getValues(child));
+    addValues(parent, getValues(child));
   }
 
   if (ctx.useArraySelector === false) {
