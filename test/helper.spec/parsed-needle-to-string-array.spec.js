@@ -47,4 +47,32 @@ describe('Testing parsed-needle-to-string-array.js', () => {
       'name[0].value.!{[16],[17],str}.property'
     ]);
   });
+
+  it('Testing random modifier', () => {
+    const rng = PRNG('8729de28-f4d6-4744-9fce-575103d14b90');
+    const r = [
+      'a', 'b', 'c',
+      new Set(['d', 'e', 'f']),
+      new Set(['g', 'h']),
+      new Set(['i']),
+      new Set(['h']),
+      new Set(['j', 'k']),
+      new Set(['l', 'm']),
+      new Set(['n', 'o']),
+      new Set(['p', 'q']),
+      new Set(['r', 's']),
+      new Set(['t', 'v']),
+      new Set(['w', 'x']),
+      new Set(['z'])
+    ];
+    expect(parsedNeedleToStringArray(
+      r,
+      {
+        anyRecGroup: 0.3,
+        doubleStarGroup: 0.5,
+        doublePlusGroup: 0.5
+      },
+      rng
+    )).to.deep.equal(['a.b.c.{d,e,f}.{g,h}.++{i}.++{h}.++{j,k}.**{l,m}.**{n,o}.**{p,q}.**{r,s}.{t,v}.**{w,x}.z']);
+  });
 });

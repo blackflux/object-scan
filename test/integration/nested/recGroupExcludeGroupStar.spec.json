@@ -1,0 +1,86 @@
+{
+  "needles": ["**(^a$)", "!**{a.a}"],
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**(^a$)", "!**{a.a}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a",
+      "isMatch": true,
+      "matchedBy": ["**(^a$)"],
+      "excludedBy": [],
+      "traversedBy": ["!**{a.a}", "**(^a$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.a",
+      "isMatch": false,
+      "matchedBy": ["**(^a$)"],
+      "excludedBy": ["!**{a.a}"],
+      "traversedBy": ["!**{a.a}", "**(^a$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.a.a",
+      "isMatch": true,
+      "matchedBy": ["**(^a$)"],
+      "excludedBy": [],
+      "traversedBy": ["!**{a.a}", "**(^a$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.a.a.a",
+      "isMatch": false,
+      "matchedBy": ["**(^a$)"],
+      "excludedBy": ["!**{a.a}"],
+      "traversedBy": ["!**{a.a}", "**(^a$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.a.a.a.a",
+      "isMatch": true,
+      "matchedBy": ["**(^a$)"],
+      "excludedBy": [],
+      "traversedBy": ["!**{a.a}", "**(^a$)"]
+    },
+    {
+      "type": "breakFn",
+      "key": "a.a.a.a.a.a",
+      "isMatch": false,
+      "matchedBy": ["**(^a$)"],
+      "excludedBy": ["!**{a.a}"],
+      "traversedBy": ["!**{a.a}", "**(^a$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "a.a.a.a.a",
+      "isMatch": true,
+      "matchedBy": ["**(^a$)"],
+      "excludedBy": [],
+      "traversedBy": ["!**{a.a}", "**(^a$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "a.a.a",
+      "isMatch": true,
+      "matchedBy": ["**(^a$)"],
+      "excludedBy": [],
+      "traversedBy": ["!**{a.a}", "**(^a$)"]
+    },
+    {
+      "type": "filterFn",
+      "key": "a",
+      "isMatch": true,
+      "matchedBy": ["**(^a$)"],
+      "excludedBy": [],
+      "traversedBy": ["!**{a.a}", "**(^a$)"]
+    }
+  ],
+  "result": ["a.a.a.a.a", "a.a.a", "a"]
+}

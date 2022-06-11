@@ -207,7 +207,7 @@ There are two types of arbitrary depth matching:
 - `**`: Matches zero or more nestings
 - `++`: Matches one or more nestings
 
-Recursions can be combined with a regex by appending the regex.
+Recursions can be combined with a regex or a group by appending the regex or group.
 
 _Examples_:
 <details><summary> <code>['a.**']</code> <em>(zero or more nestings under `a`)</em> </summary>
@@ -261,6 +261,71 @@ objectScan(['[{0,1}]'], { joined: true })(haystack);
 const haystack = { a: { b: 0, c: 1 }, d: { e: 2, f: 3 } };
 objectScan(['{a,d}.{b,f}'], { joined: true })(haystack);
 // => [ 'd.f', 'a.b' ]
+```
+</details>
+
+### Nested Path Recursion
+
+To match a nested path recursively,
+combine arbitrary depth matching with an or-clause.
+
+There are two types of nested path matching:
+- `**{...}`: Matches path(s) in group zero or more times
+- `++{...}`: Matches path(s) in group one or more times
+
+_Examples_:
+<details><summary> <code>['++{[0][1]}']</code> <em>(`cyclic path`)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = [[[[0, 1], [1, 2]], [[3, 4], [5, 6]]], [[[7, 8], [9, 10]], [[11, 12], [13, 14]]]];
+objectScan(['++{[0][1]}'], { joined: true })(haystack);
+// => [ '[0][1][0][1]', '[0][1]' ]
+```
+</details>
+<details><summary> <code>['++{[0],[1]}']</code> <em>(`nested or`)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = [[0, 1, 2], [3, 4, 5], [6, 7, 8]];
+objectScan(['++{[0],[1]}'], { joined: true })(haystack);
+// => [ '[1][1]', '[1][0]', '[1]', '[0][1]', '[0][0]', '[0]' ]
+```
+</details>
+<details><summary> <code>['**{[*]}']</code> <em>(`traverse only array`)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = [[[{ a: [1] }], [2]]];
+objectScan(['**{[*]}'], { joined: true })(haystack);
+// => [ '[0][1][0]', '[0][1]', '[0][0][0]', '[0][0]', '[0]' ]
+```
+</details>
+<details><summary> <code>['**{*}']</code> <em>(`traverse only object`)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: [0, { b: 1 }], c: { d: 2 } };
+objectScan(['**{*}'], { joined: true })(haystack);
+// => [ 'c.d', 'c', 'a' ]
+```
+</details>
+<details><summary> <code>['a.**{b.c}']</code> <em>(`zero or more times`)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: { b: { c: 0 } } } } };
+objectScan(['a.**{b.c}'], { joined: true })(haystack);
+// => [ 'a.b.c.b.c', 'a.b.c', 'a' ]
+```
+</details>
+<details><summary> <code>['a.++{b.c}']</code> <em>(`one or more times`)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: { b: { c: 0 } } } } };
+objectScan(['a.++{b.c}'], { joined: true })(haystack);
+// => [ 'a.b.c.b.c', 'a.b.c' ]
 ```
 </details>
 

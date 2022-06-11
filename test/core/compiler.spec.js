@@ -4,7 +4,8 @@ import Context from '../../src/core/context.js';
 import {
   getWildcard, compile, excludedBy, traversedBy,
   hasMatches, getNeedles, matchedBy, isLeaf,
-  isMatch, isLastLeafMatch, getIndex, getLeafNeedles
+  isMatch, isLastLeafMatch, getIndex, getLeafNeedles,
+  getValues
 } from '../../src/core/compiler.js';
 
 const c = (needles, ctx = {}) => compile(needles, Context(ctx));
@@ -76,6 +77,8 @@ describe('Testing compiler', () => {
         .to.throw('Redundant Exclusion: "[{!0,1}][{!2,3}]"');
       expect(() => c(['!{[1][2],*,{a,b},{a.!b}}']))
         .to.throw('Redundant Exclusion: "!{[1][2],*,{a,b},{a.!b}}"');
+      expect(() => c(['!**{a,!b}']))
+        .to.throw('Redundant Exclusion: !**{a,!b}, char 6');
     });
   });
 
@@ -399,5 +402,34 @@ describe('Testing compiler', () => {
     expect(traversedBy([tower.a.c.f])).to.deep.equal(['a.{c,e}.f']);
     expect(traversedBy([tower.a.e])).to.deep.equal(['a.{c,e}.f']);
     expect(traversedBy([tower.a.e.f])).to.deep.equal(['a.{c,e}.f']);
+  });
+
+  describe('Testing multi step recursion', () => {
+    it('Testing basic two step (star)', () => {
+      const input = ['**{a.b}.a'];
+      const tower = c(input);
+      expect(tower).to.deep.equal({ a: {} });
+
+      const towerValues = getValues(tower);
+      expect(towerValues).to.deep.equal([tower.a, { b: { a: {} } }]);
+      expect(getValues(tower.a)).to.deep.equal([]);
+
+      expect(getValues(towerValues[0])).to.deep.equal([]);
+      expect(getValues(towerValues[1])).to.deep.equal([{ a: {} }]);
+      expect(getValues(towerValues[1].b)).to.deep.equal([{}, towerValues[1]]);
+      expect(getValues(towerValues[1].b.a)).to.deep.equal([]);
+    });
+
+    it('Testing with exclude', () => {
+      const input = ['**{a}', '!**{a.a}'];
+      const tower = c(input);
+      expect(tower).to.deep.equal({});
+
+      const towerValues = getValues(tower);
+      expect(towerValues).to.deep.equal([{ a: {} }, {}]);
+      expect(getValues(towerValues[0])).to.deep.equal([{}]);
+      expect(getValues(towerValues[0].a)).to.deep.equal([{ a: {} }]);
+      expect(getValues(towerValues[1])).to.deep.equal([{}]);
+    });
   });
 });

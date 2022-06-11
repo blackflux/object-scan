@@ -1,0 +1,223 @@
+{
+  "needles": ["**{n[{1,2}].n[0].n[*]}"],
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "n",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "n[2]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "n[2].n",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "n[2].n[0]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "n[2].n[0].n",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "n[2].n[0].n[3]",
+      "isMatch": true,
+      "matchedBy": ["**{n[{1,2}].n[0].n[*]}"],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "n[2].n[0].n[3]",
+      "isMatch": true,
+      "matchedBy": ["**{n[{1,2}].n[0].n[*]}"],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "n[2].n[0].n[2]",
+      "isMatch": true,
+      "matchedBy": ["**{n[{1,2}].n[0].n[*]}"],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "n[2].n[0].n[2]",
+      "isMatch": true,
+      "matchedBy": ["**{n[{1,2}].n[0].n[*]}"],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "n[2].n[0].n[1]",
+      "isMatch": true,
+      "matchedBy": ["**{n[{1,2}].n[0].n[*]}"],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "n[2].n[0].n[1]",
+      "isMatch": true,
+      "matchedBy": ["**{n[{1,2}].n[0].n[*]}"],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "n[2].n[0].n[0]",
+      "isMatch": true,
+      "matchedBy": ["**{n[{1,2}].n[0].n[*]}"],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "n[2].n[0].n[0]",
+      "isMatch": true,
+      "matchedBy": ["**{n[{1,2}].n[0].n[*]}"],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "n[1]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "n[1].n",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "n[1].n[0]",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "n[1].n[0].n",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "n[1].n[0].n[3]",
+      "isMatch": true,
+      "matchedBy": ["**{n[{1,2}].n[0].n[*]}"],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "n[1].n[0].n[3]",
+      "isMatch": true,
+      "matchedBy": ["**{n[{1,2}].n[0].n[*]}"],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "n[1].n[0].n[2]",
+      "isMatch": true,
+      "matchedBy": ["**{n[{1,2}].n[0].n[*]}"],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "n[1].n[0].n[2]",
+      "isMatch": true,
+      "matchedBy": ["**{n[{1,2}].n[0].n[*]}"],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "n[1].n[0].n[1]",
+      "isMatch": true,
+      "matchedBy": ["**{n[{1,2}].n[0].n[*]}"],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "n[1].n[0].n[1]",
+      "isMatch": true,
+      "matchedBy": ["**{n[{1,2}].n[0].n[*]}"],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "n[1].n[0].n[0]",
+      "isMatch": true,
+      "matchedBy": ["**{n[{1,2}].n[0].n[*]}"],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "n[1].n[0].n[0]",
+      "isMatch": true,
+      "matchedBy": ["**{n[{1,2}].n[0].n[*]}"],
+      "excludedBy": [],
+      "traversedBy": ["**{n[{1,2}].n[0].n[*]}"]
+    }
+  ],
+  "result": [
+    "n[2].n[0].n[3]",
+    "n[2].n[0].n[2]",
+    "n[2].n[0].n[1]",
+    "n[2].n[0].n[0]",
+    "n[1].n[0].n[3]",
+    "n[1].n[0].n[2]",
+    "n[1].n[0].n[1]",
+    "n[1].n[0].n[0]"
+  ]
+}

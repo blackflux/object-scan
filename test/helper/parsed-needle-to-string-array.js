@@ -1,9 +1,11 @@
-const parsedNeedleToStringArray = (obj, depth = 0) => {
+import Joi from 'joi-strict';
+
+const parsedNeedleToStringArray = (obj, params, rng, depth = 0) => {
   const isArray = Array.isArray(obj);
   const isSet = obj instanceof Set;
   if (isArray || isSet) {
     const r = (isArray ? obj : [...obj])
-      .map((e) => parsedNeedleToStringArray(e, depth + 1));
+      .map((e) => parsedNeedleToStringArray(e, params, rng, depth + 1));
     const len = r.length;
     if (len === 0) {
       return depth === 0 ? [] : '';
@@ -29,10 +31,31 @@ const parsedNeedleToStringArray = (obj, depth = 0) => {
     if (depth === 0) {
       return [str];
     }
-    const asBlank = isArray || len === 1;
+
+    const prefix = pullExcludeOut ? '!' : '';
+    if (isArray) {
+      return `${prefix}${str}`;
+    }
+
+    const groupType = (() => {
+      if (
+        rng === null
+        || (params.doubleStarGroup === 0 && params.doublePlusGroup === 0)
+      ) {
+        return '';
+      }
+      if (!(params.anyRecGroup < rng())) {
+        return '';
+      }
+      const sumP = params.doubleStarGroup + params.doublePlusGroup;
+      const rnN = rng() * sumP;
+      return params.doublePlusGroup < rnN ? '**' : '++';
+    })();
+    const asBlank = groupType === '' && len === 1;
+
     return [
-      pullExcludeOut ? '!' : '',
-      asBlank ? '' : '{',
+      prefix,
+      asBlank ? '' : `${groupType}{`,
       str,
       asBlank ? '' : '}'
     ].join('');
@@ -40,4 +63,17 @@ const parsedNeedleToStringArray = (obj, depth = 0) => {
   return depth === 0 ? [obj] : obj;
 };
 
-export default (obj) => parsedNeedleToStringArray(obj);
+export default (obj, params_ = {}, rng = null) => {
+  const params = {
+    anyRecGroup: 0,
+    doublePlusGroup: 0,
+    doubleStarGroup: 0,
+    ...params_
+  };
+  Joi.assert(params, Joi.object().keys({
+    anyRecGroup: Joi.number().min(0).max(1),
+    doublePlusGroup: Joi.number().min(0).max(1),
+    doubleStarGroup: Joi.number().min(0).max(1)
+  }));
+  return parsedNeedleToStringArray(obj, params, rng);
+};

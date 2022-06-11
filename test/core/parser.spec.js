@@ -1,5 +1,6 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
+import { Ref } from '../../src/core/ref.js';
 import parser from '../../src/core/parser.js';
 import Context from '../../src/core/context.js';
 import generateParsedNeedle from '../helper/generate-parsed-needle.js';
@@ -8,16 +9,38 @@ import parsedNeedleToStringArray from '../helper/parsed-needle-to-string-array.j
 const parse = (input, ctx = {}) => parser.parse(input, Context(ctx));
 
 const asString = (() => {
-  const asStringRec = (input) => {
+  const asStringRec = (input, ctx) => {
     if (Array.isArray(input)) {
-      return `[${input.map((e) => asStringRec(e)).join(',')}]`;
+      return `[${input.map((e) => asStringRec(e, ctx)).join(',')}]`;
     }
     if (input instanceof Set) {
-      return `{${[...input].map((e) => asStringRec(e)).join(',')}}`;
+      return `{${[...input].map((e) => asStringRec(e, ctx)).join(',')}}`;
+    }
+    if (input instanceof Ref) {
+      let refId = ctx.refs.get(input) || ctx.refs.get(input.link);
+      if (refId === undefined) {
+        refId = ctx.counter;
+        ctx.counter += 1;
+        ctx.refs.set(input, refId);
+      }
+      return `<${[
+        input.left ? '' : '}',
+        input.left ? input.type : refId,
+        input.left ? refId : input.type,
+        input.left ? '{' : ''
+      ]
+        .filter((e) => !!e)
+        .join(':')}>`;
     }
     return `${input.excluded === true ? '!' : ''}"${input.value}"`;
   };
-  return (input) => asStringRec(parse(input));
+  return (input) => {
+    const ctx = {
+      refs: new Map(),
+      counter: 1
+    };
+    return asStringRec(parse(input), ctx);
+  };
 })();
 
 const checkError = (input, msg, useArraySelector = true) => {
@@ -277,6 +300,79 @@ describe('Testing Parser', () => {
 
       it('Testing non terminated exclusion', () => {
         checkError('!', 'Bad Terminator: !, char 1');
+      });
+    });
+
+    describe('Testing multi step recursion', () => {
+      it('Testing basic two step (star)', () => {
+        expect(asString('**{a.b}')).to.equal('[<**:1:{>,["a","b"],<}:1:**>]');
+      });
+
+      it('Testing basic two step (star and array)', () => {
+        expect(asString('**{[0][1]}')).to.equal('[<**:1:{>,["[0]","[1]"],<}:1:**>]');
+      });
+
+      it('Testing basic two step (star and mixed in group)', () => {
+        expect(asString('**{[0].a,[1].b}')).to.equal('[<**:1:{>,{["[0]","a"],["[1]","b"]},<}:1:**>]');
+      });
+
+      it('Testing basic two step (plus)', () => {
+        expect(asString('++{a.b}')).to.equal('[<++:1:{>,["a","b"],<}:1:++>]');
+      });
+
+      it('Testing or group', () => {
+        expect(asString('**{a.b,c.d}')).to.equal('[<**:1:{>,{["a","b"],["c","d"]},<}:1:**>]');
+      });
+
+      it('Testing star chain is not multi step recursion', () => {
+        expect(asString('**.a.b')).to.equal('["**","a","b"]');
+      });
+
+      it('Testing complex', () => {
+        expect(asString('**{a.**.b}')).to.equal('[<**:1:{>,["a","**","b"],<}:1:**>]');
+      });
+
+      it('Testing bad group start', () => {
+        checkError('***{a.b}', 'Bad Group Start: ***{a.b}, char 3');
+      });
+
+      it('Testing multiple nested groups', () => {
+        expect(asString('{{**{a},{b}},**{{c},{d}}}'))
+          .to.equal('{[<**:1:{>,"a",<}:1:**>],"b",[<**:2:{>,{"c","d"},<}:2:**>]}');
+      });
+
+      it('Testing nested group inside nested group', () => {
+        expect(asString('**{a.b,c.**{d.e}.f}'))
+          .to.equal('[<**:1:{>,{["a","b"],["c",<**:2:{>,["d","e"],<}:2:**>,"f"]},<}:1:**>]');
+      });
+
+      it('Testing mixed groups', () => {
+        expect(asString('nn.**{[{1,2}][0][*]}.a'))
+          .to.equal('["nn",<**:1:{>,[{"[1]","[2]"},"[0]","[*]"],<}:1:**>,"a"]');
+      });
+
+      it('Testing redundant group nested', () => {
+        expect(asString('{a.b.c.d,c.d.b.a}.**{c,d}.{a.b.c.d.a,d.c.b.a.d}'))
+          .to.equal(
+            '[{["a","b","c","d"],["c","d","b","a"]},'
+          + '<**:1:{>,{"c","d"},<}:1:**>,'
+          + '{["a","b","c","d","a"],["d","c","b","a","d"]}]'
+          );
+      });
+
+      it('Testing single or group with postfix', () => {
+        expect(asString('**{a}.b'))
+          .to.equal('[<**:1:{>,"a",<}:1:**>,"b"]');
+      });
+
+      it('Testing exclusion outside nested group', () => {
+        expect(asString('**{a.b},!**{a.b.a.b,c.d.c.d}'))
+          .to.equal('{[<**:1:{>,["a","b"],<}:1:**>],[<**:2:{>,{[!"a","b","a","b"],[!"c","d","c","d"]},<}:2:**>]}');
+      });
+
+      it('Testing exclusion inside nested group', () => {
+        expect(asString('**{a.b},**{a.b.a.b,!c.d.c.d}'))
+          .to.equal('{[<**:1:{>,["a","b"],<}:1:**>],[<**:2:{>,{["a","b","a","b"],[!"c","d","c","d"]},<}:2:**>]}');
       });
     });
   });

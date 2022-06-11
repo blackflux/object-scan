@@ -1,0 +1,86 @@
+{
+  "needles": ["b.c.**{**{**{a.a}}}"],
+  "log": [
+    {
+      "type": "breakFn",
+      "key": "",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["b.c.**{**{**{a.a}}}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["b.c.**{**{**{a.a}}}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.c",
+      "isMatch": true,
+      "matchedBy": ["b.c.**{**{**{a.a}}}"],
+      "excludedBy": [],
+      "traversedBy": ["b.c.**{**{**{a.a}}}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.c.a",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["b.c.**{**{**{a.a}}}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.c.a.a",
+      "isMatch": true,
+      "matchedBy": ["b.c.**{**{**{a.a}}}"],
+      "excludedBy": [],
+      "traversedBy": ["b.c.**{**{**{a.a}}}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.c.a.a.a",
+      "isMatch": false,
+      "matchedBy": [],
+      "excludedBy": [],
+      "traversedBy": ["b.c.**{**{**{a.a}}}"]
+    },
+    {
+      "type": "breakFn",
+      "key": "b.c.a.a.a.a",
+      "isMatch": true,
+      "matchedBy": ["b.c.**{**{**{a.a}}}"],
+      "excludedBy": [],
+      "traversedBy": ["b.c.**{**{**{a.a}}}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "b.c.a.a.a.a",
+      "isMatch": true,
+      "matchedBy": ["b.c.**{**{**{a.a}}}"],
+      "excludedBy": [],
+      "traversedBy": ["b.c.**{**{**{a.a}}}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "b.c.a.a",
+      "isMatch": true,
+      "matchedBy": ["b.c.**{**{**{a.a}}}"],
+      "excludedBy": [],
+      "traversedBy": ["b.c.**{**{**{a.a}}}"]
+    },
+    {
+      "type": "filterFn",
+      "key": "b.c",
+      "isMatch": true,
+      "matchedBy": ["b.c.**{**{**{a.a}}}"],
+      "excludedBy": [],
+      "traversedBy": ["b.c.**{**{**{a.a}}}"]
+    }
+  ],
+  "result": ["b.c.a.a.a.a", "b.c.a.a", "b.c"]
+}

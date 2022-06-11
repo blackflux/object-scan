@@ -151,7 +151,7 @@ There are two types of arbitrary depth matching:
 - `**`: Matches zero or more nestings
 - `++`: Matches one or more nestings
 
-Recursions can be combined with a regex by appending the regex.
+Recursions can be combined with a regex or a group by appending the regex or group.
 
 _Examples_:
 <pre><example>
@@ -186,6 +186,47 @@ comment: `[0]` and `[1]`
 haystack: { a: { b: 0, c: 1 }, d: { e: 2, f: 3 } }
 needles: ['{a,d}.{b,f}']
 comment: `a.b`, `a.f`, `d.b` and `d.f`
+</example></pre>
+
+### Nested Path Recursion
+
+To match a nested path recursively,
+combine arbitrary depth matching with an or-clause.
+
+There are two types of nested path matching:
+- `**{...}`: Matches path(s) in group zero or more times
+- `++{...}`: Matches path(s) in group one or more times
+
+_Examples_:
+<pre><example>
+haystack: [[[[0, 1], [1, 2]], [[3, 4], [5, 6]]], [[[7, 8], [9, 10]], [[11, 12], [13, 14]]]]
+needles: ['++{[0][1]}']
+comment: `cyclic path`
+</example></pre>
+<pre><example>
+haystack: [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
+needles: ['++{[0],[1]}']
+comment: `nested or`
+</example></pre>
+<pre><example>
+haystack: [[[{ a: [1] }], [2]]]
+needles: ['**{[*]}']
+comment: `traverse only array`
+</example></pre>
+<pre><example>
+haystack: { a: [0, { b: 1 }], c: { d: 2 } }
+needles: ['**{*}']
+comment: `traverse only object`
+</example></pre>
+<pre><example>
+haystack: { a: { b: { c: { b: { c: 0 } } } } }
+needles: ['a.**{b.c}']
+comment: `zero or more times`
+</example></pre>
+<pre><example>
+haystack: { a: { b: { c: { b: { c: 0 } } } } }
+needles: ['a.++{b.c}']
+comment: `one or more times`
 </example></pre>
 
 ### Exclusion
