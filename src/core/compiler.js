@@ -113,6 +113,7 @@ const iterate = (tower, needle, tree, { onAdd, onFin }) => {
 const applyNeedle = (tower, needle, tree, ctx) => {
   iterate(tower, needle, tree, {
     onAdd: (cur, parent, wc, wcParent, next) => {
+      addNeedle(cur, needle);
       if (wc instanceof Ref) {
         if (wc.left === true) {
           if (wc.isStarRec) {
@@ -133,7 +134,6 @@ const applyNeedle = (tower, needle, tree, ctx) => {
         }
         return;
       }
-      addNeedle(cur, needle);
       const redundantRecursion = (
         wcParent !== undefined
         && wc.isStarRec
