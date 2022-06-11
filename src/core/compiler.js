@@ -17,12 +17,12 @@ const HAS_MATCHES = Symbol('has-matches');
 const setHasMatches = (input) => defineProperty(input, HAS_MATCHES, true);
 export const hasMatches = (input) => input[HAS_MATCHES] === true;
 
-const merge = (input, symbol, value) => {
-  if (input[symbol] === undefined) {
-    defineProperty(input, symbol, []);
-  }
-  if (!input[symbol].includes(value)) {
-    input[symbol].push(value);
+const merge = (input, symbol, ...values) => {
+  const target = input[symbol];
+  if (target === undefined) {
+    defineProperty(input, symbol, values);
+  } else {
+    target.push(...values.filter((v) => !target.includes(v)));
   }
 };
 
