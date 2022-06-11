@@ -113,7 +113,7 @@ export default (input) => {
       assert(Array.isArray(cResult));
       const refMaybe = cResult[cResult.length - 2];
       if (refMaybe instanceof Ref && refMaybe.left === true) {
-        cResult.push(refMaybe.close());
+        cResult.push(refMaybe.link);
       }
     },
     finalizeResult: () => {

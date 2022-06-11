@@ -4,16 +4,10 @@ export class Ref {
   constructor(type, link = null) {
     this.type = type;
     this.left = link === null;
-    this.link = link;
+    this.link = link === null ? new Ref(type, this) : link;
     this.node = null;
     this.isStarRec = this.type === '**';
     this.pointer = null;
-  }
-
-  close() {
-    const ref = new Ref(this.type, this);
-    this.link = ref;
-    return ref;
   }
 
   setPointer(pointer) {
