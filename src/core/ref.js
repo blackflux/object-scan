@@ -1,6 +1,4 @@
 export class Ref {
-  excluded = false;
-
   constructor(type, link = null) {
     this.left = link === null;
     this.link = link === null ? new Ref(type, this) : link;
