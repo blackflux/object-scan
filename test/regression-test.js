@@ -86,10 +86,9 @@ const execute = async () => {
         shuffle: rng() > 0.9
       }),
       groupModifierParams: () => ({
-        // todo: uncomment
-        anyRecGroup: 0, // rng() > 0.2 ? 0 : rng(),
-        doublePlusGroup: 0, // rng() > 0.2 ? 0 : rng(),
-        doubleStarGroup: 0 // rng() > 0.2 ? 0 : rng()
+        anyRecGroup: rng() > 0.2 ? 0 : rng(),
+        doublePlusGroup: rng() > 0.2 ? 0 : rng(),
+        doubleStarGroup: rng() > 0.2 ? 0 : rng()
       })
     });
 
