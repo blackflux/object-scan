@@ -1,4 +1,4 @@
-const { assert } = console;
+import assert from '../generic/assert.js';
 
 export default (opts) => {
   const ctx = {

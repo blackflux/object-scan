@@ -1,3 +1,4 @@
+import assert from '../generic/assert.js';
 import {
   getWildcard, excludedBy, traversedBy,
   hasMatches, matchedBy, isLastLeafMatch,
@@ -5,8 +6,6 @@ import {
 } from './compiler.js';
 import Result from './find-result.js';
 import { toPath } from '../generic/helper.js';
-
-const { assert } = console;
 
 const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);
 
