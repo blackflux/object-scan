@@ -1,8 +1,7 @@
+import assert from '../generic/assert.js';
 import { defineProperty } from '../generic/helper.js';
 import { Wildcard } from './wildcard.js';
 import { Ref } from './ref.js';
-
-const { assert } = console;
 
 const IS_EXCLUDED = Symbol('is-excluded');
 const markExcluded = (input) => defineProperty(input, IS_EXCLUDED, true);
