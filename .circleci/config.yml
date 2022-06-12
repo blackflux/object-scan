@@ -9,7 +9,7 @@ workflows:
       - test-node-v14:
           requires:
             - gally-create-pr
-      - test-node-v17:
+      - test-node-v18:
           requires:
             - gally-create-pr
       - gally-auto-approve:
@@ -17,7 +17,7 @@ workflows:
             - gally-create-pr
             - test-node-v16
             - test-node-v14
-            - test-node-v17
+            - test-node-v18
           filters:
             branches:
               only: /dependabot\/.*/
@@ -26,7 +26,7 @@ workflows:
             - gally-create-pr
             - test-node-v16
             - test-node-v14
-            - test-node-v17
+            - test-node-v18
           filters:
             branches:
               only: master
@@ -157,9 +157,9 @@ jobs:
       - run: >-
           (git add . && git diff-index --quiet HEAD --) || (git status && exit
           1);
-  test-node-v17:
+  test-node-v18:
     docker:
-      - image: circleci/node:17
+      - image: cimg/node:18.0
     steps:
       - checkout
       - run:
