@@ -1,2 +1,5 @@
-const { assert } = console;
-export default assert;
+export default (condition, message) => {
+  if (!condition) {
+    throw new Error(message);
+  }
+};
