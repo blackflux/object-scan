@@ -1,6 +1,6 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import { Ref } from '../../src/core/ref.js';
+import { Ref } from '../../src/core/parser/ref.js';
 import parser from '../../src/core/parser.js';
 import Context from '../../src/core/context.js';
 import generateParsedNeedle from '../helper/generate-parsed-needle.js';

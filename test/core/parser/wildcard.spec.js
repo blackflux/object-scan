@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe } from 'node-tdd';
-import { parseWildcard } from '../../src/core/wildcard.js';
+import { parseWildcard } from '../../../src/core/parser/wildcard.js';
 
 describe('Testing Helper', () => {
   describe('Testing parseWildcard', () => {
