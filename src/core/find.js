@@ -1,4 +1,3 @@
-import assert from '../generic/assert.js';
 import {
   getWildcard, excludedBy, traversedBy,
   hasMatches, matchedBy, isLastLeafMatch,
@@ -16,7 +15,9 @@ export default (haystack_, searches_, ctx) => {
   };
   if (ctx.beforeFn !== undefined) {
     const r = ctx.beforeFn(state);
-    assert(r === undefined, 'beforeFn must not return');
+    if (r !== undefined) {
+      state.haystack = r;
+    }
   }
   const stack = [false, searches_, null, 0];
   const path = [];
@@ -203,7 +204,9 @@ export default (haystack_, searches_, ctx) => {
   state.result = result.get();
   if (ctx.afterFn !== undefined) {
     const r = ctx.afterFn(state);
-    assert(r === undefined, 'afterFn must not return');
+    if (r !== undefined) {
+      return r;
+    }
   }
   return state.result;
 };

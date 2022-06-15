@@ -4,8 +4,14 @@ import find from './core/find.js';
 import Context from './core/context.js';
 
 export default (needles, opts = {}) => {
-  assert(Array.isArray(needles));
-  assert(opts instanceof Object && !Array.isArray(opts));
+  assert(
+    Array.isArray(needles),
+    'Argument "needles" expected to be Array'
+  );
+  assert(
+    opts instanceof Object && !Array.isArray(opts),
+    'Argument "opts" expected to be Object'
+  );
   if (needles.length === 0) {
     return (_, ctx) => (ctx === undefined ? [] : ctx);
   }
