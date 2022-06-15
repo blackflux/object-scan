@@ -1,4 +1,4 @@
-const iterate = (tree, cb) => {
+export default (tree, cb) => {
   const stack = [tree];
   const parent = [null];
   const count = [];
@@ -56,4 +56,3 @@ const iterate = (tree, cb) => {
     }
   }
 };
-export default { iterate };

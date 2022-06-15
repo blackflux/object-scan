@@ -4,7 +4,7 @@ export default (tower, needle, tree, { onAdd, onFin }) => {
   const stack = [[[tower, null]]];
   let excluded = false;
 
-  iterator.iterate(tree, (type, wc) => {
+  iterator(tree, (type, wc) => {
     if (type === 'RM') {
       if (wc.excluded === true) {
         excluded = false;
