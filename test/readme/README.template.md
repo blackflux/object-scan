@@ -359,7 +359,7 @@ Default: `undefined`
 When defined, this function is called before traversal as `beforeFn(state = { haystack, context })`
 and `state.haystack` is subsequently traversed using `state.context`.
 
-If a value other than `undefined` is returned, that value is used instead of `haystack`.
+If a value other than `undefined` is returned, that value is used instead of `state.haystack`.
 
 _Examples_:
 <pre><example>
