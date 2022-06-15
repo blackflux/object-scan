@@ -495,7 +495,7 @@ _Examples_:
 const haystack = { a: 0 };
 objectScan(['**'], {
   joined: true,
-  beforeFn: ({ haystack, context }) => [haystack, context],
+  beforeFn: ({ haystack: h, context: c }) => [h, c],
   rtn: 'key'
 })(haystack, { b: 0 });
 // => [ '[1].b', '[1]', '[0].a', '[0]' ]
@@ -508,7 +508,7 @@ objectScan(['**'], {
 const haystack = { a: 0, b: 1 };
 objectScan(['**'], {
   joined: true,
-  beforeFn: ({ haystack }) => Object.keys(haystack),
+  beforeFn: ({ haystack: h }) => Object.keys(h),
   rtn: ['key', 'value']
 })(haystack);
 // => [ [ '[1]', 'b' ], [ '[0]', 'a' ] ]
@@ -542,12 +542,12 @@ objectScan(['**'], {
 
 <!-- eslint-disable no-undef -->
 ```js
-const haystack = { a: 0, b: 3, c: 4, d: 7 };
+const haystack = { a: 0, b: 3, c: 4 };
 objectScan(['**'], {
   afterFn: ({ result }) => result.filter((v) => v > 3),
   rtn: 'value'
 })(haystack);
-// => [ 7, 4 ]
+// => [ 4 ]
 ```
 </details>
 

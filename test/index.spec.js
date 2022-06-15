@@ -35,6 +35,11 @@ const haystack = {
 };
 
 describe('Testing Find', () => {
+  it('Testing bad option provided', () => {
+    expect(() => objectScan(['**'], { filterFn: true }))
+      .to.throw('Option "filterFn" not one of [function, undefined]');
+  });
+
   it('Testing Top Level Exact', () => {
     const find = objectScan(['simple']);
     expect(find(haystack)).to.deep.equal([

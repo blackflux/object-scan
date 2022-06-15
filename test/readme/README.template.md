@@ -367,14 +367,14 @@ haystack: { a: 0 }
 context: { b: 0 }
 needles: ['**']
 comment: combining haystack and context
-beforeFn: ({ haystack, context }) => [haystack, context]
+beforeFn: ({ haystack: h, context: c }) => [h, c]
 rtn: 'key'
 </example></pre>
 <pre><example>
 haystack: { a: 0, b: 1 }
 needles: ['**']
 comment: pre-processing haystack
-beforeFn: ({ haystack }) => Object.keys(haystack)
+beforeFn: ({ haystack: h }) => Object.keys(h)
 rtn: ['key', 'value']
 </example></pre>
 
@@ -399,7 +399,7 @@ rtn: 'count'
 joined: false
 </example></pre>
 <pre><example>
-haystack: { a: 0, b: 3, c: 4, d: 7 }
+haystack: { a: 0, b: 3, c: 4 }
 needles: ['**']
 comment: post-processing result
 afterFn: ({ result }) => result.filter((v) => v > 3)

@@ -1,4 +1,3 @@
-import assert from '../generic/assert.js';
 import {
   getWildcard, excludedBy, traversedBy,
   hasMatches, matchedBy, isLastLeafMatch,
