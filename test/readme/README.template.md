@@ -356,10 +356,16 @@ breakFn: ({ key }) => key === 'a.b'
 Type: `function`<br>
 Default: `undefined`
 
-When defined, this function is called before traversal as `beforeFn(state = { haystack, context })`
-and `state.haystack` is subsequently traversed using `state.context`.
+When defined, this function is called before traversal as `beforeFn(state = { haystack, context })`.
 
-If a value other than `undefined` is returned, that value is written to `state.haystack` before traversal.
+If a value other than `undefined` is returned from `beforeFn`,
+that value is written to `state.haystack` before traversal.
+
+The content of `state` can be modified in the function.
+After `beforeFn` has executed, the traversal happens using `state.haystack` and `state.context`.
+
+The content in `state` can be accessed in `afterFn`.
+Note however that the key `result` is being overwritten.
 
 _Examples_:
 <pre><example>
@@ -385,8 +391,13 @@ Default: `undefined`
 
 When defined, this function is called after traversal as `afterFn(state = { result, haystack, context })`.
 
-If a value other than `undefined` is returned, that value is returned as
-the final result instead of `state.result`.
+Additional information written to `state` in `beforeFn` is available in `afterFn`.
+
+The content of `state` can be modified in the function. In particular the key `state.result` can be updated.
+
+If a value other than `undefined` is returned from `afterFn`, that value is written to `state.result`.
+
+After `beforeFn` has executed, the key `state.result` is returned as the final result.
 
 _Examples_:
 <pre><example>
@@ -404,6 +415,14 @@ needles: ['**']
 comment: post-processing result
 afterFn: ({ result }) => result.filter((v) => v > 3)
 rtn: 'value'
+joined: false
+</example></pre>
+<pre><example>
+haystack: {}
+needles: ['**']
+comment: pass data from beforeFn to afterFn
+beforeFn: (state) => { /* eslint-disable no-param-reassign */ state.custom = 7; }
+afterFn: (state) => state.custom
 joined: false
 </example></pre>
 
