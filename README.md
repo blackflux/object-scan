@@ -485,7 +485,7 @@ Default: `undefined`
 When defined, this function is called before traversal as `beforeFn(state = { haystack, context })`
 and `state.haystack` is subsequently traversed using `state.context`.
 
-If a value other than `undefined` is returned, that value is used as the `haystack` instead.
+If a value other than `undefined` is returned, that value is used instead of `haystack`.
 
 _Examples_:
 <details><summary> <code>['**']</code> <em>(combining haystack and context)</em> </summary>
@@ -523,7 +523,7 @@ Default: `undefined`
 When defined, this function is called after traversal as `afterFn(state = { result, haystack, context })`.
 
 If a value other than `undefined` is returned, that value is returned as
-the final result, instead of `state.result`.
+the final result instead of `state.result`.
 
 _Examples_:
 <details><summary> <code>['**']</code> <em>(returning count plus context)</em> </summary>
