@@ -1,4 +1,4 @@
-import iterator from '../../generic/iterator.js';
+import iterator from '../generic/iterator.js';
 
 export default (tower, needle, tree, { onAdd, onFin }) => {
   const stack = [[[tower, null]]];
