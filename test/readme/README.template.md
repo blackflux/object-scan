@@ -421,7 +421,7 @@ joined: false
 haystack: {}
 needles: ['**']
 comment: pass data from beforeFn to afterFn
-beforeFn: (state) => { state.custom = 7; }
+beforeFn: (state) => { /* eslint-disable no-param-reassign */ state.custom = 7; }
 afterFn: (state) => state.custom
 joined: false
 </example></pre>

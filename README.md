@@ -567,7 +567,7 @@ objectScan(['**'], {
 ```js
 const haystack = {};
 objectScan(['**'], {
-  beforeFn: (state) => { state.custom = 7; },
+  beforeFn: (state) => { /* eslint-disable no-param-reassign */ state.custom = 7; },
   afterFn: (state) => state.custom
 })(haystack);
 // => 7
