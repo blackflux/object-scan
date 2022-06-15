@@ -1,9 +1,9 @@
 /* compile needles to hierarchical map object */
 import parser from './parser.js';
-import iterator from './compiler-iterator.js';
+import iterator from './compiler/iterator.js';
 import { defineProperty } from '../generic/helper.js';
-import { Wildcard } from './wildcard.js';
-import { Ref } from './ref.js';
+import { Wildcard } from './parser/wildcard.js';
+import { Ref } from './parser/ref.js';
 
 const LEAF = Symbol('leaf');
 const markLeaf = (input, match, readonly) => defineProperty(input, LEAF, match, readonly);
