@@ -3,7 +3,7 @@ import {
   hasMatches, matchedBy, isLastLeafMatch,
   getValues, getOrder, getRoots
 } from './compiler.js';
-import Result from './find/result.js';
+import Result from './find-result.js';
 import { toPath } from '../generic/helper.js';
 
 const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);

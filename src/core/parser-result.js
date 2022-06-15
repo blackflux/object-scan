@@ -1,5 +1,5 @@
-import assert from '../../generic/assert.js';
-import { defineProperty } from '../../generic/helper.js';
+import assert from '../generic/assert.js';
+import { defineProperty } from '../generic/helper.js';
 import { Wildcard } from './wildcard.js';
 import { Ref } from './ref.js';
 
