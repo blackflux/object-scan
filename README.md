@@ -483,7 +483,9 @@ Type: `function`<br>
 Default: `undefined`
 
 When defined, this function is called before traversal as `beforeFn(state = { haystack, context })`
-and `state.haystack` is then traversed using `state.context`.
+and `state.haystack` is subsequently traversed using `state.context`.
+
+If a value other than `undefined` is returned, that value is used as the `haystack` instead.
 
 _Examples_:
 <details><summary> <code>['**']</code> <em>(combining haystack and context)</em> </summary>
@@ -493,10 +495,23 @@ _Examples_:
 const haystack = { a: 0 };
 objectScan(['**'], {
   joined: true,
-  beforeFn: (state) => { /* eslint-disable no-param-reassign */ state.haystack = [state.haystack, state.context]; },
+  beforeFn: ({ haystack, context }) => [haystack, context],
   rtn: 'key'
 })(haystack, { b: 0 });
 // => [ '[1].b', '[1]', '[0].a', '[0]' ]
+```
+</details>
+<details><summary> <code>['**']</code> <em>(pre-processing haystack)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0, b: 1 };
+objectScan(['**'], {
+  joined: true,
+  beforeFn: ({ haystack }) => Object.keys(haystack),
+  rtn: ['key', 'value']
+})(haystack);
+// => [ [ '[1]', 'b' ], [ '[0]', 'a' ] ]
 ```
 </details>
 
@@ -505,8 +520,10 @@ objectScan(['**'], {
 Type: `function`<br>
 Default: `undefined`
 
-When defined, this function is called after traversal as `afterFn(state = { result, haystack, context })`
-and `state.result` is then returned from the search invocation.
+When defined, this function is called after traversal as `afterFn(state = { result, haystack, context })`.
+
+If a value other than `undefined` is returned, that value is returned as
+the final result, instead of `state.result`.
 
 _Examples_:
 <details><summary> <code>['**']</code> <em>(returning count plus context)</em> </summary>
@@ -515,10 +532,22 @@ _Examples_:
 ```js
 const haystack = { a: 0 };
 objectScan(['**'], {
-  afterFn: (state) => { /* eslint-disable no-param-reassign */ state.result += state.context; },
+  afterFn: ({ result, context }) => result + context,
   rtn: 'count'
 })(haystack, 5);
 // => 6
+```
+</details>
+<details><summary> <code>['**']</code> <em>(post-processing result)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0, b: 3, c: 4, d: 7 };
+objectScan(['**'], {
+  afterFn: ({ result }) => result.filter((v) => v > 3),
+  rtn: 'value'
+})(haystack);
+// => [ 7, 4 ]
 ```
 </details>
 
