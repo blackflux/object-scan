@@ -357,7 +357,9 @@ Type: `function`<br>
 Default: `undefined`
 
 When defined, this function is called before traversal as `beforeFn(state = { haystack, context })`
-and `state.haystack` is then traversed using `state.context`.
+and `state.haystack` is subsequently traversed using `state.context`.
+
+If a value other than `undefined` is returned, that value is written to `state.haystack` before traversal.
 
 _Examples_:
 <pre><example>
@@ -365,8 +367,15 @@ haystack: { a: 0 }
 context: { b: 0 }
 needles: ['**']
 comment: combining haystack and context
-beforeFn: (state) => { /* eslint-disable no-param-reassign */ state.haystack = [state.haystack, state.context]; }
+beforeFn: ({ haystack: h, context: c }) => [h, c]
 rtn: 'key'
+</example></pre>
+<pre><example>
+haystack: { a: 0, b: 1 }
+needles: ['**']
+comment: pre-processing haystack
+beforeFn: ({ haystack: h }) => Object.keys(h)
+rtn: ['key', 'value']
 </example></pre>
 
 #### afterFn
@@ -374,8 +383,10 @@ rtn: 'key'
 Type: `function`<br>
 Default: `undefined`
 
-When defined, this function is called after traversal as `afterFn(state = { result, haystack, context })`
-and `state.result` is then returned from the search invocation.
+When defined, this function is called after traversal as `afterFn(state = { result, haystack, context })`.
+
+If a value other than `undefined` is returned, that value is returned as
+the final result instead of `state.result`.
 
 _Examples_:
 <pre><example>
@@ -383,8 +394,16 @@ haystack: { a: 0 }
 context: 5
 needles: ['**']
 comment: returning count plus context
-afterFn: (state) => { /* eslint-disable no-param-reassign */ state.result += state.context; }
+afterFn: ({ result, context }) => result + context
 rtn: 'count'
+joined: false
+</example></pre>
+<pre><example>
+haystack: { a: 0, b: 3, c: 4 }
+needles: ['**']
+comment: post-processing result
+afterFn: ({ result }) => result.filter((v) => v > 3)
+rtn: 'value'
 joined: false
 </example></pre>
 

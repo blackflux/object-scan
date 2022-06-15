@@ -38,14 +38,14 @@ describe('Testing iterator', () => {
       const r1 = [];
       const r2 = [];
       recIterate(data, (...args) => r1.push(args));
-      iterator.iterate(data, (type, arg) => r2.push([type, type === 'FIN' ? arg.slice(0) : arg]));
+      iterator(data, (type, arg) => r2.push([type, type === 'FIN' ? arg.slice(0) : arg]));
       expect(r1, parsedNeedleToStringArray(data)).to.deep.equal(r2);
     }
   });
 
   it('Testing Empty Array handling', () => {
     const r1 = [];
-    iterator.iterate(
+    iterator(
       [1, new Set([2, []]), 3],
       (type, arg) => r1.push([type, type === 'FIN' ? arg.slice(0) : arg])
     );

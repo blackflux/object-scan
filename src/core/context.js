@@ -1,5 +1,12 @@
 import assert from '../generic/assert.js';
 
+const expect = (opts, option, types) => {
+  assert(
+    types.includes(typeof opts[option]),
+    () => `Option "${option}" not one of [${types.join(', ')}]`
+  );
+};
+
 export default (opts) => {
   const ctx = {
     filterFn: undefined,
@@ -17,15 +24,15 @@ export default (opts) => {
     ...opts
   };
 
-  assert(Object.keys(ctx).length === 12, 'Unexpected Option provided!');
-  assert(['function', 'undefined'].includes(typeof ctx.filterFn));
-  assert(['function', 'undefined'].includes(typeof ctx.breakFn));
-  assert(['function', 'undefined'].includes(typeof ctx.beforeFn));
-  assert(['function', 'undefined'].includes(typeof ctx.afterFn));
-  assert(['function', 'undefined'].includes(typeof ctx.compareFn));
-  assert(typeof ctx.reverse === 'boolean');
-  assert(typeof ctx.orderByNeedles === 'boolean');
-  assert(typeof ctx.abort === 'boolean');
+  assert(Object.keys(ctx).length === 12, 'Unexpected Option provided');
+  expect(ctx, 'filterFn', ['function', 'undefined']);
+  expect(ctx, 'breakFn', ['function', 'undefined']);
+  expect(ctx, 'beforeFn', ['function', 'undefined']);
+  expect(ctx, 'afterFn', ['function', 'undefined']);
+  expect(ctx, 'compareFn', ['function', 'undefined']);
+  expect(ctx, 'reverse', ['boolean']);
+  expect(ctx, 'orderByNeedles', ['boolean']);
+  expect(ctx, 'abort', ['boolean']);
   assert(
     (
       typeof ctx.rtn === 'function'
@@ -47,11 +54,11 @@ export default (opts) => {
         'isMatch', 'matchedBy', 'excludedBy',
         'traversedBy', 'isCircular', 'isLeaf', 'depth'
       ].includes(e))
-    )
+    ),
+    'Option "rtn" is malformed'
   );
-  assert(typeof ctx.joined === 'boolean');
-  assert(typeof ctx.useArraySelector === 'boolean');
-  assert(typeof ctx.strict === 'boolean');
-
+  expect(ctx, 'joined', ['boolean']);
+  expect(ctx, 'useArraySelector', ['boolean']);
+  expect(ctx, 'strict', ['boolean']);
   return ctx;
 };
