@@ -205,7 +205,7 @@ export default (haystack_, searches_, ctx) => {
   if (ctx.afterFn !== undefined) {
     const r = ctx.afterFn(state);
     if (r !== undefined) {
-      return r;
+      state.result = r;
     }
   }
   return state.result;
