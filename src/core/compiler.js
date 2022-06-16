@@ -56,11 +56,6 @@ const WILDCARD = Symbol('wildcard');
 const setWildcard = (input, wildcard) => defineProperty(input, WILDCARD, wildcard);
 export const getWildcard = (input) => input[WILDCARD];
 
-const VALUES = Symbol('values');
-const setValues = (input, entries) => defineProperty(input, VALUES, entries);
-const addValues = (input, values) => merge(input, VALUES, ...values);
-export const getValues = (input) => input[VALUES];
-
 export const matchedBy = (searches) => Array
   .from(new Set(searches.flatMap((e) => getLeafNeedlesMatch(e))));
 export const excludedBy = (searches) => Array
@@ -165,9 +160,6 @@ const finalizeTower = (tower, ctx) => {
     const child = stack.pop();
     const parent = stack.pop();
 
-    if (!(VALUES in child)) {
-      setValues(child, child.vs);
-    }
     if (link) {
       links.push(parent, child);
     }
@@ -178,12 +170,10 @@ const finalizeTower = (tower, ctx) => {
       setHasMatches(parent);
     }
   }
-  setValues(tower, tower.vs);
 
   for (let idx = 0, len = links.length; idx < len; idx += 2) {
     const parent = links[idx];
     const child = links[idx + 1];
-    addValues(parent, getValues(child));
     parent.vs.push(...child.vs.filter((v) => !parent.vs.includes(v)));
   }
 
@@ -192,7 +182,7 @@ const finalizeTower = (tower, ctx) => {
     if (tower.has('')) {
       roots.push(tower.get(''));
     }
-    roots.push(...getValues(tower).filter((e) => getWildcard(e).isStarRec));
+    roots.push(...tower.vs.filter((e) => getWildcard(e).isStarRec));
     setRoots(tower, roots);
   }
 };

@@ -4,8 +4,7 @@ import Context from '../../src/core/context.js';
 import {
   getWildcard, compile, excludedBy, traversedBy,
   hasMatches, getNeedles, matchedBy, isLeaf,
-  isMatch, isLastLeafMatch, getIndex, getLeafNeedles,
-  getValues
+  isMatch, isLastLeafMatch, getIndex, getLeafNeedles
 } from '../../src/core/compiler.js';
 
 const c = (needles, ctx = {}) => compile(needles, Context(ctx));
@@ -410,14 +409,14 @@ describe('Testing compiler', () => {
       const tower = c(input);
       expect(tower).to.deep.equal({ a: {} });
 
-      const towerValues = getValues(tower);
+      const towerValues = tower.vs;
       expect(towerValues).to.deep.equal([tower.a, { b: { a: {} } }]);
-      expect(getValues(tower.a)).to.deep.equal([]);
+      expect(tower.a.vs).to.deep.equal([]);
 
-      expect(getValues(towerValues[0])).to.deep.equal([]);
-      expect(getValues(towerValues[1])).to.deep.equal([{ a: {} }]);
-      expect(getValues(towerValues[1].b)).to.deep.equal([{}, towerValues[1]]);
-      expect(getValues(towerValues[1].b.a)).to.deep.equal([]);
+      expect(towerValues[0].vs).to.deep.equal([]);
+      expect(towerValues[1].vs).to.deep.equal([{ a: {} }]);
+      expect(towerValues[1].b.vs).to.deep.equal([{}, towerValues[1]]);
+      expect(towerValues[1].b.a.vs).to.deep.equal([]);
     });
 
     it('Testing with exclude', () => {
@@ -425,11 +424,11 @@ describe('Testing compiler', () => {
       const tower = c(input);
       expect(tower).to.deep.equal({});
 
-      const towerValues = getValues(tower);
+      const towerValues = tower.vs;
       expect(towerValues).to.deep.equal([{ a: {} }, {}]);
-      expect(getValues(towerValues[0])).to.deep.equal([{}]);
-      expect(getValues(towerValues[0].a)).to.deep.equal([{ a: {} }]);
-      expect(getValues(towerValues[1])).to.deep.equal([{}]);
+      expect(towerValues[0].vs).to.deep.equal([{}]);
+      expect(towerValues[0].a.vs).to.deep.equal([{ a: {} }]);
+      expect(towerValues[1].vs).to.deep.equal([{}]);
     });
   });
 });
