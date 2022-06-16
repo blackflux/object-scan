@@ -4,6 +4,7 @@ import iterator from './compiler-iterator.js';
 import { defineProperty } from '../generic/helper.js';
 import { Wildcard } from './wildcard.js';
 import { Ref } from './ref.js';
+import { Node } from './node.js';
 
 const LEAF = Symbol('leaf');
 const markLeaf = (input, match, readonly) => defineProperty(input, LEAF, match, readonly);
@@ -90,12 +91,12 @@ const applyNeedle = (tower, needle, tree, ctx) => {
           if (wc.isStarRec) {
             wc.setPointer(cur);
           }
-          wc.setNode({});
+          wc.setNode(new Node());
           ctx.stack.push(cur, wc.node, true);
           next(wc.node);
         } else {
           // eslint-disable-next-line no-param-reassign
-          wc.target = 'target' in wcParent ? wcParent.target : parent[wcParent.value];
+          wc.target = 'target' in wcParent ? wcParent.target : parent.get(wcParent.value);
           ctx.stack.push(wc.target, wc.node, true);
           if (wc.pointer !== null) {
             next(wc.pointer);
@@ -114,17 +115,16 @@ const applyNeedle = (tower, needle, tree, ctx) => {
         throw new Error(`Redundant Recursion: "${needle}"`);
       }
       if (!redundantRecursion) {
-        if (!(wc.value in cur)) {
-          const child = {};
-          // eslint-disable-next-line no-param-reassign
-          cur[wc.value] = child;
+        if (!cur.has(wc.value)) {
+          const child = new Node();
+          cur.set(wc.value, child);
           ctx.stack.push(cur, child, false);
           if (ctx.orderByNeedles) {
             setOrder(child, ctx.counter);
           }
           setWildcard(child, wc);
         }
-        next(cur[wc.value]);
+        next(cur.get(wc.value));
       } else {
         // eslint-disable-next-line no-param-reassign
         wc.target = cur;
@@ -135,9 +135,9 @@ const applyNeedle = (tower, needle, tree, ctx) => {
     },
     onFin: (cur, parent, wc, excluded) => {
       if (ctx.strict && wc.isSimpleStarRec) {
-        const unnecessary = Object.keys(parent).filter((k) => !['**', ''].includes(k));
+        const unnecessary = [...parent.keys()].filter((k) => !['**', ''].includes(k));
         if (unnecessary.length !== 0) {
-          throw new Error(`Needle Target Invalidated: "${parent[unnecessary[0]][NEEDLES][0]}" by "${needle}"`);
+          throw new Error(`Needle Target Invalidated: "${parent.get(unnecessary[0])[NEEDLES][0]}" by "${needle}"`);
         }
       }
       addNeedle(cur, needle);
@@ -166,7 +166,7 @@ const finalizeTower = (tower, ctx) => {
     const parent = stack.pop();
 
     if (!(VALUES in child)) {
-      setValues(child, Object.values(child).reverse());
+      setValues(child, child.vs);
     }
     if (link) {
       links.push(parent, child);
@@ -178,18 +178,19 @@ const finalizeTower = (tower, ctx) => {
       setHasMatches(parent);
     }
   }
-  setValues(tower, Object.values(tower).reverse());
+  setValues(tower, tower.vs);
 
   for (let idx = 0, len = links.length; idx < len; idx += 2) {
     const parent = links[idx];
     const child = links[idx + 1];
     addValues(parent, getValues(child));
+    parent.vs.push(...child.vs.filter((v) => !parent.vs.includes(v)));
   }
 
   if (ctx.useArraySelector === false) {
     const roots = [];
-    if ('' in tower) {
-      roots.push(tower['']);
+    if (tower.has('')) {
+      roots.push(tower.get(''));
     }
     roots.push(...getValues(tower).filter((e) => getWildcard(e).isStarRec));
     setRoots(tower, roots);
@@ -197,7 +198,7 @@ const finalizeTower = (tower, ctx) => {
 };
 
 export const compile = (needles, ctx) => {
-  const tower = {};
+  const tower = new Node();
   ctx.counter = 0;
   ctx.stack = [];
   for (let idx = 0; idx < needles.length; idx += 1) {

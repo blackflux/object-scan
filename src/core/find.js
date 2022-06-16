@@ -1,7 +1,7 @@
 import {
   getWildcard, excludedBy, traversedBy,
   hasMatches, matchedBy, isLastLeafMatch,
-  getValues, getOrder, getRoots
+  getOrder, getRoots
 } from './compiler.js';
 import Result from './find-result.js';
 import { toPath } from '../generic/helper.js';
@@ -100,8 +100,8 @@ export default (haystack_, searches_, ctx) => {
   const result = Result(kwargs, ctx);
   kwargs.getResult = () => result.get();
 
-  if ('' in searches_[0] && (ctx.useArraySelector || !Array.isArray(state.haystack))) {
-    stack[1] = [...stack[1], searches_[0]['']];
+  if (searches_[0].has('') && (ctx.useArraySelector || !Array.isArray(state.haystack))) {
+    stack[1] = [...stack[1], searches_[0].get('')];
   }
 
   do {
@@ -175,7 +175,7 @@ export default (haystack_, searches_, ctx) => {
             if (getWildcard(search).recMatch(key)) {
               searchesOut.push(search);
             }
-            const values = getValues(search);
+            const values = search.vs;
             let eIdx = values.length;
             // eslint-disable-next-line no-plusplus
             while (eIdx--) {
