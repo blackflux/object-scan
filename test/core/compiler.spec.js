@@ -2,7 +2,7 @@ import { describe } from 'node-tdd';
 import { expect } from 'chai';
 import Context from '../../src/core/context.js';
 import {
-  getWildcard, compile, excludedBy, traversedBy,
+  compile, excludedBy, traversedBy,
   hasMatches, getNeedles, matchedBy, isLeaf,
   isMatch, isLastLeafMatch, getIndex, getLeafNeedles
 } from '../../src/core/compiler.js';
@@ -340,16 +340,16 @@ describe('Testing compiler', () => {
     expect(getLeafNeedles(tower.get('a').get('e'))).to.deep.equal([]);
     expect(getLeafNeedles(tower.get('a').get('e').get('f'))).to.deep.equal(['a.{c,e}.f']);
 
-    expect(getWildcard(tower).regex).to.deep.equal(/^.*$/);
-    expect(getWildcard(tower.get('a')).regex).to.deep.equal(/^a$/);
-    expect(getWildcard(tower.get('a').get('b')).regex).to.deep.equal(/^b$/);
-    expect(getWildcard(tower.get('a').get('b').get('d')).regex).to.deep.equal(/^d$/);
-    expect(getWildcard(tower.get('a').get('b').get('d').get('g')).regex).to.deep.equal(/^g$/);
-    expect(getWildcard(tower.get('a').get('c')).regex).to.deep.equal(/^c$/);
-    expect(getWildcard(tower.get('a').get('c').get('d')).regex).to.deep.equal(/^d$/);
-    expect(getWildcard(tower.get('a').get('c').get('f')).regex).to.deep.equal(/^f$/);
-    expect(getWildcard(tower.get('a').get('e')).regex).to.deep.equal(/^e$/);
-    expect(getWildcard(tower.get('a').get('e').get('f')).regex).to.deep.equal(/^f$/);
+    expect(tower.wildcard.regex).to.deep.equal(/^.*$/);
+    expect(tower.get('a').wildcard.regex).to.deep.equal(/^a$/);
+    expect(tower.get('a').get('b').wildcard.regex).to.deep.equal(/^b$/);
+    expect(tower.get('a').get('b').get('d').wildcard.regex).to.deep.equal(/^d$/);
+    expect(tower.get('a').get('b').get('d').get('g').wildcard.regex).to.deep.equal(/^g$/);
+    expect(tower.get('a').get('c').wildcard.regex).to.deep.equal(/^c$/);
+    expect(tower.get('a').get('c').get('d').wildcard.regex).to.deep.equal(/^d$/);
+    expect(tower.get('a').get('c').get('f').wildcard.regex).to.deep.equal(/^f$/);
+    expect(tower.get('a').get('e').wildcard.regex).to.deep.equal(/^e$/);
+    expect(tower.get('a').get('e').get('f').wildcard.regex).to.deep.equal(/^f$/);
 
     expect(getIndex(tower)).to.deep.equal(undefined);
     expect(getIndex(tower.get('a'))).to.deep.equal(undefined);

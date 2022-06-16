@@ -52,10 +52,6 @@ const ORDER = Symbol('order');
 const setOrder = (input, order) => defineProperty(input, ORDER, order);
 export const getOrder = (input) => input[ORDER];
 
-const WILDCARD = Symbol('wildcard');
-const setWildcard = (input, wildcard) => defineProperty(input, WILDCARD, wildcard);
-export const getWildcard = (input) => input[WILDCARD];
-
 export const matchedBy = (searches) => Array
   .from(new Set(searches.flatMap((e) => getLeafNeedlesMatch(e))));
 export const excludedBy = (searches) => Array
@@ -111,13 +107,12 @@ const applyNeedle = (tower, needle, tree, ctx) => {
       }
       if (!redundantRecursion) {
         if (!cur.has(wc.value)) {
-          const child = new Node();
+          const child = new Node(wc);
           cur.set(wc.value, child);
           ctx.stack.push(cur, child, false);
           if (ctx.orderByNeedles) {
             setOrder(child, ctx.counter);
           }
-          setWildcard(child, wc);
         }
         next(cur.get(wc.value));
       } else {
@@ -182,13 +177,13 @@ const finalizeTower = (tower, ctx) => {
     if (tower.has('')) {
       roots.push(tower.get(''));
     }
-    roots.push(...tower.vs.filter((e) => getWildcard(e).isStarRec));
+    roots.push(...tower.vs.filter((e) => e.wildcard.isStarRec));
     setRoots(tower, roots);
   }
 };
 
 export const compile = (needles, ctx) => {
-  const tower = new Node();
+  const tower = new Node(new Wildcard('*', false));
   ctx.counter = 0;
   ctx.stack = [];
   for (let idx = 0; idx < needles.length; idx += 1) {
@@ -196,7 +191,6 @@ export const compile = (needles, ctx) => {
     const tree = [parser.parse(needle, ctx)];
     applyNeedle(tower, needle, tree, ctx);
   }
-  setWildcard(tower, new Wildcard('*', false));
   finalizeTower(tower, ctx);
   return tower;
 };

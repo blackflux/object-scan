@@ -1,5 +1,5 @@
 import {
-  getWildcard, excludedBy, traversedBy,
+  excludedBy, traversedBy,
   hasMatches, matchedBy, isLastLeafMatch,
   getOrder, getRoots
 } from './compiler.js';
@@ -172,7 +172,7 @@ export default (haystack_, searches_, ctx) => {
         } else {
           for (let sIdx = 0, sLen = searches.length; sIdx !== sLen; sIdx += 1) {
             const search = searches[sIdx];
-            if (getWildcard(search).recMatch(key)) {
+            if (search.wildcard.recMatch(key)) {
               searchesOut.push(search);
             }
             const values = search.vs;
@@ -180,7 +180,7 @@ export default (haystack_, searches_, ctx) => {
             // eslint-disable-next-line no-plusplus
             while (eIdx--) {
               const value = values[eIdx];
-              if (getWildcard(value).typeMatch(key, isArray)) {
+              if (value.wildcard.typeMatch(key, isArray)) {
                 searchesOut.push(value);
               }
             }

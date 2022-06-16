@@ -1,6 +1,7 @@
 export class Node extends Map {
-  constructor() {
+  constructor(wildcard = null) {
     super();
+    this.wildcard = wildcard;
     this.vs = [];
   }
 
