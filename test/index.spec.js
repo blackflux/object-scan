@@ -963,4 +963,14 @@ describe('Testing Find', () => {
         filterFn: ['a', 'd', 'e', 'f', 0, 'g', 'h', 'i', 1, 'b', 'c']
       });
   });
+
+  it('Testing traversal key order', () => {
+    const r = objectScan(['**.measure', '86'], {
+      filterFn: ({ context, traversedBy }) => {
+        context.push(traversedBy);
+      },
+      strict: false
+    })({ 86: 0 }, []);
+    expect(r).to.deep.equal([['**.measure', '86']]);
+  });
 });
