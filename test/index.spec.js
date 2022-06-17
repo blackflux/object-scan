@@ -963,4 +963,32 @@ describe('Testing Find', () => {
         filterFn: ['a', 'd', 'e', 'f', 0, 'g', 'h', 'i', 1, 'b', 'c']
       });
   });
+
+  it('Testing traversal key order', () => {
+    const r = objectScan(['**.measure', '86'], {
+      filterFn: ({ context, traversedBy }) => {
+        context.push(traversedBy);
+      }
+    })({ 86: 0 }, []);
+    expect(r).to.deep.equal([['86', '**.measure']]);
+  });
+
+  it('Testing deeply nested array traversal', () => {
+    const createDeeplyNestedArray = (depth) => {
+      let retval = [1];
+      for (let i = 0; i < depth - 1; i += 1) {
+        retval = [1, retval];
+      }
+      return retval;
+    };
+
+    const NUMBER_OF_ELEMENTS = 100000;
+    const arr = createDeeplyNestedArray(NUMBER_OF_ELEMENTS);
+
+    const arraySum = objectScan(['**{[*]}'], {
+      rtn: 'sum',
+      filterFn: ({ value }) => typeof value === 'number'
+    });
+    expect(arraySum(arr)).to.equal(NUMBER_OF_ELEMENTS);
+  });
 });

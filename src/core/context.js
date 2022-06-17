@@ -44,7 +44,7 @@ export default (opts) => {
       'property', 'gproperty', 'parent', 'gparent', 'parents',
       'isMatch', 'matchedBy', 'excludedBy',
       'traversedBy', 'isCircular', 'isLeaf', 'depth',
-      'bool', 'count'
+      'bool', 'count', 'sum'
     ].includes(ctx.rtn)
     || (
       Array.isArray(ctx.rtn)
