@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import Context from '../../src/core/context.js';
 import {
   compile, excludedBy, traversedBy,
-  matchedBy, isLastLeafMatch, getLeafNeedles
+  matchedBy, isLastLeafMatch
 } from '../../src/core/compiler.js';
 
 const c = (needles, ctx = {}) => compile(needles, Context(ctx));
@@ -317,16 +317,16 @@ describe('Testing compiler', () => {
     expect(tower.get('a').get('e').needles).to.deep.equal(['a.{c,e}.f']);
     expect(tower.get('a').get('e').get('f').needles).to.deep.equal(['a.{c,e}.f']);
 
-    expect(getLeafNeedles(tower)).to.deep.equal([]);
-    expect(getLeafNeedles(tower.get('a'))).to.deep.equal([]);
-    expect(getLeafNeedles(tower.get('a').get('b'))).to.deep.equal([]);
-    expect(getLeafNeedles(tower.get('a').get('b').get('d'))).to.deep.equal(['a.{b,c}.d']);
-    expect(getLeafNeedles(tower.get('a').get('b').get('d').get('g'))).to.deep.equal(['!a.b.d.g']);
-    expect(getLeafNeedles(tower.get('a').get('c'))).to.deep.equal([]);
-    expect(getLeafNeedles(tower.get('a').get('c').get('d'))).to.deep.equal(['a.{b,c}.d']);
-    expect(getLeafNeedles(tower.get('a').get('c').get('f'))).to.deep.equal(['a.{c,e}.f']);
-    expect(getLeafNeedles(tower.get('a').get('e'))).to.deep.equal([]);
-    expect(getLeafNeedles(tower.get('a').get('e').get('f'))).to.deep.equal(['a.{c,e}.f']);
+    expect(tower.leafNeedles).to.deep.equal([]);
+    expect(tower.get('a').leafNeedles).to.deep.equal([]);
+    expect(tower.get('a').get('b').leafNeedles).to.deep.equal([]);
+    expect(tower.get('a').get('b').get('d').leafNeedles).to.deep.equal(['a.{b,c}.d']);
+    expect(tower.get('a').get('b').get('d').get('g').leafNeedles).to.deep.equal(['!a.b.d.g']);
+    expect(tower.get('a').get('c').leafNeedles).to.deep.equal([]);
+    expect(tower.get('a').get('c').get('d').leafNeedles).to.deep.equal(['a.{b,c}.d']);
+    expect(tower.get('a').get('c').get('f').leafNeedles).to.deep.equal(['a.{c,e}.f']);
+    expect(tower.get('a').get('e').leafNeedles).to.deep.equal([]);
+    expect(tower.get('a').get('e').get('f').leafNeedles).to.deep.equal(['a.{c,e}.f']);
 
     expect(tower.wildcard.regex).to.deep.equal(/^.*$/);
     expect(tower.get('a').wildcard.regex).to.deep.equal(/^a$/);

@@ -15,10 +15,6 @@ const merge = (input, symbol, ...values) => {
   }
 };
 
-const LEAF_NEEDLES = Symbol('leaf-needles');
-const addLeafNeedle = (input, needle) => merge(input, LEAF_NEEDLES, needle);
-export const getLeafNeedles = (input) => input[LEAF_NEEDLES] || [];
-
 const LEAF_NEEDLES_EXCLUDE = Symbol('leaf-needles-exclude');
 const addLeafNeedleExclude = (input, needle) => merge(input, LEAF_NEEDLES_EXCLUDE, needle);
 export const getLeafNeedlesExclude = (input) => input[LEAF_NEEDLES_EXCLUDE] || [];
@@ -103,10 +99,10 @@ const applyNeedle = (tower, needle, tree, ctx) => {
         }
       }
       cur.addNeedle(needle);
-      if (ctx.strict && LEAF_NEEDLES in cur) {
-        throw new Error(`Redundant Needle Target: "${cur[LEAF_NEEDLES][0]}" vs "${needle}"`);
+      if (ctx.strict && cur.leafNeedles.length !== 0) {
+        throw new Error(`Redundant Needle Target: "${cur.leafNeedles[0]}" vs "${needle}"`);
       }
-      addLeafNeedle(cur, needle, ctx.strict);
+      cur.addLeafNeedle(needle);
       if (excluded) {
         addLeafNeedleExclude(cur, needle);
       } else {

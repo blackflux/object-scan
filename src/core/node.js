@@ -7,6 +7,7 @@ export class Node extends Map {
     this.match = false;
     this.matches = false;
     this.needles = [];
+    this.leafNeedles = [];
   }
 
   set(k, v) {
@@ -35,5 +36,11 @@ export class Node extends Map {
 
   setRoots(roots) {
     this.roots = roots;
+  }
+
+  addLeafNeedle(needle) {
+    if (!this.leafNeedles.includes(needle)) {
+      this.leafNeedles.push(needle);
+    }
   }
 }
