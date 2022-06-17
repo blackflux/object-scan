@@ -1,3 +1,5 @@
+// todo: can we make this not a map
+// todo: move wildcard logic in here and cache
 export class Node extends Map {
   constructor(wildcard = null, order = null) {
     super();

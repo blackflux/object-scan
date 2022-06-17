@@ -40,6 +40,7 @@ const compileWildcard = (str) => {
   return parseWildcard(str);
 };
 
+// todo: rename to Value and greatly simplify
 export class Wildcard {
   constructor(value, excluded) {
     this.value = value;
