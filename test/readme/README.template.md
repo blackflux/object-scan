@@ -593,12 +593,13 @@ Can be explicitly set as a `string`:
 - `depth`: as passed into `filterFn`
 - `bool`: returns _true_ iff a match is found
 - `count`: returns the match count
+- `sum`: returns the match sum
 
-When set to `array`, can contain any of the above except `context`, `bool` and `count`.
+When set to `array`, can contain any of the above except `context`, `bool`, `count` and `sum`.
 
 When set to `function`, called with _callback_ signature for every match. Returned value is added to the result.
 
-When **abort** is set to `true` and _rtn_ is not `context`, `bool` or `count`,
+When **abort** is set to `true` and _rtn_ is not `context`, `bool`, `count` or `sum`,
 the first entry of the result or _undefined_ is returned.
 
 _Examples_:
