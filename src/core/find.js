@@ -1,10 +1,7 @@
 import {
-  excludedBy, traversedBy, matchedBy, isLastLeafMatch
-} from './compiler.js';
+  excludedBy, traversedBy, matchedBy, isLastLeafMatch, formatPath
+} from './find-util.js';
 import Result from './find-result.js';
-import { toPath } from '../generic/helper.js';
-
-const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);
 
 export default (haystack_, searches_, ctx) => {
   const state = {

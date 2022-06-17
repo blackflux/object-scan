@@ -1,10 +1,11 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
 import Context from '../../src/core/context.js';
+import { compile } from '../../src/core/compiler.js';
 import {
-  compile, excludedBy, traversedBy,
+  excludedBy, traversedBy,
   matchedBy, isLastLeafMatch
-} from '../../src/core/compiler.js';
+} from '../../src/core/find-util.js';
 
 const c = (needles, ctx = {}) => compile(needles, Context(ctx));
 const ser = (node, known = []) => Object
