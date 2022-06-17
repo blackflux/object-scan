@@ -968,8 +968,7 @@ describe('Testing Find', () => {
     const r = objectScan(['**.measure', '86'], {
       filterFn: ({ context, traversedBy }) => {
         context.push(traversedBy);
-      },
-      strict: false
+      }
     })({ 86: 0 }, []);
     expect(r).to.deep.equal([['86', '**.measure']]);
   });
