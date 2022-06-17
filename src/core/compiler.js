@@ -6,10 +6,6 @@ import { Wildcard } from './wildcard.js';
 import { Ref } from './ref.js';
 import { Node } from './node.js';
 
-const ROOTS = Symbol('roots');
-const setRoots = (input, roots) => defineProperty(input, ROOTS, roots);
-export const getRoots = (input) => input[ROOTS];
-
 const merge = (input, symbol, ...values) => {
   const target = input[symbol];
   if (target === undefined) {
@@ -158,7 +154,7 @@ const finalizeTower = (tower, ctx) => {
       roots.push(tower.get(''));
     }
     roots.push(...tower.vs.filter((e) => e.wildcard.isStarRec));
-    setRoots(tower, roots);
+    tower.setRoots(roots);
   }
 };
 

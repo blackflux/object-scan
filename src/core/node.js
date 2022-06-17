@@ -31,4 +31,8 @@ export class Node extends Map {
   setIndex(index) {
     this.index = index;
   }
+
+  setRoots(roots) {
+    this.roots = roots;
+  }
 }
