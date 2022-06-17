@@ -882,6 +882,18 @@ objectScan(['**'], {
 // => [ 2, 1 ]
 ```
 </details>
+<details><summary> <code>['**']</code> <em>(return sum)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: -2, d: 1 }, e: [3, 7] } };
+objectScan(['**'], {
+  filterFn: ({ value }) => typeof value === 'number',
+  rtn: 'sum'
+})(haystack);
+// => 9
+```
+</details>
 
 #### joined
 

@@ -662,6 +662,14 @@ rtn: ({ value }) => value + 1
 filterFn: ({ isLeaf }) => isLeaf
 comment: return value plus one
 </example></pre>
+<pre><example>
+haystack: { a: { b: { c: -2, d: 1 }, e: [3, 7] } }
+needles: ['**']
+joined: false
+rtn: 'sum'
+filterFn: ({ value }) => typeof value === 'number'
+comment: return sum
+</example></pre>
 
 #### joined
 
