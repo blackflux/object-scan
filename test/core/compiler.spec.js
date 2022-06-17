@@ -2,7 +2,7 @@ import { describe } from 'node-tdd';
 import { expect } from 'chai';
 import Context from '../../src/core/context.js';
 import {
-  compile, excludedBy, traversedBy, getNeedles,
+  compile, excludedBy, traversedBy,
   matchedBy, isLastLeafMatch, getIndex, getLeafNeedles
 } from '../../src/core/compiler.js';
 
@@ -306,16 +306,16 @@ describe('Testing compiler', () => {
     expect(tower.get('a').get('e').matches).to.equal(true);
     expect(tower.get('a').get('e').get('f').matches).to.equal(true);
 
-    expect(getNeedles(tower)).to.deep.equal(['a.{b,c}.d', 'a.{c,e}.f', '!a.b.d.g']);
-    expect(getNeedles(tower.get('a'))).to.deep.equal(['a.{b,c}.d', 'a.{c,e}.f', '!a.b.d.g']);
-    expect(getNeedles(tower.get('a').get('b'))).to.deep.equal(['a.{b,c}.d', '!a.b.d.g']);
-    expect(getNeedles(tower.get('a').get('b').get('d'))).to.deep.equal(['a.{b,c}.d', '!a.b.d.g']);
-    expect(getNeedles(tower.get('a').get('b').get('d').get('g'))).to.deep.equal(['!a.b.d.g']);
-    expect(getNeedles(tower.get('a').get('c'))).to.deep.equal(['a.{b,c}.d', 'a.{c,e}.f']);
-    expect(getNeedles(tower.get('a').get('c').get('d'))).to.deep.equal(['a.{b,c}.d']);
-    expect(getNeedles(tower.get('a').get('c').get('f'))).to.deep.equal(['a.{c,e}.f']);
-    expect(getNeedles(tower.get('a').get('e'))).to.deep.equal(['a.{c,e}.f']);
-    expect(getNeedles(tower.get('a').get('e').get('f'))).to.deep.equal(['a.{c,e}.f']);
+    expect(tower.needles).to.deep.equal(['a.{b,c}.d', 'a.{c,e}.f', '!a.b.d.g']);
+    expect(tower.get('a').needles).to.deep.equal(['a.{b,c}.d', 'a.{c,e}.f', '!a.b.d.g']);
+    expect(tower.get('a').get('b').needles).to.deep.equal(['a.{b,c}.d', '!a.b.d.g']);
+    expect(tower.get('a').get('b').get('d').needles).to.deep.equal(['a.{b,c}.d', '!a.b.d.g']);
+    expect(tower.get('a').get('b').get('d').get('g').needles).to.deep.equal(['!a.b.d.g']);
+    expect(tower.get('a').get('c').needles).to.deep.equal(['a.{b,c}.d', 'a.{c,e}.f']);
+    expect(tower.get('a').get('c').get('d').needles).to.deep.equal(['a.{b,c}.d']);
+    expect(tower.get('a').get('c').get('f').needles).to.deep.equal(['a.{c,e}.f']);
+    expect(tower.get('a').get('e').needles).to.deep.equal(['a.{c,e}.f']);
+    expect(tower.get('a').get('e').get('f').needles).to.deep.equal(['a.{c,e}.f']);
 
     expect(getLeafNeedles(tower)).to.deep.equal([]);
     expect(getLeafNeedles(tower.get('a'))).to.deep.equal([]);

@@ -5,6 +5,7 @@ export class Node extends Map {
     this.vs = [];
     this.match = false;
     this.matches = false;
+    this.needles = [];
   }
 
   set(k, v) {
@@ -19,5 +20,11 @@ export class Node extends Map {
 
   markMatches() {
     this.matches = true;
+  }
+
+  addNeedle(needle) {
+    if (!this.needles.includes(needle)) {
+      this.needles.push(needle);
+    }
   }
 }

@@ -31,10 +31,6 @@ const LEAF_NEEDLES_MATCH = Symbol('leaf-needles-match');
 const addLeafNeedleMatch = (input, needle) => merge(input, LEAF_NEEDLES_MATCH, needle);
 export const getLeafNeedlesMatch = (input) => input[LEAF_NEEDLES_MATCH] || [];
 
-const NEEDLES = Symbol('needles');
-const addNeedle = (input, needle) => merge(input, NEEDLES, needle);
-export const getNeedles = (input) => input[NEEDLES];
-
 const INDEX = Symbol('index');
 const setIndex = (input, index, readonly) => defineProperty(input, INDEX, index, readonly);
 export const getIndex = (input) => input[INDEX];
@@ -48,7 +44,7 @@ export const matchedBy = (searches) => Array
 export const excludedBy = (searches) => Array
   .from(new Set(searches.flatMap((e) => getLeafNeedlesExclude(e))));
 export const traversedBy = (searches) => Array
-  .from(new Set(searches.flatMap((e) => getNeedles(e))));
+  .from(new Set(searches.flatMap((e) => e.needles)));
 
 export const isLastLeafMatch = (searches) => {
   let maxLeafIndex = Number.MIN_SAFE_INTEGER;
@@ -67,7 +63,7 @@ export const isLastLeafMatch = (searches) => {
 const applyNeedle = (tower, needle, tree, ctx) => {
   iterator(tower, needle, tree, {
     onAdd: (cur, parent, wc, wcParent, next) => {
-      addNeedle(cur, needle);
+      cur.addNeedle(needle);
       if (wc instanceof Ref) {
         if (wc.left === true) {
           if (wc.isStarRec) {
@@ -118,10 +114,10 @@ const applyNeedle = (tower, needle, tree, ctx) => {
       if (ctx.strict && wc.isSimpleStarRec) {
         const unnecessary = [...parent.keys()].filter((k) => !['**', ''].includes(k));
         if (unnecessary.length !== 0) {
-          throw new Error(`Needle Target Invalidated: "${parent.get(unnecessary[0])[NEEDLES][0]}" by "${needle}"`);
+          throw new Error(`Needle Target Invalidated: "${parent.get(unnecessary[0]).needles[0]}" by "${needle}"`);
         }
       }
-      addNeedle(cur, needle);
+      cur.addNeedle(needle);
       if (ctx.strict && LEAF_NEEDLES in cur) {
         throw new Error(`Redundant Needle Target: "${cur[LEAF_NEEDLES][0]}" vs "${needle}"`);
       }
