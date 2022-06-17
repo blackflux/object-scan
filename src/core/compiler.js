@@ -27,10 +27,6 @@ const LEAF_NEEDLES_MATCH = Symbol('leaf-needles-match');
 const addLeafNeedleMatch = (input, needle) => merge(input, LEAF_NEEDLES_MATCH, needle);
 export const getLeafNeedlesMatch = (input) => input[LEAF_NEEDLES_MATCH] || [];
 
-const ORDER = Symbol('order');
-const setOrder = (input, order) => defineProperty(input, ORDER, order);
-export const getOrder = (input) => input[ORDER];
-
 export const matchedBy = (searches) => Array
   .from(new Set(searches.flatMap((e) => getLeafNeedlesMatch(e))));
 export const excludedBy = (searches) => Array
@@ -86,12 +82,9 @@ const applyNeedle = (tower, needle, tree, ctx) => {
       }
       if (!redundantRecursion) {
         if (!cur.has(wc.value)) {
-          const child = new Node(wc);
+          const child = new Node(wc, ctx.counter);
           cur.set(wc.value, child);
           ctx.stack.push(cur, child, false);
-          if (ctx.orderByNeedles) {
-            setOrder(child, ctx.counter);
-          }
         }
         next(cur.get(wc.value));
       } else {
@@ -159,7 +152,7 @@ const finalizeTower = (tower, ctx) => {
 };
 
 export const compile = (needles, ctx) => {
-  const tower = new Node(new Wildcard('*', false));
+  const tower = new Node(new Wildcard('*', false), ctx.counter);
   ctx.counter = 0;
   ctx.stack = [];
   for (let idx = 0; idx < needles.length; idx += 1) {

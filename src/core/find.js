@@ -1,6 +1,5 @@
 import {
-  excludedBy, traversedBy, matchedBy,
-  isLastLeafMatch, getOrder
+  excludedBy, traversedBy, matchedBy, isLastLeafMatch
 } from './compiler.js';
 import Result from './find-result.js';
 import { toPath } from '../generic/helper.js';
@@ -186,7 +185,7 @@ export default (haystack_, searches_, ctx) => {
           }
         }
         if (ctx.orderByNeedles) {
-          searchesOut.index = Buffer.from(searchesOut.map((e) => getOrder(e)).sort());
+          searchesOut.index = Buffer.from(searchesOut.map(({ order }) => order).sort());
           let checkIdx = stack.length - 3;
           const checkIdxMin = checkIdx - kIdx * 4;
           while (checkIdx !== checkIdxMin && Buffer.compare(searchesOut.index, stack[checkIdx].index) === 1) {
