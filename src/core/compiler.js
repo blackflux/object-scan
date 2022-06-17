@@ -31,10 +31,6 @@ const LEAF_NEEDLES_MATCH = Symbol('leaf-needles-match');
 const addLeafNeedleMatch = (input, needle) => merge(input, LEAF_NEEDLES_MATCH, needle);
 export const getLeafNeedlesMatch = (input) => input[LEAF_NEEDLES_MATCH] || [];
 
-const INDEX = Symbol('index');
-const setIndex = (input, index, readonly) => defineProperty(input, INDEX, index, readonly);
-export const getIndex = (input) => input[INDEX];
-
 const ORDER = Symbol('order');
 const setOrder = (input, order) => defineProperty(input, ORDER, order);
 export const getOrder = (input) => input[ORDER];
@@ -51,7 +47,7 @@ export const isLastLeafMatch = (searches) => {
   let maxLeaf = null;
   for (let idx = 0, len = searches.length; idx < len; idx += 1) {
     const s = searches[idx];
-    const index = getIndex(s);
+    const { index } = s;
     if (index !== undefined && index > maxLeafIndex) {
       maxLeafIndex = index;
       maxLeaf = s;
@@ -128,7 +124,7 @@ const applyNeedle = (tower, needle, tree, ctx) => {
         addLeafNeedleMatch(cur, needle);
       }
       cur.setMatch(!excluded);
-      setIndex(cur, ctx.counter, ctx.strict);
+      cur.setIndex(ctx.counter);
       ctx.counter += 1;
     }
   });

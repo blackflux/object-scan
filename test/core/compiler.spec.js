@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import Context from '../../src/core/context.js';
 import {
   compile, excludedBy, traversedBy,
-  matchedBy, isLastLeafMatch, getIndex, getLeafNeedles
+  matchedBy, isLastLeafMatch, getLeafNeedles
 } from '../../src/core/compiler.js';
 
 const c = (needles, ctx = {}) => compile(needles, Context(ctx));
@@ -339,16 +339,16 @@ describe('Testing compiler', () => {
     expect(tower.get('a').get('e').wildcard.regex).to.deep.equal(/^e$/);
     expect(tower.get('a').get('e').get('f').wildcard.regex).to.deep.equal(/^f$/);
 
-    expect(getIndex(tower)).to.deep.equal(undefined);
-    expect(getIndex(tower.get('a'))).to.deep.equal(undefined);
-    expect(getIndex(tower.get('a').get('b'))).to.deep.equal(undefined);
-    expect(getIndex(tower.get('a').get('b').get('d'))).to.deep.equal(0);
-    expect(getIndex(tower.get('a').get('b').get('d').get('g'))).to.deep.equal(4);
-    expect(getIndex(tower.get('a').get('c'))).to.deep.equal(undefined);
-    expect(getIndex(tower.get('a').get('c').get('d'))).to.deep.equal(1);
-    expect(getIndex(tower.get('a').get('c').get('f'))).to.deep.equal(2);
-    expect(getIndex(tower.get('a').get('e'))).to.deep.equal(undefined);
-    expect(getIndex(tower.get('a').get('e').get('f'))).to.deep.equal(3);
+    expect(tower.index).to.deep.equal(undefined);
+    expect(tower.get('a').index).to.deep.equal(undefined);
+    expect(tower.get('a').get('b').index).to.deep.equal(undefined);
+    expect(tower.get('a').get('b').get('d').index).to.deep.equal(0);
+    expect(tower.get('a').get('b').get('d').get('g').index).to.deep.equal(4);
+    expect(tower.get('a').get('c').index).to.deep.equal(undefined);
+    expect(tower.get('a').get('c').get('d').index).to.deep.equal(1);
+    expect(tower.get('a').get('c').get('f').index).to.deep.equal(2);
+    expect(tower.get('a').get('e').index).to.deep.equal(undefined);
+    expect(tower.get('a').get('e').get('f').index).to.deep.equal(3);
 
     expect(isLastLeafMatch([tower])).to.deep.equal(false);
     expect(isLastLeafMatch([tower.get('a')])).to.deep.equal(false);

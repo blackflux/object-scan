@@ -27,4 +27,8 @@ export class Node extends Map {
       this.needles.push(needle);
     }
   }
+
+  setIndex(index) {
+    this.index = index;
+  }
 }
