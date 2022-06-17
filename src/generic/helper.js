@@ -1,6 +1,3 @@
-export const defineProperty = (target, k, v, readonly = true) => Object
-  .defineProperty(target, k, { value: v, writable: !readonly });
-
 const specialChars = /[?!,.*+[\](){}\\]/g;
 export const escape = (input) => input.replace(specialChars, '\\$&');
 

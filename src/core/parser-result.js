@@ -1,11 +1,6 @@
 import assert from '../generic/assert.js';
-import { defineProperty } from '../generic/helper.js';
 import { Wildcard } from './wildcard.js';
 import { Ref } from './ref.js';
-
-const IS_EXCLUDED = Symbol('is-excluded');
-const markExcluded = (input) => defineProperty(input, IS_EXCLUDED, true);
-const isExcluded = (input) => input[IS_EXCLUDED] === true;
 
 const throwError = (msg, input, context = {}) => {
   throw new Error(Object.entries(context)
@@ -28,7 +23,7 @@ export default (input) => {
   // group related
   const parentStack = [];
   const newChild = (asOr) => {
-    if (isExcluded(cResult)) {
+    if (cResult.excluded === true) {
       assert(excludeNext === false);
       excludeNext = true;
     }
@@ -95,7 +90,7 @@ export default (input) => {
     startGroup: () => {
       newChild(true);
       if (excludeNext) {
-        markExcluded(cResult);
+        cResult.excluded = true;
         excludeNext = false;
       }
       newChild(false);
