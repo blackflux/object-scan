@@ -2,9 +2,8 @@ import { describe } from 'node-tdd';
 import { expect } from 'chai';
 import Context from '../../src/core/context.js';
 import {
-  compile, excludedBy, traversedBy,
-  hasMatches, getNeedles, matchedBy,
-  isLastLeafMatch, getIndex, getLeafNeedles
+  compile, excludedBy, traversedBy, getNeedles,
+  matchedBy, isLastLeafMatch, getIndex, getLeafNeedles
 } from '../../src/core/compiler.js';
 
 const c = (needles, ctx = {}) => compile(needles, Context(ctx));
@@ -102,18 +101,18 @@ describe('Testing compiler', () => {
       const input = ['{!a}.{b}'];
       const tower = c(input);
       expect(ser(tower)).to.deep.equal({ a: { b: {} } });
-      expect(hasMatches(tower)).to.equal(false);
-      expect(hasMatches(tower.get('a'))).to.equal(false);
-      expect(hasMatches(tower.get('a').get('b'))).to.equal(false);
+      expect(tower.matches).to.equal(false);
+      expect(tower.get('a').matches).to.equal(false);
+      expect(tower.get('a').get('b').matches).to.equal(false);
     });
 
     it('Testing no backward exclusion inheritance in component path', () => {
       const input = ['{a}.{!b}'];
       const tower = c(input);
       expect(ser(tower)).to.deep.equal({ a: { b: {} } });
-      expect(hasMatches(tower)).to.equal(false);
-      expect(hasMatches(tower.get('a'))).to.equal(false);
-      expect(hasMatches(tower.get('a').get('b'))).to.equal(false);
+      expect(tower.matches).to.equal(false);
+      expect(tower.get('a').matches).to.equal(false);
+      expect(tower.get('a').get('b').matches).to.equal(false);
     });
   });
 
@@ -121,23 +120,23 @@ describe('Testing compiler', () => {
     const input = ['a.b.c.d.e', '!a.b.c.d.f'];
     const tower = c(input);
     expect(ser(tower)).to.deep.equal({ a: { b: { c: { d: { e: {}, f: {} } } } } });
-    expect(hasMatches(tower)).to.equal(true);
-    expect(hasMatches(tower.get('a'))).to.equal(true);
-    expect(hasMatches(tower.get('a').get('b'))).to.equal(true);
-    expect(hasMatches(tower.get('a').get('b').get('c'))).to.equal(true);
-    expect(hasMatches(tower.get('a').get('b').get('c').get('d'))).to.equal(true);
-    expect(hasMatches(tower.get('a').get('b').get('c').get('d')
-      .get('e'))).to.equal(true);
-    expect(hasMatches(tower.get('a').get('b').get('c').get('d')
-      .get('f'))).to.equal(false);
+    expect(tower.matches).to.equal(true);
+    expect(tower.get('a').matches).to.equal(true);
+    expect(tower.get('a').get('b').matches).to.equal(true);
+    expect(tower.get('a').get('b').get('c').matches).to.equal(true);
+    expect(tower.get('a').get('b').get('c').get('d').matches).to.equal(true);
+    expect(tower.get('a').get('b').get('c').get('d')
+      .get('e').matches).to.equal(true);
+    expect(tower.get('a').get('b').get('c').get('d')
+      .get('f').matches).to.equal(false);
   });
 
   it('Testing top level exclusion', () => {
     const input = ['!a'];
     const tower = c(input);
     expect(ser(tower)).to.deep.equal({ a: {} });
-    expect(hasMatches(tower)).to.equal(false);
-    expect(hasMatches(tower.get('a'))).to.equal(false);
+    expect(tower.matches).to.equal(false);
+    expect(tower.get('a').matches).to.equal(false);
   });
 
   it('Testing Or Paths', () => {
@@ -296,16 +295,16 @@ describe('Testing compiler', () => {
     expect(tower.get('a').get('e').match).to.equal(false);
     expect(tower.get('a').get('e').get('f').match).to.equal(true);
 
-    expect(hasMatches(tower)).to.equal(true);
-    expect(hasMatches(tower.get('a'))).to.equal(true);
-    expect(hasMatches(tower.get('a').get('b'))).to.equal(true);
-    expect(hasMatches(tower.get('a').get('b').get('d'))).to.equal(true);
-    expect(hasMatches(tower.get('a').get('b').get('d').get('g'))).to.equal(false);
-    expect(hasMatches(tower.get('a').get('c'))).to.equal(true);
-    expect(hasMatches(tower.get('a').get('c').get('d'))).to.equal(true);
-    expect(hasMatches(tower.get('a').get('c').get('f'))).to.equal(true);
-    expect(hasMatches(tower.get('a').get('e'))).to.equal(true);
-    expect(hasMatches(tower.get('a').get('e').get('f'))).to.equal(true);
+    expect(tower.matches).to.equal(true);
+    expect(tower.get('a').matches).to.equal(true);
+    expect(tower.get('a').get('b').matches).to.equal(true);
+    expect(tower.get('a').get('b').get('d').matches).to.equal(true);
+    expect(tower.get('a').get('b').get('d').get('g').matches).to.equal(false);
+    expect(tower.get('a').get('c').matches).to.equal(true);
+    expect(tower.get('a').get('c').get('d').matches).to.equal(true);
+    expect(tower.get('a').get('c').get('f').matches).to.equal(true);
+    expect(tower.get('a').get('e').matches).to.equal(true);
+    expect(tower.get('a').get('e').get('f').matches).to.equal(true);
 
     expect(getNeedles(tower)).to.deep.equal(['a.{b,c}.d', 'a.{c,e}.f', '!a.b.d.g']);
     expect(getNeedles(tower.get('a'))).to.deep.equal(['a.{b,c}.d', 'a.{c,e}.f', '!a.b.d.g']);

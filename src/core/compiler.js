@@ -10,10 +10,6 @@ const ROOTS = Symbol('roots');
 const setRoots = (input, roots) => defineProperty(input, ROOTS, roots);
 export const getRoots = (input) => input[ROOTS];
 
-const HAS_MATCHES = Symbol('has-matches');
-const setHasMatches = (input) => defineProperty(input, HAS_MATCHES, true);
-export const hasMatches = (input) => input[HAS_MATCHES] === true;
-
 const merge = (input, symbol, ...values) => {
   const target = input[symbol];
   if (target === undefined) {
@@ -153,11 +149,8 @@ const finalizeTower = (tower, ctx) => {
     if (link) {
       links.push(parent, child);
     }
-    if (child.match === true) {
-      setHasMatches(child);
-    }
-    if (hasMatches(child) && !hasMatches(parent)) {
-      setHasMatches(parent);
+    if (child.matches) {
+      parent.markMatches();
     }
   }
 

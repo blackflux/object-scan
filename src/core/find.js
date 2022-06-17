@@ -1,7 +1,6 @@
 import {
-  excludedBy, traversedBy,
-  hasMatches, matchedBy, isLastLeafMatch,
-  getOrder, getRoots
+  excludedBy, traversedBy, matchedBy,
+  isLastLeafMatch, getOrder, getRoots
 } from './compiler.js';
 import Result from './find-result.js';
 import { toPath } from '../generic/helper.js';
@@ -137,7 +136,7 @@ export default (haystack_, searches_, ctx) => {
       continue;
     }
 
-    if (!searches.some((s) => hasMatches(s))) {
+    if (!searches.some(({ matches }) => matches)) {
       // eslint-disable-next-line no-continue
       continue;
     }

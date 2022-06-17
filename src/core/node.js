@@ -4,6 +4,7 @@ export class Node extends Map {
     this.wildcard = wildcard;
     this.vs = [];
     this.match = false;
+    this.matches = false;
   }
 
   set(k, v) {
@@ -13,5 +14,10 @@ export class Node extends Map {
 
   setMatch(match) {
     this.match = match;
+    this.matches = match;
+  }
+
+  markMatches() {
+    this.matches = true;
   }
 }
