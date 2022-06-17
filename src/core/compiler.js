@@ -1,34 +1,16 @@
 /* compile needles to hierarchical map object */
 import parser from './parser.js';
 import iterator from './compiler-iterator.js';
-import { defineProperty } from '../generic/helper.js';
 import { Wildcard } from './wildcard.js';
 import { Ref } from './ref.js';
 import { Node } from './node.js';
 
-const merge = (input, symbol, ...values) => {
-  const target = input[symbol];
-  if (target === undefined) {
-    defineProperty(input, symbol, values);
-  } else {
-    target.push(...values.filter((v) => !target.includes(v)));
-  }
-};
-
-const LEAF_NEEDLES_EXCLUDE = Symbol('leaf-needles-exclude');
-const addLeafNeedleExclude = (input, needle) => merge(input, LEAF_NEEDLES_EXCLUDE, needle);
-export const getLeafNeedlesExclude = (input) => input[LEAF_NEEDLES_EXCLUDE] || [];
-
-const LEAF_NEEDLES_MATCH = Symbol('leaf-needles-match');
-const addLeafNeedleMatch = (input, needle) => merge(input, LEAF_NEEDLES_MATCH, needle);
-export const getLeafNeedlesMatch = (input) => input[LEAF_NEEDLES_MATCH] || [];
-
 export const matchedBy = (searches) => Array
-  .from(new Set(searches.flatMap((e) => getLeafNeedlesMatch(e))));
+  .from(new Set(searches.flatMap(({ leafNeedlesMatch }) => leafNeedlesMatch)));
 export const excludedBy = (searches) => Array
-  .from(new Set(searches.flatMap((e) => getLeafNeedlesExclude(e))));
+  .from(new Set(searches.flatMap(({ leafNeedlesExclude }) => leafNeedlesExclude)));
 export const traversedBy = (searches) => Array
-  .from(new Set(searches.flatMap((e) => e.needles)));
+  .from(new Set(searches.flatMap(({ needles }) => needles)));
 
 export const isLastLeafMatch = (searches) => {
   let maxLeafIndex = Number.MIN_SAFE_INTEGER;
@@ -104,9 +86,9 @@ const applyNeedle = (tower, needle, tree, ctx) => {
       }
       cur.addLeafNeedle(needle);
       if (excluded) {
-        addLeafNeedleExclude(cur, needle);
+        cur.addLeafNeedleExclude(needle);
       } else {
-        addLeafNeedleMatch(cur, needle);
+        cur.addLeafNeedleMatch(needle);
       }
       cur.setMatch(!excluded);
       cur.setIndex(ctx.counter);

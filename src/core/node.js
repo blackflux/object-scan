@@ -8,6 +8,8 @@ export class Node extends Map {
     this.matches = false;
     this.needles = [];
     this.leafNeedles = [];
+    this.leafNeedlesExclude = [];
+    this.leafNeedlesMatch = [];
   }
 
   set(k, v) {
@@ -41,6 +43,18 @@ export class Node extends Map {
   addLeafNeedle(needle) {
     if (!this.leafNeedles.includes(needle)) {
       this.leafNeedles.push(needle);
+    }
+  }
+
+  addLeafNeedleExclude(needle) {
+    if (!this.leafNeedlesExclude.includes(needle)) {
+      this.leafNeedlesExclude.push(needle);
+    }
+  }
+
+  addLeafNeedleMatch(needle) {
+    if (!this.leafNeedlesMatch.includes(needle)) {
+      this.leafNeedlesMatch.push(needle);
     }
   }
 }
