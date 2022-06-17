@@ -84,12 +84,7 @@ const applyNeedle = (tower, needle, tree, ctx) => {
       if (ctx.strict && cur.leafNeedles.length !== 0) {
         throw new Error(`Redundant Needle Target: "${cur.leafNeedles[0]}" vs "${needle}"`);
       }
-      cur.addLeafNeedle(needle);
-      if (excluded) {
-        cur.addLeafNeedleExclude(needle);
-      } else {
-        cur.addLeafNeedleMatch(needle);
-      }
+      cur.addLeafNeedle(needle, excluded);
       cur.setMatch(!excluded);
       cur.setIndex(ctx.counter);
       ctx.counter += 1;

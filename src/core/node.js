@@ -40,21 +40,13 @@ export class Node extends Map {
     this.roots = roots;
   }
 
-  addLeafNeedle(needle) {
+  addLeafNeedle(needle, excluded) {
     if (!this.leafNeedles.includes(needle)) {
       this.leafNeedles.push(needle);
     }
-  }
-
-  addLeafNeedleExclude(needle) {
-    if (!this.leafNeedlesExclude.includes(needle)) {
-      this.leafNeedlesExclude.push(needle);
-    }
-  }
-
-  addLeafNeedleMatch(needle) {
-    if (!this.leafNeedlesMatch.includes(needle)) {
-      this.leafNeedlesMatch.push(needle);
+    const target = excluded ? this.leafNeedlesExclude : this.leafNeedlesMatch;
+    if (!target.includes(needle)) {
+      target.push(needle);
     }
   }
 }
