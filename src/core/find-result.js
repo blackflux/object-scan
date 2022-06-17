@@ -23,6 +23,15 @@ export default (kwargs, ctx) => {
       get: () => result
     };
   }
+  if (ctx.rtn === 'sum') {
+    let result = 0;
+    return {
+      onMatch: ({ value }) => {
+        result += value;
+      },
+      get: () => result
+    };
+  }
 
   const result = [];
   return {

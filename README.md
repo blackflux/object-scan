@@ -797,12 +797,13 @@ Can be explicitly set as a `string`:
 - `depth`: as passed into `filterFn`
 - `bool`: returns _true_ iff a match is found
 - `count`: returns the match count
+- `sum`: returns the match sum
 
-When set to `array`, can contain any of the above except `context`, `bool` and `count`.
+When set to `array`, can contain any of the above except `context`, `bool`, `count` and `sum`.
 
 When set to `function`, called with _callback_ signature for every match. Returned value is added to the result.
 
-When **abort** is set to `true` and _rtn_ is not `context`, `bool` or `count`,
+When **abort** is set to `true` and _rtn_ is not `context`, `bool`, `count` or `sum`,
 the first entry of the result or _undefined_ is returned.
 
 _Examples_:
@@ -879,6 +880,18 @@ objectScan(['**'], {
   rtn: ({ value }) => value + 1
 })(haystack);
 // => [ 2, 1 ]
+```
+</details>
+<details><summary> <code>['**']</code> <em>(return sum)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: -2, d: 1 }, e: [3, 7] } };
+objectScan(['**'], {
+  filterFn: ({ value }) => typeof value === 'number',
+  rtn: 'sum'
+})(haystack);
+// => 9
 ```
 </details>
 
