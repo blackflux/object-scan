@@ -6,11 +6,6 @@ import { Wildcard } from './wildcard.js';
 import { Ref } from './ref.js';
 import { Node } from './node.js';
 
-const LEAF = Symbol('leaf');
-const markLeaf = (input, match, readonly) => defineProperty(input, LEAF, match, readonly);
-export const isLeaf = (input) => LEAF in input;
-export const isMatch = (input) => input !== undefined && input[LEAF] === true;
-
 const ROOTS = Symbol('roots');
 const setRoots = (input, roots) => defineProperty(input, ROOTS, roots);
 export const getRoots = (input) => input[ROOTS];
@@ -70,7 +65,7 @@ export const isLastLeafMatch = (searches) => {
       maxLeaf = s;
     }
   }
-  return maxLeaf !== null && isMatch(maxLeaf);
+  return maxLeaf !== null && maxLeaf.match === true;
 };
 
 const applyNeedle = (tower, needle, tree, ctx) => {
@@ -140,7 +135,7 @@ const applyNeedle = (tower, needle, tree, ctx) => {
       } else {
         addLeafNeedleMatch(cur, needle);
       }
-      markLeaf(cur, !excluded, ctx.strict);
+      cur.setMatch(!excluded);
       setIndex(cur, ctx.counter, ctx.strict);
       ctx.counter += 1;
     }
@@ -158,7 +153,7 @@ const finalizeTower = (tower, ctx) => {
     if (link) {
       links.push(parent, child);
     }
-    if (isMatch(child)) {
+    if (child.match === true) {
       setHasMatches(child);
     }
     if (hasMatches(child) && !hasMatches(parent)) {

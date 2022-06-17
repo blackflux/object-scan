@@ -3,8 +3,8 @@ import { expect } from 'chai';
 import Context from '../../src/core/context.js';
 import {
   compile, excludedBy, traversedBy,
-  hasMatches, getNeedles, matchedBy, isLeaf,
-  isMatch, isLastLeafMatch, getIndex, getLeafNeedles
+  hasMatches, getNeedles, matchedBy,
+  isLastLeafMatch, getIndex, getLeafNeedles
 } from '../../src/core/compiler.js';
 
 const c = (needles, ctx = {}) => compile(needles, Context(ctx));
@@ -285,27 +285,16 @@ describe('Testing compiler', () => {
       }
     });
 
-    expect(isLeaf(tower)).to.equal(false);
-    expect(isLeaf(tower.get('a'))).to.equal(false);
-    expect(isLeaf(tower.get('a').get('b'))).to.equal(false);
-    expect(isLeaf(tower.get('a').get('b').get('d'))).to.equal(true);
-    expect(isLeaf(tower.get('a').get('b').get('d').get('g'))).to.equal(true);
-    expect(isLeaf(tower.get('a').get('c'))).to.equal(false);
-    expect(isLeaf(tower.get('a').get('c').get('d'))).to.equal(true);
-    expect(isLeaf(tower.get('a').get('c').get('f'))).to.equal(true);
-    expect(isLeaf(tower.get('a').get('e'))).to.equal(false);
-    expect(isLeaf(tower.get('a').get('e').get('f'))).to.equal(true);
-
-    expect(isMatch(tower)).to.equal(false);
-    expect(isMatch(tower.get('a'))).to.equal(false);
-    expect(isMatch(tower.get('a').get('b'))).to.equal(false);
-    expect(isMatch(tower.get('a').get('b').get('d'))).to.equal(true);
-    expect(isMatch(tower.get('a').get('b').get('d').get('g'))).to.equal(false);
-    expect(isMatch(tower.get('a').get('c'))).to.equal(false);
-    expect(isMatch(tower.get('a').get('c').get('d'))).to.equal(true);
-    expect(isMatch(tower.get('a').get('c').get('f'))).to.equal(true);
-    expect(isMatch(tower.get('a').get('e'))).to.equal(false);
-    expect(isMatch(tower.get('a').get('e').get('f'))).to.equal(true);
+    expect(tower.match).to.equal(false);
+    expect(tower.get('a').match).to.equal(false);
+    expect(tower.get('a').get('b').match).to.equal(false);
+    expect(tower.get('a').get('b').get('d').match).to.equal(true);
+    expect(tower.get('a').get('b').get('d').get('g').match).to.equal(false);
+    expect(tower.get('a').get('c').match).to.equal(false);
+    expect(tower.get('a').get('c').get('d').match).to.equal(true);
+    expect(tower.get('a').get('c').get('f').match).to.equal(true);
+    expect(tower.get('a').get('e').match).to.equal(false);
+    expect(tower.get('a').get('e').get('f').match).to.equal(true);
 
     expect(hasMatches(tower)).to.equal(true);
     expect(hasMatches(tower.get('a'))).to.equal(true);
