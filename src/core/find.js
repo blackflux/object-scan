@@ -128,7 +128,7 @@ export default (haystack_, searches_, ctx) => {
 
     if (isMatch) {
       if (ctx.filterFn === undefined || ctx.filterFn(kwargs) !== false) {
-        result.onMatch();
+        result.onMatch(kwargs);
         if (ctx.abort) {
           stack.length = 0;
         }
