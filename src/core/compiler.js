@@ -80,13 +80,10 @@ const applyNeedle = (tower, needle, tree, ctx) => {
           throw new Error(`Needle Target Invalidated: "${parent.get(unnecessary[0]).needles[0]}" by "${needle}"`);
         }
       }
-      cur.addNeedle(needle);
       if (ctx.strict && cur.leafNeedles.length !== 0) {
         throw new Error(`Redundant Needle Target: "${cur.leafNeedles[0]}" vs "${needle}"`);
       }
-      cur.addLeafNeedle(needle, excluded);
-      cur.setMatch(!excluded);
-      cur.setIndex(ctx.counter);
+      cur.finish(needle, excluded, ctx.counter);
       ctx.counter += 1;
     }
   });

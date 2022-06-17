@@ -17,11 +17,6 @@ export class Node extends Map {
     this.vs.splice(0, 0, v);
   }
 
-  setMatch(match) {
-    this.match = match;
-    this.matches = match;
-  }
-
   markMatches() {
     this.matches = true;
   }
@@ -32,15 +27,12 @@ export class Node extends Map {
     }
   }
 
-  setIndex(index) {
-    this.index = index;
-  }
-
   setRoots(roots) {
     this.roots = roots;
   }
 
-  addLeafNeedle(needle, excluded) {
+  finish(needle, excluded, index) {
+    this.addNeedle(needle);
     if (!this.leafNeedles.includes(needle)) {
       this.leafNeedles.push(needle);
     }
@@ -48,5 +40,8 @@ export class Node extends Map {
     if (!target.includes(needle)) {
       target.push(needle);
     }
+    this.match = !excluded;
+    this.matches = this.match;
+    this.index = index;
   }
 }
