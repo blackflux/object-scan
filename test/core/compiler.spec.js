@@ -8,8 +8,24 @@ import {
 } from '../../src/core/find-util.js';
 
 const c = (needles, ctx = {}) => compile(needles, Context(ctx));
-const ser = (node, known = []) => Object
-  .fromEntries([...node.entries()].map(([k, v]) => [k, ser(v)]));
+const ser = (...args) => {
+  const map = new Map();
+  const get = ({ wildcard }, verbose) => {
+    if (!map.has(wildcard)) {
+      map.set(wildcard, map.size);
+    }
+    return verbose ? `:${map.get(wildcard)}` : '';
+  };
+  const rec = (node, verbose = false, known = []) => {
+    const wc = node.wildcard;
+    if (known.includes(wc)) {
+      return `REF<${wc.value}${get(node, verbose)}>`;
+    }
+    return Object
+      .fromEntries(node.vs.map((v) => [`${v.wildcard.value}${get(v, verbose)}`, rec(v, verbose, known.concat(wc))]));
+  };
+  return rec(...args);
+};
 
 describe('Testing compiler', () => {
   describe('Testing Redundant Needle Target Errors', () => {
@@ -93,7 +109,7 @@ describe('Testing compiler', () => {
     const count = 10;
     const input = '[{0,1}]'.repeat(count);
     const tower = c([input]);
-    const str = JSON.stringify(tower);
+    const str = JSON.stringify(ser(tower));
     expect(str.endsWith(`{}}${'}'.repeat(count)}`));
   });
 
@@ -400,30 +416,30 @@ describe('Testing compiler', () => {
     it('Testing basic two step (star)', () => {
       const input = ['**{a.b}.a'];
       const tower = c(input);
-      expect(ser(tower)).to.deep.equal({ a: {} });
-
-      const towerValues = tower.vs;
-      expect(towerValues).to.deep.equal([tower.get('a'), new Map([
-        ['b', new Map([['a', new Map()]])]
-      ])]);
-      expect(tower.get('a').vs).to.deep.equal([]);
-
-      expect(towerValues[0].vs).to.deep.equal([]);
-      expect(towerValues[1].vs).to.deep.equal([new Map([['a', new Map()]])]);
-      expect(towerValues[1].get('b').vs).to.deep.equal([new Map(), towerValues[1]]);
-      expect(towerValues[1].get('b').get('a').vs).to.deep.equal([]);
+      expect(ser(tower, true)).to.deep.equal({
+        'a:0': {},
+        'a:1': {
+          'b:2': {
+            'a:0': {},
+            'a:1': 'REF<a:1>'
+          }
+        }
+      });
     });
 
     it('Testing with exclude', () => {
       const input = ['**{a}', '!**{a.a}'];
       const tower = c(input);
-      expect(ser(tower)).to.deep.equal({});
-
-      const towerValues = tower.vs;
-      expect(towerValues).to.deep.equal([new Map([['a', new Map()]]), new Map()]);
-      expect(towerValues[0].vs).to.deep.equal([new Map()]);
-      expect(towerValues[0].get('a').vs).to.deep.equal([new Map([['a', new Map()]])]);
-      expect(towerValues[1].vs).to.deep.equal([new Map()]);
+      expect(ser(tower, true)).to.deep.equal({
+        'a:0': {
+          'a:1': {
+            'a:0': 'REF<a:0>'
+          }
+        },
+        'a:2': {
+          'a:2': 'REF<a:2>'
+        }
+      });
     });
   });
 });

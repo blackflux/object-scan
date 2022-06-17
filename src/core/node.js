@@ -1,10 +1,11 @@
 // todo: can we make this not a map
 // todo: move wildcard logic in here and cache
-export class Node extends Map {
-  constructor(wildcard = null, order = null) {
-    super();
+export class Node {
+  constructor(wildcard, ctx) {
+    ctx.nodes.push(this);
+    this.ctx = ctx;
     this.wildcard = wildcard;
-    this.order = order;
+    this.order = ctx.counter;
     this.vs = [];
     this.match = false;
     this.matches = false;
@@ -14,9 +15,16 @@ export class Node extends Map {
     this.leafNeedlesMatch = [];
   }
 
-  set(k, v) {
-    super.set(k, v);
-    this.vs.splice(0, 0, v);
+  add(v) {
+    this.vs.push(v);
+  }
+
+  has(k) {
+    return this.vs.some(({ wildcard }) => wildcard.value === k);
+  }
+
+  get(k) {
+    return this.vs.find(({ wildcard }) => wildcard.value === k);
   }
 
   markMatches() {

@@ -14,13 +14,13 @@ const applyNeedle = (tower, needle, tree, ctx) => {
           if (wc.isStarRec) {
             wc.setPointer(cur);
           }
-          wc.setNode(new Node());
-          ctx.stack.push(cur, wc.node, true);
+          wc.setNode(new Node(null, ctx));
+          ctx.links.push(cur, wc.node);
           next(wc.node);
         } else {
           // eslint-disable-next-line no-param-reassign
           wc.target = 'target' in wcParent ? wcParent.target : parent.get(wcParent.value);
-          ctx.stack.push(wc.target, wc.node, true);
+          ctx.links.push(wc.target, wc.node);
           if (wc.pointer !== null) {
             next(wc.pointer);
             wc.setPointer(null);
@@ -39,9 +39,8 @@ const applyNeedle = (tower, needle, tree, ctx) => {
       }
       if (!redundantRecursion) {
         if (!cur.has(wc.value)) {
-          const child = new Node(wc, ctx.counter);
-          cur.set(wc.value, child);
-          ctx.stack.push(cur, child, false);
+          const child = new Node(wc, ctx);
+          cur.add(child);
         }
         next(cur.get(wc.value));
       } else {
@@ -54,9 +53,9 @@ const applyNeedle = (tower, needle, tree, ctx) => {
     },
     onFin: (cur, parent, wc, excluded) => {
       if (ctx.strict && wc.isSimpleStarRec) {
-        const unnecessary = [...parent.keys()].filter((k) => !['**', ''].includes(k));
+        const unnecessary = parent.vs.filter(({ wildcard }) => !['', '**'].includes(wildcard.value));
         if (unnecessary.length !== 0) {
-          throw new Error(`Needle Target Invalidated: "${parent.get(unnecessary[0]).needles[0]}" by "${needle}"`);
+          throw new Error(`Needle Target Invalidated: "${unnecessary[0].needles[0]}" by "${needle}"`);
         }
       }
       if (ctx.strict && cur.leafNeedles.length !== 0) {
@@ -69,25 +68,22 @@ const applyNeedle = (tower, needle, tree, ctx) => {
 };
 
 const finalizeTower = (tower, ctx) => {
-  const { stack } = ctx;
-  const links = [];
-  while (stack.length !== 0) {
-    const link = stack.pop();
-    const child = stack.pop();
-    const parent = stack.pop();
-
-    if (link) {
-      links.push(parent, child);
-    }
-    if (child.matches) {
-      parent.markMatches();
-    }
+  const { links } = ctx;
+  while (links.length !== 0) {
+    const child = links.pop();
+    const parent = links.pop();
+    const { vs } = parent;
+    parent.vs = [...child.vs.filter((v) => !vs.includes(v)), ...vs];
   }
 
-  for (let idx = 0, len = links.length; idx < len; idx += 2) {
-    const parent = links[idx];
-    const child = links[idx + 1];
-    parent.vs.push(...child.vs.filter((v) => !parent.vs.includes(v)));
+  const { nodes } = ctx;
+  while (nodes.length !== 0) {
+    const node = nodes.pop();
+    const { vs } = node;
+    vs.reverse();
+    if (vs.some((v) => v.matches)) {
+      node.markMatches();
+    }
   }
 
   if (ctx.useArraySelector === false) {
@@ -101,9 +97,10 @@ const finalizeTower = (tower, ctx) => {
 };
 
 export const compile = (needles, ctx) => {
-  const tower = new Node(new Wildcard('*', false), ctx.counter);
   ctx.counter = 0;
-  ctx.stack = [];
+  ctx.links = [];
+  ctx.nodes = [];
+  const tower = new Node(new Wildcard('*', false), ctx);
   for (let idx = 0; idx < needles.length; idx += 1) {
     const needle = needles[idx];
     const tree = [parser.parse(needle, ctx)];
