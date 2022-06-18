@@ -66,9 +66,15 @@ export class Node {
     this.isRec = this.isStarRec || this.isPlusRec;
     this.isAnyArrayTarget = value === '[*]';
     this.isAnyObjTarget = value === '*';
-    this.regex = this.isSimpleRec || this.isAnyObjTarget || this.isAnyArrayTarget
-      ? null
-      : compileValue(value);
+    if (this.isSimpleRec || this.isAnyObjTarget || this.isAnyArrayTarget) {
+      this.regex = null;
+    } else {
+      const { regex } = ctx;
+      if (!(value in regex)) {
+        regex[value] = compileValue(value);
+      }
+      this.regex = regex[value];
+    }
   }
 
   recMatch(key) {
