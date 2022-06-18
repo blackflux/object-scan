@@ -4,23 +4,34 @@ const charsToEscape = ['-', '/', '\\', '^', '$', '*', '+', '?', '.', '(', ')', '
 export const parseValue = (str) => {
   let regex = '';
   let escaped = false;
+  let simple = true;
   for (let idx = 0; idx < str.length; idx += 1) {
     const char = str[idx];
     if (!escaped && char === '\\') {
       escaped = true;
     } else if (!escaped && char === '*') {
+      simple = false;
       regex += '.*';
     } else if (!escaped && char === '+') {
+      simple = false;
       regex += '.+';
     } else if (!escaped && char === '?') {
+      simple = false;
       regex += '.';
     } else {
       if (charsToEscape.includes(char)) {
+        simple = false;
         regex += '\\';
       }
       regex += char;
       escaped = false;
     }
+  }
+  if (simple) {
+    return { test: (v) => v === regex };
+  }
+  if (regex === '.+') {
+    return { test: (v) => v !== '' };
   }
   return new RegExp(`^${regex}$`);
 };
