@@ -52,7 +52,7 @@ const applyNeedle = (tower, needle, tree, ctx) => {
     },
     onFin: (cur, parent, v, excluded) => {
       if (ctx.strict && v.isSimpleStarRec) {
-        const unnecessary = parent.values.filter(({ value }) => !['', '**'].includes(value));
+        const unnecessary = parent.children.filter(({ value }) => !['', '**'].includes(value));
         if (unnecessary.length !== 0) {
           throw new Error(`Needle Target Invalidated: "${unnecessary[0].needles[0]}" by "${needle}"`);
         }
@@ -71,16 +71,16 @@ const finalizeTower = (tower, ctx) => {
   while (links.length !== 0) {
     const child = links.pop();
     const parent = links.pop();
-    const { values } = parent;
-    parent.values = [...child.values.filter((v) => !values.includes(v)), ...values];
+    const { children } = parent;
+    parent.children = [...child.children.filter((c) => !children.includes(c)), ...children];
   }
 
   const { nodes } = ctx;
   while (nodes.length !== 0) {
     const node = nodes.pop();
-    const { values } = node;
-    values.reverse();
-    if (values.some((v) => v.matches)) {
+    const { children } = node;
+    children.reverse();
+    if (children.some(({ matches }) => matches)) {
       node.markMatches();
     }
   }
@@ -90,7 +90,7 @@ const finalizeTower = (tower, ctx) => {
     if (tower.has('')) {
       roots.push(tower.get(''));
     }
-    roots.push(...tower.values.filter((e) => e.isStarRec));
+    roots.push(...tower.children.filter(({ isStarRec }) => isStarRec));
     tower.setRoots(roots);
   }
 };

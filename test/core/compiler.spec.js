@@ -23,9 +23,9 @@ const ser = (root, verbose = false) => {
     }
     known.add(node);
     const r = Object
-      .fromEntries(node.values.map((v) => [
-        `${v.value}${get(v)}`,
-        rec(v)
+      .fromEntries(node.children.map((child) => [
+        `${child.value}${get(child)}`,
+        rec(child)
       ]));
     known.delete(node);
     return r;

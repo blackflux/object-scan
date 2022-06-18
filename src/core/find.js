@@ -170,13 +170,13 @@ export default (haystack_, searches_, ctx) => {
             if (search.recMatch(key)) {
               searchesOut.push(search);
             }
-            const { values } = search;
-            let eIdx = values.length;
+            const { children } = search;
+            let eIdx = children.length;
             // eslint-disable-next-line no-plusplus
             while (eIdx--) {
-              const value = values[eIdx];
-              if (value.typeMatch(key, isArray)) {
-                searchesOut.push(value);
+              const child = children[eIdx];
+              if (child.typeMatch(key, isArray)) {
+                searchesOut.push(child);
               }
             }
           }

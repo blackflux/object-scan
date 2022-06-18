@@ -1,12 +1,12 @@
 import { asRegex } from '../generic/helper.js';
 
 const charsToEscape = ['-', '/', '\\', '^', '$', '*', '+', '?', '.', '(', ')', '|', '[', ']', '{', '}'];
-export const parseValue = (str) => {
+export const parseValue = (value) => {
   let regex = '';
   let escaped = false;
   let simple = true;
-  for (let idx = 0; idx < str.length; idx += 1) {
-    const char = str[idx];
+  for (let idx = 0; idx < value.length; idx += 1) {
+    const char = value[idx];
     if (!escaped && char === '\\') {
       escaped = true;
     } else if (!escaped && char === '*') {
@@ -36,20 +36,20 @@ export const parseValue = (str) => {
   return new RegExp(`^${regex}$`);
 };
 
-const compileValue = (str) => {
-  if ((str.startsWith('**(') || str.startsWith('++(')) && str.endsWith(')')) {
-    return asRegex(str.slice(3, -1));
+const compileValue = (value) => {
+  if ((value.startsWith('**(') || value.startsWith('++(')) && value.endsWith(')')) {
+    return asRegex(value.slice(3, -1));
   }
-  if (str.startsWith('[(') && str.endsWith(')]')) {
-    return asRegex(str.slice(2, -2));
+  if (value.startsWith('[(') && value.endsWith(')]')) {
+    return asRegex(value.slice(2, -2));
   }
-  if (str.startsWith('(') && str.endsWith(')')) {
-    return asRegex(str.slice(1, -1));
+  if (value.startsWith('(') && value.endsWith(')')) {
+    return asRegex(value.slice(1, -1));
   }
-  if (str.startsWith('[') && str.endsWith(']')) {
-    return parseValue(str.slice(1, -1));
+  if (value.startsWith('[') && value.endsWith(']')) {
+    return parseValue(value.slice(1, -1));
   }
-  return parseValue(str);
+  return parseValue(value);
 };
 
 export class Node {
@@ -58,7 +58,7 @@ export class Node {
     this.value = value;
     this.ctx = ctx;
     this.order = ctx.counter;
-    this.values = [];
+    this.children = [];
     this.match = false;
     this.matches = false;
     this.needles = [];
@@ -118,15 +118,15 @@ export class Node {
   }
 
   add(v) {
-    this.values.push(v);
+    this.children.push(v);
   }
 
   has(k) {
-    return this.values.some(({ value }) => value === k);
+    return this.children.some(({ value }) => value === k);
   }
 
   get(k) {
-    return this.values.find(({ value }) => value === k);
+    return this.children.find(({ value }) => value === k);
   }
 
   markMatches() {
