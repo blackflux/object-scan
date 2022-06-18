@@ -218,11 +218,11 @@ describe('Testing path-to-needle-path.js', () => {
     it('Testing regex default', () => {
       const r = pathToNeedlePath(needle, { regex: 5 }, rng);
       expect(r).to.deep.equal([
-        { value: '(name)', string: true, exclude: false },
+        { value: '(^name$)', string: true, exclude: false },
         { value: '(0)', string: false, exclude: false },
-        { value: '(value)', string: true, exclude: false },
-        { value: '(16)', string: false, exclude: false },
-        { value: '(property)', string: true, exclude: false }
+        { value: '(value$)', string: true, exclude: false },
+        { value: '(^16$)', string: false, exclude: false },
+        { value: '(^property$)', string: true, exclude: false }
       ]);
     });
 
@@ -236,7 +236,7 @@ describe('Testing path-to-needle-path.js', () => {
     it('Testing regex double star', () => {
       const r = pathToNeedlePath(['abc'], { doubleStar: 1, regex: 2 }, rng);
       expect(r).to.deep.equal([
-        { value: '(abc)', string: true, exclude: false },
+        { value: '(^abc$)', string: true, exclude: false },
         { value: '**(.*)', string: true, exclude: false }
       ]);
     });
@@ -251,21 +251,21 @@ describe('Testing path-to-needle-path.js', () => {
     it('Testing regex partial star', () => {
       const r = pathToNeedlePath(['abc'], { partialStar: 1, regex: 1 }, rng);
       expect(r).to.deep.equal([
-        { value: '(a.*c)', string: true, exclude: false }
+        { value: '(^a.*c$)', string: true, exclude: false }
       ]);
     });
 
     it('Testing regex partial plus', () => {
       const r = pathToNeedlePath(['abc'], { partialPlus: 1, regex: 1 }, rng);
       expect(r).to.deep.equal([
-        { value: '(a.+c)', string: true, exclude: false }
+        { value: '(^a.+c$)', string: true, exclude: false }
       ]);
     });
 
     it('Testing regex question mark', () => {
       const r = pathToNeedlePath(['abc'], { questionMark: 1, regex: 1 }, rng);
       expect(r).to.deep.equal([
-        { value: '(a.c)', string: true, exclude: false }
+        { value: '(a.c$)', string: true, exclude: false }
       ]);
     });
 
