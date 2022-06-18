@@ -20,18 +20,17 @@ export const traversedBy = (searches) => getUniques(searches, 'needles');
 
 export const isLastLeafMatch = (searches) => {
   let maxLeafIndex = -1;
-  let maxLeaf = '';
+  let maxLeafMath = false;
   let idx = searches.length;
   // eslint-disable-next-line no-plusplus
   while (idx--) {
-    const s = searches[idx];
-    const { index } = s;
+    const { index, match } = searches[idx];
     if (index > maxLeafIndex) {
       maxLeafIndex = index;
-      maxLeaf = s;
+      maxLeafMath = match;
     }
   }
-  return maxLeaf.match === true;
+  return maxLeafMath;
 };
 
 export const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);
