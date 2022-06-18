@@ -21,7 +21,9 @@ export const traversedBy = (searches) => getUniques(searches, 'needles');
 export const isLastLeafMatch = (searches) => {
   let maxLeafIndex = -1;
   let maxLeaf = null;
-  for (let idx = 0, len = searches.length; idx < len; idx += 1) {
+  let idx = searches.length;
+  // eslint-disable-next-line no-plusplus
+  while (idx--) {
     const s = searches[idx];
     const { index } = s;
     if (index !== undefined && index > maxLeafIndex) {
