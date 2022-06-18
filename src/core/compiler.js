@@ -75,11 +75,10 @@ const finalizeTower = (tower, ctx) => {
     parent.children = [...child.children.filter((c) => !children.includes(c)), ...children];
   }
 
-  // todo: uncomment and remove below for ordering fix
-  // if (ctx.useArraySelector === false) {
-  //   tower.setRoots(tower.children
-  //     .filter(({ isStarRec, value }) => isStarRec || value === ''));
-  // }
+  if (ctx.useArraySelector === false) {
+    tower.setRoots(tower.children
+      .filter(({ isStarRec, value }) => isStarRec || value === ''));
+  }
 
   const { nodes } = ctx;
   while (nodes.length !== 0) {
@@ -89,17 +88,6 @@ const finalizeTower = (tower, ctx) => {
     if (children.some(({ matches }) => matches)) {
       node.markMatches();
     }
-  }
-
-  // todo: replace with commented code above
-  if (ctx.useArraySelector === false) {
-    const roots = [];
-    const child = tower.get('');
-    if (child !== undefined) {
-      roots.push(child);
-    }
-    roots.push(...tower.children.filter(({ isStarRec }) => isStarRec));
-    tower.setRoots(roots);
   }
 };
 

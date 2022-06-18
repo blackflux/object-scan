@@ -983,7 +983,7 @@ describe('Testing Find', () => {
       },
       useArraySelector: false
     })([1], []);
-    expect(r).to.deep.equal([['', '**']]);
+    expect(r).to.deep.equal([['**', '']]);
   });
 
   it('Testing deeply nested array traversal', () => {
