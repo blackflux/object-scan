@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe } from 'node-tdd';
-import { parseValue } from '../../src/core/node.js';
+import { parseValue } from '../../src/core/node-util.js';
 
 describe('Testing Helper', () => {
   describe('Testing parseValue', () => {
