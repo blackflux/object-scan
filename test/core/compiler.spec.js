@@ -351,7 +351,7 @@ describe('Testing compiler', () => {
     expect(tower.get('a').get('e').leafNeedles).to.deep.equal([]);
     expect(tower.get('a').get('e').get('f').leafNeedles).to.deep.equal(['a.{c,e}.f']);
 
-    expect(tower.regex).to.deep.equal(/^.*$/);
+    expect(tower.regex).to.deep.equal(null);
     expect(tower.get('a').regex).to.deep.equal(/^a$/);
     expect(tower.get('a').get('b').regex).to.deep.equal(/^b$/);
     expect(tower.get('a').get('b').get('d').regex).to.deep.equal(/^d$/);

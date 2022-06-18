@@ -57,13 +57,14 @@ export class Node {
     this.isSimpleRec = this.isSimpleStarRec || this.isSimplePlusRec;
     this.isRegexStarRec = value.startsWith('**(') && value.endsWith(')');
     this.isRegexPlusRec = value.startsWith('++(') && value.endsWith(')');
-    this.isRegexRec = this.isRegexStarRec || this.isRegexPlusRec;
     this.isStarRec = this.isSimpleStarRec || this.isRegexStarRec;
     this.isPlusRec = this.isSimplePlusRec || this.isRegexPlusRec;
     this.isRec = this.isStarRec || this.isPlusRec;
     this.isAnyArrayTarget = value === '[*]';
     this.isAnyObjTarget = value === '*';
-    this.regex = this.isSimpleRec ? null : compileValue(value);
+    this.regex = this.isSimpleRec || this.isAnyObjTarget || this.isAnyArrayTarget
+      ? null
+      : compileValue(value);
   }
 
   recMatch(key) {
@@ -80,11 +81,11 @@ export class Node {
     if (this.isSimpleRec) {
       return true;
     }
-    if (isArray && this.isAnyArrayTarget) {
-      return true;
+    if (this.isAnyArrayTarget) {
+      return isArray;
     }
-    if (!isArray && this.isAnyObjTarget) {
-      return true;
+    if (this.isAnyObjTarget) {
+      return !isArray;
     }
     if (
       isArray !== this.isArrayTarget
