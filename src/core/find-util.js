@@ -1,11 +1,23 @@
 import { toPath } from '../generic/helper.js';
 
-export const matchedBy = (searches) => Array
-  .from(new Set(searches.flatMap(({ leafNeedlesMatch }) => leafNeedlesMatch)));
-export const excludedBy = (searches) => Array
-  .from(new Set(searches.flatMap(({ leafNeedlesExclude }) => leafNeedlesExclude)));
-export const traversedBy = (searches) => Array
-  .from(new Set(searches.flatMap(({ needles }) => needles)));
+const getUniques = (searches, key) => {
+  const result = [];
+  // eslint-disable-next-line no-restricted-syntax
+  for (const search of searches) {
+    const needles = search[key];
+    // eslint-disable-next-line no-restricted-syntax
+    for (const needle of needles) {
+      if (!result.includes(needle)) {
+        result.push(needle);
+      }
+    }
+  }
+  return result;
+};
+
+export const matchedBy = (searches) => getUniques(searches, 'leafNeedlesMatch');
+export const excludedBy = (searches) => getUniques(searches, 'leafNeedlesExclude');
+export const traversedBy = (searches) => getUniques(searches, 'needles');
 
 export const isLastLeafMatch = (searches) => {
   let maxLeafIndex = Number.MIN_SAFE_INTEGER;
