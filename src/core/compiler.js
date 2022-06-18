@@ -37,10 +37,12 @@ const applyNeedle = (tower, needle, tree, ctx) => {
         throw new Error(`Redundant Recursion: "${needle}"`);
       }
       if (!redundantRecursion) {
-        if (!cur.has(v.value)) {
-          cur.add(new Node(v.value, ctx));
+        let node = cur.get(v.value);
+        if (node === undefined) {
+          node = new Node(v.value, ctx);
+          cur.add(node);
         }
-        next(cur.get(v.value));
+        next(node);
       } else {
         // eslint-disable-next-line no-param-reassign
         v.target = cur;
@@ -90,10 +92,12 @@ const finalizeTower = (tower, ctx) => {
     }
   }
 
+  // todo: replace with commented code above
   if (ctx.useArraySelector === false) {
     const roots = [];
-    if (tower.has('')) {
-      roots.push(tower.get(''));
+    const child = tower.get('');
+    if (child !== undefined) {
+      roots.push(child);
     }
     roots.push(...tower.children.filter(({ isStarRec }) => isStarRec));
     tower.setRoots(roots);

@@ -95,8 +95,11 @@ export default (haystack_, searches_, ctx) => {
   const result = Result(kwargs, ctx);
   kwargs.getResult = () => result.get();
 
-  if (searches_[0].has('') && (ctx.useArraySelector || !Array.isArray(state.haystack))) {
-    stack[1] = [...stack[1], searches_[0].get('')];
+  if (ctx.useArraySelector || !Array.isArray(state.haystack)) {
+    const child = searches_[0].get('');
+    if (child !== undefined) {
+      stack[1] = [...stack[1], child];
+    }
   }
 
   do {

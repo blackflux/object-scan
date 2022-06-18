@@ -121,10 +121,6 @@ export class Node {
     this.children.push(v);
   }
 
-  has(k) {
-    return this.children.some(({ value }) => value === k);
-  }
-
   get(k) {
     return this.children.find(({ value }) => value === k);
   }
