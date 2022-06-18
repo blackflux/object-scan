@@ -1,7 +1,7 @@
 /* compile needles to hierarchical map object */
 import parser from './parser.js';
 import iterator from './compiler-iterator.js';
-import { Ref } from './ref.js';
+import { Ref } from './parser-ref.js';
 import { Node } from './node.js';
 
 const applyNeedle = (tower, needle, tree, ctx) => {

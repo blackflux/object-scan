@@ -1,6 +1,6 @@
 import assert from '../generic/assert.js';
-import { Value } from './value.js';
-import { Ref } from './ref.js';
+import { Value } from './parser-value.js';
+import { Ref } from './parser-ref.js';
 
 const throwError = (msg, input, context = {}) => {
   throw new Error(Object.entries(context)

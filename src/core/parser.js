@@ -1,4 +1,4 @@
-import { Value } from './value.js';
+import { Value } from './parser-value.js';
 import Result from './parser-result.js';
 
 const throwError = (msg, input, context = {}) => {
