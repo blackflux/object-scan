@@ -1,59 +1,58 @@
 /* compile needles to hierarchical map object */
 import parser from './parser.js';
 import iterator from './compiler-iterator.js';
-import { Wildcard } from './wildcard.js';
 import { Ref } from './ref.js';
 import { Node } from './node.js';
 
 const applyNeedle = (tower, needle, tree, ctx) => {
   iterator(tower, needle, tree, {
-    onAdd: (cur, parent, wc, wcParent, next) => {
+    onAdd: (cur, parent, v, vParent, next) => {
       cur.addNeedle(needle);
-      if (wc instanceof Ref) {
-        if (wc.left === true) {
-          if (wc.isStarRec) {
-            wc.setPointer(cur);
+      if (v instanceof Ref) {
+        if (v.left === true) {
+          if (v.isStarRec) {
+            v.setPointer(cur);
           }
-          wc.setNode(new Node(null, ctx));
-          ctx.links.push(cur, wc.node);
-          next(wc.node);
+          v.setNode(new Node('*', ctx));
+          ctx.links.push(cur, v.node);
+          next(v.node);
         } else {
           // eslint-disable-next-line no-param-reassign
-          wc.target = 'target' in wcParent ? wcParent.target : parent.get(wcParent.value);
-          ctx.links.push(wc.target, wc.node);
-          if (wc.pointer !== null) {
-            next(wc.pointer);
-            wc.setPointer(null);
+          v.target = 'target' in vParent ? vParent.target : parent.get(vParent.value);
+          ctx.links.push(v.target, v.node);
+          if (v.pointer !== null) {
+            next(v.pointer);
+            v.setPointer(null);
           }
           next(cur);
         }
         return;
       }
       const redundantRecursion = (
-        wcParent !== undefined
-        && wc.isStarRec
-        && wc.value === wcParent.value
+        vParent !== undefined
+        && v.isStarRec
+        && v.value === vParent.value
       );
       if (redundantRecursion && ctx.strict) {
         throw new Error(`Redundant Recursion: "${needle}"`);
       }
       if (!redundantRecursion) {
-        if (!cur.has(wc.value)) {
-          const child = new Node(wc, ctx);
+        if (!cur.has(v.value)) {
+          const child = new Node(v.value, ctx);
           cur.add(child);
         }
-        next(cur.get(wc.value));
+        next(cur.get(v.value));
       } else {
         // eslint-disable-next-line no-param-reassign
-        wc.target = cur;
+        v.target = cur;
       }
-      if (wc.isStarRec) {
+      if (v.isStarRec) {
         next(cur);
       }
     },
-    onFin: (cur, parent, wc, excluded) => {
-      if (ctx.strict && wc.isSimpleStarRec) {
-        const unnecessary = parent.vs.filter(({ wildcard }) => !['', '**'].includes(wildcard.value));
+    onFin: (cur, parent, v, excluded) => {
+      if (ctx.strict && v.isSimpleStarRec) {
+        const unnecessary = parent.vs.filter(({ value }) => !['', '**'].includes(value));
         if (unnecessary.length !== 0) {
           throw new Error(`Needle Target Invalidated: "${unnecessary[0].needles[0]}" by "${needle}"`);
         }
@@ -91,7 +90,7 @@ const finalizeTower = (tower, ctx) => {
     if (tower.has('')) {
       roots.push(tower.get(''));
     }
-    roots.push(...tower.vs.filter((e) => e.wildcard.isStarRec));
+    roots.push(...tower.vs.filter((e) => e.isStarRec));
     tower.setRoots(roots);
   }
 };
@@ -100,7 +99,8 @@ export const compile = (needles, ctx) => {
   ctx.counter = 0;
   ctx.links = [];
   ctx.nodes = [];
-  const tower = new Node(new Wildcard('*', false), ctx);
+  ctx.wildcards = {};
+  const tower = new Node('*', ctx);
   for (let idx = 0; idx < needles.length; idx += 1) {
     const needle = needles[idx];
     const tree = [parser.parse(needle, ctx)];

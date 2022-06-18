@@ -1,5 +1,5 @@
 import assert from '../generic/assert.js';
-import { Wildcard } from './wildcard.js';
+import { Value } from './value.js';
 import { Ref } from './ref.js';
 
 const throwError = (msg, input, context = {}) => {
@@ -75,7 +75,7 @@ export default (input) => {
         if (group) {
           cResult.push(new Ref(ele));
         } else {
-          cResult.push(new Wildcard(inArray ? `[${ele}]` : ele, excludeNext));
+          cResult.push(new Value(inArray ? `[${ele}]` : ele, excludeNext));
           excludeNext = false;
         }
         cursor = idx + 1;

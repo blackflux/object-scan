@@ -8,23 +8,29 @@ import {
 } from '../../src/core/find-util.js';
 
 const c = (needles, ctx = {}) => compile(needles, Context(ctx));
-const ser = (...args) => {
+const ser = (root, verbose = false) => {
   const map = new Map();
-  const get = ({ wildcard }, verbose) => {
-    if (!map.has(wildcard)) {
-      map.set(wildcard, map.size);
+  const get = (node) => {
+    if (!map.has(node)) {
+      map.set(node, map.size);
     }
-    return verbose ? `:${map.get(wildcard)}` : '';
+    return verbose ? `:${map.get(node)}` : '';
   };
-  const rec = (node, verbose = false, known = []) => {
-    const wc = node.wildcard;
-    if (known.includes(wc)) {
-      return `REF<${wc.value}${get(node, verbose)}>`;
+  const known = new Set();
+  const rec = (node) => {
+    if (known.has(node)) {
+      return `REF<${node.value}${get(node)}>`;
     }
-    return Object
-      .fromEntries(node.vs.map((v) => [`${v.wildcard.value}${get(v, verbose)}`, rec(v, verbose, known.concat(wc))]));
+    known.add(node);
+    const r = Object
+      .fromEntries(node.vs.map((v) => [
+        `${v.value}${get(v)}`,
+        rec(v)
+      ]));
+    known.delete(node);
+    return r;
   };
-  return rec(...args);
+  return rec(root);
 };
 
 describe('Testing compiler', () => {
@@ -345,16 +351,16 @@ describe('Testing compiler', () => {
     expect(tower.get('a').get('e').leafNeedles).to.deep.equal([]);
     expect(tower.get('a').get('e').get('f').leafNeedles).to.deep.equal(['a.{c,e}.f']);
 
-    expect(tower.wildcard.regex).to.deep.equal(/^.*$/);
-    expect(tower.get('a').wildcard.regex).to.deep.equal(/^a$/);
-    expect(tower.get('a').get('b').wildcard.regex).to.deep.equal(/^b$/);
-    expect(tower.get('a').get('b').get('d').wildcard.regex).to.deep.equal(/^d$/);
-    expect(tower.get('a').get('b').get('d').get('g').wildcard.regex).to.deep.equal(/^g$/);
-    expect(tower.get('a').get('c').wildcard.regex).to.deep.equal(/^c$/);
-    expect(tower.get('a').get('c').get('d').wildcard.regex).to.deep.equal(/^d$/);
-    expect(tower.get('a').get('c').get('f').wildcard.regex).to.deep.equal(/^f$/);
-    expect(tower.get('a').get('e').wildcard.regex).to.deep.equal(/^e$/);
-    expect(tower.get('a').get('e').get('f').wildcard.regex).to.deep.equal(/^f$/);
+    expect(tower.regex).to.deep.equal(/^.*$/);
+    expect(tower.get('a').regex).to.deep.equal(/^a$/);
+    expect(tower.get('a').get('b').regex).to.deep.equal(/^b$/);
+    expect(tower.get('a').get('b').get('d').regex).to.deep.equal(/^d$/);
+    expect(tower.get('a').get('b').get('d').get('g').regex).to.deep.equal(/^g$/);
+    expect(tower.get('a').get('c').regex).to.deep.equal(/^c$/);
+    expect(tower.get('a').get('c').get('d').regex).to.deep.equal(/^d$/);
+    expect(tower.get('a').get('c').get('f').regex).to.deep.equal(/^f$/);
+    expect(tower.get('a').get('e').regex).to.deep.equal(/^e$/);
+    expect(tower.get('a').get('e').get('f').regex).to.deep.equal(/^f$/);
 
     expect(tower.index).to.deep.equal(undefined);
     expect(tower.get('a').index).to.deep.equal(undefined);
@@ -420,8 +426,8 @@ describe('Testing compiler', () => {
         'a:0': {},
         'a:1': {
           'b:2': {
-            'a:0': {},
-            'a:1': 'REF<a:1>'
+            'a:1': 'REF<a:1>',
+            'a:3': {}
           }
         }
       });

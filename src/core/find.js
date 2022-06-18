@@ -167,7 +167,7 @@ export default (haystack_, searches_, ctx) => {
         } else {
           for (let sIdx = 0, sLen = searches.length; sIdx !== sLen; sIdx += 1) {
             const search = searches[sIdx];
-            if (search.wildcard.recMatch(key)) {
+            if (search.recMatch(key)) {
               searchesOut.push(search);
             }
             const values = search.vs;
@@ -175,7 +175,7 @@ export default (haystack_, searches_, ctx) => {
             // eslint-disable-next-line no-plusplus
             while (eIdx--) {
               const value = values[eIdx];
-              if (value.wildcard.typeMatch(key, isArray)) {
+              if (value.typeMatch(key, isArray)) {
                 searchesOut.push(value);
               }
             }
