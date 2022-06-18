@@ -12,7 +12,7 @@ describe('Testing Helper', () => {
   describe('Testing asRegex', () => {
     it('Testing simple regex', () => {
       const result = asRegex('a');
-      expect(result).to.deep.equal(/a/);
+      expect(result).to.have.all.keys('test');
       expect(result.test('xax')).to.equal(true);
     });
 
