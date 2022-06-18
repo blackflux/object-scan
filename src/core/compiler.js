@@ -38,8 +38,7 @@ const applyNeedle = (tower, needle, tree, ctx) => {
       }
       if (!redundantRecursion) {
         if (!cur.has(v.value)) {
-          const child = new Node(v.value, ctx);
-          cur.add(child);
+          cur.add(new Node(v.value, ctx));
         }
         next(cur.get(v.value));
       } else {
