@@ -2,11 +2,10 @@ import { toPath } from '../generic/helper.js';
 
 const getUniques = (searches, key) => {
   const result = [];
-  // eslint-disable-next-line no-restricted-syntax
-  for (const search of searches) {
-    const needles = search[key];
-    // eslint-disable-next-line no-restricted-syntax
-    for (const needle of needles) {
+  for (let i = 0, lenS = searches.length; i < lenS; i += 1) {
+    const needles = searches[i][key];
+    for (let j = 0, lenN = needles.length; j < lenN; j += 1) {
+      const needle = needles[j];
       if (!result.includes(needle)) {
         result.push(needle);
       }
@@ -20,7 +19,7 @@ export const excludedBy = (searches) => getUniques(searches, 'leafNeedlesExclude
 export const traversedBy = (searches) => getUniques(searches, 'needles');
 
 export const isLastLeafMatch = (searches) => {
-  let maxLeafIndex = Number.MIN_SAFE_INTEGER;
+  let maxLeafIndex = -1;
   let maxLeaf = null;
   for (let idx = 0, len = searches.length; idx < len; idx += 1) {
     const s = searches[idx];
