@@ -26,12 +26,12 @@ export const isLastLeafMatch = (searches) => {
   while (idx--) {
     const s = searches[idx];
     const { index } = s;
-    if (index !== undefined && index > maxLeafIndex) {
+    if (index > maxLeafIndex) {
       maxLeafIndex = index;
       maxLeaf = s;
     }
   }
-  return maxLeaf !== null && maxLeaf.match === true;
+  return maxLeaf?.match === true;
 };
 
 export const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);

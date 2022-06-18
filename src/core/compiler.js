@@ -29,9 +29,8 @@ const applyNeedle = (tower, needle, tree, ctx) => {
         return;
       }
       const redundantRecursion = (
-        vParent !== undefined
-        && v.isStarRec
-        && v.value === vParent.value
+        v.isStarRec
+        && v.value === vParent?.value
       );
       if (redundantRecursion && ctx.strict) {
         throw new Error(`Redundant Recursion: "${needle}"`);
