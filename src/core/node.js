@@ -22,9 +22,6 @@ export const parseValue = (str) => {
 };
 
 const compileValue = (str) => {
-  if (['**', '++'].includes(str)) {
-    return asRegex('.*');
-  }
   if ((str.startsWith('**(') || str.startsWith('++(')) && str.endsWith(')')) {
     return asRegex(str.slice(3, -1));
   }
@@ -54,7 +51,6 @@ export class Node {
     this.leafNeedlesExclude = [];
     this.leafNeedlesMatch = [];
 
-    this.regex = compileValue(value);
     this.isArrayTarget = value.startsWith('[') && value.endsWith(']');
     this.isSimpleStarRec = value === '**';
     this.isSimplePlusRec = value === '++';
@@ -67,6 +63,7 @@ export class Node {
     this.isRec = this.isStarRec || this.isPlusRec;
     this.isAnyArrayTarget = value === '[*]';
     this.isAnyObjTarget = value === '*';
+    this.regex = this.isSimpleRec ? null : compileValue(value);
   }
 
   recMatch(key) {
