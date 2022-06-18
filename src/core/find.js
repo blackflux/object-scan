@@ -170,7 +170,7 @@ export default (haystack_, searches_, ctx) => {
             if (search.recMatch(key)) {
               searchesOut.push(search);
             }
-            const values = search.vs;
+            const { values } = search;
             let eIdx = values.length;
             // eslint-disable-next-line no-plusplus
             while (eIdx--) {

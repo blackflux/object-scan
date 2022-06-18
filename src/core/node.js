@@ -46,7 +46,7 @@ export class Node {
     this.value = value;
     this.ctx = ctx;
     this.order = ctx.counter;
-    this.vs = [];
+    this.values = [];
     this.match = false;
     this.matches = false;
     this.needles = [];
@@ -99,15 +99,15 @@ export class Node {
   }
 
   add(v) {
-    this.vs.push(v);
+    this.values.push(v);
   }
 
   has(k) {
-    return this.vs.some(({ value }) => value === k);
+    return this.values.some(({ value }) => value === k);
   }
 
   get(k) {
-    return this.vs.find(({ value }) => value === k);
+    return this.values.find(({ value }) => value === k);
   }
 
   markMatches() {

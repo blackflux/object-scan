@@ -23,7 +23,7 @@ const ser = (root, verbose = false) => {
     }
     known.add(node);
     const r = Object
-      .fromEntries(node.vs.map((v) => [
+      .fromEntries(node.values.map((v) => [
         `${v.value}${get(v)}`,
         rec(v)
       ]));
