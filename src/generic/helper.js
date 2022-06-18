@@ -1,9 +1,6 @@
 const specialChars = /[?!,.*+[\](){}\\]/g;
 export const escape = (input) => input.replace(specialChars, '\\$&');
 
-const regexEscapeChars = /[-/\\^$*+?.()|[\]{}]/g;
-export const escapeRegex = (char) => char.replace(regexEscapeChars, '\\$&');
-
 export const asRegex = (regexStr) => {
   try {
     return new RegExp(regexStr);

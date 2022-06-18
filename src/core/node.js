@@ -1,5 +1,6 @@
-import { asRegex, escapeRegex } from '../generic/helper.js';
+import { asRegex } from '../generic/helper.js';
 
+const charsToEscape = ['-', '/', '\\', '^', '$', '*', '+', '?', '.', '(', ')', '|', '[', ']', '{', '}'];
 export const parseValue = (str) => {
   let regex = '';
   let escaped = false;
@@ -14,7 +15,10 @@ export const parseValue = (str) => {
     } else if (!escaped && char === '?') {
       regex += '.';
     } else {
-      regex += escapeRegex(char);
+      if (charsToEscape.includes(char)) {
+        regex += '\\';
+      }
+      regex += char;
       escaped = false;
     }
   }
