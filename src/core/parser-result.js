@@ -14,6 +14,8 @@ const getSimple = (arrOrSet) => {
   return arrOrSet.size === 1 ? arrOrSet.values().next().value : arrOrSet;
 };
 
+const arraySelectorRegex = /^[?*+\d]+$/;
+
 export default (input) => {
   let cResult = new Set();
   let inArray = false;
@@ -67,7 +69,7 @@ export default (input) => {
           throwError('Bad Group Start', input, { char: idx });
         }
         if (inArray && !(
-          /^[?*+\d]+$/.test(ele)
+          arraySelectorRegex.test(ele)
           || (ele.startsWith('(') && ele.endsWith(')'))
         )) {
           throwError('Bad Array Selector', input, { selector: ele });
