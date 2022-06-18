@@ -18,7 +18,7 @@ export default (needles, opts = {}) => {
 
   const ctx = Context(opts);
   const search = compile(needles, ctx); // keep separate for performance
-  return (haystack, context) => find(haystack, [search], {
+  return (haystack, context) => find(haystack, search, {
     context,
     ...ctx,
     rtn: ctx.rtn || (context === undefined ? 'key' : 'context')

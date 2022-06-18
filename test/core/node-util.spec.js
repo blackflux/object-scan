@@ -1,42 +1,42 @@
 import { expect } from 'chai';
 import { describe } from 'node-tdd';
-import { parseWildcard } from '../../src/core/wildcard.js';
+import { parseValue } from '../../src/core/node-util.js';
 
 describe('Testing Helper', () => {
-  describe('Testing parseWildcard', () => {
+  describe('Testing parseValue', () => {
     it('Testing empty', () => {
-      expect(parseWildcard('')).to.deep.equal(/^$/);
+      expect(parseValue('')).to.have.all.keys('test');
     });
 
     it('Testing star', () => {
-      expect(parseWildcard('*')).to.deep.equal(/^.*$/);
+      expect(parseValue('*')).to.deep.equal(/^.*$/);
     });
 
     it('Testing question mark', () => {
-      expect(parseWildcard('?')).to.deep.equal(/^.$/);
+      expect(parseValue('?')).to.deep.equal(/^.$/);
     });
 
     it('Testing escaped star', () => {
-      const result = parseWildcard('pa\\*nt\\*');
+      const result = parseValue('pa\\*nt\\*');
       expect(result).to.deep.equal(/^pa\*nt\*$/);
       expect(result.test('pa*nt*')).to.equal(true);
     });
 
     it('Testing special=false, regex=true', () => {
-      const result = parseWildcard('pa^');
+      const result = parseValue('pa^');
       expect(result).to.deep.equal(/^pa\^$/);
       expect(result.test('pa^')).to.equal(true);
     });
 
     it('Testing special=true, regex=true', () => {
-      const result = parseWildcard('pa\\[');
+      const result = parseValue('pa\\[');
       expect(result).to.deep.equal(/^pa\[$/);
       expect(result.test('pa[')).to.equal(true);
     });
 
     it('Testing special=true, regex=false', () => {
-      const result = parseWildcard('pa\\!');
-      expect(result).to.deep.equal(/^pa!$/);
+      const result = parseValue('pa\\!');
+      expect(result).to.have.all.keys('test');
       expect(result.test('pa!')).to.equal(true);
     });
   });

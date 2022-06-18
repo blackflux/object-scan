@@ -1,4 +1,4 @@
-import { Wildcard } from './wildcard.js';
+import { Value } from './parser-value.js';
 import Result from './parser-result.js';
 
 const throwError = (msg, input, context = {}) => {
@@ -8,7 +8,7 @@ const throwError = (msg, input, context = {}) => {
 
 const parse = (input, ctx) => {
   if (input === '') {
-    return new Wildcard('', false);
+    return new Value('', false);
   }
 
   const result = Result(input);
