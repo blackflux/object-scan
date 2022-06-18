@@ -973,6 +973,19 @@ describe('Testing Find', () => {
     expect(r).to.deep.equal([['**.measure', '86']]);
   });
 
+  it('Testing matchedBy key order for roots', () => {
+    const r = objectScan([
+      '**',
+      ''
+    ], {
+      filterFn: ({ context, matchedBy }) => {
+        context.push(matchedBy);
+      },
+      useArraySelector: false
+    })([1], []);
+    expect(r).to.deep.equal([['', '**']]);
+  });
+
   it('Testing deeply nested array traversal', () => {
     const createDeeplyNestedArray = (depth) => {
       let retval = [1];

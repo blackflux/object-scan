@@ -74,6 +74,12 @@ const finalizeTower = (tower, ctx) => {
     parent.children = [...child.children.filter((c) => !children.includes(c)), ...children];
   }
 
+  // todo: uncomment and remove below for ordering fix
+  // if (ctx.useArraySelector === false) {
+  //   tower.setRoots(tower.children
+  //     .filter(({ isStarRec, value }) => isStarRec || value === ''));
+  // }
+
   const { nodes } = ctx;
   while (nodes.length !== 0) {
     const node = nodes.pop();
