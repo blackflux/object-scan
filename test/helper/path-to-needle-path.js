@@ -1,9 +1,10 @@
 import Joi from 'joi-strict';
-import { escape, escapeRegex } from '../../src/generic/helper.js';
+import { escape } from '../../src/generic/helper.js';
 import sampleArray from './sample-array.js';
 import sampleArrayGrouped from './sample-array-grouped.js';
 import sampleRanges from './sample-ranges.js';
 import shuffleArray from './shuffle-array.js';
+import escapeRegex from './escape-regex.js';
 
 export default (...kwargs) => {
   const needle = kwargs[0];
@@ -110,18 +111,26 @@ export default (...kwargs) => {
         if (result[pos].value.length === 1 && ['**', '++'].includes(result[pos].value[0])) {
           result[pos].value[0] = `${result[pos].value[0]}(.*)`;
         } else {
-          result[pos].value = ['(', ...result[pos].value.map((char) => {
-            switch (char) {
-              case '?':
-                return '.';
-              case '*':
-                return '.*';
-              case '+':
-                return '.+';
-              default:
-                return escapeRegex(char.slice(-1)[0]);
-            }
-          }), ')'];
+          const start = rng() > 0.5 ? ['^'] : [];
+          const end = rng() > 0.5 ? ['$'] : [];
+          result[pos].value = [
+            '(',
+            ...start,
+            ...result[pos].value.map((char) => {
+              switch (char) {
+                case '?':
+                  return '.';
+                case '*':
+                  return '.*';
+                case '+':
+                  return '.+';
+                default:
+                  return escapeRegex(char.slice(-1)[0]);
+              }
+            }),
+            ...end,
+            ')'
+          ];
         }
       });
   }

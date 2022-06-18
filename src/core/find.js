@@ -1,14 +1,9 @@
 import {
-  getWildcard, excludedBy, traversedBy,
-  hasMatches, matchedBy, isLastLeafMatch,
-  getValues, getOrder, getRoots
-} from './compiler.js';
+  excludedBy, traversedBy, matchedBy, isLastLeafMatch, formatPath
+} from './find-util.js';
 import Result from './find-result.js';
-import { toPath } from '../generic/helper.js';
 
-const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);
-
-export default (haystack_, searches_, ctx) => {
+export default (haystack_, search_, ctx) => {
   const state = {
     haystack: haystack_,
     context: ctx.context
@@ -19,7 +14,7 @@ export default (haystack_, searches_, ctx) => {
       state.haystack = r;
     }
   }
-  const stack = [false, searches_, null, 0];
+  const stack = [false, [search_], null, 0];
   const path = [];
   const parents = [];
 
@@ -100,8 +95,11 @@ export default (haystack_, searches_, ctx) => {
   const result = Result(kwargs, ctx);
   kwargs.getResult = () => result.get();
 
-  if ('' in searches_[0] && (ctx.useArraySelector || !Array.isArray(state.haystack))) {
-    stack[1] = [...stack[1], searches_[0]['']];
+  if (ctx.useArraySelector || !Array.isArray(state.haystack)) {
+    const child = search_.get('');
+    if (child !== undefined) {
+      stack[1].push(child);
+    }
   }
 
   do {
@@ -137,7 +135,7 @@ export default (haystack_, searches_, ctx) => {
       continue;
     }
 
-    if (!searches.some((s) => hasMatches(s))) {
+    if (!searches.some(({ matches }) => matches)) {
       // eslint-disable-next-line no-continue
       continue;
     }
@@ -167,27 +165,27 @@ export default (haystack_, searches_, ctx) => {
         if (autoTraverseArray) {
           searchesOut.push(...searches);
           if (depth === 0) {
-            searchesOut.push(...getRoots(searches[0]));
+            searchesOut.push(...search_.roots);
           }
         } else {
           for (let sIdx = 0, sLen = searches.length; sIdx !== sLen; sIdx += 1) {
             const search = searches[sIdx];
-            if (getWildcard(search).recMatch(key)) {
+            if (search.recMatch(key)) {
               searchesOut.push(search);
             }
-            const values = getValues(search);
-            let eIdx = values.length;
+            const { children } = search;
+            let eIdx = children.length;
             // eslint-disable-next-line no-plusplus
             while (eIdx--) {
-              const value = values[eIdx];
-              if (getWildcard(value).typeMatch(key, isArray)) {
-                searchesOut.push(value);
+              const child = children[eIdx];
+              if (child.typeMatch(key, isArray)) {
+                searchesOut.push(child);
               }
             }
           }
         }
         if (ctx.orderByNeedles) {
-          searchesOut.index = Buffer.from(searchesOut.map((e) => getOrder(e)).sort());
+          searchesOut.index = Buffer.from(searchesOut.map(({ order }) => order).sort());
           let checkIdx = stack.length - 3;
           const checkIdxMin = checkIdx - kIdx * 4;
           while (checkIdx !== checkIdxMin && Buffer.compare(searchesOut.index, stack[checkIdx].index) === 1) {

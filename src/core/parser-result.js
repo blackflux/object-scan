@@ -1,11 +1,6 @@
 import assert from '../generic/assert.js';
-import { defineProperty } from '../generic/helper.js';
-import { Wildcard } from './wildcard.js';
-import { Ref } from './ref.js';
-
-const IS_EXCLUDED = Symbol('is-excluded');
-const markExcluded = (input) => defineProperty(input, IS_EXCLUDED, true);
-const isExcluded = (input) => input[IS_EXCLUDED] === true;
+import { Value } from './parser-value.js';
+import { Ref } from './parser-ref.js';
 
 const throwError = (msg, input, context = {}) => {
   throw new Error(Object.entries(context)
@@ -19,6 +14,8 @@ const getSimple = (arrOrSet) => {
   return arrOrSet.size === 1 ? arrOrSet.values().next().value : arrOrSet;
 };
 
+const arraySelectorRegex = /^[?*+\d]+$/;
+
 export default (input) => {
   let cResult = new Set();
   let inArray = false;
@@ -28,7 +25,7 @@ export default (input) => {
   // group related
   const parentStack = [];
   const newChild = (asOr) => {
-    if (isExcluded(cResult)) {
+    if (cResult.excluded === true) {
       assert(excludeNext === false);
       excludeNext = true;
     }
@@ -72,7 +69,7 @@ export default (input) => {
           throwError('Bad Group Start', input, { char: idx });
         }
         if (inArray && !(
-          /^[?*+\d]+$/.test(ele)
+          arraySelectorRegex.test(ele)
           || (ele.startsWith('(') && ele.endsWith(')'))
         )) {
           throwError('Bad Array Selector', input, { selector: ele });
@@ -80,7 +77,7 @@ export default (input) => {
         if (group) {
           cResult.push(new Ref(ele));
         } else {
-          cResult.push(new Wildcard(inArray ? `[${ele}]` : ele, excludeNext));
+          cResult.push(new Value(inArray ? `[${ele}]` : ele, excludeNext));
           excludeNext = false;
         }
         cursor = idx + 1;
@@ -95,7 +92,7 @@ export default (input) => {
     startGroup: () => {
       newChild(true);
       if (excludeNext) {
-        markExcluded(cResult);
+        cResult.excluded = true;
         excludeNext = false;
       }
       newChild(false);

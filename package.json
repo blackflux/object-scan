@@ -20,7 +20,7 @@
     "u": "yarn upgrade --latest --force",
     "i": "yarn install --frozen-lockfile",
     "it": "yarn run i && yarn run t",
-    "ncc-analyze": "yarn clean && ncc build -m -s -o lib && npx source-map-explorer lib/index.js --only-mapped --html source.html && yarn clean"
+    "ncc-analyze": "yarn clean && cp -rf ./src ./lib && ncc build -m -s -o lib && npx source-map-explorer lib/index.js --only-mapped --html source.html && yarn clean"
   },
   "repository": {
     "type": "git",
@@ -49,18 +49,18 @@
   },
   "homepage": "https://github.com/blackflux/object-scan#readme",
   "devDependencies": {
-    "@babel/core": "7.18.2",
+    "@babel/core": "7.18.5",
     "@babel/eslint-parser": "7.18.2",
     "@babel/register": "7.17.7",
     "@blackflux/eslint-plugin-rules": "2.1.0",
-    "@blackflux/robo-config-plugin": "7.8.5",
+    "@blackflux/robo-config-plugin": "7.8.8",
     "@vercel/ncc": "0.34.0",
     "c8": "7.11.3",
     "chai": "4.3.6",
     "coveralls": "3.1.1",
     "diff": "5.1.0",
     "diff2html": "3.4.17",
-    "eslint": "8.17.0",
+    "eslint": "8.18.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-json": "3.1.0",
@@ -71,8 +71,8 @@
     "json-stringify-pretty-compact": "4.0.0",
     "lodash.isequal": "4.5.0",
     "mustache": "4.2.0",
-    "node-tdd": "3.4.1",
-    "object-scan": "18.2.1",
+    "node-tdd": "3.4.2",
+    "object-scan": "18.3.0",
     "smart-fs": "3.0.1",
     "stringify-object": "4.0.1",
     "uuid": "8.3.2"
