@@ -3,7 +3,7 @@ import {
 } from './find-util.js';
 import Result from './find-result.js';
 
-export default (haystack_, searches_, ctx) => {
+export default (haystack_, search_, ctx) => {
   const state = {
     haystack: haystack_,
     context: ctx.context
@@ -14,7 +14,7 @@ export default (haystack_, searches_, ctx) => {
       state.haystack = r;
     }
   }
-  const stack = [false, searches_, null, 0];
+  const stack = [false, [search_], null, 0];
   const path = [];
   const parents = [];
 
@@ -96,9 +96,9 @@ export default (haystack_, searches_, ctx) => {
   kwargs.getResult = () => result.get();
 
   if (ctx.useArraySelector || !Array.isArray(state.haystack)) {
-    const child = searches_[0].get('');
+    const child = search_.get('');
     if (child !== undefined) {
-      stack[1] = [...stack[1], child];
+      stack[1].push(child);
     }
   }
 
