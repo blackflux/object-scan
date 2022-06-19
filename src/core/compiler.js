@@ -95,7 +95,7 @@ export const compile = (needles, ctx) => {
   ctx.counter = 0;
   ctx.links = [];
   ctx.nodes = [];
-  ctx.regex = {};
+  ctx.regex = Object.create(null);
   const tower = new Node('*', ctx);
   for (let idx = 0; idx < needles.length; idx += 1) {
     const needle = needles[idx];
