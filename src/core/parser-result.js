@@ -7,17 +7,13 @@ const throwError = (msg, input, context = {}) => {
     .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
 };
 
-const getSimple = (arrOrSet) => {
-  if (Array.isArray(arrOrSet)) {
-    return arrOrSet.length === 1 ? arrOrSet[0] : arrOrSet;
-  }
-  return arrOrSet.size === 1 ? arrOrSet.values().next().value : arrOrSet;
-};
+const getSimple = (arr) => (arr.length === 1 ? arr[0] : arr);
 
 const arraySelectorRegex = /^[?*+\d]+$/;
 
 export default (input) => {
-  let cResult = new Set();
+  let cResult = [];
+  cResult.or = true;
   let inArray = false;
   let excludeNext = false;
   let cursor = 0;
@@ -30,16 +26,16 @@ export default (input) => {
       excludeNext = true;
     }
     parentStack.push(cResult);
-    cResult = asOr ? new Set() : [];
+    cResult = [];
+    cResult.or = asOr;
   };
   const finishChild = () => {
     const parent = parentStack.pop();
-    const parentIsArray = Array.isArray(parent);
     const child = getSimple(cResult);
-    if (!parentIsArray && child instanceof Set) {
-      child.forEach((e) => parent.add(e));
+    if (parent.or === true && child.or === true) {
+      parent.push(...child);
     } else {
-      parent[parentIsArray ? 'push' : 'add'](child);
+      parent.push(child);
     }
     cResult = parent;
   };

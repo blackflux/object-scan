@@ -11,10 +11,11 @@ const parse = (input, ctx = {}) => parser.parse(input, Context(ctx));
 const asString = (() => {
   const asStringRec = (input, ctx) => {
     if (Array.isArray(input)) {
-      return `[${input.map((e) => asStringRec(e, ctx)).join(',')}]`;
-    }
-    if (input instanceof Set) {
-      return `{${[...input].map((e) => asStringRec(e, ctx)).join(',')}}`;
+      return [
+        input.or ? '{' : '[',
+        input.map((e) => asStringRec(e, ctx)).join(','),
+        input.or ? '}' : ']'
+      ].join('');
     }
     if (input instanceof Ref) {
       let refId = ctx.refs.get(input) || ctx.refs.get(input.link);
