@@ -1004,4 +1004,42 @@ describe('Testing Find', () => {
     });
     expect(arraySum(arr)).to.equal(NUMBER_OF_ELEMENTS);
   });
+
+  it('Testing toString works as expected', () => {
+    const object = {
+      hasOwnProperty: { a: 0 },
+      isPrototypeOf: { b: 1 },
+      propertyIsEnumerable: { c: 2 },
+      toString: { d: 3 },
+      toLocaleString: { e: 4 },
+      valueOf: { f: 5 }
+    };
+    [
+      [['toString'], [object.toString]],
+      [['(toString)'], [object.toString]],
+      [['**{toString}'], [object.toString]],
+      [['**(toString)'], [object.toString]],
+      [['**{(toString)}'], [object.toString]],
+      [['**'], [
+        object.valueOf.f, object.valueOf,
+        object.toLocaleString.e, object.toLocaleString,
+        object.toString.d, object.toString,
+        object.propertyIsEnumerable.c, object.propertyIsEnumerable,
+        object.isPrototypeOf.b, object.isPrototypeOf,
+        object.hasOwnProperty.a, object.hasOwnProperty
+      ]],
+      [['*'], [
+        object.valueOf,
+        object.toLocaleString,
+        object.toString,
+        object.propertyIsEnumerable,
+        object.isPrototypeOf,
+        object.hasOwnProperty
+      ]]
+    ].forEach(([needles, expected]) => {
+      expect(objectScan(needles, { rtn: 'value' })({})).to.deep.equal([]);
+      expect(objectScan(needles, { rtn: 'value' })(object))
+        .to.deep.equal(expected);
+    });
+  });
 });
