@@ -33,7 +33,7 @@ export default (input) => {
     const parent = parentStack.pop();
     const child = getSimple(cResult);
     if (parent.or === true && child.or === true) {
-      child.forEach((e) => parent.push(e));
+      parent.push(...child);
     } else {
       parent.push(child);
     }
