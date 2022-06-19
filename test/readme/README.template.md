@@ -27,18 +27,19 @@ spoiler: false
 
 ## Features
 
-- Input traversed exactly once during search
-- Dependency free, small in size and very performant
-- Separate Object and Array matching
-- Wildcard and Regex matching
-- Arbitrary depth matching
-- Or-clause Syntax
-- Exclusion Matching
-- Full support for escaping
+- Input traversed at most once during search
+- Dependency free and tiny bundle size
+- Powerful matching syntax
+- Very performant
+- Extensive tests and lots of examples
+
+## Traversal Order
+
 - Traversal in "delete-safe" order
-- Recursion free implementation
-- Search syntax validated
-- Lots of tests and examples
+- input order
+- compareFn
+- reverse
+- orderByNeedles
 
 ## Matching
 
@@ -47,6 +48,15 @@ A needle expression specifies one or more paths to an element (or a set of eleme
 ```txt
 store.book[0].title
 ```
+
+- Search syntax validated
+- Full support for escaping
+
+- Separate Object and Array matching
+- Wildcard and Regex matching
+- Arbitrary depth matching
+- Or-clause Syntax
+- Exclusion Matching
 
 ### Array
 
@@ -320,6 +330,8 @@ The return value of this callback has no effect when a search context is provide
 Can be used to do processing as matching keys are traversed.
 
 Invoked in same order as matches would appear in result.
+
+For more information on invocation order, please refer to Section `Traversal Order`.
 
 This method is conceptually similar to
 [Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
@@ -768,6 +780,10 @@ filterFn: ({ value, context }) => { context.sum += value; }
 comment: sum values
 </example></pre>
 
+## Real World Uses
+
+...
+
 ## Examples
 
 More extensive examples can be found in the tests.
@@ -868,6 +884,10 @@ comment: star recursion matches roots
 </example></pre>
 
 ## Internals
+
+This implementation is completely recursion free. This allows
+for traversal of deeply nested objects where a recursive approach
+would fail with a `Maximum call stack size exceeded` error.
 
 Conceptually this package works as follows:
 
