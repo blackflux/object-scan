@@ -33,6 +33,7 @@ spoiler: false
 - Very performant
 - Extensive tests and lots of examples
 
+<a id="traversal_order"></a>
 ## Traversal Order
 
 - Traversal in "delete-safe" order
@@ -331,7 +332,7 @@ Can be used to do processing as matching keys are traversed.
 
 Invoked in same order as matches would appear in result.
 
-For more information on invocation order, please refer to Section `Traversal Order`.
+For more information on invocation order, please refer to Section [Traversal Order](#traversal_order)
 
 This method is conceptually similar to
 [Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
