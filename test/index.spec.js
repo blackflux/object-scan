@@ -1005,7 +1005,7 @@ describe('Testing Find', () => {
     expect(arraySum(arr)).to.equal(NUMBER_OF_ELEMENTS);
   });
 
-  it('Testing toString works as expected', () => {
+  it('Testing prototype properties works as expected', () => {
     const object = {
       hasOwnProperty: { a: 0 },
       isPrototypeOf: { b: 1 },
