@@ -9,10 +9,7 @@ export default (tree, cb) => {
 
   while (idx !== -1) {
     const e = stack[idx];
-    if (e instanceof Set) {
-      stack[idx] = [...e];
-      stack[idx].or = true;
-    } else if (Array.isArray(e)) {
+    if (Array.isArray(e)) {
       if (e.or !== true) {
         stack.splice(idx, 1, ...e);
         parent.splice(idx, 1, ...new Array(e.length).fill(parent[idx]));

@@ -1,5 +1,6 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
+import parserReleased from 'object-scan/lib/core/parser.js';
 import { Ref } from '../../src/core/parser-ref.js';
 import parser from '../../src/core/parser.js';
 import Context from '../../src/core/context.js';
@@ -11,7 +12,11 @@ const parse = (input, ctx = {}) => parser.parse(input, Context(ctx));
 const asString = (() => {
   const asStringRec = (input, ctx) => {
     if (Array.isArray(input)) {
-      return `[${input.map((e) => asStringRec(e, ctx)).join(',')}]`;
+      return [
+        input.or ? '{' : '[',
+        input.map((e) => asStringRec(e, ctx)).join(','),
+        input.or ? '}' : ']'
+      ].join('');
     }
     if (input instanceof Set) {
       return `{${[...input].map((e) => asStringRec(e, ctx)).join(',')}}`;
@@ -34,12 +39,12 @@ const asString = (() => {
     }
     return `${input.excluded === true ? '!' : ''}"${input.value}"`;
   };
-  return (input) => {
+  return (input, p = parse) => {
     const ctx = {
       refs: new Map(),
       counter: 1
     };
-    return asStringRec(parse(input), ctx);
+    return asStringRec(p(input), ctx);
   };
 })();
 
@@ -47,17 +52,28 @@ const checkError = (input, msg, useArraySelector = true) => {
   expect(() => parse(input, { useArraySelector })).to.throw(msg);
 };
 
+const parsedNeedleToString = (obj) => parsedNeedleToStringArray(obj)
+  .map((e) => (e.value === undefined ? e : e.value))
+  .join(',');
+
 describe('Testing Parser', () => {
   it('Test Result Stabilizes', () => {
-    const parsedNeedleToString = (obj) => parsedNeedleToStringArray(obj)
-      .map((e) => (e.value === undefined ? e : e.value))
-      .join(',');
     for (let idx = 0; idx < 1000; idx += 1) {
       const needle = parsedNeedleToString(generateParsedNeedle());
       const parsed = parse(needle);
       const needleOptimized = parsedNeedleToString(parsed);
       const parsedOptimized = parse(needleOptimized);
       expect(needleOptimized).to.deep.equal(parsedNeedleToString(parsedOptimized));
+    }
+  });
+
+  it('Testing for regression', () => {
+    const parseReleased = (input) => parserReleased.parse(input, Context({}));
+    for (let i = 0; i < 1000; i += 1) {
+      const needle = parsedNeedleToString(generateParsedNeedle());
+      const parsed = asString(needle);
+      const parsedReleased = asString(needle, parseReleased);
+      expect(parsed, needle).to.equal(parsedReleased);
     }
   });
 

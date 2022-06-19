@@ -18,12 +18,6 @@ describe('Testing iterator', () => {
         recIterate([...obj[0], ...obj.slice(1)], cb, path);
         return;
       }
-      if (obj[0] instanceof Set) {
-        obj[0].forEach((e) => {
-          recIterate([e, ...obj.slice(1)], cb, path);
-        });
-        return;
-      }
       cb('ADD', obj[0]);
       recIterate(obj.slice(1), cb, path.concat(obj[0]));
       cb('RM', obj[0]);
@@ -45,8 +39,13 @@ describe('Testing iterator', () => {
 
   it('Testing Empty Array handling', () => {
     const r1 = [];
+    const mkOr = (v) => {
+      // eslint-disable-next-line no-param-reassign
+      v.or = true;
+      return v;
+    };
     iterator(
-      [1, new Set([2, []]), 3],
+      [1, mkOr([2, []]), 3],
       (type, arg) => r1.push([type, type === 'FIN' ? arg.slice(0) : arg])
     );
     expect(r1).to.deep.equal([
