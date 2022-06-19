@@ -780,6 +780,11 @@ filterFn: ({ value, context }) => { context.sum += value; }
 comment: sum values
 </example></pre>
 
+## JSONPath and others
+
+How does this library compare to JSONPath and others?
+...
+
 ## Real World Uses
 
 ...
