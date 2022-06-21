@@ -42,7 +42,7 @@ export default (tree, cb) => {
       path.push(e);
       cb('ADD', e);
       if (idx === stack.length - 1) {
-        cb('FIN', path);
+        cb('FIN', e);
         inc = false;
       } else {
         idx += 1;
