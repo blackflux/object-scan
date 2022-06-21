@@ -786,6 +786,10 @@ comment: sum values
 How does this library compare to JSONPath and others?
 ...
 
+TODO: is below really true? Have to think about this more
+- JSONPath and similar libraries are meant to single execute operations on object and have powerful querying logic to find nested keys
+- Object-Scan is used to process an object hierarchy as a whole and perform multiple operations in parallel, the query logic is more limited
+
 ## Real World Uses
 
 ...
