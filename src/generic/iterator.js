@@ -3,7 +3,6 @@ export default (tree, cb) => {
   const parent = [null];
   const count = [];
   const depth = [];
-  const path = [];
   let idx = 0;
   let inc = true;
 
@@ -39,16 +38,15 @@ export default (tree, cb) => {
         }
       }
     } else if (inc === true) {
-      path.push(e);
       cb('ADD', e);
       if (idx === stack.length - 1) {
-        cb('FIN', path);
+        cb('FIN', e);
         inc = false;
       } else {
         idx += 1;
       }
     } else {
-      cb('RM', path.pop());
+      cb('RM', e);
       idx -= 1;
     }
   }

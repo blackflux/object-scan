@@ -25,7 +25,7 @@ export default (tower, needle, tree, { onAdd, onFin }) => {
     } else {
       stack[stack.length - 1]
         .filter(([cur]) => cur !== tower)
-        .forEach(([cur, parent]) => onFin(cur, parent, v[v.length - 1], excluded));
+        .forEach(([cur, parent]) => onFin(cur, parent, v, excluded));
     }
   });
 };
