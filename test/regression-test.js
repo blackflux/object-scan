@@ -9,7 +9,7 @@ import generateDataset from './helper/generate-dataset.js';
 import generateNeedles from './helper/generate-needles.js';
 import createHtmlDiff from './helper/create-html-diff.js';
 
-const TEST_COUNT = 1000000;
+const TEST_COUNT = 10000000;
 
 // eslint-disable-next-line no-console
 const log = (...args) => console.log(...args);
