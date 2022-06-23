@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import { describe } from 'node-tdd';
 import Mustache from 'mustache';
 import { expect } from 'chai';
+import ncc from '@vercel/ncc';
 import stringify from './helper/stringify.js';
 
 const getObjectScanOptions = (meta) => {
@@ -51,6 +52,14 @@ const Renderer = () => {
 
   let haystack;
   return async (match, content) => {
+    if (match === '<cdn></cdn>') {
+      const indexFile = join(fs.dirname(import.meta.url), '..', 'src', 'index.js');
+      const { code } = await ncc(indexFile, { minify: true });
+      const sizeInBytes = Buffer.byteLength(code, 'utf8');
+      const size = `${(sizeInBytes / 1024).toFixed(2)}KB`;
+      return `[CDN (${size})](https://cdn.jsdelivr.net/npm/object-scan/lib/)`;
+    }
+
     const meta = content
       .split('\n')
       .map((l) => /^(?<key>[a-zA-Z0-9]+): (?<value>.*)$/.exec(l).groups)
@@ -91,7 +100,11 @@ describe('Testing Readme', { timeout: 5 * 60000 }, () => {
     const outputFile = join(dirname(fileURLToPath(import.meta.url)), '..', 'README.md');
     const input = fs.smartRead(inputFile).join('\n');
     const renderer = Renderer();
-    const output = await replaceAsync(input, /<pre><example>\n([\s\S]+?)\n<\/example><\/pre>/g, renderer);
+    const output = await replaceAsync(
+      input,
+      /<pre><example>\n([\s\S]+?)\n<\/example><\/pre>|<cdn><\/cdn>/g,
+      renderer
+    );
     const result = fs.smartWrite(outputFile, output.split('\n'));
     expect(result).to.equal(false);
   });

@@ -17,6 +17,15 @@ Install with [npm](https://www.npmjs.com/):
 
     $ npm install --save object-scan
 
+Or import from <cdn></cdn>
+
+```js
+<script type="module">
+  import objectScan from 'https://cdn.jsdelivr.net/npm/object-scan@<VERSION>/lib/index.min.js';
+  // do logic here
+</script>
+```
+
 ## Usage
 
 <pre><example>
