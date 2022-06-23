@@ -19,7 +19,7 @@ Install with [npm](https://www.npmjs.com/):
 
 Or import from <cdn></cdn>
 
-```js
+```html
 <script type="module">
   import objectScan from 'https://cdn.jsdelivr.net/npm/object-scan@<VERSION>/lib/index.min.js';
   // do logic here
