@@ -36,20 +36,11 @@ spoiler: false
 
 ## Features
 
-- Input traversed at most once during search
+- Input [traversed](#traversal_order) at most once during search
 - Dependency free and tiny bundle size
 - Powerful matching syntax
 - Very performant
 - Extensive tests and lots of examples
-
-<a id="traversal_order"></a>
-## Traversal Order
-
-- Traversal in "delete-safe" order
-- input order
-- compareFn
-- reverse
-- orderByNeedles
 
 ## Matching
 
@@ -788,6 +779,112 @@ needles: ['**.{c,d,e}']
 context: { sum: 0 }
 filterFn: ({ value, context }) => { context.sum += value; }
 comment: sum values
+</example></pre>
+
+<a id="traversal_order"></a>
+## Traversal Order
+
+The [traversal order](https://en.wikipedia.org/wiki/Tree_traversal) is always depth first.
+However, the order the nodes are traversed in can be changed.
+
+<pre><example>
+haystack: { F: { B: { A: 0, D: { C: 1, E: 2 } }, G: { I: { H: 3 } } } }
+joined: false
+needles: ['**']
+context: []
+filterFn: ({ context, property }) => { context.push(property); }
+comment: Reverse Pre-order
+</example></pre>
+
+<pre><example>
+haystack: { F: { B: { A: 0, D: { C: 1, E: 2 } }, G: { I: { H: 3 } } } }
+joined: false
+needles: ['**']
+context: []
+breakFn: ({ context, property }) => { context.push(property); }
+comment: Reverse Post-order
+</example></pre>
+
+<pre><example>
+haystack: { F: { B: { A: 0, D: { C: 1, E: 2 } }, G: { I: { H: 3 } } } }
+joined: false
+needles: ['**']
+context: []
+reverse: false
+filterFn: ({ context, property }) => { context.push(property); }
+comment: Post-order
+</example></pre>
+
+<pre><example>
+haystack: { F: { B: { A: 0, D: { C: 1, E: 2 } }, G: { I: { H: 3 } } } }
+joined: false
+needles: ['**']
+context: []
+reverse: false
+breakFn: ({ context, property }) => { context.push(property); }
+comment: Pre-order
+</example></pre>
+
+Note that the default traversal order is _delete-safe_. This means that elements from
+Arrays can be deleted without impacting the traversal.
+
+<pre><example>
+haystack: [0, 1, 2, 3, 4, 5]
+joined: false
+needles: ['**']
+afterFn: ({ haystack }) => haystack
+filterFn: ({ parent, property }) => { parent.splice(property, property % 2); }
+comment: Deleting from Array
+</example></pre>
+
+This is not true when the `reverse` option is set to `false`
+
+<pre><example>
+haystack: [0, 1, 2, 3, 4, 5]
+joined: false
+reverse: false
+needles: ['**']
+afterFn: ({ haystack }) => haystack
+filterFn: ({ parent, property }) => { parent.splice(property, property % 2); }
+comment: Deleting from Array Unexpected
+</example></pre>
+
+By default, the traversal order depends on the haystack _input order_ and the `reverse` option for the direction.
+However, this _input order_ can be altered by using `compareFn` and `orderByNeedles`.
+
+<pre><example>
+haystack: { b: 0, a: 1, c: 2 }
+joined: false
+needles: ['c', 'b', 'a']
+context: []
+orderByNeedles: true
+filterFn: ({ context, property }) => { context.push(property); }
+comment: orderByNeedles
+</example></pre>
+
+<pre><example>
+haystack: { b: 0, a: 1, c: 2 }
+joined: false
+needles: ['**']
+context: []
+compareFn: () => (a, b) => b.localeCompare(a)
+filterFn: ({ context, property }) => { context.push(property); }
+comment: compareFn
+</example></pre>
+
+Note that `compareFn` does not work on Arrays.
+
+Both options can be combined, in which case `orderByNeedles` supersedes `compareFn`
+
+<pre><example>
+haystack: { b: 0, a: 1, c: 2 }
+joined: false
+needles: ['c', '*']
+orderByNeedles: true
+context: []
+compareFn: () => (a, b) => b.localeCompare(a)
+filterFn: ({ context, property }) => { context.push(property); }
+comment: orderByNeedles and compareFn
 </example></pre>
 
 ## JSONPath and others
