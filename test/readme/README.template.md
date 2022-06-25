@@ -212,7 +212,7 @@ comment: all containing `1` at every level
 ### Nested Path Recursion
 
 To match a nested path recursively,
-combine arbitrary depth matching with an or-clause.
+combine [Arbitrary Depth](#arbitrary_depth) matching with an [Or Clause](#or_clause).
 
 There are two types of nested path matching:
 - `**{...}`: Matches path(s) in [Or Clause](#or_clause) zero or more times
