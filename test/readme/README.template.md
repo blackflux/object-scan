@@ -50,15 +50,17 @@ A needle expression specifies one or more paths to an element (or a set of eleme
 store.book[0].title
 ```
 
-- Search syntax validated
-- Full support for escaping
+The syntax is fully validated and bad input will throw a syntax error.
 
-- Separate Object and Array matching
-- Wildcard and Regex matching
-- Arbitrary depth matching
-- Or-clause Syntax
-- Exclusion Matching
+The following syntax is supported:
+- [Array](#array) and [Object](#object) matching
+- [Wildcard](#wildcard) and [Regex](#regex) matching
+- [Or Clause](#or_clause)
+- [Arbitrary Depth](#arbitrary_depth) and [Nested Path Recursion](#nested_path_recursion)
+- [Exclusion](#exclusion)
+- [Escaping](#escaping)
 
+<a id="array"></a>
 ### Array
 
 Rectangular brackets for array path matching.
@@ -75,6 +77,7 @@ needles: ['[1]']
 comment: no match in object
 </example></pre>
 
+<a id="object"></a>
 ### Object
 
 Property name for object property matching.
@@ -91,6 +94,7 @@ needles: ['1']
 comment: no match in array
 </example></pre>
 
+<a id="wildcard"></a>
 ### Wildcard
 
 The following characters have special meaning when not escaped:
@@ -123,6 +127,7 @@ needles: ['a.\\+.c']
 comment: escaped
 </example></pre>
 
+<a id="regex"></a>
 ### Regex
 
 Regex are defined by using parentheses.
@@ -156,6 +161,26 @@ needles: ['[*]', '[!(^[01]$)]']
 comment: match all and exclude `[0]` and `[1]`
 </example></pre>
 
+<a id="or_clause"></a>
+### Or Clause
+
+Or Clauses are defined by using curley brackets.
+
+Can be used with Array and Object selector.
+
+_Examples_:
+<pre><example>
+haystack: ['a', 'b', 'c', 'd']
+needles: ['[{0,1}]']
+comment: `[0]` and `[1]`
+</example></pre>
+<pre><example>
+haystack: { a: { b: 0, c: 1 }, d: { e: 2, f: 3 } }
+needles: ['{a,d}.{b,f}']
+comment: `a.b`, `a.f`, `d.b` and `d.f`
+</example></pre>
+
+<a id="arbitrary_depth"></a>
 ### Arbitrary Depth
 
 There are two types of arbitrary depth matching:
@@ -181,24 +206,7 @@ needles: ['**(1)']
 comment: all containing `1` at every level
 </example></pre>
 
-### Or Clause
-
-Or Clauses are defined by using curley brackets.
-
-Can be used with Array and Object selector.
-
-_Examples_:
-<pre><example>
-haystack: ['a', 'b', 'c', 'd']
-needles: ['[{0,1}]']
-comment: `[0]` and `[1]`
-</example></pre>
-<pre><example>
-haystack: { a: { b: 0, c: 1 }, d: { e: 2, f: 3 } }
-needles: ['{a,d}.{b,f}']
-comment: `a.b`, `a.f`, `d.b` and `d.f`
-</example></pre>
-
+<a id="nested_path_recursion"></a>
 ### Nested Path Recursion
 
 To match a nested path recursively,
@@ -240,6 +248,7 @@ needles: ['a.++{b.c}']
 comment: `one or more times`
 </example></pre>
 
+<a id="exclusion"></a>
 ### Exclusion
 
 To exclude a path, use exclamation mark.
@@ -257,6 +266,7 @@ needles: ['**,!**.a']
 comment: all except ending in `a`
 </example></pre>
 
+<a id="escaping"></a>
 ### Escaping
 
 The following characters are considered special and need to
@@ -356,6 +366,8 @@ skipped in the search and from the final result.
 
 Note that `breakFn` is invoked before the corresponding `filterFn` might be invoked.
 
+For more information on invocation order, please refer to Section [Traversal Order](#traversal_order)
+
 _Examples_:
 <pre><example>
 haystack: { a: { b: { c: 0 } } }
@@ -450,6 +462,8 @@ The returned value is used as a comparator to determine the traversal order of a
 
 This works together with the `reverse` option.
 
+Please refer to Section [Traversal Order](#traversal_order) for more information.
+
 _Examples_:
 <pre><example>
 haystack: { a: 0, c: 1, b: 2 }
@@ -468,6 +482,8 @@ When set to `true`, the scan is performed in reverse order. This means `breakFn`
 `filterFn` in _reverse pre-order_. Otherwise `breakFn` is executed in _pre-order_ and `filterFn` in _post-order_.
 
 When `reverse` is `true` the scan is _delete-safe_. I.e. `property` can be deleted / spliced from `parent` object / array in `filterFn`.
+
+Please refer to Section [Traversal Order](#traversal_order) for more information.
 
 _Examples_:
 <pre><example>
