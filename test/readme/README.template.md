@@ -104,7 +104,7 @@ The following characters have special meaning when not escaped:
 - `?`: Match exactly one character
 - `\`: Escape the subsequent character
 
-Wildcards can be used with Array and Object selector.
+Can be used with [Array](#array) and [Object](#object) selector.
 
 _Examples_:
 <pre><example>
@@ -133,7 +133,7 @@ comment: escaped
 
 Regex are defined by using parentheses.
 
-Can be used with Array and Object selector.
+Can be used with [Array](#array) and [Object](#object) selector.
 
 _Examples_:
 <pre><example>
@@ -167,7 +167,8 @@ comment: match all and exclude `[0]` and `[1]`
 
 Or Clauses are defined by using curley brackets.
 
-Can be used with Array and Object selector.
+Can be used with [Array](#array) and [Object](#object) selector
+and [Arbitrary Depth](#arbitrary_depth) matching.
 
 _Examples_:
 <pre><example>
@@ -188,7 +189,7 @@ There are two types of arbitrary depth matching:
 - `**`: Matches zero or more nestings
 - `++`: Matches one or more nestings
 
-Recursions can be combined with a regex or a group by appending the regex or group.
+Can be combined with [Regex](#regex) and [Or Clause](#or_clause) by prepending.
 
 _Examples_:
 <pre><example>
@@ -214,8 +215,8 @@ To match a nested path recursively,
 combine arbitrary depth matching with an or-clause.
 
 There are two types of nested path matching:
-- `**{...}`: Matches path(s) in group zero or more times
-- `++{...}`: Matches path(s) in group one or more times
+- `**{...}`: Matches path(s) in [Or Clause](#or_clause) zero or more times
+- `++{...}`: Matches path(s) in [Or Clause](#or_clause) one or more times
 
 _Examples_:
 <pre><example>
