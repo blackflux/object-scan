@@ -13,7 +13,7 @@ Traverse object hierarchies using matching and callbacks.
 
 ## Install
 
-Install with [npm](https://www.npmjs.com/):
+Install with [npm](https://www.npmjs.com/)
 
     $ npm install --save object-scan
 
