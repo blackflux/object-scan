@@ -38,10 +38,11 @@ spoiler: false
 
 - Input [traversed](#traversal_order) at most once during search
 - Dependency free and tiny bundle size
-- Powerful matching syntax
+- Powerful [matching syntax](#matching)
 - Very performant
 - Extensive tests and lots of examples
 
+<a id="matching"></a>
 ## Matching
 
 A needle expression specifies one or more paths to an element (or a set of elements) in a JSON structure. Paths use the dot notation:
