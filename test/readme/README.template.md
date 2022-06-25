@@ -51,7 +51,7 @@ A needle expression specifies one or more paths to an element (or a set of eleme
 store.book[0].title
 ```
 
-The syntax is fully validated and bad input will throw a syntax error.
+The matching syntax is fully validated and bad input will throw a syntax error.
 
 The following syntax is supported:
 - [Array](#array) and [Object](#object) matching
