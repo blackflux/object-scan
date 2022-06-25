@@ -480,10 +480,10 @@ reverse: false
 Type: `boolean`<br>
 Default: `true`
 
-When set to `true`, the scan is performed in reverse order. This means `breakFn` is executed in _reverse post-order_ and
+When set to `true`, the traversal is performed in reverse order. This means `breakFn` is executed in _reverse post-order_ and
 `filterFn` in _reverse pre-order_. Otherwise `breakFn` is executed in _pre-order_ and `filterFn` in _post-order_.
 
-When `reverse` is `true` the scan is _delete-safe_. I.e. `property` can be deleted / spliced from `parent` object / array in `filterFn`.
+When `reverse` is `true` the traversal is _delete-safe_. I.e. `property` can be deleted / spliced from `parent` object / array in `filterFn`.
 
 Please refer to Section [Traversal Order](#traversal_order) for more information.
 
@@ -578,7 +578,7 @@ comment: matches traverse first
 Type: `boolean`<br>
 Default: `false`
 
-When set to `true` the scan immediately returns after the first match.
+When set to `true` the traversal immediately returns after the first match.
 
 _Examples_:
 <pre><example>
@@ -660,7 +660,7 @@ haystack: { a: { b: 0, c: 1 } }
 needles: ['a.b', 'a.c']
 joined: false
 rtn: 'bool'
-comment: checks for any match, full scan
+comment: checks for any match, full traversal
 </example></pre>
 <pre><example>
 haystack: { a: 0 }
