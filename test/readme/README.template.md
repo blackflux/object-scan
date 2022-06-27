@@ -45,15 +45,14 @@ spoiler: false
 <a id="matching"></a>
 ## Matching
 
-A needle expression specifies one or more paths to an element (or a set of elements) in a JSON structure. Paths use the dot notation:
+A needle expression specifies one or more paths to an element (or a set of elements) in a JSON structure.
+Paths use the dot notation.
 
 ```txt
 store.book[0].title
 ```
 
-The matching syntax is fully validated and bad input will throw a syntax error.
-
-The following syntax is supported:
+The matching syntax is fully validated and bad input will throw a syntax error. The following syntax is supported:
 - [Array](#array) and [Object](#object) matching
 - [Wildcard](#wildcard) and [Regex](#regex) matching
 - [Or Clause](#or_clause)
