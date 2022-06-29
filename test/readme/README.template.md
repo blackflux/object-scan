@@ -47,10 +47,10 @@ spoiler: false
 ## Features
 
 - Input [traversed](#traversal_order) at most once during search
-- Dependency free and tiny bundle size
+- Dependency free and [tiny bundle size](https://cdn.jsdelivr.net/npm/object-scan/lib/)
 - Powerful [matching syntax](#matching)
-- Very performant
-- Extensive tests and lots of examples
+- Very [performant](#jsonpath)
+- Extensive [tests](./test) and lots of [examples](#real_world_uses)
 
 <a id="matching"></a>
 ## Matching
@@ -914,6 +914,7 @@ filterFn: ({ context, property }) => { context.push(property); }
 comment: orderByNeedles and compareFn
 </example></pre>
 
+<a id="jsonpath"></a>
 ## JSONPath and others
 
 How does this library compare to JSONPath and others?
@@ -923,6 +924,10 @@ TODO: is below really true? Have to think about this more
 - JSONPath and similar libraries are meant to single execute operations on object and have powerful querying logic to find nested keys
 - Object-Scan is used to process an object hierarchy as a whole and perform multiple operations in parallel, the query logic is more limited
 
+How does performance compare?
+// ....
+
+<a id="real_world_uses"></a>
 ## Real World Uses
 
 ...
