@@ -13,11 +13,19 @@ Traverse object hierarchies using matching and callbacks.
 
 ## Install
 
-Install with [npm](https://www.npmjs.com/)
+<details><summary> Install with <a href="https://www.npmjs.com/">npm</a> </summary>
 
     $ npm install --save object-scan
 
-Or import from <cdn></cdn>
+</details>
+
+<details><summary> Install with <a href="https://yarnpkg.com/">yarn</a> </summary>
+
+    $ yarn add object-scan
+
+</details>
+
+<details><summary> Import from <cdn></cdn> </summary>
 
 ```html
 <script type="module">
@@ -25,6 +33,8 @@ Or import from <cdn></cdn>
   // do logic here
 </script>
 ```
+
+</details>
 
 ## Usage
 

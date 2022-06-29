@@ -57,7 +57,7 @@ const Renderer = () => {
       const { code } = await ncc(indexFile, { minify: true });
       const sizeInBytes = Buffer.byteLength(code, 'utf8');
       const size = `${(sizeInBytes / 1024).toFixed(2)}KB`;
-      return `[CDN (${size})](https://cdn.jsdelivr.net/npm/object-scan/lib/)`;
+      return `<a href="https://cdn.jsdelivr.net/npm/object-scan/lib/">CDN</a> <em>(${size})</em>`;
     }
 
     const meta = content
