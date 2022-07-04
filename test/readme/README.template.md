@@ -911,7 +911,7 @@ comment: orderByNeedles and compareFn
 ## JSONPath and others
 
 While this library has a similar syntax and can perform similar tasks
-to [jsonpath](https://www.npmjs.com/package/jsonpath), [jmespath](https://www.npmjs.com/package/jmespath) or [json-query](https://www.npmjs.com/package/json-query),
+to [jsonpath](https://www.npmjs.com/package/jsonpath) or [jmespath](https://www.npmjs.com/package/jmespath),
 instead of querying an object hierarchy, it focuses on traversing it.
 
 This means:
@@ -920,7 +920,12 @@ This means:
 - Applying logic for multiple keys can be done via single call using [callbacks](#callbacks).
 - Easy to differentiate between matches using `matchedBy`.
 
-For a code comparison to other libraries see [these tests](test/comparison.spec.js).
+Notable differences:
+- jmespath does not [support recursion](https://github.com/jmespath/jmespath.py/issues/110)
+- jmespath does not provide [search context](https://github.com/jmespath/jmespath.js/issues/22#issuecomment-350239376)
+- jsonpath performs a breadth first traversal for recursion
+
+For a code comparison, see [tests](test/comparison.spec.js).
 
 Performance is comparable or better than other libraries, where functionality matches.
 However, a one to one comparison is not possible due to difference in functionality.
