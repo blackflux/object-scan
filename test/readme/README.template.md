@@ -285,6 +285,7 @@ comment: special object key
 
 ## Options
 
+<a id="callbacks"></a>
 Signature of all callbacks is
 
     Fn({ key, value, ... })
@@ -909,20 +910,30 @@ comment: orderByNeedles and compareFn
 <a id="jsonpath"></a>
 ## JSONPath and others
 
-How does this library compare to JSONPath and others?
-...
+While this library has a similar syntax and can perform similar tasks
+to [jsonpath](https://www.npmjs.com/package/jsonpath), [jmespath](https://www.npmjs.com/package/jmespath) or [json-query](https://www.npmjs.com/package/json-query),
+instead of querying an object hierarchy, it focuses on traversing it.
 
-TODO: is below really true? Have to think about this more
-- JSONPath and similar libraries are meant to single execute operations on object and have powerful querying logic to find nested keys
-- Object-Scan is used to process an object hierarchy as a whole and perform multiple operations in parallel, the query logic is more limited
+This means:
+- Input is traversed at most once.
+- Easy to match multiple keys in single invocation.
+- Applying logic for multiple keys can be done via single call using [callbacks](#callbacks).
+- Easy to differentiate between matches using `matchedBy`.
 
-How does performance compare?
-// ....
+For a code comparison to other libraries see [these tests](test/comparison.spec.js).
+
+Performance is comparable or better than other libraries, where functionality matches.
+However, a one to one comparison is not possible due to difference in functionality.
+
+The search is pre-computes, which makes applying the same search multiple times very performant.
+This library has been designed around performance as a core feature.
 
 <a id="real_world_uses"></a>
 ## Real World Uses
 
-...
+This library was originally designed and build to power [object-rewrite](https://github.com/blackflux/object-rewrite).
+
+Many other examples can be found on [Stack Overflow](https://stackoverflow.com/search?q=%5Bjavascript%5D+object-scan+user%3A1030413).
 
 ## Examples
 
