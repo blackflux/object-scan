@@ -13,19 +13,11 @@ Traverse object hierarchies using matching and callbacks.
 
 ## Install
 
-<details><summary> Install with <a href="https://www.npmjs.com/">npm</a> </summary>
+Using npm:
 
-    $ npm install --save object-scan
+    $ npm i object-scan
 
-</details>
-
-<details><summary> Install with <a href="https://yarnpkg.com/">yarn</a> </summary>
-
-    $ yarn add object-scan
-
-</details>
-
-<details><summary> Import from <cdn></cdn> </summary>
+In a browser:
 
 ```html
 <script type="module">
@@ -34,7 +26,7 @@ Traverse object hierarchies using matching and callbacks.
 </script>
 ```
 
-</details>
+Check ${CDN} for version.
 
 ## Usage
 
@@ -859,7 +851,7 @@ Arrays can be deleted without impacting the traversal.
 haystack: [0, 1, 2, 3, 4, 5]
 joined: false
 needles: ['**']
-afterFn: ({ haystack }) => haystack
+afterFn: ({ haystack: h }) => h
 filterFn: ({ parent, property }) => { parent.splice(property, property % 2); }
 comment: Deleting from Array
 </example></pre>
@@ -871,7 +863,7 @@ haystack: [0, 1, 2, 3, 4, 5]
 joined: false
 reverse: false
 needles: ['**']
-afterFn: ({ haystack }) => haystack
+afterFn: ({ haystack: h }) => h
 filterFn: ({ parent, property }) => { parent.splice(property, property % 2); }
 comment: Deleting from Array Unexpected
 </example></pre>

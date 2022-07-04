@@ -52,7 +52,8 @@ const Renderer = () => {
 
   let haystack;
   return async (match, content) => {
-    if (match === '<cdn></cdn>') {
+    // eslint-disable-next-line no-template-curly-in-string
+    if (match === '${CDN}') {
       const indexFile = join(fs.dirname(import.meta.url), '..', 'src', 'index.js');
       const { code } = await ncc(indexFile, { minify: true });
       const sizeInBytes = Buffer.byteLength(code, 'utf8');
@@ -102,7 +103,7 @@ describe('Testing Readme', { timeout: 5 * 60000 }, () => {
     const renderer = Renderer();
     const output = await replaceAsync(
       input,
-      /<pre><example>\n([\s\S]+?)\n<\/example><\/pre>|<cdn><\/cdn>/g,
+      /<pre><example>\n([\s\S]+?)\n<\/example><\/pre>|\$\{CDN}/g,
       renderer
     );
     const result = fs.smartWrite(outputFile, output.split('\n'));
