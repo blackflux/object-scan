@@ -926,6 +926,7 @@ Performance is comparable or better than other libraries, where functionality ma
 However, a one to one comparison is not possible due to difference in functionality.
 
 The search is pre-computes, which makes applying the same search multiple times very performant.
+Traversal happens depth-first, which allows for lower memory consumption.
 This library has been designed around performance as a core feature.
 
 <a id="real_world_uses"></a>
