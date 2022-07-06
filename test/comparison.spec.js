@@ -64,4 +64,7 @@ describe('Comparing libraries', () => {
     const r2 = jmespath.search(h2, "*[?(x == 'yes')].y");
     expect(r2).to.deep.equal([[2], []]);
   });
+
+  // todo: add tests for all entries in table @readme
+  // todo: add speed tests for simple expressions
 });
