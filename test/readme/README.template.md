@@ -913,26 +913,22 @@ comment: orderByNeedles and compareFn
 While this library has a similar syntax and can perform similar tasks
 to [jsonpath](https://www.npmjs.com/package/jsonpath) or [jmespath](https://www.npmjs.com/package/jmespath),
 instead of querying an object hierarchy, it focuses on traversing it.
+This means there are some significant differences:
 
-This means:
-- Input is traversed at most once.
-- Easy to match multiple keys in single invocation.
-- Applying logic for multiple keys can be done via single call using [callbacks](#callbacks).
-- Easy to differentiate between matches using `matchedBy`.
-
-Notable differences:
-- jmespath does not [support recursion](https://github.com/jmespath/jmespath.py/issues/110)
-- jmespath does not provide [search context](https://github.com/jmespath/jmespath.js/issues/22#issuecomment-350239376)
-- jsonpath performs a breadth first traversal for recursion
+|                         | objectScan  | jsonpath                                                                                                           | jmespath                                                                       |
+|-------------------------|-------------|--------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| Value Matching          | ✔           | ✔                                                                                                                  | ✔                       |
+| Key Matching            | ✔           | ✔                                                                                                                  | ✘                       |
+| Recursion               | ✔           | ✔                                                                                                                  | ✘[*](https://github.com/jmespath/jmespath.py/issues/110)                       |
+| Single Traversal        | ✔           | ✘                                                                                                                  | ✘                                                                              |
+| [Callbacks](#callbacks) | ✔           | ✘                                                                                                                  | ✘                                                                              |
+| Search Context          | ✔           | ✔                                                                                                                  | ✘[*](https://github.com/jmespath/jmespath.js/issues/22#issuecomment-350239376) |
+| Traversal               | depth-first | custom depth-first[*](https://cs.stackexchange.com/questions/99440/is-there-a-name-for-this-graph-search-strategy) | ✘                                                                              |
 
 For a code comparison, see [tests](test/comparison.spec.js).
 
 Performance is comparable or better than other libraries, where functionality matches.
 However, a one to one comparison is not possible due to difference in functionality.
-
-The search is pre-computes, which makes applying the same search multiple times very performant.
-Traversal happens depth-first, which allows for lower memory consumption.
-This library has been designed around performance as a core feature.
 
 <a id="real_world_uses"></a>
 ## Real World Uses
@@ -1042,9 +1038,15 @@ comment: star recursion matches roots
 
 ## Internals
 
-This implementation is completely recursion free. This allows
+This library has been designed around performance as a core feature.
+
+The implementation is completely recursion free. This allows
 for traversal of deeply nested objects where a recursive approach
 would fail with a `Maximum call stack size exceeded` error.
+
+The search is pre-computes, which makes applying the same search multiple times very performant.
+
+Traversal happens depth-first, which allows for lower memory consumption.
 
 Conceptually this package works as follows:
 
