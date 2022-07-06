@@ -923,7 +923,7 @@ This means there are some significant differences:
 | Single Traversal        | ✔           | ✘                                                                                                                  | ✘                                                                              |
 | [Callbacks](#callbacks) | ✔           | ✘                                                                                                                  | ✘                                                                              |
 | Search Context          | ✔           | ✔                                                                                                                  | ✘[*](https://github.com/jmespath/jmespath.js/issues/22#issuecomment-350239376) |
-| Value Filter            | ✘           | ✔                                                                                                                  | ✘ |
+| Value Filter            | ✘           | ✔                                                                                                                  | ✔ |
 | Traversal               | depth-first | custom depth-first[*](https://cs.stackexchange.com/questions/99440/is-there-a-name-for-this-graph-search-strategy) | ✘                                                                              |
 
 For a code comparison, see [tests](test/comparison.spec.js).
