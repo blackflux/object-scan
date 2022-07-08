@@ -924,7 +924,7 @@ This means there are some significant differences:
 | [Callbacks](#callbacks)                         | ✔           | ✘                                                                                                                  | ✘                                                                              |
 | Search Context                                  | ✔           | ✔                                                                                                                  | ✘[*](https://github.com/jmespath/jmespath.js/issues/22#issuecomment-350239376) |
 | [Condition](test/comparison/condition.spec.js)  | ✔ _**[1]**_ | ✔                                                                                                                  | ✔ |
-| Traversal                                       | depth-first | custom depth-first[*](https://cs.stackexchange.com/questions/99440/is-there-a-name-for-this-graph-search-strategy) | ✘                                                                              |
+| [Traversal](test/comparison/recursive.spec.js)  | depth-first | custom depth-first[*](https://cs.stackexchange.com/questions/99440/is-there-a-name-for-this-graph-search-strategy) | ✘                                                                              |
 _**[1]** In code logic_
 
 
