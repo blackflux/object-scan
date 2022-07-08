@@ -7,11 +7,9 @@ import cond from './fixtures/cond.js';
 
 describe('Comparing condition', () => {
   it('Testing objectScan', ({ fixture }) => {
-    const r1 = objectScan(['*[*]', '*[*].y'], {
-      reverse: false,
-      joined: true,
-      breakFn: ({ matchedBy, value }) => (matchedBy.includes('*[*]') ? value?.x !== 'yes' : false),
-      filterFn: ({ matchedBy }) => matchedBy.includes('*[*].y')
+    const r1 = objectScan(['*[*].y'], {
+      breakFn: ({ depth, value }) => depth === 2 && value?.x !== 'yes',
+      joined: true
     })(cond);
     expect(r1).to.deep.equal(['a[0].y']);
   });
