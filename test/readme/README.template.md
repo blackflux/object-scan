@@ -915,18 +915,16 @@ to [jsonpath](https://www.npmjs.com/package/jsonpath) or [jmespath](https://www.
 instead of querying an object hierarchy, it focuses on traversing it.
 This means there are some significant differences:
 
-|                                                 | objectScan  | jsonpath                                                                                                           | jmespath                                                                       |
-|-------------------------------------------------|-------------|--------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| [Value Matching](test/comparison/value.spec.js) | ✔           | ✔                                                                                                                  | ✔                       |
-| Key Matching                                    | ✔           | ✔                                                                                                                  | ✘                       |
-| [Recursion](test/comparison/recursive.spec.js)  | ✔           | ✔                                                                                                                  | ✘[*](https://github.com/jmespath/jmespath.py/issues/110)                       |
-| Single Traversal                                | ✔           | ✘                                                                                                                  | ✘                                                                              |
-| [Callbacks](#callbacks)                         | ✔           | ✘                                                                                                                  | ✘                                                                              |
-| Search Context                                  | ✔           | ✔                                                                                                                  | ✘[*](https://github.com/jmespath/jmespath.js/issues/22#issuecomment-350239376) |
-| [Condition](test/comparison/condition.spec.js)  | ✔ _**[1]**_ | ✔                                                                                                                  | ✔ |
-| [Traversal](test/comparison/recursive.spec.js)  | depth-first | custom depth-first[*](https://cs.stackexchange.com/questions/99440/is-there-a-name-for-this-graph-search-strategy) | ✘                                                                              |
-_**[1]** In code logic_
-
+|                                                 | objectScan       | jsonpath                                                                                                           | jmespath                                                                       |
+|-------------------------------------------------|------------------|--------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| [Value Matching](test/comparison/value.spec.js) | ✔                | ✔                                                                                                                  | ✔                       |
+| Key Matching                                    | ✔                | ✔                                                                                                                  | ✘                       |
+| [Recursion](test/comparison/recursive.spec.js)  | ✔                | ✔                                                                                                                  | ✘[*](https://github.com/jmespath/jmespath.py/issues/110)                       |
+| Single Traversal                                | ✔                | ✘                                                                                                                  | ✘                                                                              |
+| [Callbacks](#callbacks)                         | ✔                | ✘                                                                                                                  | ✘                                                                              |
+| Search Context                                  | ✔                | ✔                                                                                                                  | ✘[*](https://github.com/jmespath/jmespath.js/issues/22#issuecomment-350239376) |
+| [Condition](test/comparison/condition.spec.js)  | ✔ _(code logic)_ | ✔                                                                                                                  | ✔ |
+| [Traversal](test/comparison/recursive.spec.js)  | depth-first      | custom depth-first[*](https://cs.stackexchange.com/questions/99440/is-there-a-name-for-this-graph-search-strategy) | ✘                                                                              |
 
 For a code comparison, see [tests](test/comparison).
 
