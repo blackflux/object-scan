@@ -926,7 +926,7 @@ This means there are some significant differences:
 | Value Filter            | ✘           | ✔                                                                                                                  | ✔ |
 | Traversal               | depth-first | custom depth-first[*](https://cs.stackexchange.com/questions/99440/is-there-a-name-for-this-graph-search-strategy) | ✘                                                                              |
 
-For a code comparison, see [tests](test/comparison.spec.js).
+For a code comparison, see [tests](test/comparison).
 
 Performance is comparable or better than other libraries, where functionality matches.
 However, a one to one comparison is not possible due to difference in functionality.
