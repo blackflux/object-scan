@@ -5,12 +5,12 @@ import objectScan from '../../src/index.js';
 import tree from './fixtures/tree.js';
 
 describe('Comparing recursive', () => {
-  it('Testing objectScan', ({ fixture }) => {
-    const r1 = objectScan(['**'], {
+  it('Testing objectScan', () => {
+    const r = objectScan(['**'], {
       reverse: false,
       joined: true
     })(tree);
-    expect(r1).to.deep.equal([
+    expect(r).to.deep.equal([
       'F.B.A',
       'F.B.D.C',
       'F.B.D.E',
@@ -23,9 +23,9 @@ describe('Comparing recursive', () => {
     ]);
   });
 
-  it('Testing jsonpath', ({ fixture }) => {
-    const r2 = jsonpath.paths(tree, '$..[*]').map((e) => jsonpath.stringify(e).slice(2));
-    expect(r2).to.deep.equal([
+  it('Testing jsonpath', () => {
+    const r = jsonpath.paths(tree, '$..[*]').map((e) => jsonpath.stringify(e).slice(2));
+    expect(r).to.deep.equal([
       'F',
       'F.B',
       'F.G',
