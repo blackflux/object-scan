@@ -3,12 +3,12 @@ import objectScan from '../../../src/index.js';
 
 export default {
   fixture: 'tree',
-  objectScanCompiled: [
-    objectScan(['**'], {
+  objectScanCompiled: {
+    fn: objectScan(['**'], {
       reverse: false,
       joined: true
     }),
-    [
+    result: [
       'F.B.A',
       'F.B.D.C',
       'F.B.D.E',
@@ -19,13 +19,13 @@ export default {
       'F.G',
       'F'
     ]
-  ],
-  objectScan: [
-    (v) => objectScan(['**'], {
+  },
+  objectScan: {
+    fn: (v) => objectScan(['**'], {
       reverse: false,
       joined: true
     })(v),
-    [
+    result: [
       'F.B.A',
       'F.B.D.C',
       'F.B.D.E',
@@ -36,10 +36,10 @@ export default {
       'F.G',
       'F'
     ]
-  ],
-  jsonpath: [
-    (v) => jsonpath.paths(v, '$..[*]').map((e) => jsonpath.stringify(e).slice(2)),
-    [
+  },
+  jsonpath: {
+    fn: (v) => jsonpath.paths(v, '$..[*]').map((e) => jsonpath.stringify(e).slice(2)),
+    result: [
       'F',
       'F.B',
       'F.G',
@@ -50,5 +50,5 @@ export default {
       'F.G.I',
       'F.G.I.H'
     ]
-  ]
+  }
 };

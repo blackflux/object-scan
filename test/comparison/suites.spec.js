@@ -10,11 +10,11 @@ describe('Testing suites', () => {
       // eslint-disable-next-line mocha/no-setup-in-describe
       Object.entries(tests)
         .filter(([test]) => !['fixture', 'result'].includes(test))
-        .forEach(([test, fnOrArray]) => {
+        .forEach(([test, fnOrObj]) => {
           it(`Testing Test ${test}`, () => {
-            const isArray = Array.isArray(fnOrArray);
-            const fn = isArray ? fnOrArray[0] : fnOrArray;
-            const result = isArray ? fnOrArray[1] : tests.result;
+            const { fn, result } = typeof fnOrObj === 'function'
+              ? { fn: fnOrObj, result: tests.result }
+              : fnOrObj;
             expect(fn(fixtures[tests.fixture])).to.deep.equal(result);
           });
         });

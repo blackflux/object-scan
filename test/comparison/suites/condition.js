@@ -4,26 +4,26 @@ import objectScan from '../../../src/index.js';
 
 export default {
   fixture: 'cond',
-  objectScanCompiled: [
-    objectScan(['*[*].y'], {
+  objectScanCompiled: {
+    fn: objectScan(['*[*].y'], {
       breakFn: ({ depth, value }) => depth === 2 && value?.x !== 'yes',
       joined: true
     }),
-    ['a[0].y']
-  ],
-  objectScan: [
-    (v) => objectScan(['*[*].y'], {
+    result: ['a[0].y']
+  },
+  objectScan: {
+    fn: (v) => objectScan(['*[*].y'], {
       breakFn: ({ depth, value }) => depth === 2 && value?.x !== 'yes',
       joined: true
     })(v),
-    ['a[0].y']
-  ],
-  jsonpath: [
-    (v) => jsonpath.paths(v, "$.*[?(@.x == 'yes')].y").map((e) => jsonpath.stringify(e).slice(2)),
-    ['a[0].y']
-  ],
-  jmespath: [
-    (v) => jmespath.search(v, "*[?(x == 'yes')].y"),
-    [[2], []]
-  ]
+    result: ['a[0].y']
+  },
+  jsonpath: {
+    fn: (v) => jsonpath.paths(v, "$.*[?(@.x == 'yes')].y").map((e) => jsonpath.stringify(e).slice(2)),
+    result: ['a[0].y']
+  },
+  jmespath: {
+    fn: (v) => jmespath.search(v, "*[?(x == 'yes')].y"),
+    result: [[2], []]
+  }
 };
