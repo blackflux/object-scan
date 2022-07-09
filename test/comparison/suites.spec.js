@@ -6,12 +6,12 @@ import * as suites from './suites.js';
 describe('Testing suites', () => {
   // eslint-disable-next-line mocha/no-setup-in-describe
   Object.entries(suites).forEach(([suite, tests]) => {
-    describe(`Testing suite ${suite}`, () => {
+    describe(`Suite ${suite}`, () => {
       // eslint-disable-next-line mocha/no-setup-in-describe
       Object.entries(tests)
         .filter(([test]) => !['fixture', 'result'].includes(test))
         .forEach(([test, fnOrObj]) => {
-          it(`Testing Test ${test}`, () => {
+          it(`Testing ${test}`, () => {
             const { fn, result } = typeof fnOrObj === 'function'
               ? { fn: fnOrObj, result: tests.result }
               : fnOrObj;
