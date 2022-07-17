@@ -7,6 +7,10 @@ export default {
   _index: 2,
   _name: 'Conditional Path',
   _fixture: 'cond',
+  _comments: {
+    objectScanCompiled: ' _(code logic)_',
+    objectScan: ' _(code logic)_'
+  },
   objectScanCompiled: {
     fn: objectScan(['*[*].y'], {
       breakFn: ({ depth, value }) => depth === 2 && value?.x !== 'yes',

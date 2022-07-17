@@ -19,7 +19,7 @@ export default {
   jsonpath: (v) => jsonpath.value(v, '$.a[0].y'),
   jsonpathplus: {
     fn: (v) => JSONPath({ path: '$.a[0].y', json: v }),
-    result: [0]
+    result: [2]
   },
   jmespath: (v) => jmespath.search(v, 'a[0].y')
 };

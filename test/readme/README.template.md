@@ -917,14 +917,9 @@ This means there are some significant differences:
 
 |                                                   | objectScan       | jsonpath                                                                                                           | jmespath                                                                       |
 |---------------------------------------------------|------------------|--------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| [Value Matching](test/comparison/suites/value.js) | ✔                | ✔                                                                                                                  | ✔                       |
-| [Key Matching](test/comparison/suites/key.js)     | ✔                | ✔                                                                                                                  | ✘                       |
-| [Recursion](test/comparison/suites/recursive.js)  | ✔                | ✔                                                                                                                  | ✘[*](https://github.com/jmespath/jmespath.py/issues/110)                       |
 | Single Traversal                                  | ✔                | ✘                                                                                                                  | ✘                                                                              |
 | [Callbacks](#callbacks)                           | ✔                | ✘                                                                                                                  | ✘                                                                              |
 | Search Context                                    | ✔                | ✔                                                                                                                  | ✘[*](https://github.com/jmespath/jmespath.js/issues/22#issuecomment-350239376) |
-| [Condition](test/comparison/suites/condition.js)  | ✔ _(code logic)_ | ✔                                                                                                                  | ✔ |
-| [Traversal](test/comparison/suites/recursive.js)  | depth-first      | custom depth-first[*](https://cs.stackexchange.com/questions/99440/is-there-a-name-for-this-graph-search-strategy) | ✘                                                                              |
 
 For a code comparison, see [tests](test/comparison).
 
