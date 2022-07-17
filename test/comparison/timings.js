@@ -45,9 +45,7 @@ const execute = () => {
     let maxValue = Number.MIN_SAFE_INTEGER;
     for (let i = 1; i < table[0].length; i += 1) {
       const v = table[j][i];
-      if (v === undefined) {
-        table[j][i] = "<span style='color:#ff0000'>✘</span>";
-      } else {
+      if (v !== undefined) {
         if (minValue > v) {
           minValue = v;
           minPos = i;
@@ -56,17 +54,25 @@ const execute = () => {
           maxValue = v;
           maxPos = i;
         }
-        table[j][i] = `${v.toFixed(2)} μs`;
       }
       const { _comments: comments } = entries[j - 2][1];
       const suite = table[0][i];
       const comment = comments?.[suite];
+      const status = v === undefined
+        ? "<span style='color:#ff0000'>✘</span>"
+        : "<span style='color:#00ff00'>✔</span>";
+      const append = v === undefined
+        ? ''
+        : ` ${v.toFixed(2)} μs`;
       if (comment) {
         if (!(comment in footnotes)) {
           footnotes[comment] = Object.keys(footnotes).length + 1;
         }
         const footnoteId = footnotes[comment];
-        table[j][i] = `${table[j][i]}<i><sup><a href="#timing_ref_${footnoteId}">[${footnoteId}]</a></sup></i>`;
+        const footnote = `<i><sup><a href="#timing_ref_${footnoteId}">[${footnoteId}]</a></sup></i>`;
+        table[j][i] = `${status}${footnote}${append}`;
+      } else {
+        table[j][i] = `${status}${append}`;
       }
     }
     table[j][minPos] = `<span style="color:#1f811f">${table[j][minPos]}</span>`;
