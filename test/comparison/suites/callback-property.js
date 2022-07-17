@@ -46,22 +46,22 @@ export default {
         json: v,
         callback: (value, resultType, { parentProperty }) => {
           result.push({
-            parent: parentProperty
+            property: parentProperty
           });
         }
       });
       return result;
     },
     result: [
-      { parent: 'F' },
-      { parent: 'B' },
-      { parent: 'G' },
-      { parent: 'A' },
-      { parent: 'D' },
-      { parent: 'C' },
-      { parent: 'E' },
-      { parent: 'I' },
-      { parent: 'H' }
+      { property: 'F' },
+      { property: 'B' },
+      { property: 'G' },
+      { property: 'A' },
+      { property: 'D' },
+      { property: 'C' },
+      { property: 'E' },
+      { property: 'I' },
+      { property: 'H' }
     ]
   }
 };
