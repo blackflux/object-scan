@@ -18,11 +18,11 @@ const execute = () => {
       const { _name: name } = tests;
       table.push([`<a href="./test/comparison/suites/${suite}.js">${name}</a>`]);
       Object.entries(tests)
-        .filter(([test]) => !test.startsWith('_'))
-        .forEach(([test, fnOrObj]) => {
-          let col = table[0].indexOf(test);
+        .filter(([lib]) => !lib.startsWith('_'))
+        .forEach(([lib, fnOrObj]) => {
+          let col = table[0].indexOf(lib);
           if (col === -1) {
-            table[0].push(test);
+            table[0].push(lib);
             table[1].push('---');
             col = table[0].length - 1;
           }
@@ -77,6 +77,10 @@ const execute = () => {
     }
     table[j][minPos] = `<span style="color:#1f811f">${table[j][minPos]}</span>`;
     table[j][maxPos] = `<span style="color:#b01414">${table[j][maxPos]}</span>`;
+  }
+  const libs = fs.smartRead(path.join(fs.dirname(import.meta.url), 'libs.json'));
+  for (let i = 1; i < table[0].length; i += 1) {
+    table[0][i] = libs[table[0][i]];
   }
   for (let i = 0; i < table.length; i += 1) {
     table[i] = `|${table[i].join('|')}|`;
