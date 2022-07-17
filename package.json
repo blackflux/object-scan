@@ -20,7 +20,8 @@
     "u": "yarn upgrade --latest --force",
     "i": "yarn install --frozen-lockfile",
     "it": "yarn run i && yarn run t",
-    "ncc-analyze": "yarn clean && cp -rf ./src ./lib && ncc build -m -s -o lib && npx source-map-explorer lib/index.js --only-mapped --html source.html && yarn clean"
+    "ncc-analyze": "yarn clean && cp -rf ./src ./lib && ncc build -m -s -o lib && npx source-map-explorer lib/index.js --only-mapped --html source.html && yarn clean",
+    "benchmark": "node --no-opt test/comparison/benchmark.js && node test/comparison/benchmark.js"
   },
   "repository": {
     "type": "git",

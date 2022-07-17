@@ -5,9 +5,9 @@ import * as suites from './suites.js';
 
 const COUNT = 10000;
 
-const execute = () => {
+const execute = (optimize) => {
   const table = [
-    [' '],
+    [`_[v8 ${[optimize ? '--opt' : '--no-opt']}](https://flaviocopes.com/node-runtime-v8-options/)_`],
     ['---']
   ];
   const footnotes = {};
@@ -29,8 +29,14 @@ const execute = () => {
           const { fn } = typeof fnOrObj === 'function'
             ? { fn: fnOrObj, result: tests.result }
             : fnOrObj;
-          const start = process.hrtime();
+
           const { _fixture: fixture } = tests;
+          if (optimize) {
+            for (let i = 0; i < COUNT; i += 1) {
+              fn(fixtures[fixture]);
+            }
+          }
+          const start = process.hrtime();
           for (let i = 0; i < COUNT; i += 1) {
             fn(fixtures[fixture]);
           }
@@ -88,10 +94,11 @@ const execute = () => {
   for (let i = 0; i < table.length; i += 1) {
     table[i] = `|${table[i].join('|')}|`;
   }
-  table.push('');
+  fs.smartWrite(path.join(fs.dirname(import.meta.url), `benchmark-opt:${optimize}.md`), table);
+  const footer = [];
   Object.entries(footnotes).forEach((([comment, footnoteId]) => {
-    table.push(`<a id="timing_ref_${footnoteId}"><i>[${footnoteId}]</i></a>: ${comment}<br>`);
+    footer.push(`<a id="timing_ref_${footnoteId}"><i>[${footnoteId}]</i></a>: ${comment}<br>`);
   }));
-  fs.smartWrite(path.join(fs.dirname(import.meta.url), 'benchmark.md'), table);
+  fs.smartWrite(path.join(fs.dirname(import.meta.url), 'benchmark-footer.md'), footer);
 };
-execute();
+execute(!process.execArgv.includes('--no-opt'));

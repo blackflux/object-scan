@@ -16,7 +16,8 @@ describe('Testing suites', () => {
             const { fn, result } = typeof fnOrObj === 'function'
               ? { fn: fnOrObj, result: r }
               : fnOrObj;
-            expect(fn(fixtures[fixture])).to.deep.equal(result);
+            const fnResult = fn(fixtures[fixture]);
+            expect(fnResult, JSON.stringify(fnResult)).to.deep.equal(result);
           });
         });
     });

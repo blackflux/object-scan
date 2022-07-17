@@ -61,9 +61,16 @@ const Renderer = () => {
           const size = `${(sizeInBytes / 1024).toFixed(2)}KB`;
           return `<a href="https://cdn.jsdelivr.net/npm/object-scan/lib/">CDN</a> <em>(${size})</em>`;
         },
-        CMP_BMK: async () => fs.smartRead(
-          join(dirname(fileURLToPath(import.meta.url)), 'comparison', 'benchmark.md')
-        ).join('\n')
+        CMP_BMK: async () => {
+          const benchmarkPrefix = join(dirname(fileURLToPath(import.meta.url)), 'comparison', 'benchmark');
+          return [
+            ...fs.smartRead(`${benchmarkPrefix}-opt:false.md`),
+            '',
+            ...fs.smartRead(`${benchmarkPrefix}-opt:true.md`),
+            '',
+            ...fs.smartRead(`${benchmarkPrefix}-footer.md`)
+          ].join('\n');
+        }
       }[match.slice(2, -1)]();
     }
     if (match === '✔') {
