@@ -10,7 +10,8 @@ const execute = () => {
     [' '],
     ['---']
   ];
-  Object.entries(suites)
+  const entries = Object.entries(suites);
+  entries
     .sort(([, { _index: a }], [, { _index: b }]) => a - b)
     .forEach(([suite, tests]) => {
       const { _name: name } = tests;
@@ -44,7 +45,7 @@ const execute = () => {
     for (let i = 1; i < table[0].length; i += 1) {
       const v = table[j][i];
       if (v === undefined) {
-        table[j][i] = '-';
+        table[j][i] = "<span style='color:#ff0000'>✘</span>";
       } else {
         if (minValue > v) {
           minValue = v;
@@ -55,6 +56,11 @@ const execute = () => {
           maxPos = i;
         }
         table[j][i] = `${v.toFixed(2)} μs`;
+      }
+      const { _comments: comments } = entries[j - 2][1];
+      const suite = table[0][i];
+      if (comments?.[suite]) {
+        table[j][i] = `${table[j][i]}${comments[suite]}`;
       }
     }
     table[j][minPos] = `<a style="color:#1f811f">${table[j][minPos]}</a>`;

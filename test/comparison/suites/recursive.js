@@ -5,6 +5,9 @@ export default {
   _index: 3,
   _name: 'Recursive Traversal',
   _fixture: 'tree',
+  _comments: {
+    jmespath: '[*](https://github.com/jmespath/jmespath.py/issues/110)'
+  },
   objectScanCompiled: {
     fn: objectScan(['**'], {
       reverse: false,
