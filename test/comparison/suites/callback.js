@@ -85,7 +85,7 @@ export default {
     fn: (v) => {
       const result = [];
       JSONPath({
-        path: '$..[*]',
+        path: '$..*',
         json: v,
         callback: (value, resultType, context) => {
           result.push(context);

@@ -49,7 +49,7 @@ export default {
     ]
   },
   jsonpath: {
-    fn: (v) => jsonpath.paths(v, '$..[*]'),
+    fn: (v) => jsonpath.paths(v, '$..*'),
     result: [
       ['$', 'F'],
       ['$', 'F', 'B'],
@@ -63,7 +63,7 @@ export default {
     ]
   },
   jsonpathplus: {
-    fn: (v) => JSONPath({ path: '$..[*]', json: v, resultType: 'path' }),
+    fn: (v) => JSONPath({ path: '$..*', json: v, resultType: 'path' }),
     result: [
       "$['F']",
       "$['F']['B']",
