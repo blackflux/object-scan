@@ -3,6 +3,8 @@ import path from 'path';
 import * as fixtures from './fixtures.js';
 import * as suites from './suites.js';
 
+const COUNT = 10000;
+
 const execute = () => {
   const table = [
     [' '],
@@ -27,11 +29,11 @@ const execute = () => {
           ? { fn: fnOrObj, result: tests.result }
           : fnOrObj;
         const start = process.hrtime();
-        for (let i = 0; i < 10000; i += 1) {
+        for (let i = 0; i < COUNT; i += 1) {
           fn(fixtures[tests.fixture]);
         }
         const stop = process.hrtime(start);
-        table[table.length - 1][col] = (stop[0] * 1e9 + stop[1]) / 1e6;
+        table[table.length - 1][col] = (stop[0] * 1e9 + stop[1]) / (COUNT * 1000);
       });
   });
   for (let j = 2; j < table.length; j += 1) {
@@ -52,7 +54,7 @@ const execute = () => {
           maxValue = v;
           maxPos = i;
         }
-        table[j][i] = `${v.toFixed(2)} ms`;
+        table[j][i] = `${v.toFixed(2)} μs`;
       }
     }
     table[j][minPos] = `<a style="color:#1f811f">${table[j][minPos]}</a>`;
