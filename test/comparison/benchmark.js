@@ -55,6 +55,9 @@ const execute = () => {
           maxPos = i;
         }
       }
+    }
+    for (let i = 1; i < table[0].length; i += 1) {
+      const v = table[j][i];
       const { _comments: comments } = entries[j - 2][1];
       const suite = table[0][i];
       const comment = comments?.[suite];
@@ -63,7 +66,7 @@ const execute = () => {
         : "<span style='color:#00ff00'>✔</span>";
       const append = v === undefined
         ? ''
-        : ` ${v.toFixed(2)} μs`;
+        : ` ${(v / minValue).toFixed(2)}x`;
       if (comment) {
         if (!(comment in footnotes)) {
           footnotes[comment] = Object.keys(footnotes).length + 1;
