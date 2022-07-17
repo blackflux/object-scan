@@ -1,7 +1,7 @@
 import fs from 'smart-fs';
 import path from 'path';
+import suites from './suites.js';
 import * as fixtures from './fixtures.js';
-import * as suites from './suites.js';
 
 const COUNT = 10000;
 

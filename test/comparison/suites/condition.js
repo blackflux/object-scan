@@ -6,7 +6,6 @@ import objectScan from '../../../src/index.js';
 const commentObjectScan = ' Only in code logic';
 
 export default {
-  _index: 2,
   _name: 'Conditional Path',
   _fixture: 'cond',
   _comments: {

@@ -1,7 +1,7 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
+import suites from './suites.js';
 import * as fixtures from './fixtures.js';
-import * as suites from './suites.js';
 
 describe('Testing suites', () => {
   // eslint-disable-next-line mocha/no-setup-in-describe

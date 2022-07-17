@@ -9,7 +9,6 @@ const commentObjectScan = [
 const commentJsonPath = ' [Custom depth-first](https://cs.stackexchange.com/questions/99440) traversal';
 
 export default {
-  _index: 3,
   _name: 'Recursive Traversal',
   _fixture: 'tree',
   _comments: {

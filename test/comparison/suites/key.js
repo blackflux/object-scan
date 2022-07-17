@@ -3,7 +3,6 @@ import { JSONPath } from 'jsonpath-plus';
 import objectScan from '../../../src/index.js';
 
 export default {
-  _index: 0,
   _name: 'Get Key',
   _fixture: 'cond',
   objectScanCompiled: {

@@ -49,7 +49,6 @@ const objScanResult = [{
 }];
 
 export default {
-  _index: 4,
   _name: 'Callback',
   _fixture: 'tree',
   objectScanCompiled: {
