@@ -11,13 +11,10 @@ const execute = () => {
     ['---']
   ];
   Object.entries(suites).forEach(([suite, tests]) => {
-    table.push([
-      `<a href="./test/comparison/suites/${suite}.js">${
-        suite.replace(/^./, (c) => c.toUpperCase())
-      }</a>`
-    ]);
+    const { _name: name } = tests;
+    table.push([`<a href="./test/comparison/suites/${suite}.js">${name}</a>`]);
     Object.entries(tests)
-      .filter(([test]) => !['fixture', 'result'].includes(test))
+      .filter(([test]) => !test.startsWith('_'))
       .forEach(([test, fnOrObj]) => {
         let col = table[0].indexOf(test);
         if (col === -1) {
@@ -29,8 +26,9 @@ const execute = () => {
           ? { fn: fnOrObj, result: tests.result }
           : fnOrObj;
         const start = process.hrtime();
+        const { _fixture: fixture } = tests;
         for (let i = 0; i < COUNT; i += 1) {
-          fn(fixtures[tests.fixture]);
+          fn(fixtures[fixture]);
         }
         const stop = process.hrtime(start);
         table[table.length - 1][col] = (stop[0] * 1e9 + stop[1]) / (COUNT * 1000);

@@ -3,7 +3,8 @@ import jmespath from 'jmespath';
 import objectScan from '../../../src/index.js';
 
 export default {
-  fixture: 'cond',
+  _name: 'Conditional Path',
+  _fixture: 'cond',
   objectScanCompiled: {
     fn: objectScan(['*[*].y'], {
       breakFn: ({ depth, value }) => depth === 2 && value?.x !== 'yes',

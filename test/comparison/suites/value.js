@@ -3,8 +3,9 @@ import jsonpath from 'jsonpath';
 import objectScan from '../../../src/index.js';
 
 export default {
-  fixture: 'cond',
-  result: 2,
+  _name: 'Get Value',
+  _fixture: 'cond',
+  _result: 2,
   objectScanCompiled: objectScan(['a[0].y'], {
     rtn: 'value',
     abort: true

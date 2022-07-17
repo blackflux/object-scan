@@ -9,13 +9,14 @@ describe('Testing suites', () => {
     describe(`Suite ${suite}`, () => {
       // eslint-disable-next-line mocha/no-setup-in-describe
       Object.entries(tests)
-        .filter(([test]) => !['fixture', 'result'].includes(test))
+        .filter(([test]) => !test.startsWith('_'))
         .forEach(([test, fnOrObj]) => {
           it(`Testing ${test}`, () => {
+            const { _result: r, _fixture: fixture } = tests;
             const { fn, result } = typeof fnOrObj === 'function'
-              ? { fn: fnOrObj, result: tests.result }
+              ? { fn: fnOrObj, result: r }
               : fnOrObj;
-            expect(fn(fixtures[tests.fixture])).to.deep.equal(result);
+            expect(fn(fixtures[fixture])).to.deep.equal(result);
           });
         });
     });
