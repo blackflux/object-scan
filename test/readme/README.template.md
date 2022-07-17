@@ -918,7 +918,6 @@ This means there are some significant differences:
 |                                                   | objectScan       | jsonpath                                                                                                           | jmespath                                                                       |
 |---------------------------------------------------|------------------|--------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
 | Single Traversal                                  | ✔                | ✘                                                                                                                  | ✘                                                                              |
-| [Callbacks](#callbacks)                           | ✔                | ✘                                                                                                                  | ✘                                                                              |
 | Search Context                                    | ✔                | ✔                                                                                                                  | ✘[*](https://github.com/jmespath/jmespath.js/issues/22#issuecomment-350239376) |
 
 For a code comparison, see [tests](test/comparison).
