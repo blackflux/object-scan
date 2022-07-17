@@ -61,8 +61,8 @@ const Renderer = () => {
           const size = `${(sizeInBytes / 1024).toFixed(2)}KB`;
           return `<a href="https://cdn.jsdelivr.net/npm/object-scan/lib/">CDN</a> <em>(${size})</em>`;
         },
-        PERF_CMP: async () => fs.smartRead(
-          join(dirname(fileURLToPath(import.meta.url)), 'comparison', 'timings.md')
+        CMP_BMK: async () => fs.smartRead(
+          join(dirname(fileURLToPath(import.meta.url)), 'comparison', 'benchmark.md')
         ).join('\n')
       }[match.slice(2, -1)]();
     }
