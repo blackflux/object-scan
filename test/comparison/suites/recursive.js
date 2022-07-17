@@ -7,11 +7,11 @@ export default {
   _name: 'Recursive Traversal',
   _fixture: 'tree',
   _comments: {
-    jmespath: '[*](https://github.com/jmespath/jmespath.py/issues/110)',
-    objectScanCompiled: ' _(depth-first)_',
-    objectScan: ' _(depth-first)_',
-    jsonpath: ' _[(custom depth-first)](https://cs.stackexchange.com/questions/99440)_',
-    jsonpathplus: ' _[(custom depth-first)](https://cs.stackexchange.com/questions/99440)_'
+    jmespath: '[Reference](https://github.com/jmespath/jmespath.py/issues/110)',
+    objectScanCompiled: ' [Depth-first](https://en.wikipedia.org/wiki/Tree_traversal#Depth-first_search) traversal',
+    objectScan: ' [Depth-first](https://en.wikipedia.org/wiki/Tree_traversal#Depth-first_search) traversal',
+    jsonpath: ' [Custom depth-first](https://cs.stackexchange.com/questions/99440) traversal',
+    jsonpathplus: ' [Custom depth-first](https://cs.stackexchange.com/questions/99440) traversal'
   },
   objectScanCompiled: {
     fn: objectScan(['**'], {

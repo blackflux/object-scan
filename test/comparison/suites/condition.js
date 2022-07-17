@@ -8,8 +8,8 @@ export default {
   _name: 'Conditional Path',
   _fixture: 'cond',
   _comments: {
-    objectScanCompiled: ' _(code logic)_',
-    objectScan: ' _(code logic)_'
+    objectScanCompiled: ' Only in code logic',
+    objectScan: ' Only in code logic'
   },
   objectScanCompiled: {
     fn: objectScan(['*[*].y'], {

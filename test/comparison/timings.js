@@ -10,6 +10,7 @@ const execute = () => {
     [' '],
     ['---']
   ];
+  const footnotes = {};
   const entries = Object.entries(suites);
   entries
     .sort(([, { _index: a }], [, { _index: b }]) => a - b)
@@ -59,8 +60,13 @@ const execute = () => {
       }
       const { _comments: comments } = entries[j - 2][1];
       const suite = table[0][i];
-      if (comments?.[suite]) {
-        table[j][i] = `${table[j][i]}${comments[suite]}`;
+      const comment = comments?.[suite];
+      if (comment) {
+        if (!(comment in footnotes)) {
+          footnotes[comment] = Object.keys(footnotes).length + 1;
+        }
+        const footnoteId = footnotes[comment];
+        table[j][i] = `${table[j][i]}<i><sup><a href="timing_ref_${footnoteId}">[${footnoteId}]</a></sup></i>`;
       }
     }
     table[j][minPos] = `<span style="color:#1f811f">${table[j][minPos]}</span>`;
@@ -69,6 +75,10 @@ const execute = () => {
   for (let i = 0; i < table.length; i += 1) {
     table[i] = `|${table[i].join('|')}|`;
   }
+  table.push('');
+  Object.entries(footnotes).forEach((([comment, footnoteId]) => {
+    table.push(`<a id="#timing_ref_${footnoteId}">[${footnoteId}]</a>: ${comment}<br>`);
+  }));
   fs.smartWrite(path.join(fs.dirname(import.meta.url), 'timings.md'), table);
 };
 execute();
