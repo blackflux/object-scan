@@ -3,6 +3,7 @@ import jmespath from 'jmespath';
 import objectScan from '../../../src/index.js';
 
 export default {
+  _index: 2,
   _name: 'Conditional Path',
   _fixture: 'cond',
   objectScanCompiled: {

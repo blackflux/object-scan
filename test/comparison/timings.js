@@ -10,30 +10,32 @@ const execute = () => {
     [' '],
     ['---']
   ];
-  Object.entries(suites).forEach(([suite, tests]) => {
-    const { _name: name } = tests;
-    table.push([`<a href="./test/comparison/suites/${suite}.js">${name}</a>`]);
-    Object.entries(tests)
-      .filter(([test]) => !test.startsWith('_'))
-      .forEach(([test, fnOrObj]) => {
-        let col = table[0].indexOf(test);
-        if (col === -1) {
-          table[0].push(test);
-          table[1].push('---');
-          col = table[0].length - 1;
-        }
-        const { fn } = typeof fnOrObj === 'function'
-          ? { fn: fnOrObj, result: tests.result }
-          : fnOrObj;
-        const start = process.hrtime();
-        const { _fixture: fixture } = tests;
-        for (let i = 0; i < COUNT; i += 1) {
-          fn(fixtures[fixture]);
-        }
-        const stop = process.hrtime(start);
-        table[table.length - 1][col] = (stop[0] * 1e9 + stop[1]) / (COUNT * 1000);
-      });
-  });
+  Object.entries(suites)
+    .sort(([, { _index: a }], [, { _index: b }]) => a - b)
+    .forEach(([suite, tests]) => {
+      const { _name: name } = tests;
+      table.push([`<a href="./test/comparison/suites/${suite}.js">${name}</a>`]);
+      Object.entries(tests)
+        .filter(([test]) => !test.startsWith('_'))
+        .forEach(([test, fnOrObj]) => {
+          let col = table[0].indexOf(test);
+          if (col === -1) {
+            table[0].push(test);
+            table[1].push('---');
+            col = table[0].length - 1;
+          }
+          const { fn } = typeof fnOrObj === 'function'
+            ? { fn: fnOrObj, result: tests.result }
+            : fnOrObj;
+          const start = process.hrtime();
+          const { _fixture: fixture } = tests;
+          for (let i = 0; i < COUNT; i += 1) {
+            fn(fixtures[fixture]);
+          }
+          const stop = process.hrtime(start);
+          table[table.length - 1][col] = (stop[0] * 1e9 + stop[1]) / (COUNT * 1000);
+        });
+    });
   for (let j = 2; j < table.length; j += 1) {
     let minPos = -1;
     let minValue = Number.MAX_SAFE_INTEGER;

@@ -2,6 +2,7 @@ import jsonpath from 'jsonpath';
 import objectScan from '../../../src/index.js';
 
 export default {
+  _index: 0,
   _name: 'Get Key',
   _fixture: 'cond',
   _result: ['a[0].y', 'b[0].y'],

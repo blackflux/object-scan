@@ -2,6 +2,7 @@ import jsonpath from 'jsonpath';
 import objectScan from '../../../src/index.js';
 
 export default {
+  _index: 3,
   _name: 'Recursive Traversal',
   _fixture: 'tree',
   objectScanCompiled: {
