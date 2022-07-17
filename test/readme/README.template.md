@@ -931,7 +931,7 @@ For a code comparison, see [tests](test/comparison).
 Performance is comparable or better than other libraries, where functionality matches.
 However, a one to one comparison is not possible due to difference in functionality.
 
-// todo: put speed test result table here
+${PERF_CMP}
 
 <a id="real_world_uses"></a>
 ## Real World Uses

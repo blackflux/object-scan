@@ -52,13 +52,19 @@ const Renderer = () => {
 
   let haystack;
   return async (match, content) => {
-    // eslint-disable-next-line no-template-curly-in-string
-    if (match === '${CDN}') {
-      const indexFile = join(fs.dirname(import.meta.url), '..', 'src', 'index.js');
-      const { code } = await ncc(indexFile, { minify: true });
-      const sizeInBytes = Buffer.byteLength(code, 'utf8');
-      const size = `${(sizeInBytes / 1024).toFixed(2)}KB`;
-      return `<a href="https://cdn.jsdelivr.net/npm/object-scan/lib/">CDN</a> <em>(${size})</em>`;
+    if (match.startsWith('${') && match.endsWith('}')) {
+      return {
+        CDN: async () => {
+          const indexFile = join(fs.dirname(import.meta.url), '..', 'src', 'index.js');
+          const { code } = await ncc(indexFile, { minify: true });
+          const sizeInBytes = Buffer.byteLength(code, 'utf8');
+          const size = `${(sizeInBytes / 1024).toFixed(2)}KB`;
+          return `<a href="https://cdn.jsdelivr.net/npm/object-scan/lib/">CDN</a> <em>(${size})</em>`;
+        },
+        PERF_CMP: async () => fs.smartRead(
+          join(dirname(fileURLToPath(import.meta.url)), 'comparison', 'timings.md')
+        ).join('\n')
+      }[match.slice(2, -1)]();
     }
     if (match === '✔') {
       return "<span style='color:#00ff00'>✔</span>";
@@ -109,7 +115,7 @@ describe('Testing Readme', { timeout: 5 * 60000 }, () => {
     const renderer = Renderer();
     const output = await replaceAsync(
       input,
-      /<pre><example>\n([\s\S]+?)\n<\/example><\/pre>|\$\{CDN}|✔|✘/g,
+      /<pre><example>\n([\s\S]+?)\n<\/example><\/pre>|\$\{[A-Z_]+}|✔|✘/g,
       renderer
     );
     const result = fs.smartWrite(outputFile, output.split('\n'));
