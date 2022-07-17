@@ -1,4 +1,5 @@
 import jsonpath from 'jsonpath';
+import { JSONPath } from 'jsonpath-plus';
 import objectScan from '../../../src/index.js';
 
 export default {
@@ -54,6 +55,20 @@ export default {
       'F.B.D.E',
       'F.G.I',
       'F.G.I.H'
+    ]
+  },
+  jsonpathplus: {
+    fn: (v) => JSONPath({ path: '$..[*]', json: v, resultType: 'path' }),
+    result: [
+      "$['F']",
+      "$['F']['B']",
+      "$['F']['G']",
+      "$['F']['B']['A']",
+      "$['F']['B']['D']",
+      "$['F']['B']['D']['C']",
+      "$['F']['B']['D']['E']",
+      "$['F']['G']['I']",
+      "$['F']['G']['I']['H']"
     ]
   }
 };

@@ -1,5 +1,6 @@
 import jsonpath from 'jsonpath';
 import jmespath from 'jmespath';
+import { JSONPath } from 'jsonpath-plus';
 import objectScan from '../../../src/index.js';
 
 export default {
@@ -23,6 +24,10 @@ export default {
   jsonpath: {
     fn: (v) => jsonpath.paths(v, "$.*[?(@.x == 'yes')].y").map((e) => jsonpath.stringify(e).slice(2)),
     result: ['a[0].y']
+  },
+  jsonpathplus: {
+    fn: (v) => JSONPath({ path: "$.*[?(@.x == 'yes')].y", json: v, resultType: 'path' }),
+    result: ["$['a'][0]['y']"]
   },
   jmespath: {
     fn: (v) => jmespath.search(v, "*[?(x == 'yes')].y"),

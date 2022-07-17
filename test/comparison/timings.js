@@ -63,8 +63,8 @@ const execute = () => {
         table[j][i] = `${table[j][i]}${comments[suite]}`;
       }
     }
-    table[j][minPos] = `<a style="color:#1f811f">${table[j][minPos]}</a>`;
-    table[j][maxPos] = `<a style="color:#b01414">${table[j][maxPos]}</a>`;
+    table[j][minPos] = `<span style="color:#1f811f">${table[j][minPos]}</span>`;
+    table[j][maxPos] = `<span style="color:#b01414">${table[j][maxPos]}</span>`;
   }
   for (let i = 0; i < table.length; i += 1) {
     table[i] = `|${table[i].join('|')}|`;

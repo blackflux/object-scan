@@ -1,5 +1,6 @@
 import jmespath from 'jmespath';
 import jsonpath from 'jsonpath';
+import { JSONPath } from 'jsonpath-plus';
 import objectScan from '../../../src/index.js';
 
 export default {
@@ -16,5 +17,9 @@ export default {
     abort: true
   })(v),
   jsonpath: (v) => jsonpath.value(v, '$.a[0].y'),
+  jsonpathplus: {
+    fn: (v) => JSONPath({ path: '$.a[0].y', json: v }),
+    result: [0]
+  },
   jmespath: (v) => jmespath.search(v, 'a[0].y')
 };
