@@ -87,7 +87,7 @@ const execute = () => {
   }
   table.push('');
   Object.entries(footnotes).forEach((([comment, footnoteId]) => {
-    table.push(`<a id="timing_ref_${footnoteId}">[${footnoteId}]</a>: ${comment}<br>`);
+    table.push(`<a id="timing_ref_${footnoteId}"><i>[${footnoteId}]</i></a>: ${comment}<br>`);
   }));
   fs.smartWrite(path.join(fs.dirname(import.meta.url), 'timings.md'), table);
 };
