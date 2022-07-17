@@ -48,9 +48,15 @@ const objScanResult = [{
   property: 'F'
 }];
 
+const objectScanComment = '[Documentation](#callbacks)';
+
 export default {
   _name: 'Callback',
   _fixture: 'tree',
+  _comments: {
+    objectScanCompiled: objectScanComment,
+    objectScan: objectScanComment
+  },
   objectScanCompiled: {
     fn: objectScan(['**'], {
       beforeFn: (state) => {
