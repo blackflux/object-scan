@@ -3,31 +3,31 @@ import jmespath from 'jmespath';
 import { JSONPath } from 'jsonpath-plus';
 import objectScan from '../../../src/index.js';
 
+const commentObjectScan = ' Only in code logic';
+
 export default {
   _index: 2,
   _name: 'Conditional Path',
   _fixture: 'cond',
   _comments: {
-    objectScanCompiled: ' Only in code logic',
-    objectScan: ' Only in code logic'
+    objectScanCompiled: commentObjectScan,
+    objectScan: commentObjectScan
   },
   objectScanCompiled: {
     fn: objectScan(['*[*].y'], {
-      breakFn: ({ depth, value }) => depth === 2 && value?.x !== 'yes',
-      joined: true
+      breakFn: ({ depth, value }) => depth === 2 && value?.x !== 'yes'
     }),
-    result: ['a[0].y']
+    result: [['a', 0, 'y']]
   },
   objectScan: {
     fn: (v) => objectScan(['*[*].y'], {
-      breakFn: ({ depth, value }) => depth === 2 && value?.x !== 'yes',
-      joined: true
+      breakFn: ({ depth, value }) => depth === 2 && value?.x !== 'yes'
     })(v),
-    result: ['a[0].y']
+    result: [['a', 0, 'y']]
   },
   jsonpath: {
-    fn: (v) => jsonpath.paths(v, "$.*[?(@.x == 'yes')].y").map((e) => jsonpath.stringify(e).slice(2)),
-    result: ['a[0].y']
+    fn: (v) => jsonpath.paths(v, "$.*[?(@.x == 'yes')].y"),
+    result: [['$', 'a', 0, 'y']]
   },
   jsonpathplus: {
     fn: (v) => JSONPath({ path: "$.*[?(@.x == 'yes')].y", json: v, resultType: 'path' }),
