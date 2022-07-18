@@ -915,7 +915,7 @@ to [jsonpath](https://www.npmjs.com/package/jsonpath) or [jmespath](https://www.
 instead of querying an object hierarchy, it focuses on traversing it.
 This means there are some significant differences.
 
-Performance is comparable or better than other libraries, where functionality matches.
+Performance is comparable or better than other libraries, where functionality intersects.
 However, a one to one comparison is not possible due to difference in functionality.
 In general this library is more versatile than other similar libraries.
 
