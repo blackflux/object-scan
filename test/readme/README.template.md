@@ -897,7 +897,7 @@ Note that `compareFn` does not work on Arrays.
 Both options can be combined, in which case `orderByNeedles` supersedes `compareFn`
 
 <pre><example>
-haystack: { a: 0, b: 1, c: 2, }
+haystack: { a: 0, b: 1, c: 2 }
 joined: false
 needles: ['c', '*']
 orderByNeedles: true
