@@ -73,12 +73,6 @@ const Renderer = () => {
         }
       }[match.slice(2, -1)]();
     }
-    if (match === '✔') {
-      return "<span style='color:#00ff00'>✔</span>";
-    }
-    if (match === '✘') {
-      return "<span style='color:#ff0000'>✘</span>";
-    }
 
     const meta = content
       .split('\n')
@@ -122,7 +116,7 @@ describe('Testing Readme', { timeout: 5 * 60000 }, () => {
     const renderer = Renderer();
     const output = await replaceAsync(
       input,
-      /<pre><example>\n([\s\S]+?)\n<\/example><\/pre>|\$\{[A-Z_]+}|✔|✘/g,
+      /<pre><example>\n([\s\S]+?)\n<\/example><\/pre>|\$\{[A-Z_]+}/g,
       renderer
     );
     const result = fs.smartWrite(outputFile, output.split('\n'));

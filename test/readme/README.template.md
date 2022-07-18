@@ -913,16 +913,11 @@ comment: orderByNeedles and compareFn
 While this library has a similar syntax and can perform similar tasks
 to [jsonpath](https://www.npmjs.com/package/jsonpath) or [jmespath](https://www.npmjs.com/package/jmespath),
 instead of querying an object hierarchy, it focuses on traversing it.
-This means there are some significant differences:
-
-|                                                   | objectScan       | jsonpath                                                                                                           | jmespath                                                                       |
-|---------------------------------------------------|------------------|--------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| Search Context                                    | ✔                | ✔                                                                                                                  | ✘[*](https://github.com/jmespath/jmespath.js/issues/22#issuecomment-350239376) |
-
-For a code comparison, see [tests](test/comparison).
+This means there are some significant differences.
 
 Performance is comparable or better than other libraries, where functionality matches.
 However, a one to one comparison is not possible due to difference in functionality.
+In general this library is more versatile than other similar libraries.
 
 ${CMP_BMK}
 

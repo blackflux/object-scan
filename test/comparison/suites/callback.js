@@ -51,11 +51,12 @@ const objScanResult = [{
 const objectScanComment = '[Documentation](#callbacks)';
 
 export default {
-  _name: 'Callback',
+  _name: 'Callback with Context',
   _fixture: 'tree',
   _comments: {
     objectScanCompiled: objectScanComment,
-    objectScan: objectScanComment
+    objectScan: objectScanComment,
+    jsonpathplus: 'Usefulness limited since context is lacking'
   },
   objectScanCompiled: {
     fn: objectScan(['**'], {
