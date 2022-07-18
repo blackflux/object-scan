@@ -73,7 +73,7 @@ const execute = (optimize) => {
       const { _comments: comments } = entries[j - 2][1];
       const suite = table[0][i];
       const comment = comments?.[suite];
-      table[j][i] = v === undefined ? ':heavy_check_mark:' : ':x:';
+      table[j][i] = v === undefined ? ':x:' : ':heavy_check_mark:';
       if (comment) {
         if (!(comment in footnotes)) {
           footnotes[comment] = Object.keys(footnotes).length + 1;
