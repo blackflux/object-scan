@@ -11,7 +11,7 @@ export default {
   _comments: {
     jsonpath: jsonpathComment,
     jsonpathplus: jsonpathComment,
-    jmespath: 'Very basic version. Can not detect what matched a result.'
+    jmespath: 'Usefulness limited since no callback'
   },
   objectScanCompiled: {
     fn: objectScan(['F.*.I', '*.G.I'], { rtn: ['matchedBy', 'property'] }),
