@@ -346,7 +346,7 @@ Can be used to do processing as matching keys are traversed.
 
 Invoked in same order as matches would appear in result.
 
-For more information on invocation order, please refer to Section [Traversal Order](#traversal_order)
+For more information on invocation order, please refer to Section [Traversal Order](#traversal_order).
 
 This method is conceptually similar to
 [Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
@@ -370,7 +370,7 @@ skipped in the search and from the final result.
 
 Note that `breakFn` is invoked before the corresponding `filterFn` might be invoked.
 
-For more information on invocation order, please refer to Section [Traversal Order](#traversal_order)
+For more information on invocation order, please refer to Section [Traversal Order](#traversal_order).
 
 _Examples_:
 <pre><example>
