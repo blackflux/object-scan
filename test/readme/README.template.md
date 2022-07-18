@@ -897,9 +897,9 @@ Note that `compareFn` does not work on Arrays.
 Both options can be combined, in which case `orderByNeedles` supersedes `compareFn`
 
 <pre><example>
-haystack: { b: 0, a: 1, c: 2, d: 3 }
+haystack: { a: 0, b: 1, c: 2, }
 joined: false
-needles: ['d', '*']
+needles: ['c', '*']
 orderByNeedles: true
 context: []
 compareFn: () => (a, b) => b.localeCompare(a)
