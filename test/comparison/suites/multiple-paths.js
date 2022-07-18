@@ -1,3 +1,4 @@
+import jmespath from 'jmespath';
 import objectScan from '../../../src/index.js';
 
 const jsonpathComment = (
@@ -9,7 +10,8 @@ export default {
   _fixture: 'tree',
   _comments: {
     jsonpath: jsonpathComment,
-    jsonpathplus: jsonpathComment
+    jsonpathplus: jsonpathComment,
+    jmespath: 'Very basic version. Can not detect what matched a result.'
   },
   objectScanCompiled: {
     fn: objectScan(['F.*.I', '*.G.I'], { rtn: ['matchedBy', 'property'] }),
@@ -19,5 +21,9 @@ export default {
   objectScan: {
     fn: (v) => objectScan(['F.*.I', '*.G.I'], { rtn: ['matchedBy', 'property'] })(v),
     result: [[['F.*.I', '*.G.I'], 'I']]
+  },
+  jmespath: {
+    fn: (v) => jmespath.search(v, 'F.*.I || *.G.I'),
+    result: [{ H: 3 }]
   }
 };
