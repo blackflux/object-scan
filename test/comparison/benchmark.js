@@ -73,21 +73,14 @@ const execute = (optimize) => {
       const { _comments: comments } = entries[j - 2][1];
       const suite = table[0][i];
       const comment = comments?.[suite];
-      const status = v === undefined
-        ? "<span style='color:#ff0000'>✘</span>"
-        : "<span style='color:#00ff00'>✔</span>";
-      const append = v === undefined
-        ? ''
-        : ` ${(v / minValue).toFixed(2)}x`;
+      table[j][i] = v === undefined ? ':heavy_check_mark:' : ':x:';
       if (comment) {
         if (!(comment in footnotes)) {
           footnotes[comment] = Object.keys(footnotes).length + 1;
         }
         const footnoteId = footnotes[comment];
         const footnote = `<i><sup><a href="#timing_ref_${footnoteId}">[${footnoteId}]</a></sup></i>`;
-        table[j][i] = `${status}${footnote}${append}`;
-      } else {
-        table[j][i] = `${status}${append}`;
+        table[j][i] += footnote;
       }
       if (v !== undefined) {
         const multiplier = (v / minValue).toFixed(2);
@@ -101,7 +94,11 @@ const execute = (optimize) => {
               (multiplier - COLORS[idx1][0]) / (COLORS[idx2][0] - COLORS[idx1][0])
             )));
             const color = blendColors(COLORS[idx1][1], COLORS[idx2][1], factor);
-            table[j][i] = `<span style="color:${color}">${table[j][i]}</span>`;
+            table[j][i] += ` ![](https://img.shields.io/badge/${
+              (v / minValue).toFixed(2)
+            }x-${
+              color.slice(1)
+            })`;
             break;
           }
         }
