@@ -5,6 +5,22 @@ import * as fixtures from './fixtures.js';
 
 const COUNT = 10000;
 
+const COLORS = [
+  [1, '#1f811f'],
+  [5, '#dcb517'],
+  [10, '#d96a0f'],
+  [20, '#b01414']
+];
+
+const blendColors = (colorA, colorB, amount) => {
+  const [rA, gA, bA] = colorA.match(/[^#]{2}/g).map((c) => parseInt(c, 16));
+  const [rB, gB, bB] = colorB.match(/[^#]{2}/g).map((c) => parseInt(c, 16));
+  const r = Math.round(rA + (rB - rA) * amount).toString(16).padStart(2, '0');
+  const g = Math.round(gA + (gB - gA) * amount).toString(16).padStart(2, '0');
+  const b = Math.round(bA + (bB - bA) * amount).toString(16).padStart(2, '0');
+  return `#${r}${g}${b}`;
+};
+
 const execute = (optimize) => {
   const table = [
     [`_[v8 ${[optimize ? '--opt' : '--no-opt']}](https://flaviocopes.com/node-runtime-v8-options/)_`],
@@ -45,21 +61,11 @@ const execute = (optimize) => {
         });
     });
   for (let j = 2; j < table.length; j += 1) {
-    let minPos = -1;
     let minValue = Number.MAX_SAFE_INTEGER;
-    let maxPos = -1;
-    let maxValue = Number.MIN_SAFE_INTEGER;
     for (let i = 1; i < table[0].length; i += 1) {
       const v = table[j][i];
-      if (v !== undefined) {
-        if (minValue > v) {
-          minValue = v;
-          minPos = i;
-        }
-        if (maxValue < v) {
-          maxValue = v;
-          maxPos = i;
-        }
+      if (v !== undefined && minValue > v) {
+        minValue = v;
       }
     }
     for (let i = 1; i < table[0].length; i += 1) {
@@ -83,9 +89,24 @@ const execute = (optimize) => {
       } else {
         table[j][i] = `${status}${append}`;
       }
+      if (v !== undefined) {
+        const multiplier = (v / minValue).toFixed(2);
+        for (let idx1 = 0; idx1 < COLORS.length; idx1 += 1) {
+          const idx2 = Math.min(idx1 + 1, COLORS.length - 1);
+          if (
+            idx1 === idx2
+            || (COLORS[idx1][0] <= multiplier && multiplier <= COLORS[idx2][0])
+          ) {
+            const factor = Math.min(1, Math.max(0, Math.abs(
+              (multiplier - COLORS[idx1][0]) / (COLORS[idx2][0] - COLORS[idx1][0])
+            )));
+            const color = blendColors(COLORS[idx1][1], COLORS[idx2][1], factor);
+            table[j][i] = `<span style="color:${color}">${table[j][i]}</span>`;
+            break;
+          }
+        }
+      }
     }
-    table[j][minPos] = `<span style="color:#1f811f">${table[j][minPos]}</span>`;
-    table[j][maxPos] = `<span style="color:#b01414">${table[j][maxPos]}</span>`;
   }
   const libs = fs.smartRead(path.join(fs.dirname(import.meta.url), 'libs.json'));
   for (let i = 1; i < table[0].length; i += 1) {
