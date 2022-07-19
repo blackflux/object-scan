@@ -904,12 +904,12 @@ comment: orderByNeedles and compareFn
 <a id="jsonpath"></a>
 ## JSONPath and others
 
-While this library has a similar syntax and can perform similar tasks
-to [jsonpath](https://www.npmjs.com/package/jsonpath) or [jmespath](https://www.npmjs.com/package/jmespath),
-instead of querying an object hierarchy, it focuses on traversing it.
+This library has a similar syntax and can perform similar tasks
+to [jsonpath](https://www.npmjs.com/package/jsonpath) or [jmespath](https://www.npmjs.com/package/jmespath).
+But instead of querying an object hierarchy, it focuses on traversing it.
 This means there are some significant differences.
 
-Performance is comparable or better than other libraries, where functionality intersects.
+Performance is comparable or better than other libraries, where functionality aligns.
 However, a one to one comparison is not possible due to difference in functionality.
 In general `object-scan` is more versatile than other similar libraries.
 
