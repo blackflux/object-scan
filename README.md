@@ -13,9 +13,20 @@ Traverse object hierarchies using matching and callbacks.
 
 ## Install
 
-Install with [npm](https://www.npmjs.com/):
+Using npm:
 
-    $ npm install --save object-scan
+    $ npm i object-scan
+
+In a browser:
+
+```html
+<script type="module">
+  import objectScan from 'https://cdn.jsdelivr.net/npm/object-scan@<VERSION>/lib/index.min.js';
+  // do logic here
+</script>
+```
+
+Check <a href="https://cdn.jsdelivr.net/npm/object-scan/lib/">CDN</a> <em>(14.69KB)</em> for version.
 
 ## Usage
 
@@ -31,27 +42,31 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 
 ## Features
 
-- Input traversed exactly once during search
-- Dependency free, small in size and very performant
-- Separate Object and Array matching
-- Wildcard and Regex matching
-- Arbitrary depth matching
-- Or-clause Syntax
-- Exclusion Matching
-- Full support for escaping
-- Traversal in "delete-safe" order
-- Recursion free implementation
-- Search syntax validated
-- Lots of tests and examples
+- Input [traversed](#traversal_order) at most once during search
+- Dependency free and [tiny bundle size](https://cdn.jsdelivr.net/npm/object-scan/lib/)
+- Powerful [matching syntax](#matching)
+- Very [performant](#jsonpath)
+- Extensive [tests](./test) and lots of [examples](#real_world_uses)
 
+<a id="matching"></a>
 ## Matching
 
-A needle expression specifies one or more paths to an element (or a set of elements) in a JSON structure. Paths use the dot notation:
+A needle expression specifies one or more paths to an element (or a set of elements) in a JSON structure.
+Paths use the dot notation.
 
 ```txt
 store.book[0].title
 ```
 
+The matching syntax is fully validated and bad input will throw a syntax error. The following syntax is supported:
+- [Array](#array) and [Object](#object) matching
+- [Wildcard](#wildcard) and [Regex](#regex) matching
+- [Or Clause](#or_clause)
+- [Arbitrary Depth](#arbitrary_depth) and [Nested Path Recursion](#nested_path_recursion)
+- [Exclusion](#exclusion)
+- [Escaping](#escaping)
+
+<a id="array"></a>
 ### Array
 
 Rectangular brackets for array path matching.
@@ -76,6 +91,7 @@ objectScan(['[1]'], { joined: true })(haystack);
 ```
 </details>
 
+<a id="object"></a>
 ### Object
 
 Property name for object property matching.
@@ -100,6 +116,7 @@ objectScan(['1'], { joined: true })(haystack);
 ```
 </details>
 
+<a id="wildcard"></a>
 ### Wildcard
 
 The following characters have special meaning when not escaped:
@@ -108,7 +125,7 @@ The following characters have special meaning when not escaped:
 - `?`: Match exactly one character
 - `\`: Escape the subsequent character
 
-Wildcards can be used with Array and Object selector.
+Can be used with [Array](#array) and [Object](#object) selector.
 
 _Examples_:
 <details><summary> <code>['*']</code> <em>(top level)</em> </summary>
@@ -148,11 +165,12 @@ objectScan(['a.\\+.c'], { joined: true })(haystack);
 ```
 </details>
 
+<a id="regex"></a>
 ### Regex
 
 Regex are defined by using parentheses.
 
-Can be used with Array and Object selector.
+Can be used with [Array](#array) and [Object](#object) selector.
 
 _Examples_:
 <details><summary> <code>['(^foo)']</code> <em>(starting with `foo`)</em> </summary>
@@ -201,13 +219,42 @@ objectScan(['[*]', '[!(^[01]$)]'], { joined: true })(haystack);
 ```
 </details>
 
+<a id="or_clause"></a>
+### Or Clause
+
+Or Clauses are defined by using curley brackets.
+
+Can be used with [Array](#array) and [Object](#object) selector
+and [Arbitrary Depth](#arbitrary_depth) matching.
+
+_Examples_:
+<details><summary> <code>['[{0,1}]']</code> <em>(`[0]` and `[1]`)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = ['a', 'b', 'c', 'd'];
+objectScan(['[{0,1}]'], { joined: true })(haystack);
+// => [ '[1]', '[0]' ]
+```
+</details>
+<details><summary> <code>['{a,d}.{b,f}']</code> <em>(`a.b`, `a.f`, `d.b` and `d.f`)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: 0, c: 1 }, d: { e: 2, f: 3 } };
+objectScan(['{a,d}.{b,f}'], { joined: true })(haystack);
+// => [ 'd.f', 'a.b' ]
+```
+</details>
+
+<a id="arbitrary_depth"></a>
 ### Arbitrary Depth
 
 There are two types of arbitrary depth matching:
 - `**`: Matches zero or more nestings
 - `++`: Matches one or more nestings
 
-Recursions can be combined with a regex or a group by appending the regex or group.
+Can be combined with [Regex](#regex) and [Or Clause](#or_clause) by prepending.
 
 _Examples_:
 <details><summary> <code>['a.**']</code> <em>(zero or more nestings under `a`)</em> </summary>
@@ -238,40 +285,15 @@ objectScan(['**(1)'], { joined: true })(haystack);
 ```
 </details>
 
-### Or Clause
-
-Or Clauses are defined by using curley brackets.
-
-Can be used with Array and Object selector.
-
-_Examples_:
-<details><summary> <code>['[{0,1}]']</code> <em>(`[0]` and `[1]`)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = ['a', 'b', 'c', 'd'];
-objectScan(['[{0,1}]'], { joined: true })(haystack);
-// => [ '[1]', '[0]' ]
-```
-</details>
-<details><summary> <code>['{a,d}.{b,f}']</code> <em>(`a.b`, `a.f`, `d.b` and `d.f`)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = { a: { b: 0, c: 1 }, d: { e: 2, f: 3 } };
-objectScan(['{a,d}.{b,f}'], { joined: true })(haystack);
-// => [ 'd.f', 'a.b' ]
-```
-</details>
-
+<a id="nested_path_recursion"></a>
 ### Nested Path Recursion
 
 To match a nested path recursively,
-combine arbitrary depth matching with an or-clause.
+combine [Arbitrary Depth](#arbitrary_depth) matching with an [Or Clause](#or_clause).
 
 There are two types of nested path matching:
-- `**{...}`: Matches path(s) in group zero or more times
-- `++{...}`: Matches path(s) in group one or more times
+- `**{...}`: Matches path(s) in [Or Clause](#or_clause) zero or more times
+- `++{...}`: Matches path(s) in [Or Clause](#or_clause) one or more times
 
 _Examples_:
 <details><summary> <code>['++{[0][1]}']</code> <em>(`cyclic path`)</em> </summary>
@@ -329,6 +351,7 @@ objectScan(['a.++{b.c}'], { joined: true })(haystack);
 ```
 </details>
 
+<a id="exclusion"></a>
 ### Exclusion
 
 To exclude a path, use exclamation mark.
@@ -356,6 +379,7 @@ objectScan(['**,!**.a'], { joined: true })(haystack);
 ```
 </details>
 
+<a id="escaping"></a>
 ### Escaping
 
 The following characters are considered special and need to
@@ -375,6 +399,7 @@ objectScan(['\\[1\\]'], { joined: true })(haystack);
 
 ## Options
 
+<a id="callbacks"></a>
 Signature of all callbacks is
 
     Fn({ key, value, ... })
@@ -435,6 +460,8 @@ Can be used to do processing as matching keys are traversed.
 
 Invoked in same order as matches would appear in result.
 
+For more information on invocation order, please refer to Section [Traversal Order](#traversal_order).
+
 This method is conceptually similar to
 [Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
 
@@ -462,6 +489,8 @@ the search. If `true` is returned, all keys nested under the current key are
 skipped in the search and from the final result.
 
 Note that `breakFn` is invoked before the corresponding `filterFn` might be invoked.
+
+For more information on invocation order, please refer to Section [Traversal Order](#traversal_order).
 
 _Examples_:
 <details><summary> <code>['**']</code> <em>(break function)</em> </summary>
@@ -585,6 +614,8 @@ The returned value is used as a comparator to determine the traversal order of a
 
 This works together with the `reverse` option.
 
+Please refer to Section [Traversal Order](#traversal_order) for more information.
+
 _Examples_:
 <details><summary> <code>['**']</code> <em>(simple sort)</em> </summary>
 
@@ -605,10 +636,12 @@ objectScan(['**'], {
 Type: `boolean`<br>
 Default: `true`
 
-When set to `true`, the scan is performed in reverse order. This means `breakFn` is executed in _reverse post-order_ and
+When set to `true`, the traversal is performed in reverse order. This means `breakFn` is executed in _reverse post-order_ and
 `filterFn` in _reverse pre-order_. Otherwise `breakFn` is executed in _pre-order_ and `filterFn` in _post-order_.
 
-When `reverse` is `true` the scan is _delete-safe_. I.e. `property` can be deleted / spliced from `parent` object / array in `filterFn`.
+When `reverse` is `true` the traversal is _delete-safe_. I.e. `property` can be deleted / spliced from `parent` object / array in `filterFn`.
+
+Please refer to Section [Traversal Order](#traversal_order) for more information.
 
 _Examples_:
 <details><summary> <code>['**']</code> <em>(breakFn, reverse true)</em> </summary>
@@ -743,7 +776,7 @@ objectScan(['b', 'a', 'b.c', 'd'], {
 Type: `boolean`<br>
 Default: `false`
 
-When set to `true` the scan immediately returns after the first match.
+When set to `true` the traversal immediately returns after the first match.
 
 _Examples_:
 <details><summary> <code>['a', 'b']</code> <em>(only return first property)</em> </summary>
@@ -834,7 +867,7 @@ objectScan(['a.b.c', 'a'], { rtn: 'property' })(haystack);
 // => [ 'c', 'a' ]
 ```
 </details>
-<details><summary> <code>['a.b', 'a.c']</code> <em>(checks for any match, full scan)</em> </summary>
+<details><summary> <code>['a.b', 'a.c']</code> <em>(checks for any match, full traversal)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
@@ -1031,6 +1064,189 @@ objectScan(['**.{c,d,e}'], {
 ```
 </details>
 
+<a id="traversal_order"></a>
+## Traversal Order
+
+The [traversal order](https://en.wikipedia.org/wiki/Tree_traversal) is always depth first.
+However, the order the nodes are traversed in can be changed.
+
+<details><summary> <code>['**']</code> <em>(Reverse Pre-order)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { F: { B: { A: 0, D: { C: 1, E: 2 } }, G: { I: { H: 3 } } } };
+objectScan(['**'], {
+  filterFn: ({ context, property }) => { context.push(property); }
+})(haystack, []);
+// => [ 'H', 'I', 'G', 'E', 'C', 'D', 'A', 'B', 'F' ]
+```
+</details>
+
+<details><summary> <code>['**']</code> <em>(Reverse Post-order)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { F: { B: { A: 0, D: { C: 1, E: 2 } }, G: { I: { H: 3 } } } };
+objectScan(['**'], {
+  breakFn: ({ context, property }) => { context.push(property); }
+})(haystack, []);
+// => [ undefined, 'F', 'G', 'I', 'H', 'B', 'D', 'E', 'C', 'A' ]
+```
+</details>
+
+<details><summary> <code>['**']</code> <em>(Post-order)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { F: { B: { A: 0, D: { C: 1, E: 2 } }, G: { I: { H: 3 } } } };
+objectScan(['**'], {
+  filterFn: ({ context, property }) => { context.push(property); },
+  reverse: false
+})(haystack, []);
+// => [ 'A', 'C', 'E', 'D', 'B', 'H', 'I', 'G', 'F' ]
+```
+</details>
+
+<details><summary> <code>['**']</code> <em>(Pre-order)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { F: { B: { A: 0, D: { C: 1, E: 2 } }, G: { I: { H: 3 } } } };
+objectScan(['**'], {
+  breakFn: ({ context, property }) => { context.push(property); },
+  reverse: false
+})(haystack, []);
+// => [ undefined, 'F', 'B', 'A', 'D', 'C', 'E', 'G', 'I', 'H' ]
+```
+</details>
+
+Note that the default traversal order is _delete-safe_. This means that elements from
+Arrays can be deleted without impacting the traversal.
+
+<details><summary> <code>['**']</code> <em>(Deleting from Array)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = [0, 1, 2, 3, 4, 5];
+objectScan(['**'], {
+  filterFn: ({ parent, property }) => { parent.splice(property, property % 2); },
+  afterFn: ({ haystack: h }) => h
+})(haystack);
+// => [ 0, 2, 4 ]
+```
+</details>
+
+This is not true when the `reverse` option is set to `false`
+
+<details><summary> <code>['**']</code> <em>(Deleting from Array Unexpected)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = [0, 1, 2, 3, 4, 5];
+objectScan(['**'], {
+  filterFn: ({ parent, property }) => { parent.splice(property, property % 2); },
+  afterFn: ({ haystack: h }) => h,
+  reverse: false
+})(haystack);
+// => [ 0, 2, 3, 5 ]
+```
+</details>
+
+By default, the traversal order depends on the haystack _input order_ and the `reverse` option for the direction.
+However, this _input order_ can be altered by using `compareFn` and `orderByNeedles`.
+
+<details><summary> <code>['c', 'b', 'a']</code> <em>(orderByNeedles)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { b: 0, a: 1, c: 2 };
+objectScan(['c', 'b', 'a'], {
+  filterFn: ({ context, property }) => { context.push(property); },
+  orderByNeedles: true
+})(haystack, []);
+// => [ 'c', 'b', 'a' ]
+```
+</details>
+
+<details><summary> <code>['**']</code> <em>(compareFn)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { b: 0, a: 1, c: 2 };
+objectScan(['**'], {
+  filterFn: ({ context, property }) => { context.push(property); },
+  compareFn: () => (a, b) => b.localeCompare(a)
+})(haystack, []);
+// => [ 'a', 'b', 'c' ]
+```
+</details>
+
+Note that `compareFn` does not work on Arrays.
+
+Both options can be combined, in which case `orderByNeedles` supersedes `compareFn`
+
+<details><summary> <code>['c', '*']</code> <em>(orderByNeedles and compareFn)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: 0, b: 1, c: 2 };
+objectScan(['c', '*'], {
+  filterFn: ({ context, property }) => { context.push(property); },
+  compareFn: () => (a, b) => b.localeCompare(a),
+  orderByNeedles: true
+})(haystack, []);
+// => [ 'c', 'a', 'b' ]
+```
+</details>
+
+<a id="jsonpath"></a>
+## JSONPath and others
+
+While this library has a similar syntax and can perform similar tasks
+to [jsonpath](https://www.npmjs.com/package/jsonpath) or [jmespath](https://www.npmjs.com/package/jmespath),
+instead of querying an object hierarchy, it focuses on traversing it.
+This means there are some significant differences.
+
+Performance is comparable or better than other libraries, where functionality intersects.
+However, a one to one comparison is not possible due to difference in functionality.
+In general `object-scan` is more versatile than other similar libraries.
+
+|_[v8 --no-opt](https://flaviocopes.com/node-runtime-v8-options/)_|objectScanCompiled|objectScan|[jsonpath](https://www.npmjs.com/package/jsonpath)|[jsonpath-plus](https://www.npmjs.com/package/jsonpath-plus)|[jmespath](https://www.npmjs.com/package/jmespath)|
+|---|---|---|---|---|---|
+|<a href="./test/comparison/suites/key.js">Get Key</a>|![](https://img.shields.io/badge/1.98x-4d8e1d?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/5.38x-dcaf16?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/5.81x-dca916?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/1.00x-1f811f?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|-|
+|<a href="./test/comparison/suites/value.js">Get Value</a>|![](https://img.shields.io/badge/3.25x-899e1b?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/12.24x-d05710?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/26.67x-b01414?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/1.00x-1f811f?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/3.43x-92a11a?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|
+|<a href="./test/comparison/suites/condition.js">Conditional Path</a>|![](https://img.shields.io/badge/1.00x-1f811f?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC) <i><sup><a href="#timing_ref_1">[1]</a></sup></i>|![](https://img.shields.io/badge/3.09x-829c1b?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC) <i><sup><a href="#timing_ref_1">[1]</a></sup></i>|![](https://img.shields.io/badge/6.14x-dba415?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/26.61x-b01414?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/1.44x-34871e?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|
+|<a href="./test/comparison/suites/recursive.js">Recursive Traversal</a>|![](https://img.shields.io/badge/1.00x-1f811f?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC) <i><sup><a href="#timing_ref_2">[2]</a></sup></i>|![](https://img.shields.io/badge/2.17x-56901d?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC) <i><sup><a href="#timing_ref_2">[2]</a></sup></i>|![](https://img.shields.io/badge/1.74x-428b1e?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC) <i><sup><a href="#timing_ref_3">[3]</a></sup></i>|![](https://img.shields.io/badge/1.59x-3b891e?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC) <i><sup><a href="#timing_ref_3">[3]</a></sup></i>|- <i><sup><a href="#timing_ref_4">[4]</a></sup></i>|
+|<a href="./test/comparison/suites/callback.js">Callback with Context</a>|![](https://img.shields.io/badge/1.00x-1f811f?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC) <i><sup><a href="#timing_ref_5">[5]</a></sup></i>|![](https://img.shields.io/badge/1.91x-4a8d1d?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC) <i><sup><a href="#timing_ref_5">[5]</a></sup></i>|-|![](https://img.shields.io/badge/1.11x-24821f?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC) <i><sup><a href="#timing_ref_6">[6]</a></sup></i>|-|
+|<a href="./test/comparison/suites/parent.js">Get Parent</a>|![](https://img.shields.io/badge/1.13x-25831f?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/2.35x-5f931c?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|-|![](https://img.shields.io/badge/1.00x-1f811f?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|-|
+|<a href="./test/comparison/suites/multiplePaths.js">Multiple Paths</a>|![](https://img.shields.io/badge/1.00x-1f811f?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/3.93x-a9a719?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|- <i><sup><a href="#timing_ref_7">[7]</a></sup></i>|- <i><sup><a href="#timing_ref_7">[7]</a></sup></i>|![](https://img.shields.io/badge/1.16x-27831f?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC) <i><sup><a href="#timing_ref_8">[8]</a></sup></i>|
+
+|_[v8 --opt](https://flaviocopes.com/node-runtime-v8-options/)_|objectScanCompiled|objectScan|[jsonpath](https://www.npmjs.com/package/jsonpath)|[jsonpath-plus](https://www.npmjs.com/package/jsonpath-plus)|[jmespath](https://www.npmjs.com/package/jmespath)|
+|---|---|---|---|---|---|
+|<a href="./test/comparison/suites/key.js">Get Key</a>|![](https://img.shields.io/badge/2.54x-68951c?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/4.36x-bead18?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/4.55x-c7af18?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/1.00x-1f811f?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|-|
+|<a href="./test/comparison/suites/value.js">Get Value</a>|![](https://img.shields.io/badge/7.49x-db9013?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/14.77x-c54111?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/25.29x-b01414?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/1.00x-1f811f?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/1.24x-2a841f?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|
+|<a href="./test/comparison/suites/condition.js">Conditional Path</a>|![](https://img.shields.io/badge/3.14x-849d1b?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC) <i><sup><a href="#timing_ref_1">[1]</a></sup></i>|![](https://img.shields.io/badge/5.54x-dcad16?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC) <i><sup><a href="#timing_ref_1">[1]</a></sup></i>|![](https://img.shields.io/badge/6.37x-dba015?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/159.45x-b01414?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/1.00x-1f811f?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|
+|<a href="./test/comparison/suites/recursive.js">Recursive Traversal</a>|![](https://img.shields.io/badge/1.29x-2d851e?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC) <i><sup><a href="#timing_ref_2">[2]</a></sup></i>|![](https://img.shields.io/badge/1.72x-418a1e?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC) <i><sup><a href="#timing_ref_2">[2]</a></sup></i>|![](https://img.shields.io/badge/1.39x-31861e?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC) <i><sup><a href="#timing_ref_3">[3]</a></sup></i>|![](https://img.shields.io/badge/1.00x-1f811f?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC) <i><sup><a href="#timing_ref_3">[3]</a></sup></i>|- <i><sup><a href="#timing_ref_4">[4]</a></sup></i>|
+|<a href="./test/comparison/suites/callback.js">Callback with Context</a>|![](https://img.shields.io/badge/1.42x-33861e?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC) <i><sup><a href="#timing_ref_5">[5]</a></sup></i>|![](https://img.shields.io/badge/1.89x-498d1d?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC) <i><sup><a href="#timing_ref_5">[5]</a></sup></i>|-|![](https://img.shields.io/badge/1.00x-1f811f?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC) <i><sup><a href="#timing_ref_6">[6]</a></sup></i>|-|
+|<a href="./test/comparison/suites/parent.js">Get Parent</a>|![](https://img.shields.io/badge/1.88x-498c1d?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/2.76x-72981b?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|-|![](https://img.shields.io/badge/1.00x-1f811f?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|-|
+|<a href="./test/comparison/suites/multiplePaths.js">Multiple Paths</a>|![](https://img.shields.io/badge/3.50x-95a21a?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|![](https://img.shields.io/badge/8.94x-da7a11?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC)|- <i><sup><a href="#timing_ref_7">[7]</a></sup></i>|- <i><sup><a href="#timing_ref_7">[7]</a></sup></i>|![](https://img.shields.io/badge/1.00x-1f811f?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHCInKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/VEKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2d0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Zh7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kWsAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC) <i><sup><a href="#timing_ref_8">[8]</a></sup></i>|
+
+<a id="timing_ref_1"><i>[1]</i></a>:  Only in code logic<br>
+<a id="timing_ref_2"><i>[2]</i></a>:  [Depth-first](https://en.wikipedia.org/wiki/Tree_traversal#Depth-first_search) traversal. See [here](#traversal_order) for details<br>
+<a id="timing_ref_3"><i>[3]</i></a>:  [Custom depth-first](https://cs.stackexchange.com/questions/99440) traversal<br>
+<a id="timing_ref_4"><i>[4]</i></a>: [Reference](https://github.com/jmespath/jmespath.py/issues/110)<br>
+<a id="timing_ref_5"><i>[5]</i></a>: [Documentation](#callbacks)<br>
+<a id="timing_ref_6"><i>[6]</i></a>: Usefulness limited since context is lacking<br>
+<a id="timing_ref_7"><i>[7]</i></a>: [Reference](https://stackoverflow.com/questions/55497833/jsonpath-union-of-multiple-different-paths)<br>
+<a id="timing_ref_8"><i>[8]</i></a>: Usefulness limited since no callback<br>
+
+<a id="real_world_uses"></a>
+## Real World Uses
+
+This library was originally designed and build to power [object-rewrite](https://github.com/blackflux/object-rewrite).
+
+Many other examples can be found on [Stack Overflow](https://stackoverflow.com/search?q=%5Bjavascript%5D+object-scan+user%3A1030413).
+
 ## Examples
 
 More extensive examples can be found in the tests.
@@ -1208,6 +1424,16 @@ objectScan(['**(^a$)'], {
 </details>
 
 ## Internals
+
+This library has been designed around performance as a core feature.
+
+The implementation is completely recursion free. This allows
+for traversal of deeply nested objects where a recursive approach
+would fail with a `Maximum call stack size exceeded` error.
+
+The search is pre-computes, which makes applying the same search multiple times very performant.
+
+Traversal happens depth-first, which allows for lower memory consumption.
 
 Conceptually this package works as follows:
 
