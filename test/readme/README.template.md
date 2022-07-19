@@ -922,7 +922,7 @@ This library was originally designed and build to power [object-rewrite](https:/
 
 Many other examples can be found on [Stack Overflow](https://stackoverflow.com/search?q=%5Bjavascript%5D+object-scan+user%3A1030413).
 
-## Examples
+## Other Examples
 
 More extensive examples can be found in the tests.
 
