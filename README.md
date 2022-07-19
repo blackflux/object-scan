@@ -1,13 +1,9 @@
 # Object-Scan
 
 [![Build Status](https://circleci.com/gh/blackflux/object-scan.png?style=shield)](https://circleci.com/gh/blackflux/object-scan)
-[![Test Coverage](https://img.shields.io/coveralls/blackflux/object-scan/master.svg)](https://coveralls.io/github/blackflux/object-scan?branch=master)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=blackflux/object-scan)](https://dependabot.com)
-[![Dependencies](https://david-dm.org/blackflux/object-scan/status.svg)](https://david-dm.org/blackflux/object-scan)
 [![NPM](https://img.shields.io/npm/v/object-scan.svg)](https://www.npmjs.com/package/object-scan)
 [![Downloads](https://img.shields.io/npm/dt/object-scan.svg)](https://www.npmjs.com/package/object-scan)
-[![Semantic-Release](https://github.com/blackflux/js-gardener/blob/master/assets/icons/semver.svg)](https://github.com/semantic-release/semantic-release)
-[![Gardener](https://github.com/blackflux/js-gardener/blob/master/assets/badge.svg)](https://github.com/blackflux/js-gardener)
+[![Size](https://shields.io/badge/minified-14.69%20KB-informational)](https://cdn.jsdelivr.net/npm/object-scan/lib/)
 
 Traverse object hierarchies using matching and callbacks.
 
@@ -25,8 +21,6 @@ In a browser:
   // do logic here
 </script>
 ```
-
-Check <a href="https://cdn.jsdelivr.net/npm/object-scan/lib/">CDN</a> <em>(14.69KB)</em> for version.
 
 ## Usage
 

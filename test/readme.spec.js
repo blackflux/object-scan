@@ -54,12 +54,13 @@ const Renderer = () => {
   return async (match, content) => {
     if (match.startsWith('${') && match.endsWith('}')) {
       return {
-        CDN: async () => {
+        SIZE_BADGE: async () => {
           const indexFile = join(fs.dirname(import.meta.url), '..', 'src', 'index.js');
           const { code } = await ncc(indexFile, { minify: true });
           const sizeInBytes = Buffer.byteLength(code, 'utf8');
-          const size = `${(sizeInBytes / 1024).toFixed(2)}KB`;
-          return `<a href="https://cdn.jsdelivr.net/npm/object-scan/lib/">CDN</a> <em>(${size})</em>`;
+          const size = `${(sizeInBytes / 1024).toFixed(2)}%20KB`;
+          const link = 'https://cdn.jsdelivr.net/npm/object-scan/lib/';
+          return `[![Size](https://shields.io/badge/minified-${size}-informational)](${link})`;
         },
         CMP_BMK: async () => {
           const benchmarkPrefix = join(dirname(fileURLToPath(import.meta.url)), 'comparison', 'benchmark');
