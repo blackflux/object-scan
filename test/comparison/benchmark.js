@@ -12,6 +12,18 @@ const COLORS = [
   [20, '#b01414']
 ];
 
+const okLogo = (
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAAXNSR0IArs4c6QAAAN5QTFRFAAAAAAAAAAAAA'
+  + 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+  + 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+  + 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqTW0FQAAAEl0Uk5TAAECAwUKCwwQERQWFxkbHC'
+  + 'InKDEzNTg5PkVHSEpRU1VXWV5fb3R1eHp7fn+AhIaLjZeboaaorK2ys7fW19jZ6ery8/f4+fv9/sHJynAAAAEzSURBVDjLfZPXWsJAEEZ/V'
+  + 'EKTIogNLCBVEaRLlxAl5/1fyAsFQ0jyX+23Z2Znp0l7RcvDpYm9nvWfsyEdKdMz2at/csQ7OPRx6sapOcB2Wivm84Xm+5F71gI2zbjruvD2'
+  + 'd0hawDjmdruC9pkkaQY05MEhK0ltoO7NHyUpDYy8+b0kqQtWOIBH1lAN4CrB1gjgGsAkiGsBFUnKLZKeXCbcSrqBz4QXlw2Xkl6AVcLFQ4Z'
+  + 'h7Az0CqzOde30z/Fl7kJILWDx9O18/w7s/Sd/LQ7jV2DhTLPl4prA4KBQrUNubKF0WOo2D46CVWEdcTXrwsHDFnR92y1pBKT9B0Z1oC3/kW'
+  + 'sAM/+hjY0BK+k39vHmBrCy3otTrE23APOU/+oBdAKX1+xlPPKOlodL07bN5bAc/b/9Ady8YOUyY0aLAAAAAElFTkSuQmCC'
+);
+
 const blendColors = (colorA, colorB, amount) => {
   const [rA, gA, bA] = colorA.match(/[^#]{2}/g).map((c) => parseInt(c, 16));
   const [rB, gB, bB] = colorB.match(/[^#]{2}/g).map((c) => parseInt(c, 16));
@@ -72,16 +84,6 @@ const execute = (optimize) => {
       const v = table[j][i];
       const { _comments: comments } = entries[j - 2][1];
       const suite = table[0][i];
-      const comment = comments?.[suite];
-      table[j][i] = v === undefined ? ':x:' : ':heavy_check_mark:';
-      if (comment) {
-        if (!(comment in footnotes)) {
-          footnotes[comment] = Object.keys(footnotes).length + 1;
-        }
-        const footnoteId = footnotes[comment];
-        const footnote = `<i><sup><a href="#timing_ref_${footnoteId}">[${footnoteId}]</a></sup></i>`;
-        table[j][i] += footnote;
-      }
       if (v !== undefined) {
         const multiplier = (v / minValue).toFixed(2);
         for (let idx1 = 0; idx1 < COLORS.length; idx1 += 1) {
@@ -94,14 +96,25 @@ const execute = (optimize) => {
               (multiplier - COLORS[idx1][0]) / (COLORS[idx2][0] - COLORS[idx1][0])
             )));
             const color = blendColors(COLORS[idx1][1], COLORS[idx2][1], factor);
-            table[j][i] += ` ![](https://img.shields.io/badge/${
+            table[j][i] = `![](https://img.shields.io/badge/${
               (v / minValue).toFixed(2)
             }x-${
               color.slice(1)
-            })`;
+            }?logo=${okLogo})`;
             break;
           }
         }
+      } else {
+        table[j][i] = '-';
+      }
+
+      const comment = comments?.[suite];
+      if (comment) {
+        if (!(comment in footnotes)) {
+          footnotes[comment] = Object.keys(footnotes).length + 1;
+        }
+        const footnoteId = footnotes[comment];
+        table[j][i] += ` <i><sup><a href="#timing_ref_${footnoteId}">[${footnoteId}]</a></sup></i>`;
       }
     }
   }
