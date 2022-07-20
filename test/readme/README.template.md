@@ -38,6 +38,9 @@ spoiler: false
 - Very [performant](#jsonpath)
 - Extensive [tests](./test) and lots of [examples](#real_world_uses)
 
+## TOC
+${TOC}
+
 <a id="matching"></a>
 ## Matching
 

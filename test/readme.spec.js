@@ -71,7 +71,8 @@ const Renderer = () => {
             '',
             ...fs.smartRead(`${benchmarkPrefix}-footer.md`)
           ].join('\n');
-        }
+        },
+        TOC: async () => 'TOC'
       }[match.slice(2, -1)]();
     }
 
