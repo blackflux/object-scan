@@ -5,6 +5,8 @@ import value from './suites/value.js';
 import callback from './suites/callback.js';
 import parent from './suites/parent.js';
 import multiplePaths from './suites/multiple-paths.js';
+import exclusion from './suites/exclusion.js';
+import pathRecursion from './suites/path-recursion.js';
 
 export default {
   key,
@@ -13,5 +15,7 @@ export default {
   recursive,
   callback,
   parent,
-  multiplePaths
+  multiplePaths,
+  exclusion,
+  pathRecursion
 };
