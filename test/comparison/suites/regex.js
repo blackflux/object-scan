@@ -13,7 +13,7 @@ export default {
     result: [['entries', 'fooooobar'], ['entries', 'foobar']]
   },
   jsonpathplus: {
-    fn: (v) => JSONPath({ path: '$.entries.[?(@property.match(/fo+bar/))]~', json: v, resultType: 'path' }),
+    fn: (v) => JSONPath({ path: '$.entries.[?(@property.match(/fo+bar/))]', json: v, resultType: 'path' }),
     result: [
       "$['entries']['foobar']",
       "$['entries']['fooooobar']"
