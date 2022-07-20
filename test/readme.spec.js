@@ -63,16 +63,18 @@ const Renderer = () => {
           return `[![Size](https://shields.io/badge/minified-${size}-informational)](${link})`;
         },
         CMP_BMK: async () => {
-          const benchmarkPrefix = join(dirname(fileURLToPath(import.meta.url)), 'comparison', 'benchmark');
-          return [
-            ...fs.smartRead(`${benchmarkPrefix}-opt:false.md`),
-            '',
-            ...fs.smartRead(`${benchmarkPrefix}-opt:true.md`),
-            '',
-            ...fs.smartRead(`${benchmarkPrefix}-footer.md`)
-          ].join('\n');
+          const benchmarkResultDir = join(dirname(fileURLToPath(import.meta.url)), 'comparison', 'benchmark');
+          const result = [];
+          fs.walkDir(benchmarkResultDir).forEach((f) => {
+            result.push(...fs.smartRead(join(benchmarkResultDir, f)), '');
+          });
+          return result.join('\n');
         },
-        TOC: async () => 'TOC'
+        TOC: async () => {
+          // todo: read file and extract headers
+          // todo: generate toc and return here (with links!)
+          return 'TOC';
+        }
       }[match.slice(2, -1)]();
     }
 

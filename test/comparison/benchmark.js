@@ -33,9 +33,9 @@ const blendColors = (colorA, colorB, amount) => {
   return `#${r}${g}${b}`;
 };
 
-const execute = (optimize) => {
+const execute = (flags) => {
   const table = [
-    [`_[v8 ${[optimize ? '--opt' : '--no-opt']}](https://flaviocopes.com/node-runtime-v8-options/)_`],
+    [`_[v8 ${flags.join(' ')}](https://flaviocopes.com/node-runtime-v8-options/)_`],
     ['---']
   ];
   const footnotes = {};
@@ -59,13 +59,12 @@ const execute = (optimize) => {
             : fnOrObj;
 
           const { _fixture: fixture } = tests;
-          if (optimize) {
-            for (let i = 0; i < COUNT; i += 1) {
-              fn(fixtures[fixture]);
-            }
+          for (let i = 0; i < COUNT; i += 1) {
+            fn(fixtures[fixture]);
           }
           const start = process.hrtime();
           for (let i = 0; i < COUNT; i += 1) {
+            // todo: should spawn separate worker for every two executions and return average
             fn(fixtures[fixture]);
           }
           const stop = process.hrtime(start);
@@ -125,11 +124,15 @@ const execute = (optimize) => {
   for (let i = 0; i < table.length; i += 1) {
     table[i] = `|${table[i].join('|')}|`;
   }
-  fs.smartWrite(path.join(fs.dirname(import.meta.url), `benchmark-opt:${optimize}.md`), table);
+  fs.smartWrite(path.join(
+    fs.dirname(import.meta.url),
+    'benchmark',
+    `${flags.map((f) => f.slice(2)).join('_') || '_vanilla'}.md`
+  ), table);
   const footer = [];
   Object.entries(footnotes).forEach((([comment, footnoteId]) => {
     footer.push(`<a id="timing_ref_${footnoteId}"><i>[${footnoteId}]</i></a>: ${comment}<br>`);
   }));
-  fs.smartWrite(path.join(fs.dirname(import.meta.url), 'benchmark-footer.md'), footer);
+  fs.smartWrite(path.join(fs.dirname(import.meta.url), 'benchmark', '_footer.md'), footer);
 };
-execute(!process.execArgv.includes('--no-opt'));
+execute(process.execArgv);
