@@ -62,14 +62,11 @@ const Renderer = () => {
           const link = 'https://cdn.jsdelivr.net/npm/object-scan/lib/';
           return `[![Size](https://shields.io/badge/minified-${size}-informational)](${link})`;
         },
-        CMP_BMK: async () => {
-          const benchmarkResultDir = join(dirname(fileURLToPath(import.meta.url)), 'comparison', 'benchmark');
-          const result = [];
-          fs.walkDir(benchmarkResultDir).forEach((f) => {
-            result.push(...fs.smartRead(join(benchmarkResultDir, f)), '');
-          });
-          return result.join('\n');
-        },
+        CMP_BMK: async () => fs.smartRead(join(
+          dirname(fileURLToPath(import.meta.url)),
+          'comparison',
+          'benchmark.md'
+        )).join('\n'),
         TOC: async () => {
           // todo: read file and extract headers
           // todo: generate toc and return here (with links!)

@@ -33,9 +33,9 @@ const blendColors = (colorA, colorB, amount) => {
   return `#${r}${g}${b}`;
 };
 
-const execute = (flags) => {
+const execute = () => {
   const table = [
-    [`_[v8 ${flags.join(' ')}](https://flaviocopes.com/node-runtime-v8-options/)_`],
+    [''],
     ['---']
   ];
   const footnotes = {};
@@ -124,15 +124,10 @@ const execute = (flags) => {
   for (let i = 0; i < table.length; i += 1) {
     table[i] = `|${table[i].join('|')}|`;
   }
-  fs.smartWrite(path.join(
-    fs.dirname(import.meta.url),
-    'benchmark',
-    `${flags.map((f) => f.slice(2)).join('_') || '_vanilla'}.md`
-  ), table);
-  const footer = [];
+  table.push('');
   Object.entries(footnotes).forEach((([comment, footnoteId]) => {
-    footer.push(`<a id="timing_ref_${footnoteId}"><i>[${footnoteId}]</i></a>: ${comment}<br>`);
+    table.push(`<a id="timing_ref_${footnoteId}"><i>[${footnoteId}]</i></a>: ${comment}<br>`);
   }));
-  fs.smartWrite(path.join(fs.dirname(import.meta.url), 'benchmark', '_footer.md'), footer);
+  fs.smartWrite(path.join(fs.dirname(import.meta.url), 'benchmark.md'), table);
 };
-execute(process.execArgv);
+execute();
