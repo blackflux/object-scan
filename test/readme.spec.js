@@ -134,12 +134,8 @@ const injectToc = (input) => {
     stack[type] += 1;
     const number = `${stack.join('.')}.`;
     lines[i] = `${indent} ${number} ${title}`;
-    if (type === 0) {
-      toc.push('');
-      toc.push(`**[${number} ${title}](#slug-here)**`);
-    } else {
-      toc.push(`${' '.repeat(type)}* [${number} ${title}](#slug-here)`);
-    }
+    const prefix = ['-', '*', '+'][type];
+    toc.push(`${'  '.repeat(type)} ${prefix} [${number} ${title}](#slug-here)`);
   }
   lines.splice(tocIndex, 1, ...toc);
 
