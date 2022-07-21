@@ -152,21 +152,20 @@ const injectToc = (input) => {
     const [type, number, title, ctx] = toc[i];
     const indent = '    '.repeat(type);
     const prefix = `${indent}${['', ''][type]}`;
-    const postfix = `${['<br>', '<br>'][type]}`;
+    const postfix = `${['', '<br>'][type]}`;
 
-    const result = [];
-    // if (ctx.end) {
-    //   result.push('</details>');
-    //   result.push('');
-    // }
-    // if (ctx.start) {
-    //   result.push(`${prefix} <details><summary> ${number} <a href="#slug-here">${title}</a> </summary>${postfix}`);
-    //   result.push('');
-    // } else {
-    //   result.push(`${prefix} ${number} [${title}](#slug-here)${postfix}`);
-    // }
     const slug = slugger.slug(`${number} ${title}`);
-    result.push(`${prefix} ${number} [${title}](#${slug})${postfix}`);
+    const result = [];
+    if (ctx.end) {
+      result.push('</details>');
+      result.push('');
+    }
+    if (ctx.start) {
+      result.push(`${prefix} ${number} <details><summary> <a href="#${slug}">${title}</a> </summary>${postfix}`);
+      result.push('');
+    } else {
+      result.push(`${prefix} ${number} [${title}](#${slug})${postfix}`);
+    }
     toc.splice(i, 1, ...result);
     i += result.length;
   }

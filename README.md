@@ -43,11 +43,12 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 - Extensive [tests](./test) and lots of [examples](#real_world_uses)
 
 ## 4. TOC
- 1. [Install](#1-install)<br>
- 2. [Usage](#2-usage)<br>
- 3. [Features](#3-features)<br>
- 4. [TOC](#4-toc)<br>
- 5. [Matching](#5-matching)<br>
+ 1. [Install](#1-install)
+ 2. [Usage](#2-usage)
+ 3. [Features](#3-features)
+ 4. [TOC](#4-toc)
+ 5. <details><summary> <a href="#5-matching">Matching</a> </summary>
+
      5.1. [Array](#51-array)<br>
      5.2. [Object](#52-object)<br>
      5.3. [Wildcard](#53-wildcard)<br>
@@ -57,7 +58,10 @@ objectScan(['a.*.f'], { joined: true })(haystack);
      5.7. [Nested Path Recursion](#57-nested-path-recursion)<br>
      5.8. [Exclusion](#58-exclusion)<br>
      5.9. [Escaping](#59-escaping)<br>
- 6. [Options](#6-options)<br>
+</details>
+
+ 6. <details><summary> <a href="#6-options">Options</a> </summary>
+
      6.1. [filterFn](#61-filterfn)<br>
      6.2. [breakFn](#62-breakfn)<br>
      6.3. [beforeFn](#63-beforefn)<br>
@@ -70,13 +74,15 @@ objectScan(['a.*.f'], { joined: true })(haystack);
      6.10. [joined](#610-joined)<br>
      6.11. [useArraySelector](#611-usearrayselector)<br>
      6.12. [strict](#612-strict)<br>
- 7. [Search Context](#7-search-context)<br>
- 8. [Traversal Order](#8-traversal-order)<br>
- 9. [JSONPath and others](#9-jsonpath-and-others)<br>
- 10. [Real World Uses](#10-real-world-uses)<br>
- 11. [Other Examples](#11-other-examples)<br>
- 12. [Edge Cases](#12-edge-cases)<br>
- 13. [Internals](#13-internals)<br>
+</details>
+
+ 7. [Search Context](#7-search-context)
+ 8. [Traversal Order](#8-traversal-order)
+ 9. [JSONPath and others](#9-jsonpath-and-others)
+ 10. [Real World Uses](#10-real-world-uses)
+ 11. [Other Examples](#11-other-examples)
+ 12. [Edge Cases](#12-edge-cases)
+ 13. [Internals](#13-internals)
 
 <a id="matching"></a>
 ## 5. Matching
