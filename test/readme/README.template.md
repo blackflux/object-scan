@@ -39,7 +39,7 @@ spoiler: false
 - Extensive [tests](./test) and lots of [examples](#real_world_uses)
 
 ## TOC
-${TOC}
+${{TOC}}
 
 <a id="matching"></a>
 ## Matching
@@ -329,7 +329,7 @@ and should be accessed via [destructuring](https://developer.mozilla.org/en-US/d
 - Getters should be used to improve performance for conditional access. E.g. `if (isMatch) { getParents() ... }`.
 - For performance reasons, the same object is passed to all callbacks.
 
-#### filterFn
+### filterFn
 
 Type: `function`<br>
 Default: `undefined`
@@ -356,7 +356,7 @@ comment: filter function
 filterFn: ({ value }) => typeof value === 'string'
 </example></pre>
 
-#### breakFn
+### breakFn
 
 Type: `function`<br>
 Default: `undefined`
@@ -377,7 +377,7 @@ comment: break function
 breakFn: ({ key }) => key === 'a.b'
 </example></pre>
 
-#### beforeFn
+### beforeFn
 
 Type: `function`<br>
 Default: `undefined`
@@ -410,7 +410,7 @@ beforeFn: ({ haystack: h }) => Object.keys(h)
 rtn: ['key', 'value']
 </example></pre>
 
-#### afterFn
+### afterFn
 
 Type: `function`<br>
 Default: `undefined`
@@ -452,7 +452,7 @@ afterFn: (state) => state.custom
 joined: false
 </example></pre>
 
-#### compareFn
+### compareFn
 
 Type: `function`<br>
 Default: `undefined`
@@ -474,7 +474,7 @@ comment: simple sort
 reverse: false
 </example></pre>
 
-#### reverse
+### reverse
 
 Type: `boolean`<br>
 Default: `true`
@@ -524,7 +524,7 @@ reverse: false
 joined: false
 </example></pre>
 
-#### orderByNeedles
+### orderByNeedles
 
 Type: `boolean`<br>
 Default: `false`
@@ -572,7 +572,7 @@ orderByNeedles: true
 comment: matches traverse first
 </example></pre>
 
-#### abort
+### abort
 
 Type: `boolean`<br>
 Default: `false`
@@ -597,7 +597,7 @@ abort: true
 comment: abort changes count
 </example></pre>
 
-#### rtn
+### rtn
 
 Type: `string` or `array` or `function`<br>
 Default: _dynamic_
@@ -701,7 +701,7 @@ filterFn: ({ value }) => typeof value === 'number'
 comment: return sum
 </example></pre>
 
-#### joined
+### joined
 
 Type: `boolean`<br>
 Default: `false`
@@ -726,7 +726,7 @@ joined: false
 comment: not joined
 </example></pre>
 
-#### useArraySelector
+### useArraySelector
 
 Type: `boolean`<br>
 Default: `true`
@@ -749,7 +749,7 @@ useArraySelector: false
 comment: top level array matching
 </example></pre>
 
-#### strict
+### strict
 
 Type: `boolean`<br>
 Default: `true`
@@ -781,7 +781,7 @@ needles: ['**.!**']
 comment: consecutive recursion
 </example></pre>
 
-### Search Context
+## Search Context
 
 A context can be passed into a search invocation as a second parameter. It is available in all callbacks
 and can be used to manage state across a search invocation without having to recompile the search.

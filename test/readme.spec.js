@@ -66,12 +66,7 @@ const Renderer = () => {
           dirname(fileURLToPath(import.meta.url)),
           'comparison',
           'benchmark.md'
-        )).join('\n'),
-        TOC: async () => {
-          // todo: read file and extract headers
-          // todo: generate toc and return here (with links!)
-          return 'TOC';
-        }
+        )).join('\n')
       }[match.slice(2, -1)]();
     }
 
@@ -109,18 +104,61 @@ const Renderer = () => {
   };
 };
 
+const injectToc = (input) => {
+  const lines = input.split('\n');
+  const stack = [];
+  const toc = [];
+  let tocIndex = -1;
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i];
+    // eslint-disable-next-line no-template-curly-in-string
+    if (line === '${{TOC}}') {
+      tocIndex = i;
+    }
+    if (!/^#+ /.test(line)) {
+      // eslint-disable-next-line no-continue
+      continue;
+    }
+    const indexOfFirstSpace = line.indexOf(' ');
+    const indent = line.substring(0, indexOfFirstSpace);
+    const title = line.substring(indexOfFirstSpace + 1);
+    const type = indent.length - 2;
+    if (type < 0) {
+      // eslint-disable-next-line no-continue
+      continue;
+    }
+    stack.length = type + 1;
+    if (!stack[type]) {
+      stack[type] = 0;
+    }
+    stack[type] += 1;
+    // eslint-disable-next-line no-template-curly-in-string
+    const number = `${stack.join('.')}.`;
+    lines[i] = `${indent} ${number} ${title}`;
+    if (type === 0) {
+      toc.push('');
+      toc.push(`**[${number} ${title}](#slug-here)**`);
+    } else {
+      toc.push(`${' '.repeat(type)}* [${number} ${title}](#slug-here)`);
+    }
+  }
+  lines.splice(tocIndex, 1, ...toc);
+
+  return lines;
+};
+
 describe('Testing Readme', { timeout: 5 * 60000 }, () => {
   it('Updating Readme Example', async () => {
     const inputFile = join(dirname(fileURLToPath(import.meta.url)), 'readme', 'README.template.md');
     const outputFile = join(dirname(fileURLToPath(import.meta.url)), '..', 'README.md');
     const input = fs.smartRead(inputFile).join('\n');
     const renderer = Renderer();
-    const output = await replaceAsync(
+    const output = injectToc(await replaceAsync(
       input,
       /<pre><example>\n([\s\S]+?)\n<\/example><\/pre>|\$\{[A-Z_]+}/g,
       renderer
-    );
-    const result = fs.smartWrite(outputFile, output.split('\n'));
+    ));
+    const result = fs.smartWrite(outputFile, output);
     expect(result).to.equal(false);
   });
 });

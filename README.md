@@ -7,7 +7,7 @@
 
 Traverse object hierarchies using matching and callbacks.
 
-## Install
+## 1. Install
 
 Using npm:
 
@@ -22,7 +22,7 @@ In a browser:
 </script>
 ```
 
-## Usage
+## 2. Usage
 
 <!-- eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies -->
 ```js
@@ -34,7 +34,7 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 ```
 
 
-## Features
+## 3. Features
 
 - Input [traversed](#traversal_order) at most once during search
 - Dependency free and [tiny bundle size](https://cdn.jsdelivr.net/npm/object-scan/lib/)
@@ -42,11 +42,57 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 - Very [performant](#jsonpath)
 - Extensive [tests](./test) and lots of [examples](#real_world_uses)
 
-## TOC
-TOC
+## 4. TOC
+
+**[1. Install](#slug-here)**
+
+**[2. Usage](#slug-here)**
+
+**[3. Features](#slug-here)**
+
+**[4. TOC](#slug-here)**
+
+**[5. Matching](#slug-here)**
+ * [5.1. Array](#slug-here)
+ * [5.2. Object](#slug-here)
+ * [5.3. Wildcard](#slug-here)
+ * [5.4. Regex](#slug-here)
+ * [5.5. Or Clause](#slug-here)
+ * [5.6. Arbitrary Depth](#slug-here)
+ * [5.7. Nested Path Recursion](#slug-here)
+ * [5.8. Exclusion](#slug-here)
+ * [5.9. Escaping](#slug-here)
+
+**[6. Options](#slug-here)**
+ * [6.1. filterFn](#slug-here)
+ * [6.2. breakFn](#slug-here)
+ * [6.3. beforeFn](#slug-here)
+ * [6.4. afterFn](#slug-here)
+ * [6.5. compareFn](#slug-here)
+ * [6.6. reverse](#slug-here)
+ * [6.7. orderByNeedles](#slug-here)
+ * [6.8. abort](#slug-here)
+ * [6.9. rtn](#slug-here)
+ * [6.10. joined](#slug-here)
+ * [6.11. useArraySelector](#slug-here)
+ * [6.12. strict](#slug-here)
+
+**[7. Search Context](#slug-here)**
+
+**[8. Traversal Order](#slug-here)**
+
+**[9. JSONPath and others](#slug-here)**
+
+**[10. Real World Uses](#slug-here)**
+
+**[11. Other Examples](#slug-here)**
+
+**[12. Edge Cases](#slug-here)**
+
+**[13. Internals](#slug-here)**
 
 <a id="matching"></a>
-## Matching
+## 5. Matching
 
 A needle expression specifies one or more paths to an element (or a set of elements) in a JSON structure.
 Paths use the dot notation.
@@ -64,7 +110,7 @@ The matching syntax is fully validated and bad input will throw a syntax error. 
 - [Escaping](#escaping)
 
 <a id="array"></a>
-### Array
+### 5.1. Array
 
 Rectangular brackets for array path matching.
 
@@ -89,7 +135,7 @@ objectScan(['[1]'], { joined: true })(haystack);
 </details>
 
 <a id="object"></a>
-### Object
+### 5.2. Object
 
 Property name for object property matching.
 
@@ -114,7 +160,7 @@ objectScan(['1'], { joined: true })(haystack);
 </details>
 
 <a id="wildcard"></a>
-### Wildcard
+### 5.3. Wildcard
 
 The following characters have special meaning when not escaped:
 - `*`: Match zero or more character
@@ -163,7 +209,7 @@ objectScan(['a.\\+.c'], { joined: true })(haystack);
 </details>
 
 <a id="regex"></a>
-### Regex
+### 5.4. Regex
 
 Regex are defined by using parentheses.
 
@@ -217,7 +263,7 @@ objectScan(['[*]', '[!(^[01]$)]'], { joined: true })(haystack);
 </details>
 
 <a id="or_clause"></a>
-### Or Clause
+### 5.5. Or Clause
 
 Or Clauses are defined by using curley brackets.
 
@@ -245,7 +291,7 @@ objectScan(['{a,d}.{b,f}'], { joined: true })(haystack);
 </details>
 
 <a id="arbitrary_depth"></a>
-### Arbitrary Depth
+### 5.6. Arbitrary Depth
 
 There are two types of arbitrary depth matching:
 - `**`: Matches zero or more nestings
@@ -283,7 +329,7 @@ objectScan(['**(1)'], { joined: true })(haystack);
 </details>
 
 <a id="nested_path_recursion"></a>
-### Nested Path Recursion
+### 5.7. Nested Path Recursion
 
 To match a nested path recursively,
 combine [Arbitrary Depth](#arbitrary_depth) matching with an [Or Clause](#or_clause).
@@ -349,7 +395,7 @@ objectScan(['a.++{b.c}'], { joined: true })(haystack);
 </details>
 
 <a id="exclusion"></a>
-### Exclusion
+### 5.8. Exclusion
 
 To exclude a path, use exclamation mark.
 
@@ -377,7 +423,7 @@ objectScan(['**,!**.a'], { joined: true })(haystack);
 </details>
 
 <a id="escaping"></a>
-### Escaping
+### 5.9. Escaping
 
 The following characters are considered special and need to
 be escaped using `\`, if they should be matched in a key:<br>
@@ -394,7 +440,7 @@ objectScan(['\\[1\\]'], { joined: true })(haystack);
 ```
 </details>
 
-## Options
+## 6. Options
 
 <a id="callbacks"></a>
 Signature of all callbacks is
@@ -443,7 +489,7 @@ and should be accessed via [destructuring](https://developer.mozilla.org/en-US/d
 - Getters should be used to improve performance for conditional access. E.g. `if (isMatch) { getParents() ... }`.
 - For performance reasons, the same object is passed to all callbacks.
 
-#### filterFn
+### 6.1. filterFn
 
 Type: `function`<br>
 Default: `undefined`
@@ -476,7 +522,7 @@ objectScan(['**'], {
 ```
 </details>
 
-#### breakFn
+### 6.2. breakFn
 
 Type: `function`<br>
 Default: `undefined`
@@ -503,7 +549,7 @@ objectScan(['**'], {
 ```
 </details>
 
-#### beforeFn
+### 6.3. beforeFn
 
 Type: `function`<br>
 Default: `undefined`
@@ -547,7 +593,7 @@ objectScan(['**'], {
 ```
 </details>
 
-#### afterFn
+### 6.4. afterFn
 
 Type: `function`<br>
 Default: `undefined`
@@ -600,7 +646,7 @@ objectScan(['**'], {
 ```
 </details>
 
-#### compareFn
+### 6.5. compareFn
 
 Type: `function`<br>
 Default: `undefined`
@@ -628,7 +674,7 @@ objectScan(['**'], {
 ```
 </details>
 
-#### reverse
+### 6.6. reverse
 
 Type: `boolean`<br>
 Default: `true`
@@ -690,7 +736,7 @@ objectScan(['**'], {
 ```
 </details>
 
-#### orderByNeedles
+### 6.7. orderByNeedles
 
 Type: `boolean`<br>
 Default: `false`
@@ -768,7 +814,7 @@ objectScan(['b', 'a', 'b.c', 'd'], {
 ```
 </details>
 
-#### abort
+### 6.8. abort
 
 Type: `boolean`<br>
 Default: `false`
@@ -801,7 +847,7 @@ objectScan(['[0]', '[1]'], {
 ```
 </details>
 
-#### rtn
+### 6.9. rtn
 
 Type: `string` or `array` or `function`<br>
 Default: _dynamic_
@@ -925,7 +971,7 @@ objectScan(['**'], {
 ```
 </details>
 
-#### joined
+### 6.10. joined
 
 Type: `boolean`<br>
 Default: `false`
@@ -956,7 +1002,7 @@ objectScan(['[*]', '[*].foo'])(haystack);
 ```
 </details>
 
-#### useArraySelector
+### 6.11. useArraySelector
 
 Type: `boolean`<br>
 Default: `true`
@@ -991,7 +1037,7 @@ objectScan([''], {
 ```
 </details>
 
-#### strict
+### 6.12. strict
 
 Type: `boolean`<br>
 Default: `true`
@@ -1039,7 +1085,7 @@ objectScan(['**.!**'], { joined: true })(haystack);
 ```
 </details>
 
-### Search Context
+## 7. Search Context
 
 A context can be passed into a search invocation as a second parameter. It is available in all callbacks
 and can be used to manage state across a search invocation without having to recompile the search.
@@ -1062,7 +1108,7 @@ objectScan(['**.{c,d,e}'], {
 </details>
 
 <a id="traversal_order"></a>
-## Traversal Order
+## 8. Traversal Order
 
 The [traversal order](https://en.wikipedia.org/wiki/Tree_traversal) is always depth first.
 However, the order the nodes are traversed in can be changed.
@@ -1197,7 +1243,7 @@ objectScan(['c', '*'], {
 </details>
 
 <a id="jsonpath"></a>
-## JSONPath and others
+## 9. JSONPath and others
 
 This library has a similar syntax and can perform similar tasks
 to [jsonpath](https://www.npmjs.com/package/jsonpath) or [jmespath](https://www.npmjs.com/package/jmespath).
@@ -1232,13 +1278,13 @@ In general `object-scan` is more versatile than other similar libraries.
 <a id="timing_ref_8"><i>[8]</i></a>: Usefulness limited since no callback<br>
 
 <a id="real_world_uses"></a>
-## Real World Uses
+## 10. Real World Uses
 
 This library was originally designed and build to power [object-rewrite](https://github.com/blackflux/object-rewrite).
 
 Many other examples can be found on [Stack Overflow](https://stackoverflow.com/search?q=%5Bjavascript%5D+object-scan+user%3A1030413).
 
-## Other Examples
+## 11. Other Examples
 
 More extensive examples can be found in the tests.
 
@@ -1362,7 +1408,7 @@ objectScan(['**.(^[bc]$)'], { joined: true })(haystack);
 ```
 </details>
 
-## Edge Cases
+## 12. Edge Cases
 
 Top level object(s) are matched by the empty needle `''`. This is useful for matching objects nested in arrays by setting `useArraySelector` to `false`.
 To match the actual empty string as a key, use `(^$)`.
@@ -1414,7 +1460,7 @@ objectScan(['**(^a$)'], {
 ```
 </details>
 
-## Internals
+## 13. Internals
 
 This library has been designed around performance as a core feature.
 
