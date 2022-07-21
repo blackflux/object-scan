@@ -161,7 +161,7 @@ const injectToc = (input) => {
       result.push('');
     }
     if (ctx.start) {
-      result.push(`${prefix} ${number} [${title}](#${slug}) <details><summary>expand</summary>${postfix}`);
+      result.push(`${prefix} ${number} [${title}](#${slug}) <details><summary>_expand_</summary>${postfix}`);
     } else {
       result.push(`${prefix} ${number} [${title}](#${slug})${postfix}`);
     }
