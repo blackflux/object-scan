@@ -43,6 +43,7 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 - Extensive [tests](./test) and lots of [examples](#real_world_uses)
 
 ## 4. TOC
+
  - [1. Install](#slug-here)
  - [2. Usage](#slug-here)
  - [3. Features](#slug-here)
@@ -57,19 +58,22 @@ objectScan(['a.*.f'], { joined: true })(haystack);
    * [5.7. Nested Path Recursion](#slug-here)
    * [5.8. Exclusion](#slug-here)
    * [5.9. Escaping](#slug-here)
- - [6. Options](#slug-here)
-   * [6.1. filterFn](#slug-here)
-   * [6.2. breakFn](#slug-here)
-   * [6.3. beforeFn](#slug-here)
-   * [6.4. afterFn](#slug-here)
-   * [6.5. compareFn](#slug-here)
-   * [6.6. reverse](#slug-here)
-   * [6.7. orderByNeedles](#slug-here)
-   * [6.8. abort](#slug-here)
-   * [6.9. rtn](#slug-here)
-   * [6.10. joined](#slug-here)
-   * [6.11. useArraySelector](#slug-here)
-   * [6.12. strict](#slug-here)
+- <details><summary> <a href="#slug-here">6. Options</a> </summary>
+
+  - [6.1. filterFn](#slug-here)
+  - [6.2. breakFn](#slug-here)
+  - [6.3. beforeFn](#slug-here)
+  - [6.4. afterFn](#slug-here)
+  - [6.5. compareFn](#slug-here)
+  - [6.6. reverse](#slug-here)
+  - [6.7. orderByNeedles](#slug-here)
+  - [6.8. abort](#slug-here)
+  - [6.9. rtn](#slug-here)
+  - [6.10. joined](#slug-here)
+  - [6.11. useArraySelector](#slug-here)
+  - [6.12. strict](#slug-here)
+</details>
+
  - [7. Search Context](#slug-here)
  - [8. Traversal Order](#slug-here)
  - [9. JSONPath and others](#slug-here)
