@@ -109,6 +109,7 @@ const injectToc = (input) => {
   const stack = [];
   const toc = [];
   let tocIndex = -1;
+
   for (let i = 0; i < lines.length; i += 1) {
     const line = lines[i];
     // eslint-disable-next-line no-template-curly-in-string
@@ -134,9 +135,37 @@ const injectToc = (input) => {
     stack[type] += 1;
     const number = `${stack.join('.')}.`;
     lines[i] = `${indent} ${number} ${title}`;
-    const prefix = ['-', '*', '+'][type];
-    toc.push(`${'  '.repeat(type)} ${prefix} [${number} ${title}](#slug-here)`);
+    const ctx = { start: false, end: false };
+    toc.push([type, number, title, ctx]);
   }
+
+  for (let i = 0; i < toc.length; i += 1) {
+    if (toc[i][0] === 0) {
+      toc[i][3].end = toc[i - 1]?.[0] === 1;
+      toc[i][3].start = toc[i + 1]?.[0] === 1;
+    }
+  }
+
+  for (let i = 0; i < toc.length;) {
+    const [type, number, title, ctx] = toc[i];
+    const indent = '  '.repeat(type);
+    const prefix = `${indent}${['-', '*', '+'][type]}`;
+
+    const result = [];
+    if (ctx.end) {
+      result.push('</details>');
+      result.push('');
+    }
+    if (ctx.start) {
+      result.push(`${prefix} <details><summary> <a href="#slug-here">${number} ${title}</a> </summary>`);
+      result.push('');
+    } else {
+      result.push(`${prefix} [${number} ${title}](#slug-here)`);
+    }
+    toc.splice(i, 1, ...result);
+    i += result.length;
+  }
+
   lines.splice(tocIndex, 1, ...toc);
 
   return lines;
