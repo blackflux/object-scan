@@ -132,7 +132,6 @@ const injectToc = (input) => {
       stack[type] = 0;
     }
     stack[type] += 1;
-    // eslint-disable-next-line no-template-curly-in-string
     const number = `${stack.join('.')}.`;
     lines[i] = `${indent} ${number} ${title}`;
     if (type === 0) {
