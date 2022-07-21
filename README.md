@@ -43,46 +43,40 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 - Extensive [tests](./test) and lots of [examples](#real_world_uses)
 
 ## 4. TOC
-- [1. Install](#slug-here)
-- [2. Usage](#slug-here)
-- [3. Features](#slug-here)
-- [4. TOC](#slug-here)
-- <details><summary> <a href="#slug-here">5. Matching</a> </summary>
-
-  * [5.1. Array](#slug-here)
-  * [5.2. Object](#slug-here)
-  * [5.3. Wildcard](#slug-here)
-  * [5.4. Regex](#slug-here)
-  * [5.5. Or Clause](#slug-here)
-  * [5.6. Arbitrary Depth](#slug-here)
-  * [5.7. Nested Path Recursion](#slug-here)
-  * [5.8. Exclusion](#slug-here)
-  * [5.9. Escaping](#slug-here)
-</details>
-
-- <details><summary> <a href="#slug-here">6. Options</a> </summary>
-
-  * [6.1. filterFn](#slug-here)
-  * [6.2. breakFn](#slug-here)
-  * [6.3. beforeFn](#slug-here)
-  * [6.4. afterFn](#slug-here)
-  * [6.5. compareFn](#slug-here)
-  * [6.6. reverse](#slug-here)
-  * [6.7. orderByNeedles](#slug-here)
-  * [6.8. abort](#slug-here)
-  * [6.9. rtn](#slug-here)
-  * [6.10. joined](#slug-here)
-  * [6.11. useArraySelector](#slug-here)
-  * [6.12. strict](#slug-here)
-</details>
-
-- [7. Search Context](#slug-here)
-- [8. Traversal Order](#slug-here)
-- [9. JSONPath and others](#slug-here)
-- [10. Real World Uses](#slug-here)
-- [11. Other Examples](#slug-here)
-- [12. Edge Cases](#slug-here)
-- [13. Internals](#slug-here)
+ 1. [Install](#slug-here)<br>
+ 2. [Usage](#slug-here)<br>
+ 3. [Features](#slug-here)<br>
+ 4. [TOC](#slug-here)<br>
+ 5. [Matching](#slug-here)<br>
+     5.1. [Array](#slug-here)<br>
+     5.2. [Object](#slug-here)<br>
+     5.3. [Wildcard](#slug-here)<br>
+     5.4. [Regex](#slug-here)<br>
+     5.5. [Or Clause](#slug-here)<br>
+     5.6. [Arbitrary Depth](#slug-here)<br>
+     5.7. [Nested Path Recursion](#slug-here)<br>
+     5.8. [Exclusion](#slug-here)<br>
+     5.9. [Escaping](#slug-here)<br>
+ 6. [Options](#slug-here)<br>
+     6.1. [filterFn](#slug-here)<br>
+     6.2. [breakFn](#slug-here)<br>
+     6.3. [beforeFn](#slug-here)<br>
+     6.4. [afterFn](#slug-here)<br>
+     6.5. [compareFn](#slug-here)<br>
+     6.6. [reverse](#slug-here)<br>
+     6.7. [orderByNeedles](#slug-here)<br>
+     6.8. [abort](#slug-here)<br>
+     6.9. [rtn](#slug-here)<br>
+     6.10. [joined](#slug-here)<br>
+     6.11. [useArraySelector](#slug-here)<br>
+     6.12. [strict](#slug-here)<br>
+ 7. [Search Context](#slug-here)<br>
+ 8. [Traversal Order](#slug-here)<br>
+ 9. [JSONPath and others](#slug-here)<br>
+ 10. [Real World Uses](#slug-here)<br>
+ 11. [Other Examples](#slug-here)<br>
+ 12. [Edge Cases](#slug-here)<br>
+ 13. [Internals](#slug-here)<br>
 
 <a id="matching"></a>
 ## 5. Matching
