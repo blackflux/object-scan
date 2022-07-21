@@ -43,40 +43,40 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 - Extensive [tests](./test) and lots of [examples](#real_world_uses)
 
 ## 4. TOC
- 1. [Install](#install)<br>
- 2. [Usage](#usage)<br>
- 3. [Features](#features)<br>
- 4. [TOC](#toc)<br>
- 5. [Matching](#matching)<br>
-     5.1. [Array](#array)<br>
-     5.2. [Object](#object)<br>
-     5.3. [Wildcard](#wildcard)<br>
-     5.4. [Regex](#regex)<br>
-     5.5. [Or Clause](#or-clause)<br>
-     5.6. [Arbitrary Depth](#arbitrary-depth)<br>
-     5.7. [Nested Path Recursion](#nested-path-recursion)<br>
-     5.8. [Exclusion](#exclusion)<br>
-     5.9. [Escaping](#escaping)<br>
- 6. [Options](#options)<br>
-     6.1. [filterFn](#filterfn)<br>
-     6.2. [breakFn](#breakfn)<br>
-     6.3. [beforeFn](#beforefn)<br>
-     6.4. [afterFn](#afterfn)<br>
-     6.5. [compareFn](#comparefn)<br>
-     6.6. [reverse](#reverse)<br>
-     6.7. [orderByNeedles](#orderbyneedles)<br>
-     6.8. [abort](#abort)<br>
-     6.9. [rtn](#rtn)<br>
-     6.10. [joined](#joined)<br>
-     6.11. [useArraySelector](#usearrayselector)<br>
-     6.12. [strict](#strict)<br>
- 7. [Search Context](#search-context)<br>
- 8. [Traversal Order](#traversal-order)<br>
- 9. [JSONPath and others](#jsonpath-and-others)<br>
- 10. [Real World Uses](#real-world-uses)<br>
- 11. [Other Examples](#other-examples)<br>
- 12. [Edge Cases](#edge-cases)<br>
- 13. [Internals](#internals)<br>
+ 1. [Install](#1-install)<br>
+ 2. [Usage](#2-usage)<br>
+ 3. [Features](#3-features)<br>
+ 4. [TOC](#4-toc)<br>
+ 5. [Matching](#5-matching)<br>
+     5.1. [Array](#51-array)<br>
+     5.2. [Object](#52-object)<br>
+     5.3. [Wildcard](#53-wildcard)<br>
+     5.4. [Regex](#54-regex)<br>
+     5.5. [Or Clause](#55-or-clause)<br>
+     5.6. [Arbitrary Depth](#56-arbitrary-depth)<br>
+     5.7. [Nested Path Recursion](#57-nested-path-recursion)<br>
+     5.8. [Exclusion](#58-exclusion)<br>
+     5.9. [Escaping](#59-escaping)<br>
+ 6. [Options](#6-options)<br>
+     6.1. [filterFn](#61-filterfn)<br>
+     6.2. [breakFn](#62-breakfn)<br>
+     6.3. [beforeFn](#63-beforefn)<br>
+     6.4. [afterFn](#64-afterfn)<br>
+     6.5. [compareFn](#65-comparefn)<br>
+     6.6. [reverse](#66-reverse)<br>
+     6.7. [orderByNeedles](#67-orderbyneedles)<br>
+     6.8. [abort](#68-abort)<br>
+     6.9. [rtn](#69-rtn)<br>
+     6.10. [joined](#610-joined)<br>
+     6.11. [useArraySelector](#611-usearrayselector)<br>
+     6.12. [strict](#612-strict)<br>
+ 7. [Search Context](#7-search-context)<br>
+ 8. [Traversal Order](#8-traversal-order)<br>
+ 9. [JSONPath and others](#9-jsonpath-and-others)<br>
+ 10. [Real World Uses](#10-real-world-uses)<br>
+ 11. [Other Examples](#11-other-examples)<br>
+ 12. [Edge Cases](#12-edge-cases)<br>
+ 13. [Internals](#13-internals)<br>
 
 <a id="matching"></a>
 ## 5. Matching

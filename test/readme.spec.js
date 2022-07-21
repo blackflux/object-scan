@@ -5,6 +5,7 @@ import { describe } from 'node-tdd';
 import Mustache from 'mustache';
 import { expect } from 'chai';
 import ncc from '@vercel/ncc';
+import Slugger from 'github-slugger';
 import stringify from './helper/stringify.js';
 
 const getObjectScanOptions = (meta) => {
@@ -146,22 +147,26 @@ const injectToc = (input) => {
     }
   }
 
+  const slugger = new Slugger();
   for (let i = 0; i < toc.length;) {
     const [type, number, title, ctx] = toc[i];
-    const indent = '  '.repeat(type);
-    const prefix = `${indent}${['-', '*', '+'][type]}`;
+    const indent = '    '.repeat(type);
+    const prefix = `${indent}${['', ''][type]}`;
+    const postfix = `${['<br>', '<br>'][type]}`;
 
     const result = [];
-    if (ctx.end) {
-      result.push('</details>');
-      result.push('');
-    }
-    if (ctx.start) {
-      result.push(`${prefix} <details><summary> <a href="#slug-here">${number} ${title}</a> </summary>`);
-      result.push('');
-    } else {
-      result.push(`${prefix} [${number} ${title}](#slug-here)`);
-    }
+    // if (ctx.end) {
+    //   result.push('</details>');
+    //   result.push('');
+    // }
+    // if (ctx.start) {
+    //   result.push(`${prefix} <details><summary> ${number} <a href="#slug-here">${title}</a> </summary>${postfix}`);
+    //   result.push('');
+    // } else {
+    //   result.push(`${prefix} ${number} [${title}](#slug-here)${postfix}`);
+    // }
+    const slug = slugger.slug(`${number} ${title}`);
+    result.push(`${prefix} ${number} [${title}](#${slug})${postfix}`);
     toc.splice(i, 1, ...result);
     i += result.length;
   }
