@@ -47,8 +47,7 @@ objectScan(['a.*.f'], { joined: true })(haystack);
  2. [Usage](#2-usage)
  3. [Features](#3-features)
  4. [TOC](#4-toc)
- 5. <details><summary> <a href="#5-matching">Matching</a> </summary>
-
+ 5. [Matching](#5-matching) <details><summary>expand</summary>
      5.1. [Array](#51-array)<br>
      5.2. [Object](#52-object)<br>
      5.3. [Wildcard](#53-wildcard)<br>
@@ -60,8 +59,7 @@ objectScan(['a.*.f'], { joined: true })(haystack);
      5.9. [Escaping](#59-escaping)<br>
 </details>
 
- 6. <details><summary> <a href="#6-options">Options</a> </summary>
-
+ 6. [Options](#6-options) <details><summary>expand</summary>
      6.1. [filterFn](#61-filterfn)<br>
      6.2. [breakFn](#62-breakfn)<br>
      6.3. [beforeFn](#63-beforefn)<br>
