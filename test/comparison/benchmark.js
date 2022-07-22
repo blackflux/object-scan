@@ -35,7 +35,7 @@ const blendColors = (colorA, colorB, amount) => {
 
 const execute = () => {
   const table = [
-    [''],
+    ['   '],
     ['---']
   ];
   const footnotes = {};
@@ -59,12 +59,12 @@ const execute = () => {
             : fnOrObj;
 
           const { _fixture: fixture } = tests;
+          // warming up v8 before we measure
           for (let i = 0; i < COUNT; i += 1) {
             fn(fixtures[fixture]);
           }
           const start = process.hrtime();
           for (let i = 0; i < COUNT; i += 1) {
-            // todo: should spawn separate worker for every two executions and return average
             fn(fixtures[fixture]);
           }
           const stop = process.hrtime(start);
@@ -126,7 +126,7 @@ const execute = () => {
   }
   table.push('');
   Object.entries(footnotes).forEach((([comment, footnoteId]) => {
-    table.push(`<a id="timing_ref_${footnoteId}"><i>[${footnoteId}]</i></a>: ${comment}<br>`);
+    table.push(`<a id="timing_ref_${footnoteId}"><i>[${footnoteId}]</i></a>: _${comment}_<br>`);
   }));
   fs.smartWrite(path.join(fs.dirname(import.meta.url), 'benchmark.md'), table);
 };
