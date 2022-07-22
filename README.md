@@ -40,8 +40,8 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 <details><summary><a href="#1-quickstart"><img alt="Quickstart" src="https://shields.io/badge/1.-Quickstart-106ea1?style=flat-square"></a></summary>
    <a href="#11-install"><img alt="Install" src="https://shields.io/badge/1.1.-Install-c96c01?style=flat-square"></a><br>
    <a href="#12-usage"><img alt="Usage" src="https://shields.io/badge/1.2.-Usage-c96c01?style=flat-square"></a></details>
-  <a href="#2-table-of-content"><img alt="Table of Content" src="https://shields.io/badge/2.-Table%20of%20Content-106ea1?style=flat-square"></a><br>
-  <a href="#3-features"><img alt="Features" src="https://shields.io/badge/3.-Features-106ea1?style=flat-square"></a><br>
+<p>  <a href="#2-table-of-content"><img alt="Table of Content" src="https://shields.io/badge/2.-Table%20of%20Content-106ea1?style=flat-square"></a></p>
+<p>  <a href="#3-features"><img alt="Features" src="https://shields.io/badge/3.-Features-106ea1?style=flat-square"></a></p>
 <details><summary><a href="#4-matching"><img alt="Matching" src="https://shields.io/badge/4.-Matching-106ea1?style=flat-square"></a></summary>
    <a href="#41-array"><img alt="Array" src="https://shields.io/badge/4.1.-Array-c96c01?style=flat-square"></a><br>
    <a href="#42-object"><img alt="Object" src="https://shields.io/badge/4.2.-Object-c96c01?style=flat-square"></a><br>
@@ -65,7 +65,7 @@ objectScan(['a.*.f'], { joined: true })(haystack);
    <a href="#510-joined"><img alt="joined" src="https://shields.io/badge/5.10.-joined-c96c01?style=flat-square"></a><br>
    <a href="#511-usearrayselector"><img alt="useArraySelector" src="https://shields.io/badge/5.11.-useArraySelector-c96c01?style=flat-square"></a><br>
    <a href="#512-strict"><img alt="strict" src="https://shields.io/badge/5.12.-strict-c96c01?style=flat-square"></a></details>
-  <a href="#6-competitors"><img alt="Competitors" src="https://shields.io/badge/6.-Competitors-106ea1?style=flat-square"></a><br>
+<p>  <a href="#6-competitors"><img alt="Competitors" src="https://shields.io/badge/6.-Competitors-106ea1?style=flat-square"></a></p>
 <details><summary><a href="#7-examples"><img alt="Examples" src="https://shields.io/badge/7.-Examples-106ea1?style=flat-square"></a></summary>
    <a href="#71-real-world-uses"><img alt="Real World Uses" src="https://shields.io/badge/7.1.-Real%20World%20Uses-c96c01?style=flat-square"></a><br>
    <a href="#72-other-examples"><img alt="Other Examples" src="https://shields.io/badge/7.2.-Other%20Examples-c96c01?style=flat-square"></a></details>
