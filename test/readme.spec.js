@@ -156,7 +156,7 @@ const injectToc = (input) => {
 
     const slug = slugger.slug(`${number} ${title}`);
     const result = [];
-    const img = `https://shields.io/badge/${number}-${title.replace(/ /g, '%20')}-${color}?style=for-the-badge`;
+    const img = `https://shields.io/badge/${number}-${title.replace(/ /g, '%20')}-${color}?style=flat-square`;
     const text = `<a href="#${slug}"><img alt="${title}" src="${img}"></a>`;
     if (ctx.start) {
       result.push(`<details><summary>${text}</summary>`);
