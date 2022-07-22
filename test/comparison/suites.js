@@ -9,6 +9,7 @@ import wildcard from './suites/wildcard.js';
 import regex from './suites/regex.js';
 import exclusion from './suites/exclusion.js';
 import pathRecursion from './suites/path-recursion.js';
+import autoTraverse from './suites/auto-traverse.js';
 
 export default {
   key,
@@ -21,5 +22,6 @@ export default {
   wildcard,
   regex,
   exclusion,
-  pathRecursion
+  pathRecursion,
+  autoTraverse
 };
