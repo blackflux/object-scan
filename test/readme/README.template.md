@@ -1,23 +1,30 @@
 # Object-Scan
 
 [![Build Status](https://circleci.com/gh/blackflux/object-scan.png?style=shield)](https://circleci.com/gh/blackflux/object-scan)
-[![Test Coverage](https://img.shields.io/coveralls/blackflux/object-scan/master.svg)](https://coveralls.io/github/blackflux/object-scan?branch=master)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=blackflux/object-scan)](https://dependabot.com)
-[![Dependencies](https://david-dm.org/blackflux/object-scan/status.svg)](https://david-dm.org/blackflux/object-scan)
 [![NPM](https://img.shields.io/npm/v/object-scan.svg)](https://www.npmjs.com/package/object-scan)
 [![Downloads](https://img.shields.io/npm/dt/object-scan.svg)](https://www.npmjs.com/package/object-scan)
-[![Semantic-Release](https://github.com/blackflux/js-gardener/blob/master/assets/icons/semver.svg)](https://github.com/semantic-release/semantic-release)
-[![Gardener](https://github.com/blackflux/js-gardener/blob/master/assets/badge.svg)](https://github.com/blackflux/js-gardener)
+${SIZE_BADGE}
 
 Traverse object hierarchies using matching and callbacks.
 
-## Install
+## Quickstart
 
-Install with [npm](https://www.npmjs.com/):
+### Install
 
-    $ npm install --save object-scan
+Using npm:
 
-## Usage
+    $ npm i object-scan
+
+In a browser:
+
+```html
+<script type="module">
+  import objectScan from 'https://cdn.jsdelivr.net/npm/object-scan@<VERSION>/lib/index.min.js';
+  // do logic here
+</script>
+```
+
+### Usage
 
 <pre><example>
 haystack: { a: { b: { c: 'd' }, e: { f: 'g' } } }
@@ -25,29 +32,36 @@ needles: ['a.*.f']
 spoiler: false
 </example></pre>
 
+## Table of Content
+${{TOC}}
+
 ## Features
 
-- Input traversed exactly once during search
-- Dependency free, small in size and very performant
-- Separate Object and Array matching
-- Wildcard and Regex matching
-- Arbitrary depth matching
-- Or-clause Syntax
-- Exclusion Matching
-- Full support for escaping
-- Traversal in "delete-safe" order
-- Recursion free implementation
-- Search syntax validated
-- Lots of tests and examples
+- Input [traversed](#traversal_order) at most once during search
+- Dependency free and [tiny bundle size](https://cdn.jsdelivr.net/npm/object-scan/lib/)
+- Powerful [matching syntax](#matching)
+- Very [performant](#competitors)
+- Extensive [tests](./test) and lots of [examples](#examples)
 
+<a id="matching"></a>
 ## Matching
 
-A needle expression specifies one or more paths to an element (or a set of elements) in a JSON structure. Paths use the dot notation:
+A needle expression specifies one or more paths to an element (or a set of elements) in a JSON structure.
+Paths use the dot notation.
 
 ```txt
 store.book[0].title
 ```
 
+The matching syntax is fully validated and bad input will throw a syntax error. The following syntax is supported:
+- [Array](#array) and [Object](#object) matching
+- [Wildcard](#wildcard) and [Regex](#regex) matching
+- [Or Clause](#or_clause)
+- [Arbitrary Depth](#arbitrary_depth) and [Nested Path Recursion](#nested_path_recursion)
+- [Exclusion](#exclusion)
+- [Escaping](#escaping)
+
+<a id="array"></a>
 ### Array
 
 Rectangular brackets for array path matching.
@@ -64,6 +78,7 @@ needles: ['[1]']
 comment: no match in object
 </example></pre>
 
+<a id="object"></a>
 ### Object
 
 Property name for object property matching.
@@ -80,6 +95,7 @@ needles: ['1']
 comment: no match in array
 </example></pre>
 
+<a id="wildcard"></a>
 ### Wildcard
 
 The following characters have special meaning when not escaped:
@@ -88,9 +104,14 @@ The following characters have special meaning when not escaped:
 - `?`: Match exactly one character
 - `\`: Escape the subsequent character
 
-Wildcards can be used with Array and Object selector.
+Can be used with [Array](#array) and [Object](#object) selector.
 
 _Examples_:
+<pre><example>
+haystack: { foo: 0, foobar: 1, bar: 2 }
+needles: ['foo*']
+comment: starting with `foo`
+</example></pre>
 <pre><example>
 haystack: { a: { b: 0, c: 1 }, d: 2 }
 needles: ['*']
@@ -112,11 +133,12 @@ needles: ['a.\\+.c']
 comment: escaped
 </example></pre>
 
+<a id="regex"></a>
 ### Regex
 
 Regex are defined by using parentheses.
 
-Can be used with Array and Object selector.
+Can be used with [Array](#array) and [Object](#object) selector.
 
 _Examples_:
 <pre><example>
@@ -139,19 +161,35 @@ haystack: ['a', 'b', 'c', 'd']
 needles: ['[(^[^01]$)]']
 comment: other than `[0]` and `[1]`
 </example></pre>
+
+<a id="or_clause"></a>
+### Or Clause
+
+Or Clauses are defined by using curley brackets.
+
+Can be used with [Array](#array) and [Object](#object) selector
+and [Arbitrary Depth](#arbitrary_depth) matching.
+
+_Examples_:
 <pre><example>
 haystack: ['a', 'b', 'c', 'd']
-needles: ['[*]', '[!(^[01]$)]']
-comment: match all and exclude `[0]` and `[1]`
+needles: ['[{0,1}]']
+comment: `[0]` and `[1]`
+</example></pre>
+<pre><example>
+haystack: { a: { b: 0, c: 1 }, d: { e: 2, f: 3 } }
+needles: ['{a,d}.{b,f}']
+comment: `a.b`, `a.f`, `d.b` and `d.f`
 </example></pre>
 
+<a id="arbitrary_depth"></a>
 ### Arbitrary Depth
 
 There are two types of arbitrary depth matching:
 - `**`: Matches zero or more nestings
 - `++`: Matches one or more nestings
 
-Recursions can be combined with a regex or a group by appending the regex or group.
+Can be combined with [Regex](#regex) and [Or Clause](#or_clause) by prepending.
 
 _Examples_:
 <pre><example>
@@ -170,32 +208,15 @@ needles: ['**(1)']
 comment: all containing `1` at every level
 </example></pre>
 
-### Or Clause
-
-Or Clauses are defined by using curley brackets.
-
-Can be used with Array and Object selector.
-
-_Examples_:
-<pre><example>
-haystack: ['a', 'b', 'c', 'd']
-needles: ['[{0,1}]']
-comment: `[0]` and `[1]`
-</example></pre>
-<pre><example>
-haystack: { a: { b: 0, c: 1 }, d: { e: 2, f: 3 } }
-needles: ['{a,d}.{b,f}']
-comment: `a.b`, `a.f`, `d.b` and `d.f`
-</example></pre>
-
+<a id="nested_path_recursion"></a>
 ### Nested Path Recursion
 
 To match a nested path recursively,
-combine arbitrary depth matching with an or-clause.
+combine [Arbitrary Depth](#arbitrary_depth) matching with an [Or Clause](#or_clause).
 
 There are two types of nested path matching:
-- `**{...}`: Matches path(s) in group zero or more times
-- `++{...}`: Matches path(s) in group one or more times
+- `**{...}`: Matches path(s) in [Or Clause](#or_clause) zero or more times
+- `++{...}`: Matches path(s) in [Or Clause](#or_clause) one or more times
 
 _Examples_:
 <pre><example>
@@ -229,6 +250,7 @@ needles: ['a.++{b.c}']
 comment: `one or more times`
 </example></pre>
 
+<a id="exclusion"></a>
 ### Exclusion
 
 To exclude a path, use exclamation mark.
@@ -245,7 +267,13 @@ haystack: { a: 0, b: { a: 1, c: 2 } }
 needles: ['**,!**.a']
 comment: all except ending in `a`
 </example></pre>
+<pre><example>
+haystack: ['a', 'b', 'c', 'd']
+needles: ['[*]', '[!(^[01]$)]']
+comment: exclude with regex
+</example></pre>
 
+<a id="escaping"></a>
 ### Escaping
 
 The following characters are considered special and need to
@@ -261,6 +289,7 @@ comment: special object key
 
 ## Options
 
+<a id="callbacks"></a>
 Signature of all callbacks is
 
     Fn({ key, value, ... })
@@ -301,13 +330,28 @@ where:
 - `getResult`: function that returns `result`
 - `context`: as passed into the search
 
-Notes on Performance:
+_Notes on Performance_
 - Arguments backed by getters use [Functions Getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get)
 and should be accessed via [destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Unpacking_fields_from_objects_passed_as_function_parameter) to prevent redundant computation.
 - Getters should be used to improve performance for conditional access. E.g. `if (isMatch) { getParents() ... }`.
 - For performance reasons, the same object is passed to all callbacks.
 
-#### filterFn
+_Search Context_
+- A context can be passed into a search invocation as a second parameter. It is available in all callbacks
+and can be used to manage state across a search invocation without having to recompile the search.
+- By default all matched keys are returned from a search invocation.
+However, when it is not _undefined_, the context is returned instead.
+
+_Examples_:
+<pre><example>
+haystack: { a: { b: { c: 2, d: 11 }, e: 7 } }
+needles: ['**.{c,d,e}']
+context: { sum: 0 }
+filterFn: ({ value, context }) => { context.sum += value; }
+comment: search context
+</example></pre>
+
+### filterFn
 
 Type: `function`<br>
 Default: `undefined`
@@ -321,6 +365,8 @@ Can be used to do processing as matching keys are traversed.
 
 Invoked in same order as matches would appear in result.
 
+For more information on invocation order, please refer to Section [Traversal Order](#traversal_order).
+
 This method is conceptually similar to
 [Array.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
 
@@ -332,7 +378,7 @@ comment: filter function
 filterFn: ({ value }) => typeof value === 'string'
 </example></pre>
 
-#### breakFn
+### breakFn
 
 Type: `function`<br>
 Default: `undefined`
@@ -343,6 +389,8 @@ skipped in the search and from the final result.
 
 Note that `breakFn` is invoked before the corresponding `filterFn` might be invoked.
 
+For more information on invocation order, please refer to Section [Traversal Order](#traversal_order).
+
 _Examples_:
 <pre><example>
 haystack: { a: { b: { c: 0 } } }
@@ -351,7 +399,7 @@ comment: break function
 breakFn: ({ key }) => key === 'a.b'
 </example></pre>
 
-#### beforeFn
+### beforeFn
 
 Type: `function`<br>
 Default: `undefined`
@@ -384,7 +432,7 @@ beforeFn: ({ haystack: h }) => Object.keys(h)
 rtn: ['key', 'value']
 </example></pre>
 
-#### afterFn
+### afterFn
 
 Type: `function`<br>
 Default: `undefined`
@@ -426,7 +474,7 @@ afterFn: (state) => state.custom
 joined: false
 </example></pre>
 
-#### compareFn
+### compareFn
 
 Type: `function`<br>
 Default: `undefined`
@@ -437,6 +485,8 @@ The returned value is used as a comparator to determine the traversal order of a
 
 This works together with the `reverse` option.
 
+Please refer to Section [Traversal Order](#traversal_order) for more information.
+
 _Examples_:
 <pre><example>
 haystack: { a: 0, c: 1, b: 2 }
@@ -446,15 +496,17 @@ comment: simple sort
 reverse: false
 </example></pre>
 
-#### reverse
+### reverse
 
 Type: `boolean`<br>
 Default: `true`
 
-When set to `true`, the scan is performed in reverse order. This means `breakFn` is executed in _reverse post-order_ and
+When set to `true`, the traversal is performed in reverse order. This means `breakFn` is executed in _reverse post-order_ and
 `filterFn` in _reverse pre-order_. Otherwise `breakFn` is executed in _pre-order_ and `filterFn` in _post-order_.
 
-When `reverse` is `true` the scan is _delete-safe_. I.e. `property` can be deleted / spliced from `parent` object / array in `filterFn`.
+When `reverse` is `true` the traversal is _delete-safe_. I.e. `property` can be deleted / spliced from `parent` object / array in `filterFn`.
+
+Please refer to Section [Traversal Order](#traversal_order) for more information.
 
 _Examples_:
 <pre><example>
@@ -494,7 +546,7 @@ reverse: false
 joined: false
 </example></pre>
 
-#### orderByNeedles
+### orderByNeedles
 
 Type: `boolean`<br>
 Default: `false`
@@ -542,12 +594,12 @@ orderByNeedles: true
 comment: matches traverse first
 </example></pre>
 
-#### abort
+### abort
 
 Type: `boolean`<br>
 Default: `false`
 
-When set to `true` the scan immediately returns after the first match.
+When set to `true` the traversal immediately returns after the first match.
 
 _Examples_:
 <pre><example>
@@ -567,7 +619,7 @@ abort: true
 comment: abort changes count
 </example></pre>
 
-#### rtn
+### rtn
 
 Type: `string` or `array` or `function`<br>
 Default: _dynamic_
@@ -629,7 +681,7 @@ haystack: { a: { b: 0, c: 1 } }
 needles: ['a.b', 'a.c']
 joined: false
 rtn: 'bool'
-comment: checks for any match, full scan
+comment: checks for any match, full traversal
 </example></pre>
 <pre><example>
 haystack: { a: 0 }
@@ -671,7 +723,7 @@ filterFn: ({ value }) => typeof value === 'number'
 comment: return sum
 </example></pre>
 
-#### joined
+### joined
 
 Type: `boolean`<br>
 Default: `false`
@@ -696,7 +748,7 @@ joined: false
 comment: not joined
 </example></pre>
 
-#### useArraySelector
+### useArraySelector
 
 Type: `boolean`<br>
 Default: `true`
@@ -719,7 +771,7 @@ useArraySelector: false
 comment: top level array matching
 </example></pre>
 
-#### strict
+### strict
 
 Type: `boolean`<br>
 Default: `true`
@@ -751,24 +803,31 @@ needles: ['**.!**']
 comment: consecutive recursion
 </example></pre>
 
-### Search Context
+<a id="competitors"></a>
+## Competitors
 
-A context can be passed into a search invocation as a second parameter. It is available in all callbacks
-and can be used to manage state across a search invocation without having to recompile the search.
+This library has a similar syntax and can perform similar tasks
+to [jsonpath](https://www.npmjs.com/package/jsonpath) or [jmespath](https://www.npmjs.com/package/jmespath).
+But instead of querying an object hierarchy, it focuses on traversing it.
+_Hence, it is designed around handling multiple paths in a single traversal._
+No other library with this feature is currently available[*](#report-this).
+While a one-to-one comparison is difficult due to difference in functionality, it can be said that
+in general `object-scan` is more versatile at similar performance.
 
-By default all matched keys are returned from a search invocation.
-However, when it is not _undefined_, the context is returned instead.
+<a id="report-this"><i>[*]</i></a>: _Please open a ticket if you know of any!_
 
-_Examples_:
-<pre><example>
-haystack: { a: { b: { c: 2, d: 11 }, e: 7 } }
-needles: ['**.{c,d,e}']
-context: { sum: 0 }
-filterFn: ({ value, context }) => { context.sum += value; }
-comment: sum values
-</example></pre>
+${CMP_BMK}
 
+<a id="examples"></a>
 ## Examples
+
+### Real World Uses
+
+This library was originally designed and build to power [object-rewrite](https://github.com/blackflux/object-rewrite).
+
+Many other examples can be found on [Stack Overflow](https://stackoverflow.com/search?q=%5Bjavascript%5D+object-scan+user%3A1030413).
+
+### Other Examples
 
 More extensive examples can be found in the tests.
 
@@ -834,7 +893,116 @@ needles: ['**.(^[bc]$)']
 comment: regex matching
 </example></pre>
 
-## Edge Cases
+## Notes
+
+<a id="traversal_order"></a>
+### Traversal Order
+
+The [traversal order](https://en.wikipedia.org/wiki/Tree_traversal) is always depth first.
+However, the order the nodes are traversed in can be changed.
+
+<pre><example>
+haystack: { F: { B: { A: 0, D: { C: 1, E: 2 } }, G: { I: { H: 3 } } } }
+joined: false
+needles: ['**']
+context: []
+filterFn: ({ context, property }) => { context.push(property); }
+comment: Reverse Pre-order
+</example></pre>
+
+<pre><example>
+haystack: { F: { B: { A: 0, D: { C: 1, E: 2 } }, G: { I: { H: 3 } } } }
+joined: false
+needles: ['**']
+context: []
+breakFn: ({ context, property }) => { context.push(property); }
+comment: Reverse Post-order
+</example></pre>
+
+<pre><example>
+haystack: { F: { B: { A: 0, D: { C: 1, E: 2 } }, G: { I: { H: 3 } } } }
+joined: false
+needles: ['**']
+context: []
+reverse: false
+filterFn: ({ context, property }) => { context.push(property); }
+comment: Post-order
+</example></pre>
+
+<pre><example>
+haystack: { F: { B: { A: 0, D: { C: 1, E: 2 } }, G: { I: { H: 3 } } } }
+joined: false
+needles: ['**']
+context: []
+reverse: false
+breakFn: ({ context, property }) => { context.push(property); }
+comment: Pre-order
+</example></pre>
+
+Note that the default traversal order is _delete-safe_. This means that elements from
+Arrays can be deleted without impacting the traversal.
+
+<pre><example>
+haystack: [0, 1, 2, 3, 4, 5]
+joined: false
+needles: ['**']
+afterFn: ({ haystack: h }) => h
+filterFn: ({ parent, property }) => { parent.splice(property, property % 2); }
+comment: Deleting from Array
+</example></pre>
+
+This is not true when the `reverse` option is set to `false`
+
+<pre><example>
+haystack: [0, 1, 2, 3, 4, 5]
+joined: false
+reverse: false
+needles: ['**']
+afterFn: ({ haystack: h }) => h
+filterFn: ({ parent, property }) => { parent.splice(property, property % 2); }
+comment: Deleting from Array Unexpected
+</example></pre>
+
+By default, the traversal order depends on the haystack _input order_ and the `reverse` option for the direction.
+However, this _input order_ can be altered by using `compareFn` and `orderByNeedles`.
+
+<pre><example>
+haystack: { b: 0, a: 1, c: 2 }
+joined: false
+needles: ['c', 'b', 'a']
+context: []
+orderByNeedles: true
+filterFn: ({ context, property }) => { context.push(property); }
+comment: orderByNeedles
+</example></pre>
+
+<pre><example>
+haystack: { b: 0, a: 1, c: 2 }
+joined: false
+needles: ['**']
+context: []
+compareFn: () => (a, b) => b.localeCompare(a)
+filterFn: ({ context, property }) => { context.push(property); }
+comment: compareFn
+</example></pre>
+
+Note that `compareFn` does not work on Arrays.
+
+Both options can be combined, in which case `orderByNeedles` supersedes `compareFn`
+
+<pre><example>
+haystack: { a: 0, b: 1, c: 2 }
+joined: false
+needles: ['c', '*']
+orderByNeedles: true
+context: []
+compareFn: () => (a, b) => b.localeCompare(a)
+filterFn: ({ context, property }) => { context.push(property); }
+comment: orderByNeedles and compareFn
+</example></pre>
+
+
+### Edge Cases
 
 Top level object(s) are matched by the empty needle `''`. This is useful for matching objects nested in arrays by setting `useArraySelector` to `false`.
 To match the actual empty string as a key, use `(^$)`.
@@ -867,7 +1035,17 @@ useArraySelector: false
 comment: star recursion matches roots
 </example></pre>
 
-## Internals
+### Internals
+
+This library has been designed around performance as a core feature.
+
+The implementation is completely recursion free. This allows
+for traversal of deeply nested objects where a recursive approach
+would fail with a `Maximum call stack size exceeded` error.
+
+The search is pre-computes, which makes applying the same search multiple times very performant.
+
+Traversal happens depth-first, which allows for lower memory consumption.
 
 Conceptually this package works as follows:
 

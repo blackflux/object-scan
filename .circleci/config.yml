@@ -120,11 +120,6 @@ jobs:
       - run: >-
           (git add . && git diff-index --quiet HEAD --) || (git status && exit
           1);
-      - run:
-          command: |
-            if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
-              yarn run coveralls
-            fi
   test-node-v16:
     docker:
       - image: circleci/node:16
