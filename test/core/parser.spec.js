@@ -18,9 +18,6 @@ const asString = (() => {
         input.or ? '}' : ']'
       ].join('');
     }
-    if (input instanceof Set) {
-      return `{${[...input].map((e) => asStringRec(e, ctx)).join(',')}}`;
-    }
     if (input instanceof Ref) {
       let refId = ctx.refs.get(input) || ctx.refs.get(input.link);
       if (refId === undefined) {
