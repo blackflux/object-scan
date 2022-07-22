@@ -141,30 +141,29 @@ const injectToc = (input) => {
   }
 
   for (let i = 0; i < toc.length; i += 1) {
-    if (toc[i][0] === 0) {
-      toc[i][3].end = toc[i - 1]?.[0] === 1;
-      toc[i][3].start = toc[i + 1]?.[0] === 1;
-    }
+    const cur = toc[i][0];
+    const next = toc[i + 1]?.[0] || 0;
+    toc[i][3].start = cur === 0 && next === 1;
+    toc[i][3].end = cur === 1 && next === 0;
   }
 
   const slugger = new Slugger();
   for (let i = 0; i < toc.length;) {
     const [type, number, title, ctx] = toc[i];
     const color = `${['#106ea1', '#c96c01'][type].slice(1)}`;
+    const indent = ` `.repeat(type);
 
     const slug = slugger.slug(`${number} ${title}`);
     const result = [];
-    if (ctx.end) {
-      result.push('</details>');
-      result.push('');
-    }
     const img = `https://shields.io/badge/${number}-${title.replace(/ /g, '%20')}-${color}?style=flat-square`;
     const text = `<a href="#${slug}"><img alt="${title}" src="${img}"></a>`;
     if (ctx.start) {
       result.push(`<details><summary>${text}</summary>`);
+    } else if (ctx.end) {
+      result.push(`${indent}  ${text}</details>`);
     } else {
       // eslint-disable-next-line no-irregular-whitespace
-      result.push(`  ${text}<br>`);
+      result.push(`${indent}  ${text}<br>`);
     }
     toc.splice(i, 1, ...result);
     i += result.length;
