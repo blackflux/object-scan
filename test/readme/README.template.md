@@ -41,7 +41,7 @@ ${{TOC}}
 - Dependency free and [tiny bundle size](https://cdn.jsdelivr.net/npm/object-scan/lib/)
 - Powerful [matching syntax](#matching)
 - Very [performant](#competitors)
-- Extensive [tests](./test) and lots of [examples](#real_world_uses)
+- Extensive [tests](./test) and lots of [examples](#examples)
 
 <a id="matching"></a>
 ## Matching
@@ -813,9 +813,9 @@ in general `object-scan` is more versatile at similar performance.
 
 ${CMP_BMK}
 
+<a id="examples"></a>
 ## Examples
 
-<a id="real_world_uses"></a>
 ### Real World Uses
 
 This library was originally designed and build to power [object-rewrite](https://github.com/blackflux/object-rewrite).

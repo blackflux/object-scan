@@ -80,7 +80,7 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 - Dependency free and [tiny bundle size](https://cdn.jsdelivr.net/npm/object-scan/lib/)
 - Powerful [matching syntax](#matching)
 - Very [performant](#competitors)
-- Extensive [tests](./test) and lots of [examples](#real_world_uses)
+- Extensive [tests](./test) and lots of [examples](#examples)
 
 <a id="matching"></a>
 ## 4. Matching
@@ -1131,9 +1131,9 @@ in general `object-scan` is more versatile at similar performance.
 <a id="timing_ref_6"><i>[6]</i></a>: _Usefulness limited since context is lacking_<br>
 <a id="timing_ref_7"><i>[7]</i></a>: _[Reference](https://stackoverflow.com/questions/55497833/jsonpath-union-of-multiple-different-paths)_<br>
 
+<a id="examples"></a>
 ## 7. Examples
 
-<a id="real_world_uses"></a>
 ### 7.1. Real World Uses
 
 This library was originally designed and build to power [object-rewrite](https://github.com/blackflux/object-rewrite).
