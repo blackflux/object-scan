@@ -150,13 +150,14 @@ const injectToc = (input) => {
   const slugger = new Slugger();
   for (let i = 0; i < toc.length;) {
     const [type, number, title, ctx] = toc[i];
-    const color = `${['#106ea1', '#c96c01'][type].slice(1)}`;
+    const color = ['#278ec5', '#c96c01'][type].slice(1);
+    const style = ['for-the-badge', 'flat-square'][type];
     const space = ' ';
     const indent = space.repeat(type);
 
     const slug = slugger.slug(`${number} ${title}`);
     const result = [];
-    const img = `https://shields.io/badge/${number}-${title.replace(/ /g, '%20')}-${color}?style=flat-square`;
+    const img = `https://shields.io/badge/${number}-${title.replace(/ /g, '%20')}-${color}?style=${style}`;
     const text = `<a href="#${slug}"><img alt="${title}" src="${img}"></a>`;
     if (ctx.start) {
       result.push(`<details><summary>${text}</summary>`);
