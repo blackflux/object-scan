@@ -162,9 +162,12 @@ const injectToc = (input) => {
     const text = `<a href="#${slug}"><img alt="${title}" src="${img}"></a>`;
     if (ctx.start) {
       result.push(`<details><summary>${text}</summary>`);
+    } else if (type === 0) {
+      // eslint-disable-next-line no-irregular-whitespace
+      result.push(`  ${text}<br>`);
     } else {
       // eslint-disable-next-line no-irregular-whitespace
-      result.push(`  ${text}`);
+      result.push(`<summary>  ${text}</summary>`);
     }
     toc.splice(i, 1, ...result);
     i += result.length;
