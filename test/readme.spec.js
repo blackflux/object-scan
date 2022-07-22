@@ -164,7 +164,7 @@ const injectToc = (input) => {
       result.push(`<details><summary>${text}</summary>`);
     } else {
       // eslint-disable-next-line no-irregular-whitespace
-      result.push(`<summary>  ${text}</summary>`);
+      result.push(`  ${text}`);
     }
     toc.splice(i, 1, ...result);
     i += result.length;
