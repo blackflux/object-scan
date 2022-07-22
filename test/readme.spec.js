@@ -150,9 +150,8 @@ const injectToc = (input) => {
   const slugger = new Slugger();
   for (let i = 0; i < toc.length;) {
     const [type, number, title, ctx] = toc[i];
-    const indent = '    '.repeat(type);
-    const prefix = `${indent}${['', ''][type]}`;
-    const postfix = `${['', '<br>'][type]}`;
+    const indent = ' '.repeat(type);
+    const color = `${['#106ea1', '#c96c01'][type].slice(1)}`;
 
     const slug = slugger.slug(`${number} ${title}`);
     const result = [];
@@ -160,10 +159,13 @@ const injectToc = (input) => {
       result.push('</details>');
       result.push('');
     }
+    const img = `https://shields.io/badge/${number}-${title.replace(/ /g, '%20')}-${color}?style=flat-square`;
+    const text = `${indent}<a href="#${slug}"><img alt="${title}" src="${img}"></a>`;
     if (ctx.start) {
-      result.push(`${prefix} ${number} [${title}](#${slug}) <details><summary>_expand_</summary>${postfix}`);
+      result.push(`<details><summary>${text}</summary>`);
     } else {
-      result.push(`${prefix} ${number} [${title}](#${slug})${postfix}`);
+      // eslint-disable-next-line no-irregular-whitespace
+      result.push(`<summary>  ${text}</summary>`);
     }
     toc.splice(i, 1, ...result);
     i += result.length;
