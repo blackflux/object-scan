@@ -7,7 +7,9 @@ ${SIZE_BADGE}
 
 Traverse object hierarchies using matching and callbacks.
 
-## Install
+## Quickstart
+
+### Install
 
 Using npm:
 
@@ -22,7 +24,7 @@ In a browser:
 </script>
 ```
 
-## Usage
+### Usage
 
 <pre><example>
 haystack: { a: { b: { c: 'd' }, e: { f: 'g' } } }
@@ -30,16 +32,16 @@ needles: ['a.*.f']
 spoiler: false
 </example></pre>
 
+## Table of Content
+${{TOC}}
+
 ## Features
 
 - Input [traversed](#traversal_order) at most once during search
 - Dependency free and [tiny bundle size](https://cdn.jsdelivr.net/npm/object-scan/lib/)
 - Powerful [matching syntax](#matching)
-- Very [performant](#jsonpath)
+- Very [performant](#competitors)
 - Extensive [tests](./test) and lots of [examples](#real_world_uses)
-
-## TOC
-${{TOC}}
 
 <a id="matching"></a>
 ## Matching
@@ -323,11 +325,26 @@ where:
 - `getResult`: function that returns `result`
 - `context`: as passed into the search
 
-Notes on Performance:
+_Notes on Performance_
 - Arguments backed by getters use [Functions Getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get)
 and should be accessed via [destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Unpacking_fields_from_objects_passed_as_function_parameter) to prevent redundant computation.
 - Getters should be used to improve performance for conditional access. E.g. `if (isMatch) { getParents() ... }`.
 - For performance reasons, the same object is passed to all callbacks.
+
+_Search Context_
+- A context can be passed into a search invocation as a second parameter. It is available in all callbacks
+and can be used to manage state across a search invocation without having to recompile the search.
+- By default all matched keys are returned from a search invocation.
+However, when it is not _undefined_, the context is returned instead.
+
+_Examples_:
+<pre><example>
+haystack: { a: { b: { c: 2, d: 11 }, e: 7 } }
+needles: ['**.{c,d,e}']
+context: { sum: 0 }
+filterFn: ({ value, context }) => { context.sum += value; }
+comment: search context
+</example></pre>
 
 ### filterFn
 
@@ -781,25 +798,100 @@ needles: ['**.!**']
 comment: consecutive recursion
 </example></pre>
 
-## Search Context
+<a id="competitors"></a>
+## Competitors
 
-A context can be passed into a search invocation as a second parameter. It is available in all callbacks
-and can be used to manage state across a search invocation without having to recompile the search.
+This library has a similar syntax and can perform similar tasks
+to [jsonpath](https://www.npmjs.com/package/jsonpath) or [jmespath](https://www.npmjs.com/package/jmespath).
+But instead of querying an object hierarchy, it focuses on traversing it.
+_Hence, it is designed around handling multiple paths in a single traversal._
+No other library with this feature is currently available[*](#report-this).
+While a one-to-one comparison is difficult due to difference in functionality, it can be said that
+in general `object-scan` is more versatile at similar performance.
 
-By default all matched keys are returned from a search invocation.
-However, when it is not _undefined_, the context is returned instead.
+<a id="report-this"><i>[*]</i></a>: _Please open a ticket if you know of any!_
 
-_Examples_:
+${CMP_BMK}
+
+## Examples
+
+<a id="real_world_uses"></a>
+### Real World Uses
+
+This library was originally designed and build to power [object-rewrite](https://github.com/blackflux/object-rewrite).
+
+Many other examples can be found on [Stack Overflow](https://stackoverflow.com/search?q=%5Bjavascript%5D+object-scan+user%3A1030413).
+
+### Other Examples
+
+More extensive examples can be found in the tests.
+
 <pre><example>
-haystack: { a: { b: { c: 2, d: 11 }, e: 7 } }
-needles: ['**.{c,d,e}']
-context: { sum: 0 }
-filterFn: ({ value, context }) => { context.sum += value; }
-comment: sum values
+haystack: { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' }
+needles: ['a.*.f']
+comment: nested
 </example></pre>
 
+<pre><example>
+needles: ['*.*.*']
+comment: multiple nested
+</example></pre>
+
+<pre><example>
+needles: ['a.*.{c,f}']
+comment: or filter
+</example></pre>
+
+<pre><example>
+needles: ['a.*.{c,f}']
+comment: or filter, not joined
+joined: false
+</example></pre>
+
+<pre><example>
+needles: ['*.*[*]']
+comment: list filter
+</example></pre>
+
+<pre><example>
+needles: ['*[*]']
+comment: list filter, unmatched
+</example></pre>
+
+<pre><example>
+needles: ['**']
+comment: star recursion
+</example></pre>
+
+<pre><example>
+needles: ['++.++']
+comment: plus recursion
+</example></pre>
+
+<pre><example>
+needles: ['**.f']
+comment: star recursion ending in f
+</example></pre>
+
+<pre><example>
+needles: ['**[*]']
+comment: star recursion ending in array
+</example></pre>
+
+<pre><example>
+needles: ['a.*,!a.e']
+comment: exclusion filter
+</example></pre>
+
+<pre><example>
+needles: ['**.(^[bc]$)']
+comment: regex matching
+</example></pre>
+
+## Notes
+
 <a id="traversal_order"></a>
-## Traversal Order
+### Traversal Order
 
 The [traversal order](https://en.wikipedia.org/wiki/Tree_traversal) is always depth first.
 However, the order the nodes are traversed in can be changed.
@@ -904,94 +996,8 @@ filterFn: ({ context, property }) => { context.push(property); }
 comment: orderByNeedles and compareFn
 </example></pre>
 
-<a id="jsonpath"></a>
-## JSONPath and others
 
-This library has a similar syntax and can perform similar tasks
-to [jsonpath](https://www.npmjs.com/package/jsonpath) or [jmespath](https://www.npmjs.com/package/jmespath).
-But instead of querying an object hierarchy, it focuses on traversing it.
-This means there are some significant differences.
-
-Performance is comparable or better than other libraries, where functionality aligns.
-However, a one to one comparison is not possible due to difference in functionality.
-In general `object-scan` is more versatile than other similar libraries.
-
-${CMP_BMK}
-
-<a id="real_world_uses"></a>
-## Real World Uses
-
-This library was originally designed and build to power [object-rewrite](https://github.com/blackflux/object-rewrite).
-
-Many other examples can be found on [Stack Overflow](https://stackoverflow.com/search?q=%5Bjavascript%5D+object-scan+user%3A1030413).
-
-## Other Examples
-
-More extensive examples can be found in the tests.
-
-<pre><example>
-haystack: { a: { b: { c: 'd' }, e: { f: 'g' }, h: ['i', 'j'] }, k: 'l' }
-needles: ['a.*.f']
-comment: nested
-</example></pre>
-
-<pre><example>
-needles: ['*.*.*']
-comment: multiple nested
-</example></pre>
-
-<pre><example>
-needles: ['a.*.{c,f}']
-comment: or filter
-</example></pre>
-
-<pre><example>
-needles: ['a.*.{c,f}']
-comment: or filter, not joined
-joined: false
-</example></pre>
-
-<pre><example>
-needles: ['*.*[*]']
-comment: list filter
-</example></pre>
-
-<pre><example>
-needles: ['*[*]']
-comment: list filter, unmatched
-</example></pre>
-
-<pre><example>
-needles: ['**']
-comment: star recursion
-</example></pre>
-
-<pre><example>
-needles: ['++.++']
-comment: plus recursion
-</example></pre>
-
-<pre><example>
-needles: ['**.f']
-comment: star recursion ending in f
-</example></pre>
-
-<pre><example>
-needles: ['**[*]']
-comment: star recursion ending in array
-</example></pre>
-
-<pre><example>
-needles: ['a.*,!a.e']
-comment: exclusion filter
-</example></pre>
-
-<pre><example>
-needles: ['**.(^[bc]$)']
-comment: regex matching
-</example></pre>
-
-## Edge Cases
+### Edge Cases
 
 Top level object(s) are matched by the empty needle `''`. This is useful for matching objects nested in arrays by setting `useArraySelector` to `false`.
 To match the actual empty string as a key, use `(^$)`.
@@ -1024,7 +1030,7 @@ useArraySelector: false
 comment: star recursion matches roots
 </example></pre>
 
-## Internals
+### Internals
 
 This library has been designed around performance as a core feature.
 
