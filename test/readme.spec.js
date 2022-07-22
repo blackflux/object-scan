@@ -150,7 +150,7 @@ const injectToc = (input) => {
   const slugger = new Slugger();
   for (let i = 0; i < toc.length;) {
     const [type, number, title, ctx] = toc[i];
-    const color = ['#278ec5', '#c96c01'][type].slice(1);
+    const color = ['#1179b0', '#c96c01'][type].slice(1);
     const style = ['for-the-badge', 'flat-square'][type];
     const space = ' ';
     const indent = space.repeat(type);
