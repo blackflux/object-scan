@@ -243,15 +243,6 @@ objectScan(['[(^[^01]$)]'], { joined: true })(haystack);
 // => [ '[3]', '[2]' ]
 ```
 </details>
-<details><summary> <code>['[*]', '[!(^[01]$)]']</code> <em>(match all and exclude `[0]` and `[1]`)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = ['a', 'b', 'c', 'd'];
-objectScan(['[*]', '[!(^[01]$)]'], { joined: true })(haystack);
-// => [ '[3]', '[2]' ]
-```
-</details>
 
 <a id="or_clause"></a>
 ### 4.5. Or Clause
@@ -410,6 +401,15 @@ objectScan(['{a,b},!a'], {
 const haystack = { a: 0, b: { a: 1, c: 2 } };
 objectScan(['**,!**.a'], { joined: true })(haystack);
 // => [ 'b.c', 'b' ]
+```
+</details>
+<details><summary> <code>['[*]', '[!(^[01]$)]']</code> <em>(exclude with regex)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = ['a', 'b', 'c', 'd'];
+objectScan(['[*]', '[!(^[01]$)]'], { joined: true })(haystack);
+// => [ '[3]', '[2]' ]
 ```
 </details>
 

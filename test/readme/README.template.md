@@ -156,11 +156,6 @@ haystack: ['a', 'b', 'c', 'd']
 needles: ['[(^[^01]$)]']
 comment: other than `[0]` and `[1]`
 </example></pre>
-<pre><example>
-haystack: ['a', 'b', 'c', 'd']
-needles: ['[*]', '[!(^[01]$)]']
-comment: match all and exclude `[0]` and `[1]`
-</example></pre>
 
 <a id="or_clause"></a>
 ### Or Clause
@@ -266,6 +261,11 @@ strict: false
 haystack: { a: 0, b: { a: 1, c: 2 } }
 needles: ['**,!**.a']
 comment: all except ending in `a`
+</example></pre>
+<pre><example>
+haystack: ['a', 'b', 'c', 'd']
+needles: ['[*]', '[!(^[01]$)]']
+comment: exclude with regex
 </example></pre>
 
 <a id="escaping"></a>
