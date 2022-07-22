@@ -3,7 +3,7 @@ import jmespath from 'jmespath';
 import { JSONPath } from 'jsonpath-plus';
 import objectScan from '../../../src/index.js';
 
-const commentObjectScan = ' Only in code logic';
+const commentObjectScan = 'Only in code logic';
 
 export default {
   _name: 'Conditional Path',

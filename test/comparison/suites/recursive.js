@@ -3,10 +3,10 @@ import { JSONPath } from 'jsonpath-plus';
 import objectScan from '../../../src/index.js';
 
 const commentObjectScan = [
-  ' [Depth-first](https://en.wikipedia.org/wiki/Tree_traversal#Depth-first_search) traversal.',
+  '[Depth-first](https://en.wikipedia.org/wiki/Tree_traversal#Depth-first_search) traversal.',
   'See [here](#traversal_order) for details'
 ].join(' ');
-const commentJsonPath = ' [Custom depth-first](https://cs.stackexchange.com/questions/99440) traversal';
+const commentJsonPath = '[Custom depth-first](https://cs.stackexchange.com/questions/99440) traversal';
 
 export default {
   _name: 'Recursive Traversal',
