@@ -37,42 +37,42 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 
 
 ## 2. Table of Content
-<details><summary><a href="#1-quickstart"><img alt="Quickstart" src="https://shields.io/badge/1.-Quickstart-106ea1?style=flat-square"></a></summary>
-   <a href="#11-install"><img alt="Install" src="https://shields.io/badge/1.1.-Install-c96c01?style=flat-square"></a><br>
-   <a href="#12-usage"><img alt="Usage" src="https://shields.io/badge/1.2.-Usage-c96c01?style=flat-square"></a></details>
-<p>  <a href="#2-table-of-content"><img alt="Table of Content" src="https://shields.io/badge/2.-Table%20of%20Content-106ea1?style=flat-square"></a></p>
-<p>  <a href="#3-features"><img alt="Features" src="https://shields.io/badge/3.-Features-106ea1?style=flat-square"></a></p>
-<details><summary><a href="#4-matching"><img alt="Matching" src="https://shields.io/badge/4.-Matching-106ea1?style=flat-square"></a></summary>
-   <a href="#41-array"><img alt="Array" src="https://shields.io/badge/4.1.-Array-c96c01?style=flat-square"></a><br>
-   <a href="#42-object"><img alt="Object" src="https://shields.io/badge/4.2.-Object-c96c01?style=flat-square"></a><br>
-   <a href="#43-wildcard"><img alt="Wildcard" src="https://shields.io/badge/4.3.-Wildcard-c96c01?style=flat-square"></a><br>
-   <a href="#44-regex"><img alt="Regex" src="https://shields.io/badge/4.4.-Regex-c96c01?style=flat-square"></a><br>
-   <a href="#45-or-clause"><img alt="Or Clause" src="https://shields.io/badge/4.5.-Or%20Clause-c96c01?style=flat-square"></a><br>
-   <a href="#46-arbitrary-depth"><img alt="Arbitrary Depth" src="https://shields.io/badge/4.6.-Arbitrary%20Depth-c96c01?style=flat-square"></a><br>
-   <a href="#47-nested-path-recursion"><img alt="Nested Path Recursion" src="https://shields.io/badge/4.7.-Nested%20Path%20Recursion-c96c01?style=flat-square"></a><br>
-   <a href="#48-exclusion"><img alt="Exclusion" src="https://shields.io/badge/4.8.-Exclusion-c96c01?style=flat-square"></a><br>
-   <a href="#49-escaping"><img alt="Escaping" src="https://shields.io/badge/4.9.-Escaping-c96c01?style=flat-square"></a></details>
-<details><summary><a href="#5-options"><img alt="Options" src="https://shields.io/badge/5.-Options-106ea1?style=flat-square"></a></summary>
-   <a href="#51-filterfn"><img alt="filterFn" src="https://shields.io/badge/5.1.-filterFn-c96c01?style=flat-square"></a><br>
-   <a href="#52-breakfn"><img alt="breakFn" src="https://shields.io/badge/5.2.-breakFn-c96c01?style=flat-square"></a><br>
-   <a href="#53-beforefn"><img alt="beforeFn" src="https://shields.io/badge/5.3.-beforeFn-c96c01?style=flat-square"></a><br>
-   <a href="#54-afterfn"><img alt="afterFn" src="https://shields.io/badge/5.4.-afterFn-c96c01?style=flat-square"></a><br>
-   <a href="#55-comparefn"><img alt="compareFn" src="https://shields.io/badge/5.5.-compareFn-c96c01?style=flat-square"></a><br>
-   <a href="#56-reverse"><img alt="reverse" src="https://shields.io/badge/5.6.-reverse-c96c01?style=flat-square"></a><br>
-   <a href="#57-orderbyneedles"><img alt="orderByNeedles" src="https://shields.io/badge/5.7.-orderByNeedles-c96c01?style=flat-square"></a><br>
-   <a href="#58-abort"><img alt="abort" src="https://shields.io/badge/5.8.-abort-c96c01?style=flat-square"></a><br>
-   <a href="#59-rtn"><img alt="rtn" src="https://shields.io/badge/5.9.-rtn-c96c01?style=flat-square"></a><br>
-   <a href="#510-joined"><img alt="joined" src="https://shields.io/badge/5.10.-joined-c96c01?style=flat-square"></a><br>
-   <a href="#511-usearrayselector"><img alt="useArraySelector" src="https://shields.io/badge/5.11.-useArraySelector-c96c01?style=flat-square"></a><br>
-   <a href="#512-strict"><img alt="strict" src="https://shields.io/badge/5.12.-strict-c96c01?style=flat-square"></a></details>
-<p>  <a href="#6-competitors"><img alt="Competitors" src="https://shields.io/badge/6.-Competitors-106ea1?style=flat-square"></a></p>
-<details><summary><a href="#7-examples"><img alt="Examples" src="https://shields.io/badge/7.-Examples-106ea1?style=flat-square"></a></summary>
-   <a href="#71-real-world-uses"><img alt="Real World Uses" src="https://shields.io/badge/7.1.-Real%20World%20Uses-c96c01?style=flat-square"></a><br>
-   <a href="#72-other-examples"><img alt="Other Examples" src="https://shields.io/badge/7.2.-Other%20Examples-c96c01?style=flat-square"></a></details>
-<details><summary><a href="#8-notes"><img alt="Notes" src="https://shields.io/badge/8.-Notes-106ea1?style=flat-square"></a></summary>
-   <a href="#81-traversal-order"><img alt="Traversal Order" src="https://shields.io/badge/8.1.-Traversal%20Order-c96c01?style=flat-square"></a><br>
-   <a href="#82-edge-cases"><img alt="Edge Cases" src="https://shields.io/badge/8.2.-Edge%20Cases-c96c01?style=flat-square"></a><br>
-   <a href="#83-internals"><img alt="Internals" src="https://shields.io/badge/8.3.-Internals-c96c01?style=flat-square"></a></details>
+<details><summary><a href="#1-quickstart"><img alt="Quickstart" src="https://shields.io/badge/1.-Quickstart-106ea1?style=for-the-badge"></a></summary>
+   <a href="#11-install"><img alt="Install" src="https://shields.io/badge/1.1.-Install-c96c01?style=for-the-badge"></a><br>
+   <a href="#12-usage"><img alt="Usage" src="https://shields.io/badge/1.2.-Usage-c96c01?style=for-the-badge"></a></details>
+<p>  <a href="#2-table-of-content"><img alt="Table of Content" src="https://shields.io/badge/2.-Table%20of%20Content-106ea1?style=for-the-badge"></a></p>
+<p>  <a href="#3-features"><img alt="Features" src="https://shields.io/badge/3.-Features-106ea1?style=for-the-badge"></a></p>
+<details><summary><a href="#4-matching"><img alt="Matching" src="https://shields.io/badge/4.-Matching-106ea1?style=for-the-badge"></a></summary>
+   <a href="#41-array"><img alt="Array" src="https://shields.io/badge/4.1.-Array-c96c01?style=for-the-badge"></a><br>
+   <a href="#42-object"><img alt="Object" src="https://shields.io/badge/4.2.-Object-c96c01?style=for-the-badge"></a><br>
+   <a href="#43-wildcard"><img alt="Wildcard" src="https://shields.io/badge/4.3.-Wildcard-c96c01?style=for-the-badge"></a><br>
+   <a href="#44-regex"><img alt="Regex" src="https://shields.io/badge/4.4.-Regex-c96c01?style=for-the-badge"></a><br>
+   <a href="#45-or-clause"><img alt="Or Clause" src="https://shields.io/badge/4.5.-Or%20Clause-c96c01?style=for-the-badge"></a><br>
+   <a href="#46-arbitrary-depth"><img alt="Arbitrary Depth" src="https://shields.io/badge/4.6.-Arbitrary%20Depth-c96c01?style=for-the-badge"></a><br>
+   <a href="#47-nested-path-recursion"><img alt="Nested Path Recursion" src="https://shields.io/badge/4.7.-Nested%20Path%20Recursion-c96c01?style=for-the-badge"></a><br>
+   <a href="#48-exclusion"><img alt="Exclusion" src="https://shields.io/badge/4.8.-Exclusion-c96c01?style=for-the-badge"></a><br>
+   <a href="#49-escaping"><img alt="Escaping" src="https://shields.io/badge/4.9.-Escaping-c96c01?style=for-the-badge"></a></details>
+<details><summary><a href="#5-options"><img alt="Options" src="https://shields.io/badge/5.-Options-106ea1?style=for-the-badge"></a></summary>
+   <a href="#51-filterfn"><img alt="filterFn" src="https://shields.io/badge/5.1.-filterFn-c96c01?style=for-the-badge"></a><br>
+   <a href="#52-breakfn"><img alt="breakFn" src="https://shields.io/badge/5.2.-breakFn-c96c01?style=for-the-badge"></a><br>
+   <a href="#53-beforefn"><img alt="beforeFn" src="https://shields.io/badge/5.3.-beforeFn-c96c01?style=for-the-badge"></a><br>
+   <a href="#54-afterfn"><img alt="afterFn" src="https://shields.io/badge/5.4.-afterFn-c96c01?style=for-the-badge"></a><br>
+   <a href="#55-comparefn"><img alt="compareFn" src="https://shields.io/badge/5.5.-compareFn-c96c01?style=for-the-badge"></a><br>
+   <a href="#56-reverse"><img alt="reverse" src="https://shields.io/badge/5.6.-reverse-c96c01?style=for-the-badge"></a><br>
+   <a href="#57-orderbyneedles"><img alt="orderByNeedles" src="https://shields.io/badge/5.7.-orderByNeedles-c96c01?style=for-the-badge"></a><br>
+   <a href="#58-abort"><img alt="abort" src="https://shields.io/badge/5.8.-abort-c96c01?style=for-the-badge"></a><br>
+   <a href="#59-rtn"><img alt="rtn" src="https://shields.io/badge/5.9.-rtn-c96c01?style=for-the-badge"></a><br>
+   <a href="#510-joined"><img alt="joined" src="https://shields.io/badge/5.10.-joined-c96c01?style=for-the-badge"></a><br>
+   <a href="#511-usearrayselector"><img alt="useArraySelector" src="https://shields.io/badge/5.11.-useArraySelector-c96c01?style=for-the-badge"></a><br>
+   <a href="#512-strict"><img alt="strict" src="https://shields.io/badge/5.12.-strict-c96c01?style=for-the-badge"></a></details>
+<p>  <a href="#6-competitors"><img alt="Competitors" src="https://shields.io/badge/6.-Competitors-106ea1?style=for-the-badge"></a></p>
+<details><summary><a href="#7-examples"><img alt="Examples" src="https://shields.io/badge/7.-Examples-106ea1?style=for-the-badge"></a></summary>
+   <a href="#71-real-world-uses"><img alt="Real World Uses" src="https://shields.io/badge/7.1.-Real%20World%20Uses-c96c01?style=for-the-badge"></a><br>
+   <a href="#72-other-examples"><img alt="Other Examples" src="https://shields.io/badge/7.2.-Other%20Examples-c96c01?style=for-the-badge"></a></details>
+<details><summary><a href="#8-notes"><img alt="Notes" src="https://shields.io/badge/8.-Notes-106ea1?style=for-the-badge"></a></summary>
+   <a href="#81-traversal-order"><img alt="Traversal Order" src="https://shields.io/badge/8.1.-Traversal%20Order-c96c01?style=for-the-badge"></a><br>
+   <a href="#82-edge-cases"><img alt="Edge Cases" src="https://shields.io/badge/8.2.-Edge%20Cases-c96c01?style=for-the-badge"></a><br>
+   <a href="#83-internals"><img alt="Internals" src="https://shields.io/badge/8.3.-Internals-c96c01?style=for-the-badge"></a></details>
 
 ## 3. Features
 
