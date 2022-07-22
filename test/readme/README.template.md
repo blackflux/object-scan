@@ -108,6 +108,11 @@ Can be used with [Array](#array) and [Object](#object) selector.
 
 _Examples_:
 <pre><example>
+haystack: { foo: 0, foobar: 1, bar: 2 }
+needles: ['foo*']
+comment: starting with `foo`
+</example></pre>
+<pre><example>
 haystack: { a: { b: 0, c: 1 }, d: 2 }
 needles: ['*']
 comment: top level

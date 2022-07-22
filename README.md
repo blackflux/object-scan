@@ -162,6 +162,15 @@ The following characters have special meaning when not escaped:
 Can be used with [Array](#array) and [Object](#object) selector.
 
 _Examples_:
+<details><summary> <code>['foo*']</code> <em>(starting with `foo`)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { foo: 0, foobar: 1, bar: 2 };
+objectScan(['foo*'], { joined: true })(haystack);
+// => [ 'foobar', 'foo' ]
+```
+</details>
 <details><summary> <code>['*']</code> <em>(top level)</em> </summary>
 
 <!-- eslint-disable no-undef -->
