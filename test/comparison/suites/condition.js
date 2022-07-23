@@ -8,17 +8,15 @@ const commentObjectScan = 'Only in code logic';
 export default {
   _name: 'Conditional Path',
   _fixture: 'cond',
-  _comments: {
-    objectScanCompiled: commentObjectScan,
-    objectScan: commentObjectScan
-  },
   objectScanCompiled: {
+    comment: commentObjectScan,
     fn: objectScan(['*[*].y'], {
       breakFn: ({ depth, value }) => depth === 2 && value?.x !== 'yes'
     }),
     result: [['a', 0, 'y']]
   },
   objectScan: {
+    comment: commentObjectScan,
     fn: (v) => objectScan(['*[*].y'], {
       breakFn: ({ depth, value }) => depth === 2 && value?.x !== 'yes'
     })(v),
