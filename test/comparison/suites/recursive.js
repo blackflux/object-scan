@@ -11,14 +11,8 @@ const commentJsonPath = '[Custom depth-first](https://cs.stackexchange.com/quest
 export default {
   _name: 'Recursive Traversal',
   _fixture: 'tree',
-  _comments: {
-    jmespath: '[Reference](https://github.com/jmespath/jmespath.py/issues/110)',
-    objectScanCompiled: commentObjectScan,
-    objectScan: commentObjectScan,
-    jsonpath: commentJsonPath,
-    jsonpathplus: commentJsonPath
-  },
   objectScanCompiled: {
+    comment: commentObjectScan,
     fn: objectScan(['**']),
     result: [
       ['F', 'G', 'I', 'H'],
@@ -31,9 +25,9 @@ export default {
       ['F', 'B'],
       ['F']
     ]
-
   },
   objectScan: {
+    comment: commentObjectScan,
     fn: (v) => objectScan(['**'])(v),
     result: [
       ['F', 'G', 'I', 'H'],
@@ -47,7 +41,11 @@ export default {
       ['F']
     ]
   },
+  jmespath: {
+    comment: '[Reference](https://github.com/jmespath/jmespath.py/issues/110)'
+  },
   jsonpath: {
+    comment: commentJsonPath,
     fn: (v) => jsonpath.paths(v, '$..*'),
     result: [
       ['$', 'F'],
@@ -62,6 +60,7 @@ export default {
     ]
   },
   jsonpathplus: {
+    comment: commentJsonPath,
     fn: (v) => JSONPath({ path: '$..*', json: v, resultType: 'path' }),
     result: [
       "$['F']",

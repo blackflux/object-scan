@@ -4,6 +4,7 @@
 [![NPM](https://img.shields.io/npm/v/object-scan.svg)](https://www.npmjs.com/package/object-scan)
 [![Downloads](https://img.shields.io/npm/dt/object-scan.svg)](https://www.npmjs.com/package/object-scan)
 ${SIZE_BADGE}
+${RATIO_BADGE}
 
 Traverse object hierarchies using matching and callbacks.
 
@@ -19,7 +20,7 @@ In a browser:
 
 ```html
 <script type="module">
-  import objectScan from 'https://cdn.jsdelivr.net/npm/object-scan@<VERSION>/lib/index.min.js';
+  import objectScan from 'https://cdn.jsdelivr.net/npm/object-scan@<VERSION>/lib/index.min.js.gz';
   // do logic here
 </script>
 ```
@@ -33,7 +34,7 @@ spoiler: false
 </example></pre>
 
 ## Table of Content
-${{TOC}}
+${TOC}
 
 ## Features
 
@@ -823,7 +824,10 @@ ${CMP_BMK}
 
 ### Real World Uses
 
-This library was originally designed and build to power [object-rewrite](https://github.com/blackflux/object-rewrite).
+Noteworthy [dependents](https://github.com/blackflux/object-scan/network/dependents) are:
+- [object-fields](https://github.com/blackflux/object-fields): Showcases how to retain only certain nested keys from object
+- [object-lib](https://github.com/blackflux/object-lib): Good example of more advanced use cases
+- [object-rewrite](https://github.com/blackflux/object-rewrite): The original reason for creating this library
 
 Many other examples can be found on [Stack Overflow](https://stackoverflow.com/search?q=%5Bjavascript%5D+object-scan+user%3A1030413).
 
