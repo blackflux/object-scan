@@ -22,7 +22,7 @@ export default () => {
           const sizeInBytes = zlib.gzipSync(code, { level: 9 }).length;
           const size = `${(sizeInBytes / 1024).toFixed(2)}%20KB`;
           const link = 'https://cdn.jsdelivr.net/npm/object-scan/lib/';
-          return `[![Size](https://shields.io/badge/minified%20+%20gzip-${size}-informational)](${link})`;
+          return `[![Size](https://shields.io/badge/min%20+%20gz-${size}-informational)](${link})`;
         },
         TEST_RATIO_BADGE: async () => {
           const root = path.join(dirname, '..', '..');
