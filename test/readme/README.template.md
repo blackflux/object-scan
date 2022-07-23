@@ -4,7 +4,7 @@
 [![NPM](https://img.shields.io/npm/v/object-scan.svg)](https://www.npmjs.com/package/object-scan)
 [![Downloads](https://img.shields.io/npm/dt/object-scan.svg)](https://www.npmjs.com/package/object-scan)
 ${SIZE_BADGE}
-${TEST_RATIO_BADGE}
+${RATIO_BADGE}
 
 Traverse object hierarchies using matching and callbacks.
 
@@ -34,7 +34,7 @@ spoiler: false
 </example></pre>
 
 ## Table of Content
-${{TOC}}
+${TOC}
 
 ## Features
 

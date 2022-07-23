@@ -1,41 +1,22 @@
 import Slugger from 'github-slugger';
 
-// todo: refactor file
-export default (lines_) => {
-  const lines = [...lines_];
-  const stack = [];
+export default async (lines) => {
   const toc = [];
-  let tocIndex = -1;
 
+  // extract toc lines
   for (let i = 0; i < lines.length; i += 1) {
     const line = lines[i];
-    // eslint-disable-next-line no-template-curly-in-string
-    if (line === '${{TOC}}') {
-      tocIndex = i;
-    }
-    if (!/^#+ /.test(line)) {
+    if (!line.startsWith('##')) {
       // eslint-disable-next-line no-continue
       continue;
     }
-    const indexOfFirstSpace = line.indexOf(' ');
-    const indent = line.substring(0, indexOfFirstSpace);
-    const title = line.substring(indexOfFirstSpace + 1);
+    const [indent, number, ...title] = line.split(' ');
     const type = indent.length - 2;
-    if (type < 0) {
-      // eslint-disable-next-line no-continue
-      continue;
-    }
-    stack.length = type + 1;
-    if (!stack[type]) {
-      stack[type] = 0;
-    }
-    stack[type] += 1;
-    const number = `${stack.join('.')}.`;
-    lines[i] = `${indent} ${number} ${title}`;
     const ctx = { start: false, end: false };
-    toc.push([type, number, title, ctx]);
+    toc.push([type, number, title.join(' '), ctx]);
   }
 
+  // determine nesting start and end
   for (let i = 0; i < toc.length; i += 1) {
     const cur = toc[i][0];
     const next = toc[i + 1]?.[0] || 0;
@@ -43,6 +24,7 @@ export default (lines_) => {
     toc[i][3].end = cur === 1 && next === 0;
   }
 
+  // rewrite toc lines to be more appealing
   const slugger = new Slugger();
   for (let i = 0; i < toc.length;) {
     const [type, number, title, ctx] = toc[i];
@@ -66,7 +48,5 @@ export default (lines_) => {
     i += result.length;
   }
 
-  lines.splice(tocIndex, 1, ...toc);
-
-  return lines;
+  return toc;
 };
