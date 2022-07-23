@@ -2,6 +2,7 @@ import * as fixtures from '../fixtures.js';
 
 const COUNT = 1000;
 
+// todo: discard outlier
 export default (fn, fixture) => {
   const start = process.hrtime();
   for (let k = 0; k < COUNT; k += 1) {
