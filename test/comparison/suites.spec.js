@@ -1,25 +1,21 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import suites from './suites.js';
+import { iterateSuites, iterateTests } from './iterator.js';
 import * as fixtures from './fixtures.js';
 
 describe('Testing suites', () => {
   // eslint-disable-next-line mocha/no-setup-in-describe
-  Object.entries(suites).forEach(([suite, tests]) => {
+  iterateSuites(({ suite, tests }) => {
     describe(`Suite ${suite}`, () => {
-      // eslint-disable-next-line mocha/no-setup-in-describe
-      Object.entries(tests)
-        .filter(([test]) => !test.startsWith('_'))
-        .forEach(([test, fnOrObj]) => {
+      // eslint-disable-next-line mocha/no-setup-in-describe,object-curly-newline
+      iterateTests(tests, ({ test, fn, fixture, result }) => {
+        if (fn) {
           it(`Testing ${test}`, () => {
-            const { _result: r, _fixture: fixture } = tests;
-            const { fn, result } = typeof fnOrObj === 'function'
-              ? { fn: fnOrObj, result: r }
-              : fnOrObj;
             const fnResult = fn(fixtures[fixture]);
             expect(fnResult, JSON.stringify(fnResult)).to.deep.equal(result);
           });
-        });
+        }
+      });
     });
   });
 });
