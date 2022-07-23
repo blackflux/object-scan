@@ -7,11 +7,13 @@ const jsonpathComment = (
 export default {
   _name: 'Multiple Paths',
   _fixture: 'tree',
-  _comments: {
-    jsonpath: jsonpathComment,
-    jsonpathplus: jsonpathComment
-  },
   _result: [[['F.*.I', '*.G.I'], 'I'], [['*.*.A'], 'A']],
   objectScanCompiled: objectScan(['F.*.I', '*.G.I', '*.*.A'], { rtn: ['matchedBy', 'property'] }),
-  objectScan: (v) => objectScan(['F.*.I', '*.G.I', '*.*.A'], { rtn: ['matchedBy', 'property'] })(v)
+  objectScan: (v) => objectScan(['F.*.I', '*.G.I', '*.*.A'], { rtn: ['matchedBy', 'property'] })(v),
+  jsonpath: {
+    comment: jsonpathComment
+  },
+  jsonpathplus: {
+    comment: jsonpathComment
+  }
 };

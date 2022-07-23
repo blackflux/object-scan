@@ -53,12 +53,8 @@ const objectScanComment = '[Documentation](#callbacks)';
 export default {
   _name: 'Callback with Context',
   _fixture: 'tree',
-  _comments: {
-    objectScanCompiled: objectScanComment,
-    objectScan: objectScanComment,
-    jsonpathplus: 'Usefulness limited since context is lacking'
-  },
   objectScanCompiled: {
+    comment: objectScanComment,
     fn: objectScan(['**'], {
       beforeFn: (state) => {
         // eslint-disable-next-line no-param-reassign
@@ -76,6 +72,7 @@ export default {
     result: objScanResult
   },
   objectScan: {
+    comment: objectScanComment,
     fn: (v) => objectScan(['**'], {
       filterFn: ({
         context, key, value, parent, property
@@ -88,6 +85,7 @@ export default {
     result: objScanResult
   },
   jsonpathplus: {
+    comment: 'Usefulness limited since context is lacking information',
     fn: (v) => {
       const result = [];
       JSONPath({
