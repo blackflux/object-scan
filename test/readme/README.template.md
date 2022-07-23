@@ -823,7 +823,10 @@ ${CMP_BMK}
 
 ### Real World Uses
 
-This library was originally designed and build to power [object-rewrite](https://github.com/blackflux/object-rewrite).
+Noteworthy [dependents](https://github.com/blackflux/object-scan/network/dependents) are:
+- [object-fields](https://github.com/blackflux/object-fields): Showcases how to retain only certain nested keys from object
+- [object-lib](https://github.com/blackflux/object-lib): Good example of more advanced use cases
+- [object-rewrite](https://github.com/blackflux/object-rewrite): The original reason for creating this library
 
 Many other examples can be found on [Stack Overflow](https://stackoverflow.com/search?q=%5Bjavascript%5D+object-scan+user%3A1030413).
 
