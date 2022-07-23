@@ -3,7 +3,8 @@
 [![Build Status](https://circleci.com/gh/blackflux/object-scan.png?style=shield)](https://circleci.com/gh/blackflux/object-scan)
 [![NPM](https://img.shields.io/npm/v/object-scan.svg)](https://www.npmjs.com/package/object-scan)
 [![Downloads](https://img.shields.io/npm/dt/object-scan.svg)](https://www.npmjs.com/package/object-scan)
-[![Size](https://shields.io/badge/minified%20+%20gzip-4.88%20KB-informational)](https://cdn.jsdelivr.net/npm/object-scan/lib/)
+[![Size](https://shields.io/badge/min%20+%20gz-4.88%20KB-informational)](https://cdn.jsdelivr.net/npm/object-scan/lib/)
+[![Test Ratio](https://shields.io/badge/test%20:%20code-9.2%20:%201-informational)](./test/readme/renderer.js)
 
 Traverse object hierarchies using matching and callbacks.
 

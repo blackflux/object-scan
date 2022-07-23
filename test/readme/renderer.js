@@ -24,6 +24,20 @@ export default () => {
           const link = 'https://cdn.jsdelivr.net/npm/object-scan/lib/';
           return `[![Size](https://shields.io/badge/minified%20+%20gzip-${size}-informational)](${link})`;
         },
+        TEST_RATIO_BADGE: async () => {
+          const root = path.join(dirname, '..', '..');
+          const computeSize = (folder, files) => files.reduce((c, f) => c + fs.statSync(path.join(folder, f)).size, 0);
+          const srcFolder = path.join(root, 'src');
+          const testFolder = path.join(root, 'test');
+          const srcFiles = fs.walkDir(srcFolder).filter((f) => f.endsWith('.js'));
+          const testFiles = fs.walkDir(testFolder).filter((f) => f.endsWith('.js'));
+          const srcSize = computeSize(srcFolder, srcFiles);
+          const testSize = computeSize(testFolder, testFiles);
+          const ratio = `${(testSize / srcSize).toFixed(1)}%20:%20${srcSize / srcSize}`;
+          const filename = fs.filename(import.meta.url);
+          const relpath = path.relative(root, filename);
+          return `[![Test Ratio](https://shields.io/badge/test%20:%20code-${ratio}-informational)](./${relpath})`;
+        },
         CMP_BMK: async () => {
           const filepath = path.join(dirname, '..', 'comparison', 'benchmark', 'result.md');
           return fs.smartRead(filepath).join('\n');
