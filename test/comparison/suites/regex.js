@@ -1,4 +1,5 @@
 import { JSONPath } from 'jsonpath-plus';
+import Nimma from 'nimma';
 import objectScan from '../../../src/index.js';
 
 export default {
@@ -18,5 +19,32 @@ export default {
       "$['entries']['foobar']",
       "$['entries']['fooooobar']"
     ]
+  },
+  nimma: {
+    fn: (v) => {
+      const result = [];
+      new Nimma(['$.entries.[?(@property.match(/fo+bar/))]']).query(v, {
+        '$.entries.[?(@property.match(/fo+bar/))]': ({ path }) => {
+          result.push(path.slice(0));
+        }
+      });
+      return result;
+    },
+    result: [['entries', 'foobar'], ['entries', 'fooooobar']]
+  },
+  nimmaCompiled: {
+    fn: (() => {
+      const n = new Nimma(['$.entries.[?(@property.match(/fo+bar/))]']);
+      return (v) => {
+        const result = [];
+        n.query(v, {
+          '$.entries.[?(@property.match(/fo+bar/))]': ({ path }) => {
+            result.push(path.slice(0));
+          }
+        });
+        return result;
+      };
+    })(),
+    result: [['entries', 'foobar'], ['entries', 'fooooobar']]
   }
 };

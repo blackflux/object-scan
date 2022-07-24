@@ -1,5 +1,8 @@
 import { JSONPath } from 'jsonpath-plus';
+import Nimma from 'nimma';
 import objectScan from '../../../src/index.js';
+
+const commentLackingContext = 'Usefulness limited since context is lacking information';
 
 const objScanResult = [{
   key: ['F', 'G', 'I', 'H'],
@@ -85,7 +88,7 @@ export default {
     result: objScanResult
   },
   jsonpathplus: {
-    comment: 'Usefulness limited since context is lacking information',
+    comment: commentLackingContext,
     fn: (v) => {
       const result = [];
       JSONPath({
@@ -152,5 +155,54 @@ export default {
       parentProperty: 'H',
       hasArrExpr: true
     }]
+  },
+  nimma: {
+    comment: commentLackingContext,
+    fn: (v) => {
+      const result = [];
+      new Nimma(['$..*']).query(v, {
+        '$..*': ({ path, value }) => {
+          result.push({ path: path.slice(0), value });
+        }
+      });
+      return result;
+    },
+    result: [
+      { path: ['F'], value: { B: { A: 0, D: { C: 1, E: 2 } }, G: { I: { H: 3 } } } },
+      { path: ['F', 'B'], value: { A: 0, D: { C: 1, E: 2 } } },
+      { path: ['F', 'B', 'A'], value: 0 },
+      { path: ['F', 'B', 'D'], value: { C: 1, E: 2 } },
+      { path: ['F', 'B', 'D', 'C'], value: 1 },
+      { path: ['F', 'B', 'D', 'E'], value: 2 },
+      { path: ['F', 'G'], value: { I: { H: 3 } } },
+      { path: ['F', 'G', 'I'], value: { H: 3 } },
+      { path: ['F', 'G', 'I', 'H'], value: 3 }
+    ]
+  },
+  nimmaCompiled: {
+    comment: commentLackingContext,
+    fn: (() => {
+      const n = new Nimma(['$..*']);
+      return (v) => {
+        const result = [];
+        n.query(v, {
+          '$..*': ({ path, value }) => {
+            result.push({ path: path.slice(0), value });
+          }
+        });
+        return result;
+      };
+    })(),
+    result: [
+      { path: ['F'], value: { B: { A: 0, D: { C: 1, E: 2 } }, G: { I: { H: 3 } } } },
+      { path: ['F', 'B'], value: { A: 0, D: { C: 1, E: 2 } } },
+      { path: ['F', 'B', 'A'], value: 0 },
+      { path: ['F', 'B', 'D'], value: { C: 1, E: 2 } },
+      { path: ['F', 'B', 'D', 'C'], value: 1 },
+      { path: ['F', 'B', 'D', 'E'], value: 2 },
+      { path: ['F', 'G'], value: { I: { H: 3 } } },
+      { path: ['F', 'G', 'I'], value: { H: 3 } },
+      { path: ['F', 'G', 'I', 'H'], value: 3 }
+    ]
   }
 };

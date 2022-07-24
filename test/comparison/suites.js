@@ -10,6 +10,7 @@ import regex from './suites/regex.js';
 import exclusion from './suites/exclusion.js';
 import pathRecursion from './suites/path-recursion.js';
 import autoTraverse from './suites/auto-traverse.js';
+import partialTraversal from './suites/partial-traversal.js';
 
 export default {
   key,
@@ -23,5 +24,6 @@ export default {
   regex,
   exclusion,
   pathRecursion,
-  autoTraverse
+  autoTraverse,
+  partialTraversal
 };

@@ -1,6 +1,7 @@
 import jsonpath from 'jsonpath';
 import jmespath from 'jmespath';
 import { JSONPath } from 'jsonpath-plus';
+import Nimma from 'nimma';
 import objectScan from '../../../src/index.js';
 
 const commentObjectScan = 'Only in code logic';
@@ -33,5 +34,32 @@ export default {
   jmespath: {
     fn: (v) => jmespath.search(v, "*[?(x == 'yes')].y"),
     result: [[2], []]
+  },
+  nimma: {
+    fn: (v) => {
+      const result = [];
+      new Nimma(["$.*[?(@.x == 'yes')].y"]).query(v, {
+        "$.*[?(@.x == 'yes')].y": ({ path }) => {
+          result.push(path.slice(0));
+        }
+      });
+      return result;
+    },
+    result: [['a', 0, 'y']]
+  },
+  nimmaCompiled: {
+    fn: (() => {
+      const n = new Nimma(["$.*[?(@.x == 'yes')].y"]);
+      return (v) => {
+        const result = [];
+        n.query(v, {
+          "$.*[?(@.x == 'yes')].y": ({ path }) => {
+            result.push(path.slice(0));
+          }
+        });
+        return result;
+      };
+    })(),
+    result: [['a', 0, 'y']]
   }
 };
