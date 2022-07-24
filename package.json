@@ -6,7 +6,7 @@
   "main": "lib/index.js",
   "scripts": {
     "clean": "rm -rf lib",
-    "build": "cp -rf ./src ./lib && ncc build -m -o lib && mv lib/index.js lib/index.min.js && gzip -9 lib/index.min.js && cp src/index.js lib/index.js && rm lib/package.json",
+    "build": "cp -rf ./src ./lib && ncc build -m -o lib && mv lib/index.js lib/index.min.js && cp src/index.js lib/index.js && rm lib/package.json",
     "build-clean": "yarn run clean && yarn run build",
     "test-simple": "c8 mocha --experimental-loader=./test/hot.js \"./test/**/*.spec.js\"",
     "test": "yarn run clean && yarn run gardener && yarn run test-simple",
@@ -55,7 +55,7 @@
     "@babel/eslint-parser": "7.18.9",
     "@babel/register": "7.18.9",
     "@blackflux/eslint-plugin-rules": "2.1.0",
-    "@blackflux/robo-config-plugin": "7.9.6",
+    "@blackflux/robo-config-plugin": "7.9.7",
     "@vercel/ncc": "0.34.0",
     "c8": "7.11.3",
     "chai": "4.3.6",
