@@ -28,9 +28,9 @@ export default async (lines_) => {
   }
 
   await Promise.all([
+    verifyUrls(urls, content),
     verifyRefs(refs, content),
-    verifyRels(rels, content),
-    verifyUrls(urls, content)
+    verifyRels(rels, content)
   ]);
 
   return lines_;
