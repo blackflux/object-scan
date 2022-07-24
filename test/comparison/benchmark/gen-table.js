@@ -6,11 +6,12 @@ import suites from '../suites.js';
 import getColorForValue from './get-color-for-value.js';
 import okLogo from './ok-logo.js';
 
-const growTable = () => {
+const growTable = async () => {
   const table = [
     ['   '],
     ['---']
   ];
+  const tasks = [];
   iterateSuites(({ suite, tests }) => {
     const { _name: name, _fixture: fixture } = tests;
     table.push([`<a href="./test/comparison/suites/${suite}.js">${name}</a>`]);
@@ -22,10 +23,17 @@ const growTable = () => {
         col = table[0].length - 1;
       }
       if (fn) {
-        table[table.length - 1][col] = runBenchmark(suite, test, fixture);
+        const row = table.length - 1;
+        tasks.push(async () => {
+          table[row][col] = await runBenchmark(suite, test, fixture);
+        });
       }
     });
   });
+  for (let i = 0; i < tasks.length; i += 1) {
+    // eslint-disable-next-line no-await-in-loop
+    await tasks[i]();
+  }
   return table;
 };
 
@@ -51,9 +59,9 @@ const iterateTable = (table, cb) => {
   }
 };
 
-export default () => {
+export default async () => {
   const suiteEntries = Object.entries(suites);
-  const table = growTable();
+  const table = await growTable();
   const footnotes = {};
   const footer = [''];
   // eslint-disable-next-line object-curly-newline

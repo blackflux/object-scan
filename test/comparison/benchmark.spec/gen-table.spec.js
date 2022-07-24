@@ -4,9 +4,9 @@ import { describe } from 'node-tdd';
 import { expect } from 'chai';
 import genTable from '../benchmark/gen-table.js';
 
-describe('Testing gen-table.js', () => {
-  it('Testing basic', () => {
-    const table = genTable();
+describe('Testing gen-table.js', { timeout: 60000 }, () => {
+  it('Testing basic', async () => {
+    const table = await genTable();
     for (let i = 0; i < table.length; i += 1) {
       table[i] = table[i].replace(/!\[]\([^)]+\)/g, 'IMG');
     }
