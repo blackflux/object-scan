@@ -22,7 +22,7 @@ const growTable = () => {
         col = table[0].length - 1;
       }
       if (fn) {
-        table[table.length - 1][col] = runBenchmark(fn, fixture);
+        table[table.length - 1][col] = runBenchmark(suite, test, fixture);
       }
     });
   });

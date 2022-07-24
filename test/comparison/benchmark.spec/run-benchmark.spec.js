@@ -4,7 +4,7 @@ import runBenchmark from '../benchmark/run-benchmark.js';
 
 describe('Testing run-benchmark.js', () => {
   it('Testing basic', () => {
-    const r = runBenchmark(() => {}, {});
+    const r = runBenchmark('value', 'objectScan', {});
     expect(typeof r).to.equal('number');
   });
 });

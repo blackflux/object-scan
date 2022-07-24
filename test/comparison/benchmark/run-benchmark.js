@@ -1,10 +1,13 @@
 import * as fixtures from '../fixtures.js';
+import suites from '../suites.js';
 
 const COUNT = 1000;
 const trim = 0.25;
 
-export default (fn, fixture) => {
+export default (suite, test, fixture) => {
   const times = Array(COUNT);
+  const fnOrObj = suites[suite][test];
+  const fn = typeof fnOrObj === 'function' ? fnOrObj : fnOrObj.fn;
   for (let k = 0; k < COUNT; k += 1) {
     const start = process.hrtime();
     fn(fixtures[fixture]);
