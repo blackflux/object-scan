@@ -5,7 +5,7 @@ const jsonpathComment = (
   '[Reference](https://stackoverflow.com/questions/55497833/jsonpath-union-of-multiple-different-paths)'
 );
 
-const nimmaComment = 'Path deduplication has to be done in post processing';
+const nimmaComment = 'Path deduplication has to be done in custom code';
 
 export default {
   _name: 'Multiple Paths',

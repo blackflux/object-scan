@@ -23,4 +23,4 @@
 <a id="timing_ref_6"><i>[6]</i></a>: _[Documentation](#callbacks)_<br>
 <a id="timing_ref_7"><i>[7]</i></a>: _Usefulness limited since context is lacking information_<br>
 <a id="timing_ref_8"><i>[8]</i></a>: _[Reference](https://stackoverflow.com/questions/55497833/jsonpath-union-of-multiple-different-paths)_<br>
-<a id="timing_ref_9"><i>[9]</i></a>: _Path deduplication has to be done in post processing_<br>
+<a id="timing_ref_9"><i>[9]</i></a>: _Path deduplication has to be done in custom code_<br>
