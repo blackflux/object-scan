@@ -33,7 +33,7 @@ export default async (lines) => {
     const space = ' ';
     const indent = space.repeat(type);
 
-    const slug = slugger.slug(`${number} ${title}`);
+    const slug = slugger.slug(`${number} ${title}`, false);
     const result = [];
     const img = `https://shields.io/badge/${number}-${title.replace(/ /g, '%20')}-${color}?style=${style}`;
     const text = `<a href="#${slug}"><img alt="${title}" src="${img}"></a>`;

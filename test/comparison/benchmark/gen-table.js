@@ -13,7 +13,8 @@ const growTable = async () => {
   const tasks = [];
   iterateSuites(({ suite, tests }) => {
     const { _name: name, _fixture: fixture } = tests;
-    table.push([`<a href="./test/comparison/suites/${suite}.js">${name}</a>`]);
+    const suiteKebab = suite.replace(/[A-Z]/, (m) => `-${m.toLowerCase()}`);
+    table.push([`<a href="./test/comparison/suites/${suiteKebab}.js">${name}</a>`]);
     iterateTests(tests, ({ test, fn }) => {
       const col = table[0].indexOf(test);
       if (fn) {

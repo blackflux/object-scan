@@ -20,7 +20,7 @@ In a browser:
 
 ```html
 <script type="module">
-  import objectScan from 'https://cdn.jsdelivr.net/npm/object-scan@<VERSION>/lib/index.min.js.gz';
+  import objectScan from 'https://cdn.jsdelivr.net/npm/object-scan@<VERSION>/lib/index.min.js';
   // do logic here
 </script>
 ```
@@ -1049,7 +1049,8 @@ The implementation is completely recursion free. This allows
 for traversal of deeply nested objects where a recursive approach
 would fail with a `Maximum call stack size exceeded` error.
 
-The search is pre-computes, which makes applying the same search multiple times very performant.
+Having a separate initialization stage allows for a performant search and
+significant speed-ups when applying the same search to different input.
 
 Traversal happens depth-first, which allows for lower memory consumption.
 
@@ -1062,6 +1063,3 @@ Finally the search function is returned.
 2. When the search function is invoked, the input is traversed simultaneously with
 the relevant nodes of the search tree. Processing multiple search tree branches
 in parallel allows for a single traversal of the input.
-
-Having a separate initialization stage allows for a performant search and
-significant speed ups when applying the same search to different input.
