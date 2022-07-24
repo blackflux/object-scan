@@ -810,12 +810,10 @@ comment: consecutive recursion
 This library has a similar syntax and can perform similar tasks
 to [jsonpath](https://www.npmjs.com/package/jsonpath) or [jmespath](https://www.npmjs.com/package/jmespath).
 But instead of querying an object hierarchy, it focuses on traversing it.
-_Hence, it is designed around handling multiple paths in a single traversal._
-No other library with this feature is currently available[*](#report-this).
+Hence, it is designed around handling multiple paths in a single traversal.
+The only other known library able to do this is [nimma](https://www.npmjs.com/package/nimma).
 While a one-to-one comparison is difficult due to difference in functionality, it can be said that
-in general `object-scan` is more versatile at similar performance.
-
-<a id="report-this"><i>[*]</i></a>: _Please open a ticket if you know of any!_
+`object-scan` is more versatile at similar performance.
 
 ${CMP_BMK}
 

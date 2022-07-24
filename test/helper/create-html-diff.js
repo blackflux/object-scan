@@ -1,11 +1,10 @@
-import fs from 'fs';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import fs from 'smart-fs';
+import { join } from 'path';
 import { createPatch } from 'diff';
 import { html } from 'diff2html';
 
 const template = fs.readFileSync(
-  join(dirname(fileURLToPath(import.meta.url)), 'resources', 'diff-template.mustache')
+  join(fs.dirname(import.meta.url), 'resources', 'diff-template.mustache')
 ).toString('utf8');
 
 export default (name, log1, log2, meta = null) => {

@@ -1,17 +1,32 @@
-import * as fixtures from '../fixtures.js';
+import { fork } from 'child_process';
+import fs from 'smart-fs';
+import { join } from 'path';
 
-const COUNT = 1000;
-const trim = 0.25;
+const Worker = async () => {
+  const compute = fork(join(fs.dirname(import.meta.url), 'worker.js'));
+  await new Promise((resolve) => {
+    // waiting for worker to be ready
+    compute.on('message', () => resolve());
+  });
+  let resolve;
+  compute.on('message', (result) => resolve(result));
+  return {
+    exec: async (kwargs) => {
+      const result = new Promise((r) => {
+        resolve = r;
+      });
+      compute.send(kwargs);
+      return result;
+    },
+    exit: () => {
+      compute.send('exit');
+    }
+  };
+};
 
-export default (fn, fixture) => {
-  const times = Array(COUNT);
-  for (let k = 0; k < COUNT; k += 1) {
-    const start = process.hrtime();
-    fn(fixtures[fixture]);
-    const stop = process.hrtime(start);
-    times[k] = stop[0] * 1e9 + stop[1];
-  }
-  times.sort();
-  const timesRelevant = times.slice(COUNT * trim, COUNT * (1 - trim));
-  return timesRelevant.reduce((a, b) => a + b, 0) / (timesRelevant.length * 1000.0);
+export default async (suite, test, fixture) => {
+  const worker = await Worker();
+  const r = await worker.exec({ suite, test, fixture });
+  worker.exit();
+  return r;
 };

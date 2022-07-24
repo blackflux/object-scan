@@ -13,6 +13,7 @@ export const resolve = async (specifier, context, defaultResolve) => {
     child.protocol === 'nodejs:'
     || child.protocol === 'node:'
     || child.pathname.includes('/node_modules/')
+    || context.parentURL === undefined
   ) {
     return result;
   }

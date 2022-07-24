@@ -1,5 +1,6 @@
 import jsonpath from 'jsonpath';
 import { JSONPath } from 'jsonpath-plus';
+import Nimma from 'nimma';
 import objectScan from '../../../src/index.js';
 
 export default {
@@ -29,5 +30,38 @@ export default {
   jsonpathplus: {
     fn: (v) => JSONPath({ path: '$.*[*].y', json: v, resultType: 'path' }),
     result: ["$['a'][0]['y']", "$['b'][0]['y']"]
+  },
+  nimma: {
+    fn: (v) => {
+      const result = [];
+      new Nimma(['$.*[*].y']).query(v, {
+        '$.*[*].y': ({ path }) => {
+          result.push(path.slice(0));
+        }
+      });
+      return result;
+    },
+    result: [
+      ['a', 0, 'y'],
+      ['b', 0, 'y']
+    ]
+  },
+  nimmaCompiled: {
+    fn: (() => {
+      const n = new Nimma(['$.*[*].y']);
+      return (v) => {
+        const result = [];
+        n.query(v, {
+          '$.*[*].y': ({ path }) => {
+            result.push(path.slice(0));
+          }
+        });
+        return result;
+      };
+    })(),
+    result: [
+      ['a', 0, 'y'],
+      ['b', 0, 'y']
+    ]
   }
 };

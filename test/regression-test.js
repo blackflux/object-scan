@@ -1,8 +1,7 @@
 import { fork } from 'child_process';
 
 import fs from 'smart-fs';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import { join } from 'path';
 import isEqual from 'lodash.isequal';
 
 import generateDataset from './helper/generate-dataset.js';
@@ -15,7 +14,7 @@ const TEST_COUNT = 10000000;
 const log = (...args) => console.log(...args);
 
 const Worker = async () => {
-  const compute = fork(join(dirname(fileURLToPath(import.meta.url)), 'worker.js'));
+  const compute = fork(join(fs.dirname(import.meta.url), 'worker.js'));
   await new Promise((resolve) => {
     // waiting for worker to be ready
     compute.on('message', () => resolve());
@@ -116,7 +115,7 @@ const execute = async () => {
         seed: rng.seed
       });
       fs.smartWrite(
-        join(dirname(fileURLToPath(import.meta.url)), '..', 'debug', `${rng.seed}.html`),
+        join(fs.dirname(import.meta.url), '..', 'debug', `${rng.seed}.html`),
         diff.split('\n')
       );
     }

@@ -215,10 +215,10 @@
   dependencies:
     smart-fs "2.0.2"
 
-"@blackflux/robo-config-plugin@7.9.7":
-  version "7.9.7"
-  resolved "https://registry.yarnpkg.com/@blackflux/robo-config-plugin/-/robo-config-plugin-7.9.7.tgz#2f827fda16742b5bf09bcfd437526fc5ad211e00"
-  integrity sha512-3Pf3WWHByrWaR92THeHwB1hOLxh58tz7DipBrXdyi9hshOmIxp9ZMtZJsDGI1y+FRCViR5rwyY4t4zvdrw68XQ==
+"@blackflux/robo-config-plugin@7.9.8":
+  version "7.9.8"
+  resolved "https://registry.yarnpkg.com/@blackflux/robo-config-plugin/-/robo-config-plugin-7.9.8.tgz#e25ec17fd93e1027fa90da9f3c7cb68a11f23c1e"
+  integrity sha512-3lhezCH0dNX8R/xX77cU2o7uHBWEBjeZFAgqUm41YSi432XRVoB/ROU5MS4Xk7Xl4MGvRBqqd3jjFtcr1OrOjA==
 
 "@eslint/eslintrc@^1.3.0":
   version "1.3.0"
@@ -305,6 +305,16 @@
   dependencies:
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
+
+"@jsep-plugin/regex@^1.0.1":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@jsep-plugin/regex/-/regex-1.0.2.tgz#a9d5b61bf9975fe6563ba13be4003773db9dfc4a"
+  integrity sha512-Nn/Bcaww8zOebMDqNmGlhAWPWhIr/8S8lGIgaB/fSqev5xaO5uKy5i4qvTh63GpR+VzKqimgxDdcxdcRuCJXSw==
+
+"@jsep-plugin/ternary@^1.0.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@jsep-plugin/ternary/-/ternary-1.1.2.tgz#4302f1bbbda76d02c1817d4c1bdca0a39d6904e8"
+  integrity sha512-gXguJc09uCrqWt1MD7L1+ChO32g4UH4BYGpHPoQRLhyU7pAPPRA7cvKbyjoqhnUlLutiXvLzB5hVVawPKax8jw==
 
 "@sideway/address@^4.1.0":
   version "4.1.4"
@@ -508,6 +518,11 @@ assertion-error@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/assertion-error/-/assertion-error-1.1.0.tgz#e60b6b0e8f301bd97e5375215bda406c85118c0b"
   integrity sha512-jgsaNduz+ndvGyFt3uSuWqvy4lCnIJiovtouQN5JZHOKCS2QuhEdbcQHFhVksz2N2U9hXJo8odG7ETyWlEeuDw==
+
+astring@^1.8.1:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/astring/-/astring-1.8.3.tgz#1a0ae738c7cc558f8e5ddc8e3120636f5cebcb85"
+  integrity sha512-sRpyiNrx2dEYIMmUXprS8nlpRg2Drs8m9ElX9vVEXaCB4XEAJhKfs7IcX0IwShjuOAjLR6wzIrgoptz1n19i1A==
 
 at-least-node@^1.0.0:
   version "1.0.0"
@@ -2320,6 +2335,11 @@ js-yaml@^3.13.0, js-yaml@^3.4.2:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
+jsep@^1.2.0:
+  version "1.3.6"
+  resolved "https://registry.yarnpkg.com/jsep/-/jsep-1.3.6.tgz#23fbf8c9479891611a237362e9e25d7746fac9d5"
+  integrity sha512-o7fP1eZVROIChADx7HKiwGRVI0tUqgUUGhaok6DP7cMxpDeparuooREDBDeNk2G5KIB49MBSkRYsCOu4PmZ+1w==
+
 jsesc@^2.5.1:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-2.5.2.tgz#80564d2e483dacf6e8ef209650a67df3f0c283a4"
@@ -2380,6 +2400,11 @@ jsonpath-plus@7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/jsonpath-plus/-/jsonpath-plus-7.0.0.tgz#b3c7648b33041c0013c5ff534fd17aadc817bf03"
   integrity sha512-MH4UnrWrU1hJGVEyEyjvYgONkzNTO6Yol0nq18EMnUQ/ZC5cTuJheirXXIwu1b9mZ6t3XL0P79gPsu+zlTnDIQ==
+
+jsonpath-plus@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/jsonpath-plus/-/jsonpath-plus-6.0.1.tgz#9a3e16cedadfab07a3d8dc4e8cd5df4ed8f49c4d"
+  integrity sha512-EvGovdvau6FyLexFH2OeXfIITlgIbgZoAZe3usiySeaIDm5QS+A10DKNpaPBBqqRSZr2HN6HVNXxtwUAr2apEw==
 
 jsonpath@1.1.1:
   version "1.1.1"
@@ -2496,6 +2521,11 @@ lodash.set@4.3.2, lodash.set@^4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/lodash.set/-/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
   integrity sha512-4hNPN5jlm/N/HLMCO43v8BXKq9Z7QdAGc/VGrRD61w8gN9g/6jF9A4L1pbUgBLCffi0w9VsXfTOij5x8iTyFvg==
+
+lodash.topath@^4.5.2:
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/lodash.topath/-/lodash.topath-4.5.2.tgz#3616351f3bba61994a0931989660bd03254fd009"
+  integrity sha512-1/W4dM+35DwvE/iEd1M9ekewOSTlpFekhw9mhAtrwjVqUr83/ilQiyAvmg4tVX7Unkcfl1KC+i9WdaT4B6aQcg==
 
 "lodash@4.6.1 || ^4.16.1", lodash@^4.17.11, lodash@^4.17.15, lodash@^4.17.21, lodash@^4.3.0:
   version "4.17.21"
@@ -2693,6 +2723,19 @@ natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
+
+nimma@0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/nimma/-/nimma-0.2.2.tgz#48d00f837d17b4baa23beec22ac1380f152f15ef"
+  integrity sha512-V52MLl7BU+tH2Np9tDrIXK8bql3MVUadnMIl/0/oZSGC9keuro0O9UUv9QKp0aMvtN8HRew4G7byY7H4eWsxaQ==
+  dependencies:
+    "@jsep-plugin/regex" "^1.0.1"
+    "@jsep-plugin/ternary" "^1.0.2"
+    astring "^1.8.1"
+    jsep "^1.2.0"
+  optionalDependencies:
+    jsonpath-plus "^6.0.1"
+    lodash.topath "^4.5.2"
 
 nock@13.2.4:
   version "13.2.4"

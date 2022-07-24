@@ -4,16 +4,19 @@ import { describe } from 'node-tdd';
 import { expect } from 'chai';
 import genTable from '../benchmark/gen-table.js';
 
-describe('Testing gen-table.js', () => {
-  it('Testing basic', () => {
-    const table = genTable();
-    for (let i = 0; i < table.length; i += 1) {
-      table[i] = table[i].replace(/!\[]\([^)]+\)/g, 'IMG');
-    }
-    const r = fs.smartWrite(
-      path.join(fs.dirname(import.meta.url), 'gen-table.spec.js__fixtures', 'generated.md'),
-      table
-    );
-    expect(r).to.equal(false);
+const normalize = (table) => {
+  const result = [];
+  for (let i = 0; i < table.length; i += 1) {
+    result.push(table[i].replace(/!\[]\([^)]+\)/g, 'IMG'));
+  }
+  return result;
+};
+
+describe('Testing gen-table.js', { timeout: 60000 }, () => {
+  it('Testing basic', async () => {
+    const generated = normalize(await genTable());
+    const expectedFilePath = path.join(fs.dirname(import.meta.url), '..', 'benchmark', 'result.md');
+    const expected = normalize(fs.smartRead(expectedFilePath));
+    expect(generated).to.deep.equal(expected);
   });
 });

@@ -1,31 +1,33 @@
-import fs from 'smart-fs';
-import path from 'path';
 import { iterateSuites, iterateTests } from '../iterator.js';
 import runBenchmark from './run-benchmark.js';
+import libs from './libs.js';
 import suites from '../suites.js';
 import getColorForValue from './get-color-for-value.js';
 import okLogo from './ok-logo.js';
 
-const growTable = () => {
+const growTable = async () => {
   const table = [
-    ['   '],
-    ['---']
+    ['   ', ...Object.keys(libs)],
+    Array(Object.keys(libs).length + 1).fill('---')
   ];
+  const tasks = [];
   iterateSuites(({ suite, tests }) => {
     const { _name: name, _fixture: fixture } = tests;
     table.push([`<a href="./test/comparison/suites/${suite}.js">${name}</a>`]);
     iterateTests(tests, ({ test, fn }) => {
-      let col = table[0].indexOf(test);
-      if (col === -1) {
-        table[0].push(test);
-        table[1].push('---');
-        col = table[0].length - 1;
-      }
+      const col = table[0].indexOf(test);
       if (fn) {
-        table[table.length - 1][col] = runBenchmark(fn, fixture);
+        const row = table.length - 1;
+        tasks.push(async () => {
+          table[row][col] = await runBenchmark(suite, test, fixture);
+        });
       }
     });
   });
+  for (let i = 0; i < tasks.length; i += 1) {
+    // eslint-disable-next-line no-await-in-loop
+    await tasks[i]();
+  }
   return table;
 };
 
@@ -51,24 +53,28 @@ const iterateTable = (table, cb) => {
   }
 };
 
-export default () => {
+export default async () => {
   const suiteEntries = Object.entries(suites);
-  const table = growTable();
+  const table = await growTable();
   const footnotes = {};
   const footer = [''];
   // eslint-disable-next-line object-curly-newline
   iterateTable(table, ({ row, col, rowMin, value }) => {
+    const suite = table[0][col];
+
     if (value !== undefined) {
       const multiplier = value / rowMin;
       const multiplierStr = `${multiplier.toFixed(2)}x`;
-      const color = getColorForValue(multiplier).slice(1);
+      const color = (
+        suiteEntries[row - 2][1]?.[suite]?.color
+        || getColorForValue(multiplier)
+      ).slice(1);
       table[row][col] = `![](https://img.shields.io/badge/${multiplierStr}-${color}?logo=${okLogo})`;
     } else {
       table[row][col] = '-';
     }
 
     // handle footnotes
-    const suite = table[0][col];
     const comment = suiteEntries[row - 2][1]?.[suite]?.comment;
     if (comment) {
       if (!(comment in footnotes)) {
@@ -80,7 +86,6 @@ export default () => {
     }
   });
   // rewrite first column with links
-  const libs = fs.smartRead(path.join(fs.dirname(import.meta.url), 'libs.json'));
   for (let col = 1; col < table[0].length; col += 1) {
     table[0][col] = libs[table[0][col]];
   }

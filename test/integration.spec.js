@@ -1,6 +1,5 @@
 import fs from 'smart-fs';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import { join } from 'path';
 import { describe } from 'node-tdd';
 import stringify from 'json-stringify-pretty-compact';
 import { expect } from 'chai';
@@ -24,7 +23,7 @@ const logFn = (type, log, paramsToLog) => (kwargs) => {
 
 describe('Integration Testing', () => {
   // eslint-disable-next-line mocha/no-setup-in-describe
-  getDirectories(join(dirname(fileURLToPath(import.meta.url)), 'integration'))
+  getDirectories(join(fs.dirname(import.meta.url), 'integration'))
     .map(([dirName, dirPath]) => [dirName, dirPath, fs.smartRead(`${dirPath}.json`)])
     .forEach(([dirName, dirPath, dirInput]) => {
       getFiles(dirPath)
