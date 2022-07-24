@@ -60,17 +60,21 @@ export default async () => {
   const footer = [''];
   // eslint-disable-next-line object-curly-newline
   iterateTable(table, ({ row, col, rowMin, value }) => {
+    const suite = table[0][col];
+
     if (value !== undefined) {
       const multiplier = value / rowMin;
       const multiplierStr = `${multiplier.toFixed(2)}x`;
-      const color = getColorForValue(multiplier).slice(1);
+      const color = (
+        suiteEntries[row - 2][1]?.[suite]?.color
+        || getColorForValue(multiplier)
+      ).slice(1);
       table[row][col] = `![](https://img.shields.io/badge/${multiplierStr}-${color}?logo=${okLogo})`;
     } else {
       table[row][col] = '-';
     }
 
     // handle footnotes
-    const suite = table[0][col];
     const comment = suiteEntries[row - 2][1]?.[suite]?.comment;
     if (comment) {
       if (!(comment in footnotes)) {

@@ -88,6 +88,7 @@ export default {
     result: objScanResult
   },
   jsonpathplus: {
+    color: '#777777',
     comment: commentLackingContext,
     fn: (v) => {
       const result = [];
@@ -157,6 +158,7 @@ export default {
     }]
   },
   nimma: {
+    color: '#777777',
     comment: commentLackingContext,
     fn: (v) => {
       const result = [];
@@ -180,6 +182,7 @@ export default {
     ]
   },
   nimmaCompiled: {
+    color: '#777777',
     comment: commentLackingContext,
     fn: (() => {
       const n = new Nimma(['$..*']);

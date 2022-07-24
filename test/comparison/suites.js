@@ -11,19 +11,21 @@ import exclusion from './suites/exclusion.js';
 import pathRecursion from './suites/path-recursion.js';
 import autoTraverse from './suites/auto-traverse.js';
 import partialTraversal from './suites/partial-traversal.js';
+import breakCircular from './suites/break-circular.js';
 
 export default {
   key,
   value,
   condition,
   recursive,
+  partialTraversal,
   callback,
-  parent,
-  multiplePaths,
-  wildcard,
   regex,
+  multiplePaths,
+  parent,
+  wildcard,
   exclusion,
   pathRecursion,
   autoTraverse,
-  partialTraversal
+  breakCircular
 };
