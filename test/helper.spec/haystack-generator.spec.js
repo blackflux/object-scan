@@ -1,6 +1,5 @@
 import fs from 'smart-fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
 import PRNG from '../helper/prng.js';
@@ -35,7 +34,7 @@ describe('Testing haystack-generator.js', { timeout: 5000 }, () => {
       data.types[type] = (data.types[type] || 0) + 1;
     }
 
-    const filename = path.join(`${fileURLToPath(import.meta.url)}__resources`, 'distribution.json');
+    const filename = path.join(`${fs.filename(import.meta.url)}__resources`, 'distribution.json');
     const result = fs.smartWrite(filename, data);
     expect(result).to.equal(false);
   });
