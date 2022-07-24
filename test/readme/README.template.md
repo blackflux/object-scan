@@ -811,9 +811,13 @@ This library has a similar syntax and can perform similar tasks
 to [jsonpath](https://www.npmjs.com/package/jsonpath) or [jmespath](https://www.npmjs.com/package/jmespath).
 But instead of querying an object hierarchy, it focuses on traversing it.
 Hence, it is designed around handling multiple paths in a single traversal.
-The only other known library able to do this is [nimma](https://www.npmjs.com/package/nimma).
-While a one-to-one comparison is difficult due to difference in functionality, it can be said that
-`object-scan` is more versatile at similar performance.
+_No other library doing this is currently available._
+
+While [nimma](https://www.npmjs.com/package/nimma) provides the ability to traverse multiple paths,
+it doesn't do it in a [single traversal](https://github.com/P0lip/nimma/issues/7).
+
+A one-to-one comparison with other libraries is difficult due to difference in functionality,
+but it can be said that `object-scan` is more versatile at similar performance.
 
 ${CMP_BMK}
 
