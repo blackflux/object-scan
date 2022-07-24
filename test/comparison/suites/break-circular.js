@@ -2,7 +2,7 @@ import objectScan from '../../../src/index.js';
 
 export default {
   _name: 'Break Circular',
-  _fixture: 'recsimple',
+  _fixture: 'rec',
   objectScanCompiled: {
     fn: objectScan(['**'], { breakFn: ({ isCircular }) => isCircular }),
     result: [['a']]

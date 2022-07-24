@@ -1,7 +1,4 @@
-import cloneDeep from 'lodash.clonedeep';
-import nested from './nested.js';
-
-const r = cloneDeep(nested);
+const r = {};
 // add recursive reference
-r.a.b.c = r;
+r.a = r;
 export default r;

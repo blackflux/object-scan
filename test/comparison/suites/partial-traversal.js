@@ -5,7 +5,7 @@ import objectScan from '../../../src/index.js';
 
 export default {
   _name: 'Partial Traversal',
-  _fixture: 'rec',
+  _fixture: 'nestedrec',
   objectScanCompiled: {
     fn: objectScan(['a.b.a.b.a.**.b']),
     result: [
