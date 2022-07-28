@@ -61,6 +61,7 @@ The matching syntax is fully validated and bad input will throw a syntax error. 
 - [Arbitrary Depth](#arbitrary_depth) and [Nested Path Recursion](#nested_path_recursion)
 - [Exclusion](#exclusion)
 - [Escaping](#escaping)
+- [Array Needles](#array_needles)
 
 <a id="array"></a>
 ### Array
@@ -286,6 +287,33 @@ _Examples:_
 haystack: { '[1]': 0 }
 needles: ['\\[1\\]']
 comment: special object key
+</example></pre>
+
+
+<a id="array_needles"></a>
+### Array Needles
+
+Array needles can be used similarly to how they work in [_.get](https://lodash.com/docs/#get).
+
+Note that array needles can not use any of the above matching syntax but also do not require escaping.
+
+_Examples:_
+<pre><example>
+haystack: { a: [{ b: 0 }] }
+needles: [['a', 0, 'b']]
+comment: mixed path
+</example></pre>
+<pre><example>
+haystack: { 'a.b': [0], a: { b: [1] } }
+needles: [['a.b', 0]]
+rtn: 'value'
+comment: implicit escape
+</example></pre>
+<pre><example>
+haystack: { a: [{ b: 0 }, { b: 0 }] }
+needles: [['a', 0, 'b'], ['a', 1, 'b'], 'a[*].b']
+rtn: 'matchedBy'
+comment: mixed needles
 </example></pre>
 
 ## Options

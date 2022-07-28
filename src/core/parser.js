@@ -10,6 +10,9 @@ const parse = (input, ctx) => {
   if (input === '') {
     return new Value('', false);
   }
+  if (Array.isArray(input)) {
+    return input.map((e) => new Value(typeof e === 'number' ? `[${e}]` : e, false));
+  }
 
   const result = Result(input);
   const inputLength = input.length;

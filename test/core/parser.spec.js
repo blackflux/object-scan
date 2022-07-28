@@ -388,5 +388,19 @@ describe('Testing Parser', () => {
           .to.equal('{[<**:1:{>,["a","b"],<}:1:**>],[<**:2:{>,{["a","b","a","b"],[!"c","d","c","d"]},<}:2:**>]}');
       });
     });
+
+    describe('Testing array needles', () => {
+      it('Testing simple string path', () => {
+        expect(asString(['a', 'b', 'c'])).to.equal('["a","b","c"]');
+      });
+
+      it('Testing simple number path', () => {
+        expect(asString([0, 1, 2])).to.equal('["[0]","[1]","[2]"]');
+      });
+
+      it('Testing mixed path', () => {
+        expect(asString(['a', 1, 'c'])).to.equal('["a","[1]","c"]');
+      });
+    });
   });
 });
