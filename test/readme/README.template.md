@@ -293,7 +293,7 @@ comment: special object key
 <a id="array_needles"></a>
 ### Array Needles
 
-Needles can be passed as arrays, consistent of `integers` and `strings`.
+Needles can be passed as arrays, consisting of `integers` and `strings`.
 
 When given as arrays, then needles:
 - match array keys with `integers` and object keys with `strings`

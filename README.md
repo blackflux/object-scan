@@ -447,7 +447,7 @@ objectScan(['\\[1\\]'], { joined: true })(haystack);
 <a id="array_needles"></a>
 ### 4.10. Array Needles
 
-Needles can be passed as arrays, consistent of `integers` and `strings`.
+Needles can be passed as arrays, consisting of `integers` and `strings`.
 
 When given as arrays, then needles:
 - match array keys with `integers` and object keys with `strings`
