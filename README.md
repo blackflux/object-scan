@@ -447,9 +447,19 @@ objectScan(['\\[1\\]'], { joined: true })(haystack);
 <a id="array_needles"></a>
 ### 4.10. Array Needles
 
-Array needles can be used similarly to how they work in [_.get](https://lodash.com/docs/#get).
+Needles can be passed as arrays, consistent of `integers` and `strings`.
 
-Note that array needles can not use any of the above matching syntax but also do not require escaping.
+When given as arrays, then needles:
+- match array keys with `integers` and object keys with `strings`
+- do not support any other matching syntax
+- do not require escaping
+- parse faster than regular string needles
+
+This syntax allows for `key` result of object-scan to be passed back into itself.
+
+Be advised that `matchedBy` and similar contain the original needles and not copies.
+
+Array needles work similarly to how they work in [_.get](https://lodash.com/docs/#get).
 
 _Examples:_
 <details><summary> <code>[['a', 0, 'b']]</code> <em>(mixed path)</em> </summary>
