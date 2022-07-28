@@ -11,6 +11,9 @@ const parse = (input, ctx) => {
     return new Value('', false);
   }
   if (Array.isArray(input)) {
+    if (input.length === 0) {
+      return new Value('', false);
+    }
     return input.map((e) => new Value(typeof e === 'number' ? `[${e}]` : e, false));
   }
 

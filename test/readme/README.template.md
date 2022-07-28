@@ -325,6 +325,18 @@ needles: [['a', 0, 'b'], ['a', 1, 'b'], 'a[*].b']
 rtn: 'matchedBy'
 comment: mixed needles
 </example></pre>
+<pre><example>
+haystack: { a: [{ b: 0 }, { b: 0 }] }
+needles: [['a', 'b']]
+useArraySelector: false
+comment: useArraySelector=false
+</example></pre>
+<pre><example>
+haystack: [1, 2]
+needles: [[]]
+useArraySelector: false
+comment: empty array
+</example></pre>
 
 ## Options
 
@@ -378,7 +390,7 @@ and should be accessed via [destructuring](https://developer.mozilla.org/en-US/d
 _Search Context_
 - A context can be passed into a search invocation as a second parameter. It is available in all callbacks
 and can be used to manage state across a search invocation without having to recompile the search.
-- By default all matched keys are returned from a search invocation.
+- By default, all matched keys are returned from a search invocation.
 However, when it is not _undefined_, the context is returned instead.
 
 _Examples_:

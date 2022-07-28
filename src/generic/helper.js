@@ -30,3 +30,5 @@ export const asRegex = (regexStr) => {
 
 export const toPath = (input) => input
   .reduce((p, c) => `${p}${typeof c === 'number' ? `[${c}]` : `${p ? '.' : ''}${escape(c)}`}`, '');
+
+export const formatNeedle = (n) => (Array.isArray(n) ? toPath(n) : n);

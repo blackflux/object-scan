@@ -3,7 +3,7 @@
 [![Build Status](https://circleci.com/gh/blackflux/object-scan.png?style=shield)](https://circleci.com/gh/blackflux/object-scan)
 [![NPM](https://img.shields.io/npm/v/object-scan.svg)](https://www.npmjs.com/package/object-scan)
 [![Downloads](https://img.shields.io/npm/dt/object-scan.svg)](https://www.npmjs.com/package/object-scan)
-[![Size](https://shields.io/badge/min%20+%20gz-4.91%20KB-informational)](https://cdn.jsdelivr.net/npm/object-scan/lib/)
+[![Size](https://shields.io/badge/min%20+%20gz-4.93%20KB-informational)](https://cdn.jsdelivr.net/npm/object-scan/lib/)
 [![Test Ratio](https://shields.io/badge/test%20:%20code-9.9%20:%201-informational)](./test/readme/replace-variables/ratio-badge.js)
 
 Traverse object hierarchies using matching and callbacks.
@@ -495,6 +495,30 @@ objectScan([['a', 0, 'b'], ['a', 1, 'b'], 'a[*].b'], {
 // => [ [ [ 'a', 1, 'b' ], 'a[*].b' ], [ [ 'a', 0, 'b' ], 'a[*].b' ] ]
 ```
 </details>
+<details><summary> <code>[['a', 'b']]</code> <em>(useArraySelector=false)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: [{ b: 0 }, { b: 0 }] };
+objectScan([['a', 'b']], {
+  joined: true,
+  useArraySelector: false
+})(haystack);
+// => [ 'a[1].b', 'a[0].b' ]
+```
+</details>
+<details><summary> <code>[[]]</code> <em>(empty array)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = [1, 2];
+objectScan([[]], {
+  joined: true,
+  useArraySelector: false
+})(haystack);
+// => [ '[1]', '[0]' ]
+```
+</details>
 
 ## 5. Options
 
@@ -548,7 +572,7 @@ and should be accessed via [destructuring](https://developer.mozilla.org/en-US/d
 _Search Context_
 - A context can be passed into a search invocation as a second parameter. It is available in all callbacks
 and can be used to manage state across a search invocation without having to recompile the search.
-- By default all matched keys are returned from a search invocation.
+- By default, all matched keys are returned from a search invocation.
 However, when it is not _undefined_, the context is returned instead.
 
 _Examples_:

@@ -67,4 +67,36 @@ describe('Testing array needles', () => {
     expect(needles[0]).to.equal(r[1][0]);
     expect(needles[1]).to.equal(r[0][0]);
   });
+
+  it('Testing orderByNeedles=true', () => {
+    const needles = [['a', 0, 'b'], ['a', 1, 'b'], 'a[*].b'];
+    const haystack = { a: [{ b: 0 }, { b: 0 }] };
+    const r = objectScan(needles, { orderByNeedles: true })(haystack);
+    expect(r).to.deep.equal([['a', 0, 'b'], ['a', 1, 'b']]);
+  });
+
+  it('Testing useArraySelector=false', () => {
+    const needles = [['a', 'b']];
+    const haystack = { a: [{ b: 0 }, { b: 0 }] };
+    const r = objectScan(needles, { useArraySelector: false })(haystack);
+    expect(r).to.deep.equal([['a', 1, 'b'], ['a', 0, 'b']]);
+  });
+
+  it('Testing empty array', () => {
+    const needles = [[]];
+    const haystack = [{ a: 0 }, { b: 1 }];
+    expect(objectScan(needles, { useArraySelector: false })(haystack))
+      .to.deep.equal([[1], [0]]);
+  });
+
+  it('Testing redundant needle', () => {
+    expect(() => objectScan([['a', 0, 'b'], ['a', 0, 'b']]))
+      .to.throw('Redundant Needle Target: "a[0].b" vs "a[0].b"');
+    expect(() => objectScan([['a', 0, 'b'], 'a[0].b']))
+      .to.throw('Redundant Needle Target: "a[0].b" vs "a[0].b"');
+    expect(() => objectScan(['a[0].b', ['a', 0, 'b']]))
+      .to.throw('Redundant Needle Target: "a[0].b" vs "a[0].b"');
+    expect(() => objectScan(['', []]))
+      .to.throw('Redundant Needle Target: "" vs ""');
+  });
 });
