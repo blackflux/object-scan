@@ -145,6 +145,10 @@ describe('Testing Parser', () => {
     it('Testing Escaped final Dot', () => {
       expect(asString('a.\\.')).to.deep.equal('["a","\\."]');
     });
+
+    it('Testing Unnecessary Escape', () => {
+      expect(asString('a\\b')).to.deep.equal('"a\\b"');
+    });
   });
 
   describe('Testing Parentheses', () => {
