@@ -108,7 +108,4 @@ describe('Testing array needles', () => {
     expect(() => objectScan(['', []]))
       .to.throw('Redundant Needle Target: "" vs ""');
   });
-
-  // todo: any other options to test here?
-  // ...
 });
