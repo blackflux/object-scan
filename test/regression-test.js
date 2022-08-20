@@ -88,7 +88,9 @@ const execute = async () => {
         anyRecGroup: rng() > 0.2 ? 0 : rng(),
         doublePlusGroup: rng() > 0.2 ? 0 : rng(),
         doubleStarGroup: rng() > 0.2 ? 0 : rng()
-      })
+      }),
+      // todo: use commented once released
+      needleArrayProbability: 0 // rng() > 0.2 ? 0 : rng()
     });
 
     const kwargs = {

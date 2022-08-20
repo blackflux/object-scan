@@ -27,7 +27,8 @@ const Tester = (seed = null) => {
           doublePlusGroup: 0,
           doubleStarGroup: rng() > 0.2 ? 0 : rng()
         })
-        : () => {}
+        : () => {},
+      needleArrayProbability: rng() > 0.2 ? 0 : rng()
     });
     return {
       needles, haystack, rng, paths

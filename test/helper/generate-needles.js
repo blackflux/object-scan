@@ -9,11 +9,23 @@ export default ({
   paths,
   useArraySelector,
   pathModifierParams,
-  groupModifierParams
+  groupModifierParams,
+  needleArrayProbability
 }) => {
   const needles = useArraySelector ? paths : stripArraySelectorFromPaths(paths);
   const needlesShuffled = shuffleArray(needles, rng);
-  const needlePaths = needlesShuffled.map((p) => pathToNeedlePath(p, pathModifierParams(p), rng));
+  const needlePaths = [];
+  const needleArrays = [];
+  needlesShuffled.forEach((p) => {
+    if (rng() < needleArrayProbability) {
+      needleArrays.push(p);
+    } else {
+      needlePaths.push(pathToNeedlePath(p, pathModifierParams(p), rng));
+    }
+  });
   const needlesParsed = needlePathsToNeedlesParsed(needlePaths);
-  return parsedNeedleToStringArray(needlesParsed, groupModifierParams(), rng);
+  const result = parsedNeedleToStringArray(needlesParsed, groupModifierParams(), rng);
+  result.push(...needleArrays);
+  shuffleArray(result, rng);
+  return result;
 };
