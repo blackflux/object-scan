@@ -16,11 +16,16 @@ const parse = (input, ctx) => {
     if (input.length === 0) {
       return new Value('', false);
     }
-    // todo: change to replaceAll with nodejs >= v15
-    return input.map((e) => new Value(
-      typeof e === 'number' ? `[${e}]` : e.replace(BACKSLASH_REGEX, '\\\\'),
-      false
-    ));
+    return input.map((e, idx) => {
+      if (typeof e === 'number') {
+        if (!ctx.useArraySelector) {
+          throwError('Forbidden Array Selector', JSON.stringify(input), { idx });
+        }
+        return new Value(`[${e}]`, false);
+      }
+      // todo: change to replaceAll with nodejs >= v15
+      return new Value(e.replace(BACKSLASH_REGEX, '\\\\'), false);
+    });
   }
 
   const result = Result(input);

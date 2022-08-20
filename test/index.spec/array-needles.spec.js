@@ -108,4 +108,9 @@ describe('Testing array needles', () => {
     expect(() => objectScan(['', []]))
       .to.throw('Redundant Needle Target: "" vs ""');
   });
+
+  it('Testing useArraySelector=false with number', () => {
+    expect(() => objectScan([['a', 0, 'b']], { useArraySelector: false }))
+      .to.throw('Forbidden Array Selector: ["a",0,"b"], idx 1');
+  });
 });
