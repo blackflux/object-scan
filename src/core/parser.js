@@ -1,6 +1,8 @@
 import { Value } from './parser-value.js';
 import Result from './parser-result.js';
 
+const BACKSLASH_REGEX = /\\/g;
+
 const throwError = (msg, input, context = {}) => {
   throw new Error(Object.entries(context)
     .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
@@ -9,6 +11,21 @@ const throwError = (msg, input, context = {}) => {
 const parse = (input, ctx) => {
   if (input === '') {
     return new Value('', false);
+  }
+  if (Array.isArray(input)) {
+    if (input.length === 0) {
+      return new Value('', false);
+    }
+    return input.map((e, idx) => {
+      if (typeof e === 'number') {
+        if (!ctx.useArraySelector) {
+          throwError('Forbidden Array Selector', JSON.stringify(input), { idx });
+        }
+        return new Value(`[${e}]`, false);
+      }
+      // todo: change to replaceAll with nodejs >= v15
+      return new Value(e.replace(BACKSLASH_REGEX, '\\\\'), false);
+    });
   }
 
   const result = Result(input);

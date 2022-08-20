@@ -61,6 +61,7 @@ The matching syntax is fully validated and bad input will throw a syntax error. 
 - [Arbitrary Depth](#arbitrary_depth) and [Nested Path Recursion](#nested_path_recursion)
 - [Exclusion](#exclusion)
 - [Escaping](#escaping)
+- [Array Needles](#array_needles)
 
 <a id="array"></a>
 ### Array
@@ -288,6 +289,49 @@ needles: ['\\[1\\]']
 comment: special object key
 </example></pre>
 
+
+<a id="array_needles"></a>
+### Array Needles
+
+Needles can be passed as arrays, consisting of `integers` and `strings`.
+
+When given as arrays, then needles:
+- match array keys with `integers` and object keys with `strings`
+- do not support any other matching syntax
+- do not require escaping
+- parse faster than regular string needles
+
+This syntax allows for `key` result of object-scan to be passed back into itself.
+
+Be advised that `matchedBy` and similar contain the original needles and not copies.
+
+Array needles work similarly to how they work in [_.get](https://lodash.com/docs/#get).
+
+_Examples:_
+<pre><example>
+haystack: { a: [{ b: 0 }] }
+needles: [['a', 0, 'b']]
+comment: mixed path
+</example></pre>
+<pre><example>
+haystack: { 'a.b': [0], a: { b: [1] } }
+needles: [['a.b', 0]]
+rtn: 'value'
+comment: implicit escape
+</example></pre>
+<pre><example>
+haystack: { a: [{ b: 0 }, { b: 0 }] }
+needles: [['a', 0, 'b'], ['a', 1, 'b'], 'a[*].b']
+rtn: 'matchedBy'
+comment: mixed needles
+</example></pre>
+<pre><example>
+haystack: { a: [{ b: 0 }, { b: 0 }] }
+needles: [['a', 'b']]
+useArraySelector: false
+comment: useArraySelector=false
+</example></pre>
+
 ## Options
 
 <a id="callbacks"></a>
@@ -340,7 +384,7 @@ and should be accessed via [destructuring](https://developer.mozilla.org/en-US/d
 _Search Context_
 - A context can be passed into a search invocation as a second parameter. It is available in all callbacks
 and can be used to manage state across a search invocation without having to recompile the search.
-- By default all matched keys are returned from a search invocation.
+- By default, all matched keys are returned from a search invocation.
 However, when it is not _undefined_, the context is returned instead.
 
 _Examples_:
@@ -1010,16 +1054,23 @@ comment: orderByNeedles and compareFn
 
 ### Edge Cases
 
-Top level object(s) are matched by the empty needle `''`. This is useful for matching objects nested in arrays by setting `useArraySelector` to `false`.
+Top level object(s) are matched by the empty needle `''` or [empty array](#array_needles) `[]`.
+This is useful for matching objects nested in arrays by setting `useArraySelector` to `false`.
 To match the actual empty string as a key, use `(^$)`.
 
-Note that the empty string does not work to match top level objects with
+Note that an empty string or empty array does not work to match top level objects with
 [_.get](https://lodash.com/docs/#get) or [_.set](https://lodash.com/docs/#set).
 
 _Examples_:
 <pre><example>
 haystack: [{}, {}]
 needles: ['']
+useArraySelector: false
+comment: match top level objects in array
+</example></pre>
+<pre><example>
+haystack: [1, 2]
+needles: [[]]
 useArraySelector: false
 comment: match top level objects in array
 </example></pre>

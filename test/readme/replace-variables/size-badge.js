@@ -9,6 +9,6 @@ export default async (lines) => {
   const { code } = await ncc(indexFile, { minify: true });
   const sizeInBytes = zlib.gzipSync(code, { level: 9 }).length;
   const size = `${(sizeInBytes / 1024).toFixed(2)}%20KB`;
-  const link = 'https://cdn.jsdelivr.net/npm/object-scan/lib/';
+  const link = 'https://bundlephobia.com/package/object-scan';
   return [`[![Size](https://shields.io/badge/min%20+%20gz-${size}-informational)](${link})`];
 };
