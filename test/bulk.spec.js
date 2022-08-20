@@ -47,12 +47,13 @@ const Tester = (seed = null) => {
       })(haystack);
       const keys = entries.map(([k]) => k);
 
+      expect(entries).to.deep.equal(keys.map((k) => [k, get(haystack, k)]));
+
       if (useArraySelector && !modify) {
         expect(keys, `Seed: ${rng.seed}`).to.deep.equal(paths);
       } else {
         expect(keys, `Seed: ${rng.seed}`).to.include.deep.members(paths);
       }
-      expect(entries).to.deep.equal(keys.map((k) => [k, get(haystack, k)]));
     },
     executeAndTestFnCorrectness: ({ useArraySelector }) => {
       const { needles, haystack, rng } = generateTestSet({ useArraySelector, modify: false });
@@ -78,8 +79,7 @@ const Tester = (seed = null) => {
         filterFn: (kwargs) => {
           filterMatches.push(serialize(kwargs));
           filterMatchedKeys.push(kwargs.key);
-        },
-        joined: true
+        }
       })(haystack);
       const keys = entries.map(([k]) => k);
 
