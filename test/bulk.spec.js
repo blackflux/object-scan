@@ -1,5 +1,6 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
+import get from 'lodash.get';
 import generateDataset from './helper/generate-dataset.js';
 import generateNeedles from './helper/generate-needles.js';
 import objectScan from '../src/index.js';
@@ -39,12 +40,19 @@ const Tester = (seed = null) => {
       const {
         needles, haystack, rng, paths
       } = generateTestSet({ useArraySelector, modify });
-      const matches = objectScan(needles, { useArraySelector, strict: !modify })(haystack);
+      const entries = objectScan(needles, {
+        useArraySelector,
+        strict: !modify,
+        rtn: 'entry'
+      })(haystack);
+      const keys = entries.map(([k]) => k);
+
       if (useArraySelector && !modify) {
-        expect(matches, `Seed: ${rng.seed}`).to.deep.equal(paths);
+        expect(keys, `Seed: ${rng.seed}`).to.deep.equal(paths);
       } else {
-        expect(matches, `Seed: ${rng.seed}`).to.include.deep.members(paths);
+        expect(keys, `Seed: ${rng.seed}`).to.include.deep.members(paths);
       }
+      expect(entries).to.deep.equal(keys.map((k) => [k, get(haystack, k)]));
     },
     executeAndTestFnCorrectness: ({ useArraySelector }) => {
       const { needles, haystack, rng } = generateTestSet({ useArraySelector, modify: false });
@@ -59,9 +67,10 @@ const Tester = (seed = null) => {
 
       const serialize = ({ result, ...kwargs }) => JSON.stringify(kwargs);
 
-      objectScan(needles, {
+      const entries = objectScan(needles, {
         useArraySelector,
         strict: true,
+        rtn: 'entry',
         breakFn: (kwargs) => {
           (kwargs.isMatch ? breakMatches : breakNonMatches).push(serialize(kwargs));
           (kwargs.isMatch ? breakMatchedKeys : breakNonMatchedKeys).push(kwargs.key);
@@ -72,6 +81,9 @@ const Tester = (seed = null) => {
         },
         joined: true
       })(haystack);
+      const keys = entries.map(([k]) => k);
+
+      expect(entries).to.deep.equal(keys.map((k) => [k, get(haystack, k)]));
 
       expect(breakMatches.sort(), `Seed: ${rng.seed}`).to.deep.equal(filterMatches.sort());
       expect(!breakNonMatches.some((e) => filterMatches.includes(e)), `Seed: ${rng.seed}`).to.equal(true);
