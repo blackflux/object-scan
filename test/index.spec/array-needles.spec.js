@@ -56,6 +56,15 @@ describe('Testing array needles', () => {
     expect(r).to.deep.equal([0]);
   });
 
+  it('Testing backslash', () => {
+    const needles = [['a\\b', 0]];
+    const haystack = {
+      'a\\b': [0]
+    };
+    const r = objectScan(needles, { rtn: 'value' })(haystack);
+    expect(r).to.deep.equal([0]);
+  });
+
   it('Testing matchedBy', () => {
     const needles = [['a', 0, 'b'], ['a', 1, 'b'], 'a[*].b'];
     const haystack = { a: [{ b: 0 }, { b: 0 }] };
@@ -99,4 +108,7 @@ describe('Testing array needles', () => {
     expect(() => objectScan(['', []]))
       .to.throw('Redundant Needle Target: "" vs ""');
   });
+
+  // todo: any other options to test here?
+  // ...
 });
