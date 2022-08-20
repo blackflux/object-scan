@@ -8,11 +8,11 @@ export default {
   _name: 'Get Value',
   _fixture: 'cond',
   _result: 2,
-  objectScanCompiled: objectScan(['a[0].y'], {
+  objectScanCompiled: objectScan([['a', 0, 'y']], {
     rtn: 'value',
     abort: true
   }),
-  objectScan: (v) => objectScan(['a[0].y'], {
+  objectScan: (v) => objectScan([['a', 0, 'y']], {
     rtn: 'value',
     abort: true
   })(v),

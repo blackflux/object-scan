@@ -3,6 +3,7 @@ import parser from './parser.js';
 import iterator from './compiler-iterator.js';
 import { Ref } from './parser-ref.js';
 import { Node } from './node.js';
+import { formatNeedle } from '../generic/helper.js';
 
 const applyNeedle = (tower, needle, tree, ctx) => {
   iterator(tower, needle, tree, {
@@ -58,7 +59,9 @@ const applyNeedle = (tower, needle, tree, ctx) => {
         }
       }
       if (ctx.strict && cur.leafNeedles.length !== 0) {
-        throw new Error(`Redundant Needle Target: "${cur.leafNeedles[0]}" vs "${needle}"`);
+        const nLeft = formatNeedle(cur.leafNeedles[0]);
+        const nRight = formatNeedle(needle);
+        throw new Error(`Redundant Needle Target: "${nLeft}" vs "${nRight}"`);
       }
       cur.finish(needle, excluded, ctx.counter);
       ctx.counter += 1;

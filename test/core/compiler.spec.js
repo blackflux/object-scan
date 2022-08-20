@@ -162,6 +162,14 @@ describe('Testing compiler', () => {
     expect(tower.get('a').matches).to.equal(false);
   });
 
+  it('Testing backslash', () => {
+    const input = [['a\\b']];
+    const tower = c(input);
+    expect(ser(tower)).to.deep.equal({ 'a\\\\b': {} });
+    expect(tower.matches).to.equal(true);
+    expect(tower.get('a\\\\b').matches).to.equal(true);
+  });
+
   it('Testing Or Paths', () => {
     const input = ['{a,b.c}'];
     const tower = c(input);
