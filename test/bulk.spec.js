@@ -1,6 +1,7 @@
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
 import get from 'lodash.get';
+import { toPath } from 'object-scan/lib/generic/helper.js';
 import generateDataset from './helper/generate-dataset.js';
 import generateNeedles from './helper/generate-needles.js';
 import objectScan from '../src/index.js';
@@ -35,6 +36,19 @@ const Tester = (seed = null) => {
       needles, haystack, rng, paths
     };
   };
+  const validateKeyOrder = (keys_) => {
+    const keys = keys_.map((k) => toPath(k));
+    for (let i = 1; i < keys.length; i += 1) {
+      const keyRight = `${keys[i]}.`;
+      for (let j = 0; j < i; j += 1) {
+        const keyLeft = `${keys[j]}.`;
+        expect(
+          keyRight.startsWith(keyLeft),
+          `"${keyRight}".startsWith("${keyLeft}")`
+        ).to.equal(false);
+      }
+    }
+  };
   return {
     executeAndTest: ({ useArraySelector, modify }) => {
       const {
@@ -46,6 +60,7 @@ const Tester = (seed = null) => {
         rtn: 'entry'
       })(haystack);
       const keys = entries.map(([k]) => k);
+      validateKeyOrder(keys);
 
       expect(entries).to.deep.equal(keys.map((k) => [k, get(haystack, k)]));
 
@@ -82,6 +97,7 @@ const Tester = (seed = null) => {
         }
       })(haystack);
       const keys = entries.map(([k]) => k);
+      validateKeyOrder(keys);
 
       expect(entries).to.deep.equal(keys.map((k) => [k, get(haystack, k)]));
 
