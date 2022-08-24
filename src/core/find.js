@@ -25,7 +25,7 @@ export default (haystack_, search_, ctx) => {
   let haystack = state.haystack;
 
   const kwargs = {
-    getKey: () => formatPath(path, ctx),
+    getKey: (joined = ctx.joined) => formatPath(path, joined),
     get key() {
       return kwargs.getKey();
     },
@@ -33,7 +33,7 @@ export default (haystack_, search_, ctx) => {
     get value() {
       return kwargs.getValue();
     },
-    getEntry: () => [formatPath(path, ctx), haystack],
+    getEntry: (joined = ctx.joined) => [formatPath(path, joined), haystack],
     get entry() {
       return kwargs.getEntry();
     },
