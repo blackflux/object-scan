@@ -395,12 +395,6 @@ context: { sum: 0 }
 filterFn: ({ value, context }) => { context.sum += value; }
 comment: search context
 </example></pre>
-<pre><example>
-haystack: { a: { b: { c: 0 } } }
-needles: ['**.c']
-rtn: ({ getKey }) => [getKey(true), getKey(false), getKey()]
-comment: joined
-</example></pre>
 
 ### filterFn
 
@@ -803,9 +797,16 @@ comment: not joined
 <pre><example>
 haystack: { a: { b: { c: 0 } } }
 needles: ['**.c']
+joined: true
+rtn: ({ getKey }) => [getKey(true), getKey(false), getKey()]
+comment: joined, getKey
+</example></pre>
+<pre><example>
+haystack: { a: { b: { c: 0 } } }
+needles: ['**.c']
 joined: false
 rtn: ({ getEntry }) => [getEntry(true), getEntry(false), getEntry()]
-comment: getter
+comment: not joined, getEntry
 </example></pre>
 
 ### useArraySelector

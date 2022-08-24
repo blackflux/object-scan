@@ -576,18 +576,6 @@ objectScan(['**.{c,d,e}'], {
 // => { sum: 20 }
 ```
 </details>
-<details><summary> <code>['**.c']</code> <em>(joined)</em> </summary>
-
-<!-- eslint-disable no-undef -->
-```js
-const haystack = { a: { b: { c: 0 } } };
-objectScan(['**.c'], {
-  joined: true,
-  rtn: ({ getKey }) => [getKey(true), getKey(false), getKey()]
-})(haystack);
-// => [ [ 'a.b.c', [ 'a', 'b', 'c' ], 'a.b.c' ] ]
-```
-</details>
 
 ### 5.1. filterFn
 
@@ -1103,7 +1091,19 @@ objectScan(['[*]', '[*].foo'])(haystack);
 // => [ [ 2, 'foo' ], [ 2 ], [ 1 ], [ 0 ] ]
 ```
 </details>
-<details><summary> <code>['**.c']</code> <em>(getter)</em> </summary>
+<details><summary> <code>['**.c']</code> <em>(joined, getKey)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: 0 } } };
+objectScan(['**.c'], {
+  joined: true,
+  rtn: ({ getKey }) => [getKey(true), getKey(false), getKey()]
+})(haystack);
+// => [ [ 'a.b.c', [ 'a', 'b', 'c' ], 'a.b.c' ] ]
+```
+</details>
+<details><summary> <code>['**.c']</code> <em>(not joined, getEntry)</em> </summary>
 
 <!-- eslint-disable no-undef -->
 ```js
