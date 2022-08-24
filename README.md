@@ -533,9 +533,9 @@ where:
 - `isLeaf`: true iff `value` can not be traversed
 - `depth`: length of `key`
 - `result`: intermittent result as defined by `rtn`
-- `getKey`: function that returns `key`
+- `getKey(joined?: boolean)`: function that returns `key`
 - `getValue`: function that returns `value`
-- `getEntry`: function that returns `entry`
+- `getEntry(joined?: boolean)`: function that returns `entry`
 - `getProperty`: function that returns `property`
 - `getGproperty`: function that returns `gproperty`
 - `getParent`: function that returns `parent`
@@ -574,6 +574,18 @@ objectScan(['**.{c,d,e}'], {
   filterFn: ({ value, context }) => { context.sum += value; }
 })(haystack, { sum: 0 });
 // => { sum: 20 }
+```
+</details>
+<details><summary> <code>['**.c']</code> <em>(joined)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: 0 } } };
+objectScan(['**.c'], {
+  joined: true,
+  rtn: ({ getKey }) => [getKey(true), getKey(false), getKey()]
+})(haystack);
+// => [ [ 'a.b.c', [ 'a', 'b', 'c' ], 'a.b.c' ] ]
 ```
 </details>
 
@@ -1068,6 +1080,8 @@ Keys are returned as a string when set to `true` instead of as a list.
 
 Setting this option to `true` will negatively impact performance.
 
+This setting get be overwritten by using the getter methods `getKey()` or `getEntry()`.
+
 Note that [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set) fully support lists.
 
 _Examples_:
@@ -1087,6 +1101,15 @@ objectScan(['[*]', '[*].foo'], { joined: true })(haystack);
 const haystack = [0, 1, { foo: 'bar' }];
 objectScan(['[*]', '[*].foo'])(haystack);
 // => [ [ 2, 'foo' ], [ 2 ], [ 1 ], [ 0 ] ]
+```
+</details>
+<details><summary> <code>['**.c']</code> <em>(getter)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = { a: { b: { c: 0 } } };
+objectScan(['**.c'], { rtn: ({ getEntry }) => [getEntry(true), getEntry(false), getEntry()] })(haystack);
+// => [ [ [ 'a.b.c', 0 ], [ [ 'a', 'b', 'c' ], 0 ], [ [ 'a', 'b', 'c' ], 0 ] ] ]
 ```
 </details>
 

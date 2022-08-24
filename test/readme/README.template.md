@@ -357,9 +357,9 @@ where:
 - `isLeaf`: true iff `value` can not be traversed
 - `depth`: length of `key`
 - `result`: intermittent result as defined by `rtn`
-- `getKey`: function that returns `key`
+- `getKey(joined?: boolean)`: function that returns `key`
 - `getValue`: function that returns `value`
-- `getEntry`: function that returns `entry`
+- `getEntry(joined?: boolean)`: function that returns `entry`
 - `getProperty`: function that returns `property`
 - `getGproperty`: function that returns `gproperty`
 - `getParent`: function that returns `parent`
@@ -394,6 +394,12 @@ needles: ['**.{c,d,e}']
 context: { sum: 0 }
 filterFn: ({ value, context }) => { context.sum += value; }
 comment: search context
+</example></pre>
+<pre><example>
+haystack: { a: { b: { c: 0 } } }
+needles: ['**.c']
+rtn: ({ getKey }) => [getKey(true), getKey(false), getKey()]
+comment: joined
 </example></pre>
 
 ### filterFn
@@ -777,6 +783,8 @@ Keys are returned as a string when set to `true` instead of as a list.
 
 Setting this option to `true` will negatively impact performance.
 
+This setting get be overwritten by using the getter methods `getKey()` or `getEntry()`.
+
 Note that [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set) fully support lists.
 
 _Examples_:
@@ -791,6 +799,13 @@ haystack: [0, 1, { foo: 'bar' }]
 needles: ['[*]', '[*].foo']
 joined: false
 comment: not joined
+</example></pre>
+<pre><example>
+haystack: { a: { b: { c: 0 } } }
+needles: ['**.c']
+joined: false
+rtn: ({ getEntry }) => [getEntry(true), getEntry(false), getEntry()]
+comment: getter
 </example></pre>
 
 ### useArraySelector

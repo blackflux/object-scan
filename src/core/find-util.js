@@ -33,4 +33,4 @@ export const isLastLeafMatch = (searches) => {
   return maxLeafMatch;
 };
 
-export const formatPath = (input, ctx) => (ctx.joined ? toPath(input) : [...input]);
+export const formatPath = (input, joined) => (joined ? toPath(input) : [...input]);
