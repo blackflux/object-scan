@@ -777,7 +777,7 @@ Keys are returned as a string when set to `true` instead of as a list.
 
 Setting this option to `true` will negatively impact performance.
 
-This setting get be overwritten by using the getter methods `getKey()` or `getEntry()`.
+This setting get be overwritten by using the getter method `getKey()` or `getEntry()`.
 
 Note that [_.get](https://lodash.com/docs/#get) and [_.set](https://lodash.com/docs/#set) fully support lists.
 
