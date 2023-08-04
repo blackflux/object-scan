@@ -1,6 +1,6 @@
 import assert from 'assert';
-import fs from 'smart-fs';
 import path from 'path';
+import fs from 'smart-fs';
 
 const root = path.join(fs.dirname(import.meta.url), '..', '..', '..');
 

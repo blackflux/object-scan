@@ -1,5 +1,5 @@
-import fs from 'smart-fs';
 import path from 'path';
+import fs from 'smart-fs';
 
 export default async (lines) => {
   const dirname = fs.dirname(import.meta.url);

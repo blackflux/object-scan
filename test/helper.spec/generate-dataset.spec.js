@@ -1,5 +1,5 @@
-import fs from 'smart-fs';
 import path from 'path';
+import fs from 'smart-fs';
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
 import generateDataset from '../helper/generate-dataset.js';

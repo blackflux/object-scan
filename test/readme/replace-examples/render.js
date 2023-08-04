@@ -1,5 +1,5 @@
-import fs from 'smart-fs';
 import path from 'path';
+import fs from 'smart-fs';
 import Mustache from 'mustache/mustache.js';
 import stringify from '../../helper/stringify.js';
 

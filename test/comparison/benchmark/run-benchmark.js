@@ -1,6 +1,6 @@
 import { fork } from 'child_process';
-import fs from 'smart-fs';
 import { join } from 'path';
+import fs from 'smart-fs';
 
 const Worker = async () => {
   const compute = fork(join(fs.dirname(import.meta.url), 'worker.js'));

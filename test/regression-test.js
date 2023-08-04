@@ -1,7 +1,7 @@
 import { fork } from 'child_process';
 
-import fs from 'smart-fs';
 import { join } from 'path';
+import fs from 'smart-fs';
 import isEqual from 'lodash.isequal';
 
 import generateDataset from './helper/generate-dataset.js';
