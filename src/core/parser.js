@@ -1,8 +1,6 @@
 import { Value } from './parser-value.js';
 import Result from './parser-result.js';
 
-const BACKSLASH_REGEX = /\\/g;
-
 const throwError = (msg, input, context = {}) => {
   throw new Error(Object.entries(context)
     .reduce((p, [k, v]) => `${p}, ${k} ${v}`, `${msg}: ${input}`));
@@ -23,8 +21,7 @@ const parse = (input, ctx) => {
         }
         return new Value(`[${e}]`, false);
       }
-      // todo: change to replaceAll with nodejs >= v15
-      return new Value(e.replace(BACKSLASH_REGEX, '\\\\'), false);
+      return new Value(e.replaceAll('\\', '\\\\'), false);
     });
   }
 

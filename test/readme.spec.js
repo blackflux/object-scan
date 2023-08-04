@@ -1,5 +1,5 @@
-import fs from 'smart-fs';
 import { join } from 'path';
+import fs from 'smart-fs';
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
 import replaceTitles from './readme/replace-titles.js';

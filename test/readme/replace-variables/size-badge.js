@@ -1,6 +1,6 @@
-import fs from 'smart-fs';
 import path from 'path';
 import zlib from 'zlib';
+import fs from 'smart-fs';
 import ncc from '@vercel/ncc';
 
 export default async (lines) => {

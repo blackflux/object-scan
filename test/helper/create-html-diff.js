@@ -1,5 +1,5 @@
-import fs from 'smart-fs';
 import { join } from 'path';
+import fs from 'smart-fs';
 import { createPatch } from 'diff';
 import { html } from 'diff2html';
 
