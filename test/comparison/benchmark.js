@@ -1,5 +1,5 @@
-import fs from 'smart-fs';
 import path from 'path';
+import fs from 'smart-fs';
 import genTable from './benchmark/gen-table.js';
 
 const execute = async () => fs.smartWrite(

@@ -1,5 +1,5 @@
-import fs from 'smart-fs';
 import { join } from 'path';
+import fs from 'smart-fs';
 import { describe } from 'node-tdd';
 import stringify from 'json-stringify-pretty-compact';
 import { expect } from 'chai';

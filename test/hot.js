@@ -4,6 +4,43 @@ import fs from 'fs';
 import { URL } from 'url';
 
 const lookup = {};
+let envVars = {};
+const port = {}; // dummy variable, not used
+
+/* serialized and passed into main process */
+function createListener() {
+  /* communicate process.env to loader process */
+  process.env = new Proxy(process.env, {
+    set(target, key, value) {
+      // eslint-disable-next-line no-param-reassign
+      target[key] = value;
+      port.postMessage(target);
+      return target[key];
+    },
+    deleteProperty(target, key) {
+      if (!(key in target)) {
+        return false;
+      }
+      // eslint-disable-next-line no-param-reassign
+      delete target[key];
+      port.postMessage(target);
+      return true;
+    }
+  });
+}
+
+export function globalPreload({ port: p }) {
+  if (process.versions.node.split('.')[0] < 20) {
+    /* Skip listener, since process shared before node 20 */
+    envVars = process.env;
+    return '(() => {})()';
+  }
+  // eslint-disable-next-line no-param-reassign
+  p.onmessage = ({ data }) => {
+    envVars = data;
+  };
+  return `(${createListener})()`;
+}
 
 export const resolve = async (specifier, context, defaultResolve) => {
   const result = await defaultResolve(specifier, context, defaultResolve);
@@ -28,7 +65,7 @@ export const resolve = async (specifier, context, defaultResolve) => {
         reload: false
       };
       const content = fs.readFileSync(p, 'utf8');
-      if (content.includes('/* load-hot */') || content.includes('lru-cache-ext')) {
+      if (content.includes('/* load-hot */')) {
         lookup[p].reload = true;
       } else if (content.includes('process.env.')) {
         lookup[p].reload = [...content.matchAll(/\bprocess\.env\.([a-zA-Z0-9_]+)\b/g)].map((e) => e[1]);
@@ -59,7 +96,7 @@ export const resolve = async (specifier, context, defaultResolve) => {
     }
   }
 
-  if (!('TEST_SEED' in process.env)) {
+  if (!('TEST_SEED' in envVars)) {
     return result;
   }
 
@@ -69,7 +106,7 @@ export const resolve = async (specifier, context, defaultResolve) => {
 
   if (Array.isArray(lookup[childPath].reload)) {
     const hash = lookup[childPath].reload.reduce(
-      (p, c) => p.update(c).update(process.env[c] || '<undefined>'),
+      (p, c) => p.update(c).update(envVars[c] || '<undefined>'),
       crypto.createHash('md5')
     ).digest('hex');
     return {
@@ -78,6 +115,6 @@ export const resolve = async (specifier, context, defaultResolve) => {
   }
 
   return {
-    url: `${child.href}?id=${process.env.TEST_SEED}`
+    url: `${child.href}?id=${envVars.TEST_SEED}`
   };
 };
