@@ -19,7 +19,7 @@ function createListener() {
     },
     deleteProperty(target, key) {
       if (!(key in target)) {
-        return false;
+        return true;
       }
       // eslint-disable-next-line no-param-reassign
       delete target[key];
