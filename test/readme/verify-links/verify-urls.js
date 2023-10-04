@@ -5,7 +5,7 @@ import { Pool } from 'promise-pool-ext';
 const pool = Pool({ concurrency: 10 });
 
 export default async (urls, content) => {
-  const tasks = urls.map((url) => () => axios({ method: 'HEAD', url }));
+  const tasks = urls.map((url) => () => axios({ method: 'GET', url }));
   const responses = await pool(tasks);
   for (let i = 0; i < responses.length; i += 1) {
     const r = responses[i];

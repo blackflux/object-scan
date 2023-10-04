@@ -1,5 +1,4 @@
 workflows:
-  version: 2
   node-multi-build:
     jobs:
       - gally-create-pr
@@ -30,7 +29,7 @@ workflows:
           filters:
             branches:
               only: master
-version: 2
+version: 2.1
 jobs:
   gally-create-pr:
     docker:
