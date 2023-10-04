@@ -28,7 +28,7 @@ export const parseValue = (value) => {
     }
   }
   if (simple) {
-    return { test: (v) => v === regex };
+    return { test: (v) => String(v) === regex };
   }
   if (regex === '.+') {
     return { test: (v) => v !== '' };

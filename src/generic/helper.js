@@ -8,17 +8,17 @@ export const asRegex = (regexStr) => {
     const end = regexStr.endsWith('$');
     if (start && end) {
       const value = regexStr.slice(1, -1);
-      return { test: (v) => v === value };
+      return { test: (v) => String(v) === value };
     }
     if (start) {
       const value = regexStr.slice(1);
-      return { test: (v) => v.startsWith(value) };
+      return { test: (v) => String(v).startsWith(value) };
     }
     if (end) {
       const value = regexStr.slice(0, -1);
-      return { test: (v) => v.endsWith(value) };
+      return { test: (v) => String(v).endsWith(value) };
     }
-    return { test: (v) => v.includes(regexStr) };
+    return { test: (v) => String(v).includes(regexStr) };
   }
 
   try {
