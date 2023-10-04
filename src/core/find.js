@@ -152,7 +152,7 @@ export default (haystack_, search_, ctx) => {
       && haystack instanceof Object
     ) {
       const isArray = Array.isArray(haystack);
-      const keys = Object.keys(haystack);
+      const keys = isArray ? [...haystack.keys()] : Object.keys(haystack);
       if (!isArray && ctx.compareFn) {
         keys.sort(ctx.compareFn(kwargs));
       }
@@ -191,9 +191,9 @@ export default (haystack_, search_, ctx) => {
           while (checkIdx !== checkIdxMin && Buffer.compare(searchesOut.index, stack[checkIdx].index) === 1) {
             checkIdx -= 4;
           }
-          stack.splice(checkIdx + 3, 0, false, searchesOut, isArray ? Number(key) : key, depth + 1);
+          stack.splice(checkIdx + 3, 0, false, searchesOut, key, depth + 1);
         } else {
-          stack.push(false, searchesOut, isArray ? Number(key) : key, depth + 1);
+          stack.push(false, searchesOut, key, depth + 1);
         }
       }
     }

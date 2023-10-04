@@ -1042,4 +1042,14 @@ describe('Testing Find', () => {
         .to.deep.equal(expected);
     });
   });
+
+  it('Testing array unexpected string keys ignored', () => {
+    const data = ['a', 'b'];
+    data.x = 'c'; // ignored
+    const r = objectScan(['**'], {
+      joined: false,
+      rtn: 'entry'
+    })(data);
+    expect(r).to.deep.equal([[[1], 'b'], [[0], 'a']]);
+  });
 });
