@@ -73,8 +73,9 @@ objectScan(['a.*.f'], { joined: true })(haystack);
    <a href="#72-other-examples"><img alt="Other Examples" src="https://shields.io/badge/7.2.-Other%20Examples-c96c01?style=flat-square"></a></details>
 <details><summary><a href="#8-notes"><img alt="Notes" src="https://shields.io/badge/8.-Notes-1179b0?style=for-the-badge"></a></summary>
    <a href="#81-traversal-order"><img alt="Traversal Order" src="https://shields.io/badge/8.1.-Traversal%20Order-c96c01?style=flat-square"></a><br>
-   <a href="#82-edge-cases"><img alt="Edge Cases" src="https://shields.io/badge/8.2.-Edge%20Cases-c96c01?style=flat-square"></a><br>
-   <a href="#83-internals"><img alt="Internals" src="https://shields.io/badge/8.3.-Internals-c96c01?style=flat-square"></a></details>
+   <a href="#82-empty-string"><img alt="Empty String" src="https://shields.io/badge/8.2.-Empty%20String-c96c01?style=flat-square"></a><br>
+   <a href="#83-array-string-keys"><img alt="Array String Keys" src="https://shields.io/badge/8.3.-Array%20String%20Keys-c96c01?style=flat-square"></a><br>
+   <a href="#84-internals"><img alt="Internals" src="https://shields.io/badge/8.4.-Internals-c96c01?style=flat-square"></a></details>
 
 ## 3. Features
 
@@ -1511,8 +1512,7 @@ objectScan(['c', '*'], {
 ```
 </details>
 
-
-### 8.2. Edge Cases
+### 8.2. Empty String
 
 Top level object(s) are matched by the empty needle `''` or [empty array](#array_needles) `[]`.
 This is useful for matching objects nested in arrays by setting `useArraySelector` to `false`.
@@ -1577,7 +1577,24 @@ objectScan(['**(^a$)'], {
 ```
 </details>
 
-### 8.3. Internals
+### 8.3. Array String Keys
+
+String keys in an Array are not traversed.
+
+<details><summary> <code>['**']</code> <em>(str key skipped)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = (() => { const r = ['a', 'b']; r.str = 'c'; return r; })();
+objectScan(['**'], {
+  joined: true,
+  rtn: 'entry'
+})(haystack);
+// => [ [ '[1]', 'b' ], [ '[0]', 'a' ] ]
+```
+</details>
+
+### 8.4. Internals
 
 This library has been designed around performance as a core feature.
 

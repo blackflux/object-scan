@@ -152,7 +152,7 @@ export default (haystack_, search_, ctx) => {
       && haystack instanceof Object
     ) {
       const isArray = Array.isArray(haystack);
-      const keys = isArray ? [...haystack.keys()] : Object.keys(haystack);
+      const keys = isArray ? haystack.map((_, i) => i) : Object.keys(haystack);
       if (!isArray && ctx.compareFn) {
         keys.sort(ctx.compareFn(kwargs));
       }

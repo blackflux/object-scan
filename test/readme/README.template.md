@@ -1067,8 +1067,7 @@ filterFn: ({ context, property }) => { context.push(property); }
 comment: orderByNeedles and compareFn
 </example></pre>
 
-
-### Edge Cases
+### Empty String
 
 Top level object(s) are matched by the empty needle `''` or [empty array](#array_needles) `[]`.
 This is useful for matching objects nested in arrays by setting `useArraySelector` to `false`.
@@ -1106,6 +1105,17 @@ haystack: [0, [{ a: 1 }, 2]]
 needles: ['**(^a$)']
 useArraySelector: false
 comment: star recursion matches roots
+</example></pre>
+
+### Array String Keys
+
+String keys in an Array are not traversed.
+
+<pre><example>
+haystack: (() => { const r = ['a', 'b']; r.str = 'c'; return r; })()
+needles: ['**']
+rtn: 'entry'
+comment: str key skipped
 </example></pre>
 
 ### Internals
