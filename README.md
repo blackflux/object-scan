@@ -4,7 +4,7 @@
 [![NPM](https://img.shields.io/npm/v/object-scan.svg)](https://www.npmjs.com/package/object-scan)
 [![Downloads](https://img.shields.io/npm/dt/object-scan.svg)](https://www.npmjs.com/package/object-scan)
 [![Size](https://shields.io/badge/min%20+%20gz-5.00%20KB-informational)](https://bundlephobia.com/package/object-scan)
-[![Test Ratio](https://shields.io/badge/test%20:%20code-9.9%20:%201-informational)](./test/readme/replace-variables/ratio-badge.js)
+[![Test Ratio](https://shields.io/badge/test%20:%20code-9.8%20:%201-informational)](./test/readme/replace-variables/ratio-badge.js)
 
 Traverse object hierarchies using matching and callbacks.
 
@@ -75,7 +75,8 @@ objectScan(['a.*.f'], { joined: true })(haystack);
    <a href="#81-traversal-order"><img alt="Traversal Order" src="https://shields.io/badge/8.1.-Traversal%20Order-c96c01?style=flat-square"></a><br>
    <a href="#82-empty-string"><img alt="Empty String" src="https://shields.io/badge/8.2.-Empty%20String-c96c01?style=flat-square"></a><br>
    <a href="#83-array-string-keys"><img alt="Array String Keys" src="https://shields.io/badge/8.3.-Array%20String%20Keys-c96c01?style=flat-square"></a><br>
-   <a href="#84-internals"><img alt="Internals" src="https://shields.io/badge/8.4.-Internals-c96c01?style=flat-square"></a></details>
+   <a href="#84-sparse-arrays"><img alt="Sparse Arrays" src="https://shields.io/badge/8.4.-Sparse%20Arrays-c96c01?style=flat-square"></a><br>
+   <a href="#85-internals"><img alt="Internals" src="https://shields.io/badge/8.5.-Internals-c96c01?style=flat-square"></a></details>
 
 ## 3. Features
 
@@ -1594,7 +1595,24 @@ objectScan(['**'], {
 ```
 </details>
 
-### 8.4. Internals
+### 8.4. Sparse Arrays
+
+Only set keys are traversed for spare Arrays.
+
+<details><summary> <code>['**']</code> <em>(empty entries skipped)</em> </summary>
+
+<!-- eslint-disable no-undef -->
+```js
+const haystack = (() => { const r = []; r[1] = 'a'; return r; })();
+objectScan(['**'], {
+  joined: true,
+  rtn: 'entry'
+})(haystack);
+// => [ [ '[1]', 'a' ] ]
+```
+</details>
+
+### 8.5. Internals
 
 This library has been designed around performance as a core feature.
 
@@ -1611,7 +1629,7 @@ Conceptually this package works as follows:
 
 1. During initialization the needles are parsed and built into a search tree.
 Various information is pre-computed and stored for every node.
-Finally the search function is returned.
+Finally, the search function is returned.
 
 2. When the search function is invoked, the input is traversed simultaneously with
 the relevant nodes of the search tree. Processing multiple search tree branches

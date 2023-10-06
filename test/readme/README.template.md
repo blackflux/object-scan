@@ -1118,6 +1118,17 @@ rtn: 'entry'
 comment: str key skipped
 </example></pre>
 
+### Sparse Arrays
+
+Only set keys are traversed for spare Arrays.
+
+<pre><example>
+haystack: (() => { const r = []; r[1] = 'a'; return r; })()
+needles: ['**']
+rtn: 'entry'
+comment: empty entries skipped
+</example></pre>
+
 ### Internals
 
 This library has been designed around performance as a core feature.
@@ -1135,7 +1146,7 @@ Conceptually this package works as follows:
 
 1. During initialization the needles are parsed and built into a search tree.
 Various information is pre-computed and stored for every node.
-Finally the search function is returned.
+Finally, the search function is returned.
 
 2. When the search function is invoked, the input is traversed simultaneously with
 the relevant nodes of the search tree. Processing multiple search tree branches
