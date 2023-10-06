@@ -1052,4 +1052,15 @@ describe('Testing Find', () => {
     })(data);
     expect(r).to.deep.equal([[[1], 'b'], [[0], 'a']]);
   });
+
+  it('Testing sparse array keys', () => {
+    const data = [];
+    data[1] = 'a';
+    data[2] = undefined;
+    const r = objectScan(['**'], {
+      joined: false,
+      rtn: 'entry'
+    })(data);
+    expect(r).to.deep.equal([[[2], undefined], [[1], 'a']]);
+  });
 });
