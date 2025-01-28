@@ -92,8 +92,8 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 A needle expression specifies one or more paths to an element (or a set of elements) in a JSON structure.
 Paths use the dot notation.
 
-```txt
-store.book[0].title;
+```
+store.book[0].title
 ```
 
 The matching syntax is fully validated and bad input will throw a syntax error. The following syntax is supported:
