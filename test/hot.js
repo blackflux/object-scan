@@ -5,41 +5,12 @@ import { URL } from 'url';
 
 const lookup = {};
 let envVars = {};
-const port = {}; // dummy variable, not used
 
-/* serialized and passed into main process */
-function createListener() {
-  /* communicate process.env to loader process */
-  process.env = new Proxy(process.env, {
-    set(target, key, value) {
-      // eslint-disable-next-line no-param-reassign
-      target[key] = value;
-      port.postMessage(target);
-      return target[key];
-    },
-    deleteProperty(target, key) {
-      if (!(key in target)) {
-        return true;
-      }
-      // eslint-disable-next-line no-param-reassign
-      delete target[key];
-      port.postMessage(target);
-      return true;
-    }
-  });
-}
-
-export function globalPreload({ port: p }) {
-  if (process.versions.node.split('.')[0] < 20) {
-    /* Skip listener, since process shared before node 20 */
-    envVars = process.env;
-    return '(() => {})()';
-  }
+export function initialize({ port }) {
   // eslint-disable-next-line no-param-reassign
-  p.onmessage = ({ data }) => {
+  port.onmessage = ({ data }) => {
     envVars = data;
   };
-  return `(${createListener})()`;
 }
 
 export const resolve = async (specifier, context, defaultResolve) => {

@@ -18,7 +18,7 @@ Using npm:
 
 In a browser:
 
-```html
+```
 <script type="module">
   import objectScan from 'https://cdn.jsdelivr.net/npm/object-scan@<VERSION>/lib/index.min.js';
   // do logic here
@@ -51,7 +51,7 @@ A needle expression specifies one or more paths to an element (or a set of eleme
 Paths use the dot notation.
 
 ```txt
-store.book[0].title
+store.book[0].title;
 ```
 
 The matching syntax is fully validated and bad input will throw a syntax error. The following syntax is supported:
