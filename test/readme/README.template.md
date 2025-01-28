@@ -18,7 +18,7 @@ Using npm:
 
 In a browser:
 
-```html
+```
 <script type="module">
   import objectScan from 'https://cdn.jsdelivr.net/npm/object-scan@<VERSION>/lib/index.min.js';
   // do logic here
@@ -50,7 +50,7 @@ ${TOC}
 A needle expression specifies one or more paths to an element (or a set of elements) in a JSON structure.
 Paths use the dot notation.
 
-```txt
+```
 store.book[0].title
 ```
 

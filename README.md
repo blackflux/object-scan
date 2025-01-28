@@ -3,7 +3,7 @@
 [![Build Status](https://circleci.com/gh/blackflux/object-scan.png?style=shield)](https://circleci.com/gh/blackflux/object-scan)
 [![NPM](https://img.shields.io/npm/v/object-scan.svg)](https://www.npmjs.com/package/object-scan)
 [![Downloads](https://img.shields.io/npm/dt/object-scan.svg)](https://www.npmjs.com/package/object-scan)
-[![Size](https://shields.io/badge/min%20+%20gz-5.00%20KB-informational)](https://bundlephobia.com/package/object-scan)
+[![Size](https://shields.io/badge/min%20+%20gz-5.02%20KB-informational)](https://bundlephobia.com/package/object-scan)
 [![Test Ratio](https://shields.io/badge/test%20:%20code-9.8%20:%201-informational)](./test/readme/replace-variables/ratio-badge.js)
 
 Traverse object hierarchies using matching and callbacks.
@@ -18,7 +18,7 @@ Using npm:
 
 In a browser:
 
-```html
+```
 <script type="module">
   import objectScan from 'https://cdn.jsdelivr.net/npm/object-scan@<VERSION>/lib/index.min.js';
   // do logic here
@@ -92,7 +92,7 @@ objectScan(['a.*.f'], { joined: true })(haystack);
 A needle expression specifies one or more paths to an element (or a set of elements) in a JSON structure.
 Paths use the dot notation.
 
-```txt
+```
 store.book[0].title
 ```
 

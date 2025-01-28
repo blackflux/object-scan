@@ -7,6 +7,7 @@ const objectScan = (needles, opts = {}) => objectScanOriginal(needles, { joined:
 describe('Testing recursive group matching', () => {
   const input = {};
   let t;
+
   before(() => {
     input.a = input;
     input.b = input;

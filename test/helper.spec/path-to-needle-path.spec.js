@@ -6,6 +6,7 @@ import PRNG from '../helper/prng.js';
 describe('Testing path-to-needle-path.js', () => {
   let rng;
   let needle;
+
   beforeEach(() => {
     rng = PRNG('44e669e4-401b-4440-9ee8-387ae0840d66');
     needle = ['name', 0, 'value', 16, 'property'];

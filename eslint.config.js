@@ -13,7 +13,7 @@ export default [
   ...compat.extends(
     'airbnb-base',
     'plugin:mocha/recommended',
-    'plugin:markdown/recommended'
+    'plugin:markdown/recommended-legacy'
   ),
   ...compat.env({ es6: true, node: true, mocha: true }),
   ...compat.plugins('json', 'mocha'),

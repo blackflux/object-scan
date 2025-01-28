@@ -5,6 +5,7 @@ import objectScan from '../../src/index.js';
 describe('Testing useArraySelector', () => {
   describe('Testing useArraySelector=false + root matching', () => {
     let tester;
+
     before(() => {
       tester = (haystack, needles, expected) => {
         const r = objectScan(needles, {

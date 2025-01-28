@@ -155,6 +155,7 @@ describe('Testing Find', () => {
   describe('Testing greedy array matching', () => {
     const needles = ['*'];
     const input = { key: ['v1', 'v2'] };
+
     it('Testing arrays not matched with useArraySelector === true', () => {
       const find = objectScan(needles, { useArraySelector: true });
       expect(find(input)).to.deep.equal(['key']);
@@ -569,6 +570,7 @@ describe('Testing Find', () => {
 
   describe('Testing isCircular', () => {
     let input;
+
     before(() => {
       input = { a: { b: null } };
       input.a.b = input;

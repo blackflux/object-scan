@@ -7,6 +7,7 @@ describe('Testing mutation logic', () => {
   let remove;
   let replace;
   let pruneCircular;
+
   beforeEach(() => {
     haystack = { a: { b: [0, 1, 2] }, d: 3, e: 4 };
     remove = (values, data) => objectScan(['**'], {
