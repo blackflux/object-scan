@@ -5,6 +5,7 @@ import PRNG from '../helper/prng.js';
 
 describe('Testing sample-ranges.js', () => {
   let execute;
+
   before(() => {
     const visualize = (len, ranges) => {
       const result = [...Array(len).keys()].map((idx) => String.fromCharCode(97 + idx));

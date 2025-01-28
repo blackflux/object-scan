@@ -23,7 +23,7 @@ export const asRegex = (regexStr) => {
 
   try {
     return new RegExp(regexStr);
-  } catch (e) {
+  } catch {
     throw new Error(`Invalid Regex: "${regexStr}"`);
   }
 };

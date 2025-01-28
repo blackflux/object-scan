@@ -8,6 +8,7 @@ import PRNG from '../helper/prng.js';
 
 describe('Testing iterator', () => {
   let recIterate;
+
   before(() => {
     recIterate = (obj, cb) => {
       if (Array.isArray(obj[0])) {
