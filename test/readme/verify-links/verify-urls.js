@@ -4,13 +4,14 @@ import { Pool } from 'promise-pool-ext';
 
 const pool = Pool({ concurrency: 10 });
 
-export default async (urls, content) => {
-  const tasks = urls
+export default async (urls_, content) => {
+  const urls = urls_
     .filter((url) => (
       !url.startsWith('https://www.npmjs.com/package/')
       && !url.startsWith('https://en.wikipedia.org/wiki/')
       && !url.startsWith('https://img.shields.io/badge/')
-    ))
+    ));
+  const tasks = urls
     .map((url) => () => axios({
       method: 'GET',
       url,
