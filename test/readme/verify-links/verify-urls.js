@@ -10,6 +10,7 @@ export default async (urls_, content) => {
       !url.startsWith('https://www.npmjs.com/package/')
       && !url.startsWith('https://en.wikipedia.org/wiki/')
       && !url.startsWith('https://img.shields.io/badge/')
+      && !url.startsWith('https://stackoverflow.com/search?q=')
     ));
   const tasks = urls
     .map((url) => () => axios({
