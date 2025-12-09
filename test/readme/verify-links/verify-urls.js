@@ -9,6 +9,7 @@ export default async (urls, content) => {
     .filter((url) => (
       !url.startsWith('https://www.npmjs.com/package/')
       && !url.startsWith('https://en.wikipedia.org/wiki/')
+      && !url.startsWith('https://img.shields.io/badge/')
     ))
     .map((url) => () => axios({
       method: 'GET',
