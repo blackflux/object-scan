@@ -10,7 +10,11 @@ export default async (urls, content) => {
       !url.startsWith('https://www.npmjs.com/package/')
       && !url.startsWith('https://en.wikipedia.org/wiki/')
     ))
-    .map((url) => () => axios({ method: 'GET', url }));
+    .map((url) => () => axios({
+      method: 'GET',
+      url,
+      validateStatus: () => true
+    }));
   const responses = await pool(tasks);
   for (let i = 0; i < responses.length; i += 1) {
     const r = responses[i];
