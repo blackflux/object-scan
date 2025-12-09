@@ -1,6 +1,6 @@
+import crypto from 'crypto';
 import { describe } from 'node-tdd';
 import { expect } from 'chai';
-import { v4 as uuid } from 'uuid';
 import iterator from '../../src/generic/iterator.js';
 import parsedNeedleToStringArray from '../helper/parsed-needle-to-string-array.js';
 import generateParsedNeedle from '../helper/generate-parsed-needle.js';
@@ -27,7 +27,7 @@ describe('Testing iterator', () => {
 
   it('Mass Testing Iterate Correctness', () => {
     for (let idx = 0; idx < 1000; idx += 1) {
-      const seed = uuid();
+      const seed = crypto.randomUUID();
       const rng = PRNG(seed);
       const data = [generateParsedNeedle({ rng })];
       const r1 = [];
