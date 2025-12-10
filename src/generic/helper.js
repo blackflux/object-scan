@@ -1,34 +1,51 @@
 const specialChars = /[?!,.*+[\](){}\\]/g;
 export const escape = (input) => input.replace(specialChars, '\\$&');
 
-const regex = /^\^?[^-/\\^$*+?.()|[\]{}]*\$?$/g;
+const regexMetaChars = /[\\^$*+?.()|[\]{}]/;
 export const asRegex = (regexStr) => {
-  if (regex.test(regexStr)) {
-    const start = regexStr.startsWith('^');
-    const end = regexStr.endsWith('$');
-    if (start && end) {
-      const value = regexStr.slice(1, -1);
-      return { test: (v) => String(v) === value };
+  const hasStart = regexStr.charCodeAt(0) === 94; // '^' is char code 94
+  const hasEnd = regexStr.charCodeAt(regexStr.length - 1) === 36; // '$' is char code 36
+
+  const content = regexStr.slice(
+    hasStart ? 1 : 0,
+    hasEnd ? -1 : undefined
+  );
+
+  if (regexMetaChars.test(content)) {
+    try {
+      return new RegExp(regexStr);
+    } catch {
+      throw new Error(`Invalid Regex: "${regexStr}"`);
     }
-    if (start) {
-      const value = regexStr.slice(1);
-      return { test: (v) => String(v).startsWith(value) };
-    }
-    if (end) {
-      const value = regexStr.slice(0, -1);
-      return { test: (v) => String(v).endsWith(value) };
-    }
-    return { test: (v) => String(v).includes(regexStr) };
   }
 
-  try {
-    return new RegExp(regexStr);
-  } catch {
-    throw new Error(`Invalid Regex: "${regexStr}"`);
+  if (hasStart && hasEnd) {
+    return { test: (v) => String(v) === content };
   }
+  if (hasStart) {
+    return { test: (v) => String(v).startsWith(content) };
+  }
+  if (hasEnd) {
+    return { test: (v) => String(v).endsWith(content) };
+  }
+
+  return { test: (v) => String(v).includes(content) };
 };
 
-export const toPath = (input) => input
-  .reduce((p, c) => `${p}${typeof c === 'number' ? `[${c}]` : `${p ? '.' : ''}${escape(c)}`}`, '');
+export const toPath = (input) => {
+  let result = '';
+  for (let i = 0, len = input.length; i < len; i += 1) {
+    const char = input[i];
+    if (typeof char === 'number') {
+      result += `[${char}]`;
+    } else {
+      if (result.length > 0) {
+        result += '.';
+      }
+      result += escape(char);
+    }
+  }
+  return result;
+};
 
 export const formatNeedle = (n) => (Array.isArray(n) ? toPath(n) : n);
