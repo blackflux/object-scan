@@ -24,7 +24,15 @@ export default (haystack_, search_, ctx) => {
   let isMatch;
   let haystack = state.haystack;
 
-  const kwargs = {
+  // The full kwargs object (with ~17 getters) is only needed when a callback
+  // or the rtn type dereferences it. For rtn 'context'/'bool'/'count' with no
+  // callbacks, a minimal object suffices, avoiding the getter-heavy allocation.
+  const needsKwargs = ctx.filterFn !== undefined || ctx.breakFn !== undefined
+    || ctx.compareFn !== undefined
+    || (ctx.rtn !== 'context' && ctx.rtn !== 'bool' && ctx.rtn !== 'count');
+  const isCount = ctx.rtn === 'count';
+
+  const kwargs = needsKwargs ? {
     getKey: (joined = ctx.joined) => formatPath(path, joined),
     get key() {
       return kwargs.getKey();
@@ -90,7 +98,7 @@ export default (haystack_, search_, ctx) => {
       return kwargs.getResult();
     },
     context: state.context
-  };
+  } : { context: state.context };
 
   const result = Result(kwargs, ctx);
   kwargs.getResult = () => result.get();
@@ -126,7 +134,11 @@ export default (haystack_, search_, ctx) => {
 
     if (isMatch) {
       if (ctx.filterFn === undefined || ctx.filterFn(kwargs) !== false) {
-        result.onMatch(kwargs);
+        if (isCount) {
+          result.value.value += 1;
+        } else {
+          result.onMatch(kwargs);
+        }
         if (ctx.abort) {
           stack.length = 0;
         }
@@ -135,14 +147,20 @@ export default (haystack_, search_, ctx) => {
       continue;
     }
 
-    if (!searches.some(({ matches }) => matches)) {
+    if (!(searches.length === 1 ? searches[0].matches : searches.some(({ matches }) => matches))) {
       // eslint-disable-next-line no-continue
       continue;
     }
 
     const autoTraverseArray = ctx.useArraySelector === false && Array.isArray(haystack);
 
-    if (!autoTraverseArray && isLastLeafMatch(searches)) {
+    // Fast path: single simple-recursive search with no children produces an
+    // identical searchesOut for every key, so reuse the searches array instead
+    // of allocating a new one per key.
+    const simpleRec = !ctx.orderByNeedles && searches.length === 1
+      && searches[0].isSimpleRec && searches[0].children.length === 0;
+
+    if (!autoTraverseArray && (searches.length === 1 ? searches[0].match : isLastLeafMatch(searches))) {
       stack.push(true, searches, segment, depth);
       isMatch = true;
     }
@@ -153,7 +171,15 @@ export default (haystack_, search_, ctx) => {
     ) {
       const isArray = Array.isArray(haystack);
       const keys = isArray
-        ? haystack.map((_, i) => i).filter(() => true)
+        ? (() => {
+          const out = [];
+          for (let i = 0; i < haystack.length; i += 1) {
+            if (i in haystack) {
+              out.push(i);
+            }
+          }
+          return out;
+        })()
         : Object.keys(haystack);
       if (!isArray && ctx.compareFn) {
         keys.sort(ctx.compareFn(kwargs));
@@ -163,13 +189,17 @@ export default (haystack_, search_, ctx) => {
       }
       for (let kIdx = 0, kLen = keys.length; kIdx < kLen; kIdx += 1) {
         const key = keys[kIdx];
-        const searchesOut = [];
+        let searchesOut;
         if (autoTraverseArray) {
+          searchesOut = [];
           searchesOut.push(...searches);
           if (depth === 0) {
             searchesOut.push(...search_.roots);
           }
+        } else if (simpleRec) {
+          searchesOut = searches;
         } else {
+          searchesOut = [];
           for (let sIdx = 0, sLen = searches.length; sIdx !== sLen; sIdx += 1) {
             const search = searches[sIdx];
             if (search.recMatch(key)) {

@@ -1,5 +1,16 @@
 const specialChars = /[?!,.*+[\](){}\\]/g;
-export const escape = (input) => input.replace(specialChars, '\\$&');
+const isSpecialChar = (c) => (
+  c === 63 || c === 33 || c === 44 || c === 46 || c === 42 || c === 43
+  || c === 91 || c === 93 || c === 40 || c === 41 || c === 123 || c === 125 || c === 92
+);
+export const escape = (input) => {
+  for (let i = 0; i < input.length; i += 1) {
+    if (isSpecialChar(input.charCodeAt(i))) {
+      return input.replace(specialChars, '\\$&');
+    }
+  }
+  return input;
+};
 
 const regexMetaChars = /[\\^$*+?.()|[\]{}]/;
 export const asRegex = (regexStr) => {

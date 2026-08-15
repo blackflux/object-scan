@@ -11,6 +11,9 @@ export default async (urls_, content) => {
       && !url.startsWith('https://en.wikipedia.org/wiki/')
       && !url.startsWith('https://img.shields.io/badge/')
       && !url.startsWith('https://stackoverflow.com/search?q=')
+      && !url.startsWith('https://cs.stackexchange.com/questions/')
+      && !url.startsWith('https://stackexchange.com/questions/')
+      && !url.startsWith('https://stackoverflow.com/questions/')
     ));
   const tasks = urls
     .map((url) => () => axios({
